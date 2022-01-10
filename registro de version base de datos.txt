@@ -1,0 +1,3 @@
+- 240817 9:15am se realizo copia de base de datos y se registro evento en el repositorio
+- 250817 7:56am se realizo copia de base de datos y se registro evento en el repositorio como TAG1 (DBPRUEBA3)
+- 171117 11:04am se relizo la eliminacion e insercion de proyectos en banco de proyectos (tabla Proyecto_Inversion)
