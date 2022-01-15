@@ -8765,7 +8765,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   z-index: 2;
 }
 .full-page:before {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #3769709c;
 }
 .full-page[filter-color="purple"]:after, .full-page[filter-color="primary"]:after {
   background: rgba(225, 190, 231, 0.56);
@@ -10621,7 +10621,7 @@ footer .btn {
   color: #9c27b0;
 }
 .card [data-background-color="blue"] {
-  background: linear-gradient(60deg, #26c6da, #00acc1);
+  background: linear-gradient(60deg, #376970, #355256);
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
 }
 .card [data-icon-bg-color="blue"] i {

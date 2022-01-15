@@ -10,10 +10,10 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>SIGEI</title>
+    <title>GESPROOB</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" href="http://localhost/smp/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logoUniq.ico">
     <link href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/templateLogin/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/templateLogin/material-dashboard.css" rel="stylesheet">
@@ -25,7 +25,7 @@
    
     <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
         <div class="container">
-            <a class="navbar-toggle" href="http://smp.regionapurimac.gob.pe/"><img style="display: inline-block; height: 50px; width: 100px; " src="<?php echo base_url(); ?>assets/images/logosigei.png" class="img-responsive"> <span style="font-size: 12px;"></span></a>
+            <a class="navbar-toggle" href=""><!--<img style="display: inline-block; height: 50px; width: 100px; " src="<?php echo base_url(); ?>assets/images/logoUniq.png" class="img-responsive">--> SISTEMA DE GESTIÓN DE PROYECTOS... <span style="font-size: 12px;"></span></a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
                     <span class="sr-only">Toggle navigation</span>
@@ -36,16 +36,16 @@
             </div>
             <div class="collapse navbar-collapse">
                 <div>
-            <a class="navbar-brand" href="http://smp.regionapurimac.gob.pe/"><img style="display: inline-block; height: 150px; width: 360px; " src="<?php echo base_url(); ?>assets/images/logosigei.png" class="img-responsive"> <span style="font-size: 12px;"></span></a>
+            <a class="navbar-brand" href=""><!--<img style="display: inline-block; height: 150px; width: 360px; " src="<?php echo base_url(); ?>assets/images/logoUniq.png" class="img-responsive">--> SISTEMA DE GESTIÓN DE PROYECTOS... <span style="font-size: 12px;"></span></a>
                </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://smp.regionapurimac.gob.pe/">
+                        <a href="">
                            <i class="fa fa-th-large"> </i> Inicio
                         </a>
                     </li>
                     <li class=" active ">
-                        <a href="#">
+                        <a href="">
                            <i class="fa fa-sign-in"> </i>  Login
                         </a>
                     </li>
@@ -55,7 +55,8 @@
     </nav>
 
     <div class="wrapper wrapper-full-page"> 
-        <div class="full-page login-page"  data-image="<?php echo base_url(); ?>assets/Img/fondologin.png">
+        <div class="full-page login-page"  data-image="<?php echo base_url(); ?>assets/Img/fondoUniq.jpg">
+        <!--<div class="full-page login-page">-->
 
             <div class="content">
                 <div class="container">
@@ -65,7 +66,7 @@
                             <form  action="<?php echo base_url("index.php/Login/ingresar");?>" method="post">
                                 <div class="card card-login card-hidden">
                                     <div class="card-header text-center" data-background-color="blue">
-                                        <h4 class="card-title">SIGEI</h4>
+                                        <h4 class="card-title">GESPROOB</h4>
                                     </div>
                                     <p class="category text-center">
                                         Iniciar Sesión
@@ -124,7 +125,7 @@
                     </div>
                 </div>
                 <nav class="pull-right">
-                        <div><img style="display: inline-block; height: 150px; width: 150px; margin-right: 20px;" src="<?php echo base_url(); ?>assets/images/logogr1.png" class="img-responsive"></div>
+                        <div><img style="display: inline-block; height: 150px; width: 150px; margin-right: 20px;" src="<?php echo base_url(); ?>assets/images/logoUniq.png" class="img-responsive"></div>
                         </nav>
             </div>
             <footer class="footer">
