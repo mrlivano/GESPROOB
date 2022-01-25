@@ -246,7 +246,7 @@
           <?php if($value->id_modulo=='HOME') { ?>
                      <div class="col-md-3 col-sm-6 col-xs-12">
                          <div class="zoom-in">
-                         <?php if($value->id_menu=='22') { ?>
+                         
                              <a href="<?php echo site_url($value->url); ?>">
                              <div style="background-color: <?php echo $value->color; ?>;" class="col-md-12 thebox">
                                  <div class="span 6">
@@ -259,20 +259,7 @@
 
                              </div>
                              </a>
-                             <?php } else { ?>
-                              <a href="">
-                             <div style="background-color: <?php echo $value->color; ?>;" class="col-md-12 thebox">
-                                 <div class="span 6">
-                                  <img style="display: inline; height: 70px; width: 70px; margin-bottom: 5px" src="<?php echo base_url(); ?>assets/images/icondig/<?php echo $value->class_icono; ?>" class="img-responsive">
-                                     <!--<span class="<?php echo $value->class_icono; ?>"></span>-->
-                                 </div>
-                                 <div class="span 6">
-                                     <?php echo $value->nombre; ?>
-                                 </div>
-
-                             </div>
-                             </a>
-                              <?php } ?>
+      
                          </div>
                      </div>
           <?php } ?>
