@@ -500,12 +500,7 @@ class bancoproyectos extends CI_Controller
     public function index()
     {
         $listaUnidadEjecutora = $this->Model_UnidadE->getUnidadEjecutoraOpciones();
-        $listaInsumoNivel1 = $this->Model_OficinaR->listaOficinaNivel1('1');
-            foreach ($listaInsumoNivel1 as $key => $value) 
-            {
-                $value->hasChild = ($value->n==0 ? false : true);
-            }
-        $this->_load_layout('Front/Pmi/frmbancoproyectos',['unidadEjecutora'=>$listaUnidadEjecutora,'listaNivel1'=>$listaInsumoNivel1]);
+        $this->_load_layout('Front/Pmi/frmbancoproyectos',['unidadEjecutora'=>$listaUnidadEjecutora]);
     }
     public function _load_layout($template,$variable)
     {

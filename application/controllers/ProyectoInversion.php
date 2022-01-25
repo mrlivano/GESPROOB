@@ -689,7 +689,7 @@ class ProyectoInversion extends CI_Controller
             }
         $datasinoficina=$this->Model_Dashboard_Reporte->proysinoficina($anio, $sec_ejec, $tipo_proyecto);
         $this->load->view('layout/Reportes/header');
-        $this->load->view('front/Reporte/ProyectoInversion/AvanceFinancieroPorOficina',['Consolidado' => $data,'anio' =>$anio, 'unidadEjecutora'=>$sec_ejec,'tipoProyecto'=>$tipo_proyecto,'dataArray'=>$dataArray,'datatotal'=>$dataArray2,'sinOficina'=>$dataArray3,'datasinofi'=>$datasinoficina,'lista_tipos' => $result, 'lista_ue' => $result_ue,'listaUnidadEjecutora'=>$listaUnidadEjecutora,'listaNivel1'=>$listaInsumoNivel1]);
+        $this->load->view('front/Reporte/ProyectoInversion/AvanceFinancieroPorOficina',['Consolidado' => $data,'anio' =>$anio, 'unidadEjecutora'=>$sec_ejec,'tipoProyecto'=>$tipo_proyecto,'dataArray'=>$dataArray,'datatotal'=>$dataArray2,'sinOficina'=>$dataArray3,'datasinofi'=>$datasinoficina,'lista_tipos' => $result, 'lista_ue' => $result_ue,'listaUnidadEjecutora'=>$listaUnidadEjecutora]);
         $this->load->view('layout/Reportes/footer');
     
         

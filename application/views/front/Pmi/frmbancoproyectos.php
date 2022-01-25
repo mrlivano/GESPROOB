@@ -137,39 +137,7 @@
                         </div>
                         <!---combos para listar proyectos-->
 
-            <div class="table-responsive" style=" width:100%;">
-            <div class="row " style="height: 500px; margin-top:5px;padding-top:10px; overflow-y: scroll; background-color: transparent;">
-                    <ul class="trElement">
-                        <?php foreach ($listaNivel1 as $key => $value) 
-                        {
-                          if($value->hasChild)
-                          {?>
-                            <li>
-                              <button type='button'  class='btn btnf btn-xs fa fa-chevron-right' id="btnAccion" name="1" value="+" onclick="elegirAccion('<?=$value->id_oficina?>', this);"></i></button>
-
-                              <span class="nivel"><?=$value->denom_oficina?></span> 
-                               <div class='btn-group pull-right'><button type='button' class='btn btnm btn-primary btn-xs all pull-right' data-toggle='modal' data-target='#modal_vista_PIPs' data-id="<?=$value->id_oficina?>" data-denom="<?=$value->denom_oficina?>"><i class='ace-icon fa fa-list-alt bigger-120'></i> Mostrar</button>
-                                </div>
-                                <div class='btn-group pull-right'>
-                             <!-- <button type="button" class="meta btnm btn btn-success btn-xs all pull-right" data-toggle="modal" data-target="#VentanaMetaOficina" data-id="<?=$value->id_oficina?>"  data-denom="<?=$value->denom_oficina?>"><i class="ace-icon fa fa-pencil bigger-120"></i> Meta</button> -->
-                          </div>
-                            </li>
-                          <?php } else { ?>
-                            <li>
-                            <i  class='elegir btn-xs fa ' style="margin-right: 10px;"></i>
-                            <span class="nivel"><?=$value->denom_oficina?></span>
-                             <div class='btn-group pull-right'><button type='button' class='btn btnm btn-primary btn-xs all pull-right' data-toggle='modal' data-target='#modal_vista_PIPs' data-id="<?=$value->id_oficina?>" data-denom="<?=$value->denom_oficina?>"><i class='ace-icon fa fa-list-alt bigger-120'></i> Mostrar</button> 
-                              
-                               </div>
-                                <div class='btn-group pull-right'>  
-                               <button type="button" class="meta btn btnm btn-success btn-xs all pull-right" data-toggle="modal" data-target="#VentanaMetaOficina" data-id="<?=$value->id_oficina?>"  data-denom="<?=$value->denom_oficina?>"><i class="ace-icon fa fa-pencil bigger-120"></i> Meta</button> 
-                               </div>  
-                            </li>
-                          <?php } ?>                      
-                        <?php } ?>
-                      </ul>
-                  </div>
-              </div>
+           
                  <!---fin combos para listar proyectos-->
                         <div class="table-responsive">
                             <table id="table_proyectos_inversion" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
