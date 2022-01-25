@@ -22,7 +22,6 @@ function DOMPDF_autoload($class) {
     include_once $filename;
   }
 }
-
 // If SPL autoload functions are available (PHP >= 5.1.2)
 if ( function_exists("spl_autoload_register") ) {
   $autoload = "DOMPDF_autoload";
@@ -80,7 +79,8 @@ else if ( !function_exists("__autoload") ) {
    *
    * @param string $class
    */
-  function __autoload($class) {
+  //function __autoload($class) {
+  function spl_autoload_register($class) {
     DOMPDF_autoload($class);
   }
 }
