@@ -6,7 +6,7 @@ $query_builder = true;
 
 $db['default'] = array(
    'dsn'          => '',
-   'hostname'     => '192.168.1.54', //'20.0.20.100',
+   'hostname'     => '192.168.1.2', //'20.0.20.100',
    'username'     => 'sa',
    'password'     => '123456',
    'database'     => 'SMP_GRA', //SMP_GRA -- DBSMP
@@ -29,7 +29,7 @@ $db['default'] = array(
 
 $db['lectura'] = array(
    'dsn'          => '',
-   'hostname'     => '192.168.1.54', //'20.0.20.100',
+   'hostname'     => '192.168.1.2', //'20.0.20.100',
    'username'     => 'sa',
    'password'     => '123456',
    'database'     => 'SMP_GRA',
@@ -52,7 +52,7 @@ $db['lectura'] = array(
 
 $db['escritura'] = array(
    'dsn'          => '',
-   'hostname'     => '192.168.1.54', //'20.0.20.100',
+   'hostname'     => '192.168.1.2', //'20.0.20.100',
    'username'     => 'sa',
    'password'     => '123456',
    'database'     => 'SMP_GRA',

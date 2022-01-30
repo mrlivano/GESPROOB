@@ -29,7 +29,7 @@ $(document).on("ready", function()
     });
 });
 
-
+//modificación gespro
 var listar_proyectos_inversion = function() 
 {
     var table = $("#table_proyectos_inversion").DataTable({
@@ -42,11 +42,7 @@ var listar_proyectos_inversion = function()
             "dataSrc": ""
         },
         "columns":[
-        {"data": function (data, type) 
-            {
-                return "<a onclick='editarProyectoInversion("+data.id_pi+")'  class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a>"
-            }
-        }, 
+       
         { "data": "id_pi", "visible": false }, 
         { "data": "codigo_unico_pi" },
         { "data": "nombre_pi" }, 
@@ -57,7 +53,7 @@ var listar_proyectos_inversion = function()
             {
                 return "<div class='btn-group'><button data-toggle='dropdown' class='btn btn-default dropdown-toggle' type='button' aria-expanded='false'>Opciones <span class='caret'>"+
                 "</span></button><ul class='dropdown-menu'>"+
-                "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación</button></li>"+
+                "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación222</button></li>"+
                 "<li><button type='button' onclick='agregarRubro("+data.id_pi+")' class='btn btn-info btn-xs all' ><i class='fa fa-spinner' aria-hidden='true'></i> Rubro</button></li>"+
                 "<li><button type='button' class='btn btn-warning btn-xs all' onclick='modalidadEjecucion("+data.id_pi+")'><i class='fa fa-flag' aria-hidden='true'> Modalidad de Ejecución</i></button></li>"+
                 "<li><button type='button' class='btn btn-success btn-xs all' onclick='estadoCiclo("+data.id_pi+")'><i class='fa fa-paw' aria-hidden='true'> Ver Estado Ciclo</i></button></li>"+
