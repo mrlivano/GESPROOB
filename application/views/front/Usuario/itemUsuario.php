@@ -74,7 +74,7 @@
                                 <label><input <?php echo (empty($periodo) ? '': (($periodo==1) ? 'checked':'') );?> type="checkbox" class="checkPeriodo" name="checkPeriodo" id="checkPeriodo"> Periodo</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <label><input <?php echo (empty($arrayUsuario->tipo_acceso) ? '': (($arrayUsuario->tipo_acceso==1) ? 'checked':'') );?> type="radio" value="1"  name="radioTipoAcceso" id="radioTipoAcceso1"> Lectura</label>&nbsp;&nbsp;&nbsp;
                                 <label><input <?php echo (empty($arrayUsuario->tipo_acceso) ? '': (($arrayUsuario->tipo_acceso==2) ? 'checked':'') );?> type="radio" value="2"  name="radioTipoAcceso" id="radioTipoAcceso2"> Escritura</label>&nbsp;&nbsp;&nbsp;
-                                <label><input <?php echo (empty($arrayUsuario->tipo_acceso) ? 'checked': (($arrayUsuario->tipo_acceso==3) ? 'checked':'') );?> type="radio" value="3"  name="radioTipoAcceso" id="radioTipoAcceso3"  > SIGEI</label>
+                                <label><input <?php echo (empty($arrayUsuario->tipo_acceso) ? 'checked': (($arrayUsuario->tipo_acceso==3) ? 'checked':'') );?> type="radio" value="3"  name="radioTipoAcceso" id="radioTipoAcceso3"  > GESPRO</label>
                             </div>
                         </div>
                   </div>

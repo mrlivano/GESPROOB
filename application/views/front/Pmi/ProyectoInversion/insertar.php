@@ -170,6 +170,7 @@
 						</div>
 					</div>
 				</div>	
+				<!--
 				<div class="row">
 					<div class="col-md-4 col-sm-4 col-xs-12">
 						<label class="control-label">Gerencia*</label>
@@ -207,7 +208,7 @@
 							</select>
 						</div>
 					</div>
-				</div>			
+				</div>	-->	
 			</div>
 		</div>
 	</div>

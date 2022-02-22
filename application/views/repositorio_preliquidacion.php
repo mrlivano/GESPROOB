@@ -35,6 +35,6 @@
 	</script>
 </head>
 <body>
-	<div id="elfinder">REPOSITORIO SIGEI - PRE-LIQUIDACIÓN</div>
+	<div id="elfinder">REPOSITORIO GESPRO - PRE-LIQUIDACIÓN</div>
 </body>
 </html>

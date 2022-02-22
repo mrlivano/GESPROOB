@@ -271,7 +271,7 @@ function EstadisticasPorCiclosInversion() {
 function initMap()
 {
     //var LatLng={lat: -25.363, lng: 131.044};
-    var map=new google.maps.Map(document.getElementById('map'),
+   /* var map=new google.maps.Map(document.getElementById('map'),
     {
         zoom: 8,
         center: {lat: -14, lng: -73}
@@ -301,7 +301,7 @@ function initMap()
             }
 
         }
-    });
+    });*/
 }
 var listar_aniocartera_r=function(valor){ //listar ani cartera operacion y mantenimiento
                     var  html="";
@@ -341,7 +341,7 @@ $(document).on('ready', function()
     EstadisticasPorCiclosInversion();
     listar_aniocartera_r();
 
-
+/*
      $.ajax({
         url:base_url+"index.php/PrincipalPmi/EstadisticaPipProvinc",
         dataType:"json",
@@ -464,7 +464,7 @@ $.ajax({
 
             }
     });
-
+*/
  $.ajax({
         url:base_url+"index.php/PrincipalPmi/EstadisticaPipEstadoCiclo",
         dataType:"json",

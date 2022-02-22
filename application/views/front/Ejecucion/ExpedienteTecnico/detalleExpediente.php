@@ -14,7 +14,7 @@
 												<thead>
 													<tr>
 														<td><b>1. Unidad ejecutora</b></td>
-														<td>GOBIERNO REGIONAL DE APURIMAC</td>		
+														<td>GESPRO - UE</td>		
 													</tr>
 													<tr>
 														<td>1.1. Dirección</td>

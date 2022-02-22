@@ -1,6 +1,6 @@
 		<footer>
 			<div class="pull-right">
-				GOBIERNO REGIONAL DE APURIMAC
+				GESPRO - UE
 			</div>
 			<div class="clearfix"></div>
 		</footer>

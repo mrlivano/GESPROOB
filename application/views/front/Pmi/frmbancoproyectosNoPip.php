@@ -27,7 +27,15 @@
                     <div class="table-responsive">
                         <table id="table_no_pip" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%">
                             <thead>
-                            <tr>
+                                <tr>
+                                    <th style="width: 2%">#</th>
+                                    <th style="width: 8%">Codigo unico </th>
+                                    <th style="width: 32%">Nombre</th>
+                                    <th style="width: 12%; text-align: right;">Costo</th>
+                                    <th style="width: 12%">Tipo IOARR</th>
+                                    <th style="width: 10%">Opción</th>
+                                </tr>
+                                   <!-- <tr>
                                         <th rowspan="2" style="width: 1%"> </th>
                                         <th rowspan="2" style="width: 8%"> Cod.</th>
                                         <th rowspan="2" style="width: 36%"> Nombre</th>
@@ -47,7 +55,7 @@
                                         <th style="width: 8%"> Monto 2023 (S/)</th>
                                         <th style="width: 8%"> Monto 2024 (S/)</th>
                                         <th style="width: 8%"> Monto 2025 (S/)</th>
-                                    </tr>
+                                    </tr>-->
                             </thead>
                         </table>
                     </div>

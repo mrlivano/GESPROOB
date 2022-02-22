@@ -143,7 +143,14 @@
                             <table id="table_proyectos_inversion" class="table table-striped table-bordered jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="width: 1%"> </th>
+                                        <th style="width: 1%">#</th>
+                                        <th style="width: 8%"><i class="fa fa-thumb-tack"></i> Cod. </th>
+                                        <th style="width: 36%"><i class="fa fa-bookmark-o"></i> Nombre</th>
+                                        <th style="width: 12%; text-align: right;"><i class="fa fa-money"></i> Costo</th>
+                                        <th style="width: 12%"> Estado Ciclo</th>
+                                        <th style="width: 12%"> Fecha Viabilidad</th>
+                                        <th style="width: 16%">Opción</th>
+                                        <!--<th rowspan="2" style="width: 1%"> </th>
                                         <th rowspan="2" style="width: 8%"> Cod.</th>
                                         <th rowspan="2" style="width: 36%"> Nombre</th>
                                         <th rowspan="2" style="width: 8%"> Tipo</th>
@@ -155,14 +162,14 @@
                                         <th rowspan="2" style="width: 12%; text-align: right;"> Costo (S/)</th>
                                         <th rowspan="2" style="width: 12%">Devengado acumulado (S/)</th>
                                         <th rowspan="2" style="width: 12%">PIM 2022 (S/)</th>
-                                        <th colspan="4" style="width: 12%"> Programación del monto de inversión (S/)</th>
+                                        <th colspan="4" style="width: 12%"> Programación del monto de inversión (S/)</th>-->
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <th style="width: 8%"> Monto 2022 (S/)</th>
                                         <th style="width: 8%"> Monto 2023 (S/)</th>
                                         <th style="width: 8%"> Monto 2024 (S/)</th>
                                         <th style="width: 8%"> Monto 2025 (S/)</th>
-                                    </tr>
+                                    </tr>-->
                                 </thead>
                             </table>
                         </div>
@@ -187,6 +194,13 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 1%">#</th>
+                                        <th style="width: 8%"><i class="fa fa-thumb-tack"></i> Cod. </th>
+                                        <th style="width: 36%"><i class="fa fa-bookmark-o"></i> Nombre</th>
+                                        <th style="width: 12%; text-align: right;"><i class="fa fa-money"></i> Costo</th>
+                                        <th style="width: 12%"> Estado Ciclo</th>
+                                        <th style="width: 12%"> Fecha Viabilidad</th>
+                                        <th style="width: 16%">Opción</th>
+                                        <!--<th style="width: 1%">#</th>
                                         <th style="width: 8%"> Cod.</th>
                                         <th style="width: 36%"> Nombre</th>
                                         <th style="width: 8%"> Tipo</th>
@@ -198,7 +212,7 @@
                                         <th style="width: 12%; text-align: right;"> Costo (S/)</th>
                                         <th style="width: 12%">Devengado acumulado (S/)</th>
                                         <th style="width: 12%">PIM 2022 (S/)</th>
-                                        <th style="width: 12%">Programación Inversión (S/)</th>
+                                        <th style="width: 12%">Programación Inversión (S/)</th>-->
                                     </tr>
                                 </thead>
                             </table>
@@ -725,7 +739,7 @@ var filtrarPIPs = function(idUnidadEjecutora,OficinaR,anio)
         type: "POST",
          data:{"idUnidadEjecutora":idUnidadEjecutora,
                 "idOficina":idOficina,
-                "anio":"2015" },
+                "anio":anio },
         "dataSrc":"",
     },
     "columns": [
@@ -744,7 +758,7 @@ var filtrarPIPs = function(idUnidadEjecutora,OficinaR,anio)
             {
                 return "<div class='btn-group'><button data-toggle='dropdown' class='btn btn-default dropdown-toggle' type='button' aria-expanded='false'>Opciones <span class='caret'>"+
                 "</span></button><ul class='dropdown-menu'>"+
-                "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación22</button></li>"+
+                "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación</button></li>"+
                 "<li><button type='button' onclick='agregarRubro("+data.id_pi+")' class='btn btn-info btn-xs all' ><i class='fa fa-spinner' aria-hidden='true'></i> Rubro</button></li>"+
                 "<li><button type='button' class='btn btn-warning btn-xs all' onclick='modalidadEjecucion("+data.id_pi+")'><i class='fa fa-flag' aria-hidden='true'> Modalidad de Ejecución</i></button></li>"+
                 "<li><button type='button' class='btn btn-success btn-xs all' onclick='estadoCiclo("+data.id_pi+")'><i class='fa fa-paw' aria-hidden='true'> Ver Estado Ciclo</i></button></li>"+

@@ -464,7 +464,7 @@ class ProyectoInversion extends CI_Controller
             $u_data['id_tipologia_inv']=$this->input->post('selectTipologiaInversion');
             $u_data['id_tipo_inversion']=1;
             $u_data['id_grupo_funcional']=$this->input->post('selectGrupoFuncional');
-            $u_data['id_oficina']=$this->input->post('selectOficina');
+            //$u_data['id_oficina']=$this->input->post('selectOficina');
             $u_data['id_nivel_gob']=$this->input->post('selectNivelGobierno');
             $u_data['id_programa_pres']=$this->input->post('selectPrograma');
             $u_data['codigo_unico_pi']=$this->input->post('txtCodigoUnico');
@@ -486,7 +486,7 @@ class ProyectoInversion extends CI_Controller
         $programa=$this->Model_ProgramaPresupuestal->ListaProgramaPresupuestal();
         $unidadFormuladora=$this->Model_UnidadF->ListaUnidadFormuladora();
         $funcion=$this->Model_Funcion->GetListaFuncion();
-        $gerencia=$this->Model_Gerencia->GetListaGerencia();
+        //$gerencia=$this->Model_Gerencia->GetListaGerencia();
         $this->load->view('front/Pmi/ProyectoInversion/insertar', ['accion'=>$accion,'naturaleza'=>$naturaleza,'nivelGobiero'=>$nivelGobiero,'unidadEjecutora'=>$unidadEjecutora,'funcion'=>$funcion,'gerencia'=>$gerencia,'tipologia'=>$tipologia,'programa'=>$programa,'unidadFormuladora'=>$unidadFormuladora]);
     }
 

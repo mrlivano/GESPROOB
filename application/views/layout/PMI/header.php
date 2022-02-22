@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>GESPROOB</title>
+    <title>GESPRO</title>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logoUniq.ico">
     <link href="<?php echo base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -84,7 +84,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo site_url('Inicio') ?>" class="site_title"><img style="display: inline-block; height: 30px; width: 30PX; opacity: 1;" src="<?php echo base_url(); ?>assets/images/logoUniq.png" class="img-responsive"> <span>GESPROOB</span></a>
+              <a href="<?php echo site_url('Inicio') ?>" class="site_title"><img style="display: inline-block; height: 30px; width: 30PX; opacity: 1;" src="<?php echo base_url(); ?>assets/images/logoUniq.png" class="img-responsive"> <span>GESPRO</span></a>
             </div>
              <div class="clearfix"></div>
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -95,7 +95,7 @@
                     $openTag=false;
                     $arrayMenu=$this->session->userdata('menuUsuario');
                     for($i=0;$i<count($arrayMenu);$i++){
-                    if($arrayMenu[$i]['id_modulo']=='PMI' && $arrayMenu[$i]['id_menu']=='9'){
+                    if($arrayMenu[$i]['id_modulo']=='PMI' /*&& $arrayMenu[$i]['id_menu']=='9'*/){
                       if($i>0 and ($arrayMenu[$i]['id_menu']!=$arrayMenu[$i-1]['id_menu'])){
                         if($openTag==true){
                           echo '</ul></li>';

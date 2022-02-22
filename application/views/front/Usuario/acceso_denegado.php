@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SIGEI</title>
+    <title>GESPRO</title>
     <link href="<?php echo base_url();?>assets/Template/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url();?>assets/Template/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/Template/vendors/nprogress/nprogress.css" rel="stylesheet">

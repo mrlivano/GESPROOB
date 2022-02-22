@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SIGEI</title>
+    <title>GESPRO</title>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico">
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -74,7 +74,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                   <div class="navbar nav_title" style="border: 0;">
-                    <a href="#" class="site_title"><i class="fa fa-ioxhost"></i> <span>SIGEI</span></a>
+                    <a href="#" class="site_title"><i class="fa fa-ioxhost"></i> <span>GESPRO</span></a>
                   </div>
                 <div class="clearfix"></div>
                 <br>
@@ -129,7 +129,7 @@
 
 
                         <p id="copyrights_footer">Seguimiento y Monitoreo de Proyectos de Inversión</p>
-                        <p>SIGEI</p>
+                        <p>GESPRO</p>
 
                 </div>
 

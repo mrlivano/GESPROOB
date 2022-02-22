@@ -35,6 +35,6 @@
 	</script>
 </head>
 <body>
-	<div id="elfinder">REPOSITORIO SIGEI</div>
+	<div id="elfinder">REPOSITORIO GESPRO</div>
 </body>
 </html>

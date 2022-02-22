@@ -8,7 +8,7 @@ $ci->load->helper('url');
 <html>
   <head>
   	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  	<title>SIGEI - Error 404</title>
+  	<title>GESPRO - Error 404</title>
   	<link href='http://fonts.googleapis.com/css?family=Bangers&amp;v2' rel='stylesheet' type='text/css' />
   	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/css_404/reset.css" />
   	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/css_404/main.css" />
@@ -30,7 +30,7 @@ $ci->load->helper('url');
   	<div id="stage" class="stage">
   		<div id="space" class="stage"></div>
   		<div id="astronaut" class="stage">
-  			<div id="text_1">SIGEI,<br />tenemos un<br />problema!</div>
+  			<div id="text_1">GESPRO,<br />tenemos un<br />problema!</div>
   			<div id="text_2">Error 404!</div>
   			<div id="text_3">El universo<br />que estas buscando<br />no existe</div>
   			<div id="text_4">Intente visitar otra dimension</div>

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>SIGEI</title>
+	<title>GESPRO</title>
 
 	<link rel="stylesheet" href="<?=base_url()?>assets/vendors/JQueryGantt/platform.css" type="text/css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/vendors/JQueryGantt/libs/jquery/dateField/jquery.dateField.css" type="text/css">

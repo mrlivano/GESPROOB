@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>GESPROOB</title>
+    <title>GESPRO</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/logoUniq.ico">
@@ -66,7 +66,7 @@
                             <form  action="<?php echo base_url("index.php/Login/ingresar");?>" method="post">
                                 <div class="card card-login card-hidden">
                                     <div class="card-header text-center" data-background-color="blue">
-                                        <h4 class="card-title">GESPROOB</h4>
+                                        <h4 class="card-title">GESPRO</h4>
                                     </div>
                                     <p class="category text-center">
                                         Iniciar Sesión
