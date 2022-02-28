@@ -139,40 +139,109 @@
 
            
                  <!---fin combos para listar proyectos-->
-                        <div class="table-responsive">
-                            <table id="table_proyectos_inversion" class="table table-striped table-bordered jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
-                                <thead>
-                                    <tr>
-                                        <th style="width: 1%">#</th>
-                                        <th style="width: 8%"><i class="fa fa-thumb-tack"></i> Cod. </th>
-                                        <th style="width: 36%"><i class="fa fa-bookmark-o"></i> Nombre</th>
-                                        <th style="width: 12%; text-align: right;"><i class="fa fa-money"></i> Costo</th>
-                                        <th style="width: 12%"> Estado Ciclo</th>
-                                        <th style="width: 12%"> Fecha Viabilidad</th>
-                                        <th style="width: 16%">Opción</th>
-                                        <!--<th rowspan="2" style="width: 1%"> </th>
-                                        <th rowspan="2" style="width: 8%"> Cod.</th>
-                                        <th rowspan="2" style="width: 36%"> Nombre</th>
-                                        <th rowspan="2" style="width: 8%"> Tipo</th>
-                                        <th rowspan="2" style="width: 8%"> Prioridad</th>
-                                        <th rowspan="2" style="width: 8%"> Orden</th>
-                                        <th rowspan="2" style="width: 8%"> Sector</th>
-                                        <th rowspan="2" style="width: 8%"> OPMI</th>
-                                        <th rowspan="2" style="width: 8%"> Nivel</th>
-                                        <th rowspan="2" style="width: 12%; text-align: right;"> Costo (S/)</th>
-                                        <th rowspan="2" style="width: 12%">Devengado acumulado (S/)</th>
-                                        <th rowspan="2" style="width: 12%">PIM 2022 (S/)</th>
-                                        <th colspan="4" style="width: 12%"> Programación del monto de inversión (S/)</th>-->
-                                    </tr>
-                                    <!--<tr>
-                                        <th style="width: 8%"> Monto 2022 (S/)</th>
-                                        <th style="width: 8%"> Monto 2023 (S/)</th>
-                                        <th style="width: 8%"> Monto 2024 (S/)</th>
-                                        <th style="width: 8%"> Monto 2025 (S/)</th>
-                                    </tr>-->
-                                </thead>
-                            </table>
+
+                 <ul class="nav nav-tabs" role="tablist">
+                            <li class="active">
+                                <a href="#home" role="tab" data-toggle="tab">
+                                    <icon class="fa fa-home"></icon> 
+                                </a>
+                            </li>
+                            <li><a href="#profile" role="tab" data-toggle="tab">
+                                <i class="fa fa-refresh"></i> CARGAR SIAF
+                                </a>
+                            </li>
+                    
+                    </ul><br>
+                      <div class="tab-content">
+                        <div class="tab-pane fade active in" id="home">
+                            <div class="table-responsive">
+                                <table id="table_proyectos_inversion" class="table table-striped table-bordered jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 1%">#</th>
+                                            <th style="width: 8%"><i class="fa fa-thumb-tack"></i> Cod. </th>
+                                            <th style="width: 36%"><i class="fa fa-bookmark-o"></i> Nombre</th>
+                                            <th style="width: 12%; text-align: right;"><i class="fa fa-money"></i> Costo</th>
+                                            <th style="width: 12%"> Estado Ciclo</th>
+                                            <th style="width: 12%"> Fecha Viabilidad</th>
+                                            <th style="width: 16%">Opción</th>
+                                            <!--<th rowspan="2" style="width: 1%"> </th>
+                                            <th rowspan="2" style="width: 8%"> Cod.</th>
+                                            <th rowspan="2" style="width: 36%"> Nombre</th>
+                                            <th rowspan="2" style="width: 8%"> Tipo</th>
+                                            <th rowspan="2" style="width: 8%"> Prioridad</th>
+                                            <th rowspan="2" style="width: 8%"> Orden</th>
+                                            <th rowspan="2" style="width: 8%"> Sector</th>
+                                            <th rowspan="2" style="width: 8%"> OPMI</th>
+                                            <th rowspan="2" style="width: 8%"> Nivel</th>
+                                            <th rowspan="2" style="width: 12%; text-align: right;"> Costo (S/)</th>
+                                            <th rowspan="2" style="width: 12%">Devengado acumulado (S/)</th>
+                                            <th rowspan="2" style="width: 12%">PIM 2022 (S/)</th>
+                                            <th colspan="4" style="width: 12%"> Programación del monto de inversión (S/)</th>-->
+                                        </tr>
+                                        <!--<tr>
+                                            <th style="width: 8%"> Monto 2022 (S/)</th>
+                                            <th style="width: 8%"> Monto 2023 (S/)</th>
+                                            <th style="width: 8%"> Monto 2024 (S/)</th>
+                                            <th style="width: 8%"> Monto 2025 (S/)</th>
+                                        </tr>-->
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
+                        <div class="tab-pane fade" id="profile">
+                            <div class="table-responsive">
+                                        <table id="table_proyectos_inversion" class="table table-striped table-bordered jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="2" style="width: 1%"> Nombre.</th>
+                                                    <th rowspan="2" style="width: 1%"> Año eje.</th>
+                                                    <th rowspan="2" style="width: 2%"> sec_ejec.</th>
+                                                    <th rowspan="2" style="width: 2%"> funcion.</th>
+                                                    <th rowspan="2" style="width: 2%"> Act_proy.</th>
+                                                    <th rowspan="2" style="width: 2%"> Meta.</th>
+                                                    <th rowspan="2" style="width: 2%"> Finalidad.</th>
+                                                    <th rowspan="2" style="width: 2%"> Monto.</th>
+                                                    <th rowspan="2" style="width: 2%"> Cantidad.</th>
+                                                    <th rowspan="2" style="width: 2%"> Pia</th>
+                                                    <th rowspan="2" style="width: 2%"> Cantidad semestral</th>
+                                                    <th rowspan="2" style="width: 2%"> Cantidad semestral inicial</th>
+                                                    <th rowspan="2" style="width: 2%"> Estrategia nacional</th>
+                                                    <th rowspan="2" style="width: 2%"> Estado</th>
+                                                    <th rowspan="2" style="width: 2%"> Ambito</th>
+                                                
+                                                
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($listarSiaf as $item) { ?>
+                                                
+                                            
+                                                <tr>
+                                                    <td><?=$item->nombre?></td>
+                                                    <td><?=$item->ano_eje?></td>
+                                                    <td><?=$item->sec_ejec?></td>
+                                                    <td><?=$item->funcion?></td>
+                                                    <td><?=$item->act_proy?></td>
+                                                    <td><?=$item->meta?></td>
+                                                    <td><?=$item->finalidad?></td>
+                                                    <td><?=$item->monto?></td>
+                                                    <td><?=$item->cantidad?></td>
+                                                    <td><?=$item->es_pia?></td>
+                                                    <td><?=$item->cantidad_semestral?></td>
+                                                    <td><?=$item->cantidad_semestral_inicial?></td>
+                                                    <td><?=$item->estrategia_nacional?></td>
+                                                    <td><?=$item->estado?></td>
+                                                    <td><?=$item->ambito?></td>
+                                                                    
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>

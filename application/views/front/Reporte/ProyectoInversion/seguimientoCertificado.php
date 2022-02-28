@@ -35,7 +35,7 @@
 							<label>Unidad Ejecutora</label>
 							<select id="opcion_ue" class="form-control">
 								<?php foreach ($lista_ue as $row) {
-									if ($row->codigo_ue=='747' || $row->codigo_ue=='748' || $row->codigo_ue=='1546' || $row->codigo_ue=='1359' ) { ?>
+									if ($row->codigo_ue=='747' || $row->codigo_ue=='748' || $row->codigo_ue=='1546' || $row->codigo_ue=='1359' || $row->codigo_ue=='1549') { ?>
 										<option value="<?=trim($row->sec_ejec)?>" <?php echo (trim($unidadEjecutora)==trim($row->sec_ejec) ? 'selected' : ''); ?>><?=$row->unidad_ejec?></option>
 								<?php } } ?>
 							</select>
@@ -71,21 +71,21 @@
 					<div class="col-md-2 col-sm-12 col-xs-12">
 						<button style="width: 100%;" class="btn btn-warning btn-xs" type="button" onclick="ImportarExpedientes();">Expedientes</button>
 					</div>
-					<div class="col-md-2 col-sm-12 col-xs-12 form-group">
+					<!-- <div class="col-md-2 col-sm-12 col-xs-12 form-group">
 						<a href="javascript:siafActualizadorCertificado()">
 							<button style="width: 100%;" id="BtnAcatualizar" class="btn btn-primary btn-xs" type="button"><i class="glyphicon glyphicon-refresh"></i> SIAF</button>
 						</a>
-					</div>
+					</div> -->
 					<div class="col-md-2 col-sm-12 col-xs-12 form-group">
 						<a href="javascript:siafActualizadorDatosGenerales()">
 							<button style="width: 100%;" id="BtnAcatualizarDatosGenerales" class="btn btn-success btn-xs" type="button"><i class="glyphicon glyphicon-refresh"></i> Datos Año</button>
 						</a>
 					</div>
-					<div class="col-md-2 col-sm-12 col-xs-12 form-group">
+					<!-- <div class="col-md-2 col-sm-12 col-xs-12 form-group">
 						<a href="javascript:siafActualizadorCertificado()">
 							<button style="width: 100%;" id="BtnAcatualizarCertificado" class="btn btn-info btn-xs" type="button"><i class="glyphicon glyphicon-refresh"></i> Certificados</button>
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<?php } ?>	
 

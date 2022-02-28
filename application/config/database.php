@@ -6,8 +6,8 @@ $query_builder = true;
 
 $db['default'] = array(
    'dsn'          => '',
-   'hostname'     => 'DESKTOP-N1LQMHP', //'20.0.20.100',
-   'username'     => 'my',
+   'hostname'     => 'WIN-66HFFS0RNAC', //'20.0.20.100',
+   'username'     => 'sa',
    'password'     => '123456789',
    'database'     => 'SMP_GRA', //SMP_GRA -- DBSMP
    'dbdriver'     => 'sqlsrv',
@@ -29,8 +29,8 @@ $db['default'] = array(
 
 $db['lectura'] = array(
    'dsn'          => '',
-   'hostname'     => 'DESKTOP-N1LQMHP', //'20.0.20.100',
-   'username'     => 'my',
+   'hostname'     => 'WIN-66HFFS0RNAC', //'20.0.20.100',
+   'username'     => 'sa',
    'password'     => '123456789',
    'database'     => 'SMP_GRA',
    'dbdriver'     => 'sqlsrv',
@@ -52,8 +52,8 @@ $db['lectura'] = array(
 
 $db['escritura'] = array(
    'dsn'          => '',
-   'hostname'     => 'DESKTOP-N1LQMHP', //'20.0.20.100',
-   'username'     => 'my',
+   'hostname'     => 'WIN-66HFFS0RNAC', //'20.0.20.100',
+   'username'     => 'sa',
    'password'     => '123456789',
    'database'     => 'SMP_GRA',
    'dbdriver'     => 'sqlsrv',
@@ -72,27 +72,6 @@ $db['escritura'] = array(
    'save_queries' => true,
 );
 
-$db['SIGA_ANDAHUAYLAS'] = array(
-   'dsn'          => '',
-   'hostname'     => 'andahuaylas.ddns.net',
-   'username'     => 'siga_747',
-   'password'     => '747',
-   'database'     => 'SIGA',
-   'dbdriver'     => 'sqlsrv',
-   'dbprefix'     => '',
-   'pconnect'     => false,
-   'db_debug'     => (ENVIRONMENT !== 'production'),
-   'cache_on'     => false,
-   'cachedir'     => '',
-   'char_set'     => 'utf8',
-   'dbcollat'     => 'Modern_Spanish_CI_AS',
-   'swap_pre'     => '',
-   'encrypt'      => false,
-   'compress'     => false,
-   'stricton'     => false,
-   'failover'     => array(),
-   'save_queries' => true,
-);
 
 $db['SIGA_SEDECENTRAL'] = array(
     'dsn'          => '',

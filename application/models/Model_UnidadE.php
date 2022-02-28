@@ -107,4 +107,12 @@ class Model_UnidadE extends CI_Model
 
         return $data->result();
     }
+
+
+    public function cargarSiaf($anio)
+    {
+       
+        $data=$this->db->query("execute Consulta_SiafImportado   @anio ='".$anio."'");
+        return $data->result();
+    }
 }
