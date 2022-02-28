@@ -487,7 +487,7 @@ class ProyectoInversion extends CI_Controller
         $unidadFormuladora=$this->Model_UnidadF->ListaUnidadFormuladora();
         $funcion=$this->Model_Funcion->GetListaFuncion();
         //$gerencia=$this->Model_Gerencia->GetListaGerencia();
-        $this->load->view('front/Pmi/ProyectoInversion/insertar', ['accion'=>$accion,'naturaleza'=>$naturaleza,'nivelGobiero'=>$nivelGobiero,'unidadEjecutora'=>$unidadEjecutora,'funcion'=>$funcion,'gerencia'=>$gerencia,'tipologia'=>$tipologia,'programa'=>$programa,'unidadFormuladora'=>$unidadFormuladora]);
+        $this->load->view('front/Pmi/ProyectoInversion/insertar', ['accion'=>$accion,'naturaleza'=>$naturaleza,'nivelGobiero'=>$nivelGobiero,'unidadEjecutora'=>$unidadEjecutora,'funcion'=>$funcion,'tipologia'=>$tipologia,'programa'=>$programa,'unidadFormuladora'=>$unidadFormuladora]);
     }
 
     function inversionOARR()
