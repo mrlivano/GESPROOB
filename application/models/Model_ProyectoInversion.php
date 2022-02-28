@@ -143,13 +143,10 @@ class Model_ProyectoInversion extends CI_Model
 
     public function getProyectoInversionPorIdPi($idPi)
     {
-        $data=$this->db->query("select p.*, g.id_grup_funcional, d.id_div_funcional, f.id_funcion, o.id_oficina, s.id_subgerencia, ge.id_gerencia 
+        $data=$this->db->query("select p.*, g.id_grup_funcional, d.id_div_funcional, f.id_funcion  
         from PROYECTO_INVERSION p inner join  GRUPO_FUNCIONAL g on p.id_grupo_funcional=g.id_grup_funcional
         inner join DIVISION_FUNCIONAL d on g.id_div_funcional=d.id_div_funcional
         inner join FUNCION f on f.id_funcion=d.id_funcion
-        inner join  OFICINA o on p.id_oficina=o.id_oficina
-        inner join SUB_GERENCIA s on o.id_subgerencia=s.id_subgerencia
-        inner join GERENCIA ge on s.id_gerencia=ge.id_gerencia
         where p.id_pi='$idPi'");
         return $data->result();
     }
