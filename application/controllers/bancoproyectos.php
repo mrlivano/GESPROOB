@@ -504,6 +504,13 @@ class bancoproyectos extends CI_Controller
         $listarSiaf           = $this->Model_UnidadE->cargarSiaf($anio);
         $this->_load_layout('Front/Pmi/frmbancoproyectos',['unidadEjecutora'=>$listaUnidadEjecutora,'listarSiaf'=>  $listarSiaf]);
     }
+    public function PipSiaf()
+    {
+        $anio='2022';
+        $listaUnidadEjecutora = $this->Model_UnidadE->getUnidadEjecutoraOpciones();
+        $listarSiaf           = $this->Model_UnidadE->cargarSiaf($anio);
+        $this->_load_layout('Front/Pmi/frmbancoproyectosSiaf',['unidadEjecutora'=>$listaUnidadEjecutora,'listarSiaf'=>  $listarSiaf]);
+    }
     public function _load_layout($template,$variable)
     {
         $this->load->view('layout/PMI/header');
