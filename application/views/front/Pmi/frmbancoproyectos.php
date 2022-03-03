@@ -111,7 +111,7 @@
                     </div>
                     <div class="x_content">
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <button style="margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-primary" onclick="agregarProyectoInversion();"><span class="fa fa-plus-circle"></span> Nuevo </button>
                             </div>
                             <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
@@ -127,12 +127,13 @@
                                     </select>
                                 </div>
                             </div>
-                           <!-- <div class="col-md-1 col-sm-6 col-xs-12">
-                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAF</button>
-                            </div> -->
                             <div class="col-md-1 col-sm-6 col-xs-12">
                                 <button id="btnFiltrar" name="btnFiltrar" onclick="filtrarProyectoInversion();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> Cargar PIDE</button>
+                            </div><br><br><br>
+                           <div class="col-md-1 col-sm-6 col-xs-12">
+                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAF</button>
                             </div>
+                            
                             <?php } ?>
                         </div>
                         <!---combos para listar proyectos-->
@@ -146,10 +147,10 @@
                                     <icon class="fa fa-home"></icon> 
                                 </a>
                             </li>
-                            <li><a href="#profile" role="tab" data-toggle="tab">
+                            <!-- <li><a href="#profile" role="tab" data-toggle="tab">
                                 <i class="fa fa-refresh"></i> CARGAR SIAF
                                 </a>
-                            </li>
+                            </li> -->
                     
                     </ul><br>
                       <div class="tab-content">
@@ -194,22 +195,12 @@
                                         <table id="table_proyectos_inversion" class="table table-striped table-bordered jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
                                             <thead>
                                                 <tr>
-                                                    <th rowspan="2" style="width: 1%"> Nombre.</th>
-                                                    <th rowspan="2" style="width: 1%"> Año eje.</th>
-                                                    <th rowspan="2" style="width: 2%"> sec_ejec.</th>
-                                                    <th rowspan="2" style="width: 2%"> funcion.</th>
-                                                    <th rowspan="2" style="width: 2%"> Act_proy.</th>
-                                                    <th rowspan="2" style="width: 2%"> Meta.</th>
-                                                    <th rowspan="2" style="width: 2%"> Finalidad.</th>
-                                                    <th rowspan="2" style="width: 2%"> Monto.</th>
-                                                    <th rowspan="2" style="width: 2%"> Cantidad.</th>
-                                                    <th rowspan="2" style="width: 2%"> Pia</th>
-                                                    <th rowspan="2" style="width: 2%"> Cantidad semestral</th>
-                                                    <th rowspan="2" style="width: 2%"> Cantidad semestral inicial</th>
-                                                    <th rowspan="2" style="width: 2%"> Estrategia nacional</th>
-                                                    <th rowspan="2" style="width: 2%"> Estado</th>
-                                                    <th rowspan="2" style="width: 2%"> Ambito</th>
-                                                
+                                                <th rowspan="2" style="width: 1%"> Código.</th>
+                                                <th rowspan="2" style="width: 1%"> Nombre.</th>
+                                                <th rowspan="2" style="width: 1%"> Año</th>
+                                                <th rowspan="2" style="width: 2%"> Estado</th>   
+                                                <th rowspan="2" style="width: 2%"> Opciones</th>  
+                                              </tr>
                                                 
                                             </thead>
                                             <tbody>
@@ -217,21 +208,11 @@
                                                 
                                             
                                                 <tr>
-                                                    <td><?=$item->nombre?></td>
-                                                    <td><?=$item->ano_eje?></td>
-                                                    <td><?=$item->sec_ejec?></td>
-                                                    <td><?=$item->funcion?></td>
-                                                    <td><?=$item->act_proy?></td>
-                                                    <td><?=$item->meta?></td>
-                                                    <td><?=$item->finalidad?></td>
-                                                    <td><?=$item->monto?></td>
-                                                    <td><?=$item->cantidad?></td>
-                                                    <td><?=$item->es_pia?></td>
-                                                    <td><?=$item->cantidad_semestral?></td>
-                                                    <td><?=$item->cantidad_semestral_inicial?></td>
-                                                    <td><?=$item->estrategia_nacional?></td>
-                                                    <td><?=$item->estado?></td>
-                                                    <td><?=$item->ambito?></td>
+                                                <td><?=$item->act_proy?></td>
+                                                <td><?=$item->nombre?></td>
+                                                <td><?=$item->ano_eje?></td>
+                                                <td><?=$item->estado?></td>
+                                                <td></td>
                                                                     
                                                 </tr>
                                                 <?php } ?>
@@ -241,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                      </div>
+                      
                     </div>
                 </div>
             </div>
