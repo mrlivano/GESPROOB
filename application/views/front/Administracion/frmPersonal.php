@@ -203,6 +203,16 @@
                 <form class="form-horizontal " id="form-addPersonal" action="<?php echo base_url(); ?>Personal/GetPersonal" method="POST">
                     <div id="validarPersonal">
 
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">DNI<span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input id="txt_dni" name="txt_dni" class="mayuscula form-control col-md-7 col-xs-12" placeholder="DNI" maxlength="8" type="text">
+                          <label id="mensajeError" style="display: none;">  </label>
+                        </div> 
+                        <button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatos(70085642)">Buscar</button>
+                      </div>
+
                     <div class="form-group">
                            <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-6">Oficina</label>
                             <div class="col-md-6 col-sm-9 col-xs-6">
@@ -231,15 +241,6 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="txt_apellidomaterno" name="txt_apellidomaterno" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Apellido Materno" type="text" maxlength="70">
-                        </div>
-                      </div>
-
-                     <div class="item form-group">
-                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">DNI<span class="required">*</span>
-                        </label>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                          <input id="txt_dni" name="txt_dni" class="mayuscula form-control col-md-7 col-xs-12" placeholder="DNI" maxlength="8" type="text">
-                          <label id="mensajeError" style="display: none;">  </label>
                         </div>
                       </div>
 
@@ -769,6 +770,22 @@
             });
         }        
     });
+    function cargarDatos(dni) {
+      $.ajax(
+            {
+                url:"https://sysapis.uniq.edu.pe/pide/reniec?dni=70085642",
+                type: 'get',
+                cache: false,
+                async: false
+            }).done(function(objectJSON)
+            {
+                objectJSON = JSON.parse(objectJSON);
+            }).fail(function()
+            {
+                swal('Error', 'Error no controlado.', 'error');
+            });
+      
+    }
 
     $(function()
     {
