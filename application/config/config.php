@@ -46,9 +46,9 @@ $config['base_url'] .= str_replace(basename($_SERVER['ORIG_SCRIPT_NAME']),"",$_S
 | variable so that it is blank.
 |
  */
-$config['base_url'] = 'http://192.168.1.53';//'http://200.37.200.182';
+$config['base_url'] = 'http://localhost';//'http://200.37.200.182';
 $config['index_page'] = '';
-$config['ups_url'] = 'http://192.168.1.53:8080';//'http://200.37.200.182:8088';
+$config['ups_url'] = 'http://localhost:8080';//'http://200.37.200.182:8088';
 
 /*
 |--------------------------------------------------------------------------
