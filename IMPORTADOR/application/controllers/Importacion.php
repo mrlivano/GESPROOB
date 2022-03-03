@@ -288,7 +288,7 @@ class Importacion extends CI_Controller
         ini_set('memory_limit', '-1');
 
         if (is_null($unidad_ejec)) {
-            $unidad_ejec = '000747';
+            $unidad_ejec = '300251';
         }
 
         $data['mensaje']    = 'Hubo un problema en la base de datos confirme las tablas '+$anio;

@@ -58,7 +58,7 @@ class Model_Consulta extends CI_Model
                          gasto.credito, gasto.id_clasificador, gasto.monto_financ1, gasto.monto_financ2, gasto.compromiso, gasto.devengado, gasto.girado, gasto.pagado,
                          gasto.monto_certificado, gasto.monto_comprometido_anual, gasto.monto_precertificado
              FROM    gasto, meta
-             WHERE   gasto.ano_eje = meta.ano_eje AND gasto.sec_ejec = meta.sec_ejec AND gasto.sec_func = meta.sec_func AND val(meta.act_proy) = val('" . $CodigoUnico . "') AND (val(gasto.sec_ejec) = 747)");
+             WHERE   gasto.ano_eje = meta.ano_eje AND gasto.sec_ejec = meta.sec_ejec AND gasto.sec_func = meta.sec_func AND val(meta.act_proy) = val('" . $CodigoUnico . "') AND (val(gasto.sec_ejec) = 300251)");
 
         return $data->result();
     }
@@ -70,7 +70,7 @@ class Model_Consulta extends CI_Model
                 FROM    gasto, meta, gasto_acumulado
                 WHERE  gasto.ano_eje = meta.ano_eje AND gasto.sec_ejec = meta.sec_ejec AND gasto.sec_func = meta.sec_func AND gasto.ano_eje = gasto_acumulado.ano_eje AND
                            gasto.sec_ejec = gasto_acumulado.sec_ejec AND gasto.origen = gasto_acumulado.origen AND gasto.fuente_financ = gasto_acumulado.fuente_financ AND
-                           gasto.tipo_recurso = gasto_acumulado.tipo_recurso AND gasto.sec_func = gasto_acumulado.sec_func AND val(meta.act_proy) = val('" . $CodigoUnico . "')  AND val(gasto.sec_ejec) = 747");
+                           gasto.tipo_recurso = gasto_acumulado.tipo_recurso AND gasto.sec_func = gasto_acumulado.sec_func AND val(meta.act_proy) = val('" . $CodigoUnico . "')  AND val(gasto.sec_ejec) = 300251");
 
         return $data->result();
     }
@@ -81,7 +81,7 @@ class Model_Consulta extends CI_Model
         $data      = $db_prueba->query("select DISTINCT ejecucion_mpp.*
                   FROM            ejecucion_mpp, meta
                   WHERE        ejecucion_mpp.ano_eje = meta.ano_eje AND ejecucion_mpp.sec_ejec = meta.sec_ejec AND ejecucion_mpp.sec_func = meta.sec_func AND
-                  (meta.act_proy = '" . $CodigoUnico . "') AND val(meta.sec_ejec) = 747");
+                  (meta.act_proy = '" . $CodigoUnico . "') AND val(meta.sec_ejec) = 300251");
         return $data->result();
     }
 

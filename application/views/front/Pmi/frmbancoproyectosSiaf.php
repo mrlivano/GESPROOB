@@ -1048,8 +1048,8 @@ $(document).ready(function (e) {
     // alert(ue);
       $(e.currentTarget).find('#txt_id_oficina').val(id);
       $(e.currentTarget).find('#txt_oficina').val(denom);
-      $(e.currentTarget).find('#txt_ue').val('000747');
-      $(e.currentTarget).find('#txt_unidad_ejecutora').val('000747 - REGION APURIMAC SEDE CENTRAL');
+      $(e.currentTarget).find('#txt_ue').val('300251');
+      $(e.currentTarget).find('#txt_unidad_ejecutora').val('300251 - REGION APURIMAC SEDE CENTRAL');
       cargarComboMetaSiaf();
   });
 });

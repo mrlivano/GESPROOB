@@ -20,7 +20,7 @@ class Expediente extends CI_Controller
     {
         switch ($sec_ejec) 
         {
-            case '000747':
+            case '300251':
                 $this->config->set_item('odbc_active_record', 'SIAF');
                 $this->config->set_item('active_record', 'DBSIAF');
                 break;
@@ -261,7 +261,7 @@ class Expediente extends CI_Controller
     {
         switch ($sec_ejec) 
         {
-            case '000747':
+            case '300251':
                 $this->config->set_item('odbc_active_record', 'SIAF');
                 $this->config->set_item('active_record', 'DBSIAF');
                 break;
@@ -335,10 +335,10 @@ class Expediente extends CI_Controller
 	public function expediente_meta22()
     {
 		$ano_eje="2017";
-		$sec_ejec ="001546";
+		$sec_ejec ="300251";
         switch ($sec_ejec) 
         {
-            case '000747':
+            case '300251':
                 $this->config->set_item('odbc_active_record', 'SIAF');
                 $this->config->set_item('active_record', 'DBSIAF');
                 break;
@@ -414,7 +414,7 @@ class Expediente extends CI_Controller
     {
         switch ($sec_ejec) 
         {
-            case '000747':
+            case '300251':
                 $this->config->set_item('odbc_active_record', 'SIAF');
                 $this->config->set_item('active_record', 'DBSIAF');
                 break;
@@ -653,7 +653,7 @@ class Expediente extends CI_Controller
     {
          switch ($sec_ejec) 
         {
-            case '000747':
+            case '300251':
                 $this->config->set_item('odbc_active_record', 'SIAF');
                 $this->config->set_item('active_record', 'DBSIAF');
                 break;
@@ -814,7 +814,7 @@ class Expediente extends CI_Controller
     {
         switch ($sec_ejec) 
         {
-            case '000747':
+            case '300251':
                 $this->config->set_item('odbc_active_record', 'SIAF');
                 $this->config->set_item('active_record', 'DBSIAF');
                 break;

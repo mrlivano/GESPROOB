@@ -29,7 +29,7 @@
 									</tr>
 								</thead>
 								<tbody>		
-									<?php if(count($listaDetalleAnaliticoAvancFin[0]) == 0){?>
+									<?php if(count($listaDetalleAnaliticoAvancFin) == 0){?>
 										<tr>
 											<td>Prod/Proy. Cat.Pptal. Act/AI/Obr Fun. Div.Fn. Finalidad Meta A Gen</td>
 										</tr>

@@ -57,7 +57,7 @@
 						<br>
 						<div class="row">
 							<?php if($actualizador) { ?>
-							<button id="btnActualizarExpediente" class="btn btn-success btn-sm" onclick="siafExpediente('<?php  echo $anio_up ?>', '<?php  echo $exp_up ?>', '000747')">Actualizar estados de expediente</button>
+							<button id="btnActualizarExpediente" class="btn btn-success btn-sm" onclick="siafExpediente('<?php  echo $anio_up ?>', '<?php  echo $exp_up ?>', '300251')">Actualizar estados de expediente</button>
 							<?php } ?>
 						</div>
 						<br>

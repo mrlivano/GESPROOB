@@ -95,7 +95,7 @@
                     $openTag=false;
                     $arrayMenu=$this->session->userdata('menuUsuario');
                     for($i=0;$i<count($arrayMenu);$i++){
-                    if($arrayMenu[$i]['id_modulo']=='PMI' /*&& $arrayMenu[$i]['id_menu']=='9'*/){
+                    if($arrayMenu[$i]['id_modulo']=='PMI' ){
                       if($i>0 and ($arrayMenu[$i]['id_menu']!=$arrayMenu[$i-1]['id_menu'])){
                         if($openTag==true){
                           echo '</ul></li>';
