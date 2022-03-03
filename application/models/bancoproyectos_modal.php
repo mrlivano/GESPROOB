@@ -178,7 +178,11 @@ class bancoproyectos_modal extends CI_Model
 
     function obtenerProyectosSiaf($unidadEjecutora,$anio)
     {
-        $query = $this->db->query("select * from DBSIAF.dbo.act_proy_nombre where act_proy in (select act_proy from dbsiaf.dbo.META where sec_ejec like '%$unidadEjecutora%' and ano_eje = '$anio') and ano_eje = '$anio' and tipo_proyecto = '1'");
+        // $query = $this->db->query("select * from DBSIAF.dbo.act_proy_nombre where act_proy in (select act_proy from dbsiaf.dbo.META where sec_ejec like '%$unidadEjecutora%' and ano_eje = '$anio') and ano_eje = '$anio' and tipo_proyecto = '1'");
+        // return $query->result();
+        $query = $this->db->query("select * from DBSIAF.DBO.act_proy_x_entidad ape inner join DBSIAF.DBO.act_proy_nombre apn
+        on ape.act_proy=apn.act_proy
+         where ape.ano_eje='$anio' and apn.ano_eje='$anio' and apn.tipo_act_proy=2");
         return $query->result();
     }
 

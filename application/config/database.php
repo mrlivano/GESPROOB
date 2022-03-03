@@ -75,10 +75,10 @@ $db['escritura'] = array(
 
 $db['SIGA_SEDECENTRAL'] = array(
     'dsn'          => '',
-    'hostname'     => '10.19.0.3',
-    'username'     => 'serversiga',
-    'password'     => '$Sig@ue442%2017',
-    'database'     => 'SIGA',
+    'hostname'     => '192.168.1.49',
+    'username'     => 'sa',
+    'password'     => 'TestUniq2021$$',
+    'database'     => 'SIGA_1549',
     'dbdriver'     => 'sqlsrv',
     'dbprefix'     => '',
     'pconnect'     => false,
