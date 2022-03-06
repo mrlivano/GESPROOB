@@ -6,9 +6,9 @@ $query_builder = true;
 
 $db['default'] = array(
    'dsn'          => '',
-   'hostname'     => 'LAPTOP-QNNLA4MB', //'20.0.20.100',
+   'hostname'     => 'WIN-66HFFS0RNAC', //'20.0.20.100',
    'username'     => 'sa',
-   'password'     => '123456',
+   'password'     => '123456789',
    'database'     => 'SMP_GRA', //SMP_GRA -- DBSMP
    'dbdriver'     => 'sqlsrv',
    'dbprefix'     => '',
@@ -29,9 +29,9 @@ $db['default'] = array(
 
 $db['lectura'] = array(
    'dsn'          => '',
-   'hostname'     => 'LAPTOP-QNNLA4MB', //'20.0.20.100',
+   'hostname'     => 'WIN-66HFFS0RNAC', //'20.0.20.100',
    'username'     => 'sa',
-   'password'     => '123456',
+   'password'     => '123456789',
    'database'     => 'SMP_GRA',
    'dbdriver'     => 'sqlsrv',
    'dbprefix'     => '',
@@ -52,9 +52,9 @@ $db['lectura'] = array(
 
 $db['escritura'] = array(
    'dsn'          => '',
-   'hostname'     => 'LAPTOP-QNNLA4MB', //'20.0.20.100',
+   'hostname'     => 'WIN-66HFFS0RNAC', //'20.0.20.100',
    'username'     => 'sa',
-   'password'     => '123456',
+   'password'     => '123456789',
    'database'     => 'SMP_GRA',
    'dbdriver'     => 'sqlsrv',
    'dbprefix'     => '',

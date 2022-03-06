@@ -17,7 +17,7 @@ class Gerencia extends CI_Controller
             {
                 $value->hasChild = ($value->n==0 ? false : true);
             }
-        $unidadejecutora='300251';
+        $unidadejecutora='001549';
         $lista_ue = $this->db->query("select * from unidad_ejecutora");
         if($lista_ue->num_rows()>0){
             $result_ue = $lista_ue->result();

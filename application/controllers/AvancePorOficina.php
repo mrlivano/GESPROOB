@@ -52,7 +52,7 @@ public function ReporteAvanceFinanciero()
 
         $result_ue = [];
         $tipoUsuario=$this->session->userdata('tipoUsuario');
-        $unidad_ejec='300251';
+        $unidad_ejec='001549';
         if($tipoUsuario==9)
         {
             $lista_ue = $this->db->query("select sec_ejec,cast( cast(sec_ejec as int)  as varchar(100)) as codigo_ue , cast( cast(sec_ejec as int)  as varchar(100)) + ' - ' + nombre unidad_ejec from DBSIAF.dbo.entidad_estado order by sec_ejec");
