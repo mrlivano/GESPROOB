@@ -210,7 +210,7 @@
                           <input id="txt_dni" name="txt_dni" class="mayuscula form-control col-md-7 col-xs-12" placeholder="DNI" maxlength="8" type="text">
                           <label id="mensajeError" style="display: none;">  </label>
                         </div> 
-                        <button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatos(70085642)">Buscar</button>
+                        <button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatos()">Buscar</button>
                       </div>
 
                     <div class="form-group">
@@ -770,21 +770,50 @@
             });
         }        
     });
-    function cargarDatos(dni) {
+    function cargarDatos() {
+      let dni=$('#txt_dni').val();
       $.ajax(
             {
-                url:"https://sysapis.uniq.edu.pe/pide/reniec?dni=70085642",
-                type: 'get',
+                url:"https://sysapis.uniq.edu.pe/pide/reniec?dni="+dni,
+                type: 'GET',
                 cache: false,
-                async: false
-            }).done(function(objectJSON)
-            {
-                objectJSON = JSON.parse(objectJSON);
-            }).fail(function()
-            {
-                swal('Error', 'Error no controlado.', 'error');
-            });
-      
+                processData:false,
+                contentType:false,
+                beforeSend: function(request)
+                {
+                    renderLoading();
+                }               
+                              
+            }).done(
+              function(data)
+                {
+                  $('#divModalCargaAjax').hide();
+			            
+                  
+
+                  if(data)
+                  {
+                    $('#txt_nombrepersonal').val(data.nombres);
+                  $('#txt_apellidopaterno').val(data.apellidoPaterno);
+                  $('#txt_apellidomaterno').val(data.apellidoMaterno);
+                  $('#txt_direccion').val(data.direccion);
+                    swal('Operacion Completada','OK','success');
+                  }
+                  else
+                  {
+                    swal('No se pudo completar la Operacion','error');
+                  }
+                }).fail(
+                   function ( )
+                {
+                      $('#divModalCargaAjax').hide();
+                      $('#txt_nombrepersonal').val('');
+                  $('#txt_apellidopaterno').val('');
+                  $('#txt_apellidomaterno').val('');
+                  $('#txt_direccion').val('');
+                      swal('ERROR!','No se encontró su DNI verifique por favor','error');
+
+                  });
     }
 
     $(function()
