@@ -296,7 +296,7 @@
 							html +="<th  colspan='16'>"+value.nombre_finalidad+"</th></tr>";
 					html +=" <tr><th style='width:5%;'><button type='button' class='btn btn-warning btn-xs'>"+value.sec_ejec+" <i class='ace-icon'></i></button></th><th style='width:4%;'><button type='button' class='btn btn-info btn-xs' onclick='detalladoMensualizado("+value.ano_eje+",\""+value.meta+"\", \""+value.sec_ejec+"\");'>"+parseInt(value.ano_eje)+" <i class='ace-icon'></i></button></th><th style='width:3%;'><button type='button' class='btn btn-primary btn-xs' onclick='detalladoMensualizadoFuenteFinan("+value.ano_eje+",\""+value.meta+"\", \""+value.sec_ejec+"\");'>"+parseInt(value.meta)+"<i class='ace-icon bigger-120'></i></button></th>";
 
-					if(value.sec_ejec=='300251' || value.sec_ejec=='001549')
+					if(value.sec_ejec=='001549' || value.sec_ejec=='001549')
 					{
 						html+= "<th style='width:4%;'><button type='button' class='btn btn-success btn-xs' onclick='detalladoMensualizadoConceptoClasificador("+value.ano_eje+",\""+value.meta+"\", \""+value.sec_ejec+"\");'>Orden <i class='ace-icon'></i></button></th><th style='width:4%;'> <button type='button' class='btn btn-success btn-xs' onclick='detallePedidoCompraMeta("+value.ano_eje+",\""+value.meta+"\", \""+value.sec_ejec+"\");'>Pedido <i class='ace-icon'></i></button>  </th>";
 					}

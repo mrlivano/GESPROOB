@@ -35,7 +35,7 @@
 							<label>Unidad Ejecutora</label>
 							<select id="opcion_ue" class="form-control">
 								<?php foreach ($lista_ue as $row) {
-									if ($row->codigo_ue=='300251' || $row->codigo_ue=='748' || $row->codigo_ue=='1546' || $row->codigo_ue=='1359' || $row->codigo_ue=='1549') { ?>
+									if ($row->codigo_ue=='001549' || $row->codigo_ue=='748' || $row->codigo_ue=='1546' || $row->codigo_ue=='1359' || $row->codigo_ue=='1549') { ?>
 										<option value="<?=trim($row->sec_ejec)?>" <?php echo (trim($unidadEjecutora)==trim($row->sec_ejec) ? 'selected' : ''); ?>><?=$row->unidad_ejec?></option>
 								<?php } } ?>
 							</select>
