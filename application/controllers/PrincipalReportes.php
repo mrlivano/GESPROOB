@@ -395,14 +395,14 @@ class PrincipalReportes extends CI_Controller
 
 
 
-
+/*
         foreach ($listaDetalleMensualizado as $key => $data)
         {
         $compromiso = 0;
         $devengado = 0;              
         $girado = 0;
         $pagado = 0;
-            $listaExpediente=$this->Model_Dashboard_Reporte->ExpedienteMensualizado($data->ano_eje, $sec_ejec,$data->meta,$data->mes_eje);
+            $listaExpediente=$this->Model_Dashboard_Reporte->ExpedienteMensualizado($anioMeta, $sec_ejec, $correlativoMeta,$data->mes_eje);
             foreach ($listaExpediente as $value) 
             {
                 switch ($value->fase) 
@@ -418,9 +418,9 @@ class PrincipalReportes extends CI_Controller
             $data->girado = $girado; 
             $data->pagado = $pagado;             
         }
-
-        $listaDetalleMensualizadoEst=$this->Model_Dashboard_Reporte->DetalleMensualizadoMetaEst($correlativoMeta,$anioMeta,$sec_ejec);
-        $this->load->view('front/Reporte/ProyectoInversion/detalle',['listaDetalleMensualizado'=>$listaDetalleMensualizado,'listaDetalleMensualizadoEst'=>$listaDetalleMensualizadoEst,'correlativoMeta'=>$correlativoMeta,'anioMeta'=>$anioMeta,'sec_ejec'=>$sec_ejec]);
+*/
+        //$listaDetalleMensualizadoEst=$this->Model_Dashboard_Reporte->DetalleMensualizadoMetaEst($correlativoMeta,$anioMeta,$sec_ejec);
+        $this->load->view('front/Reporte/ProyectoInversion/detalle',['listaDetalleMensualizado'=>$listaDetalleMensualizado,'correlativoMeta'=>$correlativoMeta,'anioMeta'=>$anioMeta,'sec_ejec'=>$sec_ejec]);
     }
 
     function DetalleMensualizadoFuenteFinan()

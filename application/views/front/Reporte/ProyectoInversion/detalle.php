@@ -31,15 +31,15 @@
 					                        <div class="table-responsive">
 					                        	<table id="table-DatoGen"  class="table-hover" cellspacing="0" width="100%">
 													<tbody>
-														<?php if($listaDetalleMensualizadoEst ==false)
+														<?php if($listaDetalleMensualizado ==false)
 														{?>
 														<tr><td>AÑO:</td></tr>
 														<tr><td>CORRELATIVO META:</td></tr>
 														<?php }
 														else 
 														{ ?>
-															<tr><td>AÑO: <?=$listaDetalleMensualizadoEst->ano_eje ;?></td></tr>
-															<tr><td>CORRELATIVO META: <?=$listaDetalleMensualizadoEst->meta;?></td></tr>																
+															<tr><td>AÑO: <?=$anioMeta ;?></td></tr>
+															<tr><td>CORRELATIVO META: <?=$correlativoMeta;?></td></tr>																
 														<?php
 														} ?>														
 													</tbody>
