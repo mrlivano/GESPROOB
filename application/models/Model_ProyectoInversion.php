@@ -174,7 +174,7 @@ class Model_ProyectoInversion extends CI_Model
     }
 
     public function RestoreDB(){
-        $data = $this->db->query("RESTORE DATABASE BDPRUEBA FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Backup\BDPRUEBA.bak'");
+        $data = $this->db->query("exec RestoreDB");
         return $data->result();
     }
 }
