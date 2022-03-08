@@ -879,15 +879,13 @@ class PrincipalReportes extends CI_Controller
         $this->load->view('front/Reporte/ProyectoInversion/ordenServicio',['nro_orden' => $nro_orden, 'conformidad_orden' => $conformidad_orden]);
     }
     
-    function RestoreDB(){
-        if ($this->input->is_ajax_request()) {
+    public function RestoreDB(){
+
             //$anio_meta=$this->input->post('anio_meta');
             //$sec_ejec=$this->input->post('sec_ejec');
-            $data = $this->Model_ProyectoInversion->RestoreDB();
-            echo json_encode($data);
-        } else {
-            show_404();
-        }
+            $data = $this->Model_ProyectoInversion->RestoreDB(); 
+            //echo "<script>console.log('hola)</script>";
+        
     }
 
     //DATA S10

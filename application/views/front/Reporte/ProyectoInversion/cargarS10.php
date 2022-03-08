@@ -678,9 +678,8 @@ function mostrarGraficos()
     	var codigounico=$("#BuscarPip").val();
 		var start = +new Date();
     	$.ajax({
-			url: base_url + "/index.php/PrincipalReportes/RestoreDB",
+			url: base_url + "index.php/PrincipalReportes/RestoreDB",
 			type: "POST",
-			cache: false,
 			contentType:false,
 			processData:false,
 			//data: { disk: disk},
@@ -690,9 +689,11 @@ function mostrarGraficos()
 			},
 			success:function(data)
 			{
+				console.log("responde data");
 				$('#divModalCargaAjax').hide();
+				
+				//datos=JSON.parse(data);
 				console.log(data);
-				datos=JSON.parse(data);
 				/*var rtt = +new Date() - start;
 
 				if(datos.actualizo)

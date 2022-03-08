@@ -174,16 +174,7 @@ class Model_ProyectoInversion extends CI_Model
     }
 
     public function RestoreDB(){
-        $data = $this->db->query("USE master
-        GO
-        IF EXISTS(SELECT * FROM DBO.SYSDATABASES WHERE NAME = 'BDPRUEBA') 
-            BEGIN
-        ALTER DATABASE [BDPRUEBA] set single_user with rollback immediate
-        DROP DATABASE [BDPRUEBA]
-        END
-        GO
-        RESTORE DATABASE BDPRUEBA FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Backup\BDPRUEBA.bak'
-        WITH REPLACE");
+        $data = $this->db->query("RESTORE DATABASE BDPRUEBA FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Backup\BDPRUEBA.bak'");
         return $data->result();
     }
 }
