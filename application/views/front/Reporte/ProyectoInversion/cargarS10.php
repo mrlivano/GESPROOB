@@ -36,11 +36,11 @@
 			<div class="col-md-12 col-xs-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2><b>REPORTE POR PROYECTO DE INVERSIÓN</b> </h2>
+						<h2><b>CARGAR PROYECTO DE INVERSIÓN - S10</b> </h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						BÚSQUEDA POR CÓDIGO (Ingrese un código válido SIAF)
+						CARGAR POR CÓDIGO (Ingrese un código válido)
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="input-group">
@@ -53,7 +53,7 @@
                          	<div class="col-lg-6">
                             	<div class="input-group">
                               		<span class="input-group-btn">
-										<a href="javascript:siafActualizador()"><button id="BtnAcatualizar" class="btn btn-success" type="button"><i class="fa fa-spinner"></i> Actualizar (Importar de SIAF)</button></a>
+										<a href="javascript:siafActualizador()"><button id="BtnAcatualizar" class="btn btn-success" type="button"><i class="fa fa-spinner"></i> Cargar (Importar S10)</button></a>
                               		</span>
                             	</div>
                           	</div>
@@ -83,7 +83,7 @@
 								<div class="panel panel-default">
 												
 									<div id="EjecucionAnual">
-										<table class="table table-striped table-bordered jambo_table bulk_action  table-hover dataTable no-footer" STYLE="table-layout:fixed">
+										<table class="table" STYLE="table-layout:fixed">
 											<tr>
 												<td style="width: 20%" class="blue"><b>NOMBRE</b></td>
 												<td style="width: 80%">
@@ -674,15 +674,16 @@ function mostrarGraficos()
 
 	function siafActualizador()
 	{
+		console.log("entro");
     	var codigounico=$("#BuscarPip").val();
 		var start = +new Date();
-		var ups_url = '<?php $ups_url = $this->config->item('ups_url');echo $ups_url;?>';
     	$.ajax({
-			url: ups_url + "/Importacion/codigo/" + codigounico,
+			url: base_url + "/index.php/PrincipalReportes/RestoreDB",
 			type: "POST",
 			cache: false,
 			contentType:false,
 			processData:false,
+			//data: { disk: disk},
 			beforeSend: function(request)
 			{
 				renderLoading();
@@ -690,8 +691,9 @@ function mostrarGraficos()
 			success:function(data)
 			{
 				$('#divModalCargaAjax').hide();
+				console.log(data);
 				datos=JSON.parse(data);
-				var rtt = +new Date() - start;
+				/*var rtt = +new Date() - start;
 
 				if(datos.actualizo)
 				{
@@ -708,7 +710,7 @@ function mostrarGraficos()
 						datos.mensaje + ' Tiempo: ' + (rtt/1000) +'s',
 						'error'
 					);
-				}
+				}*/
 			},
 			error: function (xhr, textStatus, errorMessage) 
 			{

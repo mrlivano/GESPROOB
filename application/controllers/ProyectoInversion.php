@@ -87,6 +87,14 @@ class ProyectoInversion extends CI_Controller
 	    $this->load->view('layout/Reportes/footer');
     }
 
+    public function ReporteImportadorPorPip($codigo='')
+    {
+	    $codigo = isset($_GET['codigo']) ? $_GET['codigo'] : null;
+        $this->load->view('layout/Reportes/header');
+	    $this->load->view('front/Reporte/ProyectoInversion/cargarS10',["codigo" => $codigo]);
+	    $this->load->view('layout/Reportes/footer');
+    }
+
 	
 	public function ReportePipPedidos()
 	{

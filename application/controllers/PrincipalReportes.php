@@ -878,5 +878,18 @@ class PrincipalReportes extends CI_Controller
         $conformidad_orden = $this->Model_ProyectoInversion->getOrdenServicio($nro_orden);
         $this->load->view('front/Reporte/ProyectoInversion/ordenServicio',['nro_orden' => $nro_orden, 'conformidad_orden' => $conformidad_orden]);
     }
+    
+    function RestoreDB(){
+        if ($this->input->is_ajax_request()) {
+            //$anio_meta=$this->input->post('anio_meta');
+            //$sec_ejec=$this->input->post('sec_ejec');
+            $data = $this->Model_ProyectoInversion->RestoreDB();
+            echo json_encode($data);
+        } else {
+            show_404();
+        }
+    }
+
+    //DATA S10
 
 }
