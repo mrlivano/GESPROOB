@@ -881,9 +881,9 @@ class PrincipalReportes extends CI_Controller
     
     public function RestoreDB(){
 
-            //$anio_meta=$this->input->post('anio_meta');
-            //$sec_ejec=$this->input->post('sec_ejec');
-            $data = $this->Model_ProyectoInversion->RestoreDB(); 
+            $nameBD=$this->input->post('nameBD');
+            $urlBD=$this->input->post('urlBD');
+            $data = $this->Model_ProyectoInversion->RestoreDB($nameBD,$urlBD); 
             //echo "<script>console.log('hola)</script>";
         
     }

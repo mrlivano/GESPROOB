@@ -173,8 +173,11 @@ class Model_ProyectoInversion extends CI_Model
         return $data->result();
     }
 
-    public function RestoreDB(){
-        $data = $this->db->query("exec RestoreDB");
-        return $data->result();
+    public function RestoreDB($nameBD,$urlDB){
+        $nameDB=(string)$nameBD;
+        $query="\"IF EXISTS(SELECT * FROM DBO.SYSDATABASES WHERE NAME = '".$nameDB."') BEGIN ALTER DATABASE [".$nameDB."] set single_user with rollback immediate DROP DATABASE [".$nameDB."] END RESTORE DATABASE [".$nameDB."] FROM DISK = '".$urlDB."' WITH MOVE 'S10_Data' TO 'C:\S102000\Data\ ".$nameDB."_1.mdf', MOVE 'S10_Datos' TO 'C:\S102000\Data\ ".$nameDB."_2.ndf', MOVE 'S10_Log' TO 'C:\S102000\Data\ ".$nameDB."_3.ldf', REPLACE\"";
+        $cmd = "osql -U \"my\" -P \"123456789\" -S \"DESKTOP-N1LQMHP\" -Q " .$query;
+        
+        return passthru( $cmd );
     }
 }

@@ -9,7 +9,14 @@
 				</div>
 				<div class="x_content">
 					<div class="" role="tabpanel" data-example-id="togglable-tabs">
-						
+						<ul id="myTab" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#tab_elaboracion"  id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Expedientes en Elaboración</a>
+							</li>
+							<li role="presentation">
+								<a href="#tab_aprobacion"  id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Expedientes Aprobados</a>
+							</li>
+						</ul>
 						<div id="myTabContent" class="tab-content">
 							<div role="tabpanel" class="tab-pane fade active in" id="tab_elaboracion" aria-labelledby="home-tab">
 								<br>
