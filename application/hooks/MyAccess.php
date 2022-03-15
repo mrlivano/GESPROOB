@@ -911,6 +911,7 @@ function autorizar($url)
       'PrincipalReportes/estadoPedido',
       'Personal/verifyPersonalByDNI',
       'Expediente_Tecnico/insertActaEntregaTerreno',
+      'Expediente_Tecnico/listarBds10',
       'EstadoPedido/register',
       'PrincipalReportes/estadoPedidoShow',
       'EstadoPedido/historialPedidoEstado',
