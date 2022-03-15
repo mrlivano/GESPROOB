@@ -27,7 +27,7 @@
 										<?php foreach($listaBD as $item){ ?>
 										  	<tr>
 										  		<td style="width: 15%;">
-										  			<a style="width: 100%;" href="<?= site_url('Expediente_Tecnico/verdetalle?id_et='.$item->CodigoUnico);?>" role="button" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->CodigoUnico?></a>
+										  			<a style="width: 100%;" href="<?= site_url('Expediente_Tecnico/monitorCoordinador?id_et='.$item->CodigoUnico);?>" role="button" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->CodigoUnico?></a>
 
 										  		</td>
 												<td style="width: 70%;">
