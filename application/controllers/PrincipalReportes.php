@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PrincipalReportes extends CI_Controller
 {
+    
     public function __construct()
     {
         parent::__construct();
@@ -881,12 +882,53 @@ class PrincipalReportes extends CI_Controller
     
     public function RestoreDB(){
 
-            $nameBD=$this->input->post('nameBD');
-            $urlBD=$this->input->post('urlBD');
-            $data = $this->Model_ProyectoInversion->RestoreDB($nameBD,$urlBD); 
-            //echo "<script>console.log('hola)</script>";
+            $rutaFile = 'C:/S102000/Bak/';
+            $codigo=$this->input->post('codigo');
+            $proyecto=$this->input->post('proyecto');
+            $file = $this->input->post('file');
+            $archivo = $_FILES["archivo"];
+            //$resultado = move_uploaded_file($archivo["tmp_name"], $archivo["name"]);
+            //if ($resultado) {
+                $data = $this->Model_ProyectoInversion->RestoreDB($codigo,$file);
+            /*}
+            else {
+                echo "Error al subir archivo";
+            }*/
+             
         
     }
+   /* public function RestoreDB(){
+        $file = $_FILES['fileAdd'];
+*/
+        /*$config['upload_path'] = 'C:/S102000/Bak/';
+        $config['allowed_types'] = '*';
+        $config['max_size'] = 100000;
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('fileAdd')) { 
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode($error);
+        } else {
+            echo json_encode(true);
+        }*/
+/*
+        $ruta_destino_archivo='C:/S102000/Bak/'.$file['name'];
+
+        if (!move_uploaded_file($file['tmp_name'], $ruta_destino_archivo)) { 
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode($error);
+        } else {
+            echo json_encode(true);
+        }*/
+
+        //$info = pathinfo($_FILES['fileAdd']['name'], PATHINFO_EXTENSION);
+/*$ext = 'exe'; // obtener la extensión del archivo
+$newname = "prueba.".$ext; 
+
+$target = 'C:/S102000/Bak/'.$newname;
+move_uploaded_file( $_FILES['fileAdd']['tmp_name'], $target);
+    
+}*/
 
     //DATA S10
 
