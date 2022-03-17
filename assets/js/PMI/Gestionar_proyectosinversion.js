@@ -46,7 +46,7 @@ var listar_proyectos_inversion = function()
         { "data": "id_pi", "visible": false }, 
         { "data": function (data, type) 
             {
-                return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' onclick='cargarDatosProyecto("+data.id_pi+")' data-toggle='modal'  > "+data.codigo_unico_pi+"</button";
+                return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' onclick='cargarDatosProyecto("+data.codigo_unico_pi+")' data-toggle='modal'  > "+data.codigo_unico_pi+"</button";
             }
         },
         { "data": "nombre_pi" }, 
@@ -117,69 +117,9 @@ var filtrarProyectoInversion1 = function(idUnidadEjecutora,idOficina)
     AddListarUbigeo("#table_PIPs_filtro", table);
 }
 function cargarDatosProyecto(codigoProyectoInversion) {
-    data1={
-        "codigo": "361331",
-        "estado": "ACTIVO",
-        "nombre": "MEJORAMIENTO DEL SERVICIO DE LOS LABORATORIOS DE CIENCIAS BASICAS DE LA UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA SEDE EL ARENAL DISTRITO DE SANTA ANA PROVINCIA DE LA CONVENCION REGION CUSCO",
-        "fechaRegistro": "27/09/2016",
-        "funcion": "EDUCACIÓN",
-        "programa": "EDUCACIÓN SUPERIOR",
-        "subprograma": "EDUCACIÓN SUPERIOR UNIVERSITARIA",
-        "unidadFormuladora": "UNIDAD DE ESTUDIOS Y PROYECTOS DE INVERSIÓN",
-        "unidadFormuladoraCodigo": "20131",
-        "unidadUEICodigo": "",
-        "nivelGobierno": "GN",
-        "sector": "EDUCACION",
-        "pliego": "MINISTERIO DE EDUCACION",
-        "evaluadora": "UNIDAD DE ESTUDIOS Y PROYECTOS DE INVERSIÓN",
-        "evaluadoraCodigo": "20131",
-        "ejecutora": "UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA",
-        "ejecutoraCodigo": "1549",
-        "situacion": "VIABLE",
-        "ultimoEstudio": "PERFIL",
-        "estadoUltimoEstudio": "APROBADO",
-        "nivelEstudio": "PERFIL",
-        "beneficiario": "5711",
-        "fuenteFinanciamiento": "CANON Y SOBRECANON, REGALIAS, RENTA DE ADUANAS Y P",
-        "montoAlternativa": "8615933",
-        "montoReformulado": "0",
-        "montoF15": "9029645.30",
-        "montoF16": "9853454.50",
-        "montoLaudo": "0",
-        "montoCartaFianza": "0",
-        "costoActualizado": "9853454.50",
-        "PIM": "4000000",
-        "PIA": "4000000",
-        "devengadoAcumulado": "2119949.25",
-        "devengadoAnioActual": "5526.50",
-        "desTipoFormato": "0",
-        "flagExpedienteTecnico": "1",
-        "anioViabilidad": "2016",
-        "fechaViabilidad": "09/11/2016",
-        "actualizacion": "16/03/2022",
-        "numeroConvenio": "0",
-        "nombreProgramaInversion": "---",
-        "marco": "SNIP",
-        "conInformeCierre": "NO",
-        "incluidoPMI": "1",
-        "incluidoPMIEjecucion": "1",
-        "flagEtapas": "1",
-        "localizaciones_": [
-            {
-                "codigo": "361331",
-                "departamento": "CUSCO",
-                "provincia": "LA CONVENCION",
-                "distrito": "SANTA ANA",
-                "centroPoblado": "QUILLABAMBA",
-                "ubigeo": "080901",
-                "latitud": "0",
-                "longitud": "0"
-}
-]
-    }   
     $.ajax(
           {
-              url:"https://sysapis.uniq.edu.pe/pide/reniec?dni=70085642",
+              url:"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+codigoProyectoInversion,
               type: 'GET',
               cache: false,
               processData:false,
@@ -194,60 +134,57 @@ function cargarDatosProyecto(codigoProyectoInversion) {
             function(data)
               {
                 $('#divModalCargaAjax').hide();
-                
-                console.log(data1);
-
-                if(data1)
+                if(data)
                 {
-                  $('#codigoProyecto').val(data1.codigo);
-                  $('#estado').val(data1.estado);
-                  $('#nombreProyectoInv').val(data1.nombre);
-                  $('#fechaRegistro').val(data1.fechaRegistro);
-                  $('#funcion').val(data1.funcion);
-                  $('#programa').val(data1.programa);
-                  $('#subprograma').val(data1.subprograma);
-                  $('#unidadFormuladora').val(data1.unidadFormuladora);
-                  $('#unidadFormuladoraCodigo').val(data1.unidadFormuladoraCodigo);
-                  $('#unidadUEICodigo').val(data1.unidadUEICodigo);
-                  $('#nivelGobierno').val(data1.nivelGobierno);
-                  $('#sector').val(data1.sector);
-                  $('#pliego').val(data1.pliego);
-                  $('#evaluadora').val(data1.evaluadora);
-                  $('#evaluadoraCodigo').val(data1.evaluadoraCodigo);
-                  $('#ejecutora').val(data1.ejecutora);
-                  $('#ejecutoraCodigo').val(data1.ejecutoraCodigo);
-                  $('#situacion').val(data1.situacion);
-                  $('#ultimoEstudio').val(data1.ultimoEstudio);
-                  $('#estadoUltimoEstudio').val(data1.estadoUltimoEstudio);
-                  $('#nivelEstudio').val(data1.nivelEstudio);
-                  $('#beneficiario').val(data1.beneficiario);
-                  $('#fuenteFinanciamiento').val(data1.fuenteFinanciamiento);
-                  $('#montoAlternativa').text(data1.montoAlternativa);
-                  $('#montoReformulado').text(data1.montoReformulado);
-                  $('#montoF15').text(data1.montoF15);
-                  $('#montoF16').text(data1.montoF16);
-                  $('#montoLaudo').text(data1.montoLaudo);
-                  $('#montoCartaFianza').text(data1.montoCartaFianza);
-                  $('#costoActualizado').text(data1.costoActualizado);
-                  $('#PIM').text(data1.PIM);
-                  $('#PIA').text(data1.PIA);
-                  $('#devengadoAcumulado').text(data1.devengadoAcumulado);
-                  $('#devengadoAnioActual').text(data1.devengadoAnioActual);
-                  $('#desTipoFormato').val(data1.desTipoFormato);
-                  $('#flagExpedienteTecnico').val(data1.flagExpedienteTecnico);
-                  $('#anioViabilidad').val(data1.anioViabilidad);
-                  $('#fechaViabilidad').val(data1.fechaViabilidad);
-                  $('#actualizacion').val(data1.actualizacion);
-                  $('#numeroConvenio').val(data1.numeroConvenio);
-                  $('#nombreProgramaInversion').val(data1.nombreProgramaInversion);
-                  $('#marco').val(data1.marco);
-                  $('#conInformeCierre').val(data1.conInformeCierre);
-                  $('#incluidoPMI').val(data1.incluidoPMI);
-                  $('#incluidoPMIEjecucion').val(data1.incluidoPMIEjecucion);
-                  $('#flagEtapas').val(data1.flagEtapas);
+                  $('#codigoProyecto').val(data.codigo);
+                  $('#estado').val(data.estado);
+                  $('#nombreProyectoInv').val(data.nombre);
+                  $('#fechaRegistro').val(data.fechaRegistro);
+                  $('#funcion').val(data.funcion);
+                  $('#programa').val(data.programa);
+                  $('#subprograma').val(data.subprograma);
+                  $('#unidadFormuladora').val(data.unidadFormuladora);
+                  $('#unidadFormuladoraCodigo').val(data.unidadFormuladoraCodigo);
+                  $('#unidadUEICodigo').val(data.unidadUEICodigo);
+                  $('#nivelGobierno').val(data.nivelGobierno);
+                  $('#sector').val(data.sector);
+                  $('#pliego').val(data.pliego);
+                  $('#evaluadora').val(data.evaluadora);
+                  $('#evaluadoraCodigo').val(data.evaluadoraCodigo);
+                  $('#ejecutora').val(data.ejecutora);
+                  $('#ejecutoraCodigo').val(data.ejecutoraCodigo);
+                  $('#situacion').val(data.situacion);
+                  $('#ultimoEstudio').val(data.ultimoEstudio);
+                  $('#estadoUltimoEstudio').val(data.estadoUltimoEstudio);
+                  $('#nivelEstudio').val(data.nivelEstudio);
+                  $('#beneficiario').val(data.beneficiario);
+                  $('#fuenteFinanciamiento').val(data.fuenteFinanciamiento);
+                  $('#montoAlternativa').text(data.montoAlternativa);
+                  $('#montoReformulado').text(data.montoReformulado);
+                  $('#montoF15').text(data.montoF15);
+                  $('#montoF16').text(data.montoF16);
+                  $('#montoLaudo').text(data.montoLaudo);
+                  $('#montoCartaFianza').text(data.montoCartaFianza);
+                  $('#costoActualizado').text(data.costoActualizado);
+                  $('#PIM').text(data.PIM);
+                  $('#PIA').text(data.PIA);
+                  $('#devengadoAcumulado').text(data.devengadoAcumulado);
+                  $('#devengadoAnioActual').text(data.devengadoAnioActual);
+                  $('#desTipoFormato').val(data.desTipoFormato);
+                  $('#flagExpedienteTecnico').val(data.flagExpedienteTecnico);
+                  $('#anioViabilidad').val(data.anioViabilidad);
+                  $('#fechaViabilidad').val(data.fechaViabilidad);
+                  $('#actualizacion').val(data.actualizacion);
+                  $('#numeroConvenio').val(data.numeroConvenio);
+                  $('#nombreProgramaInversion').val(data.nombreProgramaInversion);
+                  $('#marco').val(data.marco);
+                  $('#conInformeCierre').val(data.conInformeCierre);
+                  $('#incluidoPMI').val(data.incluidoPMI);
+                  $('#incluidoPMIEjecucion').val(data.incluidoPMIEjecucion);
+                  $('#flagEtapas').val(data.flagEtapas);
                   $('#modal_informativo').modal('show');
                   var htmlBody='';
-                  data1.localizaciones_.forEach(element =>
+                  data.localizaciones_.forEach(element =>
                  {
                       htmlBody+='<tr><td>'+element.codigo+'</td><td>'+element.departamento+'</td><td>'+element.provincia+'</td><td>'+element.distrito+'</td><td>'+element.centroPoblado+'</td><td>'+element.ubigeo+'</td><td>'+element.latitud+'</td><td>'+element.longitud+'</td></tr>'
                   });
@@ -265,7 +202,7 @@ function cargarDatosProyecto(codigoProyectoInversion) {
                 $('#txt_apellidopaterno').val('');
                 $('#txt_apellidomaterno').val('');
                 $('#txt_direccion').val('');
-                    swal('ERROR!','No se encontró su DNI verifique por favor','error');
+                    swal('ERROR!','No se realiz{o la importación','error');
 
                 });
   }
