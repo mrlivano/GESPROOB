@@ -131,7 +131,7 @@
                                 <button id="btnFiltrar" name="btnFiltrar" onclick="filtrarProyectoInversion();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> Cargar PIDE</button>
                             </div><br><br><br>
                            <div class="col-md-1 col-sm-6 col-xs-12">
-                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAF</button>
+                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAFddd</button>
                             </div>
                             
                             <?php } ?>
@@ -363,7 +363,217 @@
             </div>
         </div>
     </div>
+</div>}
+<!--modal informativo-->
+<div class="modal fade" id="modal_informativo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Caracteristicas del Proyecto </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form_AddUbigeo">
+                    <input id="txt_id_pip" name="txt_id_pip" required="required" type="hidden">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <label for="name">Proyecto:</label>
+                            <textarea class="form-control" rows="2" readonly="readonly" id="nombreProyectoInv" name="nombreProyectoInv"></textarea>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Codigo:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="codigoProyecto" name="codigoProyecto">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Estado:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="estado" name="estado">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Fecha de Registro:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="fechaRegistro" name="fechaRegistro">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Funcion:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="funcion" name="funcion">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Programa:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="programa" name="programa">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Sub Programa:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="subprograma" name="subprograma">
+                        </div> 
+                        <div class="col-xs-3 col-md-3">
+                            <label for="name">Codigo UF:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="unidadFormuladoraCodigo" name="unidadFormuladoraCodigo">
+                        </div>
+                        <div class="col-xs-9 col-md-9">
+                            <label for="name">Unidad Formuladora:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="unidadFormuladora" name="unidadFormuladora">
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="name">Nivel de Gobierno:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="nivelGobierno" name="nivelGobierno">
+                        </div> 
+                        <div class="col-xs-12 col-md-4">
+                            <label for="name">Sector:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="sector" name="sector">
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="name">Pliego:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="pliego" name="pliego">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Codigo UEv:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="evaluadoraCodigo" name="evaluadoraCodigo">
+                        </div>
+                        <div class="col-xs-12 col-md-9">
+                            <label for="name">Unidad Evaluadora:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="evaluadora" name="evaluadora">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Codigo UEj:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="ejecutoraCodigo" name="ejecutoraCodigo">
+                        </div>
+                        <div class="col-xs-12 col-md-9">
+                            <label for="name">Unidad Ejecutora:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="ejecutora" name="ejecutora">
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <label for="name">Situacion:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="situacion" name="situacion">
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <label for="name">Nivel de Estudio:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="nivelEstudio" name="nivelEstudio">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Ultimo Estudio:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="ultimoEstudio" name="ultimoEstudio">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Estado Ultimo Estudio:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="estadoUltimoEstudio" name="estadoUltimoEstudio">
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <label for="name">Beneficiario:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="beneficiario" name="beneficiario">
+                        </div>
+                        <br>
+                        <div class="col-xs-12 col-md-12">
+                            <label for="name">Fuente de Financiamiento:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="fuenteFinanciamiento" name="fuenteFinanciamiento">
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                        <table id="TableMoneda" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                        <thead >
+                                        <tr>
+                                            <th colspan="6" style="width: 12%; text-align: center" >MONTO (S/)</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="width: 8%; text-align: center"> Alternativa </th>
+                                            <th style="width: 8%; text-align: center"> Reforulado </th>
+                                            <th style="width: 8%; text-align: center"> F15 </th>
+                                            <th style="width: 8%; text-align: center"> F16 </th>
+                                            <th style="width: 8%; text-align: center"> Laudo </th>
+                                            <th style="width: 8%; text-align: center"> Carta Fianza </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoAlternativa" name="montoAlternativa"></spam></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoReformulado" name="montoReformulado"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoF15" name="montoF15"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoF16" name="montoF16"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoLaudo" name="montoLaudo"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoCartaFianza" name="montoCartaFianza"></span></td>
+                                        </tr>
+                                    </tbody>
+                        </table>
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                        <table id="TableCostos" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                        <thead >
+                                        <tr>
+                                            <th style="width: 8%; text-align: center"> Costo Actualizado </th>
+                                            <th style="width: 8%; text-align: center"> PIM </th>
+                                            <th style="width: 8%; text-align: center"> PIA </th>
+                                            <th style="width: 8%; text-align: center"> Devengado Acumulado </th>
+                                            <th style="width: 8%; text-align: center"> Devengado Año Actual </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="costoActualizado" name="costoActualizado"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="PIM" name="PIM"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="PIA" name="PIA"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="devengadoAcumulado" name="devengadoAcumulado"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="devengadoAnioActual" name="devengadoAnioActual"></label></td>
+                                        </tr>
+                                    </tbody>
+                        </table>
+                        </div>
+
+                    </div>                         
+                    <br>
+                    <div class="col-xs-6 col-md-2">
+                            <label for="name">Año de Viabilidad:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="anioViabilidad" name="anioViabilidad">
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <label for="name">Fecha de Viabilidad:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="fechaViabilidad" name="fechaViabilidad">
+                        </div>
+                        <div class="col-xs-6 col-md-2">
+                            <label for="name">Actualizacion:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="actualizacion" name="actualizacion">
+                        </div>
+                        <div class="col-xs-6 col-md-2">
+                            <label for="name">Marco:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="marco" name="marco">
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <label for="name">Con Informe de Cierre?:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="conInformeCierre" name="conInformeCierre">
+                        </div>
+                    <br>                    
+                    <div class="x_panel" style="border: 1px solid #EEEEEE;">
+                        <label for="name">Localizaciones:</label>
+                        <table id="TableUbigeoProyectoInv" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                            <thead >
+                                <tr>
+                                    <th style="width: 20%" >Codigo</th>
+                                    <th style="width: 20%" >Departamento</th>
+                                    <th style="width: 20%" >Provincia</th>
+                                    <th style="width: 20%" >Distrito</th>
+                                    <th style="width: 20%" >Centro Poblado</th>
+                                    <th style="width: 20%" >Ubigeo</th>
+                                    <th style="width: 20%" >Latitud</th>
+                                    <th style="width: 20%" >Longitud</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <center>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button  class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                Cerrar
+                                </button>
+                            </div>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<!--fin modal inforamtivo>
 
 
 <!--Modal Meta Oficina-->

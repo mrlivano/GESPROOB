@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                            <div class="col-md-1 col-sm-6 col-xs-12">
-                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAF</button>
+                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAFdas</button>
                             </div>
                             <!-- <div class="col-md-1 col-sm-6 col-xs-12">
                                 <button id="btnFiltrar" name="btnFiltrar" onclick="filtrarProyectoInversion();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> Cargar PIDE</button>
