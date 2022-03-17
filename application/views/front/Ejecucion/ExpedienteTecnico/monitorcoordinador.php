@@ -70,7 +70,7 @@
                 <select id="listaProyectoBD"  class="selectpicker form-control" data-live-search="true">
 					<option value="0" selected="true" disabled>Seleccione</option>
                 <?php foreach ($listaBds10 as $row) { ?>
-                    <option value="<?=trim($row->CodigoUnico)?>" ><?=$row->CodigoUnico?> - <?=$row->Proyecto?></option>
+                    <option value="<?=trim($row->CodigoUnico)?>" <?php echo (trim($codigo)==trim($row->CodigoUnico) ? 'selected' : ''); ?> ><?=$row->CodigoUnico?> - <?=$row->Proyecto?></option>
                 <?php  } ?>
               </select>
                 </div>
@@ -282,6 +282,8 @@
 <script>
 	var presupuesto=[];
 	$(document).ready(function (e) {
+		var ue=$('select[id=listaProyectoBD]');
+		if(ue.val()!==null){mostrarPresupuesto(ue.val(),ue);}
   $('#VentanaPresupuestoDesc').on('show.bs.modal', function(e) { 
      var id = $(e.relatedTarget).data().id;
      var denom = $(e.relatedTarget).data().denom;

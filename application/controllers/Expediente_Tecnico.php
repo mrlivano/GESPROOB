@@ -71,6 +71,16 @@ class Expediente_Tecnico extends CI_Controller
 
 	public function index()
 	{
+		$lista = $this->db->query("select * from BD_S10");
+        if($lista->num_rows()>0){
+            $result = $lista->result();
+        }
+		$this->load->view('layout/Ejecucion/header');
+		$this->load->view('front/Ejecucion/ExpedienteTecnico/index.php',['listaBD'=>$result]);
+		$this->load->view('layout/Ejecucion/footer');
+	}
+	public function indexcopy()
+	{
 		$listaExpedienteTecnicoElaboracion=$this->Model_ET_Expediente_Tecnico->ExpedienteListarElaboracion('LISTARETAPA',1);
 
 		$listaExpedientesAprobados=$this->Model_ET_Expediente_Tecnico->ListaExpedienteAprobado(1);
@@ -189,13 +199,14 @@ class Expediente_Tecnico extends CI_Controller
 		$this->load->view('front/Ejecucion/ExpedienteTecnico/impactoAmbiental',['expedienteTecnico'=>$expedienteTecnico]);
 	}
 
-	public function monitorCoordinador()
+	public function monitorCoordinador($codigo='')
 	{
+		$codigo = isset($_GET['codigo']) ? $_GET['codigo'] : null;
 		$lista_ue = $this->db->query("select * from BD_S10");
         if($lista_ue->num_rows()>0){
             $result = $lista_ue->result();
         }
-		$this->_load_layout('front/Ejecucion/ExpedienteTecnico/monitorcoordinador.php', ['listaBds10' => $result]);
+		$this->_load_layout('front/Ejecucion/ExpedienteTecnico/monitorcoordinador.php', ['listaBds10' => $result,'codigo' => $codigo]);
 
 	}
 	public function monitorCoordinadorcopy()
