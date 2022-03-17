@@ -881,55 +881,31 @@ class PrincipalReportes extends CI_Controller
     }
     
     public function RestoreDB(){
-
-            $rutaFile = 'C:/S102000/Bak/';
-            $codigo=$this->input->post('codigo');
-            $proyecto=$this->input->post('proyecto');
-            $file = $this->input->post('file');
-            $archivo = $_FILES["archivo"];
-            //$resultado = move_uploaded_file($archivo["tmp_name"], $archivo["name"]);
-            //if ($resultado) {
-                $data = $this->Model_ProyectoInversion->RestoreDB($codigo,$file);
-            /*}
-            else {
-                echo "Error al subir archivo";
-            }*/
-             
+        if($_FILES)
+        {
+            $file = $_FILES['file'];
+            $codigo = $this->input->post('codigo');
+            $proyecto = $this->input->post('proyecto');
+            $fecha   = $this->input->post('fecha');
+            $rutaFile = 'C:/inetpub/wwwroot/GESPROOB/uploads/S10/Bak/';
+            $config['upload_path'] = './uploads/S10/Bak/';
+            $config['allowed_types'] = '*';
+            $config['file_name'] = $codigo;
+            $config['overwrite'] = true;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('file')) { 
+                $error = array('error' => $this->upload->display_errors());
+                
+                echo json_encode($error);
+            } else {
+                $filename = $rutaFile.$this->upload->data()['file_name'];
+                $data = $this->Model_ProyectoInversion->RestoreDB($codigo,$proyecto,$fecha,$filename);
+                
+            }
+        }
+        else{
+            echo 'Error al subir archivo';
+        }
         
     }
-   /* public function RestoreDB(){
-        $file = $_FILES['fileAdd'];
-*/
-        /*$config['upload_path'] = 'C:/S102000/Bak/';
-        $config['allowed_types'] = '*';
-        $config['max_size'] = 100000;
-
-        $this->load->library('upload', $config);
-        if (!$this->upload->do_upload('fileAdd')) { 
-            $error = array('error' => $this->upload->display_errors());
-            echo json_encode($error);
-        } else {
-            echo json_encode(true);
-        }*/
-/*
-        $ruta_destino_archivo='C:/S102000/Bak/'.$file['name'];
-
-        if (!move_uploaded_file($file['tmp_name'], $ruta_destino_archivo)) { 
-            $error = array('error' => $this->upload->display_errors());
-            echo json_encode($error);
-        } else {
-            echo json_encode(true);
-        }*/
-
-        //$info = pathinfo($_FILES['fileAdd']['name'], PATHINFO_EXTENSION);
-/*$ext = 'exe'; // obtener la extensión del archivo
-$newname = "prueba.".$ext; 
-
-$target = 'C:/S102000/Bak/'.$newname;
-move_uploaded_file( $_FILES['fileAdd']['tmp_name'], $target);
-    
-}*/
-
-    //DATA S10
-
 }

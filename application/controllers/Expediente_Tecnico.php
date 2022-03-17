@@ -76,7 +76,7 @@ class Expediente_Tecnico extends CI_Controller
             $result = $lista->result();
         }
 		$this->load->view('layout/Ejecucion/header');
-		$this->load->view('front/Ejecucion/ExpedienteTecnico/index.php',['listaBD'=>$result]);
+		$this->load->view('front/Ejecucion/ExpedienteTecnico/importadorS10.php',['listaBD'=>$result]);
 		$this->load->view('layout/Ejecucion/footer');
 	}
 	public function index()
@@ -206,7 +206,7 @@ class Expediente_Tecnico extends CI_Controller
         if($lista_ue->num_rows()>0){
             $result = $lista_ue->result();
         }
-		$this->_load_layout('front/Ejecucion/ExpedienteTecnico/monitorcoordinador.php', ['listaBds10' => $result,'codigo' => $codigo]);
+		$this->_load_layout('front/Ejecucion/ExpedienteTecnico/reporteS10.php', ['listaBds10' => $result,'codigo' => $codigo]);
 
 	}
 	public function monitorCoordinador()
