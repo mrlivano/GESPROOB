@@ -117,6 +117,7 @@ var filtrarProyectoInversion1 = function(idUnidadEjecutora,idOficina)
     AddListarUbigeo("#table_PIPs_filtro", table);
 }
 function cargarDatosProyecto(codigoProyectoInversion) {
+    
     $.ajax(
           {
               url:"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+codigoProyectoInversion,
