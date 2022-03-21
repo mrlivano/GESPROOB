@@ -334,7 +334,7 @@
 	  presupuesto=obj;
       if(obj.length==0)
       {
-         $(element).parent().parent().parent().parent().parent().find('.trElement').html('No existen Oficinas en esta Unidad Ejecutora');
+         $(element).parent().parent().parent().parent().parent().find('.trElement').html('No ....');
         return false;
       }
       
@@ -342,13 +342,13 @@
        
       for(var i=0; i<obj.length; i++)
       {
-        if(obj[i].hasChild == false)
+        if(obj[i].SubPresupuesto == "subpresupuesto")
         {
           htmlTemp+='<li class="nivel>'+
           '<i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i>'+
                 '<span>'+obj[i].Descripcion+'</span>'+
                  '<button type="button" class="btn btnf btn-primary btn-xs dropdown-toggle" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'><i class="ace-icon fa fa-list-alt bigger-120"></i> Detalles</button>'+     
-                "</ul></div>"+
+                "</div>"+
           '</li>';
         }
         else
@@ -357,9 +357,15 @@
          '<i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(\''+obj[i].Codigo+'\', this);"></i>'+
                 '<span class="nivel">'+obj[i].Descripcion+'</span>'+  
                  '<button type="button" class="btn btnf btn-primary btn-xs dropdown-toggle" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'><i class="ace-icon fa fa-list-alt bigger-120"></i> Detalles</button>'+       
-                "</ul></div>"+
-          
-        '</li>';
+                "</div><ul>";
+		for(var j=0; j<obj[i].SubPresupuesto.length; j++){
+			htmlTemp+='<li>'+
+          '<i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i>'+
+                '<span class="nivel">'+obj[i].SubPresupuesto[j].Descripcion+'</span>'+     
+                "</div>"+
+          '</li>';
+		}
+		htmlTemp+='</ul></li>';
         }       
       }
 
