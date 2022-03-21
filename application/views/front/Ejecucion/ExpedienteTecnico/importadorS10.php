@@ -108,14 +108,14 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Código Unico <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="txt_codigo_unico" name="txt_codigo_unico"autocomplete="off" value="1" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Código Unico del Proyecto" required="required" type="text">
+                          <input id="txt_codigo_unico" name="txt_codigo_unico" autocomplete="off" value="" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Código Unico del Proyecto" required="required" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Proyecto*
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="txt_proyecto" name="txt_proyecto" text="1" placeholder="Descripción del Proyecto" class="form-control col-md-7 col-xs-12" required="required">1</textarea>
+                          <textarea id="txt_proyecto" name="txt_proyecto" autocomplete="off" text="" placeholder="Descripción del Proyecto" class="form-control col-md-7 col-xs-12" required="required"></textarea>
                         </div>
                       </div>
 					  
