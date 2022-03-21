@@ -470,7 +470,7 @@
                                         </tr>
                                         <tr>
                                             <th style="width: 8%; text-align: center"> Alternativa </th>
-                                            <th style="width: 8%; text-align: center"> Reforulado </th>
+                                            <th style="width: 8%; text-align: center"> Reformulado </th>
                                             <th style="width: 8%; text-align: center"> F15 </th>
                                             <th style="width: 8%; text-align: center"> F16 </th>
                                             <th style="width: 8%; text-align: center"> Laudo </th>

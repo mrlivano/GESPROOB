@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Expediente_Tecnico extends CI_Controller
@@ -2352,13 +2355,19 @@ class Expediente_Tecnico extends CI_Controller
 	public function listarBds10()
 	{
 		$CodigoUnico = $this->input->post("CodigoUnico");
-        $listaPresupuesto = $this->db->query("select p.codpresupuesto as Codigo,p.descripcion as Descripcion,i.descripcion as Cliente, ug.descripcion as Lugar,  
+        $listaPresupuesto = $this->db->query("select 'subpresupuesto' as SubPresupuesto, p.codpresupuesto as Codigo,p.descripcion as Descripcion,i.descripcion as Cliente, ug.descripcion as Lugar,  
 		p.Fecha,p.Plazo,p.Jornada,p.fechaproceso as Fecha_Proceso, p.CostoDirectoBase1 as Costo_Directo_Base, p.CostoIndirectoBase1 as Costo_Indirecto_Base,
 		p.CostoBase1 as Costo_Base, p.CostodirectoOferta1 as Costo_Directo_Oferta, p.CostoIndirectoOferta1 as Costo_Indirecto_Oferta, p.CostoOferta1 as Costo_Oferta,
 		p.CostodirectoOfertatotal1 as Costo_Directo_Oferta_Total, p.CostoIndirectoOfertaTotal1 as Costo_Indirecto_Oferta_Total, p.CostoOfertaTotal1 as Costo_Oferta_Total
 		from ([".$CodigoUnico."].dbo.presupuesto p inner join [".$CodigoUnico."].dbo.identificador i
 		ON p.codidentificador=i.codidentificador ) INNER JOIN [".$CodigoUnico."].dbo.ubicaciongeografica ug ON i.codlugar=ug.codlugar");
-        echo json_encode($listaPresupuesto->result());exit;
+        $nuevoarray=$listaPresupuesto->result();
+		foreach($nuevoarray as $valor){
+			$subPresupuesto= $this->db->query("select CodPresupuesto,CodSubpresupuesto, Descripcion from [".$CodigoUnico."].[dbo].[Subpresupuesto] where CodPresupuesto=".$valor->Codigo." and CodSubpresupuesto!=999");
+				$valor->SubPresupuesto=$subPresupuesto->result();
+		}
+		
+		echo json_encode($nuevoarray);exit;
 	}
 
 }
