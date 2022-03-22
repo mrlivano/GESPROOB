@@ -102,6 +102,7 @@
                   </div>
 				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
 					  <h4>Hoja de Presupuesto</h4>
+					  <div id="hojaPresupuesto"></div>
                   </div>
 				</div>
 				
@@ -114,6 +115,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+				<span id="nameProy"></span>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -142,7 +144,7 @@
 													<label class="control-label">Descripcion :</label>
 												</div>
 												<div class="col-md-8 col-sm-9 col-xs-9">
-													<textarea id="txtDescripcion" name="txtDescripcion" class="form-control" readonly="readonly" required="required" type="text" ></textarea>
+													<textarea id="txtDescripcion" name="txtDescripcion" class="form-control" readonly="readonly" required="required" rows="4" type="text" ></textarea>
 												</div>	
 											</div>
 											<div class="row">
@@ -274,14 +276,12 @@
 									
 								</div>
 
-							
 						</div>
-				</div>
-				<div class="row" style="text-align: right;">
+				<div class="row" style="text-align: right; padding-top:10px">
 					<button  class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
-				</div>
+		</div>
 		</div>
 		
 	</div>
@@ -300,6 +300,8 @@
   $('#VentanaPresupuestoDesc').on('show.bs.modal', function(e) { 
      var id = $(e.relatedTarget).data().id;
      var denom = $(e.relatedTarget).data().denom;
+	 var proyecto=$("#listaProyectoBD :selected").text();
+	 $(e.currentTarget).find('#nameProy').text(proyecto);
       const result=presupuesto.find(element => element.Codigo==id);
       	$(e.currentTarget).find('#txtCodigo').val(result.Codigo);
 		$(e.currentTarget).find('#txtCliente').val(result.Cliente);
@@ -346,17 +348,15 @@
 					{
 					htmlTemp+='<li>'+
 					'<i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i>'+
-							'<span class="nivel">'+obj[i].Descripcion+'</span>'+
-							'<button type="button" class="btn btnf btn-primary btn-xs dropdown-toggle" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'><i class="ace-icon fa fa-list-alt bigger-120"></i> Detalles</button>'+     
+							'<span class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</span>'+     
 							"</div>"+
 					'</li>';
 					}
 					else
 					{
 					htmlTemp+='<li>'+
-					'<i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(\''+obj[i].Codigo+'\', this);"></i>'+
-							'<span class="nivel">'+obj[i].Descripcion+'</span>'+  
-							'<button type="button" class="btn btnf btn-primary btn-xs dropdown-toggle" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'><i class="ace-icon fa fa-list-alt bigger-120"></i> Detalles</button>'+       
+					'<i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(\''+obj[i].Codigo+'\', this);"></i>'+  
+							'<span class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</span>'+       
 							"</div><ul>";
 					for(var j=0; j<obj[i].SubPresupuesto.length; j++){
 						htmlTemp+='<li>'+
@@ -390,6 +390,11 @@
     success: function(resp)
     {
       var obj=JSON.parse(resp);
+	  
+	  $('#hojaPresupuesto').html("<h1>dsf</h1>");
+	  array.forEach(element => {
+		  button
+	  });
 	  console.log(obj);
                                            
     }
