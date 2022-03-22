@@ -26,9 +26,8 @@
 {
   color: #73879C;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.471;
+    font-size: 8px;
+    font-weight: 100;
  }
  ul{
   padding-left: 30px;
@@ -54,6 +53,23 @@
       margin-right: 0;
       width: 100%;
     }
+.colPage1 
+    {
+      margin-bottom: 0;
+      margin-right: 0;
+	  padding : 0;
+      width: 30%;
+	  height :100%
+    }
+.colPage2 
+    {
+      margin-bottom: 0;
+      margin-right: 0;
+	  padding : 0;
+      width: 70%;
+	  height :100%
+	  border: 1px solid #D8D8D8;
+    }
 </style>
 <div class="right_col" role="main">
 	<div>
@@ -74,22 +90,21 @@
 						<?php  } ?>
 						</select>
 					</div>
-                 </div>
+                </div>
 
 
 				<div class="x_content">
-				<div class="row" style="height: 500px; margin-top:5px;padding-top:10px; overflow: scroll; background-color: transparent;">
-                    <ul class="trElement" style="padding-left: 10px";>
-                        
-                      </ul>
+					<div class="row" style="height: 500px; margin-top:5px;padding-top:10px; overflow: scroll; background-color: transparent;">
+                    
+					<div class="col-md-2 col-sm-2 col-xs-2 colPage1">
+						<ul class="trElement" style="padding-left: 10px";>
+                     </ul>
+                  </div>
+				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
+					  <h4>Hoja de Presupuesto</h4>
                   </div>
 				</div>
-				<div class="x_content">
 				
-				</div>
-				<div class="x_content">
-				
-				</div>
 			</div>
 		</div>
 	</div>
@@ -258,11 +273,9 @@
 									</div>            
 									
 								</div>
-							
-							
-						</div>	
-					
 
+							
+						</div>
 				</div>
 				<div class="row" style="text-align: right;">
 					<button  class="btn btn-danger" data-dismiss="modal">Cerrar</button>
