@@ -2369,5 +2369,19 @@ class Expediente_Tecnico extends CI_Controller
 		
 		echo json_encode($nuevoarray);exit;
 	}
-
+	public function HojaPresupuesto()
+	{
+		$CodigoUnico = 1001;
+        $listaHoja = $this->db->query("select spd.codpresupuesto,spd.codsubpresupuesto,spd.secuencial,spd.nivel,spd.orden,t.Descripcion as titulos,p.descripcion as partida,u.simbolo, 
+		spd.metrado, spd.precio1 as Precio, spd.parcial1 as Parcial, spd.Tipo,spd.codtitulo,spd.codpartida,(spd.codpresupuesto+' '+spd.propiopartida) as Codigo
+		,p.Jornada,spd.ManodeObra1 as Mano_Obra,spd.Material1 as Materiales,spd.Equipo1 as Equipos,spd.subcontrato1 as Subcontratos,spd.subpartida1 as Subpartidas,
+		p.Horashombrepartida as Productividadhh,p.HorasMaquinaPotencia as Productividadhm,p.RendimientoMO as Rendimiento_MO,p.rendimientoEQ as Rendimiento_EQ ,p.peso,p.precio1 as Precio_Unitario
+		from (([1001].dbo.subpresupuestodetalle spd inner JOIN [1001].dbo.titulo t
+		on spd.codtitulo=t.codtitulo)
+		LEFT join [1001].dbo.partida p
+		on spd.codpartida=p.codpartida) left join [1001].dbo.unidad u on p.codunidad=u.codunidad
+		where spd.codpresupuesto='0304001' and spd.codsubpresupuesto='001' and(p.codpresupuesto='0304001' or p.codpartida='999999999999') 
+		order by spd.orden,spd.secuencial");		
+		echo json_encode($listaHoja->result());exit;
+	}
 }
