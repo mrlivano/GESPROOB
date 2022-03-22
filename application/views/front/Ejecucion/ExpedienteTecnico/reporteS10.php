@@ -137,10 +137,6 @@ display:block;
 				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
 				  		<h4>Hoja de Presupuesto</h4>
 						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
-						<h4>Hoja de Presupuesto</h4>
-						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
-						<h4>Hoja de Presupuesto</h4>
-						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
                   </div>
 				</div>
 				</div>
