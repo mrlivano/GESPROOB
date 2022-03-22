@@ -2370,18 +2370,48 @@ class Expediente_Tecnico extends CI_Controller
 		echo json_encode($nuevoarray);exit;
 	}
 	public function HojaPresupuesto()
-	{
-		$CodigoUnico = 1001;
+	{	
+		$CodigoUnico = $this->input->post("CodigoUnico");
+		$CodigoPresupuesto = $this->input->post("CodigoPresupuesto");
+		$CodigoSubPresupuesto = $this->input->post("CodigoSubPresupuesto");
         $listaHoja = $this->db->query("select spd.codpresupuesto,spd.codsubpresupuesto,spd.secuencial,spd.nivel,spd.orden,t.Descripcion as titulos,p.descripcion as partida,u.simbolo, 
 		spd.metrado, spd.precio1 as Precio, spd.parcial1 as Parcial, spd.Tipo,spd.codtitulo,spd.codpartida,(spd.codpresupuesto+' '+spd.propiopartida) as Codigo
 		,p.Jornada,spd.ManodeObra1 as Mano_Obra,spd.Material1 as Materiales,spd.Equipo1 as Equipos,spd.subcontrato1 as Subcontratos,spd.subpartida1 as Subpartidas,
 		p.Horashombrepartida as Productividadhh,p.HorasMaquinaPotencia as Productividadhm,p.RendimientoMO as Rendimiento_MO,p.rendimientoEQ as Rendimiento_EQ ,p.peso,p.precio1 as Precio_Unitario
-		from (([1001].dbo.subpresupuestodetalle spd inner JOIN [1001].dbo.titulo t
+		from (([".$CodigoUnico."].dbo.subpresupuestodetalle spd inner JOIN [".$CodigoUnico."].dbo.titulo t
 		on spd.codtitulo=t.codtitulo)
-		LEFT join [1001].dbo.partida p
-		on spd.codpartida=p.codpartida) left join [1001].dbo.unidad u on p.codunidad=u.codunidad
-		where spd.codpresupuesto='0304001' and spd.codsubpresupuesto='001' and(p.codpresupuesto='0304001' or p.codpartida='999999999999') 
+		LEFT join [".$CodigoUnico."].dbo.partida p
+		on spd.codpartida=p.codpartida) left join [".$CodigoUnico."].dbo.unidad u on p.codunidad=u.codunidad
+		where spd.codpresupuesto='".$CodigoPresupuesto."' and spd.codsubpresupuesto='".$CodigoSubPresupuesto."' and(p.codpresupuesto='".$CodigoPresupuesto."' or p.codpartida='999999999999') 
 		order by spd.orden,spd.secuencial");		
 		echo json_encode($listaHoja->result());exit;
+	}
+	public function sumatorias()
+	{	
+		$CodigoUnico = $this->input->post("CodigoUnico");
+		$CodigoPresupuesto = $this->input->post("CodigoPresupuesto");
+		$CodigoSubPresupuesto = $this->input->post("CodigoSubPresupuesto");
+		$CodigoPartida = $this->input->post("CodigoPartida");
+		$listaSumatorias=array();
+        $sumaManoObra = $this->db->query("select sum(ppa.Parcial1) AS Mano_Obra 
+		from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+		ON i.codinsumo=ppa.codinsumo
+		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+		and ppa.codpartida='".$CodigoPartida."' and ppa.tipo=1");
+
+		$sumaMateriales = $this->db->query("select sum(ppa.Parcial1) AS Materiales from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+		ON i.codinsumo=ppa.codinsumo
+		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+		and ppa.codpartida='".$CodigoPartida."' and ppa.tipo=2");
+
+		$sumaEquipos = $this->db->query("select sum(ppa.Parcial1) AS Equipos from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+		ON i.codinsumo=ppa.codinsumo
+		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+		and ppa.codpartida='".$CodigoPartida."' and ppa.tipo=3");
+		array_push( $listaSumatorias,$sumaManoObra->result(),$sumaMateriales->result(),$sumaEquipos->result());
+		echo json_encode($listaSumatorias);exit;
 	}
 }
