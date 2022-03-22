@@ -29,6 +29,31 @@
     font-size: 8px;
     font-weight: 100;
  }
+ .partida
+{
+  color: #73879C;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 9px;
+    font-weight: 100;
+	padding: 0px !important;
+	
+ }
+ .right
+{
+	text-align: right;
+ }
+ .center
+{
+	text-align: center;
+ }
+ .title
+{
+  color: red;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+	padding: 0px !important;
+ }
  ul{
   padding-left: 30px;
   padding-top: 0px;
@@ -67,7 +92,7 @@
       margin-right: 0;
 	  padding : 0;
       width: 70%;
-	  height :100%
+	  height :100%;
 	  border: 1px solid #D8D8D8;
     }
 </style>
@@ -394,28 +419,28 @@
 	  var htmlTemp='<table id="TableUbigeoProyectoInv" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >'+
                            ' <thead >'+
                                ' <tr>'+
-                                   ' <th style="width: 20%" >Item</th>'+
-                                   ' <th style="width: 20%" >Descripcion</th>'+
-                                   ' <th style="width: 20%" >Und.</th>'+
-                                   ' <th style="width: 20%" >Metrado</th>'+
-                                   ' <th style="width: 20%" >Precio(S/.)</th>'+
-                                   ' <th style="width: 20%" >Parcial(S/.)</th>'+
+                                   ' <th class="center" style="width: 10%" >Item</th>'+
+                                   ' <th class="center" style="width: 55%" >Descripcion</th>'+
+                                   ' <th class="center" style="width: 5%" >Und.</th>'+
+                                   ' <th class="center" style="width: 10%" >Metrado</th>'+
+                                   ' <th class="center" style="width: 10%" >Precio(S/.)</th>'+
+                                   ' <th class="center" style="width: 10%" >Parcial(S/.)</th>'+
                                ' </tr>'+
                            ' </thead>'+
                            ' <tbody>';
 						   obj.forEach(element => {
-							   htmlTemp+='<tr><td>'+element.orden+'</td>';
+							   htmlTemp+='<tr><td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.orden+'</td>';
 							   
 							   if(element.titulos!="REGISTRO RESTRINGIDO"){
-									htmlTemp+='<td>'+element.titulos+'</td>';
+									htmlTemp+='<td class="title" style="padding-left:'+element.nivel*5+'px !important;">'+element.titulos+'</td>';
 							   }
 							   else{
-								htmlTemp+='<td>'+element.partida+'</td>';
+								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.partida+'</td>';
 							   }
-							   htmlTemp+='<td>'+(isNaN(element.simbolo)? element.simbolo:'')+'</td>';
-								htmlTemp+='<td>'+(isNaN(parseFloat(element.metrado))? '':parseFloat(element.metrado))+'</td>'+
-							   '<td>'+(isNaN(parseFloat(element.Precio))? '':parseFloat(element.Precio))+'</td>'+
-							   '<td>'+(isNaN(parseFloat(element.Parcial))? '':parseFloat(element.Parcial))+'</td>';
+							   htmlTemp+='<td class="partida center">'+(isNaN(element.simbolo)? element.simbolo:'')+'</td>';
+								htmlTemp+='<td class="partida center">'+(isNaN(parseFloat(element.metrado))? '':parseFloat(element.metrado))+'</td>'+
+							   '<td class="partida right">'+(isNaN(parseFloat(element.Precio))? '':parseFloat(element.Precio))+'</td>'+
+							   '<td class="partida right">'+(isNaN(parseFloat(element.Parcial))? '':parseFloat(element.Parcial))+'</td>';
 							   htmlTemp+='</tr>';
 						   });
 
