@@ -348,15 +348,15 @@
 					{
 					htmlTemp+='<li>'+
 					'<i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i>'+
-							'<span class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</span>'+     
+							'<a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</a>'+     
 							"</div>"+
 					'</li>';
 					}
 					else
 					{
 					htmlTemp+='<li>'+
-					'<i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(\''+obj[i].Codigo+'\', this);"></i>'+  
-							'<span class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</span>'+       
+					'<div class="col-md-1 col-sm-1 col-xs-1"><i class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(\''+obj[i].Codigo+'\', this);"></i></div>'+  
+							'<a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'><div class="">'+obj[i].Descripcion+'</div></a>'+       
 							"</div><ul>";
 					for(var j=0; j<obj[i].SubPresupuesto.length; j++){
 						htmlTemp+='<li>'+
