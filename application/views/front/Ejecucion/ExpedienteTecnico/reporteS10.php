@@ -93,7 +93,6 @@
 	  padding : 0;
       width: 70%;
 	  height :100%;
-	  border: 1px solid #D8D8D8;
     }
 </style>
 <div class="right_col" role="main">
@@ -121,14 +120,19 @@
 				<div class="x_content">
 					<div class="row" style="height: 500px; margin-top:5px;padding-top:10px; overflow: scroll; background-color: transparent;">
                     
-					<div class="col-md-2 col-sm-2 col-xs-2 colPage1">
-						<ul class="trElement" style="padding-left: 10px";>
-                     </ul>
-                  </div>
-				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
-					  <h4>Hoja de Presupuesto</h4>
-					  <div id="hojaPresupuesto"></div>
-                  </div>
+						<div class="col-md-2 col-sm-2 col-xs-2 colPage1">
+							<ul class="trElement" style="padding-left: 10px;">
+						</ul>
+						</div>
+						<div class="col-md-10 col-sm-10 col-xs-10 colPage2">
+							<h4>Hoja de Presupuesto</h4>
+							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+							<h4>Hoja de Presupuesto</h4>
+							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+							<h4>Hoja de Presupuesto</h4>
+							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+						</div>
+					</div>
 				</div>
 				
 			</div>
@@ -406,6 +410,7 @@
 
   });
   function hojaPresupuesto(CodigoUnico,CodigoPresupuesto,CodigoSubPresupuesto,element){
+	 
 	$.ajax(
   {
     type: "POST",
@@ -434,7 +439,7 @@
 									htmlTemp+='<td class="title" style="padding-left:'+element.nivel*5+'px !important;">'+element.titulos+'</td>';
 							   }
 							   else{
-								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.partida+'</td>';
+								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;"><a hreft="#" onclick="sumatorias(\''+CodigoUnico+'\',\''+CodigoPresupuesto+'\',\''+CodigoSubPresupuesto+'\',\''+element.codpartida+'\', this);">'+element.partida+'</td>';
 							   }
 							   htmlTemp+='<td class="partida center">'+(isNaN(element.simbolo)? element.simbolo:'')+'</td>';
 								htmlTemp+='<td class="partida center">'+(isNaN(parseFloat(element.metrado))? '':parseFloat(element.metrado))+'</td>'+
@@ -447,6 +452,23 @@
                        ' </table>';
 
 	  $('#hojaPresupuesto').html(htmlTemp);
+                                           
+    }
+  });
+  }
+  function sumatorias(CodigoUnico,CodigoPresupuesto,CodigoSubPresupuesto,CodigoPartida,element){
+	$.ajax(
+  {
+    type: "POST",
+    url: base_url+"index.php/Expediente_Tecnico/sumatorias",
+    cache: false,
+    data: { CodigoUnico: CodigoUnico,CodigoPresupuesto:CodigoPresupuesto,CodigoSubPresupuesto:CodigoSubPresupuesto,CodigoPartida:CodigoPartida},
+    success: function(resp)
+    {
+      var obj=JSON.parse(resp);
+	  var htmlTemp='sale';
+
+	  $('#').html(htmlTemp);
                                            
     }
   });
