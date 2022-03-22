@@ -570,7 +570,7 @@
         </div>
     </div>
 </div>
-<!--fin modal inforamtivo>
+<!--fin modal inforamtivo-->
 
 
 <!--Modal Meta Oficina-->
