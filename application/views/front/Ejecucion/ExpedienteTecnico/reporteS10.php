@@ -17,10 +17,10 @@
    padding-top: 6px;
    padding-left: 5px;
   padding-bottom: 5px;
-  background-color: #F2F2F2;
+  background-color: #fdfdfd;
 }
 .trElement li:hover {
-  background: #fdfdfd;
+  background: #f9f9f9;
 }
 .nivel
 {
@@ -94,6 +94,15 @@
       width: 70%;
 	  height :100%;
     }
+.subpresupuesto{
+	padding:0 !important;
+}
+.ocultar{
+display:none;
+}
+.mostrar{
+display:block;
+}
 </style>
 <div class="right_col" role="main">
 	<div>
@@ -120,19 +129,20 @@
 				<div class="x_content">
 					<div class="row" style="height: 500px; margin-top:5px;padding-top:10px; overflow: scroll; background-color: transparent;">
                     
-						<div class="col-md-2 col-sm-2 col-xs-2 colPage1">
-							<ul class="trElement" style="padding-left: 10px;">
-						</ul>
-						</div>
-						<div class="col-md-10 col-sm-10 col-xs-10 colPage2">
-							<h4>Hoja de Presupuesto</h4>
-							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
-							<h4>Hoja de Presupuesto</h4>
-							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
-							<h4>Hoja de Presupuesto</h4>
-							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
-						</div>
-					</div>
+					<div class="col-md-2 col-sm-2 col-xs-2 colPage1">
+					<h4 class="center">Presupuestos</h4>
+						<ul class="trElement" style="padding-left: 10px";>
+                     </ul>
+                  </div>
+				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
+				  		<h4>Hoja de Presupuesto</h4>
+						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+						<h4>Hoja de Presupuesto</h4>
+						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+						<h4>Hoja de Presupuesto</h4>
+						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+                  </div>
+				</div>
 				</div>
 				
 			</div>
@@ -384,13 +394,13 @@
 					else
 					{
 					htmlTemp+='<li>'+
-					'<div class="col-md-1 col-sm-1 col-xs-1"><i class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(\''+obj[i].Codigo+'\', this);"></i></div>'+  
-							'<a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'><div class="">'+obj[i].Descripcion+'</div></a>'+       
-							"</div><ul>";
+					'<i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(this);"></i>'+  
+							'<a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</a>'+       
+							"</div><ul class='ocultar'>";
 					for(var j=0; j<obj[i].SubPresupuesto.length; j++){
-						htmlTemp+='<li>'+
-					'<i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i>'+
-							'<i onclick="hojaPresupuesto(\''+CodigoUnico+'\',\''+obj[i].Codigo+'\',\''+obj[i].SubPresupuesto[j].CodSubpresupuesto+'\', this);">'+obj[i].SubPresupuesto[j].Descripcion+"</i>"+     
+						htmlTemp+='<li onclick="hojaPresupuesto(\''+CodigoUnico+'\',\''+obj[i].Codigo+'\',\''+obj[i].SubPresupuesto[j].CodSubpresupuesto+'\', this);" class="subpresupuesto">'+
+					'<i  class="elegir btn-xs fa fa-file-text-o"  style="margin-right: 2px;"></i>'+
+							'<a class="nivel">'+obj[i].SubPresupuesto[j].Descripcion+"</a>"+     
 							"</div>"+
 					'</li>';
 					}
@@ -403,6 +413,23 @@
 			}
 		});
   }
+  function elegirAccion(element)
+{
+  var valueButton =  $(element).attr('value');
+  var clase=$(element).attr('class');
+  if(valueButton == '+')
+  {
+    $($(element).parent().find('ul')[0]).attr('class','mostrar'); 
+    $(element).attr('value','-');
+    $(element).attr('class','elegir btn btnm btn-xs fa fa-chevron-down');
+  }
+  else
+  {
+    $($(element).parent().find('ul')[0]).attr('class','ocultar'); 
+    $(element).attr('value','+');
+    $(element).attr('class','elegir btn btnm btn-xs fa fa-chevron-right');
+  } 
+}
   $("#listaProyectoBD").change(function(){
 	  
         var ue=$('select[id=listaProyectoBD]').val()
