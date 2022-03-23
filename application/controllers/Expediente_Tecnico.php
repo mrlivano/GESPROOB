@@ -2383,7 +2383,32 @@ class Expediente_Tecnico extends CI_Controller
 		LEFT join [".$CodigoUnico."].dbo.partida p
 		on spd.codpartida=p.codpartida) left join [".$CodigoUnico."].dbo.unidad u on p.codunidad=u.codunidad
 		where spd.codpresupuesto='".$CodigoPresupuesto."' and spd.codsubpresupuesto='".$CodigoSubPresupuesto."' and(p.codpresupuesto='".$CodigoPresupuesto."' or p.codpartida='999999999999') 
-		order by spd.orden,spd.secuencial");		
+		order by spd.orden,spd.secuencial");
+
+		foreach($listaHoja->result() as $valor){
+			$sumaManoObra = $this->db->query("select sum(ppa.Parcial1) AS Mano_Obra 
+			from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+			on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+			ON i.codinsumo=ppa.codinsumo
+			where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$valor->codpartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+			and ppa.codpartida='".$valor->codpartida."' and ppa.tipo=1");
+	
+			$sumaMateriales = $this->db->query("select sum(ppa.Parcial1) AS Materiales from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+			on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+			ON i.codinsumo=ppa.codinsumo
+			where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$valor->codpartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+			and ppa.codpartida='".$valor->codpartida."' and ppa.tipo=2");
+	
+			$sumaEquipos = $this->db->query("select sum(ppa.Parcial1) AS Equipos from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+			on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+			ON i.codinsumo=ppa.codinsumo
+			where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$valor->codpartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+			and ppa.codpartida='".$valor->codpartida."' and ppa.tipo=3");
+			$valor->Mano_Obra=$sumaManoObra->result()[0]->Mano_Obra;
+			$valor->Materiales=$sumaMateriales->result()[0]->Materiales;
+			$valor->Equipos=$sumaEquipos->result()[0]->Equipos;
+		}
+	
 		echo json_encode($listaHoja->result());exit;
 	}
 	public function sumatorias()
@@ -2413,5 +2438,20 @@ class Expediente_Tecnico extends CI_Controller
 		and ppa.codpartida='".$CodigoPartida."' and ppa.tipo=3");
 		array_push( $listaSumatorias,$sumaManoObra->result(),$sumaMateriales->result(),$sumaEquipos->result());
 		echo json_encode($listaSumatorias);exit;
+	}
+	public function costoUnitario()
+	{	
+		$CodigoUnico = $this->input->post("CodigoUnico");
+		$CodigoPresupuesto = $this->input->post("CodigoPresupuesto");
+		$CodigoSubPresupuesto = $this->input->post("CodigoSubPresupuesto");
+		$CodigoPartida = $this->input->post("CodigoPartida");
+		$listaSumatorias=array();
+        $costoUnitario = $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
+		from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+		ON i.codinsumo=ppa.codinsumo
+		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+		and ppa.codpartida='".$CodigoPartida."'");
+		echo json_encode($costoUnitario->result());exit;
 	}
 }

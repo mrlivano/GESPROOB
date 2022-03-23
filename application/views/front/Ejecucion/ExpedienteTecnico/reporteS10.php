@@ -137,6 +137,9 @@ display:block;
 				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
 				  		<h4>Hoja de Presupuesto</h4>
 						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
+						<div id="descripcioHojaPresupuesto" style="background-color: transparent;"></div>
+						<h4>Costos Unitarios</h4>
+						<div id="costoUnitario" style="height: 100px;overflow: scroll; background-color: transparent;"></div>
                   </div>
 				</div>
 				</div>
@@ -323,6 +326,7 @@ display:block;
 <!-- mondal end-->
 <script>
 	var presupuesto=[];
+	let elementHojaPresupuesto=[];
 	$(document).ready(function (e) {
 		var ue=$('select[id=listaProyectoBD]');
 		var maxLength = 130;
@@ -455,14 +459,15 @@ display:block;
                                ' </tr>'+
                            ' </thead>'+
                            ' <tbody>';
-						   obj.forEach(element => {
+						   elementHojaPresupuesto=obj;
+						   obj.forEach((element,key) => {
 							   htmlTemp+='<tr><td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.orden+'</td>';
 							   
 							   if(element.titulos!="REGISTRO RESTRINGIDO"){
 									htmlTemp+='<td class="title" style="padding-left:'+element.nivel*5+'px !important;">'+element.titulos+'</td>';
 							   }
 							   else{
-								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;"><a hreft="#" onclick="sumatorias(\''+CodigoUnico+'\',\''+CodigoPresupuesto+'\',\''+CodigoSubPresupuesto+'\',\''+element.codpartida+'\', this);">'+element.partida+'</td>';
+								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;"><a hreft="#" data-element="'+element+'" onclick="costoUnitario(\''+CodigoUnico+'\',\''+CodigoPresupuesto+'\',\''+CodigoSubPresupuesto+'\',\''+element.codpartida+'\',\''+key+'\', this);">'+element.partida+'</td>';
 							   }
 							   htmlTemp+='<td class="partida center">'+(isNaN(element.simbolo)? element.simbolo:'')+'</td>';
 								htmlTemp+='<td class="partida center">'+(isNaN(parseFloat(element.metrado))? '':parseFloat(element.metrado))+'</td>'+
@@ -470,6 +475,7 @@ display:block;
 							   '<td class="partida right">'+(isNaN(parseFloat(element.Parcial))? '':parseFloat(element.Parcial))+'</td>';
 							   htmlTemp+='</tr>';
 						   });
+						  
 
 						   htmlTemp+=' </tbody>'+
                        ' </table>';
@@ -479,19 +485,55 @@ display:block;
     }
   });
   }
-  function sumatorias(CodigoUnico,CodigoPresupuesto,CodigoSubPresupuesto,CodigoPartida,element){
+  function costoUnitario(CodigoUnico,CodigoPresupuesto,CodigoSubPresupuesto,CodigoPartida,key,element){
+	  console.log(key);
+	  let valor = elementHojaPresupuesto[key];
+	  var htmlTemp1='<div><label>'+valor.codpartida+'</label><label>'+valor.Codigo+'</label><label>Jornada='+valor.Jornada+'</label><label>'+valor.partida+'</label>'+
+	  '<label>Productiviadad por Und:</label><label>'+(isNaN(parseFloat(valor.Productividadhh))? '0.00':parseFloat(valor.Productividadhh))+' hh</label><label>'+(isNaN(parseFloat(valor.Productividadhm))? '0.00':parseFloat(valor.Productividadhm))+' hm.hp</label>'+
+	  '<label>Rendimiento DIA:</label><label>(i)'+(isNaN(parseFloat(valor.Rendimiento_MO))? '0.00':parseFloat(valor.Rendimiento_MO))+'</label><label>(i)'+(isNaN(parseFloat(valor.peso))? '0.00':parseFloat(valor.peso))+'</label>'+
+	  '<label>Precio Unitario:</label><label>'+valor.simbolo+'</label><label> S/'+valor.Precio_Unitario+'</label></div>'+
+	  '<div><label>(i)Mano de Obra</label><label>'+(isNaN(parseFloat(valor.Mano_Obra))? '0.00':parseFloat(valor.Mano_Obra))+'</label>'+
+	  '<label>(I)Materiales</label><label>'+(isNaN(parseFloat(valor.Materiales))? '0.00':parseFloat(valor.Materiales))+'</label>'+
+	  '<label>(i)Equipos</label><label>'+(isNaN(parseFloat(valor.Equipos))? '0.00':parseFloat(valor.Equipos))+'</label>'+
+	  '<label>(i)Subcontratos</label><label>'+(isNaN(parseFloat(valor.Subcontratos))? '0.00':parseFloat(valor.Subcontratos))+'</label>'+
+	  '<label>(i)Subpartidas</label><label>'+(isNaN(parseFloat(valor.Subpartidas))? '0.00':parseFloat(valor.Subpartidas))+'</label>';
+
+	  $('#descripcioHojaPresupuesto').html(htmlTemp1);
 	$.ajax(
   {
     type: "POST",
-    url: base_url+"index.php/Expediente_Tecnico/sumatorias",
+    url: base_url+"index.php/Expediente_Tecnico/costoUnitario",
     cache: false,
     data: { CodigoUnico: CodigoUnico,CodigoPresupuesto:CodigoPresupuesto,CodigoSubPresupuesto:CodigoSubPresupuesto,CodigoPartida:CodigoPartida},
     success: function(resp)
     {
       var obj=JSON.parse(resp);
-	  var htmlTemp='sale';
+	  var htmlTemp='<table id="TableUbigeoProyectoInv" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >'+
+                           ' <thead >'+
+                               ' <tr>'+
+                                   ' <th class="center" style="width: 55%" >Descripcion</th>'+
+                                   ' <th class="center" style="width: 5%" >Und.</th>'+								   
+                                   ' <th class="center" style="width: 10%" >Cuadrilla</th>'+
+                                   ' <th class="center" style="width: 10%" >Cantidad</th>'+
+                                   ' <th class="center" style="width: 10%" >Precio(S/.)</th>'+
+                                   ' <th class="center" style="width: 10%" >Parcial(S/.)</th>'+
+                               ' </tr>'+
+                           ' </thead>'+
+                           ' <tbody>';
+						   obj.forEach(element => {
+							   htmlTemp+='<tr><td class="partida">'+element.descripcion+'</td>'+
+								'<td class="title">'+element.unidad+'</td>'+
+								'<td class="partida">'+(isNaN(parseFloat(element.cuadrilla))? '':parseFloat(element.cuadrilla))+'</td>'+
+								'<td class="partida">'+(isNaN(parseFloat(element.cantidad))? '':parseFloat(element.cantidad))+'</td>'+
+							   '<td class="partida right">'+(isNaN(parseFloat(element.Precio))? '':parseFloat(element.Precio))+'</td>'+
+							   '<td class="partida right">'+(isNaN(parseFloat(element.Parcial))? '':parseFloat(element.Parcial))+'</td>';
+							   htmlTemp+='</tr>';
+						   });
 
-	  $('#').html(htmlTemp);
+						   htmlTemp+=' </tbody>'+
+                       ' </table>';
+
+	  $('#costoUnitario').html(htmlTemp);
                                            
     }
   });
