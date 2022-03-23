@@ -1,6 +1,6 @@
 $(document).on("ready", function()
 {
-    listar_proyectos_inversion();
+   // listar_proyectos_inversion();
 
     $("#form_AddEstadoCiclo").submit(function(event) 
     {
@@ -30,47 +30,47 @@ $(document).on("ready", function()
 });
 
 //modificación gespro
-var listar_proyectos_inversion = function() 
-{
-    var table = $("#table_proyectos_inversion").DataTable({
-        "processing": true,
-        "serverSide": false,
-        destroy: true,
-        "ajax": {
-            "url": base_url + "index.php/bancoproyectos/GetProyectoInversion",
-            "method": "POST",
-            "dataSrc": ""
-        },
-        "columns":[
+// var listar_proyectos_inversion = function() 
+// {
+//     var table = $("#table_proyectos_inversion").DataTable({
+//         "processing": true,
+//         "serverSide": false,
+//         destroy: true,
+//         "ajax": {
+//             "url": base_url + "index.php/bancoproyectos/GetProyectoInversion",
+//             "method": "POST",
+//             "dataSrc": ""
+//         },
+//         "columns":[
        
-        { "data": "id_pi", "visible": false }, 
-        { "data": function (data, type) 
-            {
-                return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' onclick='cargarDatosProyecto("+data.codigo_unico_pi+")' data-toggle='modal'  > "+data.codigo_unico_pi+"</button";
-            }
-        },
-        { "data": "nombre_pi" }, 
-        { "data": "costo_pi" }, 
-        { "data": "nombre_estado_ciclo" }, 
-        { "data": "fecha_viabilidad_pi" }, 
-        { "data": function (data, type) 
-            {
-                return "<div class='btn-group'><button data-toggle='dropdown' class='btn btn-default dropdown-toggle' type='button' aria-expanded='false'>Opciones <span class='caret'>"+
-                "</span></button><ul class='dropdown-menu'>"+
-                "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación</button></li>"+
-                "<li><button type='button' onclick='agregarRubro("+data.id_pi+")' class='btn btn-info btn-xs all' ><i class='fa fa-spinner' aria-hidden='true'></i> Rubro</button></li>"+
-                "<li><button type='button' class='btn btn-warning btn-xs all' onclick='modalidadEjecucion("+data.id_pi+")'><i class='fa fa-flag' aria-hidden='true'> Modalidad de Ejecución</i></button></li>"+
-                "<li><button type='button' class='btn btn-success btn-xs all' onclick='estadoCiclo("+data.id_pi+")'><i class='fa fa-paw' aria-hidden='true'> Ver Estado Ciclo</i></button></li>"+
-                "<li><button type='button' class='btn btn-info btn-xs all' onclick='operacionMantenimieto("+data.id_pi+")'><i class='fa fa-building' aria-hidden='true'> Operación y Mantenimiento</i></button></li>"+
-                "<li><button type='button' class='btn btn-primary btn-xs all' onclick='metaPresupuestal("+data.id_pi+")'><i class='fa fa-list' aria-hidden='true'> Meta</i></button></li>"+                
-                "</ul></div>";
-            }
-        }
-    ],
-        "language": idioma_espanol
-    });
-    AddListarUbigeo("#table_proyectos_inversion", table);
-}
+//         { "data": "id_pi", "visible": false }, 
+//         { "data": function (data, type) 
+//             {
+//                 return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' onclick='cargarDatosProyecto("+data.codigo_unico_pi+")' data-toggle='modal'  > "+data.codigo_unico_pi+"</button";
+//             }
+//         },
+//         { "data": "nombre_pi" }, 
+//         { "data": "costo_pi" }, 
+//         { "data": "nombre_estado_ciclo" }, 
+//         { "data": "fecha_viabilidad_pi" }, 
+//         { "data": function (data, type) 
+//             {
+//                 return "<div class='btn-group'><button data-toggle='dropdown' class='btn btn-default dropdown-toggle' type='button' aria-expanded='false'>Opciones <span class='caret'>"+
+//                 "</span></button><ul class='dropdown-menu'>"+
+//                 "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación</button></li>"+
+//                 "<li><button type='button' onclick='agregarRubro("+data.id_pi+")' class='btn btn-info btn-xs all' ><i class='fa fa-spinner' aria-hidden='true'></i> Rubro</button></li>"+
+//                 "<li><button type='button' class='btn btn-warning btn-xs all' onclick='modalidadEjecucion("+data.id_pi+")'><i class='fa fa-flag' aria-hidden='true'> Modalidad de Ejecución</i></button></li>"+
+//                 "<li><button type='button' class='btn btn-success btn-xs all' onclick='estadoCiclo("+data.id_pi+")'><i class='fa fa-paw' aria-hidden='true'> Ver Estado Ciclo</i></button></li>"+
+//                 "<li><button type='button' class='btn btn-info btn-xs all' onclick='operacionMantenimieto("+data.id_pi+")'><i class='fa fa-building' aria-hidden='true'> Operación y Mantenimiento</i></button></li>"+
+//                 "<li><button type='button' class='btn btn-primary btn-xs all' onclick='metaPresupuestal("+data.id_pi+")'><i class='fa fa-list' aria-hidden='true'> Meta</i></button></li>"+                
+//                 "</ul></div>";
+//             }
+//         }
+//     ],
+//         "language": idioma_espanol
+//     });
+//     AddListarUbigeo("#table_proyectos_inversion", table);
+// }
 
 var filtrarProyectoInversion1 = function(idUnidadEjecutora,idOficina) 
 {
@@ -114,7 +114,6 @@ var filtrarProyectoInversion1 = function(idUnidadEjecutora,idOficina)
         }],
        "language": idioma_espanol
     });
-    AddListarUbigeo("#table_PIPs_filtro", table);
 }
 function cargarDatosProyecto(codigoProyectoInversion) {
     
@@ -135,7 +134,7 @@ function cargarDatosProyecto(codigoProyectoInversion) {
             function(data)
               {
                 $('#divModalCargaAjax').hide();
-                if(data)
+                if(Object.keys(data).length!=0)
                 {
                   $('#codigoProyecto').val(data.codigo);
                   $('#estado').val(data.estado);
@@ -189,11 +188,11 @@ function cargarDatosProyecto(codigoProyectoInversion) {
                  {
                       htmlBody+='<tr><td>'+element.codigo+'</td><td>'+element.departamento+'</td><td>'+element.provincia+'</td><td>'+element.distrito+'</td><td>'+element.centroPoblado+'</td><td>'+element.ubigeo+'</td><td>'+element.latitud+'</td><td>'+element.longitud+'</td></tr>'
                   });
-                  $('#TableUbigeoProyectoInv tbody').append(htmlBody);
+                  $('#TableUbigeoProyectoInv tbody').html(htmlBody);
                 }
                 else
                 {
-                  swal('No se pudo completar la Operacion','error');
+                  swal('No se pudo completar la Operación','error');
                 }
               }).fail(
                  function ( )
@@ -203,7 +202,7 @@ function cargarDatosProyecto(codigoProyectoInversion) {
                 $('#txt_apellidopaterno').val('');
                 $('#txt_apellidomaterno').val('');
                 $('#txt_direccion').val('');
-                    swal('ERROR!','No se realiz{o la importación','error');
+                    swal('ERROR!','No se realizó la importación','error');
 
                 });
   }

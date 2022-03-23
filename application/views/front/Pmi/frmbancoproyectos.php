@@ -117,7 +117,7 @@
                             <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
                             <div id="validarActualizarSiaf">
                                 <div class="col-md-1 col-sm-6 col-xs-12">
-                                    <input style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizarSiaf" id="txtAnioActualizarSiaf" class="form-control" value="<?=date('Y')?>">
+                                    <input style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control" value="<?=date('Y')?>">
                                 </div>
                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                     <select style="margin-top: 5px;margin-bottom: 15px;" type="text" name="selectUnidadEjecutora" id="selectUnidadEjecutora" class="form-control">
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                            <div class="col-md-1 col-sm-6 col-xs-12">
-                                <button id="btnActualizarSiaf" name="btnActualizarSiaf" onclick="ImportarProyectosSiaf();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> SIAF</button>
+                                <button  onclick="filtrarPIPs();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> CONSULTAR</button>
                             </div>
                             
                             <?php } ?>
@@ -150,39 +150,19 @@
                             </li> -->
                     
                     </ul><br>
-                      <div class="tab-content">
+                    <div class="tab-content">
                         <div class="tab-pane fade active in" id="home">
                             <div class="table-responsive">
                                 <table id="table_proyectos_inversion" class="table table-striped table-bordered jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
                                     <thead>
                                         <tr>
                                             <th style="width: 1%">#</th>
-                                            <th style="width: 8%"><i class="fa fa-thumb-tack"></i> Cod. </th>
-                                            <th style="width: 36%"><i class="fa fa-bookmark-o"></i> Nombre</th>
-                                            <th style="width: 12%; text-align: right;"><i class="fa fa-money"></i> Costo</th>
-                                            <th style="width: 12%"> Estado Ciclo</th>
-                                            <th style="width: 12%"> Fecha Viabilidad</th>
-                                            <th style="width: 16%">Opción</th>
-                                            <!--<th rowspan="2" style="width: 1%"> </th>
-                                            <th rowspan="2" style="width: 8%"> Cod.</th>
-                                            <th rowspan="2" style="width: 36%"> Nombre</th>
-                                            <th rowspan="2" style="width: 8%"> Tipo</th>
-                                            <th rowspan="2" style="width: 8%"> Prioridad</th>
-                                            <th rowspan="2" style="width: 8%"> Orden</th>
-                                            <th rowspan="2" style="width: 8%"> Sector</th>
-                                            <th rowspan="2" style="width: 8%"> OPMI</th>
-                                            <th rowspan="2" style="width: 8%"> Nivel</th>
-                                            <th rowspan="2" style="width: 12%; text-align: right;"> Costo (S/)</th>
-                                            <th rowspan="2" style="width: 12%">Devengado acumulado (S/)</th>
-                                            <th rowspan="2" style="width: 12%">PIM 2022 (S/)</th>
-                                            <th colspan="4" style="width: 12%"> Programación del monto de inversión (S/)</th>-->
+                                            <th style="width: 5%"><i class="fa fa-thumb-tack"></i>Codigo</th>
+                                            <th style="width: 5%"><i class="fa fa-bookmark-o"></i> Año</th>
+                                            <th style="width: 55%; text-align: right;"><i class="fa fa-money"></i> Nombre</th>
+                                            <th style="width: 5%"> Codigo SNIP</th>
+                                            <th style="width: 5%"> Estado</th>
                                         </tr>
-                                        <!--<tr>
-                                            <th style="width: 8%"> Monto 2022 (S/)</th>
-                                            <th style="width: 8%"> Monto 2023 (S/)</th>
-                                            <th style="width: 8%"> Monto 2024 (S/)</th>
-                                            <th style="width: 8%"> Monto 2025 (S/)</th>
-                                        </tr>-->
                                     </thead>
                                 </table>
                             </div>
@@ -765,7 +745,7 @@
         //var idGerencia = $("#selectGerencia").val();
         //var idSubGerencia = $("#selectSubGerencia").val();
         //var idOficina = $("#selectOficina").val();
-        var anio = $('#txtAnioActualizarSiaf').val();
+        var anio = $('#txtAnioActualizar').val();
        // filtrarProyectoInversion1(idUnidadEjecutora,idGerencia,idSubGerencia,idOficina,anio);
     }
 
@@ -778,7 +758,7 @@
             return;
         }
         var idUnidadEjecutora = $("#selectUnidadEjecutora").val();
-        var anio = $('#txtAnioActualizarSiaf').val();
+        var anio = $('#txtAnioActualizar').val();
         $.ajax({
             type:"POST",
             url:base_url+'index.php/bancoproyectos/insertarProyectosSiaf',
@@ -895,7 +875,7 @@
             trigger: null,
             fields:
             {
-                txtAnioActualizarSiaf:
+                txtAnioActualizar:
                 {
                     validators:
                     {
@@ -984,60 +964,46 @@ function mostrarDeRaizPIP(codigo)
     paginaAjaxDialogo(null, 'Proyectos de Inver', {codigo: codigo}, base_url+'index.php/ProyectoInversion/editar', 'GET', null, null, false, true);
 }
 
-var filtrarPIPs = function(idUnidadEjecutora,OficinaR,anio) 
+var filtrarPIPs = function(anio) 
 {
-    var table = $("#table_PIPs_filtro").DataTable({
-    "processing": true,
-    "serverSide": false,
-    destroy: true,
-    "ajax": 
-    {
-        url: base_url + "index.php/bancoproyectos/filtrarProyectoInversion",
-        type: "POST",
-         data:{"idUnidadEjecutora":idUnidadEjecutora,
-                "idOficina":idOficina,
-                "anio":anio },
-        "dataSrc":"",
-    },
-    "columns": [
-       {"data": function (data, type) 
-            {
-                return "<a onclick='editarProyectoInversion("+data.id_pi+")'  class='btn btn-primary btn-xs'><i class='fa fa-edit' aria-hidden='true'></i></a>"
-            }
-        }, 
-        { "data": "id_pi", "visible": false }, 
-        { "data": "codigo_unico_pi" },
-        { "data": "nombre_pi" }, 
-        { "data": "costo_pi" }, 
-        { "data": "nombre_estado_ciclo" }, 
-        { "data": "fecha_viabilidad_pi" }, 
+        var anio = $('#txtAnioActualizar').val();
+       var table = $("#table_proyectos_inversion").DataTable({
+        "processing": true,
+        "serverSide": false,
+        destroy: true,
+        "ajax": {
+            "url": "https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+anio,
+            "method": "GET",
+            "dataSrc": ""
+        },
+        "columns":[
+       
+        { "data": "id", "visible": false }, 
         { "data": function (data, type) 
             {
-                return "<div class='btn-group'><button data-toggle='dropdown' class='btn btn-default dropdown-toggle' type='button' aria-expanded='false'>Opciones <span class='caret'>"+
-                "</span></button><ul class='dropdown-menu'>"+
-                "<li><button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-toggle='modal' data-target='#venta_ubicacion_geografica'><i class='fa fa-map-marker' aria-hidden='true'></i> Ubicación</button></li>"+
-                "<li><button type='button' onclick='agregarRubro("+data.id_pi+")' class='btn btn-info btn-xs all' ><i class='fa fa-spinner' aria-hidden='true'></i> Rubro</button></li>"+
-                "<li><button type='button' class='btn btn-warning btn-xs all' onclick='modalidadEjecucion("+data.id_pi+")'><i class='fa fa-flag' aria-hidden='true'> Modalidad de Ejecución</i></button></li>"+
-                "<li><button type='button' class='btn btn-success btn-xs all' onclick='estadoCiclo("+data.id_pi+")'><i class='fa fa-paw' aria-hidden='true'> Ver Estado Ciclo</i></button></li>"+
-                "<li><button type='button' class='btn btn-info btn-xs all' onclick='operacionMantenimieto("+data.id_pi+")'><i class='fa fa-building' aria-hidden='true'> Operación y Mantenimiento</i></button></li>"+
-                "<li><button type='button' class='btn btn-primary btn-xs all' onclick='metaPresupuestal("+data.id_pi+")'><i class='fa fa-list' aria-hidden='true'> Meta</i></button></li>"+                
-                "</ul></div>";
+                return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' onclick='cargarDatosProyecto("+data.idProyecto+")' data-toggle='modal'  > "+data.idProyecto+"</button";
             }
-        }],
-       "language": idioma_espanol
+        },
+        { "data": "anio" }, 
+        { "data": "nombre" }, 
+        { "data": "idProyectoSnip" }, 
+        { "data": "estado" }, 
+    ],
+        "language": idioma_espanol
     });
-    AddListarUbigeo("#table_proyectos_inversion", table);
 }
 
 $(document).ready(function (e) {
+    filtrarPIPs('2022');
   $('#modal_vista_PIPs').on('show.bs.modal', function(e) { 
     var id_uejec = document.getElementById("selectUnidadEjecutora");
     var id_unidadEjecutora = id_uejec.options[id_uejec.selectedIndex].value;
      var id_oficina = $(e.relatedTarget).data().id;
-     // filtrarPIPs();
-      filtrarProyectoInversion1(id_unidadEjecutora,id_oficina);
+     
+      //filtrarProyectoInversion1(id_unidadEjecutora,id_oficina);
   });
 });
+
 
 function guardarMetaOficina()
     {
@@ -1241,6 +1207,30 @@ $(document).ready(function (e) {
       cargarComboMetaSiaf();
   });
 });
+var idioma_espanol = {
+    "sProcessing": "Procesando...",
+    "sLengthMenu": "Mostrar _MENU_ registros",
+    "sZeroRecords": "No se encontraron resultados",
+    "sEmptyTable": "Ningún dato disponible en esta tabla",
+    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix": "",
+    "sSearch": "Buscar:",
+    "sUrl": "",
+    "sInfoThousands": ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+}
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1uRF6cxgwFc9DGwREFvIE6oorBaWny64"></script>
 
