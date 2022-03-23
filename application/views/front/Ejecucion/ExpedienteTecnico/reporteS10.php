@@ -26,8 +26,9 @@
 {
   color: #73879C;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 100;
+	line-height:1.4;
  }
  .partida
 {
@@ -103,6 +104,25 @@ display:none;
 .mostrar{
 display:block;
 }
+.detPage1{
+	margin: 10px;
+    font-size: 8px;
+    line-height: 0.4;
+    font-weight: 100 !important;
+}
+.head{
+	background: rgba(52,73,94,0.94);
+    color: #ECF0F1;
+	margin: 0;
+    padding: 10px 0;
+}
+.select{
+	background: moccasin !important;
+}
+.space{
+	margin-right: 10px;
+    margin-left: 10px;
+}
 </style>
 <div class="right_col" role="main">
 	<div>
@@ -114,8 +134,8 @@ display:block;
 					<div class="clearfix"></div>
 				</div>
 				<div class="item form-group">
-					<label class="control-label">Proyectos:</label>
-					<div class="col-md-12 col-sm-12 col-xs-12">
+					<label class="control-label col-md-1 col-sm-1 col-xs-1">Proyectos:</label>
+					<div class="col-md-11 col-sm-11 col-xs-11">
 						<select id="listaProyectoBD"  class="selectpicker show-tick form-control" data-live-search="true">
 							<option value="0" selected="true" disabled>Seleccione</option>
 						<?php foreach ($listaBds10 as $row) { ?>
@@ -127,19 +147,18 @@ display:block;
 
 
 				<div class="x_content">
-					<div class="row" style="height: 500px; margin-top:5px;padding-top:10px; overflow: scroll; background-color: transparent;">
+					<div class="row">
                     
 					<div class="col-md-2 col-sm-2 col-xs-2 colPage1">
-					<h4 class="center">Presupuestos</h4>
-						<ul class="trElement" style="padding-left: 10px";>
-                     </ul>
+					<h6 class="center head" style="margin-left:10px !important">Presupuestos</h6>
+						<div  style="height: 450px;overflow: scroll; background-color: transparent;"><ul class="trElement" style="padding-left: 10px;">
+                     </ul></div>
                   </div>
 				  <div class="col-md-10 col-sm-10 col-xs-10 colPage2">
-				  		<h4>Hoja de Presupuesto</h4>
+				  		<h6 class="center head">Hoja de Presupuesto</h6>
 						<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;"></div>
 						<div id="descripcioHojaPresupuesto" style="background-color: transparent;"></div>
-						<h4>Costos Unitarios</h4>
-						<div id="costoUnitario" style="height: 100px;overflow: scroll; background-color: transparent;"></div>
+						<div id="costoUnitario" style="height: 114px;overflow: scroll; background-color: transparent;"></div>
                   </div>
 				</div>
 				</div>
@@ -150,7 +169,7 @@ display:block;
 </div>
 <!--Modal Meta Oficina-->
 <div class="modal fade" id="VentanaPresupuestoDesc" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xs">
         <div class="modal-content">
             <div class="modal-header">
 				<span id="nameProy"></span>
@@ -169,145 +188,145 @@ display:block;
 			<div id="myTabContent" class="tab-content">
 			<div role="tabpanel" class="tab-pane fade active in" id="tab_general" aria-labelledby="home-tab">
 									<div class="form-horizontal" id="form-MetaOficina">
-											<div class="row">
+											<div class="row space space">
 												<div class="col-md-3 col-sm-3 col-xs-3">
 													<label class="control-label">Codigo :</label>
 												</div>
 												<div class="col-md-8 col-sm-9 col-xs-9">
-													<input id="txtCodigo" name="txtCodigo" class="form-control" readonly="readonly" required="required" type="text" >
+													<label class="control-label" id="txtCodigo" name="txtCodigo"></label>
 												</div>	
 											</div>
-											<div class="row">
+											<div class="row space">
 												<div class="col-md-3 col-sm-3 col-xs-3">
 													<label class="control-label">Descripcion :</label>
 												</div>
 												<div class="col-md-8 col-sm-9 col-xs-9">
-													<textarea id="txtDescripcion" name="txtDescripcion" class="form-control" readonly="readonly" required="required" rows="4" type="text" ></textarea>
+													<label class="control-label" id="txtDescripcion" name="txtDescripcion" style="text-align: justify;"></label>
 												</div>	
 											</div>
-											<div class="row">
+											<div class="row space">
 												<div class="col-md-3 col-sm-3 col-xs-3">
 													<label class="control-label">Cliente :</label>
 												</div>
 												<div class="col-md-8 col-sm-9 col-xs-9">
-													<input id="txtCliente" name="txtCliente" class="form-control" readonly="readonly" required="required" type="text" >
+													<label class="control-label" id="txtCliente" name="txtCliente" style="text-align: justify;"></label>
 												</div>	
 											</div>
-											<div class="row">
+											<div class="row space">
 											<div class="col-md-3 col-sm-3 col-xs-3">
 												<label class="control-label">Lugar :</label>
 											</div>
 											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtLugar" name="txtLugar" class="form-control" readonly="readonly" required="required" type="text" >
+												<label class="control-label" id="txtLugar" name="txtLugar"></label>
 											</div>	
 										</div>
-										<div class="row">
+										<div class="row space">
 											<div class="col-md-3 col-sm-3 col-xs-3">
 												<label class="control-label">Fecha :</label>
 											</div>
 											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtFecha" name="txtFecha" class="form-control" readonly="readonly" required="required" type="text" >
+												<label class="control-label" id="txtFecha" name="txtFecha"></label>
 											</div>	
 										</div>
-										<div class="row">
+										<div class="row space">
 											<div class="col-md-3 col-sm-3 col-xs-3">
 												<label class="control-label">Plazo :</label>
 											</div>
 											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtPlazo" name="txtPlazo" class="form-control" readonly="readonly" required="required" type="text" >
+												<label class="control-label" id="txtPlazo" name="txtPlazo"></label>
 											</div>	
 										</div>
-										<div class="row">
+										<div class="row space">
 											<div class="col-md-3 col-sm-3 col-xs-3">
 												<label class="control-label">Jornada :</label>
 											</div>
 											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtJornada" name="txtJornada" class="form-control" readonly="readonly" required="required" type="text" >
+												<label class="control-label" id="txtJornada" name="txtJornada"></label>
 											</div>	
 										</div>
-										<div class="row">
+										<div class="row space">
 											<div class="col-md-3 col-sm-3 col-xs-3">
 												<label class="control-label">Fecha Proceso	:</label>
 											</div>
 											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtFecha_Proceso" name="txtFecha_Proceso" class="form-control" readonly="readonly" required="required" type="text" >
+												<label class="control-label" id="txtFecha_Proceso" name="txtFecha_Proceso"></label>
 											</div>	
 										</div>  
 									</div>            
 									
 								</div>
-								<div role="tabpanel" class="tab-pane fade" id="tab_moneda" aria-labelledby="home-tab">
+								<div role="tabpanel" class="tab-pane fade" class="control-label" id="tab_moneda" aria-labelledby="home-tab">
 									<div class="form-horizontal" id="form-MetaOficina">
-											<div class="row">
-												<div class="col-md-3 col-sm-3 col-xs-3">
+											<div class="row space">
+												<div class="col-md-5 col-sm-5 col-xs-5">
 													<label class="control-label">Costo Directo Base S/ :</label>
 												</div>
-												<div class="col-md-8 col-sm-9 col-xs-9">
-													<input id="txtCosto_Directo_Base" name="txtCosto_Directo_Base" class="form-control" readonly="readonly" required="required" type="text" >
+												<div class="col-md-7 col-sm-7 col-xs-7">
+													<label class="control-label" id="txtCosto_Directo_Base" name="txtCosto_Directo_Base"></label>
 												</div>	
 											</div>
-											<div class="row">
-												<div class="col-md-3 col-sm-3 col-xs-3">
+											<div class="row space">
+												<div class="col-md-5 col-sm-5 col-xs-5">
 													<label class="control-label">Costo Indirecto Base S/ :</label>
 												</div>
-												<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Indirecto_Base" name="txtCosto_Indirecto_Base" class="form-control" readonly="readonly" required="required" type="text" >
+												<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Indirecto_Base" name="txtCosto_Indirecto_Base"></label>
 												</div>	
 											</div>
-											<div class="row">
-												<div class="col-md-3 col-sm-3 col-xs-3">
+											<div class="row space">
+												<div class="col-md-5 col-sm-5 col-xs-5">
 													<label class="control-label">Costo Base S/ :</label>
 												</div>
-												<div class="col-md-8 col-sm-9 col-xs-9">
-													<input id="txtCosto_Base" name="txtCosto_Base" class="form-control" readonly="readonly" required="required" type="text" >
+												<div class="col-md-7 col-sm-7 col-xs-7">
+													<label class="control-label" id="txtCosto_Base" name="txtCosto_Base"></label>
 												</div>	
 											</div>
-											<div class="row">
-											<div class="col-md-3 col-sm-3 col-xs-3">
+											<div class="row space">
+											<div class="col-md-5 col-sm-5 col-xs-5">
 												<label class="control-label">Costo Directo Oferta S/ :</label>
 											</div>
-											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Directo_Oferta" name="txtCosto_Directo_Oferta" class="form-control" readonly="readonly" required="required" type="text" >
+											<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Directo_Oferta" name="txtCosto_Directo_Oferta"></label>
 											</div>	
 										</div>
-										<div class="row">
-											<div class="col-md-3 col-sm-3 col-xs-3">
+										<div class="row space">
+											<div class="col-md-5 col-sm-5 col-xs-5">
 												<label class="control-label">Costo Indirecto Oferta S/ :</label>
 											</div>
-											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Indirecto_Oferta" name="txtCosto_Indirecto_Oferta" class="form-control" readonly="readonly" required="required" type="text" >
+											<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Indirecto_Oferta" name="txtCosto_Indirecto_Oferta"></label>
 											</div>	
 										</div>
-										<div class="row">
-											<div class="col-md-3 col-sm-3 col-xs-3">
+										<div class="row space">
+											<div class="col-md-5 col-sm-5 col-xs-5">
 												<label class="control-label">Costo Oferta S/ :</label>
 											</div>
-											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Oferta" name="txtCosto_Oferta" class="form-control" readonly="readonly" required="required" type="text" >
+											<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Oferta" name="txtCosto_Oferta"></label>
 											</div>	
 										</div>
-										<div class="row">
-											<div class="col-md-3 col-sm-3 col-xs-3">
+										<div class="row space">
+											<div class="col-md-5 col-sm-5 col-xs-5">
 												<label class="control-label">Costo Directo Oferta Total S/ :</label>
 											</div>
-											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Directo_Oferta_Total" name="txtCosto_Directo_Oferta_Total" class="form-control" readonly="readonly" required="required" type="text" >
+											<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Directo_Oferta_Total" name="txtCosto_Directo_Oferta_Total"></label>
 											</div>	
 										</div>
-										<div class="row">
-											<div class="col-md-3 col-sm-3 col-xs-3">
+										<div class="row space">
+											<div class="col-md-5 col-sm-5 col-xs-5">
 												<label class="control-label">Costo Indirecto Oferta Total S/	:</label>
 											</div>
-											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Indirecto_Oferta_Total" name="txtCosto_Indirecto_Oferta_Total" class="form-control" readonly="readonly" required="required" type="text" >
+											<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Indirecto_Oferta_Total" name="txtCosto_Indirecto_Oferta_Total"></label>
 											</div>	
 										</div>  
-										<div class="row">
-											<div class="col-md-3 col-sm-3 col-xs-3">
+										<div class="row space">
+											<div class="col-md-5 col-sm-5 col-xs-5">
 												<label class="control-label">Costo Oferta Total S/	:</label>
 											</div>
-											<div class="col-md-8 col-sm-9 col-xs-9">
-												<input id="txtCosto_Oferta_Total" name="txtCosto_Oferta_Total" class="form-control" readonly="readonly" required="required" type="text" >
+											<div class="col-md-7 col-sm-7 col-xs-7">
+												<label class="control-label" id="txtCosto_Oferta_Total" name="txtCosto_Oferta_Total"></label>
 											</div>	
 										</div> 
 									</div>            
@@ -327,6 +346,8 @@ display:block;
 <script>
 	var presupuesto=[];
 	let elementHojaPresupuesto=[];
+	let presupuestoSelect = "";
+	let hojaPresupuestoSelect = "";
 	$(document).ready(function (e) {
 		var ue=$('select[id=listaProyectoBD]');
 		var maxLength = 130;
@@ -342,27 +363,30 @@ display:block;
 	 var proyecto=$("#listaProyectoBD :selected").text();
 	 $(e.currentTarget).find('#nameProy').text(proyecto);
       const result=presupuesto.find(element => element.Codigo==id);
-      	$(e.currentTarget).find('#txtCodigo').val(result.Codigo);
-		$(e.currentTarget).find('#txtCliente').val(result.Cliente);
-		$(e.currentTarget).find('#txtCosto_Base').val(result.Costo_Base);
-		$(e.currentTarget).find('#txtCosto_Directo_Base').val(result.Costo_Directo_Base);
-		$(e.currentTarget).find('#txtCosto_Directo_Oferta').val(result.Costo_Directo_Oferta);
-		$(e.currentTarget).find('#txtCosto_Directo_Oferta_Total').val(result.Costo_Directo_Oferta_Total);
-		$(e.currentTarget).find('#txtCosto_Indirecto_Base').val(result.Costo_Indirecto_Base);
-		$(e.currentTarget).find('#txtCosto_Indirecto_Oferta').val(result.Costo_Indirecto_Oferta);
-		$(e.currentTarget).find('#txtCosto_Indirecto_Oferta_Total').val(result.Costo_Indirecto_Oferta_Total);
-		$(e.currentTarget).find('#txtCosto_Oferta').val(result.Costo_Oferta);
-		$(e.currentTarget).find('#txtCosto_Oferta_Total').val(result.Costo_Oferta_Total);
-		$(e.currentTarget).find('#txtDescripcion').val(result.Descripcion);
-		$(e.currentTarget).find('#txtFecha').val(result.Fecha);
-		$(e.currentTarget).find('#txtFecha_Proceso').val(result.Fecha_Proceso);
-		$(e.currentTarget).find('#txtJornada').val(result.Jornada);
-		$(e.currentTarget).find('#txtLugar').val(result.Lugar);
-		$(e.currentTarget).find('#txtPlazo').val(result.Plazo);
+      	$(e.currentTarget).find('#txtCodigo').text(result.Codigo);
+		$(e.currentTarget).find('#txtCliente').text(result.Cliente);
+		$(e.currentTarget).find('#txtCosto_Base').text(Number(parseFloat(result.Costo_Base)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Directo_Base').text(Number(parseFloat(result.Costo_Directo_Base)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Directo_Oferta').text(Number(parseFloat(result.Costo_Directo_Oferta)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Directo_Oferta_Total').text(Number(parseFloat(result.Costo_Directo_Oferta_Total)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Indirecto_Base').text(Number(parseFloat(result.Costo_Indirecto_Base)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Indirecto_Oferta').text(Number(parseFloat(result.Costo_Indirecto_Oferta)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Indirecto_Oferta_Total').text(Number(parseFloat(result.Costo_Indirecto_Oferta_Total)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Oferta').text(Number(parseFloat(result.Costo_Oferta)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtCosto_Oferta_Total').text(Number(parseFloat(result.Costo_Oferta)).toLocaleString('en-US'));
+		$(e.currentTarget).find('#txtDescripcion').text(result.Descripcion);
+		$(e.currentTarget).find('#txtFecha').text(result.Fecha);
+		$(e.currentTarget).find('#txtFecha_Proceso').text(result.Fecha_Proceso);
+		$(e.currentTarget).find('#txtJornada').text(result.Jornada);
+		$(e.currentTarget).find('#txtLugar').text(result.Lugar);
+		$(e.currentTarget).find('#txtPlazo').text(result.Plazo);
   });
 });
 	
 	 function mostrarPresupuesto(CodigoUnico,element){
+	$('#hojaPresupuesto').html('');
+	$('#descripcioHojaPresupuesto').html('');
+	$('#costoUnitario').html('');
     $.ajax(
 		{
 			type: "POST",
@@ -386,16 +410,16 @@ display:block;
 					if(obj[i].SubPresupuesto == "subpresupuesto")
 					{
 					htmlTemp+='<li>'+
-					'<i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i>'+
-							'<a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</a>'+     
+					'<div style=""><i  class="elegir btn-xs fa"  style="margin-right: 8px;"></i></div>'+
+							'<div class="nivel"><a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</a>'+     
 							"</div>"+
 					'</li>';
 					}
 					else
 					{
-					htmlTemp+='<li>'+
-					'<i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(this);"></i>'+  
-							'<a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</a>'+       
+					htmlTemp+='<li >'+
+					'<div style="display: inline-flex; width: 6%;"><i  class="elegir btn btnm btn-xs fa fa-chevron-right" id="btnAccion" name="Accion" value="+" onclick="elegirAccion(this);"></i></div>'+  
+							'<div class="nivel" style="display: inline-flex; width: 94%;><a href="" class="nivel" data-toggle="modal" data-target="#VentanaPresupuestoDesc" data-id=\''+obj[i].Codigo+'\'  data-denom=\''+obj[i].Descripcion+'\'>'+obj[i].Descripcion+'</a>'+       
 							"</div><ul class='ocultar'>";
 					for(var j=0; j<obj[i].SubPresupuesto.length; j++){
 						htmlTemp+='<li onclick="hojaPresupuesto(\''+CodigoUnico+'\',\''+obj[i].Codigo+'\',\''+obj[i].SubPresupuesto[j].CodSubpresupuesto+'\', this);" class="subpresupuesto">'+
@@ -419,13 +443,13 @@ display:block;
   var clase=$(element).attr('class');
   if(valueButton == '+')
   {
-    $($(element).parent().find('ul')[0]).attr('class','mostrar'); 
+    $($(element).parent().parent().find('ul')[0]).attr('class','mostrar'); 
     $(element).attr('value','-');
     $(element).attr('class','elegir btn btnm btn-xs fa fa-chevron-down');
   }
   else
   {
-    $($(element).parent().find('ul')[0]).attr('class','ocultar'); 
+    $($(element).parent().parent().find('ul')[0]).attr('class','ocultar'); 
     $(element).attr('value','+');
     $(element).attr('class','elegir btn btnm btn-xs fa fa-chevron-right');
   } 
@@ -437,7 +461,11 @@ display:block;
 
   });
   function hojaPresupuesto(CodigoUnico,CodigoPresupuesto,CodigoSubPresupuesto,element){
-	 
+	$('#descripcioHojaPresupuesto').html('');
+	$('#costoUnitario').html('');
+	$(presupuestoSelect).removeClass('select');
+	presupuestoSelect = element;
+	$(element).addClass('select');
 	$.ajax(
   {
     type: "POST",
@@ -461,13 +489,15 @@ display:block;
                            ' <tbody>';
 						   elementHojaPresupuesto=obj;
 						   obj.forEach((element,key) => {
-							   htmlTemp+='<tr><td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.orden+'</td>';
+							   
 							   
 							   if(element.titulos!="REGISTRO RESTRINGIDO"){
+								htmlTemp+='<tr><td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.orden+'</td>';
 									htmlTemp+='<td class="title" style="padding-left:'+element.nivel*5+'px !important;">'+element.titulos+'</td>';
 							   }
 							   else{
-								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;"><a hreft="#" data-element="'+element+'" onclick="costoUnitario(\''+CodigoUnico+'\',\''+CodigoPresupuesto+'\',\''+CodigoSubPresupuesto+'\',\''+element.codpartida+'\',\''+key+'\', this);">'+element.partida+'</td>';
+								htmlTemp+='<tr onclick="costoUnitario(\''+CodigoUnico+'\',\''+CodigoPresupuesto+'\',\''+CodigoSubPresupuesto+'\',\''+element.codpartida+'\',\''+key+'\', this);"><td class="partida" style="padding-left:'+element.nivel*5+'px !important;">'+element.orden+'</td>';
+								htmlTemp+='<td class="partida" style="padding-left:'+element.nivel*5+'px !important;"><a hreft="#">'+element.partida+'</td>';
 							   }
 							   htmlTemp+='<td class="partida center">'+(isNaN(element.simbolo)? element.simbolo:'')+'</td>';
 								htmlTemp+='<td class="partida center">'+(isNaN(parseFloat(element.metrado))? '':parseFloat(element.metrado))+'</td>'+
@@ -486,17 +516,19 @@ display:block;
   });
   }
   function costoUnitario(CodigoUnico,CodigoPresupuesto,CodigoSubPresupuesto,CodigoPartida,key,element){
-	  console.log(key);
+		$(hojaPresupuestoSelect).removeClass('select');
+		hojaPresupuestoSelect = element;
+		$(element).addClass('select');
 	  let valor = elementHojaPresupuesto[key];
-	  var htmlTemp1='<div><label>'+valor.codpartida+'</label><label>'+valor.Codigo+'</label><label>Jornada='+valor.Jornada+'</label><label>'+valor.partida+'</label>'+
-	  '<label>Productiviadad por Und:</label><label>'+(isNaN(parseFloat(valor.Productividadhh))? '0.00':parseFloat(valor.Productividadhh))+' hh</label><label>'+(isNaN(parseFloat(valor.Productividadhm))? '0.00':parseFloat(valor.Productividadhm))+' hm.hp</label>'+
-	  '<label>Rendimiento DIA:</label><label>(i)'+(isNaN(parseFloat(valor.Rendimiento_MO))? '0.00':parseFloat(valor.Rendimiento_MO))+'</label><label>(i)'+(isNaN(parseFloat(valor.peso))? '0.00':parseFloat(valor.peso))+'</label>'+
-	  '<label>Precio Unitario:</label><label>'+valor.simbolo+'</label><label> S/'+valor.Precio_Unitario+'</label></div>'+
-	  '<div><label>(i)Mano de Obra</label><label>'+(isNaN(parseFloat(valor.Mano_Obra))? '0.00':parseFloat(valor.Mano_Obra))+'</label>'+
-	  '<label>(I)Materiales</label><label>'+(isNaN(parseFloat(valor.Materiales))? '0.00':parseFloat(valor.Materiales))+'</label>'+
-	  '<label>(i)Equipos</label><label>'+(isNaN(parseFloat(valor.Equipos))? '0.00':parseFloat(valor.Equipos))+'</label>'+
-	  '<label>(i)Subcontratos</label><label>'+(isNaN(parseFloat(valor.Subcontratos))? '0.00':parseFloat(valor.Subcontratos))+'</label>'+
-	  '<label>(i)Subpartidas</label><label>'+(isNaN(parseFloat(valor.Subpartidas))? '0.00':parseFloat(valor.Subpartidas))+'</label>';
+	  var htmlTemp1='<div class="row detPage1"><label class="col-md-3 col-sm-3 col-xs-3"><i class="fa fa-folder-open"></i> '+valor.codpartida+'</label><label class="col-md-2 col-sm-2 col-xs-2">'+valor.Codigo+'</label><label class="col-md-3 col-sm-3 col-xs-3">Jornada = '+valor.Jornada+'</label><label class="col-md-2 col-sm-2 col-xs-2"><i class="fa fa-male"></i> Mano de Obra</label><label class="col-md-2 col-sm-2 col-xs-2">'+(isNaN(parseFloat(valor.Mano_Obra))? '0.00':parseFloat(valor.Mano_Obra))+'</label>'+
+	  '<label class="col-md-8 col-sm-8 col-xs-8">'+valor.partida+'</label>'+
+	  '<label class="col-md-2 col-sm-2 col-xs-2"><i class="fa fa-road"></i> Materiales</label><label class="col-md-2 col-sm-2 col-xs-2">'+(isNaN(parseFloat(valor.Materiales))? '0.00':parseFloat(valor.Materiales))+'</label>'+
+	  '<label class="col-md-3 col-sm-3 col-xs-3">Productividad por und:</label><label class="col-md-2 col-sm-2 col-xs-2">'+(isNaN(parseFloat(valor.Productividadhh))? '0.00':parseFloat(valor.Productividadhh))+' hh</label><label class="col-md-3 col-sm-3 col-xs-3">'+(isNaN(parseFloat(valor.Productividadhm))? '0.00':parseFloat(valor.Productividadhm))+' hm.hp</label>'+
+	  '<label class="col-md-2 col-sm-2 col-xs-2"><i class="fa fa-wrench"></i> Equipos</label><label class="col-md-2 col-sm-2 col-xs-2">'+(isNaN(parseFloat(valor.Equipos))? '0.00':parseFloat(valor.Equipos))+'</label>'+
+	  '<label class="col-md-3 col-sm-3 col-xs-3">Rendimiento DIA:</label><label class="col-md-2 col-sm-2 col-xs-2"><i class="fa fa-male"></i> '+(isNaN(parseFloat(valor.Rendimiento_MO))? '0.00':parseFloat(valor.Rendimiento_MO))+'</label><label class="col-md-3 col-sm-3 col-xs-3"><i class="fa fa-balance-scale"></i> '+(isNaN(parseFloat(valor.peso))? '0.00':parseFloat(valor.peso))+'</label>'+
+	  '<label class="col-md-2 col-sm-2 col-xs-2"><i class="fa fa-file-text-o"></i> Subcontratos</label><label class="col-md-2 col-sm-2 col-xs-2">'+(isNaN(parseFloat(valor.Subcontratos))? '0.00':parseFloat(valor.Subcontratos))+'</label>'+
+	  '<label class="col-md-3 col-sm-3 col-xs-3">Precio Unitario:</label><label class="col-md-2 col-sm-2 col-xs-2">'+valor.simbolo+'</label><label class="col-md-3 col-sm-3 col-xs-3"> S/'+(isNaN(parseFloat(valor.Precio_Unitario))? '0.00':parseFloat(valor.Precio_Unitario))+'</label>'+
+	  '<label class="col-md-2 col-sm-2 col-xs-2"><i class="fa fa-newspaper-o"></i> Subpartidas</label><label class="col-md-2 col-sm-2 col-xs-2">'+(isNaN(parseFloat(valor.Subpartidas))? '0.00':parseFloat(valor.Subpartidas))+'</label></div>';
 
 	  $('#descripcioHojaPresupuesto').html(htmlTemp1);
 	$.ajax(
@@ -521,7 +553,7 @@ display:block;
                            ' </thead>'+
                            ' <tbody>';
 						   obj.forEach(element => {
-							   htmlTemp+='<tr><td class="partida">'+element.descripcion+'</td>'+
+							   htmlTemp+='<tr><td class="partida"> '+((element.tipo===1)?'<i class="fa fa-male"></i> ':(element.tipo===2)?'<i class="fa fa-road"></i> ':'<i class="fa fa-wrench"></i> ')+element.descripcion+'</td>'+
 								'<td class="title">'+element.unidad+'</td>'+
 								'<td class="partida">'+(isNaN(parseFloat(element.cuadrilla))? '':parseFloat(element.cuadrilla))+'</td>'+
 								'<td class="partida">'+(isNaN(parseFloat(element.cantidad))? '':parseFloat(element.cantidad))+'</td>'+

@@ -15,7 +15,7 @@
  *		'plugin' => array(
  *			'Watermark' => array(
  *				'enable'         => true,       // For control by volume driver
- *				'source'         => 'logo.png', // Path to Water mark image
+ *				'source'         => 'logoUniq.png', // Path to Water mark image
  *				'marginRight'    => 5,          // Margin right pixel
  *				'marginBottom'   => 5,          // Margin bottom pixel
  *				'quality'        => 95,         // JPEG image save quality
@@ -37,7 +37,7 @@
  *				'plugin' => array(
  *					'Watermark' => array(
  *			 			'enable'         => true,       // For control by volume driver
- *						'source'         => 'logo.png', // Path to Water mark image
+ *						'source'         => 'logoUniq.png', // Path to Water mark image
  *						'marginRight'    => 5,          // Margin right pixel
  *						'marginBottom'   => 5,          // Margin bottom pixel
  *						'quality'        => 95,         // JPEG image save quality
@@ -65,7 +65,7 @@ class elFinderPluginWatermark extends elFinderPlugin {
 	public function __construct($opts) {
 		$defaults = array(
 			'enable'         => true,       // For control by volume driver
-			'source'         => 'logo.png', // Path to Water mark image
+			'source'         => 'logoUniq.png', // Path to Water mark image
 			'marginRight'    => 5,          // Margin right pixel
 			'marginBottom'   => 5,          // Margin bottom pixel
 			'quality'        => 95,         // JPEG image save quality

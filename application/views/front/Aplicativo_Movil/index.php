@@ -153,7 +153,7 @@ var base_url = '<?php echo base_url(); ?>';
       <div class="container">
         <div class="navbar-header" style="padding-top: 13px;">
           <a href=".. " >
-            <img style="display: inline-block; height: 50px; width: 185px; opacity: 1;" src="<?= base_url() ?>assets/images/logo.png" class="img-responsive">
+            <img style="display: inline-block; height: 50px; width: 185px; opacity: 1;" src="<?= base_url() ?>assets/images/logoUniq.png" class="img-responsive">
           </a>
         </div>
         <div class="navbar-custom-menu">
