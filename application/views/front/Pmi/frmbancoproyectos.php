@@ -1028,6 +1028,7 @@ $(document).ready(function (e) {
   });
   $('#modalMEF').on('show.bs.modal', function(e) { 
     var idProyecto = $(e.relatedTarget).data().id;
+    
     $('#iframeMef').html('<iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" height="700px" src="https://ofi5.mef.gob.pe/invierte/seguimiento/verFichaSeguimiento/'+idProyecto+'"></iframe>');
     
   });

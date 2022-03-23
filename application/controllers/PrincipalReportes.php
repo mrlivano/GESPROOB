@@ -883,11 +883,10 @@ class PrincipalReportes extends CI_Controller
     public function RestoreDB(){
         if($_FILES)
         {
-            $file = $_FILES['file'];
             $codigo = $this->input->post('codigo');
             $proyecto = $this->input->post('proyecto');
             $fecha   = $this->input->post('fecha');
-            $rutaFile = 'C:/inetpub/wwwroot/GESPROOB/uploads/S10/Bak/';
+            $rutaFile = dirname(__DIR__, 2).'/uploads/S10/Bak/';
             $config['upload_path'] = './uploads/S10/Bak/';
             $config['allowed_types'] = '*';
             $config['file_name'] = $codigo;
@@ -905,6 +904,18 @@ class PrincipalReportes extends CI_Controller
         }
         else{
             echo 'Error al subir archivo';
+        }
+        
+    }
+    public function DeleteDB(){
+        if($_POST)
+        {
+            $codigoProyecto = $this->input->post('codigoProyecto');
+            $data = $this->Model_ProyectoInversion->DeleteDB($codigoProyecto);
+            echo true;
+        }
+        else{
+            echo false;
         }
         
     }

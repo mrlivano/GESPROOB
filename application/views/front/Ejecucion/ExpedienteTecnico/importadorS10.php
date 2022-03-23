@@ -5,6 +5,7 @@
 			<div class="x_panel">
 				<div class="x_title">
 					<h2><b>IMPORTACIÓN DE PROYECTOS S10</b></h2>
+					
 					<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
@@ -21,6 +22,7 @@
 												<td class="col-md-2 col-xs-12">Codigo Unico</td>
 												<td class="col-md-9 col-xs-12">Proyecto</td>
 												<td class="col-md-3 col-xs-12">Fecha Salida</td>
+												<td class="col-md-3 col-xs-12">Opción</td>
 											</tr>
 										</thead>
 										<tbody>
@@ -36,45 +38,8 @@
 												<td style="width: 15%;">
 													<?=date('d/m/Y',strtotime($item->FechaSubida)) ?>
 												</td>
-										  	</tr>
-										<?php } ?>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="tab_aprobacion" aria-labelledby="home-tab">
-								<br><br>
-								<div class="table-responsive">
-									<table id="table-ExpedientesAprobados" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%">
-										<thead>
-											<tr>
-												<th>Codigo Unico</th>
-												<th>Proyecto</th>
-												<th>Fecha Subida</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody>
-										<?php foreach($listaExpedientesAprobados as $item){ ?>
-										  	<tr>
-										  		<td style="width: 10%;">
-										  			<a style="width: 100%;" href="<?= site_url('Expediente_Tecnico/verdetalle?id_et='.$item->id_et);?>" role="button" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->codigo_unico_pi?></a>
-
-										  		</td>
 												<td style="width: 15%;">
-													<?= $item->nombre_ue?>
-												</td>
-												<td style="width: 47%;">
-													<?= $item->nombre_pi?>
-												</td>
-												<td style="width: 13%;">
-													S/. <?=a_number_format($item->costo_total_inv_et,2,'.',",",3)?>
-												</td>
-												<td style="width: 10%;">
-													<?=date('d/m/Y',strtotime($item->fecha_aprobacion)) ?>
-												</td>
-												<td style="width: 5%;">
-													<a href='<?php echo base_url()."uploads/ResolucioExpediente/".$item->id_et.".".$item->url_doc_aprobacion_et ;?>' target='_blank'><i class='fa fa-file fa-lg'></i></a>
+												<a style="width: 100%;" role="button" onclick="eliminarBD(<?= $item->CodigoUnico?>)" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> ELiminar</a>
 												</td>
 										  	</tr>
 										<?php } ?>
@@ -193,7 +158,53 @@ $(document).ready(function()
 		"language":idioma_espanol
 	});
 });
+function eliminarBD(codigoProyecto)
+{
+	console.log(codigoProyecto);
+	$.ajax({
+			url: base_url + "index.php/PrincipalReportes/DeleteDB",
+			type: "POST",
+			data:{codigoProyecto:codigoProyecto},
+			beforeSend: function(request)
+			{
+				$('#ventana_restaurar_bd').modal('hide')
+				renderLoading();
+			},
+			success:function(data)
+			{
+				$('#divModalCargaAjax').hide();
+				
 
+				if(data)
+				{
+					swal(
+						'Operacion Completada',
+						'Se eleminó correctamente',
+						'success'
+					);
+					window.location.reload();
+				}
+				else
+				{
+					swal(
+						'No se pudo completar la Operacion',
+						'Error al eliminar',
+						'error'
+					);
+				}
+			},
+			error: function (xhr, textStatus, errorMessage) 
+			{
+				$('#divModalCargaAjax').hide();
+				swal(
+					'ERROR!',
+					'No se pudo eliminar la BD',
+					'error'
+				);
+			}
+			
+		});
+}
 function ImportarBD()
 {
 	
@@ -201,7 +212,6 @@ function ImportarBD()
 		var proyecto=$("#txt_proyecto").val();
 		var fecha=$("#txt_fecha").val();
 		var file = document.getElementById('txt_file').files[0];
-		console.log(file);
 		let data = new FormData();
 		data.append('file',file);
 		data.append('codigo',codigo);

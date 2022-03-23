@@ -943,6 +943,7 @@ function autorizar($url)
       'ProyectoInversion/updateConformidad',
       'PrincipalReportes/ordenServicio',
       'PrincipalReportes/RestoreDB',
+      'PrincipalReportes/DeleteDB',
       'ProyectoInversion/addOrdenServicio',
       'ProyectoInversion/updateOrdenServicio',
       'Expediente_Tecnico/formatoFE11',
