@@ -162,6 +162,7 @@
                                             <th style="width: 55%; text-align: right;"><i class="fa fa-money"></i> Nombre</th>
                                             <th style="width: 5%"> Codigo SNIP</th>
                                             <th style="width: 5%"> Estado</th>
+                                            <th style="width: 5%"> Opcion</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -551,7 +552,25 @@
     </div>
 </div>
 <!--fin modal inforamtivo-->
-
+<!--modal informativo-->
+<div class="modal fade" id="modalMEF" role="dialog">
+    <div class="modal-dialog modal-lg" style=" width: 85%;">
+        <div class="modal-content">
+              <div class="form-group" style="margin-left: 85%;padding:5px;">
+                  <div class="col-md-6 col-md-offset-3">
+                      <button  class="btn btn-danger" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-log-out"></span>
+                      Cerrar
+                      </button>
+                  </div>
+              </div>
+              <form id="iframeMef"></form>
+            
+                   
+        </div>
+    </div>
+</div>
+<!--fin modal inforamtivo-->
 
 <!--Modal Meta Oficina-->
 <div class="modal fade" id="VentanaMetaOficina" role="dialog">
@@ -608,6 +627,7 @@
             
 
         </div>
+        
         <div class="row">
              <div class="col-md-2 col-sm-3 col-xs-12">
                 <label class="control-label">Funcion:</label>
@@ -987,7 +1007,13 @@ var filtrarPIPs = function(anio)
         { "data": "anio" }, 
         { "data": "nombre" }, 
         { "data": "idProyectoSnip" }, 
-        { "data": "estado" }, 
+        { "data": "estado" },
+        {
+            "data": function (data, type) 
+            {
+                return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-target='#modalMEF' data-id='"+data.idProyecto+"' data-toggle='modal'  > Externa</button";
+            } 
+        } 
     ],
         "language": idioma_espanol
     });
@@ -999,11 +1025,25 @@ $(document).ready(function (e) {
     var id_uejec = document.getElementById("selectUnidadEjecutora");
     var id_unidadEjecutora = id_uejec.options[id_uejec.selectedIndex].value;
      var id_oficina = $(e.relatedTarget).data().id;
-     
-      //filtrarProyectoInversion1(id_unidadEjecutora,id_oficina);
+  });
+  $('#modalMEF').on('show.bs.modal', function(e) { 
+    var idProyecto = $(e.relatedTarget).data().id;
+    $('#iframeMef').html('<iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" height="700px" src="https://ofi5.mef.gob.pe/invierte/seguimiento/verFichaSeguimiento/'+idProyecto+'"></iframe>');
+    
   });
 });
+function showModal(idProyecto) {
+    console.log("vas or buen camino");
+  $('#modalMEF').on('show.bs.modal',function(e) { 
+        
+      //filtrarProyectoInversion1(id_unidadEjecutora,id_oficina);
+  });
 
+}
+
+function CloseModal() {
+  document.getElementById('openModal').style.display = 'none';
+}
 
 function guardarMetaOficina()
     {
