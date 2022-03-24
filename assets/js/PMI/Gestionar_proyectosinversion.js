@@ -192,7 +192,7 @@ function cargarDatosProyecto(codigoProyectoInversion) {
                 }
                 else
                 {
-                  swal('No se pudo completar la Operación','error');
+                  swal('ERROR!','No se pudo conectar a la base de datos del PIDE','error');
                 }
               }).fail(
                  function ( )
@@ -202,7 +202,7 @@ function cargarDatosProyecto(codigoProyectoInversion) {
                 $('#txt_apellidopaterno').val('');
                 $('#txt_apellidomaterno').val('');
                 $('#txt_direccion').val('');
-                    swal('ERROR!','No se realizó la importación','error');
+                    swal('ERROR!','No se pudo conectar a la base de datos del PIDE','error');
 
                 });
   }
