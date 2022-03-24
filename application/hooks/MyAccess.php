@@ -913,7 +913,7 @@ function autorizar($url)
       'Expediente_Tecnico/insertActaEntregaTerreno',
       'Expediente_Tecnico/listarBds10',
       'Expediente_Tecnico/HojaPresupuesto',
-      'Expediente_Tecnico/sumatorias',
+      'Expediente_Tecnico/ImprimirReporte',
       'Expediente_Tecnico/costoUnitario',
       'EstadoPedido/register',
       'PrincipalReportes/estadoPedidoShow',
