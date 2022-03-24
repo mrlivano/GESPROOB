@@ -143,10 +143,24 @@
 					<h2><b>PRESUPUESTOS</b></h2>
 					<div class="clearfix"></div>
 				</div>
-				
-				<table id="tableCostoUnitarioTotal" class="table table-striped table-bordered table-hover table-responsive display  compact "  style="display:none">
-				<thead><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead>
-				  <tbody id="bodyss"></tbody>
+
+				<table id="tableCostoUnitarioTotal" class="table table-striped table-bordered table-hover table-responsive display  compact " style="display:none">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="bodyss"></tbody>
 				</table>
 				<div class="item form-group">
 					<label class="control-label col-md-1 col-sm-1 col-xs-1">Proyectos:</label>
@@ -157,7 +171,7 @@
 								<option value="<?= trim($row->CodigoUnico) ?>" <?php echo (trim($codigo) == trim($row->CodigoUnico) ? 'selected' : ''); ?>><?= $row->CodigoUnico ?> - <?= $row->Proyecto ?></option>
 							<?php  } ?>
 						</select>
-						
+
 					</div>
 					<div class="pull-right tableTools-containerr col-md-1 col-sm-1 col-xs-1"></div>
 				</div>
@@ -178,7 +192,7 @@
 
 							<div id="hojaPresupuesto" style="height: 250px;overflow: scroll; background-color: transparent;">
 								<div class="pull-right tableTools-container"></div>
-								
+
 								<table id="tableHojaPresupuesto" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
@@ -192,7 +206,7 @@
 									</thead>
 									<tbody id="bodyHojaPresupuesto"> </tbody>
 								</table>
-								
+
 							</div>
 							<div id="descripcioHojaPresupuesto" style="background-color: transparent;height:86px"></div>
 							<div id="costoUnitario" style="height: 200px;overflow: scroll; background-color: transparent;">
@@ -436,20 +450,26 @@
 			$(e.currentTarget).find('#txtPlazo').text(result.Plazo);
 		});
 
-			});
+	});
 
 	function mostrarPresupuesto(CodigoUnico, element) {
 		$('#bodyHojaPresupuesto').html('');
 		$('#descripcioHojaPresupuesto').html('');
 		$('#bodyCostoUnitario').html('');
+		$('#bodyss').html('');
 		$.ajax({
 			type: "POST",
 			url: base_url + "index.php/Expediente_Tecnico/listarBds10",
 			cache: false,
+			
 			data: {
 				CodigoUnico: CodigoUnico
 			},
+			beforeSend: function(request) {
+				renderLoading();
+			},
 			success: function(resp) {
+				$('#divModalCargaAjax').hide();
 				var obj = JSON.parse(resp);
 				presupuesto = obj;
 				if (obj.length == 0) {
@@ -481,9 +501,16 @@
 						htmlTemp += '</ul></li>';
 					}
 				}
-
 				htmlTemp += '';
 				$(element).parent().parent().parent().parent().parent().find('.trElement').html(htmlTemp);
+			},
+			error: function(xhr, textStatus, errorMessage) {
+				$('#divModalCargaAjax').hide();
+				swal(
+					'ERROR!',
+					'No se pudo conectar con el servidor para realizar la consulta',
+					'error'
+				);
 			}
 		});
 	}
@@ -507,11 +534,11 @@
 		mostrarPresupuesto(ue, this);
 
 	});
+
 	function imprimirReporte(CodigoUnico, CodigoPresupuesto, CodigoSubPresupuesto) {
-		let PresupuestoEspecifico = presupuesto.find(element => element.Codigo ==CodigoPresupuesto).SubPresupuesto.find(element => element.CodSubpresupuesto==CodigoSubPresupuesto);
-		 console.log(PresupuestoEspecifico);
-		 destroyCostoUnitario();
-		 $.ajax({
+		let PresupuestoEspecifico = presupuesto.find(element => element.Codigo == CodigoPresupuesto).SubPresupuesto.find(element => element.CodSubpresupuesto == CodigoSubPresupuesto);
+		destroyCostoUnitario();
+		$.ajax({
 			type: "POST",
 			url: base_url + "index.php/Expediente_Tecnico/ImprimirReporte",
 			cache: false,
@@ -523,80 +550,84 @@
 			success: function(resp) {
 				let obj = JSON.parse(resp);
 				let htmlTemp = '';
-				let temp='';
-				let tempTipo='';
-				tempSuma=0;
-				tempHeader=true;
-				console.log(obj);
-				htmlTemp='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-				  '<tr><td></td><td></td><td></td><td></td><td></td><td>Análisis de precios unitarios</td><td></td><td></td><td></td><td></td><td></td></tr>'+
-				  '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-				  '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-				  '<tr><td>Presupuesto</td><td></td><td>'+PresupuestoEspecifico.CodigoPresupuesto+'</td><td style="color:red">'+PresupuestoEspecifico.DescripcionPresupuesto+'</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-				  '<tr><td>Subpresupuesto</td><td></td><td>'+PresupuestoEspecifico.CodSubpresupuesto+'</td><td>'+PresupuestoEspecifico.Descripcion+'</td><td></td><td></td><td></td><td></td><td></td><td>Fecha presupuesto</td><td>'+PresupuestoEspecifico.Fecha+'</td></tr>';
-				  obj.forEach(element => {
-					  if (element.orden!=temp)
-					  {
-						if(tempSuma!=0 ){
-									htmlTemp+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>'+tempSuma+'</td></tr>';
-									tempSuma=0;
-								}
-						htmlTemp+='<tr><td>Partida</td><td></td><td>'+element.orden+'</td><td></td><td>'+element.partida+'</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-						'<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-						'<tr><td>Rendimiento</td><td></td><td>'+element.simbolo+'/DIA</td><td>'+element.Rendimiento_MO+'</td><td>EQ.</td><td>'+element.Rendimiento_EQ+' </td><td></td><td></td><td>Costo unitario directo por : '+element.unidad+'</td><td>'+element.Precio_Unitario+'</td><td></td></tr>'+
-						'<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'+
-						'<tr><td>Código</td><td></td><td>Descripción Recurso</td><td></td><td></td><td>Unidad</td><td></td><td>Cuadrilla</td><td>Cantidad</td><td>Precio S/.</td><td>Parcial S/.</td></tr>';
-						temp=element.orden;
-					  }
-					  
-						  if(element.tipo=='1'){
-							  if (tempTipo!=element.tipo) {
-								if(tempSuma!=0){
-									htmlTemp+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>'+tempSuma+'</td></tr>';
-								}
-								htmlTemp+='<tr><td></td><td></td><td></td><td>Mano de Obra</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-								tempTipo=element.tipo;
-								tempSuma=0;
-							}
-							htmlTemp+='<tr><td>'+element.codinsumo+'</td><td></td><td>'+element.descripcion+'</td><td></td><td></td><td>'+element.unidad+'</td><td></td><td>'+element.cuadrilla+' </td><td>'+element.cantidad+' </td><td>'+element.Precio+' </td><td>'+element.Parcial+' </td></tr>';
-							tempSuma+=parseFloat(element.Parcial);
-						  }else if (element.tipo=='2') {
-							  if (tempTipo!=element.tipo) {
-								if(tempSuma!=0){
-									htmlTemp+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>'+tempSuma+'</td></tr>';
-								}
-								htmlTemp+='<tr><td></td><td></td><td></td><td>Materiales</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-								tempTipo=element.tipo;
-								tempSuma=0;
-							}
-							htmlTemp+='<tr><td>'+element.codinsumo+'</td><td></td><td>'+element.descripcion+'</td><td></td><td></td><td>'+element.unidad+'</td><td></td><td>'+element.cuadrilla+' </td><td>'+element.cantidad+' </td><td>'+element.Precio+' </td><td>'+element.Parcial+' </td></tr>';
-							tempSuma+=parseFloat(element.Parcial);
-						  }else{
-							if (tempTipo!=element.tipo) {
-								if(tempSuma!=0){
-									htmlTemp+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>'+tempSuma+'</td></tr>';
-								}
-							htmlTemp+='<tr><td></td><td></td><td></td><td>Equipos</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-							tempTipo=element.tipo;
-							tempSuma=0;
+				let temp = '';
+				let tempTipo = '';
+				tempSuma = 0;
+				tempHeader = true;
+				htmlTemp = '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+					'<tr><td></td><td></td><td></td><td></td><td></td><td>Análisis de precios unitarios</td><td></td><td></td><td></td><td></td><td></td></tr>' +
+					'<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+					'<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+					'<tr><td>Presupuesto</td><td></td><td>' + PresupuestoEspecifico.CodigoPresupuesto + '</td><td style="color:red">' + PresupuestoEspecifico.DescripcionPresupuesto + '</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+					'<tr><td>Subpresupuesto</td><td></td><td>' + PresupuestoEspecifico.CodSubpresupuesto + '</td><td>' + PresupuestoEspecifico.Descripcion + '</td><td></td><td></td><td></td><td></td><td></td><td>Fecha presupuesto</td><td>' + PresupuestoEspecifico.Fecha + '</td></tr>';
+				obj.forEach(element => {
+					if (element.orden != temp) {
+						if (tempSuma != 0) {
+							htmlTemp += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>' + tempSuma + '</td></tr>';
+							tempSuma = 0;
 						}
-							htmlTemp+='<tr><td>'+element.codinsumo+'</td><td></td><td>'+element.descripcion+'</td><td></td><td></td><td>'+element.unidad+'</td><td></td><td>'+element.cuadrilla+' </td><td>'+element.cantidad+' </td><td>'+element.Precio+' </td><td>'+element.Parcial+' </td></tr>';
-							tempSuma+=parseFloat(element.Parcial);				
-					  		}
-				  
+						htmlTemp += '<tr><td>Partida</td><td></td><td>' + element.orden + '</td><td></td><td>' + element.partida + '</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+							'<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+							'<tr><td>Rendimiento</td><td></td><td>' + element.simbolo + '/DIA</td><td>' + element.Rendimiento_MO + '</td><td>EQ.</td><td>' + element.Rendimiento_EQ + ' </td><td></td><td></td><td>Costo unitario directo por : ' + element.unidad + '</td><td>' + element.Precio_Unitario + '</td><td></td></tr>' +
+							'<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>' +
+							'<tr><td>Código</td><td></td><td>Descripción Recurso</td><td></td><td></td><td>Unidad</td><td></td><td>Cuadrilla</td><td>Cantidad</td><td>Precio S/.</td><td>Parcial S/.</td></tr>';
+						temp = element.orden;
+					}
 
-					  
-					});
-				  $('#bodyss').html(htmlTemp);
-				  toolsCostoUnitario();
+					if (element.tipo == '1') {
+						if (tempTipo != element.tipo) {
+							if (tempSuma != 0) {
+								htmlTemp += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>' + tempSuma + '</td></tr>';
+							}
+							htmlTemp += '<tr><td></td><td></td><td></td><td>Mano de Obra</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+							tempTipo = element.tipo;
+							tempSuma = 0;
+						}
+						htmlTemp += '<tr><td>' + element.codinsumo + '</td><td></td><td>' + element.descripcion + '</td><td></td><td></td><td>' + element.unidad +
+							'</td><td></td><td>' + (isNaN(parseFloat(element.cuadrilla)) ? '' : parseFloat(element.cuadrilla)) +
+							' </td><td>' + parseFloat(element.cantidad) + ' </td><td>' + parseFloat(element.Precio) + ' </td><td>' + parseFloat(element.Parcial) + ' </td></tr>';
+						tempSuma += parseFloat(element.Parcial);
+					} else if (element.tipo == '2') {
+						if (tempTipo != element.tipo) {
+							if (tempSuma != 0) {
+								htmlTemp += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>' + tempSuma + '</td></tr>';
+							}
+							htmlTemp += '<tr><td></td><td></td><td></td><td>Materiales</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+							tempTipo = element.tipo;
+							tempSuma = 0;
+						}
+						htmlTemp += '<tr><td>' + element.codinsumo + '</td><td></td><td>' + element.descripcion + '</td><td></td><td></td><td>' + element.unidad +
+							'</td><td></td><td>' + (isNaN(parseFloat(element.cuadrilla)) ? '' : parseFloat(element.cuadrilla)) + ' </td><td>' + parseFloat(element.cantidad) +
+							' </td><td>' + parseFloat(element.Precio) + ' </td><td>' + parseFloat(element.Parcial) + ' </td></tr>';
+						tempSuma += parseFloat(element.Parcial);
+					} else {
+						if (tempTipo != element.tipo) {
+							if (tempSuma != 0) {
+								htmlTemp += '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>' + tempSuma + '</td></tr>';
+							}
+							htmlTemp += '<tr><td></td><td></td><td></td><td>Equipos</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+							tempTipo = element.tipo;
+							tempSuma = 0;
+						}
+						htmlTemp += '<tr><td>' + element.codinsumo + '</td><td></td><td>' + element.descripcion + '</td><td></td><td></td><td>' + element.unidad +
+							'</td><td></td><td>' + (isNaN(parseFloat(element.cuadrilla)) ? '' : parseFloat(element.cuadrilla)) + ' </td><td>' + parseFloat(element.cantidad) +
+							' </td><td>' + parseFloat(element.Precio) + '</td><td>' + parseFloat(element.Parcial) + ' </td></tr>';
+						tempSuma += parseFloat(element.Parcial);
+					}
+
+
+
+				});
+				$('#bodyss').html(htmlTemp);
+				toolsCostoUnitario();
 			}
 		});
-		
+
 	}
-	
+
 
 	function hojaPresupuesto(CodigoUnico, CodigoPresupuesto, CodigoSubPresupuesto, element) {
-		 
+
 		destroyHojaPresupuesto();
 		$('#descripcioHojaPresupuesto').html('');
 		$('#bodyCostoUnitario').html('');
@@ -612,7 +643,11 @@
 				CodigoPresupuesto: CodigoPresupuesto,
 				CodigoSubPresupuesto: CodigoSubPresupuesto
 			},
+			beforeSend: function(request) {
+				renderLoading();
+			},
 			success: function(resp) {
+				$('#divModalCargaAjax').hide();
 				var obj = JSON.parse(resp);
 				var htmlTemp = '';
 				elementHojaPresupuesto = obj;
@@ -631,14 +666,22 @@
 						'<td class="partida right">' + (isNaN(parseFloat(element.Precio)) ? '' : parseFloat(element.Precio)) + '</td>' +
 						'<td class="partida right">' + (isNaN(parseFloat(element.Parcial)) ? '' : parseFloat(element.Parcial)) + '</td>';
 					htmlTemp += '</tr>';
-					
+
 				});
-				imprimirReporte( CodigoUnico , CodigoPresupuesto , CodigoSubPresupuesto , element.codpartida );
+				imprimirReporte(CodigoUnico, CodigoPresupuesto, CodigoSubPresupuesto, element.codpartida);
 
 
 				$('#bodyHojaPresupuesto').html(htmlTemp);
 				toolsHojaPresupuesto();
 
+			},
+			error: function(xhr, textStatus, errorMessage) {
+				$('#divModalCargaAjax').hide();
+				swal(
+					'ERROR!',
+					'No se pudo conectar con el servidor para realizar la consulta',
+					'error'
+				);
 			}
 		});
 	}
@@ -728,7 +771,7 @@
 	}
 
 	function destroyCostoUnitario() {
-		 var table = $("#tableCostoUnitarioTotal").dataTable().fnDestroy();
+		var table = $("#tableCostoUnitarioTotal").dataTable().fnDestroy();
 	}
 
 	function toolsCostoUnitario() {
@@ -737,7 +780,7 @@
 			"searching": false,
 			"info": false,
 			"paging": false,
-			"order":false,
+			"order": false,
 		});
 
 		$.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
@@ -748,7 +791,7 @@
 					"text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>Export to Excel</span>",
 					"className": "btn btn-white btn-primary btn-bold"
 				},
-				
+
 			]
 		});
 		myTable.buttons().container().appendTo($('.tableTools-containerr'));
