@@ -2430,7 +2430,7 @@ class Expediente_Tecnico extends CI_Controller
 		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
 		ON (i.codinsumo=ppa.codinsumo and spd.codpartida=ppa.codpartida and spd.codpartida=ppa.codpartida)
 		where spd.codpresupuesto='".$CodigoPresupuesto."' and spd.codsubpresupuesto='".$CodigoSubPresupuesto."' and (p.codpresupuesto='".$CodigoPresupuesto."' or p.codpartida='999999999999')
-		 and ppa.CodPresupuesto='".$CodigoPresupuesto."'  
+		and pd.CodPresupuesto='".$CodigoPresupuesto." and ppa.CodPresupuesto='".$CodigoPresupuesto." and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'  
 		and spd.tipo=1 
 		order by spd.orden,spd.secuencial,ppa.tipo");
 		echo json_encode($imprimir->result());exit;
