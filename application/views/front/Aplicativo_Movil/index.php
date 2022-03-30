@@ -153,7 +153,7 @@ var base_url = '<?php echo base_url(); ?>';
       <div class="container">
         <div class="navbar-header" style="padding-top: 13px;">
           <a href=".. " >
-            <img style="display: inline-block; height: 50px; width: 185px; opacity: 1;" src="<?= base_url() ?>assets/images/logoUniq.png" class="img-responsive">
+            <img style="display: inline-block; height: 50px;  opacity: 1;" src="<?= base_url() ?>assets/images/logoUniq.png" class="img-responsive">
           </a>
         </div>
         <div class="navbar-custom-menu">
@@ -305,36 +305,6 @@ var base_url = '<?php echo base_url(); ?>';
                   </div>
                 </div>
 
-                <div class="panel box box-success">
-                  <div class="box-header with-border">
-                    <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-
-						 <div class="alert alert-info"  style="width: 150px;">
-                              <span class="glyphicon glyphicon-arrow-down"></span> No PIP
-                         </div>
-
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="box-body">
-
-                		<div>
-							<label style="color: gray">Tipo No Pip</label>
-							<select class="form-control" id="comboboxtiponopi" name="comboboxtiponopi" onclick="mapaUbicacionNoPip();">
-							<option value="1" style="font-size:9.5px">Elija Tipo No PIP</option>
-
-							<?php foreach($comboboxtiponopip as $item){ ?>
-								<option value="<?=$item->id_tipo_nopip; ?>"  style="font-size:9.5px"><?= $item->desc_tipo_nopip;?></option>
-							<?php } ?>
-
-							</select>
-	                    </div>
-
-                    </div>
-                  </div>
-                </div>
 
 
 
