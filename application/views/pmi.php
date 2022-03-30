@@ -36,22 +36,7 @@
                 </center>
             </div>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top">TOTAL NO PIP</span>
-            <div class="count">
-                <center>
-                    <h2 style="font-size: 14px;"><div id="totalnopip"></div></h2>
-                </center>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top">MONTO NO PIP</span>
-            <div class="count">
-            <center>
-                    <h2 style="font-size: 14px;"><div id="monto_programado_nopip"></div></h2>
-                </center>
-        </div>
-    </div>
+    
 </div>
 
 <div class="row">

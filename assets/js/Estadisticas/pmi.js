@@ -3,8 +3,6 @@ function MontoProgramadoPip(anio)
   //  alert(anio);
    $("#monto_programado").text("");
    $("#totalpip").text("");
-   $("#monto_programado_nopip").text("");
-   $("#totalnopip").text("");
 
      var tipo=new Array();
      var num=new Array();
@@ -38,8 +36,6 @@ function MontoProgramadoPip(anio)
             if(tipo[0]=="NO PIP")
             {
                // alert("1");
-            $("#monto_programado_nopip").text("S/. "+registros[0]["SumaCosto"]);
-            $("#totalnopip").text(registros[0]["Cant_pi"]);
             }
                 if(tipo[1]=="PIP")
             {
@@ -57,8 +53,6 @@ function MontoProgramadoPip(anio)
             if(tipo[1]=="NO PIP")
             {
               //  alert("4");
-            $("#monto_programado_nopip").text("S/. "+registros[1]["SumaCosto"]);
-            $("#totalnopip").text(registros[1]["Cant_pi"]);
             }
         }
     });
