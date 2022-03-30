@@ -6,16 +6,14 @@ $(document).on("ready" ,function(){
                     $("#listaFuncionC").html(htmlPip);
                     event.preventDefault();
                     $.ajax({
-                        "url":base_url +"index.php/Estudio_Inversion/get_listaproyectos",
-                        type:"POST",
-                        data:{valor:valor},
+                        "url":"https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+valor,
+                        type:"GET",
                         success:function(respuesta1)
                         {
                          var registrospi = eval(respuesta1);
                             for (var i = 0; i <registrospi.length;i++) {
-                              htmlPip +="<option value="+registrospi[i]["id_pi"]+"> "+registrospi[i]["codigo_unico_pi"]+" - "+registrospi[i]["nombre_pi"]+" </option>";
+                              htmlPip +="<option value="+registrospi[i]["idProyecto"]+"> "+registrospi[i]["idProyecto"]+" - "+registrospi[i]["nombre"].substr(0, 100)+" </option>";
                             };
-                            $("#listaFuncionC").html(htmlPip);
                             $("#listaFuncionC").html(htmlPip);
                             $('select[name=listaFuncionC]').val(valor);//PARA AGREGAR UN COMBO PSELECIONADO
                             $('select[name=listaFuncionC]').change();
@@ -114,18 +112,23 @@ var listarestudiocombo=function(valor){
                         }
                     });
                 }
-
+                
                 ListaEstudioInversion();/*llamar a mi datatablet listar funcion*/
-                listarpicombo();
+                listarpicombo(new Date().getFullYear());
                 listarnivelcombo();
                 listarestudiocombo();
                 listarufcombo();
                 listaruecombo();
                 listarEstadoCiclo();
 
-            $("#comboEstadoFe").change(function(){
+           /* $("#comboEstadoFe").change(function(){
                 var NombreEstadoFormulacionEvalu=$("#comboEstadoFe").val();
                 listarpicombo(NombreEstadoFormulacionEvalu);
+             });*/
+
+             $("#comboAnio").change(function(){
+                var anio=$("#comboAnio").val();
+                listarpicombo(anio);
              });
 
               $("#listaNivelEstudio").change(function(){
@@ -140,53 +143,52 @@ var listarestudiocombo=function(valor){
               $('#listaFuncionC').on('change', function()
                {
                    var id_Pi =$("#listaFuncionC").val();
+                   var nombre_Pi =$('select[name="listaFuncionC"] option:selected').text();
                    if(id_Pi==null)
                    {
                    }else
                    {
-                       $.ajax({
-                            type:"POST",
-                           "url":base_url+"index.php/Estudio_Inversion/get_listaproyectosCargar",
-                            data:{"id_Pi":id_Pi},
-                            dataType:"JSON",
-                            success:function(resp){
-                              $.each(resp,function(index,element)
-                              {
+                    $("#txtnombres").val(nombre_Pi.split('-')[1]);
+                    $("#txtCodigoUnico").val(id_Pi);
+                    //    $.ajax({
+                    //         type:"GET",
+                    //        "url":"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+id_Pi,
+                    //         success:function(resp){
+                    //           $.each(resp,function(index,element)
+                    //           {
 
+                    //                $("#txtnombres").val(element.nombre);
+                    //                $("#txtCodigoUnico").val(element.codigo);
 
+                    //                var monto_Inversion=0;
+                    //                $("listaTipoInversion").val(element.nombre_tipo_inversion);
 
-                                   $("#txtnombres").val(element.nombre_pi);
-                                   $("#txtCodigoUnico").val(element.codigo_unico_pi);
+                    //                $('select[name=listaTipoInversion]').val(element.id_tipo_inversion);
+                    //                $('select[name=listaTipoInversion]').change();
+                    //                $('.selectpicker').selectpicker('refresh');
 
-                                   var monto_Inversion=0;
-                                   $("listaTipoInversion").val(element.nombre_tipo_inversion);
+                    //                 $('select[name=lista_unid_form]').val(element.id_uf);
+                    //                $('select[name=lista_unid_form]').change();
+                    //                $('.selectpicker').selectpicker('refresh');
 
-                                   $('select[name=listaTipoInversion]').val(element.id_tipo_inversion);
-                                   $('select[name=listaTipoInversion]').change();
-                                   $('.selectpicker').selectpicker('refresh');
+                    //                $('select[name=lista_unid_ejec]').val(element.id_ue);
+                    //                $('select[name=lista_unid_ejec]').change();
+                    //                $('.selectpicker').selectpicker('refresh');
+                    //                $("#txtMontoInversion").val(element.costo_pi);
 
-                                    $('select[name=lista_unid_form]').val(element.id_uf);
-                                   $('select[name=lista_unid_form]').change();
-                                   $('.selectpicker').selectpicker('refresh');
+                    //                if(element.pim_acumulado==0)
+                    //                {
+                    //                   $("#txtcostoestudio").val(element.pia_meta_pres);
+                    //                }
+                    //               else
+                    //                {
+                    //                   $("#txtcostoestudio").val(element.pim_acumulado);
+                    //                }
 
-                                   $('select[name=lista_unid_ejec]').val(element.id_ue);
-                                   $('select[name=lista_unid_ejec]').change();
-                                   $('.selectpicker').selectpicker('refresh');
-                                   $("#txtMontoInversion").val(element.costo_pi);
-
-                                   if(element.pim_acumulado==0)
-                                   {
-                                      $("#txtcostoestudio").val(element.pia_meta_pres);
-                                   }
-                                  else
-                                   {
-                                      $("#txtcostoestudio").val(element.pim_acumulado);
-                                   }
-
-                             });
-                           // $("#txtCodigoUnico").va(resp);
-                        }
-                    });
+                    //          });
+                    //        // $("#txtCodigoUnico").va(resp);
+                    //     }
+                    // });
                    }
               });
 

@@ -111,25 +111,30 @@
                     </div>
                     <div class="x_content">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <button style="margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-primary" onclick="agregarProyectoInversion();"><span class="fa fa-plus-circle"></span> Nuevo </button>
                             </div>
                             <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
                             <div id="validarActualizarSiaf">
-                                <div class="col-md-1 col-sm-6 col-xs-12">
-                                    <input style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control" value="<?=date('Y')?>">
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <select style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
+                                        <?php for ($i = 0; $i <= 10; $i++) { ?>
+                                            <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
-                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="col-md-4 col-sm-6 col-xs-12">
                                     <select style="margin-top: 5px;margin-bottom: 15px;" type="text" name="selectUnidadEjecutora" id="selectUnidadEjecutora" class="form-control">
                                         <?php foreach ($unidadEjecutora as $key => $value) { ?>
                                             <option value="<?=$value->id_ue?>" data-id_ue="<?=$value->id_ue?>"><?=$value->codigo_ue?> - <?=$value->nombre_ue?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
-                            </div>
-                           <div class="col-md-1 col-sm-6 col-xs-12">
+                                <div class="col-md-2 col-sm-6 col-xs-12">
                                 <button  onclick="filtrarPIPs();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> CONSULTAR</button>
                             </div>
+                            </div>
+                           
                             
                             <?php } ?>
                         </div>
@@ -1020,7 +1025,7 @@ var filtrarPIPs = function(anio)
 }
 
 $(document).ready(function (e) {
-    filtrarPIPs('2022');
+    filtrarPIPs(new Date().getFullYear());
   $('#modal_vista_PIPs').on('show.bs.modal', function(e) { 
     var id_uejec = document.getElementById("selectUnidadEjecutora");
     var id_unidadEjecutora = id_uejec.options[id_uejec.selectedIndex].value;
@@ -1034,7 +1039,6 @@ $(document).ready(function (e) {
   });
 });
 function showModal(idProyecto) {
-    console.log("vas or buen camino");
   $('#modalMEF').on('show.bs.modal',function(e) { 
         
       //filtrarProyectoInversion1(id_unidadEjecutora,id_oficina);

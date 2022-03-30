@@ -120,6 +120,14 @@
                                                 <select id="comboEstadoFe" name="comboEstadoFe" class="selectpicker form-control" data-live-search="true"  title="Elija estado">
                                                 </select>
                                             </div>
+                                            <div class="col-xs-12 col-md-3">
+                                                <label for="name">Año<span class="required"></span></label>
+                                                <select id="comboAnio" name="comboAnio" class="form-control" data-live-search="true"  title="Elija año">
+                                                    <?php for ($i = 0; $i <= 10; $i++) { ?>
+                                                        <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
                                             <div class="col-xs-12 col-md-12">
                                                 <label for="name">Proyecto PMI<span class="required"></span></label>
                                                 <select   id="listaFuncionC" name="listaFuncionC" class="selectpicker form-control" data-live-search="true"  title="Buscar Proyecto...">
