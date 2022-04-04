@@ -262,14 +262,14 @@
         display: table-cell;
         position: relative;
         height: 100%;
-        padding: 2rem 1rem;
+        padding: 5rem 1rem;
         text-align: center;
         transform-origin: 0 50%;
         transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
       }
 
       .custom-accordion>.item:hover:not(:last-of-type) {
-        transform: scaleX(1.5) translateX(-1px);
+        transform: scaleY(1.5)  scaleX(1.5)  translateX(-1px) ;
         box-shadow: 0 0 3rem #301916;
         background: #8a6552;
         border-color: transparent;
@@ -289,7 +289,7 @@
       }
 
       .custom-accordion>.item:last-of-type {
-        background: #462521;
+        background: #222d32;
         width: 25%;
         border-radius: 0;
       }
