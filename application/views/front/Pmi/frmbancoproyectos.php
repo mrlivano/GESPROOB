@@ -1029,7 +1029,7 @@ function ImportarProyectosPIDE(){
                         $.ajax({
                         type:"POST",
                         url:base_url+'index.php/bancoproyectos/insertarProyectoCodigoPIDE',
-                        data:{proy:proy},
+                        data:{id:element.idProyecto,proy:proy},
                         cache: false,
                         success:function(resp)
                         {

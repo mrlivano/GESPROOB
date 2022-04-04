@@ -557,102 +557,27 @@
 function ActualizarProyectos(){
     var anio = $('#txtAnioActualizar').val();
     $.ajax({
-    "url":"https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+anio,
-    type:"GET",
-    beforeSend: function()
-            {
-                renderLoading();
-            },
-    success:function(data)
-    {
-        count=0;
-        proyect=0;
-        if(!data || data.length === 0)
-        {
-            return;
-        }
-        data.forEach(element => {
-            if(element.estado==='A'){
-                $.ajax({
-                    "url":"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+element.idProyecto,
-                    type:"GET",
-                    success:function(proy)
-                    {
-                        if(proy.codigo){
-                            $.ajax({
-                            type:"POST",
-                            url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
-                            data:{proy:proy},
-                            cache: false,
-                            success:function(resp)
-                            {
-                                count++;
-                                proyect++;
-                                if (count===data.length) {
-                                    $('#divModalCargaAjax').hide(); 
-                                    swal(
-                                    'Operacion Completada',
-                                    ' Total de proyectos ingresados: '+proyect,
-                                    'success'
-                                    );
-                                }
-                            },
-                            error:function ()
-                            {
-                                count++;
-                                if (count===data.length) {
-                                    $('#divModalCargaAjax').hide(); 
-                                    swal(
-                                    'Operacion Completada',
-                                    ' Total de proyectos ingresados: '+proyect,
-                                    'success'
-                                    );
-                                }
-                            }
-                        });
-                        }
-                        else{
-                            count++;
-                            if (count===data.length) {
-                                $('#divModalCargaAjax').hide(); 
-                                swal(
-                                'Operacion Completada',
-                                ' Total de proyectos ingresados: '+proyect,
-                                'success'
-                                );
-                            }
-                        }
-                    
-                    },
-                    error:function ()
-                    {
-                        count++;
-                        if (count===data.length) {
-                            $('#divModalCargaAjax').hide(); 
-                            swal(
-                            'Operacion Completada',
-                            ' Total de proyectos ingresados: '+proyect,
-                            'success'
-                            );
-                        }
-                    }
-                });
-             } else {
-                count++;
-                if (count===data.length) {
-                    $('#divModalCargaAjax').hide(); 
-                    swal(
-                    'Operacion Completada',
-                    ' Total de proyectos ingresados: '+proyect,
-                    'success'
-                    );
-                }
-            }
-        });
-        if (count===data.length) {
-            $('#divModalCargaAjax').hide(); 
-        }
-     }
- });
+       type:"POST",
+       url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
+       cache: false,
+       success:function(resp)
+       {
+          $('#divModalCargaAjax').hide(); 
+          swal(
+          'Operacion Completada',
+          ' Se actualizaron estudios de inversión',
+          'success'
+          );
+       },
+       error:function ()
+       {
+           $('#divModalCargaAjax').hide(); 
+           swal(
+           'Error',
+           ' No se actualizaron los estudios de inversión',
+           'error'
+           );
+       }
+   });            
 }
 </script>

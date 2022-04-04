@@ -238,6 +238,12 @@ class bancoproyectos_modal extends CI_Model
         $this->db->update('PIDE_PROYECTO_INVERSION');
     }
 
+    function obtenerProyectosPIDE()
+    {
+        $query = $this->db->query("select pi.codigo_unico_pi as codigo_unico_est_inv, pi.nombre_pi as nombre_est_inv, pi.id_pi, pi.id_ue, ppi.situacion, ppi.ultimoEstudio from PROYECTO_INVERSION pi inner join PIDE_PROYECTO_INVERSION ppi on pi.codigo_unico_pi=ppi.codigo");
+        return $query->result();
+    }
+
     function verificarCodigoUnicoEstudio($codigo_unico_pi)
     {
         $this->db->select('ESTUDIO_INVERSION.*');
