@@ -117,7 +117,7 @@
                             <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
                             <div id="validarActualizarSiaf">
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <select style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
+                                    <select onchange="filtrarPIPs(0)" style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
                                         <?php for ($i = 0; $i <= 10; $i++) { ?>
                                             <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
                                         <?php } ?>
@@ -131,7 +131,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button  onclick="filtrarPIPs();" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> CONSULTAR</button>
+                                <button  onclick="filtrarPIPs(1)" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> IMPORTAR PIDE</button>
                             </div>
                             </div>
                            
@@ -521,7 +521,7 @@
                             <input class="form-control" rows="2" readonly="readonly" id="conInformeCierre" name="conInformeCierre">
                         </div>
                     <br>                    
-                    <div class="x_panel" style="border: 1px solid #EEEEEE;">
+                    <div class="col-xs-12 col-md-12" style="border: 1px solid #EEEEEE;">
                         <label for="name">Localizaciones:</label>
                         <table id="TableUbigeoProyectoInv" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
                             <thead >
@@ -800,6 +800,8 @@
         });
     }
 
+    
+
     $('.modal').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
     });
@@ -989,8 +991,111 @@ function mostrarDeRaizPIP(codigo)
     paginaAjaxDialogo(null, 'Proyectos de Inver', {codigo: codigo}, base_url+'index.php/ProyectoInversion/editar', 'GET', null, null, false, true);
 }
 
-var filtrarPIPs = function(anio) 
+function ImportarProyectosPIDE(){
+    var anio = $('#txtAnioActualizar').val();
+    $.ajax({
+    "url":"https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+anio,
+    type:"GET",
+    beforeSend: function()
+            {
+                renderLoading();
+            },
+    success:function(data)
+    {
+        count=0;
+        proyect=0;
+        if(!data || data.length === 0)
+        {
+            return;
+        }
+        var idUnidadEjecutora = $("#selectUnidadEjecutora").val();
+        var anio = $('#txtAnioActualizar').val();
+        $.ajax({
+            type:"POST",
+            url:base_url+'index.php/bancoproyectos/insertarProyectosPIDE',
+            data:{idUnidadEjecutora:idUnidadEjecutora,anio:anio, data:data},
+            cache: false,
+            success:function(resp)
+            {
+            }
+        });
+        data.forEach(element => {
+            $.ajax({
+                "url":"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+element.idProyecto,
+                type:"GET",
+                success:function(proy)
+                {
+                    if(proy.codigo){
+                        $.ajax({
+                        type:"POST",
+                        url:base_url+'index.php/bancoproyectos/insertarProyectoCodigoPIDE',
+                        data:{proy:proy},
+                        cache: false,
+                        success:function(resp)
+                        {
+                            count++;
+                            proyect++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                        },
+                        error:function ()
+                        {
+                            count++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                        }
+                      });
+                    }
+                    else{
+                        count++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                    }
+                   
+                },
+                error:function ()
+                {
+                    count++;
+                    if (count===data.length) {
+                        $('#divModalCargaAjax').hide(); 
+                        swal(
+						'Operacion Completada',
+						' Total de proyectos ingresados: '+proyect,
+						'success'
+					    );
+                    }
+                }
+            });
+        });
+        if (count===data.length) {
+            $('#divModalCargaAjax').hide(); 
+        }
+     }
+ });
+}
+
+
+var filtrarPIPs = function(type) 
 {
+    var i=0;
         var anio = $('#txtAnioActualizar').val();
        var table = $("#table_proyectos_inversion").DataTable({
         "processing": true,
@@ -1002,10 +1107,10 @@ var filtrarPIPs = function(anio)
             "dataSrc": ""
         },
         "columns":[
-       
-        { "data": "id", "visible": false }, 
+        { "data": "id", "visible": false}, 
         { "data": function (data, type) 
-            {
+            {  
+               
                 return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' onclick='cargarDatosProyecto("+data.idProyecto+")' data-toggle='modal'  > "+data.idProyecto+"</button";
             }
         },
@@ -1015,17 +1120,21 @@ var filtrarPIPs = function(anio)
         { "data": "estado" },
         {
             "data": function (data, type) 
-            {
+            { 
                 return "<button type='button' class='ubicacion_geografica btn btn-primary btn-xs all' data-target='#modalMEF' data-id='"+data.idProyecto+"' data-toggle='modal'  > Externa</button";
             } 
         } 
-    ],
+    ],  
         "language": idioma_espanol
+        
     });
+    if(type===1){
+        ImportarProyectosPIDE();
+    }
 }
 
 $(document).ready(function (e) {
-    filtrarPIPs(new Date().getFullYear());
+    filtrarPIPs(0);
   $('#modal_vista_PIPs').on('show.bs.modal', function(e) { 
     var id_uejec = document.getElementById("selectUnidadEjecutora");
     var id_unidadEjecutora = id_uejec.options[id_uejec.selectedIndex].value;

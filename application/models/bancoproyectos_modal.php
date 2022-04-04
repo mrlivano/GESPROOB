@@ -205,4 +205,56 @@ class bancoproyectos_modal extends CI_Model
         $this->db->where('codigo_unico_pi',$codigo_unico_pi);
         $this->db->update('PROYECTO_INVERSION');
     }
+
+    function insertarProyectosdePIDE($data)
+    {
+        $this->db->insert('PROYECTO_INVERSION',$data);
+    }
+
+    function editarProyectosdePIDE($data,$codigo_unico_pi)
+    {
+        $this->db->set($data);
+        $this->db->where('codigo_unico_pi',$codigo_unico_pi);
+        $this->db->update('PROYECTO_INVERSION');
+    }
+
+    function verificarCodigoUnicoPIDE($codigo_unico_pi)
+    {
+        $this->db->select('PIDE_PROYECTO_INVERSION.*');
+        $this->db->from('PIDE_PROYECTO_INVERSION');
+        $this->db->where('PIDE_PROYECTO_INVERSION.codigo',$codigo_unico_pi);
+        return $this->db->get()->result();
+    }
+
+    function insertarProyectoCodigoPIDE($data)
+    {
+        $this->db->insert('PIDE_PROYECTO_INVERSION',$data);
+    }
+
+    function editarProyectoCodigoPIDE($data,$codigo_unico_pi)
+    {
+        $this->db->set($data);
+        $this->db->where('codigo',$codigo_unico_pi);
+        $this->db->update('PIDE_PROYECTO_INVERSION');
+    }
+
+    function verificarCodigoUnicoEstudio($codigo_unico_pi)
+    {
+        $this->db->select('ESTUDIO_INVERSION.*');
+        $this->db->from('ESTUDIO_INVERSION');
+        $this->db->where('ESTUDIO_INVERSION.id_pi',$codigo_unico_pi);
+        return $this->db->get()->result();
+    }
+
+    function insertarEstudioCodigoPIDE($data)
+    {
+        $this->db->insert('ESTUDIO_INVERSION',$data);
+    }
+
+    function editarEstudioCodigoPIDE($data,$codigo_unico_pi)
+    {
+        $this->db->set($data);
+        $this->db->where('id_pi',$codigo_unico_pi);
+        $this->db->update('ESTUDIO_INVERSION');
+    }
 }

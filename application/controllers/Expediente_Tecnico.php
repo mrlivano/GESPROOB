@@ -65,10 +65,11 @@ class Expediente_Tecnico extends CI_Controller
 		$listarExpedienteFicha001=$this->Model_ET_Expediente_Tecnico->reporteExpedienteFicha001($Opcion,$id_ExpedienteTecnico);
 
 		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteExpedienteTecnico',["listarExpedienteFicha001" => $listarExpedienteFicha001, "ImagenesExpediente" =>$ImagenesExpediente,"responsableElaboracion" => $responsableElaboracion,"responsableEjecucion" => $responsableEjecucion],true);
-		$this->mydompdf->load_html($html);
+		return $html;
+		/*$this->mydompdf->load_html($html);
 		$this->mydompdf->set_paper("A4", "portrait");
 		$this->mydompdf->render();
-		$this->mydompdf->stream("FormatoFF-01.pdf", array("Attachment" => false));
+		$this->mydompdf->stream("FormatoFF-01.pdf", array("Attachment" => false));*/
 
 	}
 

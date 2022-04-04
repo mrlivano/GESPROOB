@@ -557,4 +557,262 @@ class bancoproyectos extends CI_Controller
             }
         }
     }
+
+    function insertarProyectosPIDE()
+    {
+        $idUnidadEjecutora=$this->input->post('idUnidadEjecutora');
+        $anio=$this->input->post('anio');
+        $proyectosPIDE=$this->input->post('data');
+        $proyectosPIDE;
+        foreach ($proyectosPIDE as $key => $value) {
+            $verificar=count($this->bancoproyectos_modal->verificarCodigoUnico($value['idProyecto']));
+
+            if($verificar===0)
+            {
+                $c_data['id_ue'] = $idUnidadEjecutora;
+                $c_data['codigo_unico_pi'] = $value['idProyecto'];
+                $c_data['nombre_pi'] = $value['nombre'];
+                $c_data['costo_pi'] = NULL;
+                $c_data['id_naturaleza_inv'] = NULL;
+                $c_data['id_tipologia_inv'] = NULL;
+                $c_data['id_tipo_inversion'] = NULL;
+                $c_data['id_grupo_funcional'] = NULL;
+                $c_data['id_nivel_gob'] =NULL;
+                $c_data['estado_pi'] = $value['estado']==='A'?1:0;
+                $c_data['fecha_viabilidad_pi'] =  NULL;
+                $data = $this->bancoproyectos_modal->insertarProyectosdePIDE($c_data);
+
+            }
+            else
+            {
+               $u_data['estado_pi'] = $value['estado']==='A'?1:0;
+               $data = $this->bancoproyectos_modal->editarProyectosdePIDE($u_data,$value['idProyecto']);
+            }
+        }
+    }
+    function insertarProyectoCodigoPIDE()
+    {
+        $value=$this->input->post('proy');
+            $verificar=count($this->bancoproyectos_modal->verificarCodigoUnicoPIDE($value['codigo']));
+
+            if($verificar===0)
+            {
+                if(gettype($value['PIA'])==='array'){
+                    $c_data['PIA']='';
+                }else{
+                    $c_data['PIA']=$value['PIA'];
+                }
+                $c_data['PIM'] = $value['PIM'];
+                $c_data['actualizacion'] = $value['actualizacion'];
+                $c_data['anioViabilidad'] = $value['anioViabilidad'];
+                $c_data['beneficiario'] = $value['beneficiario'];
+                $c_data['codigo'] = $value['codigo'];
+                $c_data['conInformeCierre'] = $value['conInformeCierre'];
+                $c_data['costoActualizado'] = $value['costoActualizado'];
+                $c_data['desTipoFormato'] = $value['desTipoFormato'];
+                $c_data['devengadoAcumulado'] = $value['devengadoAcumulado'];
+                $c_data['devengadoAnioActual'] = $value['devengadoAnioActual'];
+                $c_data['ejecutora'] = $value['ejecutora'];
+                $c_data['ejecutoraCodigo'] = $value['ejecutoraCodigo'];
+                $c_data['estado'] = $value['estado'];
+                $c_data['estadoUltimoEstudio'] = $value['estadoUltimoEstudio'];
+                $c_data['evaluadora'] = $value['evaluadora'];
+                $c_data['evaluadoraCodigo'] = $value['evaluadoraCodigo'];
+                $c_data['fechaRegistro'] = $value['fechaRegistro'];
+                $c_data['fechaViabilidad'] = $value['fechaViabilidad'];
+                $c_data['flagEtapas'] = $value['flagEtapas'];
+                $c_data['flagExpedienteTecnico'] = $value['flagExpedienteTecnico'];
+                $c_data['fuenteFinanciamiento'] = $value['fuenteFinanciamiento'];
+                $c_data['funcion'] = $value['funcion'];
+                $c_data['incluidoPMI'] = $value['incluidoPMI'];
+                $c_data['incluidoPMIEjecucion'] = $value['incluidoPMIEjecucion'];
+                $c_data['marco'] = $value['marco'];
+                $c_data['montoAlternativa'] = $value['montoAlternativa'];
+                $c_data['montoCartaFianza'] = $value['montoCartaFianza'];
+                $c_data['montoF15'] = $value['montoF15'];
+                $c_data['montoF16'] = $value['montoF16'];
+                $c_data['montoLaudo'] = $value['montoLaudo'];
+                $c_data['montoReformulado'] = $value['montoReformulado'];
+                $c_data['nivelEstudio'] = $value['nivelEstudio'];
+                $c_data['nivelGobierno'] = $value['nivelGobierno'];
+                $c_data['nombre'] = $value['nombre'];
+                $c_data['nombreProgramaInversion'] = $value['nombreProgramaInversion'];
+                $c_data['numeroConvenio'] = $value['numeroConvenio'];
+                $c_data['pliego'] = $value['pliego'];
+                $c_data['programa'] = $value['programa'];
+                $c_data['sector'] = $value['sector'];
+                $c_data['situacion'] = $value['situacion'];
+                $c_data['subprograma'] = $value['subprograma'];
+                $c_data['ultimoEstudio'] = $value['ultimoEstudio'];
+                $c_data['unidadFormuladora'] = $value['unidadFormuladora'];
+                $c_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
+                $c_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
+                $data = $this->bancoproyectos_modal->insertarProyectoCodigoPIDE($c_data);
+                
+            }
+            else
+            {
+                if(gettype($value['PIA'])==='array'){
+                    $u_data['PIA']='';
+                }else{
+                    $u_data['PIA']=$value['PIA'];
+                }
+                $u_data['PIM'] = $value['PIM'];
+                $u_data['actualizacion'] = $value['actualizacion'];
+                $u_data['anioViabilidad'] = $value['anioViabilidad'];
+                $u_data['beneficiario'] = $value['beneficiario'];
+                $u_data['conInformeCierre'] = $value['conInformeCierre'];
+                $u_data['costoActualizado'] = $value['costoActualizado'];
+                $u_data['desTipoFormato'] = $value['desTipoFormato'];
+                $u_data['devengadoAcumulado'] = $value['devengadoAcumulado'];
+                $u_data['devengadoAnioActual'] = $value['devengadoAnioActual'];
+                $u_data['ejecutora'] = $value['ejecutora'];
+                $u_data['ejecutoraCodigo'] = $value['ejecutoraCodigo'];
+                $u_data['estado'] = $value['estado'];
+                $u_data['estadoUltimoEstudio'] = $value['estadoUltimoEstudio'];
+                $u_data['evaluadora'] = $value['evaluadora'];
+                $u_data['evaluadoraCodigo'] = $value['evaluadoraCodigo'];
+                $u_data['fechaRegistro'] = $value['fechaRegistro'];
+                $u_data['fechaViabilidad'] = $value['fechaViabilidad'];
+                $u_data['flagEtapas'] = $value['flagEtapas'];
+                $u_data['flagExpedienteTecnico'] = $value['flagExpedienteTecnico'];
+                $u_data['fuenteFinanciamiento'] = $value['fuenteFinanciamiento'];
+                $u_data['funcion'] = $value['funcion'];
+                $u_data['incluidoPMI'] = $value['incluidoPMI'];
+                $u_data['incluidoPMIEjecucion'] = $value['incluidoPMIEjecucion'];
+                $u_data['marco'] = $value['marco'];
+                $u_data['montoAlternativa'] = $value['montoAlternativa'];
+                $u_data['montoCartaFianza'] = $value['montoCartaFianza'];
+                $u_data['montoF15'] = $value['montoF15'];
+                $u_data['montoF16'] = $value['montoF16'];
+                $u_data['montoLaudo'] = $value['montoLaudo'];
+                $u_data['montoReformulado'] = $value['montoReformulado'];
+                $u_data['nivelEstudio'] = $value['nivelEstudio'];
+                $u_data['nivelGobierno'] = $value['nivelGobierno'];
+                $u_data['nombre'] = $value['nombre'];
+                $u_data['nombreProgramaInversion'] = $value['nombreProgramaInversion'];
+                $u_data['numeroConvenio'] = $value['numeroConvenio'];
+                $u_data['pliego'] = $value['pliego'];
+                $u_data['programa'] = $value['programa'];
+                $u_data['sector'] = $value['sector'];
+                $u_data['situacion'] = $value['situacion'];
+                $u_data['subprograma'] = $value['subprograma'];
+                $u_data['ultimoEstudio'] = $value['ultimoEstudio'];
+                $u_data['unidadFormuladora'] = $value['unidadFormuladora'];
+                $u_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
+                $u_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
+               $data = $this->bancoproyectos_modal->editarProyectoCodigoPIDE($u_data,$value['codigo']);
+            }
+    }
+
+    function insertarEstudioCodigoPIDE()
+    {
+        $value=$this->input->post('proy');
+        $ue=$this->session->userdata('idUnidadEjecutora');
+            $verificar=count($this->bancoproyectos_modal->verificarCodigoUnicoEstudio($value['codigo']));
+
+            if($verificar===0)
+            {
+                $c_data['PIM'] = $value['PIM'];
+                $c_data['actualizacion'] = $value['actualizacion'];
+                $c_data['anioViabilidad'] = $value['anioViabilidad'];
+                $c_data['beneficiario'] = $value['beneficiario'];
+                $c_data['codigo'] = $value['codigo'];
+                $c_data['conInformeCierre'] = $value['conInformeCierre'];
+                $c_data['costoActualizado'] = $value['costoActualizado'];
+                $c_data['desTipoFormato'] = $value['desTipoFormato'];
+                $c_data['devengadoAcumulado'] = $value['devengadoAcumulado'];
+                $c_data['devengadoAnioActual'] = $value['devengadoAnioActual'];
+                $c_data['ejecutora'] = $value['ejecutora'];
+                $c_data['ejecutoraCodigo'] = $value['ejecutoraCodigo'];
+                $c_data['estado'] = $value['estado'];
+                $c_data['estadoUltimoEstudio'] = $value['estadoUltimoEstudio'];
+                $c_data['evaluadora'] = $value['evaluadora'];
+                $c_data['evaluadoraCodigo'] = $value['evaluadoraCodigo'];
+                $c_data['fechaRegistro'] = $value['fechaRegistro'];
+                $c_data['fechaViabilidad'] = $value['fechaViabilidad'];
+                $c_data['flagEtapas'] = $value['flagEtapas'];
+                $c_data['flagExpedienteTecnico'] = $value['flagExpedienteTecnico'];
+                $c_data['fuenteFinanciamiento'] = $value['fuenteFinanciamiento'];
+                $c_data['funcion'] = $value['funcion'];
+                $c_data['incluidoPMI'] = $value['incluidoPMI'];
+                $c_data['incluidoPMIEjecucion'] = $value['incluidoPMIEjecucion'];
+                $c_data['marco'] = $value['marco'];
+                $c_data['montoAlternativa'] = $value['montoAlternativa'];
+                $c_data['montoCartaFianza'] = $value['montoCartaFianza'];
+                $c_data['montoF15'] = $value['montoF15'];
+                $c_data['montoF16'] = $value['montoF16'];
+                $c_data['montoLaudo'] = $value['montoLaudo'];
+                $c_data['montoReformulado'] = $value['montoReformulado'];
+                $c_data['nivelEstudio'] = $value['nivelEstudio'];
+                $c_data['nivelGobierno'] = $value['nivelGobierno'];
+                $c_data['nombre'] = $value['nombre'];
+                $c_data['nombreProgramaInversion'] = $value['nombreProgramaInversion'];
+                $c_data['numeroConvenio'] = $value['numeroConvenio'];
+                $c_data['pliego'] = $value['pliego'];
+                $c_data['programa'] = $value['programa'];
+                $c_data['sector'] = $value['sector'];
+                $c_data['situacion'] = $value['situacion'];
+                $c_data['subprograma'] = $value['subprograma'];
+                $c_data['ultimoEstudio'] = $value['ultimoEstudio'];
+                $c_data['unidadFormuladora'] = $value['unidadFormuladora'];
+                $c_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
+                $c_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
+                $data = $this->bancoproyectos_modal->insertarProyectoCodigoPIDE($c_data);
+                
+            }
+            else
+            {
+                if(gettype($value['PIA'])==='array'){
+                    $u_data['PIA']='';
+                }else{
+                    $u_data['PIA']=$value['PIA'];
+                }
+                $u_data['PIM'] = $value['PIM'];
+                $u_data['actualizacion'] = $value['actualizacion'];
+                $u_data['anioViabilidad'] = $value['anioViabilidad'];
+                $u_data['beneficiario'] = $value['beneficiario'];
+                $u_data['conInformeCierre'] = $value['conInformeCierre'];
+                $u_data['costoActualizado'] = $value['costoActualizado'];
+                $u_data['desTipoFormato'] = $value['desTipoFormato'];
+                $u_data['devengadoAcumulado'] = $value['devengadoAcumulado'];
+                $u_data['devengadoAnioActual'] = $value['devengadoAnioActual'];
+                $u_data['ejecutora'] = $value['ejecutora'];
+                $u_data['ejecutoraCodigo'] = $value['ejecutoraCodigo'];
+                $u_data['estado'] = $value['estado'];
+                $u_data['estadoUltimoEstudio'] = $value['estadoUltimoEstudio'];
+                $u_data['evaluadora'] = $value['evaluadora'];
+                $u_data['evaluadoraCodigo'] = $value['evaluadoraCodigo'];
+                $u_data['fechaRegistro'] = $value['fechaRegistro'];
+                $u_data['fechaViabilidad'] = $value['fechaViabilidad'];
+                $u_data['flagEtapas'] = $value['flagEtapas'];
+                $u_data['flagExpedienteTecnico'] = $value['flagExpedienteTecnico'];
+                $u_data['fuenteFinanciamiento'] = $value['fuenteFinanciamiento'];
+                $u_data['funcion'] = $value['funcion'];
+                $u_data['incluidoPMI'] = $value['incluidoPMI'];
+                $u_data['incluidoPMIEjecucion'] = $value['incluidoPMIEjecucion'];
+                $u_data['marco'] = $value['marco'];
+                $u_data['montoAlternativa'] = $value['montoAlternativa'];
+                $u_data['montoCartaFianza'] = $value['montoCartaFianza'];
+                $u_data['montoF15'] = $value['montoF15'];
+                $u_data['montoF16'] = $value['montoF16'];
+                $u_data['montoLaudo'] = $value['montoLaudo'];
+                $u_data['montoReformulado'] = $value['montoReformulado'];
+                $u_data['nivelEstudio'] = $value['nivelEstudio'];
+                $u_data['nivelGobierno'] = $value['nivelGobierno'];
+                $u_data['nombre'] = $value['nombre'];
+                $u_data['nombreProgramaInversion'] = $value['nombreProgramaInversion'];
+                $u_data['numeroConvenio'] = $value['numeroConvenio'];
+                $u_data['pliego'] = $value['pliego'];
+                $u_data['programa'] = $value['programa'];
+                $u_data['sector'] = $value['sector'];
+                $u_data['situacion'] = $value['situacion'];
+                $u_data['subprograma'] = $value['subprograma'];
+                $u_data['ultimoEstudio'] = $value['ultimoEstudio'];
+                $u_data['unidadFormuladora'] = $value['unidadFormuladora'];
+                $u_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
+                $u_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
+               $data = $this->bancoproyectos_modal->editarProyectoCodigoPIDE($u_data,$value['codigo']);
+            }
+    }
 }

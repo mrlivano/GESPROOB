@@ -133,7 +133,9 @@ function cargarDatosProyecto(codigoProyectoInversion) {
           }).done(
             function(data)
               {
+                  console.log(data);
                 $('#divModalCargaAjax').hide();
+
                 if(Object.keys(data).length!=0)
                 {
                   $('#codigoProyecto').val(data.codigo);
@@ -159,17 +161,17 @@ function cargarDatosProyecto(codigoProyectoInversion) {
                   $('#nivelEstudio').val(data.nivelEstudio);
                   $('#beneficiario').val(data.beneficiario);
                   $('#fuenteFinanciamiento').val(data.fuenteFinanciamiento);
-                  $('#montoAlternativa').text(data.montoAlternativa);
-                  $('#montoReformulado').text(data.montoReformulado);
-                  $('#montoF15').text(data.montoF15);
-                  $('#montoF16').text(data.montoF16);
-                  $('#montoLaudo').text(data.montoLaudo);
-                  $('#montoCartaFianza').text(data.montoCartaFianza);
-                  $('#costoActualizado').text(data.costoActualizado);
-                  $('#PIM').text(data.PIM);
-                  $('#PIA').text(data.PIA);
-                  $('#devengadoAcumulado').text(data.devengadoAcumulado);
-                  $('#devengadoAnioActual').text(data.devengadoAnioActual);
+                  $('#montoAlternativa').text(parseFloat(data.montoAlternativa).toLocaleString('en-US'));
+                  $('#montoReformulado').text(parseFloat(data.montoReformulado).toLocaleString('en-US'));
+                  $('#montoF15').text(parseFloat(data.montoF15).toLocaleString('en-US'));
+                  $('#montoF16').text(parseFloat(data.montoF16).toLocaleString('en-US'));
+                  $('#montoLaudo').text(parseFloat(data.montoLaudo).toLocaleString('en-US'));
+                  $('#montoCartaFianza').text(parseFloat(data.montoCartaFianza).toLocaleString('en-US'));
+                  $('#costoActualizado').text(parseFloat(data.costoActualizado).toLocaleString('en-US'));
+                  $('#PIM').text(parseFloat(data.PIM).toLocaleString('en-US'));
+                  $('#PIA').text(parseFloat(data.PIA).toLocaleString('en-US'));
+                  $('#devengadoAcumulado').text(parseFloat(data.devengadoAcumulado).toLocaleString('en-US'));
+                  $('#devengadoAnioActual').text(parseFloat(data.devengadoAnioActual).toLocaleString('en-US'));
                   $('#desTipoFormato').val(data.desTipoFormato);
                   $('#flagExpedienteTecnico').val(data.flagExpedienteTecnico);
                   $('#anioViabilidad').val(data.anioViabilidad);
@@ -206,6 +208,7 @@ function cargarDatosProyecto(codigoProyectoInversion) {
 
                 });
   }
+
 function editarProyectoInversion(codigo)
 {
     paginaAjaxDialogo(null, 'Editar Proyecto de Inversión', {codigo: codigo}, base_url+'index.php/ProyectoInversion/editar', 'GET', null, null, false, true);

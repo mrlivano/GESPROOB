@@ -40,9 +40,19 @@
                                               <div class="x_panel">
 
                                                     <div class="x_title">
-                                                          <button type="button" id="btn_nuevoEstInv" class="btn btn-primary" data-toggle="modal" data-target="#ventanaEstudioInversion" >
-                                                                <span  aria-hidden="true"></span><strong> Nuevo</strong>
-                                                          </button>
+                                                            <button type="button" id="btn_nuevoEstInv" class="btn btn-primary" data-toggle="modal" data-target="#ventanaEstudioInversion" >
+                                                                    <span  aria-hidden="true"></span><strong> Nuevo</strong>
+                                                            </button>
+                                                          <div class="col-md-2 col-sm-6 col-xs-12">
+                                                            <select type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
+                                                                <?php for ($i = 0; $i <= 10; $i++) { ?>
+                                                                    <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                                            <button  onclick="ActualizarProyectos()"  type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> ACTUALIZAR</button>
+                                                            </div>
                                                           <div class="pull-right tableTools-container-EstudioInversion">
                                                            </div>
 
@@ -542,4 +552,107 @@
         formatted = output.reverse().join("");
         return("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
     };
+
+    
+function ActualizarProyectos(){
+    var anio = $('#txtAnioActualizar').val();
+    $.ajax({
+    "url":"https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+anio,
+    type:"GET",
+    beforeSend: function()
+            {
+                renderLoading();
+            },
+    success:function(data)
+    {
+        count=0;
+        proyect=0;
+        if(!data || data.length === 0)
+        {
+            return;
+        }
+        data.forEach(element => {
+            if(element.estado==='A'){
+                $.ajax({
+                    "url":"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+element.idProyecto,
+                    type:"GET",
+                    success:function(proy)
+                    {
+                        if(proy.codigo){
+                            $.ajax({
+                            type:"POST",
+                            url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
+                            data:{proy:proy},
+                            cache: false,
+                            success:function(resp)
+                            {
+                                count++;
+                                proyect++;
+                                if (count===data.length) {
+                                    $('#divModalCargaAjax').hide(); 
+                                    swal(
+                                    'Operacion Completada',
+                                    ' Total de proyectos ingresados: '+proyect,
+                                    'success'
+                                    );
+                                }
+                            },
+                            error:function ()
+                            {
+                                count++;
+                                if (count===data.length) {
+                                    $('#divModalCargaAjax').hide(); 
+                                    swal(
+                                    'Operacion Completada',
+                                    ' Total de proyectos ingresados: '+proyect,
+                                    'success'
+                                    );
+                                }
+                            }
+                        });
+                        }
+                        else{
+                            count++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                        }
+                    
+                    },
+                    error:function ()
+                    {
+                        count++;
+                        if (count===data.length) {
+                            $('#divModalCargaAjax').hide(); 
+                            swal(
+                            'Operacion Completada',
+                            ' Total de proyectos ingresados: '+proyect,
+                            'success'
+                            );
+                        }
+                    }
+                });
+             } else {
+                count++;
+                if (count===data.length) {
+                    $('#divModalCargaAjax').hide(); 
+                    swal(
+                    'Operacion Completada',
+                    ' Total de proyectos ingresados: '+proyect,
+                    'success'
+                    );
+                }
+            }
+        });
+        if (count===data.length) {
+            $('#divModalCargaAjax').hide(); 
+        }
+     }
+ });
+}
 </script>
