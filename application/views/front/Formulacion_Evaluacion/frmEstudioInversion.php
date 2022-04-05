@@ -69,14 +69,9 @@
                                                                        <th style="width: 1%">#</th>
                                                                          <th style="width: 70%"><i class="fa fa-thumb-tack"></i>Nombre</th>
                                                                          <th style="width: 12%"> Función</th>
-                                                                         <th style="width: 20%">
-                                                                        <i class="fa fa-users"></i>
-
-                                                                         Coordinador</th>
-
-                                                                         <th style="width: 12%"> Avance</th>
-                                                                         <th style="width: 13%"> Etapa</th>
-                                                                         <th style="width: 12%">Opción</th>
+                                                                         <th style="width: 6%">Situación</th>
+                                                                         <th style="width: 14%">Ultimo Estudio</th>
+                                                                         <th style="width: 10%">Opción</th>
                                                                       </tr>
                                                                    </thead>
                                                                 </table>
@@ -568,6 +563,7 @@ function ActualizarProyectos(){
           ' Se actualizaron estudios de inversión',
           'success'
           );
+          $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
        },
        error:function ()
        {

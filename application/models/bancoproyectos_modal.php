@@ -240,7 +240,7 @@ class bancoproyectos_modal extends CI_Model
 
     function obtenerProyectosPIDE()
     {
-        $query = $this->db->query("select pi.codigo_unico_pi as codigo_unico_est_inv, pi.nombre_pi as nombre_est_inv, pi.id_pi, pi.id_ue, ppi.situacion, ppi.ultimoEstudio from PROYECTO_INVERSION pi inner join PIDE_PROYECTO_INVERSION ppi on pi.codigo_unico_pi=ppi.codigo");
+        $query = $this->db->query("select pi.codigo_unico_pi as codigo_unico_est_inv, pi.nombre_pi as nombre_est_inv, pi.id_pi, pi.id_ue, ppi.situacion, ppi.ultimoEstudio,gf.id_grup_funcional from PROYECTO_INVERSION pi inner join PIDE_PROYECTO_INVERSION ppi on pi.codigo_unico_pi=ppi.codigo left join GRUPO_FUNCIONAL gf on gf.nombre_grup_funcional= ppi.subprograma COLLATE SQL_Latin1_General_CP1_CI_AI");
         return $query->result();
     }
 

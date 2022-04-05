@@ -575,7 +575,7 @@ class bancoproyectos extends CI_Controller
                 $c_data['costo_pi'] = NULL;
                 $c_data['id_naturaleza_inv'] = NULL;
                 $c_data['id_tipologia_inv'] = NULL;
-                $c_data['id_tipo_inversion'] = NULL;
+                $c_data['id_tipo_inversion'] = 1;
                 $c_data['id_grupo_funcional'] = NULL;
                 $c_data['id_nivel_gob'] =NULL;
                 $c_data['estado_pi'] = $value['estado']==='A'?1:0;
@@ -586,6 +586,7 @@ class bancoproyectos extends CI_Controller
             else
             {
                $u_data['estado_pi'] = $value['estado']==='A'?1:0;
+               $u_data['id_tipo_inversion'] = 1;
                $data = $this->bancoproyectos_modal->editarProyectosdePIDE($u_data,$value['idProyecto']);
             }
         }
@@ -714,12 +715,16 @@ class bancoproyectos extends CI_Controller
         {
             $verificar=count($this->bancoproyectos_modal->verificarCodigoUnicoEstudio($value->id_pi));
 
+            $p_data['id_grupo_funcional'] = $value->id_grup_funcional;
+            $datap = $this->bancoproyectos_modal->editarProyectosdePIDE($p_data,$value->codigo_unico_est_inv);
+
             if($verificar===0)
             {
                 $c_data['codigo_unico_est_inv'] = $value->codigo_unico_est_inv;
                 $c_data['nombre_est_inv'] = $value->nombre_est_inv;
                 $c_data['id_pi'] = $value->id_pi;
                 $c_data['id_ue'] = $value->id_ue;
+                $c_data['id_tipo_est'] = 1;
                 $c_data['situacion'] = $value->situacion;
                 $c_data['ultimoEstudio'] = $value->ultimoEstudio;
                 $data = $this->bancoproyectos_modal->insertarEstudioCodigoPIDE($c_data);
@@ -727,6 +732,7 @@ class bancoproyectos extends CI_Controller
             }
             else
             {
+                $u_data['id_tipo_est'] = 1;
                 $u_data['situacion'] = $value->situacion;
                 $u_data['ultimoEstudio'] = $value->ultimoEstudio;
                $data = $this->bancoproyectos_modal->editarEstudioCodigoPIDE($u_data,$value->id_pi);
