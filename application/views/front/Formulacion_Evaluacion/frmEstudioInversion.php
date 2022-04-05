@@ -38,28 +38,16 @@
                                            <div class="row">
                                               <div class="col-md-12 col-sm-12 col-xs-12">
                                               <div class="x_panel">
-
-                                                    <div class="x_title">
-                                                            <button type="button" id="btn_nuevoEstInv" class="btn btn-primary" data-toggle="modal" data-target="#ventanaEstudioInversion" >
-                                                                    <span  aria-hidden="true"></span><strong> Nuevo</strong>
-                                                            </button>
-                                                          <div class="col-md-2 col-sm-6 col-xs-12">
-                                                            <select type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
-                                                                <?php for ($i = 0; $i <= 10; $i++) { ?>
-                                                                    <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                              
+                                                   
+                                                    <div class="clearfix">
+                                                    <div class="col-md-4 col-sm-6 col-xs-12">
                                                             <button  onclick="ActualizarProyectos()"  type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> ACTUALIZAR</button>
-                                                            </div>
-                                                          <div class="pull-right tableTools-container-EstudioInversion">
-                                                           </div>
-
-                                                      </div>
-                                                        <div class="clearfix">
-
                                                         </div>
+                                                        <div class="pull-right tableTools-container-EstudioInversion"></div>
+                                                   
+                                                     </div>
+                                                     <div class="x_title"> </div>
                                                       <div class="x_content" >
                                                         <div class="table-responsive">
                                                                 <table id="dynamic-table-EstudioInversion" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >

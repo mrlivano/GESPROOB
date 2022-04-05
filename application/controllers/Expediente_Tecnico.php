@@ -2366,7 +2366,7 @@ class Expediente_Tecnico extends CI_Controller
 		foreach($nuevoarray as $valor){
 			$subPresupuesto= $this->db->query("select p.Fecha, p.codpresupuesto as CodigoPresupuesto,p.descripcion  AS DescripcionPresupuesto,sp.codsubpresupuesto as CodSubpresupuesto,sp.descripcion AS Descripcion
 			from [".$CodigoUnico."].[dbo].presupuesto p inner join  [".$CodigoUnico."].[dbo].subpresupuesto sp 
-			ON p.codpresupuesto=sp.codpresupuesto where p.Nivel=3 and p.codpresupuesto='".$valor->Codigo."'");
+			ON p.codpresupuesto=sp.codpresupuesto where p.Nivel=3 and sp.codsubpresupuesto!='999' and p.codpresupuesto='".$valor->Codigo."'");
 				$valor->SubPresupuesto=$subPresupuesto->result();
 		}
 		
