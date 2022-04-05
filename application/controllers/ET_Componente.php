@@ -122,7 +122,15 @@ class ET_Componente extends CI_Controller
 			$value->hasChild = (count($this->Model_Unidad_Medida->listaPartidaNivel1($value->CodPartida, ($value->Nivel+1)))==0 ? false : true);
 		}
 
-		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico, 'listaUnidadMedida'=>$listaUnidadMedida,'listaPartidaNivel1'=>$listaPartidaNivel1,'PresupuestoEjecucion'=>$PresupuestoEjecucion]);
+		$selectPresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarPresupuesto($expedienteTecnico->codigo_unico_pi);
+
+		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico, 'listaUnidadMedida'=>$listaUnidadMedida,'listaPartidaNivel1'=>$listaPartidaNivel1,'PresupuestoEjecucion'=>$PresupuestoEjecucion,"SelectPresupuesto"=>$selectPresupuesto]);
+	}
+	public function cargarSelectSubPresupuesto(){
+		$Codigo_Presupuesto=$this->input->post('Codigo_Presupuesto');
+		$Codigo_Proyecto=$this->input->post('Codigo_Proyecto');
+		$selectSubPresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarComponente($Codigo_Proyecto,$Codigo_Presupuesto);
+		echo json_encode(['data' => $selectSubPresupuesto]);exit;
 	}
 
 	public function editarDescComponente()

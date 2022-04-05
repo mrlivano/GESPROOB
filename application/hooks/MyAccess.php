@@ -840,6 +840,7 @@ function autorizar($url)
       'ET_Componente/editarDescComponente',
       'ET_Meta/insertar',
       'ET_Componente/eliminar',
+      'ET_Componente/cargarSelectSubPresupuesto',
       'ET_Meta/editarDescMeta',
       'ET_Meta/eliminar',
       'ET_Partida/insertar',

@@ -21,7 +21,14 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
 
         return $ListarPresupuestoEjecucion->result();
     }
-
+    function listarPresupuesto($codigoProyecto){
+        $selectPresupuesto=$this->db->query("select * from S10_PRESUPUESTO where Codigo_Proyecto='".$codigoProyecto."'");
+        return $selectPresupuesto->result();
+    }
+    function listarComponente($codigoProyecto,$CodigoPresupuesto){
+        $selectSubPresupuesto=$this->db->query("select * from S10_COMPONENTE where Codigo_Proyecto='".$codigoProyecto."' and Codigo_Presupuesto='".$CodigoPresupuesto."'");
+        return $selectSubPresupuesto->result();
+    }
     function ListaPresupuestoEjecucion()
     {
         $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej_padre is NULL");
