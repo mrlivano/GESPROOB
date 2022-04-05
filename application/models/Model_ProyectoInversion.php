@@ -273,23 +273,67 @@ class Model_ProyectoInversion extends CI_Model
                 where spd.codpresupuesto='".$valor->Codigo."' and spd.codsubpresupuesto='".$valorS->CodSubpresupuesto."' and(p.codpresupuesto='".$valor->Codigo."' or p.codpartida='999999999999') 
                 order by spd.orden,spd.secuencial")->result();
                 foreach($listaMetaPartida as $valorMP){
-                    $validarMetaPartida = count($this->db->query("select * from S10_META_PARTIDA where Cod_Titulo='".$valorMP->codtitulo."' and Cod_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'")->result());
+                    $validarMetaPartida = count($this->db->query("select * from S10_META_PARTIDA where Cod_Titulo='".$valorMP->codtitulo."' and Cod_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."' and Secuencial='".$valorMP->secuencial."'")->result());
                     if ($validarMetaPartida===0) {
                         $mp_data['Codigo_Subpresupuesto'] = $valorS->CodSubpresupuesto;   
                         $mp_data['Codigo_Presupuesto'] = $valor->Codigo;           
                         $mp_data['Codigo_Proyecto'] = $CodigoUnico;    
                         $mp_data['Cod_Titulo'] = $valorMP->codtitulo;  
                         $mp_data['Cod_Partida'] = $valorMP->codpartida;       
-                        $mp_data['Secuencial'] = $valorMP->secuencial;    
+                        $mp_data['Secuencial'] = $valorMP->secuencial; 
+                        $mp_data['Nivel'] = $valorMP->nivel;  
+                        $mp_data['Orden'] = $valorMP->orden;     
+                        $mp_data['Titulo'] = $valorMP->titulos;  
+                        $mp_data['Partida'] = $valorMP->partida;  
+                        $mp_data['Simbolo'] = $valorMP->simbolo;  
+                        $mp_data['Metrado'] = $valorMP->metrado;  
+                        $mp_data['Precio'] = $valorMP->Precio;  
+                        $mp_data['Parcial'] = $valorMP->Parcial;  
+                        $mp_data['Tipo'] = $valorMP->Tipo;  
+                        $mp_data['Codigo'] = $valorMP->Codigo;  
+                        $mp_data['Jornada'] = $valorMP->Jornada;  
+                        $mp_data['Mano_Obra'] = $valorMP->Mano_Obra;  
+                        $mp_data['Materiales'] = $valorMP->Materiales;
+                        $mp_data['Equipos'] = $valorMP->Equipos;  
+                        $mp_data['Subcontrato'] = $valorMP->Subcontratos;  
+                        $mp_data['Subpartida'] = $valorMP->Subpartidas;
+                        $mp_data['ProductividadHH'] = $valorMP->Productividadhh;  
+                        $mp_data['ProductividadHM'] = $valorMP->Productividadhm;  
+                        $mp_data['Rendimiento_MO'] = $valorMP->Rendimiento_MO;
+                        $mp_data['Rendimiento_EQ'] = $valorMP->Rendimiento_EQ;  
+                        $mp_data['Peso'] = $valorMP->peso;  
+                        $mp_data['Precio_Unitario'] = $valorMP->Precio_Unitario;
                         $this->db->insert('S10_META_PARTIDA',$mp_data);           
-                    } else {
-                        $mp_data['Secuencial'] = $valorMP->secuencial;           
+                    } else {  
+                        $mp_data['Nivel'] = $valorMP->nivel;  
+                        $mp_data['Orden'] = $valorMP->orden;     
+                        $mp_data['Titulo'] = $valorMP->titulos;  
+                        $mp_data['Partida'] = $valorMP->partida;  
+                        $mp_data['Simbolo'] = $valorMP->simbolo;  
+                        $mp_data['Metrado'] = $valorMP->metrado;  
+                        $mp_data['Precio'] = $valorMP->Precio;  
+                        $mp_data['Parcial'] = $valorMP->Parcial;  
+                        $mp_data['Tipo'] = $valorMP->Tipo;  
+                        $mp_data['Codigo'] = $valorMP->Codigo;  
+                        $mp_data['Jornada'] = $valorMP->Jornada;  
+                        $mp_data['Mano_Obra'] = $valorMP->Mano_Obra;  
+                        $mp_data['Materiales'] = $valorMP->Materiales;
+                        $mp_data['Equipos'] = $valorMP->Equipos;  
+                        $mp_data['Subcontrato'] = $valorMP->Subcontratos;  
+                        $mp_data['Subpartida'] = $valorMP->Subpartidas;
+                        $mp_data['ProductividadHH'] = $valorMP->Productividadhh;  
+                        $mp_data['ProductividadHM'] = $valorMP->Productividadhm;  
+                        $mp_data['Rendimiento_MO'] = $valorMP->Rendimiento_MO;
+                        $mp_data['Rendimiento_EQ'] = $valorMP->Rendimiento_EQ;  
+                        $mp_data['Peso'] = $valorMP->peso;  
+                        $mp_data['Precio_Unitario'] = $valorMP->Precio_Unitario;         
                         $this->db->set($mp_data);
                         $this->db->where('Codigo_Subpresupuesto',$valorS->CodSubpresupuesto); 
                         $this->db->where('Codigo_Presupuesto',$valor->Codigo);
                         $this->db->where('Codigo_Proyecto',$CodigoUnico);
                         $this->db->where('Cod_Titulo',$valorMP->codtitulo);
                         $this->db->where('Cod_Partida',$valorMP->codpartida);
+                        $this->db->where('Secuencial',$valorMP->secuencial);
                         $this->db->update('S10_META_PARTIDA');
                     }
                     
