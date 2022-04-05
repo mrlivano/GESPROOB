@@ -174,8 +174,22 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div>
+				<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
+					<option selected="true" value="" disabled>Selecione Presupuesto</option>
+					<?php foreach ($SelectPresupuesto as $key => $value) { ?>
+						<option value="<?=$value->Codigo?>"><?=$value->Descripcion?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		
+	</div>
 	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
-		<div class="col-md-2 col-sm-12 col-xs-12">
+	
+		<div class="col-md-5 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
 					<option value="">Estructura de Presupuesto</option>
@@ -185,9 +199,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div class="col-md-8 col-sm-12 col-xs-12">
-			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
+		<div class="col-md-5 col-sm-12 col-xs-12">
+			<div>
+				<select id="selectComponente" name="selectComponente" class="form-control">
+				<option selected="true" value="" disabled>Seleccione Componente</option>
+				</select>
+			</div>
 		</div>
+		
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
 		</div>
@@ -319,7 +338,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 	function agregarComponente()
 	{
-		$('#divAgregarComponente').data('formValidation').resetField($('#txtDescripcionComponente'));
+		$('#divAgregarComponente').data('formValidation').resetField($('#selectComponente'));
 		$('#divAgregarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucion'));
 
 		$('#divAgregarComponente').data('formValidation').validate();
@@ -335,7 +354,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 		$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(function(index, element)
 		{
-			if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll($('#txtDescripcionComponente').val(), ' ', '').toLowerCase())
+			if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll($('#selectComponente').val(), ' ', '').toLowerCase())
 			{
 				existeComponente=true;
 
@@ -356,7 +375,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			return;
 		}
 
-		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
+		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#selectComponente').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
 		{
 			objectJSON=JSON.parse(objectJSON);
 
@@ -376,18 +395,47 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			var htmlTemp='<li>'+
 				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
 
-				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',1,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
+				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',1,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#selectComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
 				htmlTemp+='<ul></ul></li>';
 
 
 			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
 
-			$('#txtDescripcionComponente').val('');
+			$('#selectComponente').val('');
 
 			limpiarArbolCompletoMasOpciones();
 		}, false, true);
 	}
-
+	$("#selectPresupuesto").change(function()
+		{
+			let Codigo_Presupuesto=$(this).find("option:selected").val();
+			let CodigoProyecto="<?php echo $expedienteTecnico->codigo_unico_pi ?>";
+			
+			console.log(CodigoProyecto);
+			paginaAjaxJSON(
+				{ 
+				"Codigo_Presupuesto" : Codigo_Presupuesto ,
+				"Codigo_Proyecto" :  CodigoProyecto,
+				},
+				base_url+'index.php/ET_Componente/cargarSelectSubPresupuesto',
+				 'POST', null, function(objectJSON)
+				{
+					resultado=JSON.parse(objectJSON);
+					let select = document.getElementsByName("selectComponente")[0];
+					$("#selectComponente").find('option').not(':first').remove();
+						console.log(resultado.data);
+						resultado.data.forEach(element => {
+							var option = document.createElement("option");
+							console.log(element);
+							option.text = element.Codigo_Presupuesto+" - "+element.Descripcion;
+							select.add(option);
+						}); 
+							
+						
+					
+			}, false, true)
+		});
+		
 	function guardarCambiosComponente(idComponente)
 	{
 		if($('#nombreComponente'+idComponente).text().trim()=='')
@@ -1045,7 +1093,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			trigger: null,
 			fields:
 			{
-				txtDescripcionComponente:
+				selectComponente:
 				{
 					validators:
 					{
