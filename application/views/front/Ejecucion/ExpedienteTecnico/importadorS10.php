@@ -236,12 +236,23 @@ function ImportarBD()
 
 				if(datos.indexOf('successfully')!==-1)
 				{
+					//importar tablas 
+					console.log(codigo)
+					$.ajax({
+						type:"POST",
+						url:base_url+'index.php/PrincipalReportes/ImportarTableS10',
+						data:{codigo:codigo},
+						cache: false,
+						success:function(resp)
+						{
+						}
+					});
 					swal(
 						'Operacion Completada',
 						datos,
 						'success'
 					);
-					window.location.reload();
+					//window.location.reload();
 				}
 				else
 				{

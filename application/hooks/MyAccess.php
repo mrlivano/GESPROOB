@@ -946,6 +946,7 @@ function autorizar($url)
       'ProyectoInversion/updateConformidad',
       'PrincipalReportes/ordenServicio',
       'PrincipalReportes/RestoreDB',
+      'PrincipalReportes/ImportarTableS10',
       'PrincipalReportes/DeleteDB',
       'ProyectoInversion/addOrdenServicio',
       'ProyectoInversion/updateOrdenServicio',

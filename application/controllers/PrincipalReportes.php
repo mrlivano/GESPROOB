@@ -899,7 +899,6 @@ class PrincipalReportes extends CI_Controller
             } else {
                 $filename = $rutaFile.$this->upload->data()['file_name'];
                 $data = $this->Model_ProyectoInversion->RestoreDB($codigo,$proyecto,$fecha,$filename);
-                
             }
         }
         else{
@@ -912,6 +911,19 @@ class PrincipalReportes extends CI_Controller
         {
             $codigoProyecto = $this->input->post('codigoProyecto');
             $data = $this->Model_ProyectoInversion->DeleteDB($codigoProyecto);
+            echo true;
+        }
+        else{
+            echo false;
+        }
+        
+    }
+
+    public function ImportarTableS10(){
+        if($_POST)
+        {
+            $codigoProyecto = $this->input->post('codigo');
+            $data = $this->Model_ProyectoInversion->ImportarTableS10($codigoProyecto);
             echo true;
         }
         else{
