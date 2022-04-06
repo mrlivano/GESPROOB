@@ -268,7 +268,7 @@
 																</div>
 															</div>
 														</li>
-														<li>
+														<!-- <li>
 															<div class="block">
 																<div class="tags">
 																	<a href="" onclick="paginaAjaxDialogo(null, 'Cronograma de Requerimiento', null, base_url+'index.php/Expediente_Tecnico/CronogramacionRecurso?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', 'GET', null, null, false, true); return false;" class="tag">
@@ -285,7 +285,7 @@
 																	<p class="excerpt">Se realiza la Cronogramación de Requerimiento de Recursos.</p>
 																</div>
 															</div>
-														</li>
+														</li> -->
 													</ul>
 												</div>
 												<div class="row"  style="margin-right:-15px;margin-left:-15px;">
@@ -307,13 +307,13 @@
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-05
 															</a>
-															<a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Cuadro de Presupuesto Analítico General" href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoAnalitico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!--<a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Cuadro de Presupuesto Analítico General" href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoAnalitico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-06
-															</a>
+															</a>-->
 															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-07
 															</a>
-															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos Generales" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos Generales" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
 															<a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Supervisión" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosSupervision?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -348,7 +348,7 @@
 															</a>
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Requerimiento de Mano de Obra" href="<?= site_url('ET_RelacionInsumo/ReportePdfCronogramaRequerimiento?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et.'&id_recurso=2');?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-18
-															</a>
+															</a> -->
 														</div>
 													</div>
 												</div>
@@ -475,16 +475,16 @@
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-05
 															</a>
-															<a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Cuadro de Presupuesto Analítico General" href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoAnalitico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!-- <a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Cuadro de Presupuesto Analítico General" href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoAnalitico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-06
-															</a>
+															</a> -->
 															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-07
 															</a>
-															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos Generales" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos Generales" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
-															</a>
-															<a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Supervisión" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosSupervision?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															</a> -->
+															<!-- <a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Supervisión" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosSupervision?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-09
 															</a>
 															<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Liquidación" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosLiquidacion?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -516,7 +516,7 @@
 															</a>
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Requerimiento de Mano de Obra" href="<?= site_url('ET_RelacionInsumo/ReportePdfCronogramaRequerimiento?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et.'&id_recurso=2');?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-18
-															</a>
+															</a> -->
 														</div>
 													</div>
 												</div>
