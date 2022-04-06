@@ -29,6 +29,10 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
         $selectSubPresupuesto=$this->db->query("select * from S10_COMPONENTE where Codigo_Proyecto='".$codigoProyecto."' and Codigo_Presupuesto='".$CodigoPresupuesto."'");
         return $selectSubPresupuesto->result();
     }
+    function listarMetaSubpresupuesto($id){
+        $metaSubpresupuesto=$this->db->query("select* from S10_META_PARTIDA where Id_Subpresupuesto='".$id."' ");
+        return $metaSubpresupuesto->result();
+    }
     function ListaPresupuestoEjecucion()
     {
         $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej_padre is NULL");

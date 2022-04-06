@@ -174,22 +174,39 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="row" style="margin-top: 3px;">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+					<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
+						<option selected="true" value="" disabled>Selecione Presupuesto</option>
+						<?php foreach ($SelectPresupuesto as $key => $value) { ?>
+							<option value="<?=$value->Codigo?>"><?=$value->Descripcion?></option>
+						<?php } ?>
+					</select>
+			</div>
+		</div>
+	<div id="divImportarComponente" class="row" style="margin-top: 3px;">
+		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
-				<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
-					<option selected="true" value="" disabled>Selecione Presupuesto</option>
-					<?php foreach ($SelectPresupuesto as $key => $value) { ?>
-						<option value="<?=$value->Codigo?>"><?=$value->Descripcion?></option>
+				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
+					<option value="">Estructura de Presupuesto</option>
+					<?php foreach ($PresupuestoEjecucion as $key => $value) { ?>
+						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
 					<?php } ?>
 				</select>
 			</div>
 		</div>
+		<div class="col-md-7 col-sm-12 col-xs-12">
+				<select id="selectComponente" name="selectComponente" class="form-control">
+				<option selected="true" value="" disabled>Seleccione Componente</option>
+				</select>
+		</div>
 		
+		<div class="col-md-2 col-sm-12 col-xs-12">
+			<input type="button" class="btn btn-info" value="Importar componente" onclick="importarComponente();" style="width: 100%;">
+		</div>
 	</div>
 	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
-	
-		<div class="col-md-5 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
 					<option value="">Estructura de Presupuesto</option>
@@ -199,14 +216,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div class="col-md-5 col-sm-12 col-xs-12">
-			<div>
-				<select id="selectComponente" name="selectComponente" class="form-control">
-				<option selected="true" value="" disabled>Seleccione Componente</option>
-				</select>
-			</div>
+		<div class="col-md-7 col-sm-12 col-xs-12">
+			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
-		
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
 		</div>
@@ -338,7 +350,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 	function agregarComponente()
 	{
-		$('#divAgregarComponente').data('formValidation').resetField($('#selectComponente'));
+		$('#divAgregarComponente').data('formValidation').resetField($('#txtDescripcionComponente'));
 		$('#divAgregarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucion'));
 
 		$('#divAgregarComponente').data('formValidation').validate();
@@ -351,6 +363,76 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		var existeComponente=false;
 
 		var PresupuestoEjecucion=$('#selectPresupuestoEjecucion').val();
+
+		$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(function(index, element)
+		{
+			if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll($('#txtDescripcionComponente').val(), ' ', '').toLowerCase())
+			{
+				existeComponente=true;
+
+				return false;
+			}
+		});
+
+		if(existeComponente)
+		{
+			swal(
+			{
+				title: '',
+				text: 'No se puede agregar dos veces el mismo componente.',
+				type: 'error'
+			},
+			function(){});
+
+			return;
+		}
+
+		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
+		{
+			objectJSON=JSON.parse(objectJSON);
+
+			swal(
+			{
+				title: '',
+				text: objectJSON.mensaje,
+				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+			},
+			function(){});
+
+			if(objectJSON.proceso=='Error')
+			{
+				return false;
+			}
+
+			var htmlTemp='<li>'+
+				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
+
+				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',1,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
+				htmlTemp+='<ul></ul></li>';
+
+
+			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
+
+			$('#txtDescripcionComponente').val('');
+
+			limpiarArbolCompletoMasOpciones();
+		}, false, true);
+	}
+	function importarComponente()
+	{
+		$('#divImportarComponente').data('formValidation').resetField($('#selectComponente'));
+		$('#divImportarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucionI'));
+
+		$('#divImportarComponente').data('formValidation').validate();
+
+		if(!($('#divImportarComponente').data('formValidation').isValid()))
+		{
+			return;
+		}
+
+		var existeComponente=false;
+
+		var PresupuestoEjecucion=$('#selectPresupuestoEjecucionI').val();
 
 		$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(function(index, element)
 		{
@@ -401,6 +483,49 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
 
+			//Importar Meta S10
+
+			id = $('#selectComponente option:selected').attr('id');
+			componente = $('#selectComponente').val();
+
+			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(async function(index, element)
+			{
+				var elementP = [];
+				var idelementP = [];
+				elementP[0]=$(element).parent();
+				if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(componente, ' ', '').toLowerCase()){
+					
+					paginaAjaxJSON(
+						{ 
+						"idSubpresupuesto" : id ,
+						"idComponente" : objectJSON.idComponente ,
+						},
+						base_url+'index.php/ET_Componente/cargarMetaS10',
+						'POST', null, async function(metaJSON)
+						{
+							resultado=JSON.parse(metaJSON);
+							console.log(resultado);
+								
+								/*await Promise.all(resultado.data.map(async (elementM) => {
+								
+								if (elementM.Nivel===0) {
+									elementP[(elementM.Nivel+1)]= await importarMeta(objectJSON.idComponente,elementP[elementM.Nivel],'',(elementM.Nivel+1),PresupuestoEjecucion,elementM.Titulo);
+									console.log(elementP[(elementM.Nivel+1)]);
+								}
+								else{
+									console.log(elementP[elementM.Nivel]);
+									//importarMeta('',elementP[elementM.Nivel],idelementP[(elementM.Nivel-1)],(elementM.Nivel+1),PresupuestoEjecucion,elementM.Titulo, function(resultado,idmeta){ elementP[elementM.Nivel]=resultado; idelementP[elementM.Nivel]=idmeta;});
+								}
+					        }));*/
+							
+					    }, false, true)
+				}
+			});
+				console.log('id'+id)
+				console.log('componente'+componente)
+
+
+
 			$('#selectComponente').val('');
 
 			limpiarArbolCompletoMasOpciones();
@@ -423,11 +548,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					resultado=JSON.parse(objectJSON);
 					let select = document.getElementsByName("selectComponente")[0];
 					$("#selectComponente").find('option').not(':first').remove();
-						console.log(resultado.data);
 						resultado.data.forEach(element => {
 							var option = document.createElement("option");
-							console.log(element);
 							option.text = element.Codigo_Presupuesto+" - "+element.Descripcion;
+							option.id = element.Id;
 							select.add(option);
 						}); 
 							
@@ -733,7 +857,69 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				limpiarArbolCompletoMasOpciones();
 			}, false, true);
 		});
+	}
 
+	function importarMeta(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion,meta)
+	{
+		if($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length>0)
+		{
+			return;
+		}
+
+		var descripcionMeta = '';
+
+		  	descripcionMeta = meta;
+
+			if(descripcionMeta==null || descripcionMeta.trim()=='')
+			{
+				return;
+			}
+
+			var existeMeta=false;
+
+			$($(elementoPadre).find('ul')[0]).find('> li').each(function(index, element)
+			{
+				if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(descripcionMeta, ' ', '').toLowerCase())
+				{
+					existeMeta=true;
+
+					return false;
+				}
+			});
+
+			if(existeMeta)
+			{
+				return;
+			}
+
+			paginaAjaxJSON({ "idComponente" : idComponente, "descripcionMeta" : descripcionMeta.trim(), "idMetaPadre" : idMetaPadre }, base_url+'index.php/ET_Meta/insertar', 'POST', null, function(objectJSON)
+			{
+				objectJSON=JSON.parse(objectJSON);
+				idmeta = objectJSON.idMeta;
+				if(objectJSON.proceso=='Error')
+				{
+					return false;
+				}
+
+				var htmlTemp='<li class="listaNivel'+nivel+'">'+
+					'<input type="button" class="btn btn-default btn-xs" title="Guardar Cambios" value="G" onclick="guardarCambiosMeta('+objectJSON.idMeta+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" title="Eliminar Meta" value="-" onclick="eliminarMeta('+objectJSON.idMeta+', this);" style="width: 30px;"> <button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'+objectJSON.idMeta+'"><i class="fa fa-expand"></i></button><input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '+objectJSON.idMeta+','+(nivel+1)+','+idPresupuestoEjecucion+')" style="width: 30px;"><input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '+objectJSON.idMeta+','+idPresupuestoEjecucion+')" style="width: 30px;"><span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'+objectJSON.idMeta+'" contenteditable>'+descripcionMeta+'</span>';
+					htmlTemp+='<ul></ul></li>';
+
+				$($(elementoPadre).find('ul')[0]).append(htmlTemp);
+
+				limpiarArbolCompletoMasOpciones();
+
+				$($(elementoPadre).find('ul')[0]).find('> li >span').each(function(index, element)
+				{
+					if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(descripcionMeta, ' ', '').toLowerCase())
+					{
+						console.log($(element).parent());
+						return  $(element).parent();
+					}
+				});
+
+			}, false, true);
+		
 	}
 
 	var elementoPadreParaAgregarPartida, metaPadreParaAgregarPartida;
@@ -1084,7 +1270,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	        preserveSelected: false
 	    });
 
-		$('#divAgregarComponente').formValidation(
+		$('#divImportarComponente').formValidation(
 		{
 			framework: 'bootstrap',
 			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
@@ -1094,6 +1280,39 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			fields:
 			{
 				selectComponente:
+				{
+					validators:
+					{
+						notEmpty:
+						{
+							message: '<b style="color: red;">El campo "Descripción del componente" es requerido.</b>'
+						}
+					}
+				},
+				selectPresupuestoEjecucionI:
+				{
+					validators:
+					{
+						notEmpty:
+						{
+							message: '<b style="color: red;">El campo "Estructurao de Presupuesto" es requerido.</b>'
+						}
+					}
+
+				}
+			}
+		});
+
+		$('#divAgregarComponente').formValidation(
+		{
+			framework: 'bootstrap',
+			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
+			live: 'enabled',
+			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
+			trigger: null,
+			fields:
+			{
+				txtDescripcionComponente:
 				{
 					validators:
 					{

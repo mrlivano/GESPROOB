@@ -15,6 +15,8 @@ class ET_Componente extends CI_Controller
 		$this->load->model('Model_ET_Detalle_Partida');
 		$this->load->model('Model_ET_Analisis_Unitario');
 		$this->load->model('Model_ET_Presupuesto_Ejecucion');
+		$this->load->model('Model_ET_Etapa_Ejecucion');
+		$this->load->model('Model_ET_Analitico_Partida');
 	}
 
 	private function updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico, $idPresupuestoEjecucion, $estado)
@@ -255,4 +257,138 @@ class ET_Componente extends CI_Controller
 
 		$this->Model_ET_Meta->eliminar($meta->id_meta);
 	}
+
+	public function cargarMetaS10(){
+		$idSubpresupuesto=$this->input->post('idSubpresupuesto');
+		$idComponente=$this->input->post('idComponente');
+		$elementP = [];
+		/*$componente = $this->Model_ET_Componente->ETComponentePorIdComponente($idComponente);
+		$numeracion=$componente[0]->numeracion;*/
+		$metaSubpresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarMetaSubpresupuesto($idSubpresupuesto);
+		foreach ($metaSubpresupuesto as $key => $value) {
+			if($value->Cod_Titulo!='9999999'){
+				if($value->Nivel===0){
+					$idmeta = $this->insertarmetaS10($idComponente,'',$value->Titulo);
+					$elementP[$value->Nivel]= $idmeta;
+				} else {
+					$idmeta = $this->insertarmetaS10('',$elementP[($value->Nivel-1)],$value->Titulo);
+					$elementP[$value->Nivel]= $idmeta;
+				}
+			}
+			else{
+				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio_Unitario);
+			}
+		}
+		echo json_encode(['data' => $metaSubpresupuesto]);exit;
+	}
+
+	public function insertarPartidaS10($idMeta, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida)
+	{
+		$this->db->trans_start();
+
+		$idListaPartida=6;
+
+		if($unidad!="")
+		{
+			$data = $this->Model_Unidad_Medida->validarInsumo($unidad);
+			$idUnidad=$data->id_unidad;
+		}
+
+		$etEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucionPorDescEtaoaET('Elaboración de expediente técnico');
+
+		$this->Model_ET_Partida->insertar($idMeta, $idUnidad, $idListaPartida, $descripcionPartida, $rendimientoPartida, $cantidadPartida);
+
+		$unidadMedida=$this->Model_Unidad_Medida->UnidadMedida($idUnidad)[0];
+
+		$ultimoIdPartida=$this->Model_ET_Partida->ultimoId();
+
+		$this->Model_ET_Detalle_Partida->insertar($ultimoIdPartida, $idUnidad, $etEtapaEjecucion->id_etapa_et, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida, true);
+
+		$ultimoIdDetallePartida=$this->Model_ET_Detalle_Partida->ultimoId();
+
+		$listaETAnaliticoPartida=$this->Model_ET_Analitico_Partida->ETAnaliticoPartidaPorIdListaPartida($idListaPartida);
+
+		foreach($listaETAnaliticoPartida as $key => $value)
+		{
+			$this->Model_ET_Analisis_Unitario->insertar('NULL', $value->id_recurso, $ultimoIdDetallePartida);
+
+			$ultimoIdAnalisisUnitario=$this->Model_ET_Analisis_Unitario->ultimoId();
+
+			$value->childETDetalleAnaliticoPartida=$this->Model_ET_Detalle_Analitico_Partida->ETDetalleAnaliticoPartidaPorIdAnaliticoPartida($value->id_analitico_partida);
+
+			foreach($value->childETDetalleAnaliticoPartida as $index => $item)
+			{
+				$this->Model_ET_Detalle_Analisis_Unitario->insertar($ultimoIdAnalisisUnitario, $item->id_unidad, $item->desc_insumo, $item->cuadrilla, 1, $item->precio, $item->rendimiento);
+			}
+		}
+
+		$ultimoETDetallePartida=$this->Model_ET_Detalle_Partida->ultimoETDetallePartida();
+
+		$this->updateNumerationPartida($idMeta);
+
+		$this->db->trans_complete();
+
+		return true;
+	}
+
+	private function updateNumerationPartida($idMeta)
+	{
+		$meta=$this->Model_ET_Meta->ETMetaPorIdMeta($idMeta);
+
+		$listaETPartidaTemporal=$this->Model_ET_Partida->ETPartidaPorIdMeta($meta->id_meta);
+
+		foreach($listaETPartidaTemporal as $key => $value)
+		{
+			$this->Model_ET_Partida->updateNumeracionPorIdPartida($value->id_partida, $meta->numeracion.'.'.($key+1));
+		}
+	}
+
+	public function insertarmetaS10($idComponente,$idMetaPadre,$descripcionMeta)
+	{
+		$this->db->trans_start();
+
+		$this->Model_ET_Meta->insertar(($idComponente=='' ? null : $idComponente), ($idMetaPadre=='' ? null : $idMetaPadre), $descripcionMeta);
+
+		$ultimoIdMeta=$this->Model_ET_Meta->ultimoId();
+
+		$this->updateNumerationMeta($idComponente=='' ? null : $idComponente, $idMetaPadre=='' ? null : $idMetaPadre);
+
+		$this->db->trans_complete();
+
+		return $ultimoIdMeta;
+	}
+
+	private function updateNumerationMeta($idComponente, $idMetaPadre)
+	{
+		if($idComponente!=null)
+		{
+			$numberFromRoman=['I' => 1, 'II' => 2, 'III' => 3, 'IV' => 4, 'V' => 5, 'VI' => 6, 'VII' => 7, 'VIII' => 8, 'IX' => 9, 'X' => 10, 'XI' => 11, 'XII' => 12, 'XIII' => 13, 'XIV' => 14, 'XV' => 15, 'XVI' => 16, 'XVII' => 17, 'XVIII' => 18, 'XIX' => 19, 'XX' => 20, 'XXI' => 21, 'XXII' => 22, 'XXIII' => 23, 'XXIV' => 24, 'XXV' => 25, 'XXVI' => 26, 'XXVII' => 27, 'XXVIII' => 28, 'XXIX' => 29, 'XXX' => 30, 'XXXI' => 31, 'XXXII' => 32, 'XXXIII' => 33, 'XXXIV' => 34, 'XXXV' => 35, 'XXXVI' => 36, 'XXXVII' => 37, 'XXXVIII' => 38, 'XXXIX' => 39, 'XL' => 40, 'XLI' => 41, 'XLII' => 42, 'XLIII' => 43, 'XLIV' => 44, 'XLV' => 45, 'XLVI' => 46, 'XLVII' => 47, 'XLVIII' => 48, 'XLIX' => 49, 'L' => 50, 'LI' => 51, 'LII' => 52, 'LIII' => 53, 'LIV' => 54, 'LV' => 55, 'LVI' => 56, 'LVII' => 57, 'LVIII' => 58, 'LIX' => 59, 'LX' => 60, 'LXI' => 61, 'LXII' => 62, 'LXIII' => 63, 'LXIV' => 64, 'LXV' => 65, 'LXVI' => 66, 'LXVII' => 67, 'LXVIII' => 68, 'LXIX' => 69, 'LXX' => 70, 'LXXI' => 71, 'LXXII' => 72, 'LXXIII' => 73, 'LXXIV' => 74, 'LXXV' => 75, 'LXXVI' => 76, 'LXXVII' => 77, 'LXXVIII' => 78, 'LXXIX' => 79, 'LXXX' => 80, 'LXXXI' => 81, 'LXXXII' => 82, 'LXXXIII' => 83, 'LXXXIV' => 84, 'LXXXV' => 85, 'LXXXVI' => 86, 'LXXXVII' => 87, 'LXXXVIII' => 88, 'LXXXIX' => 89, 'XC' => 90, 'XCI' => 91, 'XCII' => 92, 'XCIII' => 93, 'XCIV' => 94, 'XCV' => 95, 'XCVI' => 96, 'XCVII' => 97, 'XCVIII' => 98, 'XCIX' => 99, 'C' => 100];
+
+			$etComponenteTemporal=$this->Model_ET_Componente->ETComponentePorIdComponente($idComponente);
+
+			$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($idComponente);
+
+			foreach($listaETMeta as $index => $item)
+			{
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, $numberFromRoman[$etComponenteTemporal->numeracion].'.'.($index+1));
+
+				$this->updateNumerationMetaAndChild($item, $numberFromRoman[$etComponenteTemporal->numeracion].'.'.($index+1));
+			}
+		}
+		else
+		{
+			$etMetaTemporal=$this->Model_ET_Meta->ETMetaPorIdMeta($idMetaPadre);
+
+			$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdMetaPadre($idMetaPadre);
+
+			foreach($listaETMeta as $index => $item)
+			{
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, $etMetaTemporal->numeracion.'.'.($index+1));
+
+				$this->updateNumerationMetaAndChild($item, $etMetaTemporal->numeracion.'.'.($index+1));
+			}
+		}
+	}
+
+
 }

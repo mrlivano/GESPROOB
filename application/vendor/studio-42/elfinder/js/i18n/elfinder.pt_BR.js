@@ -307,7 +307,7 @@
 			'shortcutsof'     : 'Atalhos desabilitados',
 			'dropFiles'       : 'Solte os arquivos aqui',
 			'or'              : 'ou',
-			'selectForUpload' : 'Selecione arquivos para upload',
+			'selectForUpload' : 'Seleccione arquivos para upload',
 			'moveFiles'       : 'Mover arquivos',
 			'copyFiles'       : 'Copiar arquivos',
 			'rmFromPlaces'    : 'Remover de Lugares',

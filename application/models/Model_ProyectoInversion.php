@@ -241,13 +241,16 @@ class Model_ProyectoInversion extends CI_Model
 			$listaSubPresupuesto= $this->db->query("select sp.descripcion AS descripcion,sp.CodSubpresupuesto from [".$CodigoUnico."].[dbo].presupuesto p inner join  [".$CodigoUnico."].[dbo].subpresupuesto sp 
             ON p.codpresupuesto=sp.codpresupuesto where p.Nivel=3 and sp.codsubpresupuesto!='999' and p.CodPresupuesto='".$valor->Codigo."'")->result();
 			foreach($listaSubPresupuesto as $valorS){
-                $validarSubPresupuesto = count($this->db->query("select * from S10_COMPONENTE where Codigo='".$valorS->CodSubpresupuesto."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Proyecto='".$CodigoUnico."'")->result());
+               $SubPresupuesto = $this->db->query("select * from S10_COMPONENTE where Codigo='".$valorS->CodSubpresupuesto."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Proyecto='".$CodigoUnico."'")->result();
+               $validarSubPresupuesto = count($SubPresupuesto);
+               $idSubpresupuesto = $this->db->insert_id();
                 if ($validarSubPresupuesto===0) {
                     $sp_data['Codigo'] = $valorS->CodSubpresupuesto;
                     $sp_data['Codigo_Presupuesto'] = $valor->Codigo;           
                     $sp_data['Codigo_Proyecto'] = $CodigoUnico;         
                     $sp_data['Descripcion'] = $valorS->descripcion;    
-                    $this->db->insert('S10_COMPONENTE',$sp_data);           
+                    $this->db->insert('S10_COMPONENTE',$sp_data); 
+                    $idSubpresupuesto = $this->db->insert_id();          
                 } else {
                     $sp_data['Descripcion'] = $valorS->descripcion;           
                     $this->db->set($sp_data);
@@ -255,9 +258,10 @@ class Model_ProyectoInversion extends CI_Model
                     $this->db->where('Codigo_Presupuesto',$valor->Codigo);
                     $this->db->where('Codigo_Proyecto',$CodigoUnico);
                     $this->db->update('S10_COMPONENTE');
+                    foreach($SubPresupuesto as $valorSP){$idSubpresupuesto = $valorSP->Id;}
                 }
                 // Insertar tabla META - PARTIDA S10
-                $listaMetaPartida= $this->db->query("select spd.codpresupuesto,spd.codsubpresupuesto,spd.secuencial,spd.nivel,spd.orden,t.Descripcion as titulos,p.descripcion as partida,u.simbolo, 
+                $listaMetaPartida= $this->db->query("select spd.codpresupuesto,spd.codsubpresupuesto,spd.secuencial,spd.nivel,spd.orden,t.Descripcion as titulos,p.descripcion as partida,u.simbolo, u.Descripcion as unidadDesc, 
                 spd.metrado, spd.precio1 as Precio, spd.parcial1 as Parcial, spd.Tipo,spd.codtitulo,spd.codpartida,(spd.codpresupuesto+' '+spd.propiopartida) as Codigo
                 ,p.Jornada,(select sum(ppa.Parcial1)  from ([".$CodigoUnico."].[dbo].partidadetalle pd inner join [".$CodigoUnico."].[dbo].insumo i on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].[dbo].presupuestopartidaanalisis ppa ON i.codinsumo=ppa.codinsumo
                 where pd.codpresupuesto='".$valor->Codigo."' and pd.codpartida=spd.CodPartida and ppa.codpresupuesto='".$valor->Codigo."' and ppa.codsubpresupuesto='".$valorS->CodSubpresupuesto."'
@@ -303,6 +307,8 @@ class Model_ProyectoInversion extends CI_Model
                         $mp_data['Rendimiento_EQ'] = $valorMP->Rendimiento_EQ;  
                         $mp_data['Peso'] = $valorMP->peso;  
                         $mp_data['Precio_Unitario'] = $valorMP->Precio_Unitario;
+                        $mp_data['Id_Subpresupuesto'] = $idSubpresupuesto;
+                        $mp_data['UnidadDesc'] = $valorMP->unidadDesc;
                         $this->db->insert('S10_META_PARTIDA',$mp_data);           
                     } else {  
                         $mp_data['Nivel'] = $valorMP->nivel;  
@@ -326,7 +332,9 @@ class Model_ProyectoInversion extends CI_Model
                         $mp_data['Rendimiento_MO'] = $valorMP->Rendimiento_MO;
                         $mp_data['Rendimiento_EQ'] = $valorMP->Rendimiento_EQ;  
                         $mp_data['Peso'] = $valorMP->peso;  
-                        $mp_data['Precio_Unitario'] = $valorMP->Precio_Unitario;         
+                        $mp_data['Precio_Unitario'] = $valorMP->Precio_Unitario; 
+                        $mp_data['Id_Subpresupuesto'] = $idSubpresupuesto;        
+                        $mp_data['UnidadDesc'] = $valorMP->unidadDesc;        
                         $this->db->set($mp_data);
                         $this->db->where('Codigo_Subpresupuesto',$valorS->CodSubpresupuesto); 
                         $this->db->where('Codigo_Presupuesto',$valor->Codigo);
