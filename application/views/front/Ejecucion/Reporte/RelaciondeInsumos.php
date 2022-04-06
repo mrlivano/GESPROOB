@@ -41,11 +41,11 @@
 				<img style="width: 50px;" src="./assets/images/peru.jpg">
 			</td>
 			<td id="header_texto">
-				<div style="text-align: center;"><b>GOBIERNO REGIONAL DE APURÍMAC</b></div>
-				<div style="text-align: center; font-size: 12px;">"Año del Diálogo y la Reconciliación Nacional"</div>
+				<div style="text-align: center;"><b>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</b></div>
+				<div style="text-align: center; font-size: 12px;">"Año del Fortalecimiento de la Soberanía Nacional"</div>
 			</td>
 			<td style="width: 85px;">
-				<img style="width: 60px;" src="./assets/images/apurimac.png">
+				<img style="width: 60px;" src="./assets/images/logoUniq.png">
 			</td>
 		</tr>
 	</table>

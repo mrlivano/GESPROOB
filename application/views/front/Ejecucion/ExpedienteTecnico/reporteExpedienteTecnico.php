@@ -39,15 +39,15 @@
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 75px;">
-						<img style="width: 60px;" src="./assets/images/peru.jpg">
+						<img style="width: 60px;" src="/assets/images/peru.jpg">
 					</td>
 					<td id="header_texto">
-						<div style="text-align: center;"><b>GOBIERNO REGIONAL DE APURÍMAC</b></div>
-						<div style="text-align: center; font-size: 12px;">"Año del Diálogo y la Reconciliación Nacional"</div>
+						<div style="text-align: center;"><b>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</b></div>
+						<div style="text-align: center; font-size: 12px;">"Año del Fortalecimiento de la Soberanía Nacional"</div>
 						
 					</td>
 					<td style="width: 75px;">
-						<img style="width: 60px;" src="./assets/images/apurimac.png">
+						<img style="width: 60px;" src="/assets/images/logoUniq.png">
 					</td>
 				</tr>
 			</table>
@@ -255,13 +255,13 @@
 				<?php $temp+=1;?>
 				<td>
 					<?php if(@$ImagenesExpediente[$temp]->desc_img!='') {  ?>
-						<img style="width: 320px;height: 220px; margin:5px 5px;" src="./uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
+						<img style="width: 320px;height: 220px; margin:5px 5px;" src="/uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
 					<?php } ?>
 				</td>
 				<?php $temp+=1;?>
 				<td>
 					<?php if(@$ImagenesExpediente[$temp]->desc_img!='') {  ?>
-						<img style="width: 320px;height: 220px; margin:5px 5px;" src="./uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
+						<img style="width: 320px;height: 220px; margin:5px 5px;" src="/uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
 					<?php } ?>
 				</td>
 			</tr>

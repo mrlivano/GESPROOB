@@ -577,6 +577,7 @@ function autorizar($url)
       'MantenimientoBrecha/GetBrecha',
       'CarteraInversion/GetCarteraInvFechAct',
       'ProyectoInversion/AddProyecto',
+      'ProyectoInversion/listarProyecto',
       'Programacion/BuscarProyectoInversion',
       'criterio/addPrioridad',
       'programar_nopip/AddProgramacion',

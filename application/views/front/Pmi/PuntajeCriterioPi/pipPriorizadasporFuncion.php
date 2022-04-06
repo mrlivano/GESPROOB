@@ -114,7 +114,7 @@
 						"extend": "pdf",
 						"text": "<i class='fa fa-file-pdf-o bigger-110 red'></i> <span >PDF</span>",
 						"className": "btn btn-white btn-primary btn-bold",
-						"title":"Gobierno Regional de Apurímac"
+						"title":"UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA"
 					  },
 					  {
 						"extend": "print",

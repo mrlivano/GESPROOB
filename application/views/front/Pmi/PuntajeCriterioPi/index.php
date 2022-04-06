@@ -98,7 +98,7 @@
                       columns: [ 0, 1, 2]
                   },
 				"pageSize": 'A4',
-				"title":"Gobierno Regional de Apurímac"
+				"title":"UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA"
 			  },
 			  {
 				"extend": "print",

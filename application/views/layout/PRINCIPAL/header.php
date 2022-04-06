@@ -125,7 +125,7 @@
                              alt="Cinque Terre" width="100" height="90" style="opacity: 0.5;">
                         <br>
 
-                        <p>GOBIERNO REGIONAL DE APURÍMAC</p>
+                        <p>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</p>
 
 
                         <p id="copyrights_footer">Seguimiento y Monitoreo de Proyectos de Inversión</p>

@@ -42,7 +42,7 @@
 							<img style="width: 80px;" src="./assets/images/peru.jpg">
 						</td>
 						<td id="header_texto">
-							<div style="text-align: center;"><b>GOBIERNO REGIONAL DE APURÍMAC</b></div>
+							<div style="text-align: center;"><b>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</b></div>
 							<div style="text-align: center; font-size: 12px;">GERENCIA REGIONAL DE PLANEAMIENTO, PRESUPUESTO Y ACONDICIONAMIENTO TERRITORIAL.</div>
 							<div style="text-align: center; font-size: 12px;">Sub Gerencia de Programación Multianual de Inversiones<br> OPMI</div>
 						</td>

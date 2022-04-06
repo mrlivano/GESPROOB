@@ -240,7 +240,7 @@
 												      <div class="page-template">
 												        <div class="header">
 												          <div style="float: right">Página #: pageNum # de #: totalPages #</div>
-												          Gobierno Regional de Apurímac
+												          UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA
 												        </div>
 												        <div class="watermark">GRA</div>
 												        <div class="footer">
