@@ -76,9 +76,7 @@ class Expediente_Tecnico extends CI_Controller
 	public function importadorS10()
 	{
 		$lista = $this->db->query("select * from BD_S10");
-        if($lista->num_rows()>0){
-            $result = $lista->result();
-        }
+         $result = $lista->result();
 		$this->load->view('layout/Ejecucion/header');
 		$this->load->view('front/Ejecucion/ExpedienteTecnico/importadorS10.php',['listaBD'=>$result]);
 		$this->load->view('layout/Ejecucion/footer');

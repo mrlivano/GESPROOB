@@ -81,7 +81,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Proyecto*
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div style="height: 150px;" id="txt_proyecto" name="txt_proyecto" autocomplete="off" text="" placeholder="Descripción del Proyecto" class="form-control col-md-7 col-xs-12" required="required"></div>
+                          <textarea style="height: 200px;" id="txt_proyecto" name="txt_proyecto" autocomplete="off" text="" placeholder="Descripción del Proyecto" class="form-control col-md-7 col-xs-12" required="required"></textarea>
                         </div>
                       </div>
 					  
@@ -225,6 +225,7 @@ function ImportarBD()
 	
 		var codigo=$("#txt_codigo_unico").val();
 		var proyecto=$("#txt_proyecto").val();
+		console.log(proyecto);
 		var fecha=$("#txt_fecha").val();
 		var file = document.getElementById('txt_file').files[0];
 		let data = new FormData();
@@ -245,7 +246,7 @@ function ImportarBD()
 			},
 			success:function(data)
 			{
-				$('#divModalCargaAjax').hide();
+				
 				
 				datos=data.slice(data.indexOf('RESTORE'));
 
@@ -260,6 +261,8 @@ function ImportarBD()
 						cache: false,
 						success:function(resp)
 						{
+							$('#divModalCargaAjax').hide();
+							window.location.reload();
 						}
 					});
 					swal(
@@ -267,7 +270,7 @@ function ImportarBD()
 						datos,
 						'success'
 					);
-					//window.location.reload();
+					
 				}
 				else
 				{
@@ -374,7 +377,7 @@ function cargarDatos() {
                   $('#divModalCargaAjax').hide();
                   if(objectJSON[0])
                   {
-                    $('#txt_proyecto').html(objectJSON[0].nombre_pi);
+                    $('#txt_proyecto').val(objectJSON[0].nombre_pi);
 					
                     swal('Operacion Completada','Se encontro el proyecto','success');
                   }
