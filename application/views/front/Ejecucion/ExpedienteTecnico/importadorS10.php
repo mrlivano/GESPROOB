@@ -75,12 +75,13 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="txt_codigo_unico" name="txt_codigo_unico" autocomplete="off" value="" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Código Unico del Proyecto" required="required" type="text">
                         </div>
+						<button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatos()">Buscar</button>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Proyecto*
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="txt_proyecto" name="txt_proyecto" autocomplete="off" text="" placeholder="Descripción del Proyecto" class="form-control col-md-7 col-xs-12" required="required"></textarea>
+                          <div style="height: 150px;" id="txt_proyecto" name="txt_proyecto" autocomplete="off" text="" placeholder="Descripción del Proyecto" class="form-control col-md-7 col-xs-12" required="required"></div>
                         </div>
                       </div>
 					  
@@ -161,49 +162,63 @@ $(document).ready(function()
 function eliminarBD(codigoProyecto)
 {
 	console.log(codigoProyecto);
-	$.ajax({
-			url: base_url + "index.php/PrincipalReportes/DeleteDB",
-			type: "POST",
-			data:{codigoProyecto:codigoProyecto},
-			beforeSend: function(request)
-			{
-				$('#ventana_restaurar_bd').modal('hide')
-				renderLoading();
-			},
-			success:function(data)
-			{
-				$('#divModalCargaAjax').hide();
-				
+	swal({
+			title: "Esta seguro que desea eliminar el Registro?",
+			text: "",
+			type: "warning",
+			showCancelButton: true,
+			cancelButtonText:"CERRAR" ,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "SI,Eliminar",
+			closeOnConfirm: false
+		},
+		function()
+		{
+			$.ajax({
+					url: base_url + "index.php/PrincipalReportes/DeleteDB",
+					type: "POST",
+					data:{codigoProyecto:codigoProyecto},
+					beforeSend: function(request)
+					{
+						$('#ventana_restaurar_bd').modal('hide')
+						renderLoading();
+					},
+					success:function(data)
+					{
+						$('#divModalCargaAjax').hide();
+						
 
-				if(data)
-				{
-					swal(
-						'Operacion Completada',
-						'Se eleminó correctamente',
-						'success'
-					);
-					window.location.reload();
-				}
-				else
-				{
-					swal(
-						'No se pudo completar la Operacion',
-						'Error al eliminar',
-						'error'
-					);
-				}
-			},
-			error: function (xhr, textStatus, errorMessage) 
-			{
-				$('#divModalCargaAjax').hide();
-				swal(
-					'ERROR!',
-					'No se pudo eliminar la BD',
-					'error'
-				);
-			}
-			
-		});
+						if(data)
+						{
+							swal(
+								'Operacion Completada',
+								'Se eleminó correctamente',
+								'success'
+							);
+							window.location.reload();
+						}
+						else
+						{
+							swal(
+								'No se pudo completar la Operacion',
+								'Error al eliminar',
+								'error'
+							);
+						}
+					},
+					error: function (xhr, textStatus, errorMessage) 
+					{
+						$('#divModalCargaAjax').hide();
+						swal(
+							'ERROR!',
+							'No se pudo eliminar la BD',
+							'error'
+						);
+					}
+					
+				});
+	})
+		
 }
 function ImportarBD()
 {
@@ -340,5 +355,39 @@ $(function()
         }
     });
 });
+function cargarDatos() {
+      let codigoProyecto=$('#txt_codigo_unico').val();
+      $.ajax(
+            {
+				url:base_url+'index.php/ProyectoInversion/listarProyecto',
+                type: 'POST',
+				data:{CodigoProyecto:codigoProyecto},
+                beforeSend: function(request)
+                {
+                    renderLoading();
+                }               
+                              
+            }).done(
+              function(request)
+                {
+					objectJSON=JSON.parse(request);
+                  $('#divModalCargaAjax').hide();
+                  if(objectJSON[0])
+                  {
+                    $('#txt_proyecto').html(objectJSON[0].nombre_pi);
+					
+                    swal('Operacion Completada','Se encontro el proyecto','success');
+                  }
+                  else
+                  {
+                    swal('No se pudo completar la Operacion','No se encontro el Proyecto','error');
+                  }
+                }).fail(
+                   function ( )
+                {
+					$('#divModalCargaAjax').hide();
+                      swal('ERROR!','No se encontró este Proyecto','error');
 
+                  });
+    }
 </script>

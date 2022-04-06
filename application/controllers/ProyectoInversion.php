@@ -25,6 +25,7 @@ class ProyectoInversion extends CI_Controller
         $this->load->model('TipoNoPip_Model');    
         $this->load->model('Model_NoPip');   
         $this->load->model('Model_OficinaR');
+        $this->load->model('Model_ET_Expediente_Tecnico');
         
 		
 		//$this->load->library('mydompdf');
@@ -738,6 +739,12 @@ class ProyectoInversion extends CI_Controller
       $sec_func=$this->input->get("sec_func");
       $dataDetalle=$this->Model_Dashboard_Reporte->detalleProys($sec_func,$act_proy,$anio);
       $this->load->view('front/Reporte/ProyectoInversion/detalleProyectoInversion',['dataDetalle'=>$dataDetalle ]);
+    }
+    function listarProyecto()
+    {
+      $CodigoUnico=$this->input->post('CodigoProyecto');
+      $proyectoInversion=$this->Model_ET_Expediente_Tecnico->ExpedienteContarRegistros($CodigoUnico);
+      echo json_encode($proyectoInversion);exit;
     }
 
 }

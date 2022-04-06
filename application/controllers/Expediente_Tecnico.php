@@ -483,7 +483,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 
-		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteMetrado',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe,'MostraExpedienteNombre' =>$MostraExpedienteNombre], true);
+		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteMetrado',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe,'MostraExpedienteNombre' =>$MostraExpedienteNombre], false);
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->render();
 		$this->mydompdf->stream("ReporteMetrado.pdf", array("Attachment" => false));
@@ -496,7 +496,7 @@ class Expediente_Tecnico extends CI_Controller
 		foreach ($PresupuestoEjecucion as $key => $value)
 		{
 			$Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
-			if(count($Presupuesto==0))
+			if(count($Presupuesto)==0)
 			{
 				$value->NombrePresupuesto=$value->desc_presupuesto_ej;
 				$value->IdPresupuesto=$value->id_presupuesto_ej;
@@ -521,7 +521,7 @@ class Expediente_Tecnico extends CI_Controller
 		foreach ($PresupuestoEjecucionListar as $key => $value)
 		{
 			$Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
-			if(count($Presupuesto==0))
+			if(count($Presupuesto)==0)
 			{
 				$value->ChilpresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoDetalles($id_et,$value->id_presupuesto_ej);
 				foreach ($value->ChilpresupuestoAnalitico as $key  => $presupuesto)
@@ -533,7 +533,7 @@ class Expediente_Tecnico extends CI_Controller
 					}
 				}
 			}
-			if(count($Presupuesto>0))
+			if(count($Presupuesto)>0)
 			{
 				$value->childPresupuesto=$Presupuesto;
 				foreach ($value->childPresupuesto as $key => $temp)
@@ -669,7 +669,7 @@ class Expediente_Tecnico extends CI_Controller
 			{
 				$item->nivel = substr_count($item->numeracion, '.');
 				$clasificadorMeta=$this->Model_ET_Meta_Analitico->ClasificadorPorMeta($item->id_meta);
-				if(count($clasificadorMeta==0))
+				if(count($clasificadorMeta)==0)
 				{
 					$item->clasificador='';
 				}
@@ -692,7 +692,7 @@ class Expediente_Tecnico extends CI_Controller
 			{
 				$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
 				$clasificadorMeta=$this->Model_ET_Meta_Analitico->ClasificadorPorMeta($item->id_meta);
-				if(count($clasificadorMeta==0))
+				if(count($clasificadorMeta)==0)
 				{
 					$item->clasificador='NO ASIGNADO';
 				}
@@ -725,7 +725,7 @@ class Expediente_Tecnico extends CI_Controller
 			{
 				$item->nivel = substr_count($item->numeracion, '.');
 				$clasificadorMeta=$this->Model_ET_Meta_Analitico->ClasificadorPorMeta($item->id_meta);
-				if(count($clasificadorMeta==0))
+				if(count($clasificadorMeta)==0)
 				{
 					$item->clasificador='';
 				}
@@ -748,7 +748,7 @@ class Expediente_Tecnico extends CI_Controller
 			{
 				$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
 				$clasificadorMeta=$this->Model_ET_Meta_Analitico->ClasificadorPorMeta($item->id_meta);
-				if(count($clasificadorMeta==0))
+				if(count($clasificadorMeta)==0)
 				{
 					$item->clasificador='NO ASIGNADO';
 				}
@@ -781,7 +781,7 @@ class Expediente_Tecnico extends CI_Controller
 			{
 				$item->nivel = substr_count($item->numeracion, '.');
 				$clasificadorMeta=$this->Model_ET_Meta_Analitico->ClasificadorPorMeta($item->id_meta);
-				if(count($clasificadorMeta==0))
+				if(count($clasificadorMeta)==0)
 				{
 					$item->clasificador='';
 				}
@@ -804,7 +804,7 @@ class Expediente_Tecnico extends CI_Controller
 			{
 				$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
 				$clasificadorMeta=$this->Model_ET_Meta_Analitico->ClasificadorPorMeta($item->id_meta);
-				if(count($clasificadorMeta==0))
+				if(count($clasificadorMeta)==0)
 				{
 					$item->clasificador='NO ASIGNADO';
 				}
@@ -1098,9 +1098,9 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 
-		foreach($meta->childMeta as $key => $value)
+		foreach($meta->childMeta as $key => $value1)
 		{
-			$this->updateMetaAnidadaCostoIndirecto($value);
+			$this->updateMetaAnidadaCostoIndirecto($value1);
 		}
 	}
 
