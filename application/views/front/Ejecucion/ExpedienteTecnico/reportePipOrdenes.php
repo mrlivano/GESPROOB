@@ -49,12 +49,12 @@
 						<img style="width: 60px;" src="./assets/images/peru.jpg">
 					</td>
 					<td id="header_texto">
-						<div style="text-align: center;"><b>GOBIERNO REGIONAL DE APURÍMAC</b></div>
+						<div style="text-align: center;"><b>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</b></div>
 						<div style="text-align: center; font-size: 12px;">"Año de la lucha contra la corrupción y la impunidad"</div>
 						
 					</td>
 					<td style="width: 75px;">
-						<img style="width: 60px;" src="./assets/images/apurimac.png">
+						<img style="width: 60px;" src="./assets/images/logoUniq.png">
 					</td>
 				</tr>
 			</table>
@@ -82,7 +82,7 @@
   		<table id="tablaPresentacion" style="width: 100%" border="1">
 			<tr>
 				<th>Nombre de la Unidad Ejecución</th>
-				<td>Gobierno Regional de Apurímac</td>
+				<td>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</td>
 			</tr>
 			<tr>
 				<th>Meta</th>

@@ -29,7 +29,7 @@
 		text-align:center;
 	}	
 </style>
-	<p style="font-size:8px;">GESPRO - GOBIERNO REGIONAL DE APURÍMAC</p>
+	<p style="font-size:8px;">GESPRO - UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</p>
     <p style="font-size:8px;"><?=date('d/m/y H:i')?></p>
     <div style="text-align: center; font-size: 13px;padding-bottom:20px;"><b>PROYECTOS DE INVERSIÓN PROGRAMADOS</b></div>
 	<table id="tablaProgramacionEjecucion" cellspacing="0" width="100%">

@@ -66,11 +66,11 @@ function mostrarMetaAnidada($meta)
 					<img style="width: 60px;" src="./assets/images/peru.jpg">
 				</td>
 				<td>
-					<div style="text-align: center; font-size: 13px;"><b>GOBIERNO REGIONAL DE APURÍMAC</b></div>
-					<div style="text-align: center; font-size: 12px;">"Año del Diálogo y la Reconciliación Nacional"</div>							
+					<div style="text-align: center; font-size: 13px;"><b>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</b></div>
+					<div style="text-align: center; font-size: 12px;">"Año del Fortalecimiento de la Soberanía Nacional"</div>							
 				</td>
 				<td style="width: 65px;">
-					<img style="width: 60px;" src="./assets/images/apurimac.png">
+					<img style="width: 60px;" src="./assets/images/logoUniq.png">
 				</td>
 			</tr>
 		</table>
