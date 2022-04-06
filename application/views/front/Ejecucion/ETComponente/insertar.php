@@ -504,8 +504,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'POST', null, async function(metaJSON)
 						{
 							resultado=JSON.parse(metaJSON);
-							console.log(resultado);
-								
+							
+							let idetTemp=$('#hdIdET').val();
+							console.log(idetTemp);
+							window.location.reload();
+							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
+
 								/*await Promise.all(resultado.data.map(async (elementM) => {
 								
 								if (elementM.Nivel===0) {
