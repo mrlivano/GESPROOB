@@ -345,11 +345,11 @@ class Model_ProyectoInversion extends CI_Model
                         $this->db->where('Cod_Partida',$valorMP->codpartida);
                         $this->db->where('Secuencial',$valorMP->secuencial);
                         $this->db->update('S10_META_PARTIDA');
-                        $idMetaPartida =  $metaPartida[0]->Id; 
+                        foreach($metaPartida as $valorMP0){$idMetaPartida = $valorMP0->Id;}
                     }
                     if($valorMP->codtitulo === '9999999'){
                         // Insertar tabla COSTO UNITARIO S10
-                        $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Codigo_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
+                        $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Id_Partida='".$idMetaPartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
                         $listaCostoUnitario= $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
                         from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
                         on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa

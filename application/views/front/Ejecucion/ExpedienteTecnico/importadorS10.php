@@ -269,6 +269,15 @@ function ImportarBD()
 							);
 					
 							window.location.reload();
+						},
+						error: function (xhr, textStatus, errorMessage) 
+						{
+							$('#divModalCargaAjax').hide();
+							swal(
+								'ERROR!',
+								'No se pudo conectar con el servidor para Importar BD',
+								'error'
+							);
 						}
 					});
 				}
