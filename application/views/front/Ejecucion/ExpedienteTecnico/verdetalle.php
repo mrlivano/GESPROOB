@@ -741,7 +741,7 @@
 															</div>
 														</li>
 														<li>
-															<div class="block">
+															<!-- <div class="block">
 																<div class="tags">
 																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
 																	<span>Informe Mensual.</span>
@@ -829,7 +829,7 @@
 																	<p class="excerpt">Se registra las horas trabajadas de una maquinaria propia o alquilada</p>
 																</div>
 															</div>
-														</li>
+														</li> -->
 														<!-- <li>
 															<div class="block">
 																<div class="tags">
@@ -862,12 +862,12 @@
 																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
-																<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
-																</a>
+																</a> -->
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisicaAdicionales?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04A</span>
 																</a>
@@ -889,7 +889,7 @@
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="" href="#" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-08
 																</a> -->
-																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia/Alquilada" href="<?=site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe09');?>" target="_blank" >
+																<!-- <a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia/Alquilada" href="<?=site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe09');?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-09
 																</a>
 																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
@@ -897,7 +897,7 @@
 																</a>
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('ET_Consumo_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
-																</a>																
+																</a>																 -->
 																<!--<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
 																</a>
