@@ -707,6 +707,7 @@ function autorizar($url)
       'ET_Componente/editarDescComponente',
       'ET_Componente/eliminar',
       'ET_Analisis_Unitario/insertar',
+      'ET_Analisis_Unitario/insertarCostoUnitario',
       'ET_Analisis_Unitario/insertarDetalleAnalisisUnitario',
       'ET_Analisis_Unitario/insertarinsumo',
       'ET_Analisis_Unitario/eliminar',

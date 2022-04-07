@@ -91,6 +91,14 @@ class ET_Analisis_Unitario extends CI_Controller
 			$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertarClasificadorIndirecto', ['etDetallePartida' => $etDetallePartida,'listaETPresupuestoAnalitico' => $listaETPresupuestoAnalitico,'listaETAnalisisUnitario' => $listaETAnalisisUnitario, 'idPartida' => $idPartida,'idExpediente' => $idET, 'idPresupuesto'=>$idPresupuesto]);		
 		}
 	}
+	public function insertarCostoUnitario()
+	{
+		
+		$idPartida=$this->input->get('idPartida');
+
+			$resultado=$this->Model_ET_Analisis_Unitario->insertarCostoUnitario($idPartida);			
+			$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertarCostoUnitario', ['resultado'=>$resultado,'idPartida'=>$idPartida]);		
+	}
 
 	public function eliminar()
 	{
