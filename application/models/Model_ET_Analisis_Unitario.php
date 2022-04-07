@@ -103,4 +103,9 @@ class Model_ET_Analisis_Unitario extends CI_Model
         $costoUnitario=$this->db->query("select* from ET_ANALISIS_CU_S10 where id_partida='".$id."' ");
         return $costoUnitario->result();
     }
+	
+	function eliminarCU($idPartida){
+		$this->db->query("delete from ET_ANALISIS_CU_S10 where id_partida=".$idPartida);
+		return true;
+	}
 }

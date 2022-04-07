@@ -252,6 +252,11 @@ class ET_Componente extends CI_Controller
 
 		if(count($temp)==0)
 		{
+			$tempP=$this->Model_ET_Partida->mostrarPartidaPorIdMeta($meta->id_meta);
+			foreach($tempP as $key => $valueP)
+			{
+				$this->Model_ET_Analisis_Unitario->eliminarCU($valueP->id_partida);
+			}
 			$this->Model_ET_Partida->eliminarPorIdMeta($meta->id_meta);
 		}
 

@@ -114,4 +114,11 @@ class Model_ET_Partida extends CI_Model
 		from ET_PARTIDA as ETP inner join ET_DETALLE_PARTIDA as ETDP on ETP.id_partida=ETDP.id_partida where id_meta='$idMeta'");
 		return $data->result();
 	}
+
+	function mostrarPartidaPorIdMeta($idMeta)
+	{
+		$data=$this->db->query("select * from ET_PARTIDA where id_meta=".$idMeta);
+
+		return $data->result();
+	}
 }
