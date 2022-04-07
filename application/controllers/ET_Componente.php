@@ -279,7 +279,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 			else{
-				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio_Unitario);
+				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio_Unitario);
 				$idpartida = $this->db->insert_id();
 				$costoUnitario = $this->Model_ET_Analisis_Unitario->listarCostoUnitario($value->Id);
 				foreach ($costoUnitario as $key => $valueC) {
@@ -300,7 +300,7 @@ class ET_Componente extends CI_Controller
 		echo json_encode(['data' => $metaSubpresupuesto]);exit;
 	}
 
-	public function insertarPartidaS10($idMeta, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida)
+	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida)
 	{
 		$this->db->trans_start();
 
@@ -308,8 +308,13 @@ class ET_Componente extends CI_Controller
 
 		if($unidad!="")
 		{
-			$data = $this->Model_Unidad_Medida->validarInsumo($unidad);
-			$idUnidad=$data->id_unidad;
+			$data = $this->Model_Unidad_Medida->validarInsumoS($unidad);
+			if (count($data)===0) {
+				$idUnidad=$this->Model_Unidad_Medida->insertar($unidad,$simbolo);
+			}
+			else{
+				$idUnidad=$data[0]->id_unidad;
+			}
 		}
 
 		$etEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucionPorDescEtaoaET('Elaboración de expediente técnico');

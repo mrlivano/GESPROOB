@@ -32,7 +32,12 @@ class Model_Unidad_Medida extends CI_Model
 		}
 		return $error;
 	}
-
+	
+	function insertarUM($txtDescripcion, $txtAbreviatura)
+	{
+		$sql = "insert into UNIDAD_MEDIDA (descripcion,abreviatura) values(".$this->db->escape($txtDescripcion).", '".$txtAbreviatura."')";
+		return $this->db->insert_id();
+	}
 	function UnidadMedida($id)
 	{
 		$unidadMedida=$this->db->query("select * from UNIDAD_MEDIDA where id_unidad='".$id."' ");
@@ -90,6 +95,11 @@ class Model_Unidad_Medida extends CI_Model
 	{
 		$data=$this->db->query("select * from UNIDAD_MEDIDA where descripcion = '$descripcion'");
 		return $data->result()[0];
+	}
+	function validarInsumoS($descripcion)
+	{
+		$data=$this->db->query("select * from UNIDAD_MEDIDA where descripcion = '$descripcion'");
+		return $data->result();
 	}
 	function listaPartidaNivel1()
 	{
