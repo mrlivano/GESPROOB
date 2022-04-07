@@ -262,15 +262,15 @@ function ImportarBD()
 						success:function(resp)
 						{
 							$('#divModalCargaAjax').hide();
+							swal(
+								'Operacion Completada',
+								datos,
+								'success'
+							);
+					
 							window.location.reload();
 						}
 					});
-					swal(
-						'Operacion Completada',
-						datos,
-						'success'
-					);
-					
 				}
 				else
 				{

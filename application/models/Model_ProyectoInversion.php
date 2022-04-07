@@ -277,7 +277,8 @@ class Model_ProyectoInversion extends CI_Model
                 where spd.codpresupuesto='".$valor->Codigo."' and spd.codsubpresupuesto='".$valorS->CodSubpresupuesto."' and(p.codpresupuesto='".$valor->Codigo."' or p.codpartida='999999999999') 
                 order by spd.orden,spd.secuencial")->result();
                 foreach($listaMetaPartida as $valorMP){
-                    $validarMetaPartida = count($this->db->query("select * from S10_META_PARTIDA where Cod_Titulo='".$valorMP->codtitulo."' and Cod_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."' and Secuencial='".$valorMP->secuencial."'")->result());
+                    $metaPartida = $this->db->query("select * from S10_META_PARTIDA where Cod_Titulo='".$valorMP->codtitulo."' and Cod_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."' and Secuencial='".$valorMP->secuencial."'")->result();
+                    $validarMetaPartida = count($metaPartida);
                     if ($validarMetaPartida===0) {
                         $mp_data['Codigo_Subpresupuesto'] = $valorS->CodSubpresupuesto;   
                         $mp_data['Codigo_Presupuesto'] = $valor->Codigo;           
@@ -309,7 +310,8 @@ class Model_ProyectoInversion extends CI_Model
                         $mp_data['Precio_Unitario'] = $valorMP->Precio_Unitario;
                         $mp_data['Id_Subpresupuesto'] = $idSubpresupuesto;
                         $mp_data['UnidadDesc'] = $valorMP->unidadDesc;
-                        $this->db->insert('S10_META_PARTIDA',$mp_data);           
+                        $this->db->insert('S10_META_PARTIDA',$mp_data);  
+                        $idMetaPartida = $this->db->insert_id();      
                     } else {  
                         $mp_data['Nivel'] = $valorMP->nivel;  
                         $mp_data['Orden'] = $valorMP->orden;     
@@ -343,8 +345,33 @@ class Model_ProyectoInversion extends CI_Model
                         $this->db->where('Cod_Partida',$valorMP->codpartida);
                         $this->db->where('Secuencial',$valorMP->secuencial);
                         $this->db->update('S10_META_PARTIDA');
+                        $idMetaPartida =  $metaPartida[0]->Id; 
                     }
-                    
+                    if($valorMP->codtitulo === '9999999'){
+                        // Insertar tabla COSTO UNITARIO S10
+                        $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Codigo_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
+                        $listaCostoUnitario= $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
+                        from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+                        on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+                        ON i.codinsumo=ppa.codinsumo
+                        where pd.codpresupuesto='".$valor->Codigo."' and pd.codpartida='".$valorMP->codpartida."' and ppa.codpartida='".$valorMP->codpartida."' and ppa.codpresupuesto='".$valor->Codigo."' and ppa.codsubpresupuesto='".$valorS->CodSubpresupuesto."'")->result();
+                        foreach($listaCostoUnitario as $valorCU){
+                                $cu_data['Codigo_Subpresupuesto'] = $valorS->CodSubpresupuesto;   
+                                $cu_data['Codigo_Presupuesto'] = $valor->Codigo;           
+                                $cu_data['Codigo_Proyecto'] = $CodigoUnico;    
+                                $cu_data['Codigo_Partida'] = $valorMP->codpartida;  
+                                $cu_data['Codigo_Insumo'] = $valorCU->codinsumo;       
+                                $cu_data['Descripcion'] = $valorCU->descripcion; 
+                                $cu_data['Tipo'] = $valorCU->tipo;  
+                                $cu_data['Unidad'] = $valorCU->unidad;     
+                                $cu_data['Cuadrilla'] = $valorCU->cuadrilla;  
+                                $cu_data['Cantidad'] = $valorCU->cantidad;  
+                                $cu_data['Precio'] = $valorCU->Precio;  
+                                $cu_data['Parcial'] = $valorCU->Parcial;  
+                                $cu_data['Id_Partida'] = $idMetaPartida;  
+                                $this->db->insert('S10_COSTO_UNITARIO',$cu_data);  
+                        }
+                    }
                 }
             }
 		}

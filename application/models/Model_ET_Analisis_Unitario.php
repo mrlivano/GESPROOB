@@ -90,4 +90,17 @@ class Model_ET_Analisis_Unitario extends CI_Model
 
 		return true;
 	}
+	function insertarAnalisisCUS10($data)
+	{
+		$this->db->insert('ET_ANALISIS_CU_S10',$data);
+		return $this->db->insert_id();
+	}
+	function listarCostoUnitario($id){
+        $costoUnitario=$this->db->query("select* from S10_COSTO_UNITARIO where Id_Partida='".$id."' ");
+        return $costoUnitario->result();
+    }
+	function insertarCostoUnitario($id){
+        $costoUnitario=$this->db->query("select* from ET_ANALISIS_CU_S10 where id_partida='".$id."' ");
+        return $costoUnitario->result();
+    }
 }

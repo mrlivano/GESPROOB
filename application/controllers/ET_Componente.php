@@ -262,8 +262,6 @@ class ET_Componente extends CI_Controller
 		$idSubpresupuesto=$this->input->post('idSubpresupuesto');
 		$idComponente=$this->input->post('idComponente');
 		$elementP = [];
-		/*$componente = $this->Model_ET_Componente->ETComponentePorIdComponente($idComponente);
-		$numeracion=$componente[0]->numeracion;*/
 		$metaSubpresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarMetaSubpresupuesto($idSubpresupuesto);
 		foreach ($metaSubpresupuesto as $key => $value) {
 			if($value->Cod_Titulo!='9999999'){
@@ -277,6 +275,21 @@ class ET_Componente extends CI_Controller
 			}
 			else{
 				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio_Unitario);
+				$idpartida = $this->db->insert_id();
+				$costoUnitario = $this->Model_ET_Analisis_Unitario->listarCostoUnitario($value->Id);
+				foreach ($costoUnitario as $key => $valueC) {
+					//insertar costos unitarios
+					$c_data['cod_insumo']=$valueC->Codigo_Insumo;
+					$c_data['descripcion']=$valueC->Descripcion;
+					$c_data['tipo']=$valueC->Tipo;
+					$c_data['unidad']=$valueC->Unidad;
+					$c_data['cuadrilla']=$valueC->Cuadrilla;
+					$c_data['cantidad']=$valueC->Cantidad;
+					$c_data['precio']=$valueC->Precio;
+					$c_data['parcial']=$valueC->Parcial;
+					$c_data['id_partida']=$idpartida;
+					$idAnalisis = $this->Model_ET_Analisis_Unitario->insertarAnalisisCUS10($c_data);
+				}
 			}
 		}
 		echo json_encode(['data' => $metaSubpresupuesto]);exit;
