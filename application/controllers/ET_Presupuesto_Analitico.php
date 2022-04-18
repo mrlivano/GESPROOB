@@ -50,7 +50,7 @@ class ET_Presupuesto_Analitico extends CI_Controller
 		foreach ($PresupuestoEjecucion as $key => $value) 
 		{
 			$Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
-			if(count($Presupuesto==0))
+			if(count($Presupuesto)==0)
 			{
 				$value->NombrePresupuesto=$value->desc_presupuesto_ej;
 				$value->IdPresupuesto=$value->id_presupuesto_ej;
@@ -72,11 +72,12 @@ class ET_Presupuesto_Analitico extends CI_Controller
 		foreach ($PresupuestoEjecucionListar as $key => $value) 
 		{
 			$Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
-			if(count($Presupuesto==0))
+			if(count($Presupuesto)==0)
 			{
+				$value->childPresupuesto=[];
 				$value->ChilpresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoDetalles($this->input->get('idExpedienteTecnico'),$value->id_presupuesto_ej);
 			}
-			if(count($Presupuesto>0))
+			if(count($Presupuesto)>0)
 			{
 				$value->childPresupuesto=$Presupuesto;
 				foreach ($value->childPresupuesto as $key => $temp) 
