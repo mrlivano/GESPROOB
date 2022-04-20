@@ -44,6 +44,20 @@
                                                     <div class="col-md-4 col-sm-6 col-xs-12">
                                                             <button  onclick="ActualizarProyectos()"  type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> ACTUALIZAR</button>
                                                         </div>
+                                                        <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
+                                                    <div id="validarActualizarSiaf">
+                                                        <div class="col-md-2 col-sm-6 col-xs-12">
+                                                            <select  style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
+                                                                <?php for ($i = 0; $i <= 10; $i++) { ?>
+                                                                    <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-6 col-xs-12">
+                                                        <button  onclick="ImportarProyectosPIDE()" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> IMPORTAR PIDE</button>
+                                                    </div>
+                                                    </div>
+                                                    <?php } ?>
                                                         <div class="pull-right tableTools-container-EstudioInversion"></div>
                                                    
                                                      </div>
@@ -564,4 +578,109 @@ function ActualizarProyectos(){
        }
    });            
 }
+
+function ImportarProyectosPIDE(){
+    var anio = $('#txtAnioActualizar').val();
+    $.ajax({
+    "url":"https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+anio,
+    type:"GET",
+    beforeSend: function()
+            {
+                renderLoading();
+            },
+    success:function(data)
+    {
+        count=0;
+        proyect=0;
+        if(!data || data.length === 0)
+        {
+            return;
+        }
+        var idUnidadEjecutora = $("#selectUnidadEjecutora").val();
+        var anio = $('#txtAnioActualizar').val();
+       /* $.ajax({
+            type:"POST",
+            url:base_url+'index.php/bancoproyectos/insertarProyectosPIDE',
+            data:{idUnidadEjecutora:idUnidadEjecutora,anio:anio, data:data},
+            cache: false,
+            success:function(resp)
+            {
+            }
+        });*/
+        data.forEach(element => {
+            if(element.estado==='A'){$.ajax({
+                "url":"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+element.idProyecto,
+                type:"GET",
+                success:function(proy)
+                {
+                    if(proy.codigo && proy.incluidoPMI=='1'){
+                        $.ajax({
+                        type:"POST",
+                        url:base_url+'index.php/bancoproyectos/insertarProyectoCodigoPIDE',
+                        data:{id:element.idProyecto,proy:proy,idUnidadEjecutora:idUnidadEjecutora,anio:anio},
+                        cache: false,
+                        success:function(resp)
+                        {
+                            count++;
+                            proyect++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                        },
+                        error:function ()
+                        {
+                            count++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                        }
+                      });
+                    }
+                    else{
+                        count++;
+                            if (count===data.length) {
+                                $('#divModalCargaAjax').hide(); 
+                                swal(
+                                'Operacion Completada',
+                                ' Total de proyectos ingresados: '+proyect,
+                                'success'
+                                );
+                            }
+                    }
+                   
+                },
+                error:function ()
+                {
+                    count++;
+                    if (count===data.length) {
+                        $('#divModalCargaAjax').hide(); 
+                        swal(
+						'Operacion Completada',
+						' Total de proyectos ingresados: '+proyect,
+						'success'
+					    );
+                    }
+                }
+            });}
+            else{
+                count++;
+            }
+        });
+        if (count===data.length) {
+            $('#divModalCargaAjax').hide(); 
+        }
+     }
+ });
+}
+
 </script>

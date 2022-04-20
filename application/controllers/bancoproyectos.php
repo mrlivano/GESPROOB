@@ -594,6 +594,8 @@ class bancoproyectos extends CI_Controller
     function insertarProyectoCodigoPIDE()
     {
         $id=$this->input->post('id');
+        $idUnidadEjecutora=$this->input->post('idUnidadEjecutora');
+        $anio=$this->input->post('anio');
         $value=$this->input->post('proy');
             $verificar=count($this->bancoproyectos_modal->verificarCodigoUnicoPIDE($id));
 
@@ -650,6 +652,19 @@ class bancoproyectos extends CI_Controller
                 $c_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
                 $c_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
                 $data = $this->bancoproyectos_modal->insertarProyectoCodigoPIDE($c_data);
+
+                $c_data_pi['id_ue'] = $idUnidadEjecutora;
+                $c_data_pi['codigo_unico_pi'] = $id;
+                $c_data_pi['nombre_pi'] = $value['nombre'];
+                $c_data_pi['costo_pi'] = $value['montoAlternativa'];
+                $c_data_pi['id_naturaleza_inv'] = NULL;
+                $c_data_pi['id_tipologia_inv'] = NULL;
+                $c_data_pi['id_tipo_inversion'] = $value['desTipoFormato'];
+                $c_data_pi['id_grupo_funcional'] = NULL;
+                $c_data_pi['id_nivel_gob'] =NULL;
+                $c_data_pi['estado_pi'] = $value['estado']==='A'?1:0;
+                $c_data_pi['fecha_viabilidad_pi'] =  $value['fechaViabilidad'];
+                $data_pi = $this->bancoproyectos_modal->insertarProyectosdePIDE($c_data_pi);
                 
             }
             else
@@ -703,7 +718,18 @@ class bancoproyectos extends CI_Controller
                 $u_data['unidadFormuladora'] = $value['unidadFormuladora'];
                 $u_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
                 $u_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
-               $data = $this->bancoproyectos_modal->editarProyectoCodigoPIDE($u_data,$id);
+                $data = $this->bancoproyectos_modal->editarProyectoCodigoPIDE($u_data,$id);
+
+                $u_data_pi['nombre_pi'] = $value['nombre'];
+                $u_data_pi['costo_pi'] = $value['montoAlternativa'];
+                $u_data_pi['id_naturaleza_inv'] = NULL;
+                $u_data_pi['id_tipologia_inv'] = NULL;
+                $u_data_pi['id_tipo_inversion'] = $value['desTipoFormato'];
+                $u_data_pi['id_grupo_funcional'] = NULL;
+                $u_data_pi['id_nivel_gob'] =NULL;
+                $u_data_pi['estado_pi'] = $value['estado']==='A'?1:0;
+                $u_data_pi['fecha_viabilidad_pi'] =  $value['fechaViabilidad'];
+                $data_pi = $this->bancoproyectos_modal->editarProyectosdePIDE($u_data_pi,$id);
             }
     }
 
