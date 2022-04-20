@@ -753,8 +753,35 @@ class bancoproyectos extends CI_Controller
             }
             else
             {
-                $u_data_pi_anio['estado'] = $value['estado']==='ACTIVO'?1:0;
-                $data_pi_anio = $this->bancoproyectos_modal->editarProyectoAñoPIDE($u_data_pi_anio,$id);
+                $u_data_pi_loc['estado'] = $value['estado']==='ACTIVO'?1:0;
+                $data_pi_loc = $this->bancoproyectos_modal->editarProyectoAñoPIDE($u_data_pi_loc,$id,$anio);
+            }
+            foreach ($value['localizaciones_'] as $key => $val) {
+                $verificar_pi_loc=count($this->bancoproyectos_modal->verificarLocalizacionPIDE($id,$val['ubigeo']));
+
+                if($verificar_pi_loc===0)
+                {
+                    $c_data_pi_loc['codigo'] = $id;
+                    $c_data_pi_loc['departamento'] = $val['departamento'];
+                    $c_data_pi_loc['provincia'] = $val['provincia'];
+                    $c_data_pi_loc['distrito'] = $val['distrito'];
+                    $c_data_pi_loc['centroPoblado'] = $val['centroPoblado'];
+                    $c_data_pi_loc['ubigeo'] = $val['ubigeo'];
+                    $c_data_pi_loc['latitud'] = $val['latitud'];
+                    $c_data_pi_loc['longitud'] = $val['longitud'];
+                    $data_pi_loc = $this->bancoproyectos_modal->insertarLocalizacionPIDE($c_data_pi_loc);
+
+                }
+                else
+                {
+                    $u_data_pi_loc['departamento'] = $val['departamento'];
+                    $u_data_pi_loc['provincia'] = $val['provincia'];
+                    $u_data_pi_loc['distrito'] = $val['distrito'];
+                    $u_data_pi_loc['centroPoblado'] = $val['centroPoblado'];
+                    $u_data_pi_loc['latitud'] = $val['latitud'];
+                    $u_data_pi_loc['longitud'] = $val['longitud'];
+                    $data_pi_loc = $this->bancoproyectos_modal->editarLocalizacionPIDE($u_data_pi_loc,$id,$val['ubigeo']);
+                }
             }
     }
 
@@ -793,6 +820,20 @@ class bancoproyectos extends CI_Controller
                $data = $this->bancoproyectos_modal->editarEstudioCodigoPIDE($u_data,$value->id_pi);
             }
 
+        }
+    }
+    public function getProyectoPIDE()
+    {
+        if ($this->input->is_ajax_request())
+        {
+            $codigo = $this->input->post("codigo");
+            $data = $this->bancoproyectos_modal->getProyectoPIDE($codigo);
+            $localizacion = $this->bancoproyectos_modal->getProyectoLocalizacionPIDE($codigo);
+            echo json_encode(array('data' => $data,'localizacion' => $localizacion));
+        }
+        else
+        {
+            show_404();
         }
     }
 }

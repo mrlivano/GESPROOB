@@ -1113,7 +1113,11 @@ var filtrarPIPs = function(type)
         { "data": "anio" }, 
         { "data": "nombre" }, 
         { "data": "idProyectoSnip" }, 
-        { "data": "estado" },
+        { "data": function (data, type) 
+            {  
+                return data.estado=='A'?'Activo':'Inactivo';
+            }
+        },
         {
             "data": function (data, type) 
             { 

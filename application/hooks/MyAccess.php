@@ -243,6 +243,7 @@ function autorizar($url)
       'bancoproyectos/insertarProyectosPIDE',
       'bancoproyectos/insertarProyectoCodigoPIDE',
       'bancoproyectos/insertarEstudioCodigoPIDE',
+      'bancoproyectos/getProyectoPIDE',
       'bancoproyectos/filtrarProyectoInversion',
       'bancoproyectos/filtrarProyectoInversion1',
       'CarteraInversion/EditCartera',
