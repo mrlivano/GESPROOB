@@ -359,6 +359,48 @@ x<div class="right_col" role="main">
                           <input id="txt_NombreUnidadEU" name="txt_NombreUnidadEU" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" type="text">
                         </div>
                       </div>
+                      <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Direccion <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txtDireccion" name="txtDireccion" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" type="text" maxlength="8">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Distrito <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txtDistrito" name="txtDistrito" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" type="text" maxlength="8">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Provincia <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txtProvincia" name="txtProvincia" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" type="text" maxlength="8">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Departamento <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txtRegion" name="txtRegion" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" type="text" maxlength="8">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Telefono<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txtTelefono" name="txtTelefono" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" type="text" maxlength="8">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">RUC<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txtRUC" name="txtRUC" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" type="text" maxlength="8">
+                          </div>
+                        </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">

@@ -56,11 +56,19 @@ class UnidadE extends CI_Controller
     //ACTUALIZAR O MODIFICAR DATOS DE UNIDAD EJECUTORA
     public function UpdateUnidadE()
     {
+        echo("<script>consolo.log('entrando'); </script>");
         if ($this->input->is_ajax_request()) {
-            $txt_IdUnidadEModif = $this->input->post("txt_IdUnidadEModif");
-            $txt_NombreUnidadEU = $this->input->post("txt_NombreUnidadEU");
-            $txtCodigoUE_M = $this->input->post("txtCodigoUE_M");
-            if ($this->Model_UnidadE->UpdateUnidadE($txt_IdUnidadEModif, $txt_NombreUnidadEU, $txtCodigoUE_M) == false) {
+            $id = $this->input->post("txt_IdUnidadEModif");
+            $data['nombre_ue'] = $this->input->post("txt_NombreUnidadEU");
+            $data['codigo_ue'] = $this->input->post("txtCodigoUE_M");
+            // $data['direccion'] = $this->input->post("txtDireccion");
+            // $data['distrito'] = $this->input->post("txtDistrito");
+            // $data['provincia'] = $this->input->post("txtProvincia");
+            // $data['region'] = $this->input->post("txtRegion");
+            // $data['telefono'] = $this->input->post("txtTelefono");
+            // $data['RUC'] = $this->input->post("txtRUC");
+
+            if ($this->Model_UnidadE->UpdateUnidadE($data, $id) == false) {
                 echo "Se actualizo correctamente la unidad ejecutora";
             } else {
                 echo "No se actualizo correctamente la unidad ejecutora";

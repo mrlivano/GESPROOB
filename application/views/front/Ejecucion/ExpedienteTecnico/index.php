@@ -75,15 +75,17 @@
 										</div>
 										<div class="modal-body">
 											<div class="row">
-												<div class="col-md-5 col-sm-5 col-xs-5" id="divProyectoBuscar">
+												<div class="col-md-12 col-sm-12 col-xs-12" id="divProyectoBuscar">
 														<input type="hidden" id="idProyecto" name="idProyecto" notValidate>
 														<label class="control-label">Proyecto</label>
 														<div>
-															<select name="selectProyecto" id="selectProyecto" class="form-control selectpicker">
-																<option value="">Buscar Clasificador</option>
+															<select name="selectProyecto" id="selectProyecto"  class="form-control selectpicker">
+																<option value="">Buscar Proyecto</option>
 															</select>
-														</div>
-													</div><div class="col-xs-12">
+														</div><br>
+													</div>
+													
+													<div class="col-xs-12">
 													
 													<div class="row" style="text-align: right;">
 														<button  onclick="BuscarProyectocodigo()" class="btn btn-success" data-dismiss="modal">BUSCAR</button>
@@ -178,6 +180,7 @@ if ($sessionTempError) { ?>
 
 	function BuscarProyectocodigo() {
 		var inputValue=$("#idProyecto").val();
+		$('#selectProyecto').find('option[1]').remove();
 		if (inputValue === "") {
 				swal.showInputError("Ingresar codigo!");
 				return false
@@ -192,9 +195,10 @@ if ($sessionTempError) { ?>
 					cache: false,
 					success: function(resp) {
 						var ProyetoEncontrado = JSON.parse(resp);
-						if (ProyetoEncontrado != 'noexiste') {
+						if (ProyetoEncontrado != 'no existe') {
 							if (ProyetoEncontrado == true) {
-								swal.showInputError("Este proyecto de inversión ya esta registrado.");
+								console.log("ya esta el proy");
+								swal("","Este proyecto de inversión ya esta registrado.","error");
 								return false
 							}
 
@@ -205,7 +209,7 @@ if ($sessionTempError) { ?>
 							}, base_url + 'index.php/Expediente_Tecnico/insertar', 'GET', null, null, false, true);
 							swal("Correcto!", "Se Encontro el Proyecto: " + inputValue, "success");
 						} else {
-							swal.showInputError("No se encontro un proyecto de inversión con ese código único. Intente Nuevamente!");
+							swal("","No se encontro un proyecto de inversión con ese código único. Intente Nuevamente!","error");
 							return false
 						}
 					}
