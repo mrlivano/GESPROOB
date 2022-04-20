@@ -52,9 +52,11 @@ class Model_UnidadE extends CI_Model
     //FIN LISTAR UNIDAD DE EJECUCION
 
     //MODIFICAR DATOS DE UNIDAD EJECUTORA
-         function UpdateUnidadE($id_ue, $nombre_ue, $txtCodigoUE_M)
+         function UpdateUnidadE($data,$id)
         {
-           $this->db->query("execute sp_UnidadEjecutora_u '".$id_ue."','".$nombre_ue."','".$txtCodigoUE_M."'");
+           $this->db->set($data);
+           $this->db->where('id_ue',$id);
+           $this->db->update('UNIDAD_EJECUTORA');
             if ($this->db->affected_rows() > 0)
               {
                 return true;

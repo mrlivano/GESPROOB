@@ -11,7 +11,11 @@ class Model_ProyectoInversion extends CI_Model
         $this->db->insert('PROYECTO_INVERSION', $data);
         return $this->db->insert_id();
     }
-
+    function BuscarLike($like)
+    {
+        $ProyectoInversionLike=$this->db->query("select codigo_unico_pi ,(codigo_unico_pi+' '+nombre_pi) as proyecto from PROYECTO_INVERSION where codigo_unico_pi like '%'+replace('".$like."', ' ', '')+'%' or nombre_pi like '%'+replace('".$like."', ' ', '')+'%';");
+        return $ProyectoInversionLike->result();
+    }
     function editar($data, $idPi)
     {
         $this->db->set($data);
@@ -178,7 +182,7 @@ class Model_ProyectoInversion extends CI_Model
         $delete=$this->db->query("delete from [dbo].[BD_S10] where CodigoUnico='".$codigo."'");
         $insert=$this->db->query("insert into [dbo].[BD_S10] ([CodigoUnico],[Proyecto],[FechaSubida]) VALUES('".$codigo."','".$proyecto."','".$fecha."')");
         $query="\"IF EXISTS(SELECT * FROM DBO.SYSDATABASES WHERE NAME = '".$nameDB."') BEGIN ALTER DATABASE [".$nameDB."] set single_user with rollback immediate DROP DATABASE [".$nameDB."] END RESTORE DATABASE [".$nameDB."] FROM DISK = '".$urlDB."' WITH MOVE 'S10_Data' TO 'C:\S102000\Data\ ".$nameDB."_1.mdf', MOVE 'S10_Datos' TO 'C:\S102000\Data\ ".$nameDB."_2.ndf', MOVE 'S10_Log' TO 'C:\S102000\Data\ ".$nameDB."_3.ldf', REPLACE\"";
-        $cmd = "osql -U \"my\" -P \"123456789\" -S \"DESKTOP-N1LQMHP\" -Q " .$query;
+        $cmd = "osql -U \"sa\" -P \"123456\" -S \"LAPTOP-QNNLA4MB\" -Q " .$query;
         return passthru( $cmd );
     }
     public function DeleteDB($codigo){
@@ -345,11 +349,11 @@ class Model_ProyectoInversion extends CI_Model
                         $this->db->where('Cod_Partida',$valorMP->codpartida);
                         $this->db->where('Secuencial',$valorMP->secuencial);
                         $this->db->update('S10_META_PARTIDA');
-                        foreach($metaPartida as $valorMP0){$idMetaPartida = $valorMP0->Id;}
+                        $idMetaPartida =  $metaPartida[0]->Id; 
                     }
                     if($valorMP->codtitulo === '9999999'){
                         // Insertar tabla COSTO UNITARIO S10
-                        $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Id_Partida='".$idMetaPartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
+                        $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Codigo_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
                         $listaCostoUnitario= $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
                         from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
                         on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa

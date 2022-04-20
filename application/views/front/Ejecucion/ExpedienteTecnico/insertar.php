@@ -41,6 +41,10 @@
 							<label class="control-label">Nombre de la Unidad Ejecutora</label>
 							<div>
 								<input id="txtNombreUe" name="txtNombreUe" value="<?= $Listarproyectobuscado->nombre_ue?>" class="form-control"  placeholder="Nombre de la Unidad Ejecutora"  autocomplete="off" >	
+								<input type="hidden" id="txtDireccion" name="txtDireccion" value="<?= $Listarproyectobuscado->direccion?>" class="form-control" >	
+								<input type="hidden" id="txtDPR" name="txtDPR" value="<?= $Listarproyectobuscado->UEdpr?>" class="form-control" >	
+								<input type="hidden" id="txtTelefono" name="txtTelefono" value="<?= $Listarproyectobuscado->telefono?>" class="form-control" >	
+								<input type="hidden" id="txtRUC" name="txtRUC" value="<?= $Listarproyectobuscado->RUC?>" class="form-control" >	
 							</div>	
 						</div>
 					</div>			

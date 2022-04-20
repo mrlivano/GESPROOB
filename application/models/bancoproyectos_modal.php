@@ -240,8 +240,23 @@ class bancoproyectos_modal extends CI_Model
 
     function obtenerProyectosPIDE()
     {
-        $query = $this->db->query("select pi.codigo_unico_pi as codigo_unico_est_inv, pi.nombre_pi as nombre_est_inv, pi.id_pi, pi.id_ue, ppi.situacion, ppi.ultimoEstudio,gf.id_grup_funcional from PROYECTO_INVERSION pi inner join PIDE_PROYECTO_INVERSION ppi on pi.codigo_unico_pi=ppi.codigo left join GRUPO_FUNCIONAL gf on gf.nombre_grup_funcional= ppi.subprograma COLLATE SQL_Latin1_General_CP1_CI_AI");
+        $query = $this->db->query("select pi.codigo_unico_pi as codigo_unico_est_inv , ppi.montoAlternativa, ppi.costoActualizado, pi.nombre_pi as nombre_est_inv, pi.id_pi, pi.id_ue, ppi.situacion, ppi.ultimoEstudio,gf.id_grup_funcional from PROYECTO_INVERSION pi inner join PIDE_PROYECTO_INVERSION ppi on pi.codigo_unico_pi=ppi.codigo left join GRUPO_FUNCIONAL gf on gf.nombre_grup_funcional= ppi.subprograma COLLATE SQL_Latin1_General_CP1_CI_AI");
         return $query->result();
+    }
+    function getProyectoPIDE($codigo_unico_pi)
+    {
+        $this->db->select('PIDE_PROYECTO_INVERSION.*');
+        $this->db->from('PIDE_PROYECTO_INVERSION');
+        $this->db->where('PIDE_PROYECTO_INVERSION.codigo',$codigo_unico_pi);
+        return $this->db->get()->result();
+    }
+
+    function getProyectoLocalizacionPIDE($codigo_unico_pi)
+    {
+        $this->db->select('PIDE_LOCALIZACION.*');
+        $this->db->from('PIDE_LOCALIZACION');
+        $this->db->where('PIDE_LOCALIZACION.codigo',$codigo_unico_pi);
+        return $this->db->get()->result();
     }
 
     function verificarCodigoUnicoEstudio($codigo_unico_pi)
@@ -262,5 +277,49 @@ class bancoproyectos_modal extends CI_Model
         $this->db->set($data);
         $this->db->where('id_pi',$codigo_unico_pi);
         $this->db->update('ESTUDIO_INVERSION');
+    }
+
+    function verificarCodigoUnicoProyectoAño($codigo_unico_pi,$anio)
+    {
+        $this->db->select('PROYECTO_AÑO.*');
+        $this->db->from('PROYECTO_AÑO');
+        $this->db->where('PROYECTO_AÑO.cod_proyecto',$codigo_unico_pi);
+        $this->db->where('PROYECTO_AÑO.año',$anio);
+        return $this->db->get()->result();
+    }
+
+    function insertarProyectoAñoPIDE($data)
+    {
+        $this->db->insert('PROYECTO_AÑO',$data);
+    }
+
+    function editarProyectoAñoPIDE($data,$codigo_unico_pi,$anio)
+    {
+        $this->db->set($data);
+        $this->db->where('cod_proyecto',$codigo_unico_pi);
+        $this->db->where('año',$anio);
+        $this->db->update('PROYECTO_AÑO');
+    }
+
+    function verificarLocalizacionPIDE($codigo,$ubigeo)
+    {
+        $this->db->select('PIDE_LOCALIZACION.*');
+        $this->db->from('PIDE_LOCALIZACION');
+        $this->db->where('PIDE_LOCALIZACION.codigo',$codigo);
+        $this->db->where('PIDE_LOCALIZACION.ubigeo',$ubigeo);
+        return $this->db->get()->result();
+    }
+
+    function insertarLocalizacionPIDE($data)
+    {
+        $this->db->insert('PIDE_LOCALIZACION',$data);
+    }
+
+    function editarLocalizacionPIDE($data,$codigo,$ubigeo)
+    {
+        $this->db->set($data);
+        $this->db->where('codigo',$codigo);
+        $this->db->where('ubigeo',$ubigeo);
+        $this->db->update('PIDE_LOCALIZACION');
     }
 }

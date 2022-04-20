@@ -594,6 +594,8 @@ class bancoproyectos extends CI_Controller
     function insertarProyectoCodigoPIDE()
     {
         $id=$this->input->post('id');
+        $idUnidadEjecutora=$this->input->post('idUnidadEjecutora');
+        $anio=$this->input->post('anio');
         $value=$this->input->post('proy');
             $verificar=count($this->bancoproyectos_modal->verificarCodigoUnicoPIDE($id));
 
@@ -703,7 +705,83 @@ class bancoproyectos extends CI_Controller
                 $u_data['unidadFormuladora'] = $value['unidadFormuladora'];
                 $u_data['unidadFormuladoraCodigo'] = $value['unidadFormuladoraCodigo'];
                 $u_data['unidadUEICodigo'] = $value['unidadUEICodigo'];
-               $data = $this->bancoproyectos_modal->editarProyectoCodigoPIDE($u_data,$id);
+                $data = $this->bancoproyectos_modal->editarProyectoCodigoPIDE($u_data,$id);
+            }
+            $verificar_pi=count($this->bancoproyectos_modal->verificarCodigoUnico($id));
+
+            if($verificar_pi===0)
+            {
+                $c_data_pi['id_ue'] = $idUnidadEjecutora;
+                $c_data_pi['codigo_unico_pi'] = $id;
+                $c_data_pi['nombre_pi'] = $value['nombre'];
+                $c_data_pi['costo_pi'] = $value['montoAlternativa'];
+                $c_data_pi['id_naturaleza_inv'] = NULL;
+                $c_data_pi['id_tipologia_inv'] = NULL;
+                $c_data_pi['id_tipo_inversion'] = $value['desTipoFormato']==='2'?'2':'1';
+                $c_data_pi['id_grupo_funcional'] = NULL;
+                $c_data_pi['id_nivel_gob'] =NULL;
+                $c_data_pi['estado_pi'] = $value['estado']==='ACTIVO'?1:0;
+                $c_data_pi['num_beneficiarios'] =  $value['beneficiario'];
+                $c_data_pi['fecha_viabilidad_pi'] =  date('Y-m-d', strtotime(str_replace('/', '-',$value['fechaViabilidad'])));
+                $data_pi = $this->bancoproyectos_modal->insertarProyectosdePIDE($c_data_pi);
+
+            }
+            else
+            {
+                $u_data_pi['nombre_pi'] = $value['nombre'];
+                $u_data_pi['costo_pi'] = $value['montoAlternativa'];
+                $u_data_pi['id_naturaleza_inv'] = NULL;
+                $u_data_pi['id_tipologia_inv'] = NULL;
+                $u_data_pi['id_tipo_inversion'] = $value['desTipoFormato']==='2'?'2':'1';
+                $u_data_pi['id_grupo_funcional'] = NULL;
+                $u_data_pi['id_nivel_gob'] =NULL;
+                $u_data_pi['estado_pi'] = $value['estado']==='ACTIVO'?1:0;
+                $u_data_pi['num_beneficiarios'] =  $value['beneficiario'];
+                $u_data_pi['fecha_viabilidad_pi'] =  date('Y-m-d', strtotime(str_replace('/', '-',$value['fechaViabilidad'])));
+                $data_pi = $this->bancoproyectos_modal->editarProyectosdePIDE($u_data_pi,$id);
+            }
+
+            $verificar_pi_anio=count($this->bancoproyectos_modal->verificarCodigoUnicoProyectoAño($id,$anio));
+
+            if($verificar_pi_anio===0)
+            {
+                $c_data_pi_anio['cod_proyecto'] = $id;
+                $c_data_pi_anio['año'] = $anio;
+                $c_data_pi_anio['estado'] = $value['estado']==='ACTIVO'?1:0;
+                $data_pi_anio = $this->bancoproyectos_modal->insertarProyectoAñoPIDE($c_data_pi_anio);
+
+            }
+            else
+            {
+                $u_data_pi_loc['estado'] = $value['estado']==='ACTIVO'?1:0;
+                $data_pi_loc = $this->bancoproyectos_modal->editarProyectoAñoPIDE($u_data_pi_loc,$id,$anio);
+            }
+            foreach ($value['localizaciones_'] as $key => $val) {
+                $verificar_pi_loc=count($this->bancoproyectos_modal->verificarLocalizacionPIDE($id,$val['ubigeo']));
+
+                if($verificar_pi_loc===0)
+                {
+                    $c_data_pi_loc['codigo'] = $id;
+                    $c_data_pi_loc['departamento'] = $val['departamento'];
+                    $c_data_pi_loc['provincia'] = $val['provincia'];
+                    $c_data_pi_loc['distrito'] = $val['distrito'];
+                    $c_data_pi_loc['centroPoblado'] = $val['centroPoblado'];
+                    $c_data_pi_loc['ubigeo'] = $val['ubigeo'];
+                    $c_data_pi_loc['latitud'] = $val['latitud'];
+                    $c_data_pi_loc['longitud'] = $val['longitud'];
+                    $data_pi_loc = $this->bancoproyectos_modal->insertarLocalizacionPIDE($c_data_pi_loc);
+
+                }
+                else
+                {
+                    $u_data_pi_loc['departamento'] = $val['departamento'];
+                    $u_data_pi_loc['provincia'] = $val['provincia'];
+                    $u_data_pi_loc['distrito'] = $val['distrito'];
+                    $u_data_pi_loc['centroPoblado'] = $val['centroPoblado'];
+                    $u_data_pi_loc['latitud'] = $val['latitud'];
+                    $u_data_pi_loc['longitud'] = $val['longitud'];
+                    $data_pi_loc = $this->bancoproyectos_modal->editarLocalizacionPIDE($u_data_pi_loc,$id,$val['ubigeo']);
+                }
             }
     }
 
@@ -727,6 +805,8 @@ class bancoproyectos extends CI_Controller
                 $c_data['id_tipo_est'] = 1;
                 $c_data['situacion'] = $value->situacion;
                 $c_data['ultimoEstudio'] = $value->ultimoEstudio;
+                $c_data['monto_inv'] = $value->montoAlternativa;
+                $c_data['costo_estudio'] = $value->costoActualizado;
                 $data = $this->bancoproyectos_modal->insertarEstudioCodigoPIDE($c_data);
                 
             }
@@ -735,9 +815,25 @@ class bancoproyectos extends CI_Controller
                 $u_data['id_tipo_est'] = 1;
                 $u_data['situacion'] = $value->situacion;
                 $u_data['ultimoEstudio'] = $value->ultimoEstudio;
+                $u_data['monto_inv'] = $value->montoAlternativa;
+                $u_data['costo_estudio'] = $value->costoActualizado;
                $data = $this->bancoproyectos_modal->editarEstudioCodigoPIDE($u_data,$value->id_pi);
             }
 
+        }
+    }
+    public function getProyectoPIDE()
+    {
+        if ($this->input->is_ajax_request())
+        {
+            $codigo = $this->input->post("codigo");
+            $data = $this->bancoproyectos_modal->getProyectoPIDE($codigo);
+            $localizacion = $this->bancoproyectos_modal->getProyectoLocalizacionPIDE($codigo);
+            echo json_encode(array('data' => $data,'localizacion' => $localizacion));
+        }
+        else
+        {
+            show_404();
         }
     }
 }

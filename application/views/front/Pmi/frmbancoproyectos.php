@@ -112,7 +112,6 @@
                     <div class="x_content">
                         <div class="row">
                             <div class="col-md-4">
-                                <button style="margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-primary" onclick="agregarProyectoInversion();"><span class="fa fa-plus-circle"></span> Nuevo </button>
                             </div>
                             <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
                             <div id="validarActualizarSiaf">
@@ -123,16 +122,13 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select style="margin-top: 5px;margin-bottom: 15px;" type="text" name="selectUnidadEjecutora" id="selectUnidadEjecutora" class="form-control">
                                         <?php foreach ($unidadEjecutora as $key => $value) { ?>
                                             <option value="<?=$value->id_ue?>" data-id_ue="<?=$value->id_ue?>"><?=$value->codigo_ue?> - <?=$value->nombre_ue?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                <button  onclick="filtrarPIPs(1)" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> IMPORTAR PIDE</button>
-                            </div>
                             </div>
                            
                             
@@ -1117,7 +1113,11 @@ var filtrarPIPs = function(type)
         { "data": "anio" }, 
         { "data": "nombre" }, 
         { "data": "idProyectoSnip" }, 
-        { "data": "estado" },
+        { "data": function (data, type) 
+            {  
+                return data.estado=='A'?'Activo':'Inactivo';
+            }
+        },
         {
             "data": function (data, type) 
             { 

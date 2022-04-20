@@ -41,9 +41,20 @@
                                               
                                                    
                                                     <div class="clearfix">
-                                                    <div class="col-md-4 col-sm-6 col-xs-12">
-                                                            <button  onclick="ActualizarProyectos()"  type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> ACTUALIZAR</button>
+                                                        <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
+                                                    <div id="validarActualizarSiaf">
+                                                        <div class="col-md-2 col-sm-6 col-xs-12">
+                                                            <select  onchange="ListaEstudioInversion()" style="margin-top: 5px;margin-bottom: 15px;" type="text" name="txtAnioActualizar" id="txtAnioActualizar" class="form-control"data-live-search="true"  title="Elija año">
+                                                                <?php for ($i = 0; $i <= 10; $i++) { ?>
+                                                                    <option value="<?=date('Y')-$i?>"><?=date('Y')-$i?></option>
+                                                                <?php } ?>
+                                                            </select>
                                                         </div>
+                                                        <div class="col-md-2 col-sm-6 col-xs-12">
+                                                        <button  onclick="ImportarProyectosPIDE()" style="float: right;margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-warning"><span class="fa fa-refresh"></span> IMPORTAR PIDE</button>
+                                                    </div>
+                                                    </div>
+                                                    <?php } ?>
                                                         <div class="pull-right tableTools-container-EstudioInversion"></div>
                                                    
                                                      </div>
@@ -54,12 +65,14 @@
                                                                     <thead style=" ">
                                                                        <tr>
                                                                        <th style="width: 1%">Código</th>
-                                                                       <th style="width: 1%">#</th>
+                                                                       
                                                                          <th style="width: 70%"><i class="fa fa-thumb-tack"></i>Nombre</th>
-                                                                         <th style="width: 12%"> Función</th>
+                                                                         <th style="width: 1%"> Tipo</th>
+                                                                         <th style="width: 10%"> Monto Inversión</th>
+                                                                         <th style="width: 10%"> Costo Actualizado</th>
                                                                          <th style="width: 6%">Situación</th>
-                                                                         <th style="width: 14%">Ultimo Estudio</th>
-                                                                         <th style="width: 10%">Opción</th>
+                                                                         <th style="width: 4%">Ultimo Estudio</th>
+                                                                         <th style="width: 4%">Opción</th>
                                                                       </tr>
                                                                    </thead>
                                                                 </table>
@@ -487,6 +500,217 @@
     </div>
 </div>
 
+<!--modal informativo-->
+<div class="modal fade" id="modal_informativo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Caracteristicas del Proyecto </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form_AddUbigeo">
+                    <input id="txt_id_pip" name="txt_id_pip" required="required" type="hidden">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <label for="name">Proyecto:</label>
+                            <textarea class="form-control" rows="2" readonly="readonly" id="nombreProyectoInv" name="nombreProyectoInv"></textarea>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Codigo:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="codigoProyecto" name="codigoProyecto">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Estado:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="estado" name="estado">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Fecha de Registro:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="fechaRegistro" name="fechaRegistro">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Funcion:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="funcion" name="funcion">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Programa:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="programa" name="programa">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <label for="name">Sub Programa:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="subprograma" name="subprograma">
+                        </div> 
+                        <div class="col-xs-3 col-md-3">
+                            <label for="name">Codigo UF:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="unidadFormuladoraCodigo" name="unidadFormuladoraCodigo">
+                        </div>
+                        <div class="col-xs-9 col-md-9">
+                            <label for="name">Unidad Formuladora:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="unidadFormuladora" name="unidadFormuladora">
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="name">Nivel de Gobierno:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="nivelGobierno" name="nivelGobierno">
+                        </div> 
+                        <div class="col-xs-12 col-md-4">
+                            <label for="name">Sector:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="sector" name="sector">
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="name">Pliego:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="pliego" name="pliego">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Codigo UEv:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="evaluadoraCodigo" name="evaluadoraCodigo">
+                        </div>
+                        <div class="col-xs-12 col-md-9">
+                            <label for="name">Unidad Evaluadora:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="evaluadora" name="evaluadora">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Codigo UEj:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="ejecutoraCodigo" name="ejecutoraCodigo">
+                        </div>
+                        <div class="col-xs-12 col-md-9">
+                            <label for="name">Unidad Ejecutora:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="ejecutora" name="ejecutora">
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <label for="name">Situacion:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="situacion" name="situacion">
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <label for="name">Nivel de Estudio:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="nivelEstudio" name="nivelEstudio">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Ultimo Estudio:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="ultimoEstudio" name="ultimoEstudio">
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="name">Estado Ultimo Estudio:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="estadoUltimoEstudio" name="estadoUltimoEstudio">
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <label for="name">Beneficiario:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="beneficiario" name="beneficiario">
+                        </div>
+                        <br>
+                        <div class="col-xs-12 col-md-12">
+                            <label for="name">Fuente de Financiamiento:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="fuenteFinanciamiento" name="fuenteFinanciamiento">
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                        <table id="TableMoneda" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                        <thead >
+                                        <tr>
+                                            <th colspan="6" style="width: 12%; text-align: center" >MONTO (S/)</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="width: 8%; text-align: center"> Alternativa </th>
+                                            <th style="width: 8%; text-align: center"> Reformulado </th>
+                                            <th style="width: 8%; text-align: center"> F15 </th>
+                                            <th style="width: 8%; text-align: center"> F16 </th>
+                                            <th style="width: 8%; text-align: center"> Laudo </th>
+                                            <th style="width: 8%; text-align: center"> Carta Fianza </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoAlternativa" name="montoAlternativa"></spam></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoReformulado" name="montoReformulado"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoF15" name="montoF15"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoF16" name="montoF16"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoLaudo" name="montoLaudo"></span></td>
+                                            <td style="width: 8%; text-align: center"> s/ <span id="montoCartaFianza" name="montoCartaFianza"></span></td>
+                                        </tr>
+                                    </tbody>
+                        </table>
+                        </div>
+                        <div class="col-xs-12 col-md-12">
+                        <table id="TableCostos" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                        <thead >
+                                        <tr>
+                                            <th style="width: 8%; text-align: center"> Costo Actualizado </th>
+                                            <th style="width: 8%; text-align: center"> PIM </th>
+                                            <th style="width: 8%; text-align: center"> PIA </th>
+                                            <th style="width: 8%; text-align: center"> Devengado Acumulado </th>
+                                            <th style="width: 8%; text-align: center"> Devengado Año Actual </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="costoActualizado" name="costoActualizado"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="PIM" name="PIM"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="PIA" name="PIA"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="devengadoAcumulado" name="devengadoAcumulado"></label></td>
+                                            <td style="width: 8%; text-align: center"> s/ <label id="devengadoAnioActual" name="devengadoAnioActual"></label></td>
+                                        </tr>
+                                    </tbody>
+                        </table>
+                        </div>
+
+                    </div>                         
+                    <br>
+                    <div class="col-xs-6 col-md-2">
+                            <label for="name">Año de Viabilidad:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="anioViabilidad" name="anioViabilidad">
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <label for="name">Fecha de Viabilidad:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="fechaViabilidad" name="fechaViabilidad">
+                        </div>
+                        <div class="col-xs-6 col-md-2">
+                            <label for="name">Actualizacion:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="actualizacion" name="actualizacion">
+                        </div>
+                        <div class="col-xs-6 col-md-2">
+                            <label for="name">Marco:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="marco" name="marco">
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <label for="name">Con Informe de Cierre?:</label>
+                            <input class="form-control" rows="2" readonly="readonly" id="conInformeCierre" name="conInformeCierre">
+                        </div>
+                    <br>                    
+                    <div class="col-xs-12 col-md-12" style="border: 1px solid #EEEEEE;">
+                        <label for="name">Localizaciones:</label>
+                        <table id="TableUbigeoProyectoInv" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%" >
+                            <thead >
+                                <tr>
+                                    <th style="width: 20%" >Codigo</th>
+                                    <th style="width: 20%" >Departamento</th>
+                                    <th style="width: 20%" >Provincia</th>
+                                    <th style="width: 20%" >Distrito</th>
+                                    <th style="width: 20%" >Centro Poblado</th>
+                                    <th style="width: 20%" >Ubigeo</th>
+                                    <th style="width: 20%" >Latitud</th>
+                                    <th style="width: 20%" >Longitud</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <center>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <button  class="btn btn-danger" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                Cerrar
+                                </button>
+                            </div>
+                        </div>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fin modal inforamtivo-->
+
 <?php
   $sessionTempo=$this->session->flashdata('correcto');
 
@@ -564,4 +788,140 @@ function ActualizarProyectos(){
        }
    });            
 }
+
+function ImportarProyectosPIDE(){
+    var anio = $('#txtAnioActualizar').val();
+    $.ajax({
+    "url":"https://sysapis.uniq.edu.pe/api/dev/proyectos-inversion/proyectos-inversion?anio="+anio,
+    type:"GET",
+    beforeSend: function()
+            {
+                renderLoading();
+            },
+    success:function(data)
+    {
+        count=0;
+        proyect=0;
+        if(!data || data.length === 0)
+        {
+            return;
+        }
+        var idUnidadEjecutora = $("#selectUnidadEjecutora").val();
+        var anio = $('#txtAnioActualizar').val();
+        data.forEach(element => {
+            if(element.estado==='A'){$.ajax({
+                "url":"https://sysapis.uniq.edu.pe/pide/mef/pips?codigo="+element.idProyecto,
+                type:"GET",
+                success:function(proy)
+                {
+                    if(proy.codigo){
+                        $.ajax({
+                        type:"POST",
+                        url:base_url+'index.php/bancoproyectos/insertarProyectoCodigoPIDE',
+                        data:{id:element.idProyecto,proy:proy,idUnidadEjecutora:idUnidadEjecutora,anio:anio},
+                        cache: false,
+                        success:function(resp)
+                        {
+                            count++;
+                            proyect++;
+                            if (count===data.length) {
+                                $.ajax({
+                                    type:"POST",
+                                    url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
+                                    cache: false,
+                                    success:function(resp)
+                                    {
+                                        $('#divModalCargaAjax').hide(); 
+                                        swal(
+                                        'Operacion Completada',
+                                        ' Total de proyectos ingresados: '+proyect,
+                                        'success'
+                                        );
+                                        $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
+                                    }
+                                });
+                            }
+                        },
+                        error:function ()
+                        {
+                            count++;
+                            if (count===data.length) {
+                                $.ajax({
+                                    type:"POST",
+                                    url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
+                                    cache: false,
+                                    success:function(resp)
+                                    {
+                                        $('#divModalCargaAjax').hide(); 
+                                        swal(
+                                        'Operacion Completada',
+                                        ' Total de proyectos ingresados: '+proyect,
+                                        'success'
+                                        );
+                                        $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
+                                    }
+                                });
+                            }
+                        }
+                      });
+                    }
+                    else{
+                        count++;
+                            if (count===data.length) {
+                                $.ajax({
+                                    type:"POST",
+                                    url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
+                                    cache: false,
+                                    success:function(resp)
+                                    {
+                                        $('#divModalCargaAjax').hide(); 
+                                        swal(
+                                        'Operacion Completada',
+                                        ' Total de proyectos ingresados: '+proyect,
+                                        'success'
+                                        );
+                                        $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
+                                    }
+                                });
+                            }
+                    }
+                   
+                },
+                error:function ()
+                {
+                    count++;
+                    if (count===data.length) {
+                        $.ajax({
+                             type:"POST",
+                             url:base_url+'index.php/bancoproyectos/insertarEstudioCodigoPIDE',
+                             cache: false,
+                             success:function(resp)
+                             {
+                                 $('#divModalCargaAjax').hide(); 
+                                 swal(
+                                 'Operacion Completada',
+                                 ' Total de proyectos ingresados: '+proyect,
+                                 'success'
+                                 );
+                                 $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
+                             }
+                         });
+                   }
+                }
+            });}
+            else{
+                count++;
+            }
+        });
+        if (count===data.length) {
+            $('#divModalCargaAjax').hide(); 
+        }
+     }
+ });
+}
+
+function actualizarProyectoInversion() {
+    $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
+}
+
 </script>
