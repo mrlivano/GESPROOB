@@ -11,7 +11,11 @@ class Model_ProyectoInversion extends CI_Model
         $this->db->insert('PROYECTO_INVERSION', $data);
         return $this->db->insert_id();
     }
-
+    function BuscarLike($like)
+    {
+        $ProyectoInversionLike=$this->db->query("select codigo_unico_pi ,(codigo_unico_pi+' '+nombre_pi) as proyecto from PROYECTO_INVERSION where codigo_unico_pi like '%'+replace('".$like."', ' ', '')+'%' or nombre_pi like '%'+replace('".$like."', ' ', '')+'%';");
+        return $ProyectoInversionLike->result();
+    }
     function editar($data, $idPi)
     {
         $this->db->set($data);

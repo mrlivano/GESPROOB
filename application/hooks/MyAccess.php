@@ -578,6 +578,7 @@ function autorizar($url)
       'CarteraInversion/GetCarteraInvFechAct',
       'ProyectoInversion/AddProyecto',
       'ProyectoInversion/listarProyecto',
+      'ProyectoInversion/BuscarProyectoLike',
       'Programacion/BuscarProyectoInversion',
       'criterio/addPrioridad',
       'programar_nopip/AddProgramacion',

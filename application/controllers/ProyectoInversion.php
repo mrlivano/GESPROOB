@@ -34,6 +34,11 @@ class ProyectoInversion extends CI_Controller
 		
 		
 	}
+    function BuscarProyectoLike()
+    {
+      $data=$this->Model_ProyectoInversion->BuscarLike($this->input->post('valueSearch'));
+		echo json_encode($data);exit;
+    }
 
     function GetProyectoInversion()
   	{
