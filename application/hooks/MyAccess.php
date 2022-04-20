@@ -685,6 +685,7 @@ function autorizar($url)
       'Expediente_Tecnico/reportePdfAnalisisUnitarioPorComponente',
       'Expediente_Tecnico/reportePdfValorizacionEjecucion',
       'criterio/getPrioridad',
+      'CostosReferenciales/index',
       'RepositorioExpediente/index',
       'RepositorioExpediente/insertar',
       'RepositorioExpediente/mostrarCarpeta',

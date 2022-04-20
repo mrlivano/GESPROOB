@@ -112,7 +112,6 @@
                     <div class="x_content">
                         <div class="row">
                             <div class="col-md-4">
-                                <button style="margin-top: 5px;margin-bottom: 15px;" type="button" class="btn btn-primary" onclick="agregarProyectoInversion();"><span class="fa fa-plus-circle"></span> Nuevo </button>
                             </div>
                             <?php if($this->session->userdata('tipoUsuario')==9 || $this->session->userdata('tipoUsuario')==1 ) {?>
                             <div id="validarActualizarSiaf">

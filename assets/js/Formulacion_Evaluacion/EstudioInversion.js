@@ -463,8 +463,11 @@ var ListaEstudioInversion=function()
         "dataSrc":""
     },
     "columns":[
-        {"data":"codigo_unico_est_inv" ,"visible": true},
-        {"data":"id_est_inv" ,"visible": true},
+        {"data":function(data)
+            {
+                return '<a data-toggle="tooltip" title="ver etapa"><button data-toggle="tooltip" title="ver etapa" type="button" class="btn btn btn-success btn-xs">'+data.codigo_unico_est_inv +' </button></a>';
+            }},
+        
         { "data": function (data, type, dataToSet)
             {
                 return "<strong>"+data.nombre_est_inv + "</strong>";

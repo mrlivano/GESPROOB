@@ -54,7 +54,7 @@
                                                                     <thead style=" ">
                                                                        <tr>
                                                                        <th style="width: 1%">Código</th>
-                                                                       <th style="width: 1%">#</th>
+                                                                       
                                                                          <th style="width: 70%"><i class="fa fa-thumb-tack"></i>Nombre</th>
                                                                          <th style="width: 12%"> Función</th>
                                                                          <th style="width: 6%">Situación</th>
