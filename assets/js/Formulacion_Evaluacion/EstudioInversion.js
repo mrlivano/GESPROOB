@@ -452,6 +452,7 @@ var eliminarEtapaEstado=function(idEtapaestudio,idEstudioInversion,element)
          /*listra */
 var ListaEstudioInversion=function()
 {
+    var anio = $('#txtAnioActualizar').val();
     var myTableUA=$("#dynamic-table-EstudioInversion").DataTable({
     "processing":true,
     "serverSide":false,
@@ -460,7 +461,8 @@ var ListaEstudioInversion=function()
     "ajax":{
         "url":base_url+"index.php/Estudio_Inversion/get_EstudioInversion",
         "method":"POST",
-        "dataSrc":""
+        data:{anio:anio},
+        "dataSrc":''
     },
     "columns":[
         {"data":function(data)
@@ -473,7 +475,29 @@ var ListaEstudioInversion=function()
                 return "<strong>"+data.nombre_est_inv + "</strong>";
             }
         },
-        {"data":"nombre_funcion"},
+        {"data": function (data, type, dataToSet)
+        {
+
+            if (data.id_tipo_inversion =='1')
+            {
+                return '<a data-toggle="tooltip" title="ver etapa"><button data-toggle="tooltip" title="ver etapa" type="button" class="btn btn btn-primary btn-xs"> PROYECTO </button></a>';
+            }
+            else 
+            {
+                return '<a data-toggle="tooltip" title="ver etapa"><button data-toggle="tooltip" title="ver etapa" type="button" class="btn btn btn-success btn-xs"> IOARR </button></a>';
+            }
+        }
+        },
+        {"data": function (data, type, dataToSet)
+        {
+            return parseFloat(data.monto_inv).toLocaleString('en-US');
+        }
+        },
+        {"data": function (data, type, dataToSet)
+        {
+            return parseFloat(data.costo_estudio).toLocaleString('en-US');
+        }
+        },
         {"data": function (data, type, dataToSet)
             {
 

@@ -52,7 +52,8 @@ class Estudio_Inversion extends CI_Controller
     {
         if ($this->input->is_ajax_request())
         {
-            $datos=$this->Estudio_Inversion_Model->get_EstudioInversion();
+            $anio=$this->input->post('anio');
+            $datos=$this->Estudio_Inversion_Model->get_EstudioInversion($anio);
             foreach ($datos as $key => $value)
             {
                 $value->fecha = date('d/m/Y',strtotime($value->fecha));
