@@ -528,6 +528,7 @@ class Expediente_Tecnico extends CI_Controller
 			$Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
 			if(count($Presupuesto)==0)
 			{
+				$value->childPresupuesto=[];
 				$value->ChilpresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoDetalles($id_et,$value->id_presupuesto_ej);
 				foreach ($value->ChilpresupuestoAnalitico as $key  => $presupuesto)
 				{
