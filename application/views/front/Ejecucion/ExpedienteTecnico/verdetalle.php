@@ -340,9 +340,9 @@
 															<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Liquidación" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosLiquidacion?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FF-09B</span>
 															</a>
-															<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-10
-															</a>
+															</a> -->
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Análisis de Costos Unitarios" onclick="listaComponenteAnalisis('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-11
 															</a>
@@ -508,9 +508,9 @@
 															<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Liquidación" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosLiquidacion?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FF-09B</span>
 															</a>
-															<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-10
-															</a>
+															</a> -->
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Análisis de Costos Unitarios" onclick="listaComponenteAnalisis('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-11
 															</a>
