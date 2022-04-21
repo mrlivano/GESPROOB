@@ -753,8 +753,8 @@ class bancoproyectos extends CI_Controller
             }
             else
             {
-                $u_data_pi_loc['estado'] = $value['estado']==='ACTIVO'?1:0;
-                $data_pi_loc = $this->bancoproyectos_modal->editarProyectoAñoPIDE($u_data_pi_loc,$id,$anio);
+                $u_data_pi_anio['estado'] = $value['estado']==='ACTIVO'?1:0;
+                $data_pi_anio = $this->bancoproyectos_modal->editarProyectoAñoPIDE($u_data_pi_anio,$id,$anio);
             }
             foreach ($value['localizaciones_'] as $key => $val) {
                 $verificar_pi_loc=count($this->bancoproyectos_modal->verificarLocalizacionPIDE($id,$val['ubigeo']));
