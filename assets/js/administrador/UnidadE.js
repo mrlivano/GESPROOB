@@ -53,6 +53,12 @@ $(document).on("ready" ,function()
                                     {"data":"id_ue", "visible" : false},
 																		{"data":"codigo_ue"},
                                     {"data":"nombre_ue"},
+                                    {"data":"direccion", "visible" : false},
+                                    {"data":"distrito", "visible" : false},
+                                    {"data":"provincia", "visible" : false},
+                                    {"data":"region", "visible" : false},
+                                    {"data":"telefono", "visible" : false},
+                                    {"data":"RUC", "visible" : false},
                                     {"defaultContent":"<button type='button' class='editar btn btn-primary btn-xs' data-toggle='modal' data-target='#VentanaModificarUnidadE'><i class='ace-icon fa fa-pencil bigger-120'></i></button><button type='button' class='eliminar btn btn-danger btn-xs' data-toggle='modal' data-target='#'><i class='fa fa-trash-o'></i></button>"}
                                 ],
 
@@ -66,8 +72,10 @@ $(document).on("ready" ,function()
 //ACTUALIZAR UNA UNIDAD EJECUTORA
 $("#form-ActualizarUnidadE").submit(function(event)
 {
+  console.log($('#validarActualizarUnidadE').data('formValidation').isValid())
 	event.preventDefault();
-	if($('#validarActualizarUnidadE').data('formValidation').isValid()) {
+	if(true) {
+   
 		$.ajax(
 		{
 			url : base_url+"index.php/UnidadE/UpdateUnidadE",
@@ -98,6 +106,12 @@ $("#form-ActualizarUnidadE").submit(function(event)
                         var id_ue=$('#txt_IdUnidadEModif').val(data.id_ue);
 												var codigo_ue =$('#txtCodigoUE_M').val(data.codigo_ue);
                         var nombre_ue=$('#txt_NombreUnidadEU').val(data.nombre_ue);
+                        var direccion=$('#txtDireccion').val(data.direccion);
+                        var distrito=$('#txtDistrito').val(data.distrito);
+                        var provincia=$('#txtProvincia').val(data.provincia);
+                        var region=$('#txtRegion').val(data.region);
+                        var telefono=$('#txtTelefono').val(data.telefono);
+                        var RUC=$('#txtRUC').val(data.RUC);
                     });
                 }
 

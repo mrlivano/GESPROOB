@@ -87,6 +87,12 @@ x<div class="right_col" role="main">
                                                                   <th>ID </th>
                                                                   <th>Codigo Unidad Ejecutora</th>
                                                                   <th>UNIDAD EJECUTORA </th>
+                                                                  <th>DIRECCION </th>
+                                                                  <th>DISTRITO </th>
+                                                                  <th>PROVINCIA </th>
+                                                                  <th>REGION </th>
+                                                                  <th>TELEFONO </th>
+                                                                  <th>RUC </th>
                                                                   <th class="col-md-1 col-md-1 col-xs-12">ACCIONES</th>
                                                                 </tr>
                                                               </thead>
@@ -742,6 +748,90 @@ x<div class="right_col" role="main">
                   }
               },
               txtCodigoUE_M:
+              {
+                validators:
+                {
+                    notEmpty:
+                    {
+                        message: '<b style="color: red;">El campo es requerido.</b>'
+                    },
+                    regexp: {
+                          regexp: /^[0-9\s]+$/,
+                          message: 'El campo "codigo UE" solo puede contener caracteres numéricos.'
+                    }
+                }
+              },
+              txtDireccion:
+              {
+                  validators:
+                  {
+                      notEmpty:
+                      {
+                          message: '<b style="color: red;">El campo es requerido.</b>'
+                      },
+                      regexp: {
+                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
+                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
+                      }
+                  }
+              },
+              txtDistrito:
+              {
+                  validators:
+                  {
+                      notEmpty:
+                      {
+                          message: '<b style="color: red;">El campo es requerido.</b>'
+                      },
+                      regexp: {
+                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
+                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
+                      }
+                  }
+              },
+              txtProvincia:
+              {
+                  validators:
+                  {
+                      notEmpty:
+                      {
+                          message: '<b style="color: red;">El campo es requerido.</b>'
+                      },
+                      regexp: {
+                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
+                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
+                      }
+                  }
+              },
+              txtRegion:
+              {
+                  validators:
+                  {
+                      notEmpty:
+                      {
+                          message: '<b style="color: red;">El campo es requerido.</b>'
+                      },
+                      regexp: {
+                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
+                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
+                      }
+                  }
+              },
+              txtTelefono:
+              {
+                validators:
+                {
+                    notEmpty:
+                    {
+                        message: '<b style="color: red;">El campo es requerido.</b>'
+                    },
+                    regexp: {
+                          regexp: /^[0-9\s]+$/,
+                          message: 'El campo "codigo UE" solo puede contener caracteres numéricos.'
+                    }
+                }
+              },
+              txtRUC:
               {
                 validators:
                 {
