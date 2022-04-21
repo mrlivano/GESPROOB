@@ -257,6 +257,9 @@ class Expediente_Tecnico extends CI_Controller
 			$c_data['distrito_provincia_departamento_ue']=$this->input->post('txtDPR');
 			$c_data['telefono_ue']=$this->input->post('txtTelefono');
 			$c_data['ruc_ue']=$this->input->post('txtRUC');
+			$c_data['num_beneficiarios_indirectos']=$this->input->post('txtNumBeneficiarios');
+			$c_data['costo_total_preinv_et']=$this->input->post('txtMontoInv');
+			$c_data['costo_total_inv_et']=$this->input->post('txtCostoEstudio');
 			$c_data['funcion_programatica']=$this->input->post('txtFuncion')."/".$this->input->post('txtPrograma')."/".$this->input->post('txtSubPrograma');
 			$c_data['funcion_et']=$this->input->post('txtFuncion');
 			$c_data['programa_et']=$this->input->post('txtPrograma');

@@ -44,7 +44,10 @@
 								<input type="hidden" id="txtDireccion" name="txtDireccion" value="<?= $Listarproyectobuscado->direccion?>" class="form-control" >	
 								<input type="hidden" id="txtDPR" name="txtDPR" value="<?= $Listarproyectobuscado->UEdpr?>" class="form-control" >	
 								<input type="hidden" id="txtTelefono" name="txtTelefono" value="<?= $Listarproyectobuscado->telefono?>" class="form-control" >	
-								<input type="hidden" id="txtRUC" name="txtRUC" value="<?= $Listarproyectobuscado->RUC?>" class="form-control" >	
+								<input type="hidden" id="txtRUC" name="txtRUC" value="<?= $Listarproyectobuscado->RUC?>" class="form-control" >
+								<input type="hidden" id="txtNumBeneficiarios" name="txtNumBeneficiarios" value="<?= $Listarproyectobuscado->num_beneficiarios?>" class="form-control" >	
+								<input type="hidden" id="txtMontoInv" name="txtMontoInv" value="<?= $Listarproyectobuscado->monto_inv?>" class="form-control" >	
+								<input type="hidden" id="txtCostoEstudio" name="txtCostoEstudio" value="<?= $Listarproyectobuscado->costo_estudio?>" class="form-control" >		
 							</div>	
 						</div>
 					</div>			

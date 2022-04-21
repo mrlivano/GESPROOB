@@ -28,10 +28,10 @@
 												<td class="col-md-1 col-xs-12">Detalle</td>
 												<td class="col-md-2 col-xs-12">Unidad Ejecutora</td>
 												<td class="col-md-5 col-xs-12">Nombre del proyecto</td>
-												<td class="col-md-1 col-xs-12">Costo Total del proyecto Preinversion</td>
+												<td class="col-md-2 col-xs-12">Costo Total del proyecto Preinversion</td>
 												<td class="col-md-2 col-xs-12">Costo Total del proyecto Inversion</td>
-												<td class="col-md-1 col-xs-12">Tiempo Ejecucion</td>
-												<td class="col-md-1 col-xs-12">Numero Beneficiarios</td>
+												<td class="col-md-0 col-xs-12">Tiempo Ejecucion</td>
+												<td class="col-md-0 col-xs-12">Numero Beneficiarios</td>
 											</tr>
 										</thead>
 										<tbody>
@@ -44,7 +44,7 @@
 													<td>
 														<?= $item->nombre_ue ?>
 													</td>
-													<td>
+													<td style="text-align: justify;">
 														<?= $item->nombre_pi ?>
 													</td>
 													<td>
