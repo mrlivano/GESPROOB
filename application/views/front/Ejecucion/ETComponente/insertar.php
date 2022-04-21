@@ -499,6 +499,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						{ 
 						"idSubpresupuesto" : id ,
 						"idComponente" : objectJSON.idComponente ,
+						"idET" : $('#hdIdET').val(),
 						},
 						base_url+'index.php/ET_Componente/cargarMetaS10',
 						'POST', null, async function(metaJSON)

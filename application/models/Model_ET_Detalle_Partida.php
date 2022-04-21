@@ -38,6 +38,13 @@ class Model_ET_Detalle_Partida extends CI_Model
 
 		return $data->result()[0]->idDetallePartida;
 	}
+	function ultimoIdPartida($idPartida)
+	{
+		$data=$this->db->query("select max(id_detalle_partida) as idDetallePartida from ET_DETALLE_PARTIDA where id_partida=".$idPartida." and estado=1");
+
+		return $data->result()[0]->idDetallePartida;
+	}
+
 
 	function ETDetallePartida($idDetallePartida)
 	{
