@@ -1,4 +1,4 @@
-<script src="http://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
 <div class="right_col" role="main">
     <div>
         <div class="clearfix"></div>

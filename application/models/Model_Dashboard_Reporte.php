@@ -436,6 +436,18 @@ class Model_Dashboard_Reporte extends CI_Model
             return $data->result();
         }  
     }
+    function DetallePorCadaPedido1($nropedido,$anio,$tipopedido,$tipobien, $sec_ejec)
+    {
+        
+            $db_sedecentral = $this->load->database('SIGA_SEDECENTRAL', true);
+            $data = $db_sedecentral->query("select sdp.GRUPO_BIEN+sdp.CLASE_BIEN+sdp.FAMILIA_BIEN+sdp.ITEM_BIEN as codigo,(select NOMBRE_ITEM from CATALOGO_BIEN_SERV_ORIGINAL WHERE GRUPO_BIEN+CLASE_BIEN+FAMILIA_BIEN+ITEM_BIEN=sdp.GRUPO_BIEN+sdp.CLASE_BIEN+sdp.FAMILIA_BIEN+sdp.ITEM_BIEN) as DESCRIPCION,
+            (select ABREVIATURA from UNIDAD_MEDIDA where UNIDAD_MEDIDA=sdp.UNIDAD_MEDIDA) as UNIDAD,sdp.CANT_SOLICITADA,sdp.CANT_APROBADA,sdp.CANT_ATENDIDA,sca.NRO_CONS_PAAC,sca2.NRO_ORDEN,sdp.NRO_PECOSA
+            from (SIG_DETALLE_PEDIDOS sdp left join SIG_CUADRO_ADQUISICION sca
+            on (sdp.NRO_CUADRO =sca.SEC_CUADRO and sdp.TIPO_BIEN=sca.tipo_bien and sdp.ANO_EJE=sca.ANO_EJE)) left JOIN SIG_CUADRO_ADQUISICION sca2
+            on (sca.NRO_CONS_PAAC=sca2.NRO_CONS_PAAC and sca.tipo_bien=sca2.tipo_bien and sca.ANO_EJE=sca2.ANO_EJE and sca2.ESTADO=2)
+            where sdp.ANO_EJE=".$anio." AND sdp.tipo_pedido=".$tipopedido." AND sdp.NRO_PEDIDO=".$nropedido." and sdp.TIPO_BIEN='".$tipobien."' order by sdp.TIPO_BIEN,sdp.NRO_PEDIDO,DESCRIPCION");
+             return $data->result();
+    }
 
     function listaExpedientes($anio,$codigounico,$sec_ejec)
     {

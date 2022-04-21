@@ -90,7 +90,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class='nav side-menu'>
-                  <li><a href="<?php echo site_url('PrincipalPmi/pmi'); ?>"> <i class="fa fa-home"></i>PROGRAMACIÓN MULTIANUAL<span class=""></span></a></li>
+                  <li><a > <i class="fa fa-home"></i>PROGRAMACIÓN MULTIANUAL<span class=""></span></a></li>
                   <?php
                     $openTag=false;
                     $arrayMenu=$this->session->userdata('menuUsuario');

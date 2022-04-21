@@ -133,7 +133,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
               <ul class='nav side-menu'>
-                <li><a href="<?php echo site_url('PrincipalFyE/PrincipalFyED'); ?>"> <i class="fa fa-home"></i>FORMULACIÓN Y EVALUACIÓN<span class=""></span></a></li>
+                <li><a > <i class="fa fa-home"></i>FORMULACIÓN Y EVALUACIÓN<span class=""></span></a></li>
                 <?php
                   $openTag=false;
                   $arrayMenu=$this->session->userdata('menuUsuario');

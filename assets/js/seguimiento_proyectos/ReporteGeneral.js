@@ -1,6 +1,6 @@
 $(document).on("ready" ,function(){
 
-              //  ListaconsolidadoAvance();/*llamar a mi datatablet listar funcion*/
+                ListaconsolidadoAvance();/*llamar a mi datatablet listar funcion*/
          });
 
 var ListaconsolidadoAvance=function()

@@ -10,7 +10,7 @@
 
 <script src="https://kendo.cdn.telerik.com/2018.1.221/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min.js"></script>
-<script src="http://kendo.cdn.telerik.com/2018.1.221/js/messages/kendo.messages.es-ES.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2018.1.221/js/messages/kendo.messages.es-ES.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
 
 <style>

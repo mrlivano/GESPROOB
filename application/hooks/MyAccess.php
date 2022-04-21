@@ -803,6 +803,7 @@ function autorizar($url)
       'PrincipalReportes/detalladoMensualizadoConceptoClasificador',
       'PrincipalReportes/detallePedidoCompraMeta',
       'PrincipalReportes/detallePorCadaPedido',
+      'PrincipalReportes/detallePorCadaPedido1',
       'PrincipalReportes/ReporteEjecucionFinanciera',
       'CarteraInversion/editarCartera',
       'CarteraInversion/itemCartera',

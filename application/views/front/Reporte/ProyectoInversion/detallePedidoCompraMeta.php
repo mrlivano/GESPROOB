@@ -118,7 +118,32 @@
 									<?=$item->TIPO_PEDIDO?>
 								</td>
 								<td>
-									<?=$item->ESTADO?>
+									<?php switch ($item->ESTADO) {
+										case 0:
+											echo "PENDIENTE";
+											break;
+										case 1:
+											echo "VB";
+											break;
+										case 2:
+											echo "APROBADO";
+											break;
+										case 3:
+											echo "DENEGADO";
+											break;
+										case 4:
+											echo "PECOSA PARCIAL POR FIRMAR";
+											break;
+										case 5:
+											echo "PECOSA PARCIAL";
+											break;
+										case 6:
+											echo "PECOSA POR FIRMAR";
+											break;
+										case 7:
+											echo "table-UnidadE";
+											break;
+									}?>
 								</td>
 								<td>
 									<?=($item->FECHA_APROB!='' ? date('d/m/Y',strtotime($item->FECHA_APROB)) : '')?>
@@ -142,11 +167,7 @@
 									<?=$item->personal?>
 								</td>
 								<td>
-								<?php if($tipo_usuario == '15' OR $tipo_usuario == '09') { ?>
-									<button type="button" class="clasificador btn btn-info btn-xs" onclick="estadoPedido(<?= (int)$item->NRO_PEDIDO?>,<?= (int)$item->ANO_EJE?>,<?= (int)$item->TIPO_PEDIDO?>,'<?=$item->TIPO_BIEN?>',<?= (int)$item->SEC_EJEC?>);">📌<i class='ace-icon bigger-120'></i></button>
-								<?php } else { ?>
-									<button type="button" class="clasificador btn btn-info btn-xs" onclick="estadoPedidoShow(<?= (int)$item->NRO_PEDIDO?>,<?= (int)$item->ANO_EJE?>,<?= (int)$item->TIPO_PEDIDO?>,'<?=$item->TIPO_BIEN?>',<?= (int)$item->SEC_EJEC?>);">ℹ️<i class='ace-icon bigger-120'></i></button>
-								<?php } ?>
+								<button type="button" class="clasificador btn btn-primary btn-xs" onclick="detallepedidoPip1(<?= (int)$item->NRO_PEDIDO?>,<?= (int)$item->ANO_EJE?>,<?= (int)$item->TIPO_PEDIDO?>,'<?=$item->TIPO_BIEN?>',<?= (int)$item->SEC_EJEC?>);">+<i class='ace-icon bigger-120'></i></button>
 								</td>
 							</tr>
 							<?php } ?>
@@ -235,6 +256,11 @@
 	function detallepedidoPip(nropedido,anio,tipopedido,tipobien, sec_ejec)
 	{
 		paginaAjaxDialogo(1, 'Detalle por pedido',{nropedido:nropedido,anio:anio,tipopedido:tipopedido,tipobien:tipobien, sec_ejec:sec_ejec}, base_url+'index.php/PrincipalReportes/detallePorCadaPedido', 'GET', null, null, false, true);
+	}
+
+	function detallepedidoPip1(nropedido,anio,tipopedido,tipobien, sec_ejec)
+	{
+		paginaAjaxDialogo(1, 'Detalle por pedido',{nropedido:nropedido,anio:anio,tipopedido:tipopedido,tipobien:tipobien, sec_ejec:sec_ejec}, base_url+'index.php/PrincipalReportes/detallePorCadaPedido1', 'GET', null, null, false, true);
 	}
 
   	function estadoPedido(nropedido,anio,tipopedido,tipobien, sec_ejec)

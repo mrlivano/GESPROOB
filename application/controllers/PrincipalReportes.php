@@ -765,6 +765,17 @@ class PrincipalReportes extends CI_Controller
         $listadetalleporcadapedido=$this->Model_Dashboard_Reporte->DetallePorCadaPedido($nropedido,$anio,$tipopedido,$tipobien,$sec_ejec);
         $this->load->view('front/Reporte/ProyectoInversion/detallePorCadaPedido',['listadetalleporcadapedido'=>$listadetalleporcadapedido]);
     }
+    function detallePorCadaPedido1()
+    {
+        $nropedido=$this->input->GET('nropedido');
+        $anio=$this->input->GET('anio');
+        $tipopedido=$this->input->GET('tipopedido');
+        $tipobien=$this->input->GET('tipobien');
+        $sec_ejec=$this->input->GET('sec_ejec');
+
+        $listadetalleporcadapedido1=$this->Model_Dashboard_Reporte->DetallePorCadaPedido1($nropedido,$anio,$tipopedido,$tipobien,$sec_ejec);
+        $this->load->view('front/Reporte/ProyectoInversion/detallePorCadaPedido1',['listadetalleporcadapedido1'=>$listadetalleporcadapedido1]);
+    }
 
     function estadoPedido()
     {
