@@ -16,6 +16,7 @@
 									<td class="col-md-1 col-xs-12">CODIGO</td>
 									<td class="col-md-2 col-xs-12">DESCRIPCION ITEM</td>
 									<td class="col-md-5 col-xs-12">PRECIO</td>
+									<td class="col-md-5 col-xs-12">ABREVIATURA</td>
 									<td class="col-md-5 col-xs-12">TIPO</td>
 								</tr>
 							</thead>
@@ -25,11 +26,14 @@
 									<td style="width:15%;">
 										<?= $item->CODIGO?>
 									</td>
-									<td style="width:65%;">
+									<td style="width:55%;">
 										<?= $item->NOMBRE_ITEM?>
 									</td>
 									<td style="width:10%;">
 										<?= $item->PRECIO_COMPRA?>
+									</td>
+									<td style="width:10%;">
+										<?= $item->ABREVIATURA?>
 									</td>
 									<td style="width:10%;">
 										<?= $item->TIPO_BIEN?>
