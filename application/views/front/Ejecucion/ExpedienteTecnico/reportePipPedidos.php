@@ -79,7 +79,7 @@
   		<table id="tablaPresentacion" style="width: 100%" border="1">
 			<tr>
 				<th>Nombre de la Unidad Ejecución</th>
-				<td>Gobierno Regional Apurímac</td>
+				<td>Universidad Nacional Intercultural de Quillabamba</td>
 			</tr>
 			<tr>
 				<th>Meta</th>

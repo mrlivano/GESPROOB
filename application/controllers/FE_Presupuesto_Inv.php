@@ -194,7 +194,7 @@ class FE_Presupuesto_Inv extends CI_Controller
          <th colspan="12" ><center><strong>13. AFECTACIÓN PRESUPUESTAL</strong></center></th>
    </tr>
     <tr>
-         <th colspan="12" style="background-color:#f5f5f5;">&nbsp;&nbsp;Financiamiento: Recursos ordinarios - Oficina Regional  de Pre Inversión - Gobierno Regional <br>&nbsp;&nbsp;de Apurímac</th>
+         <th colspan="12" style="background-color:#f5f5f5;">&nbsp;&nbsp;Financiamiento: Recursos ordinarios - Oficina Regional  de Pre Inversión - Universidad Nacional Intercultural de Quillabamba</th>
    </tr>
 </table>
 <table border="0"  cellpadding="3">
