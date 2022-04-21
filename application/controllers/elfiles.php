@@ -23,7 +23,7 @@ class Elfiles extends CI_Controller {
     	$id_et = $_GET['id_et'];
 		if ($mod == "FE") 
 		{
-			$folders2 = $this->Estudio_Inversion_Model->get_EstudioInversion();
+			$folders2 = $this->Estudio_Inversion_Model->get_EstudioInversionR();
 			foreach ($folders2 as $folder2) 
 			{
 				if (!file_exists('uploads/RepositorioFE/'.$folder2->codigo_unico_est_inv)) 

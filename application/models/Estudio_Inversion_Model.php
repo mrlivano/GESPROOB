@@ -31,6 +31,23 @@ class Estudio_Inversion_Model extends CI_Model
         }
     }
 
+    public function get_EstudioInversionR()
+    {
+        $ue=$this->session->userdata('idUnidadEjecutora');
+        $tipoUsuario=$this->session->userdata('tipoUsuario');
+        $idPersona=$this->session->userdata('idPersona');
+        if($tipoUsuario==9)
+        {
+            $q=$this->db->query("EXEC sp_ListarEstudioInversion @opcion= 'listar_estudio_completo',@ue=NULL");
+            return $q->result();
+        }
+        else
+        {
+            $q=$this->db->query("EXEC sp_ListarEstudioInversion @opcion='listar_estudio_persona' , @ue=$ue, @id_persona=$idPersona");
+            return $q->result();
+        }
+    }
+
     public function getEstudioInversionF($id_persona, $id_et, $idTipoUsuario)
   	{
   		if ($idTipoUsuario == 9) {
