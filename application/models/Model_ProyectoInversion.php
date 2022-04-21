@@ -195,12 +195,12 @@ class Model_ProyectoInversion extends CI_Model
     function ImportarTableS10($CodigoUnico)
     {
         // Insertar tabla PRESUPUESTO S10
-        $listaPresupuesto = $this->db->query("select p.codpresupuesto as Codigo,p.descripcion as Descripcion,i.descripcion as Cliente, ug.descripcion as Lugar,  
+        $listaPresupuesto = $this->db->query("select p.codpresupuesto as Codigo,p.descripcion as Descripcion,i.descripcion as Cliente,  
 		p.Fecha,p.Plazo,p.Jornada,p.fechaproceso as Fecha_Proceso, p.CostoDirectoBase1 as Costo_Directo_Base, p.CostoIndirectoBase1 as Costo_Indirecto_Base,
 		p.CostoBase1 as Costo_Base, p.CostodirectoOferta1 as Costo_Directo_Oferta, p.CostoIndirectoOferta1 as Costo_Indirecto_Oferta, p.CostoOferta1 as Costo_Oferta,
 		p.CostodirectoOfertatotal1 as Costo_Directo_Oferta_Total, p.CostoIndirectoOfertaTotal1 as Costo_Indirecto_Oferta_Total, p.CostoOfertaTotal1 as Costo_Oferta_Total
 		from ([".$CodigoUnico."].dbo.presupuesto p inner join [".$CodigoUnico."].dbo.identificador i
-		ON p.codidentificador=i.codidentificador ) INNER JOIN [".$CodigoUnico."].dbo.ubicaciongeografica ug ON i.codlugar=ug.codlugar")->result();
+		ON p.codidentificador=i.codidentificador )")->result();
 		foreach($listaPresupuesto as $valor){
             $validarPresupuesto = count($this->db->query("select * from S10_PRESUPUESTO where Codigo='".$valor->Codigo."' and Codigo_Proyecto='".$CodigoUnico."'")->result());
             if ($validarPresupuesto===0) {
@@ -208,7 +208,7 @@ class Model_ProyectoInversion extends CI_Model
                 $p_data['Codigo_Proyecto'] = $CodigoUnico;         
                 $p_data['Descripcion'] = $valor->Descripcion;           
                 $p_data['Cliente'] = $valor->Cliente;          
-                $p_data['Lugar'] = $valor->Lugar;           
+                $p_data['Lugar'] = '';           
                 $p_data['Fecha'] = $valor->Fecha;                          
                 $p_data['Jornada'] = $valor->Jornada;           
                 $p_data['Fecha_Proceso'] = $valor->Fecha_Proceso;                          
