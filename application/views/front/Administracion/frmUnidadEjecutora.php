@@ -768,10 +768,6 @@ x<div class="right_col" role="main">
                       notEmpty:
                       {
                           message: '<b style="color: red;">El campo es requerido.</b>'
-                      },
-                      regexp: {
-                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
-                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
                       }
                   }
               },
@@ -782,10 +778,6 @@ x<div class="right_col" role="main">
                       notEmpty:
                       {
                           message: '<b style="color: red;">El campo es requerido.</b>'
-                      },
-                      regexp: {
-                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
-                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
                       }
                   }
               },
@@ -796,10 +788,6 @@ x<div class="right_col" role="main">
                       notEmpty:
                       {
                           message: '<b style="color: red;">El campo es requerido.</b>'
-                      },
-                      regexp: {
-                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
-                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
                       }
                   }
               },
@@ -810,10 +798,6 @@ x<div class="right_col" role="main">
                       notEmpty:
                       {
                           message: '<b style="color: red;">El campo es requerido.</b>'
-                      },
-                      regexp: {
-                            regexp: /^[a-zA-Z-ñÑàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ\s*]*$/,
-                            message: 'El campo "nombre" solo puede contener caracteres alfabéticos y numéricos'
                       }
                   }
               },
