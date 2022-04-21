@@ -594,7 +594,7 @@ class bancoproyectos extends CI_Controller
     function insertarProyectoCodigoPIDE()
     {
         $id=$this->input->post('id');
-        $idUnidadEjecutora=$this->input->post('idUnidadEjecutora');
+        $idUnidadEjecutora=$this->session->userdata('idUnidadEjecutora');;
         $anio=$this->input->post('anio');
         $value=$this->input->post('proy');
             $verificar=count($this->bancoproyectos_modal->verificarCodigoUnicoPIDE($id));
@@ -728,6 +728,7 @@ class bancoproyectos extends CI_Controller
             }
             else
             {
+                $u_data_pi['id_ue'] = $idUnidadEjecutora;
                 $u_data_pi['nombre_pi'] = $value['nombre'];
                 $u_data_pi['costo_pi'] = $value['montoAlternativa'];
                 $u_data_pi['id_naturaleza_inv'] = NULL;
