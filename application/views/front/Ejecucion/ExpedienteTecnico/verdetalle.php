@@ -286,7 +286,7 @@
 																</div>
 															</div>
 														</li>
-														<!-- <li>
+														<li>
 															<div class="block">
 																<div class="tags">
 																	<a href="" onclick="paginaAjaxDialogo(null, 'Cronograma de Requerimiento', null, base_url+'index.php/Expediente_Tecnico/CronogramacionRecurso?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', 'GET', null, null, false, true); return false;" class="tag">
@@ -295,7 +295,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Cronograma de Requerimiento', null, base_url+'index.php/Expediente_Tecnico/CronogramacionRecurso?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', 'GET', null, null, false, true); return false;">7.- Cronogramación de Requerimiento de Insumo </a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Cronograma de Requerimiento', null, base_url+'index.php/Expediente_Tecnico/CronogramacionRecurso?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', 'GET', null, null, false, true); return false;">8.- Cronogramación de Requerimiento de Insumo </a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -303,7 +303,7 @@
 																	<p class="excerpt">Se realiza la Cronogramación de Requerimiento de Recursos.</p>
 																</div>
 															</div>
-														</li> -->
+														</li>
 													</ul>
 												</div>
 												<div class="row"  style="margin-right:-15px;margin-left:-15px;">
@@ -777,7 +777,7 @@
 															</div>
 														</li>
 														<li>
-															<!-- <div class="block">
+															 <div class="block">
 																<div class="tags">
 																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
 																	<span>Informe Mensual.</span>
@@ -865,8 +865,8 @@
 																	<p class="excerpt">Se registra las horas trabajadas de una maquinaria propia o alquilada</p>
 																</div>
 															</div>
-														</li> -->
-														<!-- <li>
+														</li> 
+														 <li>
 															<div class="block">
 																<div class="tags">
 																	<a href="<?=site_url('ET_Almacen/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
@@ -883,7 +883,7 @@
 																	<p class="excerpt">Se registra el movimiento diario de almacen</p>
 																</div>
 															</div>
-														</li> -->
+														</li> 
 													</ul>
 												</div>
 												<div class="row">
@@ -898,12 +898,12 @@
 																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
-																<!-- <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																 <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
-																</a> -->
+																</a> 
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisicaAdicionales?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04A</span>
 																</a>

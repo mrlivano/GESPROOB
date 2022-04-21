@@ -320,7 +320,7 @@ var base_url = '<?php echo base_url(); ?>';
 
 		  var a = document.createElement('a');
 		  a.target="_blank";
-		  a.href="http://sigeiapp.regionapurimac.gob.pe/ProyectoInversion/ReportePipOrdenesGeneral?annos="+annos_j+"&ue="+ue_j+"&meta="+meta_j+"&mes="+mes_j;
+		  a.href=base_url+"/ProyectoInversion/ReportePipOrdenesGeneral?annos="+annos_j+"&ue="+ue_j+"&meta="+meta_j+"&mes="+mes_j;
 		  a.click();
   
   
