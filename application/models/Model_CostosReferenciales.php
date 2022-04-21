@@ -5,7 +5,10 @@ class Model_CostosReferenciales extends CI_Model
 {
     function lista()
     {
-        $query=$this->db->query("select GRUPO_BIEN+FAMILIA_BIEN+CLASE_BIEN+ITEM_BIEN AS CODIGO,NOMBRE_ITEM,PRECIO_COMPRA,TIPO_BIEN from [SIGA_300251].dbo.CATALOGO_BIEN_SERV where estado='A' AND ESTADO_MEF='A' AND PRECIO_COMPRA!=0 ORDER BY TIPO_BIEN,CODIGO");
+        $db_sedecentral = $this->load->database('SIGA_SEDECENTRAL', true);
+        $query=$db_sedecentral->query("select GRUPO_BIEN+CLASE_BIEN+FAMILIA_BIEN+ITEM_BIEN as CODIGO,NOMBRE_ITEM,PRECIO_COMPRA,um.ABREVIATURA,TIPO_BIEN from CATALOGO_BIEN_SERV cbs inner join UNIDAD_MEDIDA um
+        on cbs.UNIDAD_MEDIDA=um.UNIDAD_MEDIDA 
+        where cbs.ESTADO='A' and cbs.ESTADO_MEF='A' and cbs.PRECIO_COMPRA!=0 order by cbs.TIPO_BIEN,CODIGO");
         return $query->result();
     }
 
