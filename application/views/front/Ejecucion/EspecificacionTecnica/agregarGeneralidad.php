@@ -18,8 +18,8 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">Generalidades:</label></br>
-							<input type="hidden" name="hdIdExpediente" id="hdIdExpediente" value="<?=@$expedienteTecnico[0]->id_et?>">											
-							<input type="hidden" id="hdEspecificacionTecnica" value="<?=htmlspecialchars(@$expedienteTecnico[0]->generalidad_especificacion_tecnica)?>" type="hidden">
+							<input type="hidden" name="hdIdExpediente" id="hdIdExpediente" value="<?=$expedienteTecnico[0]->id_et?>">											
+							<input type="hidden" id="hdEspecificacionTecnica" value="<?=htmlspecialchars($expedienteTecnico[0]->generalidad_especificacion_tecnica)?>" type="hidden">
 							<p><textarea name="txtGeneralidad" id="txtGeneralidad" rows="10" cols="80"></textarea></p>
 							<div class="msgError"><p class="help-block" id="MsgContenido"> Oops!</p></div>                              
 						</div>	

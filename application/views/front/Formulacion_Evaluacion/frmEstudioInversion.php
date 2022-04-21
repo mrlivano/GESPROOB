@@ -806,7 +806,6 @@ function ImportarProyectosPIDE(){
         {
             return;
         }
-        var idUnidadEjecutora = $("#selectUnidadEjecutora").val();
         var anio = $('#txtAnioActualizar').val();
         data.forEach(element => {
             if(element.estado==='A'){$.ajax({
@@ -818,7 +817,7 @@ function ImportarProyectosPIDE(){
                         $.ajax({
                         type:"POST",
                         url:base_url+'index.php/bancoproyectos/insertarProyectoCodigoPIDE',
-                        data:{id:element.idProyecto,proy:proy,idUnidadEjecutora:idUnidadEjecutora,anio:anio},
+                        data:{id:element.idProyecto,proy:proy,anio:anio},
                         cache: false,
                         success:function(resp)
                         {
