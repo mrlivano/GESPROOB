@@ -801,20 +801,6 @@ x<div class="right_col" role="main">
                       }
                   }
               },
-              txtTelefono:
-              {
-                validators:
-                {
-                    notEmpty:
-                    {
-                        message: '<b style="color: red;">El campo es requerido.</b>'
-                    },
-                    regexp: {
-                          regexp: /^[0-9\s]+$/,
-                          message: 'El campo "codigo UE" solo puede contener caracteres numéricos.'
-                    }
-                }
-              },
               txtRUC:
               {
                 validators:
