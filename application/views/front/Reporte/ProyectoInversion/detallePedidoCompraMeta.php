@@ -228,7 +228,7 @@
 		  
 		  var a = document.createElement('a');
   a.target="_blank";
-  a.href="http://sigeiapp.regionapurimac.gob.pe/ProyectoInversion/ReportePipPedidos?annos="+annos_j+"&ue="+ue_j+"&meta="+meta_j+"&mes="+mes_j;
+  a.href=base_url+"/ProyectoInversion/ReportePipPedidos?annos="+annos_j+"&ue="+ue_j+"&meta="+meta_j+"&mes="+mes_j;
   a.click();
   
   
