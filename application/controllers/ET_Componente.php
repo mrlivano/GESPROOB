@@ -17,6 +17,9 @@ class ET_Componente extends CI_Controller
 		$this->load->model('Model_ET_Presupuesto_Ejecucion');
 		$this->load->model('Model_ET_Etapa_Ejecucion');
 		$this->load->model('Model_ET_Analitico_Partida');
+		$this->load->model('Model_ET_Detalle_Analisis_Unitario');
+		$this->load->model('Model_ET_Insumo');
+		$this->load->model('Model_ET_Recurso_Insumo');
 	}
 
 	private function updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico, $idPresupuestoEjecucion, $estado)
@@ -266,6 +269,7 @@ class ET_Componente extends CI_Controller
 	public function cargarMetaS10(){
 		$idSubpresupuesto=$this->input->post('idSubpresupuesto');
 		$idComponente=$this->input->post('idComponente');
+		$idET=$this->input->post('idET');
 		$elementP = [];
 		$metaSubpresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarMetaSubpresupuesto($idSubpresupuesto);
 		foreach ($metaSubpresupuesto as $key => $value) {
@@ -281,8 +285,41 @@ class ET_Componente extends CI_Controller
 			else{
 				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio_Unitario);
 				$idpartida = $this->db->insert_id();
+				$idDetallePartida=$this->Model_ET_Detalle_Partida->ultimoIdPartida($idpartida);
+				$recMat = false;
+				$recMO = false;
+				$recME = false;
+				//$this->insertarAnalisisUnitarioS10(NULL,$idRecursoS,$idDetallePartida,$idET,NULL);
+				
 				$costoUnitario = $this->Model_ET_Analisis_Unitario->listarCostoUnitario($value->Id);
 				foreach ($costoUnitario as $key => $valueC) {
+					//insertar Analisis Unitario
+					switch ($valueC->Tipo) {
+						case '1':
+							$idTipo='2';
+							if(!$recMO){
+								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'2',$idDetallePartida,$idET,NULL);
+								$recMO=true;
+							}
+							break;
+						case '2':
+							$idTipo='1';
+							if(!$recMat){
+								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'1',$idDetallePartida,$idET,NULL);
+								$recMat=true;
+							}
+							break;
+						case '3':
+							$idTipo='3';
+							if(!$recME){
+								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'3',$idDetallePartida,$idET,NULL);
+								$recME=true;
+							}
+							break;
+					}
+					//Insertar Detalle Analisi Unitario
+					$this->insertarDetalleAnalisisUnitarioS10($idET, $idpartida, $idTipo, NULL, $idAnalisisS10, $valueC->Descripcion, $valueC->Cuadrilla, $valueC->Unidad, NULL,$valueC->Cantidad,$valueC->Precio);
+					
 					//insertar costos unitarios
 					$c_data['cod_insumo']=$valueC->Codigo_Insumo;
 					$c_data['descripcion']=$valueC->Descripcion;
@@ -413,5 +450,110 @@ class ET_Componente extends CI_Controller
 		}
 	}
 
+	public function insertarAnalisisUnitarioS10($idAnaliticoS,$idRecursoS,$idDetallePartidaS,$idETS,$idPresupuestoEjecucionS)
+	{
+		if($_POST)
+		{
+			$msg = array();
+
+			$c_data['id_analitico']=$idAnaliticoS;
+			$c_data['id_recurso']=$idRecursoS;
+			$c_data['id_detalle_partida']=$idDetallePartidaS;
+			$idET = $idETS;
+			$idAnalitico = $idAnaliticoS;
+			/*
+			if($idPresupuestoEjecucionS==2)
+			{
+				if($this->Model_ET_Analisis_Unitario->ETAnalisisUnitarioPorIdDetallePartidaAndIdRecurso($idDetallePartidaS, $idRecursoS)!=null)
+				{
+					$this->db->trans_rollback();
+					return false;
+				}
+			}
+			else
+			{
+				if(count($this->Model_ET_Analisis_Unitario->ETClasificadorPorIdDetallePartida($idDetallePartidaS))>0)
+				{
+					$this->db->trans_rollback();
+					return false;
+				}
+				//$c_data['id_recurso']=NULL;
+			}*/
+
+			$idAnalisis = $this->Model_ET_Analisis_Unitario->insertar($c_data);
+
+			$this->db->trans_complete();
+			
+			return $idAnalisis;
+		
+		}
+	}
+
+	public function insertarDetalleAnalisisUnitarioS10($idEtS, $idPartidaS, $idRecursoS, $metradoPartidaS, $idAnalisisS, $descripcionS, $cuadrillaS, $unidadS, $rendimientoS,$cantidadS,$precioUnitarioS)
+	{
+		if($_POST)
+		{					
+			$flag=0;
+			$idEt=$idEtS;
+			$idPartida=$idPartidaS;
+			$idRecurso=$idRecursoS;
+			$metradoPartida=$metradoPartidaS;
+			$idAnalisis=$idAnalisisS;
+			$descripcion=$descripcionS;
+			$cuadrilla=$cuadrillaS;
+			$unidad=$unidadS;
+			$rendimiento=$rendimientoS;
+			$cantidad=$cantidadS;
+			$precioUnitario=$precioUnitarioS;
+			$cuadrilla=(($cuadrilla=='' || $cuadrilla==null) ? NULL : $cuadrilla);
+			$rendimiento=(($rendimiento=='' || $rendimiento==null) ? NULL : $rendimiento);
+			if($unidad!="")
+			{
+				$data = $this->Model_Unidad_Medida->validarUnidadMedida($unidad);
+				if(count($data)>0)
+				{
+					$idUnidad=$data[0]->id_unidad;
+				}
+				else
+				{
+					$um_data['descripcion']=$unidad;
+					$idUnidad=$this->Model_Unidad_Medida->insertarUnidadMedida($um_data);
+				}				
+			}	
+
+			if($this->Model_ET_Detalle_Analisis_Unitario->ETDetalleAnalisisUnitarioPorIdAnalisisAndDescDetalleAnalisis($idAnalisis, $descripcion)!=null)
+			{
+				return false;
+			}
+			else
+			{
+				$this->db->trans_start();	
+				$idDetalleAnalisisUnitario=$this->Model_ET_Detalle_Analisis_Unitario->insertar($idAnalisis, $idUnidad, $descripcion, $cuadrilla, $cantidad, $precioUnitario, $rendimiento);
+				$insumo = $this->Model_ET_Insumo->ETInsumoPorDescripcion($descripcion, $idUnidad);
+				if($insumo==null)
+				{
+					$c_data['id_unidad']=$idUnidad;
+					$c_data['desc_insumo']=$descripcion;
+					$idInsumo=$this->Model_ET_Insumo->insertar($c_data);
+				}
+				else
+				{
+					$idInsumo=$insumo->id_insumo;
+				}
+
+				$detallePartida=$this->Model_ET_Detalle_Analisis_Unitario->ETDetallePartidaPorIdAnalisis($idAnalisis);
+
+				$r_data['id_detalle_analisis_u']=$idDetalleAnalisisUnitario;
+				$r_data['id_recurso']=$idRecurso;
+				$r_data['id_insumo']=$idInsumo;
+				$r_data['id_et']=$idEt;
+				$r_data['precio_unitario']=$precioUnitario;
+				$r_data['cantidad']=$cantidad*$detallePartida[0]->cantidad;
+				$id_recurso_insumo=$this->Model_ET_Recurso_Insumo->insertar($r_data);
+				$this->db->trans_complete();
+				return true;
+			}	
+		}
+	}
 
 }

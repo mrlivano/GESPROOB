@@ -182,7 +182,7 @@ class Model_ProyectoInversion extends CI_Model
         $delete=$this->db->query("delete from [dbo].[BD_S10] where CodigoUnico='".$codigo."'");
         $insert=$this->db->query("insert into [dbo].[BD_S10] ([CodigoUnico],[Proyecto],[FechaSubida]) VALUES('".$codigo."','".$proyecto."','".$fecha."')");
         $query="\"IF EXISTS(SELECT * FROM DBO.SYSDATABASES WHERE NAME = '".$nameDB."') BEGIN ALTER DATABASE [".$nameDB."] set single_user with rollback immediate DROP DATABASE [".$nameDB."] END RESTORE DATABASE [".$nameDB."] FROM DISK = '".$urlDB."' WITH MOVE 'S10_Data' TO 'C:\S102000\Data\ ".$nameDB."_1.mdf', MOVE 'S10_Datos' TO 'C:\S102000\Data\ ".$nameDB."_2.ndf', MOVE 'S10_Log' TO 'C:\S102000\Data\ ".$nameDB."_3.ldf', REPLACE\"";
-        $cmd = "osql -U \"sa\" -P \"123456\" -S \"LAPTOP-QNNLA4MB\" -Q " .$query;
+        $cmd = "osql -U \"my\" -P \"123456789\" -S \"DESKTOP-N1LQMHP\" -Q " .$query;
         return passthru( $cmd );
     }
     public function DeleteDB($codigo){
@@ -195,12 +195,12 @@ class Model_ProyectoInversion extends CI_Model
     function ImportarTableS10($CodigoUnico)
     {
         // Insertar tabla PRESUPUESTO S10
-        $listaPresupuesto = $this->db->query("select p.codpresupuesto as Codigo,p.descripcion as Descripcion,i.descripcion as Cliente, ug.descripcion as Lugar,  
+        $listaPresupuesto = $this->db->query("select p.codpresupuesto as Codigo,p.descripcion as Descripcion,i.descripcion as Cliente,  
 		p.Fecha,p.Plazo,p.Jornada,p.fechaproceso as Fecha_Proceso, p.CostoDirectoBase1 as Costo_Directo_Base, p.CostoIndirectoBase1 as Costo_Indirecto_Base,
 		p.CostoBase1 as Costo_Base, p.CostodirectoOferta1 as Costo_Directo_Oferta, p.CostoIndirectoOferta1 as Costo_Indirecto_Oferta, p.CostoOferta1 as Costo_Oferta,
 		p.CostodirectoOfertatotal1 as Costo_Directo_Oferta_Total, p.CostoIndirectoOfertaTotal1 as Costo_Indirecto_Oferta_Total, p.CostoOfertaTotal1 as Costo_Oferta_Total
 		from ([".$CodigoUnico."].dbo.presupuesto p inner join [".$CodigoUnico."].dbo.identificador i
-		ON p.codidentificador=i.codidentificador ) INNER JOIN [".$CodigoUnico."].dbo.ubicaciongeografica ug ON i.codlugar=ug.codlugar")->result();
+		ON p.codidentificador=i.codidentificador )")->result();
 		foreach($listaPresupuesto as $valor){
             $validarPresupuesto = count($this->db->query("select * from S10_PRESUPUESTO where Codigo='".$valor->Codigo."' and Codigo_Proyecto='".$CodigoUnico."'")->result());
             if ($validarPresupuesto===0) {
@@ -208,7 +208,7 @@ class Model_ProyectoInversion extends CI_Model
                 $p_data['Codigo_Proyecto'] = $CodigoUnico;         
                 $p_data['Descripcion'] = $valor->Descripcion;           
                 $p_data['Cliente'] = $valor->Cliente;          
-                $p_data['Lugar'] = $valor->Lugar;           
+                $p_data['Lugar'] = '';           
                 $p_data['Fecha'] = $valor->Fecha;                          
                 $p_data['Jornada'] = $valor->Jornada;           
                 $p_data['Fecha_Proceso'] = $valor->Fecha_Proceso;                          
@@ -354,10 +354,10 @@ class Model_ProyectoInversion extends CI_Model
                     if($valorMP->codtitulo === '9999999'){
                         // Insertar tabla COSTO UNITARIO S10
                         $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Codigo_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
-                        $listaCostoUnitario= $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
+                        $listaCostoUnitario= $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,u.Descripcion as unidadDesc,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
                         from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
                         on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
-                        ON i.codinsumo=ppa.codinsumo
+                        ON i.codinsumo=ppa.codinsumo inner join [".$CodigoUnico."].dbo.Unidad u on u.simbolo=ppa.unidad
                         where pd.codpresupuesto='".$valor->Codigo."' and pd.codpartida='".$valorMP->codpartida."' and ppa.codpartida='".$valorMP->codpartida."' and ppa.codpresupuesto='".$valor->Codigo."' and ppa.codsubpresupuesto='".$valorS->CodSubpresupuesto."'")->result();
                         foreach($listaCostoUnitario as $valorCU){
                                 $cu_data['Codigo_Subpresupuesto'] = $valorS->CodSubpresupuesto;   
@@ -367,7 +367,7 @@ class Model_ProyectoInversion extends CI_Model
                                 $cu_data['Codigo_Insumo'] = $valorCU->codinsumo;       
                                 $cu_data['Descripcion'] = $valorCU->descripcion; 
                                 $cu_data['Tipo'] = $valorCU->tipo;  
-                                $cu_data['Unidad'] = $valorCU->unidad;     
+                                $cu_data['Unidad'] = $valorCU->unidadDesc;    
                                 $cu_data['Cuadrilla'] = $valorCU->cuadrilla;  
                                 $cu_data['Cantidad'] = $valorCU->cantidad;  
                                 $cu_data['Precio'] = $valorCU->Precio;  

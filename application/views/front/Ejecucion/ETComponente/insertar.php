@@ -177,7 +177,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	<div class="row" style="margin-top: 3px;">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 					<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
-						<option selected="true" value="" disabled>Selecione Presupuesto</option>
+						<option selected="true" value="" disabled>Seleccione Presupuesto</option>
 						<?php foreach ($SelectPresupuesto as $key => $value) { ?>
 							<option value="<?=$value->Codigo?>"><?=$value->Descripcion?></option>
 						<?php } ?>
@@ -499,6 +499,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						{ 
 						"idSubpresupuesto" : id ,
 						"idComponente" : objectJSON.idComponente ,
+						"idET" : $('#hdIdET').val(),
 						},
 						base_url+'index.php/ET_Componente/cargarMetaS10',
 						'POST', null, async function(metaJSON)
