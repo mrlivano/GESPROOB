@@ -536,8 +536,8 @@ class Model_Dashboard_Reporte extends CI_Model
             SIG_ORDEN_ITEM.FAMILIA_BIEN = CATALOGO_BIEN_SERV.FAMILIA_BIEN AND 
             SIG_ORDEN_ITEM.SEC_EJEC = CATALOGO_BIEN_SERV.SEC_EJEC AND 
             SIG_ORDEN_ITEM.TIPO_BIEN = CATALOGO_BIEN_SERV.TIPO_BIEN
-            WHERE SIG_ORDEN_ITEM.ano_eje = ".$anio." and SIG_ORDEN_ITEM.sec_ejec = ".$sec_ejec." and SIG_ORDEN_ITEM.NRO_ORDEN = ".$nro_orden." and 
-            SIG_ORDEN_ITEM.TIPO_BIEN = ".$tipo_bien." and SIG_ORDEN_ITEM.TIPO_PPTO = ".$tipo_ppto."
+            WHERE SIG_ORDEN_ITEM.ano_eje ='".$anio."' and SIG_ORDEN_ITEM.sec_ejec ='".$sec_ejec."' and SIG_ORDEN_ITEM.NRO_ORDEN ='".$nro_orden."' and 
+            SIG_ORDEN_ITEM.TIPO_BIEN ='".$tipo_bien."' and SIG_ORDEN_ITEM.TIPO_PPTO ='".$tipo_ppto."'
             ORDER BY CATALOGO_BIEN_SERV.NOMBRE_ITEM");
              return $data->result();
     }
