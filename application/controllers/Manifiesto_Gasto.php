@@ -422,6 +422,10 @@ class Manifiesto_Gasto extends CI_Controller
                         }
                     }
                 }
+                else
+                {
+                    $value->childPresupuesto=[];
+                }
             }
             $this->load->view('Front/Ejecucion/ProgramacionClasificador/tablaProgramacion', ['idExpedienteTecnico'=>$idExpedienteTecnico, 'PresupuestoEjecucion'=>$PresupuestoEjecucion, 'fuenteFinanciamiento'=>$fuenteFinanciamiento]);
         }
