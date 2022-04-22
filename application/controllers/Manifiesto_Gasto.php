@@ -169,7 +169,7 @@ class Manifiesto_Gasto extends CI_Controller
 		{
             $presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($temporal->id_presupuesto_ej);            
             $temporal->numHijos=count($presupuesto);
-			if(count($presupuesto>0))
+			if(count($presupuesto)>0)
 			{
 				$temporal->childPresupuesto=$presupuesto;
 			}
