@@ -506,15 +506,17 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						{
 							resultado=JSON.parse(metaJSON);
 
+							
+							let idetTemp=$('#hdIdET').val();
+							console.log(idetTemp);
+
 							swal(
 							{
 								title: '',
 								text: objectJSON.mensaje,
 								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-							},
+							},function(){});
 							
-							let idetTemp=$('#hdIdET').val();
-							console.log(idetTemp);
 							window.location.reload();
 							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
 
