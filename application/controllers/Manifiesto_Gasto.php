@@ -544,6 +544,7 @@ class Manifiesto_Gasto extends CI_Controller
                         $temporal->porcentajeSaldo=100-$temporal->porcentajeAcumulado;                    
                     }
                 }
+                $value->childPresupuesto=[];
                 if(count($Presupuesto)>0)
                 {
                     $value->childPresupuesto=$Presupuesto;
