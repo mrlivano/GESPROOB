@@ -507,9 +507,19 @@ class Model_Dashboard_Reporte extends CI_Model
 
     function DatosOrdenSiga($meta, $nro_orden, $anio, $expediente)
     {
-        $data = $this->db->query("execute Consulta_Proveedor_Expediente @meta='$meta', @nro_orden='$nro_orden', @anio='$anio', @exp_siaf='$expediente'");
-
-        return $data->result();
+        $db_sedecentral = $this->load->database('SIGA_SEDECENTRAL', true);
+            $data = $db_sedecentral->query("select SIG_ORDEN_ADQUISICION.ANO_EJE, SIG_ORDEN_ADQUISICION.SEC_EJEC, SIG_ORDEN_PRESUPUESTO.SEC_FUNC, SIG_ORDEN_ADQUISICION.NRO_ORDEN, SIG_ORDEN_ADQUISICION.EXP_SIAF, 
+            SIG_CONTRATISTAS.NOMBRE_PROV, SIG_ORDEN_ADQUISICION.TIPO_BIEN, SIG_ORDEN_ADQUISICION.TIPO_PPTO
+            from SIGA.dbo.SIG_ORDEN_ADQUISICION INNER JOIN
+            SIGA.dbo.SIG_CONTRATISTAS ON SIG_ORDEN_ADQUISICION.PROVEEDOR = SIG_CONTRATISTAS.PROVEEDOR INNER JOIN
+            SIGA.dbo.SIG_ORDEN_PRESUPUESTO ON SIG_ORDEN_ADQUISICION.NRO_ORDEN = SIG_ORDEN_PRESUPUESTO.NRO_ORDEN AND 
+            SIG_ORDEN_ADQUISICION.ANO_EJE = SIG_ORDEN_PRESUPUESTO.ANO_EJE AND 
+            SIG_ORDEN_ADQUISICION.SEC_EJEC = SIG_ORDEN_PRESUPUESTO.SEC_EJEC AND 
+            SIG_ORDEN_ADQUISICION.TIPO_BIEN = SIG_ORDEN_PRESUPUESTO.TIPO_BIEN AND 
+            SIG_ORDEN_ADQUISICION.TIPO_PPTO = SIG_ORDEN_PRESUPUESTO.TIPO_PPTO 
+            WHERE SIG_ORDEN_PRESUPUESTO.SEC_FUNC='".$meta."' and SIG_ORDEN_PRESUPUESTO.ANO_EJE='".$anio."' and SIG_ORDEN_PRESUPUESTO.NRO_ORDEN='".$nro_orden."' and SIG_ORDEN_ADQUISICION.EXP_SIAF='".$expediente."'");
+             return $data->result();
+        
     }
 
     function ConsultaDetalleOrden($nro_orden, $tipo_bien, $tipo_ppto, $sec_ejec, $anio)
