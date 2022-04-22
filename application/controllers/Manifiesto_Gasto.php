@@ -169,7 +169,7 @@ class Manifiesto_Gasto extends CI_Controller
 		{
             $presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($temporal->id_presupuesto_ej);            
             $temporal->numHijos=count($presupuesto);
-			if(count($presupuesto>0))
+			if(count($presupuesto)>0)
 			{
 				$temporal->childPresupuesto=$presupuesto;
 			}
@@ -384,7 +384,7 @@ class Manifiesto_Gasto extends CI_Controller
             foreach ($PresupuestoEjecucion as $key => $value) 
             {
                 $Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
-                if(count($Presupuesto==0))
+                if(count($Presupuesto)==0)
                 {
                     $value->ChilpresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoDetalles($idExpedienteTecnico,$value->id_presupuesto_ej);
                     foreach ($value->ChilpresupuestoAnalitico as $temporal) 
@@ -401,7 +401,7 @@ class Manifiesto_Gasto extends CI_Controller
                         }
                     }
                 }
-                if(count($Presupuesto>0))
+                if(count($Presupuesto)>0)
                 {
                     $value->childPresupuesto=$Presupuesto;
                     foreach ($value->childPresupuesto as $key => $temp) 
@@ -421,6 +421,10 @@ class Manifiesto_Gasto extends CI_Controller
                             }
                         }
                     }
+                }
+                else
+                {
+                    $value->childPresupuesto=[];
                 }
             }
             $this->load->view('Front/Ejecucion/ProgramacionClasificador/tablaProgramacion', ['idExpedienteTecnico'=>$idExpedienteTecnico, 'PresupuestoEjecucion'=>$PresupuestoEjecucion, 'fuenteFinanciamiento'=>$fuenteFinanciamiento]);
@@ -511,7 +515,7 @@ class Manifiesto_Gasto extends CI_Controller
             foreach ($PresupuestoEjecucion as $key => $value) 
             {
                 $Presupuesto=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjPorIdPadre($value->id_presupuesto_ej);
-                if(count($Presupuesto==0))
+                if(count($Presupuesto)==0)
                 {
                     $value->ChilpresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoDetalles($idExpedienteTecnico,$value->id_presupuesto_ej);
                     foreach ($value->ChilpresupuestoAnalitico as $temporal) 
@@ -540,7 +544,8 @@ class Manifiesto_Gasto extends CI_Controller
                         $temporal->porcentajeSaldo=100-$temporal->porcentajeAcumulado;                    
                     }
                 }
-                if(count($Presupuesto>0))
+                $value->childPresupuesto=[];
+                if(count($Presupuesto)>0)
                 {
                     $value->childPresupuesto=$Presupuesto;
                     foreach ($value->childPresupuesto as $key => $temp) 

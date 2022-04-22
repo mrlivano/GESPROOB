@@ -507,16 +507,39 @@ class Model_Dashboard_Reporte extends CI_Model
 
     function DatosOrdenSiga($meta, $nro_orden, $anio, $expediente)
     {
-        $data = $this->db->query("execute Consulta_Proveedor_Expediente @meta='$meta', @nro_orden='$nro_orden', @anio='$anio', @exp_siaf='$expediente'");
-
-        return $data->result();
+        $db_sedecentral = $this->load->database('SIGA_SEDECENTRAL', true);
+            $data = $db_sedecentral->query("select SIG_ORDEN_ADQUISICION.ANO_EJE, SIG_ORDEN_ADQUISICION.SEC_EJEC, SIG_ORDEN_PRESUPUESTO.SEC_FUNC, SIG_ORDEN_ADQUISICION.NRO_ORDEN, SIG_ORDEN_ADQUISICION.EXP_SIAF, 
+            SIG_CONTRATISTAS.NOMBRE_PROV, SIG_ORDEN_ADQUISICION.TIPO_BIEN, SIG_ORDEN_ADQUISICION.TIPO_PPTO
+            from SIG_ORDEN_ADQUISICION INNER JOIN
+            SIG_CONTRATISTAS ON SIG_ORDEN_ADQUISICION.PROVEEDOR = SIG_CONTRATISTAS.PROVEEDOR INNER JOIN
+            SIG_ORDEN_PRESUPUESTO ON SIG_ORDEN_ADQUISICION.NRO_ORDEN = SIG_ORDEN_PRESUPUESTO.NRO_ORDEN AND 
+            SIG_ORDEN_ADQUISICION.ANO_EJE = SIG_ORDEN_PRESUPUESTO.ANO_EJE AND 
+            SIG_ORDEN_ADQUISICION.SEC_EJEC = SIG_ORDEN_PRESUPUESTO.SEC_EJEC AND 
+            SIG_ORDEN_ADQUISICION.TIPO_BIEN = SIG_ORDEN_PRESUPUESTO.TIPO_BIEN AND 
+            SIG_ORDEN_ADQUISICION.TIPO_PPTO = SIG_ORDEN_PRESUPUESTO.TIPO_PPTO 
+            WHERE SIG_ORDEN_PRESUPUESTO.SEC_FUNC='".$meta."' and SIG_ORDEN_PRESUPUESTO.ANO_EJE='".$anio."' and SIG_ORDEN_PRESUPUESTO.NRO_ORDEN='".$nro_orden."' and SIG_ORDEN_ADQUISICION.EXP_SIAF='".$expediente."'");
+             return $data->result();
+        
     }
 
     function ConsultaDetalleOrden($nro_orden, $tipo_bien, $tipo_ppto, $sec_ejec, $anio)
     {
-        $data = $this->db->query("execute Consulta_Detalle_Orden @nro_orden='$nro_orden', @tipo_bien='$tipo_bien', @tipo_ppto='$tipo_ppto', @sec_ejec='$sec_ejec', @anio='$anio'");
-
-        return $data->result();
+        $db_sedecentral = $this->load->database('SIGA_SEDECENTRAL', true);
+            $data = $db_sedecentral->query("select CATALOGO_BIEN_SERV.CODIGO_ITEM, CATALOGO_BIEN_SERV.NOMBRE_ITEM, UNIDAD_MEDIDA.ABREVIATURA,
+            SIG_ORDEN_ITEM.CANT_ITEM, SIG_ORDEN_ITEM.PREC_UNIT_MONEDA, SIG_ORDEN_ITEM.PREC_TOT_MONEDA
+            FROM SIG_ORDEN_ITEM INNER JOIN UNIDAD_MEDIDA ON 
+            UNIDAD_MEDIDA.UNIDAD_MEDIDA=SIG_ORDEN_ITEM.UNIDAD_MEDIDA
+            INNER JOIN
+            CATALOGO_BIEN_SERV ON SIG_ORDEN_ITEM.ITEM_BIEN = CATALOGO_BIEN_SERV.ITEM_BIEN AND 
+            SIG_ORDEN_ITEM.GRUPO_BIEN = CATALOGO_BIEN_SERV.GRUPO_BIEN AND 
+            SIG_ORDEN_ITEM.CLASE_BIEN = CATALOGO_BIEN_SERV.CLASE_BIEN AND 
+            SIG_ORDEN_ITEM.FAMILIA_BIEN = CATALOGO_BIEN_SERV.FAMILIA_BIEN AND 
+            SIG_ORDEN_ITEM.SEC_EJEC = CATALOGO_BIEN_SERV.SEC_EJEC AND 
+            SIG_ORDEN_ITEM.TIPO_BIEN = CATALOGO_BIEN_SERV.TIPO_BIEN
+            WHERE SIG_ORDEN_ITEM.ano_eje ='".$anio."' and SIG_ORDEN_ITEM.sec_ejec ='".$sec_ejec."' and SIG_ORDEN_ITEM.NRO_ORDEN ='".$nro_orden."' and 
+            SIG_ORDEN_ITEM.TIPO_BIEN ='".$tipo_bien."' and SIG_ORDEN_ITEM.TIPO_PPTO ='".$tipo_ppto."'
+            ORDER BY CATALOGO_BIEN_SERV.NOMBRE_ITEM");
+             return $data->result();
     }
 
     function ConsultaTipoDocumento($expediente, $anio)
