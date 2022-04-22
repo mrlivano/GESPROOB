@@ -866,7 +866,7 @@
 																</div>
 															</div>
 														</li> 
-														 <li>
+														 <!-- <li>
 															<div class="block">
 																<div class="tags">
 																	<a href="<?=site_url('ET_Almacen/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
@@ -882,7 +882,7 @@
 																	</div>
 																	<p class="excerpt">Se registra el movimiento diario de almacen</p>
 																</div>
-															</div>
+															</div> -->
 														</li> 
 													</ul>
 												</div>
