@@ -524,9 +524,22 @@ class Model_Dashboard_Reporte extends CI_Model
 
     function ConsultaDetalleOrden($nro_orden, $tipo_bien, $tipo_ppto, $sec_ejec, $anio)
     {
-        $data = $this->db->query("execute Consulta_Detalle_Orden @nro_orden='$nro_orden', @tipo_bien='$tipo_bien', @tipo_ppto='$tipo_ppto', @sec_ejec='$sec_ejec', @anio='$anio'");
-
-        return $data->result();
+        $db_sedecentral = $this->load->database('SIGA_SEDECENTRAL', true);
+            $data = $db_sedecentral->query("select CATALOGO_BIEN_SERV.CODIGO_ITEM, CATALOGO_BIEN_SERV.NOMBRE_ITEM, UNIDAD_MEDIDA.ABREVIATURA,
+            SIG_ORDEN_ITEM.CANT_ITEM, SIG_ORDEN_ITEM.PREC_UNIT_MONEDA, SIG_ORDEN_ITEM.PREC_TOT_MONEDA
+            FROM SIG_ORDEN_ITEM INNER JOIN UNIDAD_MEDIDA ON 
+            UNIDAD_MEDIDA.UNIDAD_MEDIDA=SIG_ORDEN_ITEM.UNIDAD_MEDIDA
+            INNER JOIN
+            CATALOGO_BIEN_SERV ON SIG_ORDEN_ITEM.ITEM_BIEN = CATALOGO_BIEN_SERV.ITEM_BIEN AND 
+            SIG_ORDEN_ITEM.GRUPO_BIEN = CATALOGO_BIEN_SERV.GRUPO_BIEN AND 
+            SIG_ORDEN_ITEM.CLASE_BIEN = CATALOGO_BIEN_SERV.CLASE_BIEN AND 
+            SIG_ORDEN_ITEM.FAMILIA_BIEN = CATALOGO_BIEN_SERV.FAMILIA_BIEN AND 
+            SIG_ORDEN_ITEM.SEC_EJEC = CATALOGO_BIEN_SERV.SEC_EJEC AND 
+            SIG_ORDEN_ITEM.TIPO_BIEN = CATALOGO_BIEN_SERV.TIPO_BIEN
+            WHERE SIG_ORDEN_ITEM.ano_eje = ".$anio." and SIG_ORDEN_ITEM.sec_ejec = ".$sec_ejec." and SIG_ORDEN_ITEM.NRO_ORDEN = ".$nro_orden." and 
+            SIG_ORDEN_ITEM.TIPO_BIEN = ".$tipo_bien." and SIG_ORDEN_ITEM.TIPO_PPTO = ".$tipo_ppto."
+            ORDER BY CATALOGO_BIEN_SERV.NOMBRE_ITEM");
+             return $data->result();
     }
 
     function ConsultaTipoDocumento($expediente, $anio)
