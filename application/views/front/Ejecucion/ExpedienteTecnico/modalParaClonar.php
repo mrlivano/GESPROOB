@@ -120,6 +120,7 @@ $(function()
 				},
 				function()
 				{
+					$('#divModalCargaAjax').hide();
 					if(objectJSON.proceso=='Correcto')
 					{
 						renderLoading();
@@ -128,6 +129,7 @@ $(function()
 					}
 				});
             }
+			
         });
       	$('#frmAprobarExpediente')[0].reset();
     });			  

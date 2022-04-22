@@ -461,12 +461,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		{
 			objectJSON=JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
+			// swal(
+			// {
+			// 	title: '',
+			// 	text: objectJSON.mensaje,
+			// 	type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+			// },
 			function(){});
 
 			if(objectJSON.proceso=='Error')
@@ -505,6 +505,13 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'POST', null, async function(metaJSON)
 						{
 							resultado=JSON.parse(metaJSON);
+
+							swal(
+							{
+								title: '',
+								text: objectJSON.mensaje,
+								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+							},
 							
 							let idetTemp=$('#hdIdET').val();
 							console.log(idetTemp);
