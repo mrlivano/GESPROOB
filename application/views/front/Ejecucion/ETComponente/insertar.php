@@ -467,7 +467,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			// 	text: objectJSON.mensaje,
 			// 	type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
 			// },
-			function(){});
+			// function(){});
 
 			if(objectJSON.proceso=='Error')
 			{
