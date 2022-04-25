@@ -506,7 +506,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						{
 							resultado=JSON.parse(metaJSON);
 
-							
 							let idetTemp=$('#hdIdET').val();
 							console.log(idetTemp);
 
