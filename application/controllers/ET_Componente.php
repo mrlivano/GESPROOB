@@ -316,6 +316,20 @@ class ET_Componente extends CI_Controller
 								$recME=true;
 							}
 							break;
+						case '4':
+							$idTipo='4';
+							if(!$recMat){
+								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'4',$idDetallePartida,$idET,NULL);
+								$recMat=true;
+							}
+							break;
+						case '5':
+							$idTipo='11';
+							if(!$recME){
+								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'11',$idDetallePartida,$idET,NULL);
+								$recME=true;
+							}
+							break;
 					}
 					//Insertar Detalle Analisi Unitario
 					$this->insertarDetalleAnalisisUnitarioS10($idET, $idpartida, $idTipo, NULL, $idAnalisisS10, $valueC->Descripcion, $valueC->Cuadrilla, $valueC->Unidad, NULL,$valueC->Cantidad,$valueC->Precio);

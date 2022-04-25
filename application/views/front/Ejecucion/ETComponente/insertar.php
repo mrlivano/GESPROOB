@@ -461,13 +461,13 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		{
 			objectJSON=JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
+			// swal(
+			// {
+			// 	title: '',
+			// 	text: objectJSON.mensaje,
+			// 	type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+			// },
+			// function(){});
 
 			if(objectJSON.proceso=='Error')
 			{
@@ -505,9 +505,17 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'POST', null, async function(metaJSON)
 						{
 							resultado=JSON.parse(metaJSON);
-							
+
 							let idetTemp=$('#hdIdET').val();
 							console.log(idetTemp);
+
+							swal(
+							{
+								title: '',
+								text: objectJSON.mensaje,
+								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+							},function(){});
+							
 							window.location.reload();
 							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
 
