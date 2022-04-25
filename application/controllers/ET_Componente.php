@@ -317,14 +317,14 @@ class ET_Componente extends CI_Controller
 							}
 							break;
 						case '4':
-							$idTipo='1';
+							$idTipo='4';
 							if(!$recMat){
 								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'4',$idDetallePartida,$idET,NULL);
 								$recMat=true;
 							}
 							break;
 						case '5':
-							$idTipo='3';
+							$idTipo='11';
 							if(!$recME){
 								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'11',$idDetallePartida,$idET,NULL);
 								$recME=true;
