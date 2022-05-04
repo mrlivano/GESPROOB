@@ -21,7 +21,7 @@
 											<tr>
 												<td class="col-md-2 col-xs-12">Codigo Unico</td>
 												<td class="col-md-9 col-xs-12">Proyecto</td>
-												<td class="col-md-3 col-xs-12">Fecha Salida</td>
+												<td class="col-md-3 col-xs-12">Fecha Importación</td>
 												<td class="col-md-3 col-xs-12">Opción</td>
 											</tr>
 										</thead>
