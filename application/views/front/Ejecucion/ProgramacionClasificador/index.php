@@ -17,7 +17,7 @@
 					<div class="" role="tabpanel" data-example-id="togglable-tabs">
 						<ul id="myTab" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active">
-								<a href="#tab_cronograma"  id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Porgramación de Analitico</a>
+								<a href="#tab_cronograma"  id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Programación de Analitico</a>
 							</li>
 							<li role="presentation">
 								<a href="#tab_comparacion"  id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Comparación de Cuadros</a>
