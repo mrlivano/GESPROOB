@@ -63,6 +63,8 @@ class ET_Analisis_Unitario extends CI_Controller
 		$idPartida=$this->input->get('idPartida');
 		$idET = $this->input->get('idET');
 		$idPresupuesto = $this->input->get('idPresupuesto');
+		$id_etapa_et = $this->input->get('id_etapa_et');
+		$aprobado = $this->input->get('aprobado');
 
 		if($idPresupuesto==2)
 		{
@@ -80,7 +82,7 @@ class ET_Analisis_Unitario extends CI_Controller
 			$listaETRecurso=$this->Model_ET_Recurso->RecursoListar('R');
 			$listaETPresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoPorIdET($idET);
 
-			$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertar', ['etDetallePartida' => $etDetallePartida, 'listaUnidadMedida' => $listaUnidadMedida, 'listaETAnalisisUnitario' => $listaETAnalisisUnitario, 'listaETRecurso' => $listaETRecurso, 'listaETPresupuestoAnalitico' => $listaETPresupuestoAnalitico, 'idPartida' => $idPartida,'idExpediente' => $idET, 'idPresupuesto'=>$idPresupuesto]);		
+			$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertar', ['etDetallePartida' => $etDetallePartida, 'listaUnidadMedida' => $listaUnidadMedida, 'listaETAnalisisUnitario' => $listaETAnalisisUnitario, 'listaETRecurso' => $listaETRecurso, 'listaETPresupuestoAnalitico' => $listaETPresupuestoAnalitico, 'idPartida' => $idPartida,'idExpediente' => $idET, 'idPresupuesto'=>$idPresupuesto, 'aprobado'=>$aprobado, 'id_etapa_et'=>$id_etapa_et]);		
 		}
 		else
 		{

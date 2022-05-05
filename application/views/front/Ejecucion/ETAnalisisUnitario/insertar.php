@@ -13,6 +13,7 @@
 	}
 </style>
 <div class="form-horizontal">
+	<?php if(!$aprobado && $id_etapa_et!=3) {?>
 	<div id="divInsertarAnalisisUnitario" class="row">
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<label for="control-label">Recurso</label>
@@ -52,6 +53,7 @@
 			</div>
 		</div>
 	</div>
+	<?php }?>
 	<hr style="margin: 4px;">
 	<div id="divListaAnalisisUnitario">
 		<?php 
@@ -76,31 +78,46 @@
 								<div class="row">
 									<div class="col-md-8 col-sm-8 col-xs-12">
 										<div>
+										<?php if(!$aprobado && $id_etapa_et!=3) {?>
 											<select name="selectPresupuestoAnalitico<?=$value->id_analisis?>" id="selectPresupuestoAnalitico<?=$value->id_analisis?>" class="form-control selectPresupuestoAnaliticoAux">
 												<option></option>
 												<?php foreach($listaETPresupuestoAnalitico as $item){ ?>
 													<option value="<?=$item->id_analitico?>" <?=($item->id_analitico==$value->id_analitico ? 'selected' : '')?>><?=html_escape($item->desc_clasificador.' | '.$item->desc_presupuesto_ej)?></option>
 												<?php } ?>
 											</select>
+										<?php } else {?>
+											<select name="selectPresupuestoAnalitico<?=$value->id_analisis?>" id="selectPresupuestoAnalitico<?=$value->id_analisis?>" class="form-control selectPresupuestoAnaliticoAux" disabled>
+												<option></option>
+												<?php foreach($listaETPresupuestoAnalitico as $item){ ?>
+													<option value="<?=$item->id_analitico?>" <?=($item->id_analitico==$value->id_analitico ? 'selected' : '')?>><?=html_escape($item->desc_clasificador.' | '.$item->desc_presupuesto_ej)?></option>
+												<?php } ?>
+											</select>
+										<?php }?>
 										</div>
 									</div>
+									<?php if(!$aprobado && $id_etapa_et!=3) {?>
 									<div class="col-md-4 col-sm-4 col-xs-12">
 										<button  id="btnEnviarFormulario" class="btn btn-primary btn-sm" onclick="guardarPresupuestoAnaliticoParaAnalisisUnitario(<?=$value->id_analisis?>);"> <span class="fa fa-save"></span> Guardar</button>
 										<button  class="btn btn-danger btn-sm" onclick="eliminarAnalisisUnitario(<?=$value->id_analisis?>, this);"><span class="fa fa-trash-o"></span> Eliminar A.U.</button>																		
 									</div>
+									<?php }?>
 								</div>
 								<hr style="margin: 2px;">
+								<?php if(!$aprobado && $id_etapa_et!=3) {?>
 								<div class="row">
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<button  class="btn btn-success btn-sm" onclick=" paginaAjaxDialogo('otherModal2', 'Análisis Unitario',{ id_Et:<?=$idExpediente?>,id_AnalisisUnitario: <?=$value->id_analisis?>}, base_url+'index.php/ET_Detalle_Analisis_Unitario/insertar', 'GET', null, null, false, true);" > <span class="fa fa-plus"></span> Registrar A.U.</button>
 									</div>										
 								</div>
+								<?php }?>
 							</div>
 							<div class="table-responsive">
 								<table id="tableDetalleAnalisisUnitario<?=$value->id_analisis?>" class="table table-bordered">
 									<thead>
 										<tr>
+										<?php if(!$aprobado && $id_etapa_et!=3) {?>
 											<th></th>
+											<?php }?>
 											<th>Descripción</th>
 											<th>Cuadrilla</th>
 											<th>Und.</th>
@@ -115,9 +132,11 @@
 											$sumatoriaPrecioUnitario+=$item->precio_parcial;
 											?>
 											<tr>
+											<?php if(!$aprobado && $id_etapa_et!=3) {?>
 												<td style="width:5%;">
 													<a href="#" style="color: red;text-decoration: underline;" onclick="eliminarDetalleAnalisisUnitario(<?=$item->id_detalle_analisis_u?>, this);"><b>Eliminar</b></a>
 												</td>
+												<?php }?>
 												<td style="width:40%;"><?=html_escape($item->desc_detalle_analisis)?></td>
 												<td style="width:10%;"><?=html_escape($item->cuadrilla)?></td>
 												<td style="width:15%;"><?=html_escape($item->descripcion)?></td>

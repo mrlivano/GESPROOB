@@ -1477,6 +1477,183 @@ class Expediente_Tecnico extends CI_Controller
 
 	}
 
+	public function clonacionModificatoria()
+	{
+		$idExpedienteTecnico=$this->input->post('idExpedienteTecnico');
+		$idEtapa=$this->input->post('idEtapaExpedienteTecnico');
+		$txtUrlDocAprobacion=$this->input->post('url');
+		$txtFechaAprobacion=$this->input->post('txtFechaAprobacion');
+		$txtDescripcionModificatoria=$this->input->post('txtDescripcionModificatoria');
+
+		if($idExpedienteTecnico!=null && $idEtapa!=null)
+		{
+			$expediente=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoPorId($idExpedienteTecnico);
+
+			if($expediente[0]->estado_revision!=1)
+			{
+				echo json_encode(['proceso' => 'Error', 'mensaje' => 'Aún no se ha dado el visto bueno a este expediente técnico para proceder con la modificatoria.']);exit;
+			}
+
+			if($expediente[0]->id_etapa_et==$idEtapa && $expediente[0]->id_etapa_et!=10)
+			{
+				echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede crear la modificatoria de expediente técnico para la misma etapa.']);exit;
+			}
+
+			if($this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoPorIdETPadre($expediente[0]->id_et)!=null)
+			{
+				echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede crear la modificatoria dos veces de un mismo expediente técnico.']);exit;
+			}
+
+			$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+
+			foreach($listaETComponente as $key => $value)
+			{
+				$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+
+				foreach($listaETMeta as $index => $item)
+				{
+					if($this->analisisUnitarioSinAnalitico($item))
+					{
+						echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede crear la modificatoria de expediente técnico porque existen análisis unitarios sin asignación de analítico.']);exit;
+					}
+				}
+			}
+
+			if($this->input->post('url')!='')
+			{
+				$config['upload_path']   = './uploads/ResolucioExpediente/';
+				$config['allowed_types'] = '*';
+				$config['encrypt_name']  = false;
+				$config['file_name'] =$idExpedienteTecnico;
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				$this->upload->do_upload('fileResolucion');
+
+				$this->Model_ET_Expediente_Tecnico->AprobarExpediente($txtUrlDocAprobacion, $txtFechaAprobacion, $idExpedienteTecnico);
+			}
+
+			$this->db->trans_start();			
+			
+			foreach($expediente as $exp)
+			{
+				$exp_data['id_pi']=$exp->id_pi;
+				$exp_data['nombre_ue']=$exp->nombre_ue;
+				$exp_data['direccion_ue']=$exp->direccion_ue;
+				$exp_data['distrito_provincia_departamento_ue']=$exp->distrito_provincia_departamento_ue;
+				$exp_data['telefono_ue']=$exp->telefono_ue;
+				$exp_data['ruc_ue']=$exp->ruc_ue;
+				$exp_data['costo_total_preinv_et']=$exp->costo_total_preinv_et;
+				$exp_data['costo_directo_preinv_et']=$exp->costo_directo_preinv_et;
+				$exp_data['costo_indirecto_preinv_et']=$exp->costo_indirecto_preinv_et;
+				$exp_data['costo_total_inv_et']=$exp->costo_total_inv_et;
+				$exp_data['costo_directo_inv_et']=$exp->costo_directo_inv_et;
+				$exp_data['gastos_generales_et']=$exp->gastos_generales_et;
+				$exp_data['gastos_supervision_et']=$exp->gastos_supervision_et;
+				$exp_data['funcion_programatica']=$exp->funcion_programatica;
+				$exp_data['funcion_et']=$exp->funcion_et;
+				$exp_data['programa_et']=$exp->programa_et;
+				$exp_data['sub_programa_et']=$exp->sub_programa_et;
+				$exp_data['proyecto_et']=$exp->proyecto_et;
+				$exp_data['componente_et']=$exp->componente_et;
+				$exp_data['meta_et']=$exp->meta_et;
+				$exp_data['fuente_financiamiento_et']= $exp->fuente_financiamiento_et;
+				$exp_data['modalidad_ejecucion_et']= $exp->modalidad_ejecucion_et;
+				$exp_data['tiempo_ejecucion_pi_et']= $exp->tiempo_ejecucion_pi_et;
+				$exp_data['num_beneficiarios_indirectos']= $exp->num_beneficiarios_indirectos;
+				$exp_data['fecha_inicio_et']= $exp->fecha_inicio_et;
+				$exp_data['fecha_fin_et']= $exp->fecha_fin_et;
+				$exp_data['url_doc_aprobacion_et']= $exp->url_doc_aprobacion_et;
+				$exp_data['desc_situacion_actual_et']= $exp->desc_situacion_actual_et;
+				$exp_data['relevancia_economica_et']= $exp->relevancia_economica_et;
+				$exp_data['resumen_pi_et']= $exp->resumen_pi_et;
+				$exp_data['num_folios']= $exp->num_folios;
+				$exp_data['estado_revision']= $exp->estado_revision;
+				$exp_data['id_et_padre']= $exp->id_et;
+				$exp_data['id_etapa_et']= $idEtapa;
+				$exp_data['fecha_registro']= $exp->fecha_registro;
+				$exp_data['fecha_aprobacion']= $exp->fecha_aprobacion;
+				$exp_data['aprobado']= $exp->aprobado;
+				$exp_data['url_memoria_descriptiva']= $exp->url_memoria_descriptiva;
+				$exp_data['url_impacto_ambiental']= $exp->url_impacto_ambiental;
+				$exp_data['url_categoria_impacto']= $exp->url_categoria_impacto;
+				$exp_data['num_meses']= $exp->num_meses;
+				$exp_data['generalidad_especificacion_tecnica']=$exp->generalidad_especificacion_tecnica;
+				$exp_data['descripcion_modificatoria']=$txtDescripcionModificatoria;			
+				$lastExpediente=$this->Model_ET_Expediente_Tecnico->insertar($exp_data);
+				if(file_exists('./uploads/ResolucioExpediente/'.$exp->id_et.'.'.$exp->url_doc_aprobacion_et))
+				{
+					copy('./uploads/ResolucioExpediente/'.$exp->id_et.'.'.$exp->url_doc_aprobacion_et, './uploads/ResolucioExpediente/'.$lastExpediente.'.'.$exp->url_doc_aprobacion_et);
+				}
+			}
+
+			$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdET($idExpedienteTecnico);
+			foreach ($presupuestoAnalitico as $pres) 
+			{
+				$pres_data['id_clasificador']=$pres->id_clasificador;
+				$pres_data['id_et']=$lastExpediente;
+				$pres_data['id_presupuesto_ej']=$pres->id_presupuesto_ej;
+				$pres_data['fecha_presupuesto']=$pres->fecha_presupuesto;
+				$lastPres=$this->Model_ET_Presupuesto_Analitico->insertar($pres_data);
+			}
+
+			$responsable=$this->Model_ET_Responsable->ETResponsablePorIdET($idExpedienteTecnico);
+			foreach ($responsable as $resp) 
+			{
+				$resp_data['id_et']=$lastExpediente;
+				$resp_data['id_persona']=$resp->id_persona;
+				$resp_data['id_tipo_responsable_et']=$resp->id_tipo_responsable_et;
+				$resp_data['id_cargo']=$resp->id_cargo;
+				$resp_data['num_registro_prof']=$resp->num_registro_prof;
+				$resp_data['fecha_asignacion_resp_et']=$resp->fecha_asignacion_resp_et;
+				$resp_data['estado_responsable_et']=$resp->estado_responsable_et;
+				$lastResp=$this->Model_ET_Responsable->insertar($resp_data);
+			}
+
+			$imagen=$this->Model_ET_Img->ListarImagen($idExpedienteTecnico);
+			foreach ($imagen as $img) 
+			{
+				$data_img['id_et']=$lastExpediente;
+				$data_img['desc_img']=$img->desc_img;
+				$lastImg=$this->Model_ET_Img->insertarImgExpediente($data_img);
+
+				if(file_exists('./uploads/ImageExpediente/'.$img->id_img.''.$img->desc_img))
+				{
+					copy('./uploads/ImageExpediente/'.$img->id_img.''.$img->desc_img, './uploads/ImageExpediente/'.$lastImg.''.$img->desc_img);
+				}
+			}
+
+			$componente=$this->Model_ET_Componente->ETComponentePorIdET($idExpedienteTecnico);
+			foreach ($componente as $comp) 
+			{
+				$comp_data['id_et']=$lastExpediente;
+				$comp_data['descripcion']=$comp->descripcion;
+				$comp_data['numeracion']=$comp->numeracion;
+				$comp_data['id_presupuesto_ej']=$comp->id_presupuesto_ej;
+				$comp_data['estado']=$comp->estado;
+				$comp_data['url']=$comp->url;
+				$lastComponente=$this->Model_ET_Componente->insertarComponente($comp_data);
+				
+				$meta=$this->Model_ET_Meta->ETMetaPorIdComponente($comp->id_componente);
+				foreach($meta as $item)
+				{
+					$meta_data['id_componente']=$lastComponente;
+					$meta_data['desc_meta']=$item->desc_meta;
+					$meta_data['numeracion']=$item->numeracion;
+					$meta_data['url']=$item->url;
+					$lastMeta=$this->Model_ET_Meta->insertarMeta($meta_data);
+					$this->obtenerMetaAnidadaParaClonacion($item, $lastMeta, $lastExpediente);
+				}
+			}
+
+			$this->Model_ET_Expediente_Tecnico->updateAprobacion(1,$idExpedienteTecnico);
+
+			$this->db->trans_complete();
+
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Se creó la Modificatoria de Expediente Tecnico satisfactoriamente', 'id_et' => $lastExpediente]);exit;
+		}
+
+	}
+
 	private function obtenerMetaAnidadaParaClonacion($meta, $lastMeta, $lastExpediente)
 	{
 		$temp=$this->Model_ET_Meta->ETMetaPorIdMetaPadre($meta->id_meta);
@@ -1666,6 +1843,115 @@ class Expediente_Tecnico extends CI_Controller
 		}
 	}
 
+	public function crearModificatoria()
+	{
+		if($_POST)
+		{
+			$idExpedienteTecnico=$this->input->post('idExpedienteTecnico');
+			$idEtapaExpedienteTecnico=$this->input->post('idEtapaExpedienteTecnico');
+			$txtUrlDocAprobacion=$this->input->post('url');
+			$txtFechaAprobacion=$this->input->post('txtFechaAprobacion');
+
+			if($idExpedienteTecnico!=null && $idEtapaExpedienteTecnico!=null)
+			{
+				$this->db->trans_start();
+
+				$etExpedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+
+				if($etExpedienteTecnico->estado_revision!=1)
+				{
+					echo json_encode(['proceso' => 'Error', 'mensaje' => 'Aún no se ha dado el visto bueno a este expediente técnico para proceder con el pase de etapa.']);exit;
+				}
+
+				if($etExpedienteTecnico->id_etapa_et==$idEtapaExpedienteTecnico)
+				{
+					echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar expediente técnico para la misma etapa.']);exit;
+				}
+
+				if($this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoPorIdETPadre($etExpedienteTecnico->id_et)!=null)
+				{
+					echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar dos veces de un mismo expediente técnico.']);exit;
+				}
+
+				$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+
+				foreach($listaETComponente as $key => $value)
+				{
+					$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+
+					foreach($listaETMeta as $index => $item)
+					{
+						if($this->analisisUnitarioSinAnalitico($item))
+						{
+							echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar expediente técnico porque existen análisis unitarios sin asignación de analítico.']);exit;
+						}
+					}
+				}
+
+				if($this->input->post('url')!='')
+				{
+					$config['upload_path']   = './uploads/ResolucioExpediente/';
+					$config['allowed_types'] = '*';
+					$config['max_size']      = 50000;
+					$config['encrypt_name']  = false;
+					$config['file_name'] =$idExpedienteTecnico;
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					$this->upload->do_upload('fileResolucion');
+
+					$this->Model_ET_Expediente_Tecnico->AprobarExpediente($txtUrlDocAprobacion, $txtFechaAprobacion, $idExpedienteTecnico);
+				}
+
+				$this->Model_ET_Expediente_Tecnico->clonar($etExpedienteTecnico->id_et, $idEtapaExpedienteTecnico);
+
+				$this->Model_ET_Expediente_Tecnico->updateAprobacion(1,$idExpedienteTecnico);
+
+				$idUltimoExpedienteTecnico=$this->Model_ET_Expediente_Tecnico->UltimoExpedienteTecnico()->id_et;
+
+				$listaETImgOrigen=$this->Model_ET_Img->ListarImagen($etExpedienteTecnico->id_et);
+				$listaETImgDestino=$this->Model_ET_Img->ListarImagen($idUltimoExpedienteTecnico);
+
+				foreach($listaETImgOrigen as $key => $value)
+				{
+					$nombreImgTemp=$listaETImgDestino[$key]->id_img.'.'.(explode('.', $value->desc_img)[count(explode('.', $value->desc_img))-1]);
+
+					$this->Model_ET_Img->updateDescImagePorIdImg($listaETImgDestino[$key]->id_img, $nombreImgTemp);
+
+					if(file_exists('./uploads/ImageExpediente/'.$value->desc_img))
+					{
+						copy('./uploads/ImageExpediente/'.$value->desc_img, './uploads/ImageExpediente/'.$nombreImgTemp);
+					}
+				}
+
+				if(file_exists('./uploads/ResolucioExpediente/'.$etExpedienteTecnico->id_et.'.'.$etExpedienteTecnico->url_doc_aprobacion_et))
+				{
+					copy('./uploads/ResolucioExpediente/'.$etExpedienteTecnico->id_et.'.'.$etExpedienteTecnico->url_doc_aprobacion_et, './uploads/ResolucioExpediente/'.$idUltimoExpedienteTecnico.'.'.$etExpedienteTecnico->url_doc_aprobacion_et);
+				}
+
+				$this->db->trans_complete();
+
+				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Clonación de expediente en la etapa seleccionada realizado correctamente.']);exit;
+			}
+		}
+		else
+		{
+			$listaETEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucion_Listar('R');
+
+			$idExpedienteTecnico= $this->input->get('idExpedienteTecnico');
+
+			$ExpedienteTecnico = $this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+
+			$fechaAprobacion = '';
+
+			if($ExpedienteTecnico->url_doc_aprobacion_et!=null && $ExpedienteTecnico->fecha_aprobacion != null)
+			{
+				$fechaAprobacion = $ExpedienteTecnico->fecha_aprobacion;
+			}
+
+			return $this->load->view('front/Ejecucion/ExpedienteTecnico/modalParaCrearModificatoria', ['idExpedienteTecnico' => $idExpedienteTecnico, 'listaETEtapaEjecucion' => $listaETEtapaEjecucion,'fechaAprobacion' => $fechaAprobacion]);
+		}
+	}
+
 	private function analisisUnitarioSinAnalitico($meta)
 	{
 		$temp=$this->Model_ET_Meta->ETMetaPorIdMetaPadre($meta->id_meta);
@@ -1726,8 +2012,10 @@ class Expediente_Tecnico extends CI_Controller
 			$ExpedienteTecnicoElaboracion=$this->Model_ET_Expediente_Tecnico->ExpedienteListarElaboracionPorId($id_et);
 		}
 		$et_documentos = $this->Model_ET_Expediente_Tecnico->getETDocumento($id_et);
+		$listaContraActual = $this->Model_ET_Expediente_Tecnico->ListarExpedientePorEtapaProyecto(3,$ExpedienteAprobado[0]->id_pi);
+		$listaModificatoria = $this->Model_ET_Expediente_Tecnico->ListarExpedientePorEtapaProyecto(10,$ExpedienteAprobado[0]->id_pi);
 		$this->load->view('layout/Ejecucion/header');
-		$this->load->view('front/Ejecucion/ExpedienteTecnico/verdetalle',['aprobado'=>$aprobado, 'ExpedienteTecnicoElaboracion'=>$ExpedienteTecnicoElaboracion, 'et_documentos' => $et_documentos]);
+		$this->load->view('front/Ejecucion/ExpedienteTecnico/verdetalle',['aprobado'=>$aprobado, 'ExpedienteTecnicoElaboracion'=>$ExpedienteTecnicoElaboracion, 'et_documentos' => $et_documentos, 'listaContraActual' => $listaContraActual, 'listaModificatoria' => $listaModificatoria]);
 		$this->load->view('layout/Ejecucion/footer');
 	}
 

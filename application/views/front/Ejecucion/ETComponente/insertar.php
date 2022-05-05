@@ -1,22 +1,57 @@
 <?php
-function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion)
+function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion, $expedienteTecnico)
 {
 	$htmlTemp='';
-	$htmlTemp.='<li class="listaNivel'.$meta->nivel.'">';
-	$htmlTemp.='<input type="button" title="Guardar Cambios" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosMeta('.$meta->id_meta.');" style="width: 30px;">
-		<input type="button" title="Eliminar Meta" class="btn btn-default btn-xs" value="-" onclick="eliminarMeta('.$meta->id_meta.', this);" style="width: 30px;">
-		<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
+	if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){
+		$htmlTemp.='<li class="listaNivel'.$meta->nivel.'">';
+		$htmlTemp.='<input type="button" title="Guardar Cambios" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosMeta('.$meta->id_meta.');" style="width: 30px;">
+			<input type="button" title="Eliminar Meta" class="btn btn-default btn-xs" value="-" onclick="eliminarMeta('.$meta->id_meta.', this);" style="width: 30px;">
+			<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
 
-		$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '.$meta->id_meta.', '.$meta->nivel.', '.$idPresupuestoEjecucion.')" style="width: 30px;">';
+			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '.$meta->id_meta.', '.$meta->nivel.', '.$idPresupuestoEjecucion.')" style="width: 30px;">';
 
-		$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '.$meta->id_meta.','.$idPresupuestoEjecucion.')" style="width: 30px;">';
+			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '.$meta->id_meta.','.$idPresupuestoEjecucion.')" style="width: 30px;">';
 
-		if($idPresupuestoEjecucion==16 && $meta->nivel==1)
+			if($idPresupuestoEjecucion==16 && $meta->nivel==1)
+			{
+				$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Clasificador" value="+C" onclick="paginaAjaxDialogo(\'clasificadorMeta\', \'Asociar a Clasificador\', { idET : '.$idExpedienteTecnico.', idMeta : '.$meta->id_meta.'}, \''.base_url().'index.php/ET_Meta_Analitico/insertar\', \'get\', null, null, false, true);" style="width: 30px;" style="width: 30px;">';
+			}
+
+			$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'" contenteditable>'.html_escape($meta->desc_meta).'</span>'.
+			((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
+
+		if(count($meta->childMeta)==0)
 		{
-			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Clasificador" value="+C" onclick="paginaAjaxDialogo(\'clasificadorMeta\', \'Asociar a Clasificador\', { idET : '.$idExpedienteTecnico.', idMeta : '.$meta->id_meta.'}, \''.base_url().'index.php/ET_Meta_Analitico/insertar\', \'get\', null, null, false, true);" style="width: 30px;" style="width: 30px;">';
+			foreach($meta->childPartida as $key => $value)
+			{
+				$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
+					'<td>'.
+						'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('.$value->id_partida.');" style="width: 30px;">'.
+						'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
+						// if($idPresupuestoEjecucion==2)
+						// {
+							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+						// }
+						// else
+						// {
+						// 	$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+						// }
+						
+					$htmlTemp.='</td>'.
+					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
+					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
+					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
+					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.$value->precio_unitario.'</span></td>';
+					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
+				'</tr>';
+			}
 		}
+   }
+   else {
+	$htmlTemp.='<li class="listaNivel'.$meta->nivel.'">';
+	$htmlTemp.='<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
 
-		$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'" contenteditable>'.html_escape($meta->desc_meta).'</span>'.
+		$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'">'.html_escape($meta->desc_meta).'</span>'.
 		((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
 
 	if(count($meta->childMeta)==0)
@@ -24,12 +59,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		foreach($meta->childPartida as $key => $value)
 		{
 			$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
-				'<td>'.
-					'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('.$value->id_partida.');" style="width: 30px;">'.
-					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
+				'<td>';
 					// if($idPresupuestoEjecucion==2)
 					// {
-						$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+						$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.', id_etapa_et:'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 					// }
 					// else
 					// {
@@ -37,18 +70,19 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					// }
 					
 				$htmlTemp.='</td>'.
-				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
+				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'">'.html_escape($value->desc_partida).'</span></td>'.
 				'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-				'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
-				'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.$value->precio_unitario.'</span></td>';
+				'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'">'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
+				'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'">'.$value->precio_unitario.'</span></td>';
 				$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
 			'</tr>';
 		}
 	}
+   }
 
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarMetaAnidada($value, $idExpedienteTecnico,$idPresupuestoEjecucion);
+		$htmlTemp.=mostrarMetaAnidada($value, $idExpedienteTecnico,$idPresupuestoEjecucion, $expedienteTecnico);
 	}
 
 	$htmlTemp.=((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '</tbody></table></div>' : '</ul>').
@@ -310,12 +344,16 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	                        <ul id="ulComponenteMetaPartida<?=$temp3->id_presupuesto_ej?>" style="list-style-type: upper-roman;">
 								<?php foreach($temp3->childComponente as $key => $value) { ?>
 									<li>
-										<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
-										<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',1,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
-										<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?></b>
+										<?php if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){?>
+											<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
+											<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',1,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
+											<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?></b>
+										<?php } else {?>
+											<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?></b>
+										<?php }?>
 										<ul>
 											<?php foreach($value->childMeta as $index => $item){ ?>
-												<?=mostrarMetaAnidada($item, $expedienteTecnico->id_et, $temp3->id_presupuesto_ej);?>
+												<?=mostrarMetaAnidada($item, $expedienteTecnico->id_et, $temp3->id_presupuesto_ej,$expedienteTecnico);?>
 											<?php } ?>
 										</ul>
 									</li>
@@ -1033,7 +1071,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('+objectJSON.idPartida+', this);" style="width: 30px;">';
 				// if(idPresupuestoEjecucion==2)
 				// {
-					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
+					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' , aprobado :<?=$expedienteTecnico->aprobado?>, id_etapa_et :<?=$expedienteTecnico->id_etapa_et?> }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
 				// }
 				// else
 				// {

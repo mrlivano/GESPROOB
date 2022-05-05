@@ -77,7 +77,7 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 
 	public function ExpedienteListarElaboracionPorId($id_et)
 	{
-		$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='LISTARETAPA', @id_et=$id_et");
+		$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='LISTARETAPAPROYECTO', @id_et=$id_et");
         return $data->result();
 	}
 
@@ -105,6 +105,28 @@ class Model_ET_Expediente_Tecnico extends CI_Model
         else
         {
             $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='LISTARETAPA',@id_etapa_et='".$id_etapa_et."', @ue=$ue,@id_usuario=$idPersona");
+			return $data->result();				
+        }
+	}
+
+	public function ListarExpedientePorEtapaProyecto($id_etapa_et,$id_pi)
+	{
+		$ue=$this->session->userdata('idUnidadEjecutora');
+		$idPersona=$this->session->userdata('idPersona');
+        $tipoUsuario=$this->session->userdata('tipoUsuario');
+        if($tipoUsuario==9)
+        {
+            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='LISTARETAPAPROYECTO',@id_etapa_et='".$id_etapa_et."',@id_pi='".$id_pi."', @ue=NULL");
+        	return $data->result();
+        }
+        if($tipoUsuario==1)
+        {
+            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='LISTARETAPAPROYECTO',@id_etapa_et='".$id_etapa_et."',@id_pi='".$id_pi."', @ue=$ue");
+        	return $data->result();
+        }
+        else
+        {
+            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='LISTARETAPAPROYECTO',@id_etapa_et='".$id_etapa_et."',@id_pi='".$id_pi."', @ue=$ue,@id_usuario=$idPersona");
 			return $data->result();				
         }
 	}
