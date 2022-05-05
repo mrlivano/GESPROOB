@@ -109,7 +109,7 @@
                               <button type="button" class="insertar btn btn-warning btn-xs all pull-right" onclick="insertarOficinaR('<?=$value->id_oficina?>', this);"><i class="ace-icon fa fa-plus bigger-120"></i> Insertar Oficina</button>
                               <button type='button' class='btn btn-primary btn-xs all pull-right' onclick="editarOficinaR('<?=$value->id_oficina?>','<?=$value->denom_oficina?>', this);"><i class='ace-icon fa fa-pencil bigger-120'></i> Editar Oficina</button>
                               <button type='button' class='btn btn-danger btn-xs all pull-right' onclick='eliminarOficinaR(<?=$value->id_oficina?>,this)'><i class='fa fa-trash-o'></i> Eliminar Oficina</button>  
-                              <button type="button" class="meta btn btn-success btn-xs all pull-right" data-toggle="modal" data-target="#VentanaMetaOficina" data-id="<?=$value->id_oficina?>"  data-denom="<?=$value->denom_oficina?>"><i class="ace-icon fa fa-list-alt bigger-120"></i> Asignar Meta</button>         
+                              <!-- <button type="button" class="meta btn btn-success btn-xs all pull-right" data-toggle="modal" data-target="#VentanaMetaOficina" data-id="<?=$value->id_oficina?>"  data-denom="<?=$value->denom_oficina?>"><i class="ace-icon fa fa-list-alt bigger-120"></i> Asignar Meta</button>          -->
                               </ul></div> 
                             </li>
                           <?php } else { ?>
@@ -119,7 +119,7 @@
                               <button type="button" class="insertar btn btn-warning btn-xs all pull-right" onclick="insertarOficinaR('<?=$value->id_oficina?>', this);"><i class="ace-icon fa fa-plus bigger-120"></i> Insertar Oficina</button>
                               <button type='button' class='btn btn-primary btn-xs all pull-right' onclick="editarOficinaR('<?=$value->id_oficina?>','<?=$value->denom_oficina?>', this);"><i class='ace-icon fa fa-pencil bigger-120'></i> Editar Oficina</button>
                               <button type='button' class='btn btn-danger btn-xs all pull-right' onclick='eliminarOficinaR(<?=$value->id_oficina?>,this)'><i class='fa fa-trash-o'></i> Eliminar Oficina</button>  
-                              <button type="button" class="meta btn btn-success btn-xs all pull-right" data-toggle="modal" data-target="#VentanaMetaOficina" data-id="<?=$value->id_oficina?>"  data-denom="<?=$value->denom_oficina?>"><i class="ace-icon fa fa-list-alt bigger-120"></i> Asignar Meta</button>         
+                              <!-- <button type="button" class="meta btn btn-success btn-xs all pull-right" data-toggle="modal" data-target="#VentanaMetaOficina" data-id="<?=$value->id_oficina?>"  data-denom="<?=$value->denom_oficina?>"><i class="ace-icon fa fa-list-alt bigger-120"></i> Asignar Meta</button>          -->
                               </ul></div>
                               <span class="nivel"><?=$value->denom_oficina?></span> 
                             </li>
