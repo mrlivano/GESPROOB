@@ -102,4 +102,17 @@ class Model_Oficina extends CI_Model
         $this->db->delete('META_OFICINA');
         return $this->db->affected_rows();
     }
+    function ListaOficina()
+    {
+        $ListarOficina=$this->db->query("select * from oficinaR");
+
+        return $ListarOficina->result();
+    }
+
+     function listaOficinaPorIdPadre($id_oficinaP)
+    {
+        $ListarOficina=$this->db->query("select * from oficinaR  where id_oficinaP=".$id_oficinaP);
+
+        return $ListarOficina->result();
+    }
 }
