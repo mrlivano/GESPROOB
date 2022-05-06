@@ -965,7 +965,7 @@
 												</div>
 												<div class="row">
 													<div class="col-md-12" style="text-align: center; display: inline-block;">
-														<?php if($ExpedienteTecnicoElaboracion[0]->id_etapa_et == 2 || $ExpedienteTecnicoElaboracion[0]->id_etapa_et == 3)
+														<?php if($ExpedienteTecnicoElaboracion[0]->id_etapa_et == 2 || $ExpedienteTecnicoElaboracion[0]->id_etapa_et == 3 || $ExpedienteTecnicoElaboracion[0]->id_etapa_et == 10)
 														{ ?>
 															<div>
 																<h6><span>Formatos de Ejecución</span></h6>
@@ -1445,7 +1445,7 @@
 												</div>
 												<div class="row">
 													<div class="col-md-12" style="text-align: center; display: inline-block;">
-														<?php if($ExpedienteTecnicoElaboracion[0]->id_etapa_et == 2 || $ExpedienteTecnicoElaboracion[0]->id_etapa_et == 3)
+														<?php if($ExpedienteTecnicoElaboracion[0]->id_etapa_et == 2 || $ExpedienteTecnicoElaboracion[0]->id_etapa_et == 3 || $ExpedienteTecnicoElaboracion[0]->id_etapa_et == 10)
 														{ ?>
 															<div>
 																<h6><span>Formatos de Ejecución</span></h6>

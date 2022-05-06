@@ -63,6 +63,31 @@
 										<?php } ?>
 										</tbody>
 									</table>
+									<?php } if($etapa==10) { ?>	
+									<table id="table-ResponsableExpediente"  class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<td>Cargo</td>
+												<td>Responsable</td>
+												<td>Fecha de Asignación</td>												
+											</tr>
+										</thead>
+										<tbody>
+										<?php foreach($listaResponsableExpediente as $item ){ ?>
+										  	<tr>
+												<td>
+													<?=$item->desc_cargo?>
+										    	</td>
+										    	<td>
+													<?=$item->nombres?> <?=$item->apellido_p?> <?=$item->apellido_m?>
+										    	</td>
+												<td>
+													<?=date('d/m/Y',strtotime($item->fecha_asignacion_resp_et)) ?>
+										    	</td>
+										  </tr>
+										<?php } ?>
+										</tbody>
+									</table>
 									<?php } ?>									
 								</div>
 							</div>

@@ -1262,6 +1262,10 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$listaResponsableExpediente=$this->Model_ET_Responsable->personalActualPorET($id_et);
 		}
+		if($detalleExpediente[0]->id_etapa_et==10)
+		{
+			$listaResponsableExpediente=$this->Model_ET_Responsable->personalActualPorET($id_et);
+		}
 		if($detalleExpediente[0]->id_etapa_et==1)
 		{
 			$listaResponsableExpediente=$this->Model_ET_Expediente_Tecnico->ListarResponsableExpediente($flat,$id_et);
