@@ -12,9 +12,7 @@
 						<label class="control-label">Tipo:</label>
 						<div>
 						<select id="selectTipoEstado" name="selectTipoEstado" class="form-control">
-							<option value="">--Seleccionar--</option>
 							<option value="EXPEDIENTETECNICO">Expediente Técnico</option>
-							<option value="ADICIONAL">Adicionales de Obra</option>
 						</select>
 						</div>	
 					</div>
@@ -92,7 +90,7 @@
 		var anio=$('#txtAnio').val();
         $.ajax({
             type:"POST",
-            url:base_url+"index.php/ET_Cronograma_Ejecucion/cronograma",
+            url:base_url+"index.php/ET_Cronograma_Ejecucion/cronogramaPlazo",
             data: 
 			{
 				idExpedienteTecnico:idExpedienteTecnico,

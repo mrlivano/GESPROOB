@@ -734,6 +734,7 @@ function autorizar($url)
       'ET_Detalle_Formato/eliminarFotografia',
       'ET_Cronograma_Ejecucion/index',
       'ET_Cronograma_Ejecucion/cronograma',
+      'ET_Cronograma_Ejecucion/cronogramaPlazo',
       'ET_Cronograma_Ejecucion/insertar',
       'ET_Cronograma_Componente/insertar',
       'ET_Detalle_Formato/InformeMensual',

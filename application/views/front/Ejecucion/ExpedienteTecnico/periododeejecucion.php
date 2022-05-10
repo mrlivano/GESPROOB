@@ -12,17 +12,16 @@
 <form class="form-horizontal" id="frmAgregarPeriodo" method="POST">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div>
 					<select id="selectTipoPlazo" name="selectTipoPlazo" class="form-control">
-						<option value="">Seleccionar..</option>
 						<option value="Programado">Programado</option>
-						<option value="Ampliacion">Ampliación</option>
 					</select>
 					</div>	
 				</div>
-			</div>
+			</div> -->
+			<input type="hidden" name="selectTipoPlazo" id="selectTipoPlazo" value="Programado">	
 			<div class="row">
 				<input type="hidden" name="hdIdEt" id="hdIdEt" value="<?=$id_et?>">	
 				<div class="col-md-3 col-sm-6 col-xs-12">

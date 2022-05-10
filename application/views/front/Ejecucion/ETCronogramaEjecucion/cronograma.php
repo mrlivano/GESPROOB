@@ -1,5 +1,5 @@
 <?php
-function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
+function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio)
 {
 	$htmlTemp='';
 
@@ -12,7 +12,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 		'<td>---</td>'.
 		'<td>---</td>';
 
-		foreach($listaMes as $i => $mes)
+		foreach($listaMesesPeriodo as $i => $mes)
 		{
 			$htmlTemp.='<td>---</td>';
 		}
@@ -35,14 +35,14 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 
 			$ValorizacionporPartida = 0;
 
-			foreach($listaMes as $i => $mes)
+			foreach($listaMesesPeriodo as $i => $mes)
 			{
 				$precioTotalMesValorizacionTemp=0;
 				$cantidadMesValorizacionTemp=0;
 
 				foreach($value->childDetallePartida->childMesValorizacion as $index => $item)
 				{
-					if($item->id_detalle_partida==$value->childDetallePartida->id_detalle_partida && $item->numero_mes==($mes))
+					if($item->id_detalle_partida==$value->childDetallePartida->id_detalle_partida && $item->numero_mes==($mes->num))
 					{
 
 						$precioTotalMesValorizacionTemp=$item->precio;
@@ -54,7 +54,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 						break;
 					}
 				}
-				$htmlTemp.='<td '.($precioTotalMesValorizacionTemp==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"').'><div><input type="text" style="display: none;padding: 0px;width: 40px;" value="'.$cantidadMesValorizacionTemp.'" onkeyup="onKeyUpCalcularPrecio('.$value->cantidad.', '.$value->precio_unitario.', '.$value->childDetallePartida->id_detalle_partida.', '.$mes.','.$anio.', this, event,'.$value->id_partida.');"></div><span class="spanMontoValorizacion">S/.'.number_format($precioTotalMesValorizacionTemp, 2).'</span></td>';
+				$htmlTemp.='<td '.($precioTotalMesValorizacionTemp==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"').'><div><input type="text" style="display: none;padding: 0px;width: 40px;" value="'.$cantidadMesValorizacionTemp.'" onkeyup="onKeyUpCalcularPrecio('.$value->cantidad.', '.$value->precio_unitario.', '.$value->childDetallePartida->id_detalle_partida.', '.$mes->num.','.$anio.', this, event,'.$value->id_partida.');"></div><span class="spanMontoValorizacion">S/.'.number_format($precioTotalMesValorizacionTemp, 2).'</span></td>';
 			}
 
 			if($ValorizacionporPartida==$value->cantidad)
@@ -72,7 +72,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $listaMes, $anio);
+		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $listaMesesPeriodo, $anio);
 	}
 
 	return $htmlTemp;
@@ -146,9 +146,9 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 				<th>P.U.</th>
 				<th>TOTAL</th>
 				<th>SALDO</th>
-				<?php foreach($listaMes as $key => $value)
+				<?php foreach($listaMesesPeriodo as $key => $value)
 				{ ?>
-				<th><?=substr($key, 0, 3)?></th>
+				<th><?=substr($value->mes, 0, 3)?></th>
 				<?php } ?>
 			</tr>
 		</thead>
@@ -163,14 +163,14 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 					<td>---</td>
 					<td>---</td>
 					<td>---</td>
-					<?php foreach($listaMes as $i => $mes)
+					<?php foreach($listaMesesPeriodo as $i => $mes)
 					{ ?>
 					<td>---</td>
 					<?php } ?>
 				</tr>
 				<?php foreach($value->childMeta as $index => $item)
 				{ ?>
-					<?= mostrarMetaAnidada($item, $expedienteTecnico, $listaMes, $anio)?>
+					<?= mostrarMetaAnidada($item, $expedienteTecnico, $listaMesesPeriodo, $anio)?>
 				<?php } ?>
 			<?php } ?>
 			<tr>
@@ -181,12 +181,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 				<tr class="elementoBuscar">
 					<td><b><i><?=$value->numeracion?></i></b></td>
 					<td style="text-align: left;" colspan="6"><b><i><?=html_escape($value->descripcion)?></i></b></td>
-					<?php foreach($listaMes as $i => $mes) 
+					<?php foreach($listaMesesPeriodo as $i => $mes) 
 					{ 
 						$precioComponente=0;
 						foreach($value->childCronograma as $temp)
 						{
-							if($value->id_componente==$temp->id_componente && $temp->numero_mes==$mes)
+							if($value->id_componente==$temp->id_componente && $temp->numero_mes==$mes->num)
 							{
 								$precioComponente=$temp->precio;
 								break;
@@ -194,7 +194,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMes, $anio)
 						}?>
 						<td <?=($precioComponente==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"')?>>
 							<div>
-								<input type="text" style="display: none;padding: 0px;width: 40px;" value="<?=number_format($precioComponente, 2, '.', ',')?>" onkeyup="onKeyUpGuardarCronograma('<?=$value->id_componente?>', '<?=$mes?>','<?=$anio?>', this, event);">
+								<input type="text" style="display: none;padding: 0px;width: 40px;" value="<?=number_format($precioComponente, 2, '.', ',')?>" onkeyup="onKeyUpGuardarCronograma('<?=$value->id_componente?>', '<?=$mes->num?>','<?=$anio?>', this, event);">
 							</div>
 							<span class="spanMontoValorizacion">S/.<?=number_format($precioComponente, 2, '.', ',')?></span>
 						</td>

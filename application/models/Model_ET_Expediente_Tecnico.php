@@ -341,6 +341,14 @@ class Model_ET_Expediente_Tecnico extends CI_Model
         // return true;
     }
 
+	public function clonarModificatoria($idExpedienteTecnico, $idEtapaExpedienteTecnico)
+    {
+		
+    	$data=$this->db->query("execute cloneEjecucionAndChild @id_et_input='".$idExpedienteTecnico."', @id_etapa_et='".$idEtapaExpedienteTecnico."'");
+
+        // return true;
+    }
+
 
     public function darvistobueno($id_et)
     {

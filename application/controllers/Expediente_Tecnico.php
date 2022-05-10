@@ -1906,7 +1906,7 @@ class Expediente_Tecnico extends CI_Controller
 					$this->Model_ET_Expediente_Tecnico->AprobarExpediente($txtUrlDocAprobacion, $txtFechaAprobacion, $idExpedienteTecnico);
 				}
 
-				$this->Model_ET_Expediente_Tecnico->clonar($etExpedienteTecnico->id_et, $idEtapaExpedienteTecnico);
+				$this->Model_ET_Expediente_Tecnico->clonarModificatoria($etExpedienteTecnico->id_et, $idEtapaExpedienteTecnico);
 
 				$this->Model_ET_Expediente_Tecnico->updateAprobacion(1,$idExpedienteTecnico);
 

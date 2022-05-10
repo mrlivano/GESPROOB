@@ -13,6 +13,11 @@ class Model_ET_Periodo_Ejecucion extends CI_Model
 		$query=$this->db->query("select * from ET_TIEMPO_EJECUCION where id_et=$id_Et order by estado desc,fecha_fin desc");
 		return  $query->result();
 	}
+	function listaPlazoEjecucionAnio($id_Et,$anio)
+	{
+		$query=$this->db->query("select MES.id, MES.num, MES.mes from ET_TIEMPO_EJECUCION INNER JOIN MES on ((MES.id BETWEEN MONTH(fecha_inicio) and  MONTH(fecha_fin)) or (YEAR(fecha_fin)>YEAR(fecha_inicio) and ( (YEAR(fecha_inicio)='$anio'and mes.id between month(fecha_inicio) and 12) or (YEAR(fecha_fin)='$anio'and mes.id between 1 and month(fecha_fin))))) where id_et='$id_Et' and (YEAR(fecha_inicio)='$anio' or YEAR(fecha_fin)='$anio') group by MES.id,MES.num,MES.MES order by MES.id asc");
+		return  $query->result();
+	}
 
 	function plazoEjecucion($idExpedienteTecnico, $tipo)
 	{
