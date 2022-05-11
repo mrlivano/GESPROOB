@@ -39,6 +39,7 @@ class Expediente_Tecnico extends CI_Controller
 		$this->load->model('Model_ET_Recurso_Insumo');
 		$this->load->model('Model_ET_Periodo_Ejecucion');
 		$this->load->model('Model_Dashboard_Reporte');
+		$this->load->model('Model_ET_Cronograma_Ejecucion');
 		$this->load->library('mydompdf');
 		$this->load->helper('FormatNumber_helper');
 	}
@@ -1645,7 +1646,7 @@ class Expediente_Tecnico extends CI_Controller
 					$meta_data['numeracion']=$item->numeracion;
 					$meta_data['url']=$item->url;
 					$lastMeta=$this->Model_ET_Meta->insertarMeta($meta_data);
-					$this->obtenerMetaAnidadaParaClonacion($item, $lastMeta, $lastExpediente);
+					$this->obtenerMetaAnidadaParaClonacionModificatoria($item, $lastMeta, $lastExpediente);
 				}
 			}
 
@@ -1733,6 +1734,103 @@ class Expediente_Tecnico extends CI_Controller
 					$mes_data['cantidad']=$valor->cantidad;
 					$mes_data['precio']=$valor->precio;
 					$lastValorizacion=$this->Model_ET_Mes_Valorizacion->insertarMesValorizacion($mes_data);
+				}
+			}
+		}
+	}
+
+	private function obtenerMetaAnidadaParaClonacionModificatoria($meta, $lastMeta, $lastExpediente)
+	{
+		$temp=$this->Model_ET_Meta->ETMetaPorIdMetaPadre($meta->id_meta);
+
+		$meta->childMeta=$temp;		
+
+		$idUltimo=$lastMeta;
+
+		foreach ($meta->childMeta as $item) 
+		{
+			$meta_data['id_meta_padre']=$idUltimo;
+			$meta_data['desc_meta']=$item->desc_meta;
+			$meta_data['numeracion']=$item->numeracion;
+			$meta_data['url']=$item->url;
+			$lastMeta=$this->Model_ET_Meta->insertarMeta($meta_data);
+			
+			$this->obtenerMetaAnidadaParaClonacionModificatoria($item, $lastMeta, $lastExpediente);
+		}
+
+		if(count($temp)==0)
+		{
+			$partida=$this->Model_ET_Partida->ETPartidaDetallePartidaPorIdMeta($meta->id_meta);
+			foreach ($partida as $part) 
+			{
+				$part_data['id_meta']=$lastMeta;
+				$part_data['id_unidad']=$part->id_unidad;
+				$part_data['desc_partida']=$part->desc_partida;
+				$part_data['rendimiento']=$part->rendimiento;
+				$part_data['cantidad']=$part->cantidad;
+				$part_data['id_lista_partida']=$part->id_lista_partida;
+				$part_data['numeracion']=$part->numeracion;
+				$part_data['url']=$part->url;
+				$lastPartida=$this->Model_ET_Partida->insertarPartida($part_data);
+				$det_data['id_partida']=$lastPartida;
+				$det_data['id_unidad']=$part->id_unidad;
+				$det_data['id_etapa_et']=$part->id_etapa_et;
+				$det_data['rendimiento']=$part->rendimiento;
+				$det_data['cantidad']=$part->cantidad;
+				$det_data['precio_unitario']=$part->precio_unitario;
+				$det_data['estado']=$part->estado;
+				$det_data['especificacion_tecnica']=$part->especificacion_tecnica;
+				$lastDetallePartida=$this->Model_ET_Detalle_Partida->insertarDetallePartida($det_data);
+
+				$analisisUnitario=$this->Model_ET_Analisis_Unitario->ETAnalisisUnitarioPorIdDetalle($part->id_detalle_partida);				
+				foreach($analisisUnitario as $analisis)
+				{
+					$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdAnalitico($analisis->id_analitico);
+					$tempPresupestoAnalitico=$this->Model_ET_Presupuesto_Analitico->verificarPresupuestoAnaliticoTipoClasi($lastExpediente,$presupuestoAnalitico[0]->id_clasificador, $presupuestoAnalitico[0]->id_presupuesto_ej);
+					$au_data['id_analitico']=$tempPresupestoAnalitico[0]->id_analitico;
+					$au_data['id_recurso']=$analisis->id_recurso;
+					$au_data['id_detalle_partida']=$lastDetallePartida;
+					$lastAnalisisUnitario=$this->Model_ET_Analisis_Unitario->insertar($au_data);
+					
+					$detalleAnalisisUnitario=$this->Model_ET_Detalle_Analisis_Unitario->ETDetalleAnalisisPorIdAnalisis($analisis->id_analisis);
+					foreach($detalleAnalisisUnitario as $detalle)
+					{
+						$detuni_data['id_analisis']=$lastAnalisisUnitario;
+						$detuni_data['id_unidad']=$detalle->id_unidad;
+						$detuni_data['desc_detalle_analisis']=$detalle->desc_detalle_analisis;
+						$detuni_data['cuadrilla']=$detalle->cuadrilla;
+						$detuni_data['cantidad']=$detalle->cantidad;
+						$detuni_data['precio_unitario']=$detalle->precio_unitario;
+						$detuni_data['rendimiento']=$detalle->rendimiento;
+						$lastDetalleAnalisisUnitario=$this->Model_ET_Detalle_Analisis_Unitario->insertarDetalleAnalisisUnitario($detuni_data);
+					}
+				}
+
+				$mesValorizacion=$this->Model_ET_Mes_Valorizacion->ETMesValorizacionPorIdDetallePartida($part->id_detalle_partida);				
+				foreach($mesValorizacion as $valor)
+				{
+					$mes_data['id_detalle_partida']=$lastDetallePartida;
+					$mes_data['numero_mes']=$valor->numero_mes;
+					$mes_data['cantidad']=$valor->cantidad;
+					$mes_data['precio']=$valor->precio;
+					$lastValorizacion=$this->Model_ET_Mes_Valorizacion->insertarMesValorizacion($mes_data);
+				}
+
+				$cronogramaEjecucion=$this->Model_ET_Cronograma_Ejecucion->ETCronogramaEjecucionPorIdDetallePartida($part->id_detalle_partida);				
+				foreach($cronogramaEjecucion as $cronograma)
+				{
+					$cronograma_data['id_detalle_partida']=$lastDetallePartida;
+					$cronograma_data['numero_mes']=$cronograma->numero_mes;
+					$cronograma_data['anio']=$cronograma->anio;
+					$cronograma_data['cantidad']=$cronograma->cantidad;
+					$cronograma_data['precio']=$cronograma->precio;
+					$lastCronogramaEjecucion=$this->Model_ET_Cronograma_Ejecucion->insertar($cronograma_data);
+				}
+
+				$detValorizacion=$this->Model_DetSegOrden->listarValorizacionPorDetallePartida($part->id_detalle_partida);				
+				foreach($detValorizacion as $detValor)
+				{
+					$lastDetValorizacion=$this->Model_DetSegOrden->insertar($detValor->etapa_valorizacion, $detValor->fecha, $detValor->cantidad, $detValor->sub_total, $detValor->fecha_dia, $lastDetallePartida);
 				}
 			}
 		}

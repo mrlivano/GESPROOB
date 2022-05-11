@@ -15,6 +15,13 @@ class Model_ET_Cronograma_Ejecucion extends CI_Model
 		return $data->result();
 	}
 
+	function ETCronogramaEjecucionPorIdDetallePartida($idDetallePartida)
+	{
+		$data=$this->db->query("select * from ET_CRONOGRAMA_EJECUCION where id_detalle_partida='$idDetallePartida'");
+
+		return $data->result();
+	}
+
 	function sumCantidadPorIdDetallePartida($idDetallePartida)
 	{
 		$data=$this->db->query("select sum(cantidad) as sumatoriaCantidad from ET_CRONOGRAMA_EJECUCION where id_detalle_partida=$idDetallePartida");

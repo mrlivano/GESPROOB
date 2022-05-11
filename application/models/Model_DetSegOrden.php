@@ -62,8 +62,14 @@ class Model_DetSegOrden extends CI_Model
 
 	public function eliminar($id_detSegValorizacion)
 	{
-		$data = $this->db->query("exec sp_Gestionar_Det_Seg_Valorizacion_d @Opcion = 'D', @id_det_seg_valorizacion =$id_detSegValorizacion");
-		return true;
+		$this->db->where('id_det_seg_valorizacion',$id_detSegValorizacion);
+        $this->db->delete('DET_SEG_VALORIZACION');
+        if($this->db->affected_rows()>0){
+            return true;
+        }
+        else{
+            return false;
+        }
 	}
 
 	public function valorizadaActual($idDetallePartida, $mesActual, $anioActual, $etapa)

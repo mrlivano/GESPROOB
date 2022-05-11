@@ -20,10 +20,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div>
 								<select name="selectEtapaValorizacion" id="selectEtapaValorizacion" class="form-control">
-									<option value="">Seleccionar Etapa</option>
 									<option value="valorizacion">Valorizacion</option>
-									<option value="mayor metrado">Mayor Metrado</option>
-									<option value="deductivo">Deductivo</option>
 								</select>
 							</div>	
 						</div>

@@ -642,7 +642,7 @@
 																	</a>
 																</div>
 																<div class="block_content">
-																	<h2 class="title"><?=$value->descripcion_modificatoria?></a>
+																	<h2 class="title"><a href='<?=base_url();?>Expediente_Tecnico/verdetalle?id_et=<?=$value->id_et?>'><?=$value->descripcion_modificatoria?></a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
