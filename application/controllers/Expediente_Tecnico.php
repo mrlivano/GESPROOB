@@ -2131,7 +2131,7 @@ class Expediente_Tecnico extends CI_Controller
 		$year2 = date('Y', $ts2);
 		$month1 = date('m', $ts1);
 		$month2 = date('m', $ts2);
-		$numerodemeses = (($year2 - $year1) * 12) + ($month2 - $month1);
+		$numerodemeses = (($year2 - $year1) * 12) + ($month2 - $month1)+1;
 		echo json_encode(['numerodemeses' => $numerodemeses]); exit;
 
 	}
@@ -2251,7 +2251,7 @@ class Expediente_Tecnico extends CI_Controller
 			$idDetallePartida=$this->input->post('hdIdDetallePartida');
 
 			$cantidad=$this->input->post('txtCantidad');
-			
+
 			$descripcion=$this->input->post('txtDescripcion');
 
 			$subtotal=floatval(str_replace(",", "", $this->input->post('txtCosto')));
