@@ -21,6 +21,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 	{
 		$idExpedienteTecnico=isset($_GET['id_et']) ? $_GET['id_et'] : null;
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+		$anioPlazoEjecucion=$this->Model_ET_Periodo_Ejecucion->listaAnioPlazoEjecucion($idExpedienteTecnico);
 		$tipoUsuario=$this->session->userdata('tipoUsuario');
         if($tipoUsuario!=9 && $tipoUsuario!=1)
         {
@@ -32,7 +33,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 			}
         }
 		$this->load->view('layout/Ejecucion/header');
-		$this->load->view('front/Ejecucion/ETCronogramaEjecucion/index', ['idExpedienteTecnico' => $idExpedienteTecnico]);
+		$this->load->view('front/Ejecucion/ETCronogramaEjecucion/index', ['idExpedienteTecnico' => $idExpedienteTecnico, 'anioPlazoEjecucion' => $anioPlazoEjecucion]);
 		$this->load->view('layout/Ejecucion/footer');
 	}
 

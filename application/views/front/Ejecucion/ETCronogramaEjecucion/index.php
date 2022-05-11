@@ -8,7 +8,7 @@
 			<form class="form-horizontal" id="frmCronogramaValorizado">
 				<div class="row" id="divBusquedaCronograma">
 					<input type="hidden" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico" value="<?=@$idExpedienteTecnico?>">						
-					<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="col-md-3 col-sm-3 col-xs-12">
 						<label class="control-label">Tipo:</label>
 						<div>
 						<select id="selectTipoEstado" name="selectTipoEstado" class="form-control">
@@ -16,10 +16,17 @@
 						</select>
 						</div>	
 					</div>
-					<div class="col-md-2 col-sm-6 col-xs-12">
+					<div class="col-md-2 col-sm-2 col-xs-12">
 						<label class="control-label">Año:</label>
 						<div>
-							<input type="text" name="txtAnio" id="txtAnio" class="form-control" value="<?=date('Y')?>">
+						<select  id="txtAnio" selected name="txtAnio" class="form-control">
+								<?php
+								foreach ($anioPlazoEjecucion as $value) 
+								{?>
+									<option value="<?=$value->anio?>"><?=$value->anio?></option>
+								<?php } 
+								?>
+							</select>
 						</div>	
 					</div>	
 					<div class="col-md-2 col-sm-2 col-xs-12">
@@ -64,13 +71,8 @@
 					{
 						notEmpty:
 						{
-							message: '<b style="color: red;">El campo "Año" es requerido.</b>'
+							message: '<b style="color: red;">Registre plazo de ejecución.</b>'
 						},
-						regexp:
-						{
-							regexp: /^([0-9]){4}$/,
-							message: '<b style="color: red;">El campo "Año" debe ser un número de 4 dígitos.</b>'
-						}
 					}
 				}	
 			}
