@@ -25,7 +25,7 @@ class Model_DetSegOrden extends CI_Model
 		return $data->result();
 	}
 
-	public function insertar($etapa, $fecha, $cantidad, $subtotal, $fechadia, $idDetallePartida)
+	public function insertar($etapa, $fecha, $cantidad, $subtotal, $fechadia, $idDetallePartida,$descripcion)
 	{
 		$data = array(
 			'fecha' => $fecha,
@@ -33,7 +33,8 @@ class Model_DetSegOrden extends CI_Model
 			'sub_total' => $subtotal,
 			'fecha_dia' => $fechadia,
 			'id_detalle_partida' => $idDetallePartida,
-			'etapa_valorizacion' => $etapa
+			'etapa_valorizacion' => $etapa,
+			'descripcion' => $descripcion
 		);
 
 		$this->db->insert('DET_SEG_VALORIZACION',$data);

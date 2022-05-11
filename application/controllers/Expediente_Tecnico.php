@@ -1830,7 +1830,7 @@ class Expediente_Tecnico extends CI_Controller
 				$detValorizacion=$this->Model_DetSegOrden->listarValorizacionPorDetallePartida($part->id_detalle_partida);				
 				foreach($detValorizacion as $detValor)
 				{
-					$lastDetValorizacion=$this->Model_DetSegOrden->insertar($detValor->etapa_valorizacion, $detValor->fecha, $detValor->cantidad, $detValor->sub_total, $detValor->fecha_dia, $lastDetallePartida);
+					$lastDetValorizacion=$this->Model_DetSegOrden->insertar($detValor->etapa_valorizacion, $detValor->fecha, $detValor->cantidad, $detValor->sub_total, $detValor->fecha_dia, $lastDetallePartida, $detValor->descripcion);
 				}
 			}
 		}
@@ -2251,6 +2251,8 @@ class Expediente_Tecnico extends CI_Controller
 			$idDetallePartida=$this->input->post('hdIdDetallePartida');
 
 			$cantidad=$this->input->post('txtCantidad');
+			
+			$descripcion=$this->input->post('txtDescripcion');
 
 			$subtotal=floatval(str_replace(",", "", $this->input->post('txtCosto')));
 
@@ -2279,10 +2281,10 @@ class Expediente_Tecnico extends CI_Controller
 
 					if($valorizacionNormal!=0)
 					{
-						$data = $this->Model_DetSegOrden->insertar('valorizacion', $fecha, $valorizacionNormal, $valorizacionNormal*$precioUnitario, $fechadia,$idDetallePartida);
+						$data = $this->Model_DetSegOrden->insertar('valorizacion', $fecha, $valorizacionNormal, $valorizacionNormal*$precioUnitario, $fechadia,$idDetallePartida,$descripcion);
 					}
 
-					$dataMayorMetrado = $this->Model_DetSegOrden->insertar('mayor metrado', $fecha, $mayorMetrado, $mayorMetrado*$precioUnitario, $fechadia,$idDetallePartida);
+					$dataMayorMetrado = $this->Model_DetSegOrden->insertar('mayor metrado', $fecha, $mayorMetrado, $mayorMetrado*$precioUnitario, $fechadia,$idDetallePartida,$descripcion);
 
 					$q1 = $this->Model_DetSegOrden->sumatoriaValorizacionPartida($idDetallePartida);
 
@@ -2294,12 +2296,12 @@ class Expediente_Tecnico extends CI_Controller
 				}
 				else
 				{
-					$data = $this->Model_DetSegOrden->insertar($etapa, $fecha, $cantidad, $subtotal, $fechadia,$idDetallePartida);
+					$data = $this->Model_DetSegOrden->insertar($etapa, $fecha, $cantidad, $subtotal, $fechadia,$idDetallePartida,$descripcion);
 				}
 			}
 			else
 			{
-				$data = $this->Model_DetSegOrden->insertar($etapa, $fecha, $cantidad, $subtotal, $fechadia,$idDetallePartida);
+				$data = $this->Model_DetSegOrden->insertar($etapa, $fecha, $cantidad, $subtotal, $fechadia,$idDetallePartida,$descripcion);
 			}
 
 			$q1 = $this->Model_DetSegOrden->sumatoriaValorizacionPartida($idDetallePartida);

@@ -20,8 +20,13 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div>
 								<select name="selectEtapaValorizacion" id="selectEtapaValorizacion" class="form-control">
-									<option value="valorizacion">Valorizacion</option>
+									<option value="valorizacion">Valorización</option>
 								</select>
+							</div>	
+						</div>
+						<div class="col-md-9 col-sm-6 col-xs-12">
+							<div>
+								<input class="form-control" placeholder="Descripción" name="txtDescripcion" id="txtDescripcion" type="text" autocomplete="off">	
 							</div>	
 						</div>
 					</div>				
@@ -69,7 +74,8 @@
 						<th style="width: 5%" class="col-md-1 col-xs-12">Etapa</th>
 						<th style="width: 5%" class="col-md-1 col-xs-12">Fecha</th>
 						<th style="width: 30%" class="col-md-2 col-xs-12">Cantidad</th>
-						<th style="width: 30%" class="col-md-2 col-xs-12">Costo</th>	
+						<th style="width: 30%" class="col-md-2 col-xs-12">Costo</th>
+						<th style="width: 30%" class="col-md-2 col-xs-12">Descripción</th>	
 						<th style="width: 3%" class="col-md-2 col-xs-12">Opciones</th>						
 					</tr>
 				</thead>
@@ -80,6 +86,7 @@
 						<td><?=(new DateTime($value->fecha_dia))->format('d-m-Y')?></td>
 						<td><?=$value->cantidad?></td>
 						<td><?=a_number_format($value->sub_total, 2, '.',",",3)?></td>
+						<td><?=$value->descripcion?></td>
 						<td><button type="button" class="btn btn-danger btn-xs" onclick="eliminar('<?=$value->id_det_seg_valorizacion?>',this);"><i class="fa fa-trash-o"></i> Eliminar</button></td>
 					</tr>
 				<?php } ?>
