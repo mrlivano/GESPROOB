@@ -104,7 +104,6 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<select id="selectTipoEstado" name="selectTipoEstado" class="form-control">
 						<option value="Programado">Expediente Técnico</option>
-						<option value="Adicional">Adicionales de Obra</option>
 					</select>
 				</div>
 			</div>
