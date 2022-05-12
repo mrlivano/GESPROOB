@@ -20,6 +20,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		'<td></td>'.
 		'<td></td>'.
 		'<td></td>'.
+		'<td></td>'.
 		'<td></td>';		
 	$htmlTemp.='</tr>';
 	if(count($meta->childMeta)==0)
@@ -36,6 +37,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 			$metradoSaldo = 0;
 			$valorizadoSaldo = 0;
 			$porcentajeSaldo = 0;
+			$descripcion = '';
 			$htmlTemp.='<tr class="elementoBuscar">'.
 				'<td>'.$value->numeracion.'</td>'.
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
@@ -64,6 +66,15 @@ function mostrarAnidado($meta, $expedienteTecnico)
 					}
 				}
 
+				foreach($value->childDetallePartida->childDetSegValorizacionDescripcion as $index => $item)
+				{
+					if($item->id_detalle_partida==$value->childDetallePartida->id_detalle_partida)
+					{
+						$descripcion = $item->descripcion;
+						break;
+					}
+				}
+
 				$metradoAcumulado= $metradoAnterior + $metradoActual;
 				$valorizadoAcumulado=$valorizadoAnterior + $valorizadoActual;
 				$porcentajeAcumulado = (100 * $metradoAcumulado)/($value->cantidad);
@@ -75,6 +86,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				$htmlTemp.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right;">S/.'.number_format($valorizadoActual, 2).'</td>';
+				$htmlTemp.='<td style="text-align: right;">'.$descripcion.'</td>';
 				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoAcumulado, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right;">S/. '.number_format($valorizadoAcumulado, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right;">'.number_format($porcentajeAcumulado, 2).'% </td>';
@@ -205,14 +217,14 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										<th><?=trim($expedienteTecnico->nombre_pi)?></th>
 										<th rowspan="3">UNIDAD</th>
 										<th rowspan="2" colspan="3" >PRESUPUESTO</th>
-										<th colspan="7">AVANCES</th>
+										<th colspan="8">AVANCES</th>
 										<th colspan="3" rowspan="2">SALDO</th>
 									</tr>
 									<tr>
 										<th rowspan="2">ÍTEM</th>
 										<th style="width: 400px;"; rowspan="2">DESCRIPCIÓN</th>
 										<th colspan="2">ANTERIOR</th>
-										<th colspan="2">ACTUAL</th>
+										<th colspan="3">ACTUAL</th>
 										<th colspan="3">ACUMULADO</th>
 									</tr>
 									<tr>
@@ -223,6 +235,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										<th>Valorizado S/.</th>
 										<th>Metrado</th>
 										<th>Valorizado S/.</th>
+										<th>Descripción.</th>
 										<th>Metrado</th>
 										<th>Valorizado S/.</th>
 										<th>%</th>
@@ -236,6 +249,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										<tr class="elementoBuscar">
 											<td><b><i><?=$value->numeracion?></i></b></td>
 											<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+											<td></td>
 											<td></td>
 											<td></td>
 											<td></td>
