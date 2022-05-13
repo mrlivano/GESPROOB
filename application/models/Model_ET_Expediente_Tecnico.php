@@ -144,17 +144,17 @@ class Model_ET_Expediente_Tecnico extends CI_Model
         $tipoUsuario=$this->session->userdata('tipoUsuario');
         if($tipoUsuario==9)
         {
-            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados', @id_et=NULL, @ue=NULL, @id_usuario=NULL,@aprobado=$aprobado");
+            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados_etapa1', @id_et=NULL, @ue=NULL, @id_usuario=NULL,@aprobado=$aprobado");
         	return $data->result();
         }
         if($tipoUsuario==1)
         {
-            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados', @id_et=NULL, @ue=$ue, @id_usuario=NULL,@aprobado=$aprobado");
+            $data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados_etapa1', @id_et=NULL, @ue=$ue, @id_usuario=NULL,@aprobado=$aprobado");
         	return $data->result();
         }
         else
         {
-        	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados', @id_et=NULL, @ue=$ue, @id_usuario=$idPersona,@aprobado=$aprobado");
+        	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados_etapa1', @id_et=NULL, @ue=$ue, @id_usuario=$idPersona,@aprobado=$aprobado");
         	return $data->result();
         }
 	}
@@ -170,7 +170,7 @@ class Model_ET_Expediente_Tecnico extends CI_Model
         }
         else
         {
-        	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados', @id_et=$idEt, @ue=NULL, @id_usuario=NULL,@aprobado=$aprobado");
+        	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados, @id_et=$idEt, @ue=NULL, @id_usuario=NULL,@aprobado=$aprobado");
         	return $data->result();
         }
 	}
