@@ -101,10 +101,13 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 
 			$htmlTemp2.='</tr>';
 		  }
+		}
+		if($totalMostrar>0){
+			$htmlTemp=$htmlTemp1.$htmlTemp2;
 		}		
 	}
-	if($totalMostrar>0){
-		$htmlTemp=$htmlTemp1.$htmlTemp2;
+	else {
+		$htmlTemp=$htmlTemp1;
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
