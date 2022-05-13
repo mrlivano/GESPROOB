@@ -1,9 +1,10 @@
 <?php
-function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
+function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 {
 	$cantidad = 0;
 	$totalMostrar = 0;
 	$htmlTemp='';
+	$htmlP='';
 	$htmlTemp1='';
 	$htmlTemp2='';
 
@@ -103,18 +104,16 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 		  }
 		}
 		if($totalMostrar>0){
-			$htmlTemp=$htmlP.$htmlTemp1.$htmlTemp2;
+			$htmlTemp=$htmlTemp1.$htmlTemp2;
 		}		
 	}
 	else if(!$mostrar){
 		$htmlTemp=$htmlTemp1;
-	} else {
-		$htmlP.=$htmlTemp1;
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
 		$totalMeta = 0;
-		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar,$htmlP);
+		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar);
 		
 		$totalMostrar+=$anidado[1];
 		$totalMeta+=$anidado[1];
@@ -299,7 +298,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 											<td></td>
 										</tr>
 										<?php foreach($value->childMeta as $index => $item){ 
-											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar,'');
+											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar);
 											if($mostrarA[1]>0){
 											?>
 											<?= $mostrarA[0]?>
