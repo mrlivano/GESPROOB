@@ -121,6 +121,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 		$totalMeta+=$anidado[1];
 		if($mostrar && $totalMeta>0){
 			$htmlTemp.=$anidado[0];
+			$htmlP='';
 		}
 		else{
 			$htmlTemp.=$anidado[0];
