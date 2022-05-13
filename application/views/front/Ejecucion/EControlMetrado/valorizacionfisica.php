@@ -106,15 +106,22 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 			$htmlTemp=$htmlTemp1.$htmlTemp2;
 		}		
 	}
-	else {
+	else if(!$mostrar){
 		$htmlTemp=$htmlTemp1;
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
 		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar);
-		$htmlTemp.=$anidado[0];
+		
 		$totalMostrar+=$anidado[1];
+		if($mostrar && $anidado[1]>0){
+			$htmlTemp.=$anidado[0];
+		}
+		else{
+			$htmlTemp.=$anidado[0];
+		}
 	}
+	
 	return array($htmlTemp,$totalMostrar);
 }
 ?>
