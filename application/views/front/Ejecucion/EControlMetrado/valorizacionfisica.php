@@ -206,7 +206,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 							<div>
 								<select id="txtMostrar" name="txtMostrar" class="form-control selectpicker">
 										<option value="0" <?php echo (!$mostrar ? 'selected' : '')?>>Todas las partidas</option>
-										<option value="1" <?php echo ($mostrar ? 'selected' : '')?>>Partidas aprobadas</option>
+										<option value="1" <?php echo ($mostrar ? 'selected' : '')?>>Partidas ejecutadas</option>
 								</select>
 							</div>
 						</div>
@@ -304,7 +304,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 		var idEt = $('#hdIdEt').val();
 		var mostrar = $('#txtMostrar').val();
 		if(mostrar==1){
-			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio+"&mostrar=aprobada";
+			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio+"&mostrar=ejecutada";
 		} else {
 			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio;	
 		}
