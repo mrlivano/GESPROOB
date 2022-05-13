@@ -111,10 +111,12 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
+		$totalMeta = 0;
 		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar);
 		
 		$totalMostrar+=$anidado[1];
-		if($mostrar && $anidado[1]>0){
+		$totalMeta+=$anidado[1];
+		if($mostrar && $totalMeta>0){
 			$htmlTemp.=$anidado[0];
 		}
 		else{
