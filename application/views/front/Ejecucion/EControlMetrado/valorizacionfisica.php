@@ -205,8 +205,8 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 							<label for="control-label">Mostrar:</label>
 							<div>
 								<select id="txtMostrar" name="txtMostrar" class="form-control selectpicker">
-										<option value="0">Todas las partidas</option>
-										<option value="1">Partidas aprobadas</option>
+										<option value="0" <?php echo (!$mostrar ? 'selected' : '')?>>Todas las partidas</option>
+										<option value="1" <?php echo ($mostrar ? 'selected' : '')?>>Partidas aprobadas</option>
 								</select>
 							</div>
 						</div>
