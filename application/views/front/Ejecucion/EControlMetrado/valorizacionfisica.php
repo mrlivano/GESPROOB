@@ -111,9 +111,11 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico, $mostrar);
+		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar);
+		$htmlTemp.=$anidado[0];
+		$totalMostrar+=$anidado[1];
 	}
-	return $htmlTemp;
+	return array($htmlTemp,$totalMostrar);
 }
 ?>
 <style>
@@ -285,9 +287,12 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 											<td></td>
 											<td></td>
 										</tr>
-										<?php foreach($value->childMeta as $index => $item){ ?>
-											<?= mostrarAnidado($item, $expedienteTecnico,$mostrar)?>
-										<?php } ?>
+										<?php foreach($value->childMeta as $index => $item){ 
+											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar);
+											if($mostrarA[1]>0){
+											?>
+											<?= $mostrarA[0]?>
+										<?php }} ?>
 									<?php } ?>
 								</tbody>
 							</table>
