@@ -2354,6 +2354,7 @@ class Expediente_Tecnico extends CI_Controller
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : '';
 		$mes = isset($_GET['mes']) ? $_GET['mes'] : date('m');
 		$anio = isset($_GET['anio']) ? $_GET['anio'] : date('Y');
+		$mostrar = isset($_GET['mostrar']) ? true : false;
 
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
 		$tipoUsuario=$this->session->userdata('tipoUsuario');
@@ -2388,7 +2389,7 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 			$this->load->view('layout/Ejecucion/header');
-			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida, 'listaMeses' =>$meses, 'mes'=>$mes, 'anio'=>$anio]);
+			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida, 'listaMeses' =>$meses, 'mes'=>$mes, 'anio'=>$anio, 'mostrar'=>$mostrar]);
 			$this->load->view('layout/Ejecucion/footer');
 		}
 	}

@@ -33,7 +33,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 			}
         }
 		$this->load->view('layout/Ejecucion/header');
-		$this->load->view('front/Ejecucion/ETCronogramaEjecucion/index', ['idExpedienteTecnico' => $idExpedienteTecnico, 'anioPlazoEjecucion' => $anioPlazoEjecucion]);
+		$this->load->view('front/Ejecucion/ETCronogramaEjecucion/index', ['idExpedienteTecnico' => $idExpedienteTecnico, 'anioPlazoEjecucion' => $anioPlazoEjecucion, 'descripcionET' => $expedienteTecnico->descripcion_modificatoria]);
 		$this->load->view('layout/Ejecucion/footer');
 	}
 

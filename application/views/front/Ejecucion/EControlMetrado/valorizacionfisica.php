@@ -1,5 +1,5 @@
 <?php
-function mostrarAnidado($meta, $expedienteTecnico)
+function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 {
 	$cantidad = 0;
 	$htmlTemp='';
@@ -38,15 +38,8 @@ function mostrarAnidado($meta, $expedienteTecnico)
 			$valorizadoSaldo = 0;
 			$porcentajeSaldo = 0;
 			$descripcion = '';
-			$htmlTemp.='<tr class="elementoBuscar">'.
-				'<td>'.$value->numeracion.'</td>'.
-				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
-				'<td>'.html_escape($value->descripcion).'</td>'.
-				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
-				'<td style="text-align: right;">S/.'.$value->precio_unitario.'</td>'.
-				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
 
-				foreach($value->childDetallePartida->childDetSegValorizacion as $index => $item)
+			foreach($value->childDetallePartida->childDetSegValorizacion as $index => $item)
 				{
 					if($item->id_detalle_partida==$value->childDetallePartida->id_detalle_partida)
 					{
@@ -55,6 +48,14 @@ function mostrarAnidado($meta, $expedienteTecnico)
 						break;
 					}
 				}
+			if (!$mostrar || ($mostrar && number_format($metradoActual, 2)!='0.00')){
+			$htmlTemp.='<tr class="elementoBuscar">'.
+				'<td>'.$value->numeracion.'</td>'.
+				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
+				'<td>'.html_escape($value->descripcion).'</td>'.
+				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
+				'<td style="text-align: right;">S/.'.$value->precio_unitario.'</td>'.
+				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
 
 				foreach($value->childDetallePartida->childDetSegValorizacionAnterior as $index => $item)
 				{
@@ -95,12 +96,12 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				$htmlTemp.='<td style="text-align: right;">'.number_format($porcentajeSaldo, 2).'% </td>';
 
 			$htmlTemp.='</tr>';
-
+		  }
 		}		
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico);
+		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico, $mostrar);
 	}
 	return $htmlTemp;
 }
@@ -163,7 +164,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		<div class="col-md-12 col-xs-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-					<h2><b>Valorización Mensual</b></h2>
+					<h2><b>Valorización Mensual: <?=trim($expedienteTecnico->descripcion_modificatoria)?></b></h2>
 					<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
@@ -198,6 +199,15 @@ function mostrarAnidado($meta, $expedienteTecnico)
 							<label for="control-label">Año</label>
 							<div>
 								<input type="text" id="txtAnio" name="txtAnio" maxlength="4" autocomplete="off" class="form-control" value="<?=$anio?>">
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-6 col-xs-12">
+							<label for="control-label">Mostrar:</label>
+							<div>
+								<select id="txtMostrar" name="txtMostrar" class="form-control selectpicker">
+										<option value="0">Todas las partidas</option>
+										<option value="1">Partidas aprobadas</option>
+								</select>
 							</div>
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12">
@@ -266,7 +276,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 											<td></td>
 										</tr>
 										<?php foreach($value->childMeta as $index => $item){ ?>
-											<?= mostrarAnidado($item, $expedienteTecnico)?>
+											<?= mostrarAnidado($item, $expedienteTecnico,$mostrar)?>
 										<?php } ?>
 									<?php } ?>
 								</tbody>
@@ -292,7 +302,13 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		var mes = $('#txtMes').val();
 		var anio = $('#txtAnio').val();
 		var idEt = $('#hdIdEt').val();
-		window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio;
+		var mostrar = $('#txtMostrar').val();
+		if(mostrar==1){
+			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio+"&mostrar=aprobada";
+		} else {
+			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio;	
+		}
+		
 	}
 
 </script>

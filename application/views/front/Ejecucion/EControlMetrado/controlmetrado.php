@@ -87,7 +87,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 <div class="right_col" role="main">
 	<div class="x_panel">
 		<div class="x_title">
-			<h2><b>Ejecución diaria de Metrados</b></h2>
+			<h2><b>Ejecución diaria de Metrados: <?=trim($expedienteTecnico->descripcion_modificatoria)?></b></h2>
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">                    
