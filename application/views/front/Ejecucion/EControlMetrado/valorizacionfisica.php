@@ -289,7 +289,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 										</tr>
 										<?php foreach($value->childMeta as $index => $item){ 
 											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar);
-											if($mostrarA[1]>0){
+											if(true){
 											?>
 											<?= $mostrarA[0]?>
 										<?php }} ?>
