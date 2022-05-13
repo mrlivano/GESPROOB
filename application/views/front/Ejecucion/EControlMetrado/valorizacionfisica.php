@@ -2,9 +2,12 @@
 function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 {
 	$cantidad = 0;
+	$totalMostrar = 0;
 	$htmlTemp='';
+	$htmlTemp1='';
+	$htmlTemp2='';
 
-	$htmlTemp.='<tr class="elementoBuscar">'.
+	$htmlTemp1.='<tr class="elementoBuscar">'.
 		'<td><b><i>'.$meta->numeracion.'</i></b></td>'.
 		'<td style="text-align: left;"><b><i>'.html_escape($meta->desc_meta).'</i></b></td>'.
 		'<td></td>'.
@@ -22,7 +25,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 		'<td></td>'.
 		'<td></td>'.
 		'<td></td>';		
-	$htmlTemp.='</tr>';
+	$htmlTemp1.='</tr>';
 	if(count($meta->childMeta)==0)
 	{		
 		foreach($meta->childPartida as $key => $value)
@@ -49,7 +52,8 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 					}
 				}
 			if (!$mostrar || ($mostrar && number_format($metradoActual, 2)!='0.00')){
-			$htmlTemp.='<tr class="elementoBuscar">'.
+			$totalMostrar++;
+			$htmlTemp2.='<tr class="elementoBuscar">'.
 				'<td>'.$value->numeracion.'</td>'.
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
@@ -83,21 +87,24 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar)
 				$valorizadoSaldo = ($value->cantidad*$value->precio_unitario) - $valorizadoAcumulado;
 				$porcentajeSaldo = 100 - $porcentajeAcumulado;
 
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoAnterior, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/.'.number_format($valorizadoActual, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.$descripcion.'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoAcumulado, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/. '.number_format($valorizadoAcumulado, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($porcentajeAcumulado, 2).'% </td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoSaldo, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/. '.number_format($valorizadoSaldo, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($porcentajeSaldo, 2).'% </td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoAnterior, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoActual, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.$descripcion.'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoAcumulado, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/. '.number_format($valorizadoAcumulado, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($porcentajeAcumulado, 2).'% </td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoSaldo, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/. '.number_format($valorizadoSaldo, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($porcentajeSaldo, 2).'% </td>';
 
-			$htmlTemp.='</tr>';
+			$htmlTemp2.='</tr>';
 		  }
 		}		
+	}
+	if($totalMostrar>0){
+		$htmlTemp=$htmlTemp1.$htmlTemp2;
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
