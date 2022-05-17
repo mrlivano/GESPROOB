@@ -551,7 +551,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							swal(
 							{
 								title: '',
-								text: 'Se importó el costo total del componente: '+resultado.sumaParcial+' de un total de: '+resultado.sumaParcial,
+								text: 'Se importó el costo total del componente: '+resultado.sumaParcial.toFixed(4)+' de un total de: '+resultado.totalSubpresupuesto.toFixed(4),
 								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
 							},function(){
 								

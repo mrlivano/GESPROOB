@@ -34,7 +34,7 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
         return $metaSubpresupuesto->result();
     }
     function totalSubpresupuesto($id){
-        $sumSubpresupuesto=$this->db->query("select sum(parcial) as sum from S10_META_PARTIDA where Id_Subpresupuesto='".$id."' ");
+        $sumSubpresupuesto=$this->db->query("select sum(parcial) as sum from S10_META_PARTIDA where  Cod_Partida!='999999999999' and Id_Subpresupuesto='".$id."' ");
         return $sumSubpresupuesto->result()[0]->sum;
     }
     function ListaPresupuestoEjecucion()
