@@ -272,6 +272,7 @@ class ET_Componente extends CI_Controller
 		$idComponente=$this->input->post('idComponente');
 		$idET=$this->input->post('idET');
 		$elementP = [];
+		$totalSubpresupuesto= $this->Model_ET_Presupuesto_Ejecucion->totalSubpresupuesto($idSubpresupuesto);
 		$metaSubpresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarMetaSubpresupuesto($idSubpresupuesto);
 		foreach ($metaSubpresupuesto as $key => $value) {
 			if($value->Cod_Titulo!='9999999'){
@@ -350,7 +351,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 		}
-		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial]);exit;
+		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial, 'totalSubpresupuesto' => $totalSubpresupuesto[0]]);exit;
 	}
 
 	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida,$parcial)

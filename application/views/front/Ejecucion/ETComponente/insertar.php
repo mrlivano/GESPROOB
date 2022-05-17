@@ -543,18 +543,22 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'POST', null, async function(metaJSON)
 						{
 							resultado=JSON.parse(metaJSON);
-							console.log(resultado);
+							console.log(resultado.sumaParcial);
+							console.log(resultado.totalSubpresupuesto);
 							let idetTemp=$('#hdIdET').val();
 							console.log(idetTemp);
 
 							swal(
 							{
 								title: '',
-								text: objectJSON.mensaje,
+								text: 'Se importó el costo total del componente: '+resultado.sumaParcial+' de un total de: '+resultado.totalSubpresupuesto,
 								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-							},function(){});
-							
-							//window.location.reload();
+							},function(){
+								
+							});
+							setTimeout(function(){
+								window.location.reload();
+							},5000);
 							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
 
 								/*await Promise.all(resultado.data.map(async (elementM) => {
