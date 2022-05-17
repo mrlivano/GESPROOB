@@ -205,6 +205,7 @@ class Expediente_Tecnico extends CI_Controller
 	public function reporteS10($codigo='')
 	{
 		$codigo = isset($_GET['codigo']) ? $_GET['codigo'] : null;
+		$result = [];
 		$lista_ue = $this->db->query("select * from BD_S10");
         if($lista_ue->num_rows()>0){
             $result = $lista_ue->result();
