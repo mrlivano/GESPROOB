@@ -283,7 +283,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 			else{
-				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio_Unitario);
+				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio);
 				$idpartida = $this->db->insert_id();
 				$idDetallePartida=$this->Model_ET_Detalle_Partida->ultimoIdPartida($idpartida);
 				$recMat = false;
