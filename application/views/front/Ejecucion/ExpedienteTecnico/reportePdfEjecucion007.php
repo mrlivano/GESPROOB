@@ -26,11 +26,11 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 				'<td>'.html_escape($value->descripcion).'</td>'.
 				'<td>'.$value->cantidad.'</td>'.
 				'<td style="text-align: right;">'.$value->precio_unitario.'</td>'.
-				'<td style="text-align: right;">'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
+				'<td style="text-align: right;">'.number_format($value->parcial, 2).'</td>';
 
 			$htmlTemp.='</tr>';
 
-			$costoDirectoTotal+=($value->cantidad*$value->precio_unitario);
+			$costoDirectoTotal+=($value->parcial);
 		}
 		
 	}
