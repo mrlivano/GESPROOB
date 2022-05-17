@@ -267,6 +267,7 @@ class ET_Componente extends CI_Controller
 	}
 
 	public function cargarMetaS10(){
+		$sumaParcial=0;
 		$idSubpresupuesto=$this->input->post('idSubpresupuesto');
 		$idComponente=$this->input->post('idComponente');
 		$idET=$this->input->post('idET');
@@ -285,6 +286,7 @@ class ET_Componente extends CI_Controller
 			else{
 				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio,$value->Parcial);
 				$idpartida = $this->db->insert_id();
+				$sumaParcial+=$value->Parcial;
 				$idDetallePartida=$this->Model_ET_Detalle_Partida->ultimoIdPartida($idpartida);
 				$recMat = false;
 				$recMO = false;
@@ -348,7 +350,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 		}
-		echo json_encode(['data' => $metaSubpresupuesto]);exit;
+		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial]);exit;
 	}
 
 	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida,$parcial)
