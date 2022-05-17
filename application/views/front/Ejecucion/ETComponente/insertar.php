@@ -554,7 +554,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
 							},function(){});
 							
-							window.location.reload();
+							//window.location.reload();
 							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
 
 								/*await Promise.all(resultado.data.map(async (elementM) => {

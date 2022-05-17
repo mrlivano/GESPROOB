@@ -267,7 +267,7 @@ class ET_Componente extends CI_Controller
 	}
 
 	public function cargarMetaS10(){
-		$sumaParcial=0;
+		$sumaParcial=0.00000;
 		$idSubpresupuesto=$this->input->post('idSubpresupuesto');
 		$idComponente=$this->input->post('idComponente');
 		$idET=$this->input->post('idET');
