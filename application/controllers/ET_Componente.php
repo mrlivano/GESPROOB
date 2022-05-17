@@ -283,7 +283,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 			else{
-				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio);
+				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio,$value->Parcial);
 				$idpartida = $this->db->insert_id();
 				$idDetallePartida=$this->Model_ET_Detalle_Partida->ultimoIdPartida($idpartida);
 				$recMat = false;
@@ -351,7 +351,7 @@ class ET_Componente extends CI_Controller
 		echo json_encode(['data' => $metaSubpresupuesto]);exit;
 	}
 
-	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida)
+	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida,$parcial)
 	{
 		$this->db->trans_start();
 
@@ -376,7 +376,7 @@ class ET_Componente extends CI_Controller
 
 		$ultimoIdPartida=$this->Model_ET_Partida->ultimoId();
 
-		$this->Model_ET_Detalle_Partida->insertar($ultimoIdPartida, $idUnidad, $etEtapaEjecucion->id_etapa_et, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida, true);
+		$this->Model_ET_Detalle_Partida->insertar($ultimoIdPartida, $idUnidad, $etEtapaEjecucion->id_etapa_et, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida, true,$parcial);
 
 		$ultimoIdDetallePartida=$this->Model_ET_Detalle_Partida->ultimoId();
 

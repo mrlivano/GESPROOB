@@ -15,9 +15,9 @@ class Model_ET_Detalle_Partida extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	function insertar($idPartida, $idUnidad, $idEtapaET, $rendimiento, $cantidad, $precioUnitario, $estado)
+	function insertar($idPartida, $idUnidad, $idEtapaET, $rendimiento, $cantidad, $precioUnitario, $estado, $parcial)
 	{
-		$this->db->query("execute sp_Gestionar_ETDetallePartida_c 'insertar', ".$idPartida.", ".$idUnidad.", ".$idEtapaET.", '".$rendimiento."', ".$cantidad.", ".$precioUnitario.", ".$estado);
+		$this->db->query("execute sp_Gestionar_ETDetallePartida_c 'insertar', ".$idPartida.", ".$idUnidad.", ".$idEtapaET.", '".$rendimiento."', ".$cantidad.", ".$precioUnitario.", ".$estado.", ".$parcial);
 
 		return true;
 	}
