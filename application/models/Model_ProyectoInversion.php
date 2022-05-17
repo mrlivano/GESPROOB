@@ -182,7 +182,7 @@ class Model_ProyectoInversion extends CI_Model
         $delete=$this->db->query("delete from [dbo].[BD_S10] where CodigoUnico='".$codigo."'");
         $insert=$this->db->query("insert into [dbo].[BD_S10] ([CodigoUnico],[Proyecto],[FechaSubida]) VALUES('".$codigo."','".$proyecto."','".$fecha."')");
         $query="\"IF EXISTS(SELECT * FROM DBO.SYSDATABASES WHERE NAME = '".$nameDB."') BEGIN ALTER DATABASE [".$nameDB."] set single_user with rollback immediate DROP DATABASE [".$nameDB."] END RESTORE DATABASE [".$nameDB."] FROM DISK = '".$urlDB."' WITH MOVE 'S10_Data' TO 'C:\S102000\Data\ ".$nameDB."_1.mdf', MOVE 'S10_Datos' TO 'C:\S102000\Data\ ".$nameDB."_2.ndf', MOVE 'S10_Log' TO 'C:\S102000\Data\ ".$nameDB."_3.ldf', REPLACE\"";
-        $cmd = "osql -U \"my\" -P \"123456789\" -S \"DESKTOP-N1LQMHP\" -Q " .$query;
+        $cmd = "osql -U \"sa\" -P \"123456\" -S \"LAPTOP-QNNLA4MB\" -Q " .$query;
         return passthru( $cmd );
     }
     public function DeleteDB($codigo){
