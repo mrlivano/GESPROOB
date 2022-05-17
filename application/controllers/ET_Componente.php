@@ -351,7 +351,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 		}
-		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial, 'totalSubpresupuesto' => $totalSubpresupuesto[0]]);exit;
+		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial, 'totalSubpresupuesto' => $totalSubpresupuesto]);exit;
 	}
 
 	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida,$parcial)
