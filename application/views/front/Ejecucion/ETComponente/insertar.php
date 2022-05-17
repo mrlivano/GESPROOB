@@ -546,7 +546,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							console.log(resultado.sumaParcial);
 							console.log(resultado.totalSubpresupuesto);
 							let idetTemp=$('#hdIdET').val();
-							console.log(idetTemp);
 
 							swal(
 							{
