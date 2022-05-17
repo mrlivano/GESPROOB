@@ -551,14 +551,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							swal(
 							{
 								title: '',
-								text: objectJSON.mensaje,
-								type: (objectJSON.proceso=='Se importó el costo total del componente: '+resultado.sumaParcial+' de un total de: '+resultado.totalSubpresupuesto ? 'success' : 'error')
+								text: 'Se importó el costo total del componente: '+resultado.sumaParcial+' de un total de: '+resultado.totalSubpresupuesto,
+								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
 							},function(){
 								
 							});
 							setTimeout(function(){
 								window.location.reload();
-							},500);
+							},1000);
 							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
 
 								/*await Promise.all(resultado.data.map(async (elementM) => {
