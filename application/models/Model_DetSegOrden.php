@@ -91,6 +91,12 @@ class Model_DetSegOrden extends CI_Model
 		return $data->result();
 	}
 
+	public function valorizacionDescripcion($idDetallePartida, $mesActual, $anioActual, $etapa)
+	{
+		$data = $this->db->query("select id_detalle_partida, STUFF((SELECT ', ' + valorizacion.descripcion from (select Datepart(mm,dv.fecha_dia) as mesActual,dv.id_detalle_partida,dv.descripcion FROM DET_SEG_VALORIZACION dv WHERE dv.id_detalle_partida='$idDetallePartida' and Datepart(mm,dv.fecha_dia)= '$mesActual' and Datepart(YY,dv.fecha_dia) = '$anioActual' and etapa_valorizacion ='$etapa' group by Datepart(mm,dv.fecha_dia),dv.id_detalle_partida,dv.descripcion) as valorizacion FOR XML PATH ('')), 1,2, '') as descripcion from DET_SEG_VALORIZACION where id_detalle_partida = '$idDetallePartida' group by id_detalle_partida");
+		return $data->result();
+	}
+
 	public function PartidasEjecutadasPeriodo($mesActual)
 	{
 		$data =  $this->db->query("select p.numeracion, dp.id_detalle_partida, p.desc_partida,um.descripcion, sum( ds.cantidad) as cantidad from DET_SEG_VALORIZACION ds inner join ET_DETALLE_PARTIDA dp on ds.id_detalle_partida=dp.id_detalle_partida inner join ET_PARTIDA p on dp.id_partida = p.id_partida inner join UNIDAD_MEDIDA um on dp.id_unidad = um.id_unidad where Datepart(mm,ds.fecha_dia) = $mesActual group by p.numeracion, dp.id_detalle_partida, p.desc_partida,um.descripcion");

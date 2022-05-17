@@ -2132,7 +2132,7 @@ class Expediente_Tecnico extends CI_Controller
 		$year2 = date('Y', $ts2);
 		$month1 = date('m', $ts1);
 		$month2 = date('m', $ts2);
-		$numerodemeses = (($year2 - $year1) * 12) + ($month2 - $month1);
+		$numerodemeses = (($year2 - $year1) * 12) + ($month2 - $month1)+1;
 		echo json_encode(['numerodemeses' => $numerodemeses]); exit;
 
 	}
@@ -2252,7 +2252,7 @@ class Expediente_Tecnico extends CI_Controller
 			$idDetallePartida=$this->input->post('hdIdDetallePartida');
 
 			$cantidad=$this->input->post('txtCantidad');
-			
+
 			$descripcion=$this->input->post('txtDescripcion');
 
 			$subtotal=floatval(str_replace(",", "", $this->input->post('txtCosto')));
@@ -2355,6 +2355,7 @@ class Expediente_Tecnico extends CI_Controller
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : '';
 		$mes = isset($_GET['mes']) ? $_GET['mes'] : date('m');
 		$anio = isset($_GET['anio']) ? $_GET['anio'] : date('Y');
+		$mostrar = isset($_GET['mostrar']) ? true : false;
 
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
 		$tipoUsuario=$this->session->userdata('tipoUsuario');
@@ -2389,7 +2390,7 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 			$this->load->view('layout/Ejecucion/header');
-			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida, 'listaMeses' =>$meses, 'mes'=>$mes, 'anio'=>$anio]);
+			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida, 'listaMeses' =>$meses, 'mes'=>$mes, 'anio'=>$anio, 'mostrar'=>$mostrar]);
 			$this->load->view('layout/Ejecucion/footer');
 		}
 	}
@@ -2653,6 +2654,8 @@ class Expediente_Tecnico extends CI_Controller
 				$value->childDetallePartida->childDetSegValorizacion=$this->Model_DetSegOrden->valorizadaActual($value->childDetallePartida->id_detalle_partida, $mes, $anio, $etapa);
 
 				$value->childDetallePartida->childDetSegValorizacionAnterior=$this->Model_DetSegOrden->valorizadoAnterior($value->childDetallePartida->id_detalle_partida, $mes, $anio, $etapa);
+
+				$value->childDetallePartida->childDetSegValorizacionDescripcion=$this->Model_DetSegOrden->valorizacionDescripcion($value->childDetallePartida->id_detalle_partida, $mes, $anio, $etapa);
 			}
 
 			return false;

@@ -87,7 +87,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 <div class="right_col" role="main">
 	<div class="x_panel">
 		<div class="x_title">
-			<h2><b>Ejecución diaria de Metrados</b></h2>
+			<h2><b>Ejecución diaria de Metrados: <?=trim($expedienteTecnico->descripcion_modificatoria)?></b></h2>
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">                    
@@ -104,7 +104,6 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<select id="selectTipoEstado" name="selectTipoEstado" class="form-control">
 						<option value="Programado">Expediente Técnico</option>
-						<option value="Adicional">Adicionales de Obra</option>
 					</select>
 				</div>
 			</div>

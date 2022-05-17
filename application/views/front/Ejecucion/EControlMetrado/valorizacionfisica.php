@@ -1,10 +1,13 @@
 <?php
-function mostrarAnidado($meta, $expedienteTecnico)
+function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 {
 	$cantidad = 0;
+	$totalMostrar = 0;
 	$htmlTemp='';
+	$htmlTemp1='';
+	$htmlTemp2='';
 
-	$htmlTemp.='<tr class="elementoBuscar">'.
+	$htmlTemp1.='<tr class="elementoBuscar">'.
 		'<td><b><i>'.$meta->numeracion.'</i></b></td>'.
 		'<td style="text-align: left;"><b><i>'.html_escape($meta->desc_meta).'</i></b></td>'.
 		'<td></td>'.
@@ -20,8 +23,9 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		'<td></td>'.
 		'<td></td>'.
 		'<td></td>'.
+		'<td></td>'.
 		'<td></td>';		
-	$htmlTemp.='</tr>';
+	$htmlTemp1.='</tr>';
 	if(count($meta->childMeta)==0)
 	{		
 		foreach($meta->childPartida as $key => $value)
@@ -36,15 +40,9 @@ function mostrarAnidado($meta, $expedienteTecnico)
 			$metradoSaldo = 0;
 			$valorizadoSaldo = 0;
 			$porcentajeSaldo = 0;
-			$htmlTemp.='<tr class="elementoBuscar">'.
-				'<td>'.$value->numeracion.'</td>'.
-				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
-				'<td>'.html_escape($value->descripcion).'</td>'.
-				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
-				'<td style="text-align: right;">S/.'.$value->precio_unitario.'</td>'.
-				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
+			$descripcion = '';
 
-				foreach($value->childDetallePartida->childDetSegValorizacion as $index => $item)
+			foreach($value->childDetallePartida->childDetSegValorizacion as $index => $item)
 				{
 					if($item->id_detalle_partida==$value->childDetallePartida->id_detalle_partida)
 					{
@@ -53,6 +51,15 @@ function mostrarAnidado($meta, $expedienteTecnico)
 						break;
 					}
 				}
+			if (!$mostrar || ($mostrar && number_format($metradoActual, 2)!='0.00')){
+			$totalMostrar++;
+			$htmlTemp2.='<tr class="elementoBuscar">'.
+				'<td>'.$value->numeracion.'</td>'.
+				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
+				'<td>'.html_escape($value->descripcion).'</td>'.
+				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
+				'<td style="text-align: right;">S/.'.$value->precio_unitario.'</td>'.
+				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
 
 				foreach($value->childDetallePartida->childDetSegValorizacionAnterior as $index => $item)
 				{
@@ -64,6 +71,15 @@ function mostrarAnidado($meta, $expedienteTecnico)
 					}
 				}
 
+				foreach($value->childDetallePartida->childDetSegValorizacionDescripcion as $index => $item)
+				{
+					if($item->id_detalle_partida==$value->childDetallePartida->id_detalle_partida)
+					{
+						$descripcion = $item->descripcion;
+						break;
+					}
+				}
+
 				$metradoAcumulado= $metradoAnterior + $metradoActual;
 				$valorizadoAcumulado=$valorizadoAnterior + $valorizadoActual;
 				$porcentajeAcumulado = (100 * $metradoAcumulado)/($value->cantidad);
@@ -71,26 +87,48 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				$valorizadoSaldo = ($value->cantidad*$value->precio_unitario) - $valorizadoAcumulado;
 				$porcentajeSaldo = 100 - $porcentajeAcumulado;
 
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoAnterior, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/.'.number_format($valorizadoActual, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoAcumulado, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/. '.number_format($valorizadoAcumulado, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($porcentajeAcumulado, 2).'% </td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($metradoSaldo, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">S/. '.number_format($valorizadoSaldo, 2).'</td>';
-				$htmlTemp.='<td style="text-align: right;">'.number_format($porcentajeSaldo, 2).'% </td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoAnterior, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoActual, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.$descripcion.'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoAcumulado, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/. '.number_format($valorizadoAcumulado, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($porcentajeAcumulado, 2).'% </td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoSaldo, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">S/. '.number_format($valorizadoSaldo, 2).'</td>';
+				$htmlTemp2.='<td style="text-align: right;">'.number_format($porcentajeSaldo, 2).'% </td>';
 
-			$htmlTemp.='</tr>';
-
+			$htmlTemp2.='</tr>';
+		  }
+		}
+		if($totalMostrar>0){
+			$htmlTemp=$htmlP.$htmlTemp1.$htmlTemp2;
+			$htmlP='';
 		}		
+	}
+	else if(!$mostrar){
+		$htmlTemp=$htmlTemp1;
+	} else {
+		$htmlP.=$htmlTemp1;
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico);
+		$totalMeta = 0;
+		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar, $htmlP);
+		
+		$totalMostrar+=$anidado[1];
+		$totalMeta+=$anidado[1];
+		if($mostrar && $totalMeta>0){
+			$htmlTemp.=$anidado[0];
+			$htmlP='';
+		}
+		else{
+			$htmlTemp.=$anidado[0];
+		}
 	}
-	return $htmlTemp;
+	
+	return array($htmlTemp,$totalMostrar);
 }
 ?>
 <style>
@@ -151,7 +189,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		<div class="col-md-12 col-xs-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
-					<h2><b>Valorización Mensual</b></h2>
+					<h2><b>Valorización Mensual: <?=trim($expedienteTecnico->descripcion_modificatoria)?></b></h2>
 					<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
@@ -188,6 +226,15 @@ function mostrarAnidado($meta, $expedienteTecnico)
 								<input type="text" id="txtAnio" name="txtAnio" maxlength="4" autocomplete="off" class="form-control" value="<?=$anio?>">
 							</div>
 						</div>
+						<div class="col-md-2 col-sm-6 col-xs-12">
+							<label for="control-label">Mostrar:</label>
+							<div>
+								<select id="txtMostrar" name="txtMostrar" class="form-control selectpicker">
+										<option value="0" <?php echo (!$mostrar ? 'selected' : '')?>>Todas las partidas</option>
+										<option value="1" <?php echo ($mostrar ? 'selected' : '')?>>Partidas ejecutadas</option>
+								</select>
+							</div>
+						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<label for="control-label">.</label>
 							<div>
@@ -205,14 +252,14 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										<th><?=trim($expedienteTecnico->nombre_pi)?></th>
 										<th rowspan="3">UNIDAD</th>
 										<th rowspan="2" colspan="3" >PRESUPUESTO</th>
-										<th colspan="7">AVANCES</th>
+										<th colspan="8">AVANCES</th>
 										<th colspan="3" rowspan="2">SALDO</th>
 									</tr>
 									<tr>
 										<th rowspan="2">ÍTEM</th>
 										<th style="width: 400px;"; rowspan="2">DESCRIPCIÓN</th>
 										<th colspan="2">ANTERIOR</th>
-										<th colspan="2">ACTUAL</th>
+										<th colspan="3">ACTUAL</th>
 										<th colspan="3">ACUMULADO</th>
 									</tr>
 									<tr>
@@ -223,6 +270,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										<th>Valorizado S/.</th>
 										<th>Metrado</th>
 										<th>Valorizado S/.</th>
+										<th>Descripción.</th>
 										<th>Metrado</th>
 										<th>Valorizado S/.</th>
 										<th>%</th>
@@ -250,10 +298,14 @@ function mostrarAnidado($meta, $expedienteTecnico)
 											<td></td>
 											<td></td>
 											<td></td>
+											<td></td>
 										</tr>
-										<?php foreach($value->childMeta as $index => $item){ ?>
-											<?= mostrarAnidado($item, $expedienteTecnico)?>
-										<?php } ?>
+										<?php foreach($value->childMeta as $index => $item){ 
+											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar,'');
+											if($mostrarA[1]>0){
+											?>
+											<?= $mostrarA[0]?>
+										<?php }} ?>
 									<?php } ?>
 								</tbody>
 							</table>
@@ -278,7 +330,13 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		var mes = $('#txtMes').val();
 		var anio = $('#txtAnio').val();
 		var idEt = $('#hdIdEt').val();
-		window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio;
+		var mostrar = $('#txtMostrar').val();
+		if(mostrar==1){
+			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio+"&mostrar=ejecutada";
+		} else {
+			window.location.href=base_url+"index.php/Expediente_Tecnico/ValorizacionFisicaMetrado?id_et="+idEt+"&mes="+mes+"&anio="+anio;	
+		}
+		
 	}
 
 </script>
