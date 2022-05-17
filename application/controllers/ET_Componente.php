@@ -444,9 +444,9 @@ class ET_Componente extends CI_Controller
 
 			foreach($listaETMeta as $index => $item)
 			{
-				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, $numberFromRoman[$etComponenteTemporal->numeracion].'.'.($index+1));
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta,($index+1));
 
-				$this->updateNumerationMetaAndChild($item, $numberFromRoman[$etComponenteTemporal->numeracion].'.'.($index+1));
+				$this->updateNumerationMetaAndChild($item,($index+1));
 			}
 		}
 		else
@@ -457,9 +457,9 @@ class ET_Componente extends CI_Controller
 
 			foreach($listaETMeta as $index => $item)
 			{
-				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, $etMetaTemporal->numeracion.'.'.($index+1));
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, ($index+1));
 
-				$this->updateNumerationMetaAndChild($item, $etMetaTemporal->numeracion.'.'.($index+1));
+				$this->updateNumerationMetaAndChild($item, ($index+1));
 			}
 		}
 	}
