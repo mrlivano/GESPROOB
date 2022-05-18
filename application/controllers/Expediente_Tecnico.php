@@ -1039,11 +1039,11 @@ class Expediente_Tecnico extends CI_Controller
 
 		$meta->childMeta=$temp;
 
+		$sumatoria=0;
+
 		if(count($temp)==0)
 		{
 			$data = $this->Model_ET_Partida->ETPartidaPorIdMeta($meta->id_meta);
-
-			$sumatoria=0;
 
 			foreach($data as $key => $value)
 			{
@@ -1053,8 +1053,18 @@ class Expediente_Tecnico extends CI_Controller
 			return $sumatoria;
 
 		}
+		else
+		{
+			$data = $this->Model_ET_Partida->ETPartidaPorIdMeta($meta->id_meta);
 
-		$costoPorMeta=0;
+			foreach($data as $key => $value)
+			{
+				$sumatoria+=$value->parcial;
+			}
+
+		}
+
+		$costoPorMeta=$sumatoria;
 
 		foreach($meta->childMeta as $key => $value)
 		{

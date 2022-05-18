@@ -18,7 +18,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			}
 
 			$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'" contenteditable>'.html_escape($meta->desc_meta).'</span>'.
-			((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
+			((count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
 
 		if(count($meta->childMeta)==0)
 		{
@@ -45,6 +45,26 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
 				'</tr>';
 			}
+		}
+		else{
+			foreach($meta->childPartida as $key => $value)
+			{
+				$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
+					'<td>'.
+						'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('.$value->id_partida.');" style="width: 30px;">'.
+						'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
+
+							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+						
+					$htmlTemp.='</td>'.
+					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
+					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
+					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
+					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.$value->precio_unitario.'</span></td>';
+					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
+				'</tr>';
+			}
+			$htmlTemp.=((count($meta->childPartida))>0 ? '</tbody></table></div><ul>' : '');
 		}
    }
    else {

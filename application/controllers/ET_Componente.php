@@ -199,6 +199,39 @@ class ET_Componente extends CI_Controller
 
 			return false;
 		}
+		else {
+			$meta->nivel = substr_count($meta->numeracion, '.'); 
+			$meta->childPartida=$this->Model_ET_Partida->ETPartidaPorIdMeta($meta->id_meta);
+
+			foreach($meta->childPartida as $key => $value)
+			{
+				$value->partidaCompleta=true;
+
+				$value->childDetallePartida=$this->Model_ET_Detalle_Partida->ETDetallePartidaPorIdPartida($value->id_partida);
+
+				foreach($value->childDetallePartida as $index => $item)
+				{
+					$item->childAnalisisUnitario=$this->Model_ET_Analisis_Unitario->ETClasificadorPorIdDetallePartida($item->id_detalle_partida);
+
+					foreach($item->childAnalisisUnitario as $i => $v)
+					{
+						if($v->id_analitico==null)
+						{
+							$value->partidaCompleta=false;
+
+							break 2;
+						}
+					}
+
+					if(count($item->childAnalisisUnitario)==0)
+					{
+						$value->partidaCompleta=false;
+
+						break;
+					}
+				}
+			}
+		}
 
 		foreach($meta->childMeta as $key => $value)
 		{
