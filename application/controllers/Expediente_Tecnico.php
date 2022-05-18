@@ -2787,7 +2787,7 @@ class Expediente_Tecnico extends CI_Controller
 		p.CostoBase1 as Costo_Base, p.CostodirectoOferta1 as Costo_Directo_Oferta, p.CostoIndirectoOferta1 as Costo_Indirecto_Oferta, p.CostoOferta1 as Costo_Oferta,
 		p.CostodirectoOfertatotal1 as Costo_Directo_Oferta_Total, p.CostoIndirectoOfertaTotal1 as Costo_Indirecto_Oferta_Total, p.CostoOfertaTotal1 as Costo_Oferta_Total
 		from ([".$CodigoUnico."].dbo.presupuesto p inner join [".$CodigoUnico."].dbo.identificador i
-		ON p.codidentificador=i.codidentificador )");
+		ON p.codidentificador=i.codidentificador)");
         $nuevoarray=$listaPresupuesto->result();
 		foreach($nuevoarray as $valor){
 			$subPresupuesto= $this->db->query("select p.Fecha, p.codpresupuesto as CodigoPresupuesto,p.descripcion  AS DescripcionPresupuesto,sp.codsubpresupuesto as CodSubpresupuesto,sp.descripcion AS Descripcion
@@ -2811,7 +2811,7 @@ class Expediente_Tecnico extends CI_Controller
 		on spd.codtitulo=t.codtitulo)
 		LEFT join [".$CodigoUnico."].dbo.partida p
 		on spd.codpartida=p.codpartida) left join [".$CodigoUnico."].dbo.unidad u on p.codunidad=u.codunidad
-		where spd.codpresupuesto='".$CodigoPresupuesto."' and spd.codsubpresupuesto='".$CodigoSubPresupuesto."' and(p.codpresupuesto='".$CodigoPresupuesto."' or p.codpartida='999999999999') 
+		where spd.codpresupuesto='".$CodigoPresupuesto."' and (p.PropioPartida='01' or p.PropioPartida='99') and  spd.codsubpresupuesto='".$CodigoSubPresupuesto."' and(p.codpresupuesto='".$CodigoPresupuesto."' or p.codpartida='999999999999') 
 		order by spd.orden,spd.secuencial");
 
 		foreach($listaHoja->result() as $valor){
@@ -2872,7 +2872,7 @@ class Expediente_Tecnico extends CI_Controller
 		from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
 		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
 		ON i.codinsumo=ppa.codinsumo
-		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.PropioPartida='01' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
 		and ppa.codpartida='".$CodigoPartida."'");
 		echo json_encode($costoUnitario->result());exit;
 	}
