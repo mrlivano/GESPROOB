@@ -1181,6 +1181,20 @@ class Expediente_Tecnico extends CI_Controller
 
 			return false;
 		}
+		else {
+			$meta->childPartida=$this->Model_ET_Partida->ETPartidaPorIdMeta($meta->id_meta);
+
+			foreach($meta->childPartida as $key => $value)
+			{
+
+				$value->childDetallePartida=$this->Model_ET_Detalle_Partida->ETDetallePartidaPorIdPartidaParaValorizacion($value->id_partida);
+
+				$value->childDetallePartida->childMesValorizacion=$this->Model_ET_Mes_Valorizacion->ETMesValorizacionPorIdDetallePartida($value->childDetallePartida->id_detalle_partida);
+
+				$sumatoriaValorizacion=$this->Model_ET_Mes_Valorizacion->sumCantidadPorIdDetallePartida($value->childDetallePartida->id_detalle_partida);
+				$value->saldo=$value->cantidad-$sumatoriaValorizacion;
+			}
+		}
 
 		foreach($meta->childMeta as $key => $value)
 		{

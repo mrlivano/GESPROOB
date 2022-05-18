@@ -34,6 +34,22 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 		}
 		
 	}
+	else {
+		foreach($meta->childPartida as $key => $value)
+		{
+			$htmlTemp.='<tr>'.
+				'<td>'.$value->numeracion.'</td>'.
+				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
+				'<td>'.html_escape($value->descripcion).'</td>'.
+				'<td>'.$value->cantidad.'</td>'.
+				'<td style="text-align: right;">'.$value->precio_unitario.'</td>'.
+				'<td style="text-align: right;">'.number_format($value->parcial, 2).'</td>';
+
+			$htmlTemp.='</tr>';
+
+			$costoDirectoTotal+=($value->parcial);
+		}
+	}
 
 	foreach($meta->childMeta as $key => $value)
 	{
