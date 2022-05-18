@@ -105,7 +105,7 @@
                             },
                             error: function ()
                             {
-                                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                             }
                         });
               });
@@ -245,7 +245,7 @@
                          },
                           error: function ()
                           {
-                              swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                              swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                           }
                       });
                   });
@@ -348,7 +348,7 @@ var addEntreEstudio=function(txt_nombre_entre,txt_denominacion_entre,txt_valorac
                          },
                           error: function ()
                           {
-                              swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                              swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                           }
                       });
                   };
@@ -371,7 +371,7 @@ var editarEntreEstudio=function(IdEntregable,Editxt_nombre_entre,Editxt_denoMult
                          },
                           error: function ()
                           {
-                              swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                              swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                           }
                       });
 }
@@ -652,7 +652,7 @@ var generarActividadesVertical=function(id_en)
           },
           error: function ()
           {
-              swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+              swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
           }
         });
       });

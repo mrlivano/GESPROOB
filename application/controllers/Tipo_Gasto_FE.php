@@ -39,7 +39,7 @@ class Tipo_Gasto_FE extends CI_Controller
 	    	}
 	    	else
 	    	{
-	    		$this->session->set_flashdata('error', 'Usted no tiene permisos para realizar esta acción');
+	    		$this->session->set_flashdata('error', 'Ocurrió un error en la conexión, vuelva a intentarlo');
                 return redirect('/Tipo_Gasto_FE');
 	    	}			
 		}
@@ -69,7 +69,7 @@ class Tipo_Gasto_FE extends CI_Controller
 	    	}
 	    	else
 	    	{
-	    		$this->session->set_flashdata('error', 'Usted no tiene permisos para realizar esta acción');
+	    		$this->session->set_flashdata('error', 'Ocurrió un error en la conexión, vuelva a intentarlo');
                 return redirect('/Tipo_Gasto_FE');
 	    	}
 		}
