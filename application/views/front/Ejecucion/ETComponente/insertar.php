@@ -610,7 +610,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					$("#selectComponente").find('option').not(':first').remove();
 						resultado.data.forEach(element => {
 							var option = document.createElement("option");
-							option.text = element.Codigo_Presupuesto+" - "+element.Descripcion;
+							option.text = element.Descripcion;
 							option.id = element.Id;
 							select.add(option);
 						}); 

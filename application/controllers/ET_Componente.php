@@ -89,7 +89,7 @@ class ET_Componente extends CI_Controller
 
 			$ultimoIdComponente=$this->Model_ET_Componente->insertarComponente($c_data);
 
-			//$this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
+			$this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
 
 			$this->db->trans_complete();
 
@@ -257,7 +257,7 @@ class ET_Componente extends CI_Controller
 
 		$this->Model_ET_Componente->eliminar($idComponente);
 
-		//$this->updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico,$idPresupuestoEjecucion,'EXPEDIENTETECNICO');
+		$this->updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico,$idPresupuestoEjecucion,'EXPEDIENTETECNICO');
 
 		$this->db->trans_complete();
 
@@ -480,9 +480,9 @@ class ET_Componente extends CI_Controller
 
 			foreach($listaETMeta as $index => $item)
 			{
-				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta,($index+1));
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta,$numberFromRoman[$etComponenteTemporal->numeracion].'.'.($index+1));
 
-				$this->updateNumerationMetaAndChild($item,($index+1));
+				$this->updateNumerationMetaAndChild($item,$numberFromRoman[$etComponenteTemporal->numeracion].'.'.($index+1));
 			}
 		}
 		else
@@ -493,9 +493,9 @@ class ET_Componente extends CI_Controller
 
 			foreach($listaETMeta as $index => $item)
 			{
-				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, ($index+1));
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta,$etMetaTemporal->numeracion.'.'. ($index+1));
 
-				$this->updateNumerationMetaAndChild($item, ($index+1));
+				$this->updateNumerationMetaAndChild($item, $etMetaTemporal->numeracion.'.'.($index+1));
 			}
 		}
 	}
