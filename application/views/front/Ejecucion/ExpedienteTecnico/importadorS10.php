@@ -106,7 +106,7 @@
                         <div class="col-md-6 col-md-offset-3">
                           <button id="send" type="submit" class="btn btn-success">
                             <span class="glyphicon glyphicon-floppy-disk"></span>
-                            Guardar
+                            Importar
                           </button>
                           <button type="submit" class="btn btn-danger" data-dismiss="modal">
                              <span class="glyphicon glyphicon-remove"></span>
