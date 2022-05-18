@@ -36,7 +36,7 @@ listaFuncion();/*llamar a mi datatablet listar funcion*/
 			},
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#VentanaRegistraFuncion').modal('hide');
             }
 
@@ -73,7 +73,7 @@ function formReset(){
 			},
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#VentanaModificarFuncion').modal('hide');
             }
 		});
@@ -146,7 +146,7 @@ function formReset(){
                                     },
                                     error: function ()
                                     {
-                                        swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                                        swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                                     }
                                 });
                             });

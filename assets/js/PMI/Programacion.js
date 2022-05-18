@@ -333,7 +333,7 @@ $("#finalizarProgram").click(function(){
                         },
                         error: function ()
                         {
-                            swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                            swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                         }
                     });
                     $('#form-addProgramacion')[0].reset();
@@ -388,7 +388,7 @@ $("#finalizarProgram").click(function(){
                             },
                             error: function ()
                             {
-                                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                             }
                           });
 
@@ -565,7 +565,7 @@ function GuardarProyectos(id_ue,id_naturaleza_inv,id_tipologia_inv,id_tipo_inver
     },
     error: function ()
     {
-        swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+        swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
     }
   });
 }

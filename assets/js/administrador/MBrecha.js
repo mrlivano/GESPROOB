@@ -41,7 +41,7 @@ $(document).on("ready" ,function()
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $("#VentanaRegistraBrecha").modal("hide");
             }
         });
@@ -71,7 +71,7 @@ $(document).on("ready" ,function()
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#form-ActualizarBrecha')[0].reset();
                 $("#VentanaModificarBrecha").modal("hide");
             }
@@ -117,7 +117,7 @@ $(document).on("ready" ,function()
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#form-addIndicador')[0].reset();
                 $("#VentanaRegistraIndicador").modal("hide");
             }
@@ -149,7 +149,7 @@ $(document).on("ready" ,function()
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#form-ActualizarIndicador')[0].reset();
                 $("#VentanaModificarIndicador").modal("hide");
             }
@@ -180,7 +180,7 @@ $(document).on("ready" ,function()
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#UpdateServicioAsociado').modal('hide');
             }
         });
@@ -462,7 +462,7 @@ var EliminarServicioLista=function(tbody,table)
                 },
                 error: function ()
                 {
-                    swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                    swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 }
             });
         });
@@ -519,7 +519,7 @@ function guardarServicio()
         },
         error: function ()
         {
-            swal("Error", "Usted no tiene permisos para realizar esta acción", "error");
+            swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error");
             $("#VentanaRegistraServicioAsociado").modal("hide");
         }
     });
@@ -617,7 +617,7 @@ var EliminarBrechaLista=function(tbody,table)
                 },
                 error: function ()
                 {
-                    swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                    swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 }        
             });
         });
@@ -687,7 +687,7 @@ var EliminarIndicador=function(tbody,table)
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
             });
         });

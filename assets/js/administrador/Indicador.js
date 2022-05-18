@@ -38,7 +38,7 @@
 //             },
 //             error: function ()
 //             {
-//                 swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+//                 swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
 //                 $('#form-addIndicador')[0].reset();
 //                 $("#VentanaRegistraIndicador").modal("hide");
 //             }
@@ -70,7 +70,7 @@
 //             },
 //             error: function ()
 //             {
-//                 swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+//                 swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
 //                 $('#form-ActualizarIndicador')[0].reset();
 //                 $("#VentanaModificarIndicador").modal("hide");
 //             }
@@ -229,7 +229,7 @@
 //             },
 //             error: function ()
 //             {
-//                 swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+//                 swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
 //             }
 //             });
 //         });

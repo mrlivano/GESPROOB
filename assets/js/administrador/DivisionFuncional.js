@@ -391,7 +391,7 @@ $(document).on("ready" ,function()
                                            },
                                             error: function ()
                                             {
-                                                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                                                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                                             }
                                         });
                               });

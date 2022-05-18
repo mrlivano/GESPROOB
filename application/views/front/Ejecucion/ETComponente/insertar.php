@@ -563,8 +563,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'POST', null, async function(metaJSON)
 						{
 							resultado=JSON.parse(metaJSON);
-							console.log(resultado.sumaParcial);
-							console.log(resultado.totalSubpresupuesto);
 							let idetTemp=$('#hdIdET').val();
 							console.log(idetTemp);
 
@@ -579,19 +577,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							setTimeout(function(){
 								window.location.reload();
 							},5000);
-							//paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas',idetTemp, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true);
-
-								/*await Promise.all(resultado.data.map(async (elementM) => {
-								
-								if (elementM.Nivel===0) {
-									elementP[(elementM.Nivel+1)]= await importarMeta(objectJSON.idComponente,elementP[elementM.Nivel],'',(elementM.Nivel+1),PresupuestoEjecucion,elementM.Titulo);
-									console.log(elementP[(elementM.Nivel+1)]);
-								}
-								else{
-									console.log(elementP[elementM.Nivel]);
-									//importarMeta('',elementP[elementM.Nivel],idelementP[(elementM.Nivel-1)],(elementM.Nivel+1),PresupuestoEjecucion,elementM.Titulo, function(resultado,idmeta){ elementP[elementM.Nivel]=resultado; idelementP[elementM.Nivel]=idmeta;});
-								}
-					        }));*/
 							
 					    }, false, true)
 				}

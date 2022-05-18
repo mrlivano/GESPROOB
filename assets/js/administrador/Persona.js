@@ -34,7 +34,7 @@ $(document).on("ready" ,function()
             error: function ()
             {
             	$('#VentanaRegistraPersonal').modal('hide');
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
 		});
 	});
@@ -69,7 +69,7 @@ $(document).on("ready" ,function()
 			},
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                 $('#VentanaModificarPersonal').modal('hide');
             }
 		});
@@ -198,7 +198,7 @@ $(document).on("ready" ,function()
 			},
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
 		});
 	}
@@ -314,7 +314,7 @@ var EliminarPersonal=function(tbody,table)
                 },
 	            error: function ()
 	            {
-	                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+	                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
 	            }
             });
         });

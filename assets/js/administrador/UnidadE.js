@@ -26,7 +26,7 @@ $(document).on("ready" ,function()
 			},
       error: function ()
       {
-          swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+          swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
           $('#VentanaRegistraUnidadEjecutora').modal('hide');
       }
 		});
@@ -91,7 +91,7 @@ $("#form-ActualizarUnidadE").submit(function(event)
 			},
       error: function ()
       {
-          swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+          swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
           $("#VentanaModificarUnidadE").modal("hide");
       }
 		});
@@ -145,7 +145,7 @@ $("#form-ActualizarUnidadE").submit(function(event)
                                           },
                                           error: function ()
                                           {
-                                              swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                                              swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
                                           }
                                         });
                               });

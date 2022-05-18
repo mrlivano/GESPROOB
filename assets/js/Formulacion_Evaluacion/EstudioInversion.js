@@ -210,7 +210,7 @@ $(document).on("ready", function () {
                 $('#form-AddEstudioInversion')[0].reset();
             },
             error: function () {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
         });
     });
@@ -247,7 +247,7 @@ $(document).on("ready", function () {
                 listarDocumentos(id_est_inv);
             },
             error: function () {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
         });
     });
@@ -269,7 +269,7 @@ $(document).on("ready", function () {
                 $('#dynamic-table-EstudioInversion').dataTable()._fnAjaxUpdate();
             },
             error: function () {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
         });
     });
@@ -301,7 +301,7 @@ $(document).on("ready", function () {
                 formReset();
             },
             error: function () {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
         });
     });

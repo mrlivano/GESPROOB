@@ -41,7 +41,7 @@ class Unidad_Medida extends CI_Controller
             }
             else
             {
-                $this->session->set_flashdata('error', 'Usted no tiene permisos para realizar esta acción');
+                $this->session->set_flashdata('error', 'Ocurrió un error en la conexión, vuelva a intentarlo');
                 return redirect('/Unidad_Medida');
             }    		
     	}
@@ -73,7 +73,7 @@ class Unidad_Medida extends CI_Controller
             }
             else
             {
-                $this->session->set_flashdata('error', 'Usted no tiene permisos para realizar esta acción');
+                $this->session->set_flashdata('error', 'Ocurrió un error en la conexión, vuelva a intentarlo');
                 return redirect('/Unidad_Medida');
             }    		
     	}

@@ -23,7 +23,7 @@ $("#form-addRubroE").submit(function(event)
 			},
       error: function ()
       {
-          swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+          swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
           $('#VentanaRegistraRubroEjecucion').modal('hide');
       }
 		});
@@ -55,7 +55,7 @@ $("#form-ActualizarRubroE").submit(function(event)
 			},
       error: function ()
       {
-          swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+          swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
           $('#VentanaModificarRubroE').modal('hide');
       }
 		});
@@ -138,7 +138,7 @@ var listaRubroE=function()
               ,
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
             });
         });

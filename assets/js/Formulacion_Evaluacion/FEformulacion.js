@@ -18,7 +18,7 @@ $("#form-AddEtapaEstudio").submit(function(event)
         },
         error: function ()
         {
-            swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+            swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
         }
     });
 });
@@ -39,7 +39,7 @@ $("#form-AddSituacion").submit(function(event)
         },
         error: function ()
         {
-            swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+            swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
         }
     });
 });
@@ -61,7 +61,7 @@ $("#form-AddAsiganarPersona").submit(function(event)
         },
         error: function ()
         {
-            swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+            swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
         }
     });
 });
@@ -357,7 +357,7 @@ function cargarestudiosetapas(datahtml)
             },
             error: function ()
             {
-                swal("Error", "Usted no tiene permisos para realizar esta acción", "error")
+                swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error")
             }
             });
         });
