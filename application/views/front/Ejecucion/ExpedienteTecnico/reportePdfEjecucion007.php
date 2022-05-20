@@ -161,7 +161,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 							<td style="width:10%;">---</td>
 							<td style="width:10%;">---</td>
 							<td style="width:10%;text-align: right;">---</td>
-							<td style="width:13%;text-align: right;">---</td>
+							<td style="width:13%;text-align: right;"><? $costoDirectoTotal?></td>
 						</tr>
 						<?php foreach($value->childMeta as $index => $item){ ?>
 							<?= mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal)?>
