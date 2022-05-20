@@ -34,7 +34,7 @@ class ET_Meta extends CI_Controller
 			echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede agregar submeta al mismo nivel que una partida.']);exit;
 		}
 
-		$this->Model_ET_Meta->insertar(($idComponente=='' ? null : $idComponente), ($idMetaPadre=='' ? null : $idMetaPadre), $descripcionMeta);
+		$this->Model_ET_Meta->insertar(($idComponente=='' ? null : $idComponente), ($idMetaPadre=='' ? null : $idMetaPadre), $descripcionMeta,'');
 
 		$ultimoIdMeta=$this->Model_ET_Meta->ultimoId();
 
