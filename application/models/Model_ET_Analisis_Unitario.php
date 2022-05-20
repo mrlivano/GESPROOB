@@ -96,7 +96,7 @@ class Model_ET_Analisis_Unitario extends CI_Model
 		return $this->db->insert_id();
 	}
 	function listarCostoUnitario($id){
-        $costoUnitario=$this->db->query("select* from S10_COSTO_UNITARIO where Id_Partida='".$id."' ");
+        $costoUnitario=$this->db->query("select* from S10_COSTO_UNITARIO where Id_Partida='".$id."' order by Tipo");
         return $costoUnitario->result();
     }
 	function insertarCostoUnitario($id){

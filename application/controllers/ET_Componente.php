@@ -89,7 +89,7 @@ class ET_Componente extends CI_Controller
 
 			$ultimoIdComponente=$this->Model_ET_Componente->insertarComponente($c_data);
 
-			$this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
+			// $this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
 
 			$this->db->trans_complete();
 
@@ -257,7 +257,7 @@ class ET_Componente extends CI_Controller
 
 		$this->Model_ET_Componente->eliminar($idComponente);
 
-		$this->updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico,$idPresupuestoEjecucion,'EXPEDIENTETECNICO');
+		// $this->updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico,$idPresupuestoEjecucion,'EXPEDIENTETECNICO');
 
 		$this->db->trans_complete();
 
@@ -325,6 +325,8 @@ class ET_Componente extends CI_Controller
 				$recMat = false;
 				$recMO = false;
 				$recME = false;
+				$recSubC = false;
+				$recSubP = false;
 				//$this->insertarAnalisisUnitarioS10(NULL,$idRecursoS,$idDetallePartida,$idET,NULL);
 				
 				$costoUnitario = $this->Model_ET_Analisis_Unitario->listarCostoUnitario($value->Id);
@@ -354,21 +356,26 @@ class ET_Componente extends CI_Controller
 							break;
 						case '4':
 							$idTipo='4';
-							if(!$recMat){
+							if(!$recSubC){
 								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'4',$idDetallePartida,$idET,NULL);
-								$recMat=true;
+								$recSubC=true;
 							}
 							break;
 						case '5':
 							$idTipo='11';
-							if(!$recME){
+							if(!$recSubP){
 								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'11',$idDetallePartida,$idET,NULL);
-								$recME=true;
+								$recSubP=true;
 							}
 							break;
 					}
 					//Insertar Detalle Analisi Unitario
-					$this->insertarDetalleAnalisisUnitarioS10($idET, $idpartida, $idTipo, NULL, $idAnalisisS10, $valueC->Descripcion, $valueC->Cuadrilla, $valueC->Unidad, NULL,$valueC->Cantidad,$valueC->Precio);
+					if($valueC->Tipo=='5'){
+						$this->insertarDetalleAnalisisUnitarioS10($idET, $idpartida, $idTipo, NULL, $idAnalisisS10, $valueC->DescripcionR, $valueC->Cuadrilla, $valueC->Unidad, NULL,$valueC->Cantidad,$valueC->Precio);
+					}
+					else{
+						$this->insertarDetalleAnalisisUnitarioS10($idET, $idpartida, $idTipo, NULL, $idAnalisisS10, $valueC->Descripcion, $valueC->Cuadrilla, $valueC->Unidad, NULL,$valueC->Cantidad,$valueC->Precio);
+					}
 					
 					//insertar costos unitarios
 					$c_data['cod_insumo']=$valueC->Codigo_Insumo;
