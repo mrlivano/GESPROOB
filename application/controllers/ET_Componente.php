@@ -310,10 +310,10 @@ class ET_Componente extends CI_Controller
 		foreach ($metaSubpresupuesto as $key => $value) {
 			if($value->Cod_Titulo!='9999999'){
 				if($value->Nivel===0){
-					$idmeta = $this->insertarmetaS10($idComponente,'',$value->Titulo);
+					$idmeta = $this->insertarmetaS10($idComponente,'',$value->Titulo,$value->Orden);
 					$elementP[$value->Nivel]= $idmeta;
 				} else {
-					$idmeta = $this->insertarmetaS10('',$elementP[($value->Nivel-1)],$value->Titulo);
+					$idmeta = $this->insertarmetaS10('',$elementP[($value->Nivel-1)],$value->Titulo,$value->Orden);
 					$elementP[$value->Nivel]= $idmeta;
 				}
 			}
@@ -453,15 +453,15 @@ class ET_Componente extends CI_Controller
 		}
 	}
 
-	public function insertarmetaS10($idComponente,$idMetaPadre,$descripcionMeta)
+	public function insertarmetaS10($idComponente,$idMetaPadre,$descripcionMeta,$numeracion)
 	{
 		$this->db->trans_start();
 
-		$this->Model_ET_Meta->insertar(($idComponente=='' ? null : $idComponente), ($idMetaPadre=='' ? null : $idMetaPadre), $descripcionMeta);
+		$this->Model_ET_Meta->insertar(($idComponente=='' ? null : $idComponente), ($idMetaPadre=='' ? null : $idMetaPadre), $descripcionMeta,$numeracion);
 
 		$ultimoIdMeta=$this->Model_ET_Meta->ultimoId();
 
-		$this->updateNumerationMeta($idComponente=='' ? null : $idComponente, $idMetaPadre=='' ? null : $idMetaPadre);
+		//$this->updateNumerationMeta($idComponente=='' ? null : $idComponente, $idMetaPadre=='' ? null : $idMetaPadre);
 
 		$this->db->trans_complete();
 
