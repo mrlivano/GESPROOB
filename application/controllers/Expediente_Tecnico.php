@@ -2872,8 +2872,14 @@ class Expediente_Tecnico extends CI_Controller
 		from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
 		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
 		ON i.codinsumo=ppa.codinsumo and pd.CodPartidaR=ppa.CodPartidaR
-		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.PropioPartida='01' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
-		and ppa.codpartida='".$CodigoPartida."'");
+		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
+		and ppa.codpartida='".$CodigoPartida."' and pd.PropioPartida=(select top 1 max(pd.PropioPartida) 
+		from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+		on pd.codinsumo=i.codinsumo ) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+		ON i.codinsumo=ppa.codinsumo and pd.CodPartidaR=ppa.CodPartidaR
+	   where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.codpartida='".$CodigoPartida."' and 
+	   ppa.codpartida='".$CodigoPartida."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."' and ppa.codpresupuesto='".$CodigoPresupuesto."'
+	   group by pd.PropioPartida order by pd.PropioPartida desc)");
 		echo json_encode($costoUnitario->result());exit;
 	}
 }

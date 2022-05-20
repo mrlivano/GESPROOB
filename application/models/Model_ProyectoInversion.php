@@ -360,9 +360,13 @@ class Model_ProyectoInversion extends CI_Model
                             from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
                         on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
                         ON i.codinsumo=ppa.codinsumo and pd.CodPartidaR=ppa.CodPartidaR inner join [".$CodigoUnico."].dbo.Unidad u on u.simbolo=ppa.unidad
-                        where pd.codpresupuesto='".$valor->Codigo."' and pd.codpartida='".$valorMP->codpartida."' and ppa.codpresupuesto='".$valor->Codigo."' and ppa.codsubpresupuesto='".$valorS->CodSubpresupuesto."' and pd.PropioPartida='01'
-                        and ppa.codpartida='".$valorMP->codpartida."'
-                        order by i.Descripcion")->result();
+                        where pd.codpresupuesto='".$valor->Codigo."' and pd.codpartida='".$valorMP->codpartida."' and ppa.codpresupuesto='".$valor->Codigo."' and ppa.codsubpresupuesto='".$valorS->CodSubpresupuesto."'  and ppa.codpartida='".$valorMP->codpartida."' and pd.PropioPartida=(select top 1 max(pd.PropioPartida) 
+                        from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
+                        on pd.codinsumo=i.codinsumo ) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
+                        ON i.codinsumo=ppa.codinsumo and pd.CodPartidaR=ppa.CodPartidaR
+                       where pd.codpresupuesto='".$valor->Codigo."' and pd.codpartida='".$valorMP->codpartida."' and 
+                       ppa.codpartida='".$valorMP->codpartida."' and ppa.codsubpresupuesto='".$valorS->CodSubpresupuesto."' and ppa.codpresupuesto='".$valor->Codigo."'
+                       group by pd.PropioPartida order by pd.PropioPartida desc)")->result();
                         foreach($listaCostoUnitario as $valorCU){
                                 $cu_data['Codigo_Subpresupuesto'] = $valorS->CodSubpresupuesto;   
                                 $cu_data['Codigo_Presupuesto'] = $valor->Codigo;           
