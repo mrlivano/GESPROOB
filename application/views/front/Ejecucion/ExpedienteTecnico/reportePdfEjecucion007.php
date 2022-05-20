@@ -54,7 +54,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $costoDirectoTotal)
 
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $costoDirectoTotal)['htmlT'];
+		$html=mostrarMetaAnidada($value, $expedienteTecnico, $costoDirectoTotal)['htmlT'];
+		$htmlTemp.=$html;
 	}
 
 	$arrayMeta=array('htmlT'=> $htmlTemp,'sumaTemp'=>$sumaTemp);
