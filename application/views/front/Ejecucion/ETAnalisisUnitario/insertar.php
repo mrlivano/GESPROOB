@@ -141,8 +141,8 @@
 												<td style="width:10%;"><?=html_escape($item->cuadrilla)?></td>
 												<td style="width:15%;"><?=html_escape($item->descripcion)?></td>
 												<td style="width:10%;"><?=number_format($item->cantidad, 4)?></td>
-												<td style="width:10%;"><?=number_format($item->precio_unitario, 2)?></td>
-												<td style="width:10%;" class="subTotalDetalleAnalisisUnitario"><?=number_format($item->precio_parcial, 2)?></td>												
+												<td style="width:10%;"><?=number_format($item->precio_unitario, 4)?></td>
+												<td style="width:10%;" class="subTotalDetalleAnalisisUnitario"><?=number_format($item->precio_parcial, 4)?></td>												
 											</tr>
 										<?php } ?>
 									</tbody>
@@ -160,7 +160,7 @@
 				<thead>
 					<tr>
 						<td colspan="6">PRECIO UNITARIO (S/.)</td>
-						<td style="width:10%;"><?=number_format($sumatoriaPrecioUnitario, 2)?></td>											
+						<td style="width:10%;"><?=number_format($sumatoriaPrecioUnitario, 4)?></td>											
 					</tr>
 				</thead>
 			</table>
