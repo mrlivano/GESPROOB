@@ -1,24 +1,14 @@
 <?php
 
 $costoDirectoTotal=0;
-function mostrarMetaAnidada($meta, $expedienteTecnico, $costoDirectoTotal)
+function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 {
 	$htmlTemp='';
+	$htmlTempP='';
 	$sumaTemp=0;
-
-	$htmlTemp.='<tr>'.
-		'<td><b><i>'.$meta->numeracion.'</i></b></td>'.
-		'<td style="text-align: left;"><b><i>'.html_escape($meta->desc_meta).'</i></b></td>'.
-		'<td>---</td>'.
-		'<td>---</td>'.
-		'<td style="text-align: right;">---</td>'.
-		'<td style="text-align: right;">---</td>';	
-
-	$htmlTemp.='</tr>';
 
 	if(count($meta->childMeta)==0)
 	{
-		
 		foreach($meta->childPartida as $key => $value)
 		{
 			$htmlTemp.='<tr>'.
@@ -32,6 +22,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $costoDirectoTotal)
 			$htmlTemp.='</tr>';
 
 			$costoDirectoTotal+=($value->parcial);
+			$sumaTemp+=($value->parcial);
 		}
 		
 	}
@@ -49,16 +40,29 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $costoDirectoTotal)
 			$htmlTemp.='</tr>';
 
 			$costoDirectoTotal+=($value->parcial);
+			$sumaTemp+=($value->parcial);
 		}
 	}
 
 	foreach($meta->childMeta as $key => $value)
 	{
-		$html=mostrarMetaAnidada($value, $expedienteTecnico, $costoDirectoTotal)['htmlT'];
-		$htmlTemp.=$html;
+		$temp = mostrarMetaAnidada($value, $expedienteTecnico, $costoDirectoTotal);
+		$htmlTemp.=$temp['htmlT'];
+		$sumaTemp+=$temp['sumaTemp'];
 	}
+	
+	$htmlTempP.='<tr>'.
+		'<td><b><i>'.$meta->numeracion.'</i></b></td>'.
+		'<td style="text-align: left;"><b><i>'.html_escape($meta->desc_meta).'</i></b></td>'.
+		'<td>---</td>'.
+		'<td>---</td>'.
+		'<td style="text-align: right;">---</td>'.
+		'<td style="text-align: right;"><b><i>'.number_format($sumaTemp, 2).'</i></b></td>';	
 
-	$arrayMeta=array('htmlT'=> $htmlTemp,'sumaTemp'=>$sumaTemp);
+	$htmlTempP.='</tr>';
+	$htmlTempP.=$htmlTemp;
+
+	$arrayMeta=array('htmlT'=> $htmlTempP,'sumaTemp'=>$sumaTemp);
 
 	return $arrayMeta;
 }
@@ -158,18 +162,24 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $costoDirectoTotal)
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
+					<?php foreach($expedienteTecnico->childComponente as $key => $value){ 
+						$resultadoMetaAnidada='';
+						$resultadoSumaAnidada=0;
+							foreach($value->childMeta as $index => $item){ 
+								$resultado=mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal);
+								$resultadoMetaAnidada.= $resultado['htmlT'];
+								$resultadoSumaAnidada+=$resultado['sumaTemp'];
+							 } 
+						?>
 						<tr>
 							<td style="width:7%;"><b><i><?=$value->numeracion?></i></b></td>
 							<td style="text-align: left;width:50%;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
 							<td style="width:10%;">---</td>
 							<td style="width:10%;">---</td>
 							<td style="width:10%;text-align: right;">---</td>
-							<td style="width:13%;text-align: right;"><? $costoDirectoTotal?></td>
+							<td style="width:13%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 2, '.',",",3)?></b></td>
 						</tr>
-						<?php foreach($value->childMeta as $index => $item){ ?>
-							<?= mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal)?>
-						<?php } ?>
+					    <?=$resultadoMetaAnidada?>
 					<?php } ?>
 				</tbody>
 			</table>
