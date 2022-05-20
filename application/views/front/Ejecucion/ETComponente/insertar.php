@@ -41,8 +41,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
 					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
 					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
-					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.number_format($value->precio_unitario, 4, '.', '').'</span></td>';
-					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
+					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.number_format($value->precio_unitario, 2, '.', '').'</span></td>';
+					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
 				'</tr>';
 			}
 		}
