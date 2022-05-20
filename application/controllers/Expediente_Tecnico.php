@@ -2868,10 +2868,10 @@ class Expediente_Tecnico extends CI_Controller
 		$CodigoPresupuesto = $this->input->post("CodigoPresupuesto");
 		$CodigoSubPresupuesto = $this->input->post("CodigoSubPresupuesto");
 		$CodigoPartida = $this->input->post("CodigoPartida");
-        $costoUnitario = $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,i.descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
+        $costoUnitario = $this->db->query("select pd.codpresupuesto,ppa.codsubpresupuesto,pd.codpartida,i.codinsumo,(case i.descripcion when 'REGISTRO RESTRINGIDO' then (select Descripcion from [".$CodigoUnico."].dbo.Partida where CodPresupuesto='".$CodigoPresupuesto."' and CodSubpresupuesto='".$CodigoSubPresupuesto."' and CodPartida=pd.CodPartidaR and PropioPartida='01') else i.descripcion end) as descripcion,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial 
 		from ([".$CodigoUnico."].dbo.partidadetalle pd inner join [".$CodigoUnico."].dbo.insumo i
 		on pd.codinsumo=i.codinsumo) inner join [".$CodigoUnico."].dbo.presupuestopartidaanalisis ppa
-		ON i.codinsumo=ppa.codinsumo
+		ON i.codinsumo=ppa.codinsumo and pd.CodPartidaR=ppa.CodPartidaR
 		where pd.codpresupuesto='".$CodigoPresupuesto."' and pd.PropioPartida='01' and pd.codpartida='".$CodigoPartida."' and ppa.codpresupuesto='".$CodigoPresupuesto."' and ppa.codsubpresupuesto='".$CodigoSubPresupuesto."'
 		and ppa.codpartida='".$CodigoPartida."'");
 		echo json_encode($costoUnitario->result());exit;
