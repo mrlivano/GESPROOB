@@ -129,7 +129,8 @@
 									<tbody>
 										<?php foreach($value->childETDetalleAnalisisUnitario as $item)
 										{ 
-											$sumatoriaPrecioUnitario+=number_format($item->precio_parcial, 2);
+											$valor=number_format($item->precio_parcial, 2);
+											$sumatoriaPrecioUnitario+=round($item->precio_parcial, 2);
 											?>
 											<tr>
 											<?php if(!$aprobado && $id_etapa_et!=3) {?>

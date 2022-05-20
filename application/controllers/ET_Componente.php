@@ -327,6 +327,7 @@ class ET_Componente extends CI_Controller
 				$recME = false;
 				$recSubC = false;
 				$recSubP = false;
+				$recGeneral=false;
 				//$this->insertarAnalisisUnitarioS10(NULL,$idRecursoS,$idDetallePartida,$idET,NULL);
 				
 				$costoUnitario = $this->Model_ET_Analisis_Unitario->listarCostoUnitario($value->Id);
@@ -366,6 +367,13 @@ class ET_Componente extends CI_Controller
 							if(!$recSubP){
 								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'11',$idDetallePartida,$idET,NULL);
 								$recSubP=true;
+							}
+							break;
+						default:
+							$idTipo='20';
+							if(!$recGeneral){
+								$idAnalisisS10 = $this->insertarAnalisisUnitarioS10(NULL,'20',$idDetallePartida,$idET,NULL);
+								$recGeneral=true;
 							}
 							break;
 					}
