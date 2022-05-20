@@ -1,9 +1,10 @@
 <?php
 
 $costoDirectoTotal=0;
-function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
+function mostrarMetaAnidada($meta, $expedienteTecnico, $costoDirectoTotal)
 {
 	$htmlTemp='';
+	$sumaTemp=0;
 
 	$htmlTemp.='<tr>'.
 		'<td><b><i>'.$meta->numeracion.'</i></b></td>'.
@@ -53,10 +54,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $costoDirectoTotal);
+		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $costoDirectoTotal)['htmlT'];
 	}
 
-	return $htmlTemp;
+	$arrayMeta=array('htmlT'=> $htmlTemp,'sumaTemp'=>$sumaTemp);
+
+	return $arrayMeta;
 }
 ?>
 <!DOCTYPE html>

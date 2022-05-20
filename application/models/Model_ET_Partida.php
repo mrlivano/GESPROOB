@@ -15,7 +15,7 @@ class Model_ET_Partida extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	function insertar($idMeta, $idUnidad, $idListaPartida, $descripcion, $rendimiento, $cantidad)
+	function insertar($idMeta, $idUnidad, $idListaPartida, $descripcion, $rendimiento, $cantidad, $numeracion)
 	{
 		$data = array(
 			'id_meta' => $idMeta,
@@ -23,7 +23,8 @@ class Model_ET_Partida extends CI_Model
 			'desc_partida' => $descripcion,
 			'rendimiento' => $rendimiento,
 			'cantidad' => $cantidad,
-			'id_lista_partida' => $idListaPartida
+			'id_lista_partida' => $idListaPartida,
+			'numeracion' => $numeracion
 		);
 
 		$this->db->insert('ET_PARTIDA',$data);
