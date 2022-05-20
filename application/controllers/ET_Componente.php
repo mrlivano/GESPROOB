@@ -318,7 +318,7 @@ class ET_Componente extends CI_Controller
 				}
 			}
 			else{
-				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio,$value->Parcial);
+				$this->insertarPartidaS10($elementP[($value->Nivel-1)],$value->Simbolo,$value->UnidadDesc,$value->Partida,$value->Rendimiento_MO,$value->Metrado,$value->Precio,$value->Parcial,$value->Orden);
 				$idpartida = $this->db->insert_id();
 				$sumaParcial+=$value->Parcial;
 				$idDetallePartida=$this->Model_ET_Detalle_Partida->ultimoIdPartida($idpartida);
@@ -394,7 +394,7 @@ class ET_Componente extends CI_Controller
 		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial, 'totalSubpresupuesto' => $totalSubpresupuesto]);exit;
 	}
 
-	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida,$parcial)
+	public function insertarPartidaS10($idMeta,$simbolo, $unidad, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $precioUnitarioPartida,$parcial, $numeracion)
 	{
 		$this->db->trans_start();
 
@@ -413,7 +413,7 @@ class ET_Componente extends CI_Controller
 
 		$etEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucionPorDescEtaoaET('Elaboración de expediente técnico');
 
-		$this->Model_ET_Partida->insertar($idMeta, $idUnidad, $idListaPartida, $descripcionPartida, $rendimientoPartida, $cantidadPartida);
+		$this->Model_ET_Partida->insertar($idMeta, $idUnidad, $idListaPartida, $descripcionPartida, $rendimientoPartida, $cantidadPartida, $numeracion);
 
 		$unidadMedida=$this->Model_Unidad_Medida->UnidadMedida($idUnidad)[0];
 
@@ -441,7 +441,7 @@ class ET_Componente extends CI_Controller
 
 		$ultimoETDetallePartida=$this->Model_ET_Detalle_Partida->ultimoETDetallePartida();
 
-		$this->updateNumerationPartida($idMeta);
+		//$this->updateNumerationPartida($idMeta);
 
 		$this->db->trans_complete();
 
