@@ -15,9 +15,9 @@ class Model_ET_Meta extends CI_Model
 		return $this->db->insert_id();
 	}
 
-	function insertar($idComponente, $idMetaPadre, $descripcion)
+	function insertar($idComponente, $idMetaPadre, $descripcion,$numeracion)
 	{
-		$this->db->query("execute sp_Gestionar_ETMeta_c 'insertar', ".($idComponente==null ? 'NULL' : $idComponente).", ".($idMetaPadre==null ? 'NULL' : $idMetaPadre).", '".$descripcion."'");
+		$this->db->query("execute sp_Gestionar_ETMeta_c 'insertar', ".($idComponente==null ? 'NULL' : $idComponente).", ".($idMetaPadre==null ? 'NULL' : $idMetaPadre).", '".$descripcion."','".$numeracion."'");
 
 		return true;
 	}
