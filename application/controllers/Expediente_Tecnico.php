@@ -1358,20 +1358,20 @@ class Expediente_Tecnico extends CI_Controller
 				echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar dos veces de un mismo expediente técnico.']);exit;
 			}
 
-			$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+			// $listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
 
-			foreach($listaETComponente as $key => $value)
-			{
-				$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			// foreach($listaETComponente as $key => $value)
+			// {
+			// 	$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
 
-				foreach($listaETMeta as $index => $item)
-				{
-					if($this->analisisUnitarioSinAnalitico($item))
-					{
-						echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar expediente técnico porque existen análisis unitarios sin asignación de analítico.']);exit;
-					}
-				}
-			}
+			// 	foreach($listaETMeta as $index => $item)
+			// 	{
+			// 		if($this->analisisUnitarioSinAnalitico($item))
+			// 		{
+			// 			echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar expediente técnico porque existen análisis unitarios sin asignación de analítico.']);exit;
+			// 		}
+			// 	}
+			// }
 
 			if($this->input->post('url')!='')
 			{
@@ -1534,20 +1534,20 @@ class Expediente_Tecnico extends CI_Controller
 				echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede crear la modificatoria dos veces de un mismo expediente técnico.']);exit;
 			}
 
-			$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+			// $listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
 
-			foreach($listaETComponente as $key => $value)
-			{
-				$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			// foreach($listaETComponente as $key => $value)
+			// {
+			// 	$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
 
-				foreach($listaETMeta as $index => $item)
-				{
-					if($this->analisisUnitarioSinAnalitico($item))
-					{
-						echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede crear la modificatoria de expediente técnico porque existen análisis unitarios sin asignación de analítico.']);exit;
-					}
-				}
-			}
+			// 	foreach($listaETMeta as $index => $item)
+			// 	{
+			// 		if($this->analisisUnitarioSinAnalitico($item))
+			// 		{
+			// 			echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede crear la modificatoria de expediente técnico porque existen análisis unitarios sin asignación de analítico.']);exit;
+			// 		}
+			// 	}
+			// }
 
 			if($this->input->post('url')!='')
 			{
@@ -1730,9 +1730,13 @@ class Expediente_Tecnico extends CI_Controller
 				$analisisUnitario=$this->Model_ET_Analisis_Unitario->ETAnalisisUnitarioPorIdDetalle($part->id_detalle_partida);				
 				foreach($analisisUnitario as $analisis)
 				{
-					$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdAnalitico($analisis->id_analitico);
-					$tempPresupestoAnalitico=$this->Model_ET_Presupuesto_Analitico->verificarPresupuestoAnaliticoTipoClasi($lastExpediente,$presupuestoAnalitico[0]->id_clasificador, $presupuestoAnalitico[0]->id_presupuesto_ej);
-					$au_data['id_analitico']=$tempPresupestoAnalitico[0]->id_analitico;
+					if($analisis->id_analitico){
+						$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdAnalitico($analisis->id_analitico);
+						$tempPresupestoAnalitico=$this->Model_ET_Presupuesto_Analitico->verificarPresupuestoAnaliticoTipoClasi($lastExpediente,$presupuestoAnalitico[0]->id_clasificador, $presupuestoAnalitico[0]->id_presupuesto_ej);
+						$au_data['id_analitico']=$tempPresupestoAnalitico[0]->id_analitico;
+					} else {
+						$au_data['id_analitico']=$analisis->id_analitico;
+					}
 					$au_data['id_recurso']=$analisis->id_recurso;
 					$au_data['id_detalle_partida']=$lastDetallePartida;
 					$lastAnalisisUnitario=$this->Model_ET_Analisis_Unitario->insertar($au_data);
@@ -1810,9 +1814,13 @@ class Expediente_Tecnico extends CI_Controller
 				$analisisUnitario=$this->Model_ET_Analisis_Unitario->ETAnalisisUnitarioPorIdDetalle($part->id_detalle_partida);				
 				foreach($analisisUnitario as $analisis)
 				{
-					$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdAnalitico($analisis->id_analitico);
-					$tempPresupestoAnalitico=$this->Model_ET_Presupuesto_Analitico->verificarPresupuestoAnaliticoTipoClasi($lastExpediente,$presupuestoAnalitico[0]->id_clasificador, $presupuestoAnalitico[0]->id_presupuesto_ej);
-					$au_data['id_analitico']=$tempPresupestoAnalitico[0]->id_analitico;
+					if($analisis->id_analitico){
+						$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdAnalitico($analisis->id_analitico);
+						$tempPresupestoAnalitico=$this->Model_ET_Presupuesto_Analitico->verificarPresupuestoAnaliticoTipoClasi($lastExpediente,$presupuestoAnalitico[0]->id_clasificador, $presupuestoAnalitico[0]->id_presupuesto_ej);
+						$au_data['id_analitico']=$tempPresupestoAnalitico[0]->id_analitico;
+					} else {
+						$au_data['id_analitico']=$analisis->id_analitico;
+					}
 					$au_data['id_recurso']=$analisis->id_recurso;
 					$au_data['id_detalle_partida']=$lastDetallePartida;
 					$lastAnalisisUnitario=$this->Model_ET_Analisis_Unitario->insertar($au_data);
