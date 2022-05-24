@@ -347,6 +347,14 @@ class Expediente_Tecnico extends CI_Controller
 			$c_data['modalidad_ejecucion_et']=$this->input->post('txtModalidadEjecucion');
 			$c_data['tiempo_ejecucion_pi_et']=$this->input->post('txtTiempoEjecucionPip');
 			$c_data['num_beneficiarios_indirectos']=$this->input->post('txtNumBeneficiarios');
+			
+			$c_data['costo_liquidacion']=floatval(str_replace(",","",$this->input->post('txtCostoLiquidacion')));
+			$c_data['costo_IGV']=floatval(str_replace(",","",$this->input->post('txtCostoIGV')));
+			$c_data['costo_utilidad']=floatval(str_replace(",","",$this->input->post('txtCostoUtilidad')));
+			$c_data['costo_administracion_contratos']=floatval(str_replace(",","",$this->input->post('txtCostoAdministracion')));
+			$c_data['costo_elaboracion_ET']=floatval(str_replace(",","",$this->input->post('txtCostoElaboracionET')));
+			$c_data['costo_supervision_ET']=floatval(str_replace(",","",$this->input->post('txtCostoSupervisionET')));
+
 
 			if($url!='')
 			{

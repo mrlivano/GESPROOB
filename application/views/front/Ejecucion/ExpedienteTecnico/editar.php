@@ -56,6 +56,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Costo Total (Pre Inversión)*</label>
@@ -75,6 +76,20 @@
 								<input id="txtCostoIndirectoPre" name="txtCostoIndirectoPre" value=" <?= a_number_format($ExpedienteTecnicoM->costo_indirecto_preinv_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto"  autocomplete="off" maxlength="40" >
 							</div>
 						</div>
+					</div>
+					<div class="row">
+					<div class=" col-md-4 col-sm-4 col-xs-12">
+					  		<label class="control-label">Modalidad de Ejecución*</label>
+					    	<div class="form-group">
+						      	<select class="selectpicker form-control" id="txtModalidadEjecucion" name="txtModalidadEjecucion" data-live-search="true" onChange="mostrar(this.value);">
+								  	<option value="">Seleccione una opción</option>
+									<?php foreach ($listaModalidadEjecucion as $key => $value) { ?>
+						      			<option  value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
+						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
+						      		<?php } ?>
+						      	</select>
+					    	</div>
+					  	</div>
 					</div>
 
 					<div class="row">
@@ -102,7 +117,48 @@
 								<input id="txtGastosSupervision" name="txtGastosSupervision" value ="<?= a_number_format($ExpedienteTecnicoM->gastos_supervision_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto" autocomplete="off" maxlength="40" >
 							</div>
 						</div>
-					</div>					
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-6 col-xs-12" id="divUtilidad">
+							<label class="control-label">Utilidad*</label>
+							<div>
+								<input id="txtCostoUtilidad" name="txtCostoUtilidad" value="<?=a_number_format($ExpedienteTecnicoM->costo_utilidad , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Utilidad" maxlength="40" autocomplete="off" >
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="divIGV">
+							<label class="control-label">IGV*</label>
+							<div>
+								<input id="txtCostoIGV" name="txtCostoIGV" value="<?= a_number_format($ExpedienteTecnicoM->costo_IGV , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="IGV"  autocomplete="off" maxlength="40" >
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="divAdministracion">
+							<label class="control-label">Administracion de Contratos*</label>
+							<div>
+								<input id="txtCostoAdministracion" name="txtCostoAdministracion" value="<?= a_number_format($ExpedienteTecnicoM->costo_administracion_contratos , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto"  autocomplete="off" maxlength="40" >
+							</div>
+						</div>
+						
+						<div class="col-md-3 col-sm-6 col-xs-12" id="divLiquidacion">
+							<label class="control-label">Liquidacion*</label>
+							<div>
+								<input id="txtCostoLiquidacion" name="txtCostoLiquidacion" value ="<?= a_number_format($ExpedienteTecnicoM->costo_liquidacion , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Liquidacion" autocomplete="off" maxlength="40" >
+							</div>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12" id="divElaboracionET">
+							<label class="control-label">Elaboracion de Expediente Tecnico*</label>
+							<div>
+								<input id="txtCostoElaboracionET" name="txtCostoElaboracionET" value="<?=a_number_format($ExpedienteTecnicoM->costo_elaboracion_ET , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Elaboracion de Exp. Tecnico" maxlength="40" autocomplete="off" >
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="divSupervisionET">
+							<label class="control-label">Supervision de Expediente Tecnico*</label>
+							<div>
+								<input id="txtCostoSupervisionET" name="txtCostoSupervisionET" value="<?= a_number_format($ExpedienteTecnicoM->costo_supervision_ET , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Supervision de Exp. Tecnico"  autocomplete="off" maxlength="40" >
+							</div>
+						</div>
+						
+					</div>				
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Funcion</label>
@@ -162,18 +218,7 @@
 						      	</select>
 					    	</div>
 						</div>
-						<div class=" col-md-4 col-sm-4 col-xs-12">
-					  		<label class="control-label">Modalidad de Ejecución*</label>
-					    	<div class="form-group">
-						      	<select class="selectpicker form-control" id="txtModalidadEjecucion" name="txtModalidadEjecucion" data-live-search="true">
-								  	<option value="">Seleccione una opción</option>
-									<?php foreach ($listaModalidadEjecucion as $key => $value) { ?>
-						      			<option value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
-						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
-						      		<?php } ?>
-						      	</select>
-					    	</div>
-					  	</div>
+						
 					</div>
 
 					<div class="row">						
@@ -308,6 +353,7 @@
 	  
 $(function()
 {
+	mostrar($("#txtModalidadEjecucion").val());
 	CKEDITOR.replace('txtSituacioActual' ,{
 		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>'
 	});
@@ -707,6 +753,41 @@ $(function()
 	$('.selectpicker').selectpicker({
 	});
 
+	function mostrar(id) {
+     
+	if (id == "ADMINISTRACION DIRECTA") {
+        $("#divUtilidad").hide();
+		$("#divIGV").hide();
+        $("#divAdministracion").hide();
+		$("#divElaboracionET").hide();
+		$("#divSupervisionET").hide();
+		$("#divLiquidacion").show();
+    }
+	if (id == "POR CONTRATA") {
+		$("#divLiquidacion").hide();
+		$("#divUtilidad").show();
+		$("#divIGV").show();
+        $("#divAdministracion").show();
+		$("#divElaboracionET").show();
+		$("#divSupervisionET").show();
+    }
+	if (id == "MIXTO") {
+        $("#divLiquidacion").show();
+		$("#divUtilidad").show();
+		$("#divIGV").show();
+        $("#divAdministracion").show();
+		$("#divElaboracionET").show();
+		$("#divSupervisionET").show();
+    }
+	if (id == "") {
+        $("#divLiquidacion").hide();
+		$("#divUtilidad").hide();
+		$("#divIGV").hide();
+        $("#divAdministracion").hide();
+		$("#divElaboracionET").hide();
+		$("#divSupervisionET").hide();
+    }
+}
 </script>
 
 
