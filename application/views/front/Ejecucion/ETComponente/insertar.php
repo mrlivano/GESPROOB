@@ -30,7 +30,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
 						// if($idPresupuestoEjecucion==2)
 						// {
-							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - '.html_escape($value->desc_partida).' \', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 						// }
 						// else
 						// {

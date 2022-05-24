@@ -18,7 +18,7 @@
 							<label class="control-label">Nombre de la Unidad Ejecutora*</label>
 							<div>
 								<input id="hdIdExpediente" name="hdIdExpediente" value="<?= $ExpedienteTecnicoM->id_et?>" class="form-control col-md-4 col-xs-12" placeholder="" autocomplete="off"  type="hidden">	
-								<input id="txtNombreUe" name="txtNombreUe" value="<?= $ExpedienteTecnicoM->nombre_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Nombre de la unidad ejecutora" autocomplete="off" maxlength="200">	
+								<input id="txtNombreUe" readonly name="txtNombreUe" value="<?= $ExpedienteTecnicoM->nombre_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Nombre de la unidad ejecutora" autocomplete="off" maxlength="200">	
 							</div>	
 						</div>
 					</div>
@@ -26,25 +26,25 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Dirección*</label>
 							<div>
-								<input id="txtDireccionUE" name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Dirección"  autocomplete="off" maxlength="200" >	
+								<input id="txtDireccionUE" readonly name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Dirección"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Distrito/Provincia/Departamento*</label>
 							<div>
-								<input id="txtUbicacionUE" name="txtUbicacionUE" value="<?= $ExpedienteTecnicoM->distrito_provincia_departamento_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Distrito/Provincia/Departamento" autocomplete="off" maxlength="200" >	
+								<input id="txtUbicacionUE" readonly name="txtUbicacionUE" value="<?= $ExpedienteTecnicoM->distrito_provincia_departamento_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Distrito/Provincia/Departamento" autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Teléfono*</label>
 							<div>
-								<input id="txtTelefonoUE" name="txtTelefonoUE" value="<?= $ExpedienteTecnicoM->telefono_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Teléfono"  autocomplete="off" maxlength="20" >	
+								<input id="txtTelefonoUE" readonly name="txtTelefonoUE" value="<?= $ExpedienteTecnicoM->telefono_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Teléfono"  autocomplete="off" maxlength="20" >	
 							</div>	
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">RUC*</label>
 							<div>
-								<input id="txtRucUE" name="txtRucUE" value="<?= $ExpedienteTecnicoM->ruc_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="RUC"  autocomplete="off" maxlength="11" >	
+								<input id="txtRucUE" readonly name="txtRucUE" value="<?= $ExpedienteTecnicoM->ruc_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="RUC"  autocomplete="off" maxlength="11" >	
 							</div>	
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">Proyecto*</label>
 							<div>
-								<textarea name="txtProyecto" id="txtProyecto" rows="3" class="form-control" style="resize: none;resize: vertical;"><?=html_escape(trim($ExpedienteTecnicoM->proyecto_et))?></textarea>
+								<textarea name="txtProyecto" readonly id="txtProyecto" rows="3" class="form-control" style="resize: none;resize: vertical;"><?=html_escape(trim($ExpedienteTecnicoM->proyecto_et))?></textarea>
 							</div>
 						</div>
 					</div>
@@ -177,16 +177,7 @@
 					</div>
 
 					<div class="row">						
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Tipo de Responsable:</label>
-					    	<div class="form-group">
-						      	<select class="selectpicker form-control" id="comboTipoResponsableElaboracion" name="comboTipoResponsableElaboracion" data-live-search="true">
-									<?php foreach ($listaTipoResponsableElaboracion as $key => $item) { ?>
-										<option value="<?=$item->id_tipo_responsable_et?>"><?=$item->desc_tipo_responsable_et?></option>
-									<?php } ?>
-						      	</select>
-					    	</div>
-						</div>
+						
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Responsable de Elaboración:</label>
 					    	<div class="form-group">
@@ -212,16 +203,7 @@
 					  	</div>
 					</div>
 					<div class="row">						
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Tipo de Responsable:</label>
-					    	<div class="form-group">
-						      	<select class="selectpicker form-control" id="ComboTipoResponsableEjecucion" name="ComboTipoResponsableEjecucion" data-live-search="true">
-									<?php foreach ($listaTipoResponsableEjecucion as $key => $item) { ?>
-										<option value="<?=$item->id_tipo_responsable_et?>"><?=$item->desc_tipo_responsable_et?></option>
-									<?php } ?>
-						      	</select>
-					    	</div>
-						</div>
+						<?php if($ExpedienteTecnicoM->id_etapa_et==3 || $ExpedienteTecnicoM->id_etapa_et==10){ ?>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Responsable de Ejecución:</label>
 					    	<div class="form-group">
@@ -245,6 +227,7 @@
 						      	</select>
 					    	</div>
 					  	</div>
+						  <?php } ?>
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -284,7 +267,7 @@
                         </div>
                         <div class="col-md-3 col-sm-12 col-xs-12">
                             <label class="control-label">Fecha de Aprobacion:</label>
-                            <input class="form-control col-md-4 col-xs-12" type="date" name="txtFechaAprobacion" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaAprobacion" notValidate>
+                            <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" name="txtFechaAprobacion" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaAprobacion" Validate>
                         </div>
 					</div>
 					<div class="row">
