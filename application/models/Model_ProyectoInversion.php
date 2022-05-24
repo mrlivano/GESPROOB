@@ -245,6 +245,7 @@ class Model_ProyectoInversion extends CI_Model
 			$listaSubPresupuesto= $this->db->query("select sp.descripcion AS descripcion,sp.CodSubpresupuesto from [".$CodigoUnico."].[dbo].presupuesto p inner join  [".$CodigoUnico."].[dbo].subpresupuesto sp 
             ON p.codpresupuesto=sp.codpresupuesto where p.Nivel=3 and sp.codsubpresupuesto!='999' and p.CodPresupuesto='".$valor->Codigo."'")->result();
 			foreach($listaSubPresupuesto as $valorS){
+                $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
                $SubPresupuesto = $this->db->query("select * from S10_COMPONENTE where Codigo='".$valorS->CodSubpresupuesto."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Proyecto='".$CodigoUnico."'")->result();
                $validarSubPresupuesto = count($SubPresupuesto);
                $idSubpresupuesto = $this->db->insert_id();
@@ -353,7 +354,6 @@ class Model_ProyectoInversion extends CI_Model
                     }
                     if($valorMP->codtitulo === '9999999'){
                         // Insertar tabla COSTO UNITARIO S10
-                        $deleteCostoUnitario = $this->db->query("delete from S10_COSTO_UNITARIO where Codigo_Partida='".$valorMP->codpartida."' and Codigo_Presupuesto='".$valor->Codigo."' and Codigo_Subpresupuesto='".$valorS->CodSubpresupuesto."' and Codigo_Proyecto='".$CodigoUnico."'");
                         $listaCostoUnitario= $this->db->query("select pd.codpresupuesto,u.Descripcion as unidadDesc,ppa.codsubpresupuesto,pd.codpartida,pd.CodPartidaR,i.codinsumo,i.descripcion,
                         (select Descripcion from [".$CodigoUnico."].dbo.Partida where CodPresupuesto='".$valor->Codigo."' and CodSubpresupuesto='".$valorS->CodSubpresupuesto."' and CodPartida=pd.CodPartidaR and PropioPartida='01') DescripcionR 
                         ,i.CodInsumoR,i.DescripcionAlterna,ppa.tipo,ppa.unidad,pd.cuadrilla,ppa.cantidad,ppa.precio1 as Precio,ppa.parcial1 as Parcial
