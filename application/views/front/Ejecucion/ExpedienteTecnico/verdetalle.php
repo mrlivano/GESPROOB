@@ -730,13 +730,13 @@
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Agregar Periodo de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ver plazo de Ejecución</span>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Agregar Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Ver cronograma de Ejecución</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Definir Periodo de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" >2.- Plazo de Ejecución del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Definir Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" >2.- Cronograma de Ejecución del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -1218,13 +1218,13 @@
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Agregar Periodo de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ver plazo de Ejecución</span>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Agregar Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Ver Cronograma de Ejecución</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Definir Periodo de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" >2.- Plazo de Ejecución del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Definir Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" >2.- Cronograma de Ejecución del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>

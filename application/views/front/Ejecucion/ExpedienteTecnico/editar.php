@@ -222,7 +222,16 @@
 					</div>
 
 					<div class="row">						
-						
+					<div class="col-md-4 col-sm-4 col-xs-12" style="display:none;">
+							<label class="control-label">Tipo de Responsable:</label>
+					    	<div class="form-group">
+						      	<select class="selectpicker form-control" id="comboTipoResponsableElaboracion" name="comboTipoResponsableElaboracion" data-live-search="true">
+									<?php foreach ($listaTipoResponsableElaboracion as $key => $item) { ?>
+										<option value="<?=$item->id_tipo_responsable_et?>"><?=$item->desc_tipo_responsable_et?></option>
+									<?php } ?>
+						      	</select>
+					    	</div>
+						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Responsable de Elaboración:</label>
 					    	<div class="form-group">
@@ -249,6 +258,16 @@
 					</div>
 					<div class="row">						
 						<?php if($ExpedienteTecnicoM->id_etapa_et==3 || $ExpedienteTecnicoM->id_etapa_et==10){ ?>
+							<div class="col-md-4 col-sm-4 col-xs-12" style="display:none;">
+							<label class="control-label">Tipo de Responsable:</label>
+					    	<div class="form-group">
+						      	<select class="selectpicker form-control" id="comboTipoResponsableElaboracion" name="comboTipoResponsableElaboracion" data-live-search="true">
+									<?php foreach ($listaTipoResponsableElaboracion as $key => $item) { ?>
+										<option value="<?=$item->id_tipo_responsable_et?>"><?=$item->desc_tipo_responsable_et?></option>
+									<?php } ?>
+						      	</select>
+					    	</div>
+						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Responsable de Ejecución:</label>
 					    	<div class="form-group">

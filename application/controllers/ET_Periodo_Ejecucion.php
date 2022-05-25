@@ -9,6 +9,8 @@ class ET_Periodo_Ejecucion extends CI_Controller
 
 		$this->load->model('Model_ET_Periodo_Ejecucion');
 		$this->load->model('Model_ET_Expediente_Tecnico');
+		$this->load->model('Model_Personal');
+		$this->load->model("Cargo_Modal");
 	}
 
 	public function insertar()
@@ -53,6 +55,8 @@ class ET_Periodo_Ejecucion extends CI_Controller
 				$c_data['numero_resolucion']=$this->input->post('txtNumeroResolucion');
 				$c_data['fecha_resolucion']=$this->input->post('txtFechaResolución');
 				$c_data['tipo']=$this->input->post('selectTipoPlazo');
+				$c_data['responsable']=$this->input->post('ComboResponsableEjecucion');
+				$c_data['cargo']=$this->input->post('comboCargoEjecucion');
 
 				$data=$this->Model_ET_Periodo_Ejecucion->insertar($c_data);
 
@@ -65,6 +69,8 @@ class ET_Periodo_Ejecucion extends CI_Controller
 			else
 			{
 				$id_et=$this->input->get('id_et');
+				$listarPersona=$this->Model_Personal->listarPersona();
+				$listarCargo=$this->Cargo_Modal->getcargo();
 				$listaPlazoEjecucion=$this->Model_ET_Periodo_Ejecucion->listaPlazoEjecucion($id_et);
 				if(count($listaPlazoEjecucion)==0)
 				{
@@ -75,7 +81,7 @@ class ET_Periodo_Ejecucion extends CI_Controller
 				{
 					$fecha=$listaPlazoEjecucion[0]->fecha_fin;
 				}
-				$this->load->view('front/Ejecucion/ExpedienteTecnico/periododeejecucion',['id_et'=>$id_et, 'listaPlazoEjecucion' => $listaPlazoEjecucion, 'fecha'=>$fecha]);
+				$this->load->view('front/Ejecucion/ExpedienteTecnico/periododeejecucion',['id_et'=>$id_et, 'listaPlazoEjecucion' => $listaPlazoEjecucion, 'fecha'=>$fecha,'listarPersona'=>$listarPersona,'listarCargo' => $listarCargo]);
 			}
 		}
 	}
