@@ -75,13 +75,13 @@
 															<div class="form-group">
 										                        <label class="control-label col-md-2 col-sm-2 col-xs-12">De:</label>
 										                        <div class="col-md-4 col-sm-4 col-xs-12">
-										                          <input type="date" class="form-control" placeholder="Default Input" id="deFecha">
+										                          <input type="date" max="2050-12-31" class="form-control" placeholder="Default Input" id="deFecha">
 										                        </div>
 										                    </div>
 										                    <div class="form-group">
 										                        <label class="control-label col-md-2 col-sm-2 col-xs-12">A:</label>
 										                        <div class="col-md-4 col-sm-4 col-xs-12">
-										                          <input type="date" class="form-control" placeholder="Default Input" id="aFecha">
+										                          <input type="date" max="2050-12-31" class="form-control" placeholder="Default Input" id="aFecha">
 										                        </div>
 										                    </div>
 									                    </div>

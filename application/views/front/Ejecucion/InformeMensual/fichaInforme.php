@@ -447,12 +447,12 @@
 							<td><?=$i?></td>
 							<td>
 								<div>									
-									<input class="form-control input-sm field" value="<?=(@$childManoObra[$i-1]->nro_semana==$i ? @$childManoObra[$i-1]->de_fecha :'')?>" name="txtDeSemana<?=$i?>" id="txtDeSemana<?=$i?>" type="date">
+									<input class="form-control input-sm field" value="<?=(@$childManoObra[$i-1]->nro_semana==$i ? @$childManoObra[$i-1]->de_fecha :'')?>" name="txtDeSemana<?=$i?>" id="txtDeSemana<?=$i?>" type="date" max="2050-12-31">
 								</div>
 							</td>
 							<td>
 								<div>
-									<input class="form-control input-sm field" value="<?=(@$childManoObra[$i-1]->nro_semana==$i ? @$childManoObra[$i-1]->a_fecha :'')?>"  name="txtASemana<?=$i?>" id="txtASemana<?=$i?>" type="date">
+									<input class="form-control input-sm field" value="<?=(@$childManoObra[$i-1]->nro_semana==$i ? @$childManoObra[$i-1]->a_fecha :'')?>"  name="txtASemana<?=$i?>" id="txtASemana<?=$i?>" type="date" max="2050-12-31">
 								</div>
 							</td>
 							<td>

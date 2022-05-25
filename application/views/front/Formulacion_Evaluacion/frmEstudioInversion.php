@@ -275,7 +275,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="name">Fecha de Asignación</label>
-                        <input type="date" id="dateFechaAsig" name="dateFechaAsig" class="form-control" data-validate-length-range="6" data-validate-words="2" required="required" type="text" value="<?php echo date("Y-m-d"); ?>">
+                        <input type="date" max="2050-12-31" id="dateFechaAsig" name="dateFechaAsig" class="form-control" data-validate-length-range="6" data-validate-words="2" required="required" type="text" value="<?php echo date("Y-m-d"); ?>">
                     </div>
                     <div class="col-md-4">
                         <label for="name">.</label>
@@ -351,11 +351,11 @@
                             <div class="item form-group">
                                 <div class="col-md-4">
                                     <label for="name">Fecha Inicio*</label>
-                                    <input type="date" id="dateFechaIniC" name="dateFechaIniC" class="form-control" type="text" value="<?=date('Y-m-d')?>">
+                                    <input type="date" max="2050-12-31" id="dateFechaIniC" name="dateFechaIniC" class="form-control" type="text" value="<?=date('Y-m-d')?>">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="name">Fecha Final*</label>
-                                    <input type="date" id="dateFechaIniF" name="dateFechaIniF" class="form-control" type="text" value="<?=date('Y-m-d')?>">
+                                    <input type="date" max="2050-12-31" id="dateFechaIniF" name="dateFechaIniF" class="form-control" type="text" value="<?=date('Y-m-d')?>">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="name">Avance Físico*</label>

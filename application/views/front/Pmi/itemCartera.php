@@ -28,13 +28,13 @@
                 <div class="item form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Fecha Inicio Cartera <span class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="dateFechaIniCart" name="dateFechaIniCart" value="<?php if(isset($arrayCartera)){echo $arrayCartera->fecha_inicio_cartera;} else { echo date('Y-m-d');}?>" class="form-control col-md-7 col-xs-5" required="required" type="text">
+                        <input type="date" max="2050-12-31" id="dateFechaIniCart" name="dateFechaIniCart" value="<?php if(isset($arrayCartera)){echo $arrayCartera->fecha_inicio_cartera;} else { echo date('Y-m-d');}?>" class="form-control col-md-7 col-xs-5" required="required" type="text">
                     </div>
                 </div>
                 <div class="item form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="name">Fecha Fin Cartera <span class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="date" id="dateFechaFinCart" name="dateFechaFinCart" value="<?php if(isset($arrayCartera)){echo $arrayCartera->fecha_cierre_cartera;} else { echo date('Y-m-d');}?>" class="form-control col-md-7 col-xs-5" required="required" type="text">
+                        <input type="date" max="2050-12-31" id="dateFechaFinCart" name="dateFechaFinCart" value="<?php if(isset($arrayCartera)){echo $arrayCartera->fecha_cierre_cartera;} else { echo date('Y-m-d');}?>" class="form-control col-md-7 col-xs-5" required="required" type="text">
                     </div>
                     <p style="color: red; display: none;" id="Advertencia">La Fecha de Inicio no puede ser mayor a la Fecha de Fin</p>
                 </div>

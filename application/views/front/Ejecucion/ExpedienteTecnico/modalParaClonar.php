@@ -18,7 +18,7 @@
 	                        </div>
 	                        <div class="col-md-3 col-sm-12 col-xs-12">
 	                            <label class="control-label">Fecha de Aprobacion:</label>
-	                            <input class="form-control col-md-4 col-xs-12" type="date" name="txtFechaAprobacion" id="txtFechaAprobacion" notValidate>
+	                            <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" name="txtFechaAprobacion" id="txtFechaAprobacion" notValidate>
 	                        </div>
 	                    <?php } 
 	                    else

@@ -20,7 +20,7 @@
 					<div class="col-md-4 col-sm-4 col-xs-12">
 						<label class="control-label">Fecha de viabilidad:</label>
 						<div>
-							<input type="date" id="txtFechaViabilidad" name="txtFechaViabilidad" value="<?=@$proyectoInversion[0]->fecha_viabilidad_pi?>"  class="form-control">
+							<input type="date" max="2050-12-31" id="txtFechaViabilidad" name="txtFechaViabilidad" value="<?=@$proyectoInversion[0]->fecha_viabilidad_pi?>"  class="form-control">
 						</div>
 					</div>
 				</div>

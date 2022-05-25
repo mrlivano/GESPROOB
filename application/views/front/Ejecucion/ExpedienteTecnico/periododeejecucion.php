@@ -33,7 +33,7 @@
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<label class="control-label">Fecha de Resolución:</label>
 					<div>
-						<input type="date" name="txtFechaResolución" class="form-control" id="txtFechaResolución">
+						<input type="date" max="2050-12-31" name="txtFechaResolución" class="form-control" id="txtFechaResolución">
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12">
@@ -47,13 +47,13 @@
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<label class="control-label">Fecha de Inicio:</label>
 					<div>
-						<input type="date" class="form-control" name="txtFechaInicio" id="txtFechaInicio">
+						<input type="date" max="2050-12-31" class="form-control" name="txtFechaInicio" id="txtFechaInicio">
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<label class="control-label">Fecha Fin:</label>
 					<div>
-						<input type="date" name="txtFechaFin" class="form-control" id="txtFechaFin">
+						<input type="date" max="2050-12-31" name="txtFechaFin" class="form-control" id="txtFechaFin">
 					</div>
 					<p style="color: red; display: none;" id="Advertencia">La Fecha de Inicio no puede ser mayor a la Fecha de Fin</p>
 				</div>
