@@ -15,9 +15,9 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 				'<td>'.$value->numeracion.'</td>'.
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
-				'<td>'.$value->cantidad.'</td>'.
-				'<td style="text-align: right;">'.$value->precio_unitario.'</td>'.
-				'<td style="text-align: right;">'.number_format($value->parcial, 2).'</td>';
+				'<td>'.number_format($value->cantidad, 2, '.', '').'</td>'.
+				'<td style="text-align: right;">'.number_format($value->precio_unitario,4).'</td>'.
+				'<td style="text-align: right;">'.number_format($value->parcial, 4).'</td>';
 
 			$htmlTemp.='</tr>';
 
@@ -33,9 +33,9 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 				'<td>'.$value->numeracion.'</td>'.
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
-				'<td>'.$value->cantidad.'</td>'.
-				'<td style="text-align: right;">'.number_format($value->precio_unitario, 2).'</td>'.
-				'<td style="text-align: right;">'.number_format($value->parcial, 2).'</td>';
+				'<td>'.number_format($value->cantidad, 2, '.', '').'</td>'.
+				'<td style="text-align: right;">'.number_format($value->precio_unitario, 4).'</td>'.
+				'<td style="text-align: right;">'.number_format($value->parcial, 4).'</td>';
 
 			$htmlTemp.='</tr>';
 
@@ -57,7 +57,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 		'<td>---</td>'.
 		'<td>---</td>'.
 		'<td style="text-align: right;">---</td>'.
-		'<td style="text-align: right;"><b><i>'.number_format($sumaTemp, 2).'</i></b></td>';	
+		'<td style="text-align: right;"><b><i>'.number_format($sumaTemp, 4).'</i></b></td>';	
 
 	$htmlTempP.='</tr>';
 	$htmlTempP.=$htmlTemp;
@@ -177,7 +177,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 							<td style="width:10%;">---</td>
 							<td style="width:10%;">---</td>
 							<td style="width:10%;text-align: right;">---</td>
-							<td style="width:13%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 2, '.',",",3)?></b></td>
+							<td style="width:13%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 4, '.',",",3)?></b></td>
 						</tr>
 					    <?=$resultadoMetaAnidada?>
 					<?php } ?>
@@ -187,22 +187,22 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 			<table id="tableResumen" style="width: 100%; font-size:12px;">
 				<tr>
 					<td style="width: 87%;text-decoration: underline; background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 2, '.',",",3)?></b></td>
+					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
 				</tr>
 				<?php $costoIndirectoTotal=0; foreach($expedienteTecnico->childCostoIndirecto as $key => $value) { 
 					$costoIndirectoTotal+=$value->costoComponente?>
 					<tr>
 						<td style="width: 87%"><b><?=strtoupper(html_escape($value->descripcion))?></b></td>
-						<td style="width: 13%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 2, '.',",",3)?></td>
+						<td style="width: 13%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 4, '.',",",3)?></td>
 					</tr>				
 				<?php } ?>
 				<tr>
 					<td style="width: 87%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoIndirectoTotal, 2, '.',",",3)?></b></td>
+					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoIndirectoTotal, 4, '.',",",3)?></b></td>
 				</tr>
 				<tr>
 					<td style="width: 87%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></td>
-					<td style="width: 13%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($costoDirectoTotal+$costoIndirectoTotal, 2, '.',",",3)?></b></td>
+					<td style="width: 13%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($costoDirectoTotal+$costoIndirectoTotal, 4, '.',",",3)?></b></td>
 				</tr>
 			</table>
 		</div>

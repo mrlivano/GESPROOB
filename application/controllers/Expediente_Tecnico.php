@@ -1733,6 +1733,7 @@ class Expediente_Tecnico extends CI_Controller
 				$det_data['precio_unitario']=$part->precio_unitario;
 				$det_data['estado']=$part->estado;
 				$det_data['especificacion_tecnica']=$part->especificacion_tecnica;
+				$det_data['parcial']=$part->parcial;
 				$lastDetallePartida=$this->Model_ET_Detalle_Partida->insertarDetallePartida($det_data);
 
 				$analisisUnitario=$this->Model_ET_Analisis_Unitario->ETAnalisisUnitarioPorIdDetalle($part->id_detalle_partida);				
@@ -1817,6 +1818,7 @@ class Expediente_Tecnico extends CI_Controller
 				$det_data['precio_unitario']=$part->precio_unitario;
 				$det_data['estado']=$part->estado;
 				$det_data['especificacion_tecnica']=$part->especificacion_tecnica;
+				$det_data['parcial']=$part->parcial;
 				$lastDetallePartida=$this->Model_ET_Detalle_Partida->insertarDetallePartida($det_data);
 
 				$analisisUnitario=$this->Model_ET_Analisis_Unitario->ETAnalisisUnitarioPorIdDetalle($part->id_detalle_partida);				

@@ -24,21 +24,21 @@ class ET_Componente extends CI_Controller
 
 	private function updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico, $idPresupuestoEjecucion, $estado)
 	{
-		$numberRoman=[0 => 'I', 1 => 'II', 2 => 'III', 3 => 'IV', 4 => 'V', 5 => 'VI', 6 => 'VII', 7 => 'VIII', 8 => 'IX', 9 => 'X', 10 => 'XI', 11 => 'XII', 12 => 'XIII', 13 => 'XIV', 14 => 'XV', 15 => 'XVI', 16 => 'XVII', 17 => 'XVIII', 18 => 'XIX', 19 => 'XX', 20 => 'XXI', 21 => 'XXII', 22 => 'XXIII', 23 => 'XXIV', 24 => 'XXV', 25 => 'XXVI', 26 => 'XXVII', 27 => 'XXVIII', 28 => 'XXIX', 29 => 'XXX', 30 => 'XXXI', 31 => 'XXXII', 32 => 'XXXIII', 33 => 'XXXIV', 34 => 'XXXV', 35 => 'XXXVI', 36 => 'XXXVII', 37 => 'XXXVIII', 38 => 'XXXIX', 39 => 'XL', 40 => 'XLI', 41 => 'XLII', 42 => 'XLIII', 43 => 'XLIV', 44 => 'XLV', 45 => 'XLVI', 46 => 'XLVII', 47 => 'XLVIII', 48 => 'XLIX', 49 => 'L', 50 => 'LI', 51 => 'LII', 52 => 'LIII', 53 => 'LIV', 54 => 'LV', 55 => 'LVI', 56 => 'LVII', 57 => 'LVIII', 58 => 'LIX', 59 => 'LX', 60 => 'LXI', 61 => 'LXII', 62 => 'LXIII', 63 => 'LXIV', 64 => 'LXV', 65 => 'LXVI', 66 => 'LXVII', 67 => 'LXVIII', 68 => 'LXIX', 69 => 'LXX', 70 => 'LXXI', 71 => 'LXXII', 72 => 'LXXIII', 73 => 'LXXIV', 74 => 'LXXV', 75 => 'LXXVI', 76 => 'LXXVII', 77 => 'LXXVIII', 78 => 'LXXIX', 79 => 'LXXX', 80 => 'LXXXI', 81 => 'LXXXII', 82 => 'LXXXIII', 83 => 'LXXXIV', 84 => 'LXXXV', 85 => 'LXXXVI', 86 => 'LXXXVII', 87 => 'LXXXVIII', 88 => 'LXXXIX', 89 => 'XC', 90 => 'XCI', 91 => 'XCII', 92 => 'XCIII', 93 => 'XCIV', 94 => 'XCV', 95 => 'XCVI', 96 => 'XCVII', 97 => 'XCVIII', 98 => 'XCIX', 99 => 'C'];
+		// $numberRoman=[0 => 'I', 1 => 'II', 2 => 'III', 3 => 'IV', 4 => 'V', 5 => 'VI', 6 => 'VII', 7 => 'VIII', 8 => 'IX', 9 => 'X', 10 => 'XI', 11 => 'XII', 12 => 'XIII', 13 => 'XIV', 14 => 'XV', 15 => 'XVI', 16 => 'XVII', 17 => 'XVIII', 18 => 'XIX', 19 => 'XX', 20 => 'XXI', 21 => 'XXII', 22 => 'XXIII', 23 => 'XXIV', 24 => 'XXV', 25 => 'XXVI', 26 => 'XXVII', 27 => 'XXVIII', 28 => 'XXIX', 29 => 'XXX', 30 => 'XXXI', 31 => 'XXXII', 32 => 'XXXIII', 33 => 'XXXIV', 34 => 'XXXV', 35 => 'XXXVI', 36 => 'XXXVII', 37 => 'XXXVIII', 38 => 'XXXIX', 39 => 'XL', 40 => 'XLI', 41 => 'XLII', 42 => 'XLIII', 43 => 'XLIV', 44 => 'XLV', 45 => 'XLVI', 46 => 'XLVII', 47 => 'XLVIII', 48 => 'XLIX', 49 => 'L', 50 => 'LI', 51 => 'LII', 52 => 'LIII', 53 => 'LIV', 54 => 'LV', 55 => 'LVI', 56 => 'LVII', 57 => 'LVIII', 58 => 'LIX', 59 => 'LX', 60 => 'LXI', 61 => 'LXII', 62 => 'LXIII', 63 => 'LXIV', 64 => 'LXV', 65 => 'LXVI', 66 => 'LXVII', 67 => 'LXVIII', 68 => 'LXIX', 69 => 'LXX', 70 => 'LXXI', 71 => 'LXXII', 72 => 'LXXIII', 73 => 'LXXIV', 74 => 'LXXV', 75 => 'LXXVI', 76 => 'LXXVII', 77 => 'LXXVIII', 78 => 'LXXIX', 79 => 'LXXX', 80 => 'LXXXI', 81 => 'LXXXII', 82 => 'LXXXIII', 83 => 'LXXXIV', 84 => 'LXXXV', 85 => 'LXXXVI', 86 => 'LXXXVII', 87 => 'LXXXVIII', 88 => 'LXXXIX', 89 => 'XC', 90 => 'XCI', 91 => 'XCII', 92 => 'XCIII', 93 => 'XCIV', 94 => 'XCV', 95 => 'XCVI', 96 => 'XCVII', 97 => 'XCVIII', 98 => 'XCIX', 99 => 'C'];
 
 		$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, $idPresupuestoEjecucion, $estado);
-
+		$indice = 1;
 		foreach($listaETComponente as $key => $value)
 		{
-			$this->Model_ET_Componente->updateNumeracionPorIdComponente($value->id_componente, $numberRoman[$key]);
+			$this->Model_ET_Componente->updateNumeracionPorIdComponente($value->id_componente, "");
 
 			$listaETMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
 
 			foreach($listaETMeta as $index => $item)
 			{
-				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, ($key+1).'.'.($index+1));
-
-				$this->updateNumerationMetaAndChild($item, ($key+1).'.'.($index+1));
+				$this->Model_ET_Meta->updateNumeracionPorIdMeta($item->id_meta, sprintf("%02d", $indice));
+				$this->updateNumerationMetaAndChild($item, sprintf("%02d", $indice));
+				$indice++;
 			}
 		}
 	}
@@ -55,7 +55,7 @@ class ET_Componente extends CI_Controller
 
 			foreach($meta->childPartida as $key => $value)
 			{
-				$this->Model_ET_Partida->updateNumeracionPorIdPartida($value->id_partida, $numeracionMetaActual.'.'.($key+1));
+				$this->Model_ET_Partida->updateNumeracionPorIdPartida($value->id_partida, $numeracionMetaActual.'.'.sprintf("%02d",($key+1)));
 			}
 
 			return false;
@@ -63,9 +63,9 @@ class ET_Componente extends CI_Controller
 
 		foreach($meta->childMeta as $key => $value)
 		{
-			$this->Model_ET_Meta->updateNumeracionPorIdMeta($value->id_meta, $numeracionMetaActual.'.'.($key+1));
+			$this->Model_ET_Meta->updateNumeracionPorIdMeta($value->id_meta, $numeracionMetaActual.'.'.sprintf("%02d",($key+1)));
 
-			$this->updateNumerationMetaAndChild($value, $numeracionMetaActual.'.'.($key+1));
+			$this->updateNumerationMetaAndChild($value, $numeracionMetaActual.'.'.sprintf("%02d",($key+1)));
 		}
 	}
 
@@ -89,7 +89,7 @@ class ET_Componente extends CI_Controller
 
 			$ultimoIdComponente=$this->Model_ET_Componente->insertarComponente($c_data);
 
-			// $this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
+			$this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
 
 			$this->db->trans_complete();
 
@@ -110,13 +110,18 @@ class ET_Componente extends CI_Controller
 
 			foreach($value->childComponente as $key => $item)
 			{
+				$costoComponente=0;
+
 				$item->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($item->id_componente);
 
 				foreach($item->childMeta as $index => $temp)
 				{
 					$temp->nivel = substr_count($temp->numeracion, '.'); 
-					$this->obtenerMetaAnidada($temp);
+					$temp->costoMeta=$this->obtenerMetaAnidada($temp);
+					$costoComponente+=$temp->costoMeta;
 				}
+
+				$item->costoComponente=$costoComponente;
 			}
 		}		
 
@@ -163,6 +168,8 @@ class ET_Componente extends CI_Controller
 		
 		$meta->nivel = substr_count($meta->numeracion, '.'); 
 
+		$sumatoria=0;
+
 		if(count($temp)==0)
 		{
 			$meta->nivel = substr_count($meta->numeracion, '.'); 
@@ -170,6 +177,8 @@ class ET_Componente extends CI_Controller
 
 			foreach($meta->childPartida as $key => $value)
 			{
+				$sumatoria+=$value->parcial;
+
 				$value->partidaCompleta=true;
 
 				$value->childDetallePartida=$this->Model_ET_Detalle_Partida->ETDetallePartidaPorIdPartida($value->id_partida);
@@ -197,7 +206,9 @@ class ET_Componente extends CI_Controller
 				}
 			}
 
-			return false;
+			$meta->costoMeta=$sumatoria;
+
+			return $sumatoria;
 		}
 		else {
 			$meta->nivel = substr_count($meta->numeracion, '.'); 
@@ -205,6 +216,8 @@ class ET_Componente extends CI_Controller
 
 			foreach($meta->childPartida as $key => $value)
 			{
+				$sumatoria+=$value->parcial;
+
 				$value->partidaCompleta=true;
 
 				$value->childDetallePartida=$this->Model_ET_Detalle_Partida->ETDetallePartidaPorIdPartida($value->id_partida);
@@ -233,10 +246,17 @@ class ET_Componente extends CI_Controller
 			}
 		}
 
+		$costoPorMeta=$sumatoria;
+
 		foreach($meta->childMeta as $key => $value)
 		{
-			$this->obtenerMetaAnidada($value);
+			$costoPorMeta+=$this->obtenerMetaAnidada($value);
 		}
+
+		
+		$meta->costoMeta=$costoPorMeta;
+
+		return $costoPorMeta;
 	}
 
 	public function eliminar()
@@ -257,7 +277,7 @@ class ET_Componente extends CI_Controller
 
 		$this->Model_ET_Componente->eliminar($idComponente);
 
-		// $this->updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico,$idPresupuestoEjecucion,'EXPEDIENTETECNICO');
+		$this->updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico,$idPresupuestoEjecucion,'EXPEDIENTETECNICO');
 
 		$this->db->trans_complete();
 
@@ -304,6 +324,7 @@ class ET_Componente extends CI_Controller
 		$idSubpresupuesto=$this->input->post('idSubpresupuesto');
 		$idComponente=$this->input->post('idComponente');
 		$idET=$this->input->post('idET');
+		$idPresupuestoEjecucion=$this->input->post('idPresupuestoEjecucion');
 		$elementP = [];
 		$totalSubpresupuesto= $this->Model_ET_Presupuesto_Ejecucion->totalSubpresupuesto($idSubpresupuesto);
 		$metaSubpresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarMetaSubpresupuesto($idSubpresupuesto);
@@ -399,6 +420,8 @@ class ET_Componente extends CI_Controller
 				}
 			}
 		}
+		$this->updateNumerationComponentPresupuestoEjecucion($idET, $idPresupuestoEjecucion, 'EXPEDIENTETECNICO');
+
 		echo json_encode(['data' => $metaSubpresupuesto,'sumaParcial' => $sumaParcial, 'totalSubpresupuesto' => $totalSubpresupuesto]);exit;
 	}
 

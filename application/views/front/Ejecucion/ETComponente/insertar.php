@@ -8,7 +8,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			<input type="button" title="Eliminar Meta" class="btn btn-default btn-xs" value="-" onclick="eliminarMeta('.$meta->id_meta.', this);" style="width: 30px;">
 			<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
 
-			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '.$meta->id_meta.', '.$meta->nivel.', '.$idPresupuestoEjecucion.')" style="width: 30px;">';
+			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '.$meta->id_meta.', '.($meta->nivel+1).', '.$idPresupuestoEjecucion.')" style="width: 30px;">';
 
 			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '.$meta->id_meta.','.$idPresupuestoEjecucion.')" style="width: 30px;">';
 
@@ -17,7 +17,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Clasificador" value="+C" onclick="paginaAjaxDialogo(\'clasificadorMeta\', \'Asociar a Clasificador\', { idET : '.$idExpedienteTecnico.', idMeta : '.$meta->id_meta.'}, \''.base_url().'index.php/ET_Meta_Analitico/insertar\', \'get\', null, null, false, true);" style="width: 30px;" style="width: 30px;">';
 			}
 
-			$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'" contenteditable>'.html_escape($meta->numeracion).' '.html_escape($meta->desc_meta).'</span>'.
+			$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'" contenteditable>'.html_escape($meta->numeracion).' '.html_escape($meta->desc_meta).' - '.number_format($meta->costoMeta, 4, '.', ',').'</span>'.
 			((count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
 
 		if(count($meta->childMeta)==0)
@@ -40,9 +40,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					$htmlTemp.='</td>'.
 					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
 					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
-					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.number_format($value->precio_unitario, 2, '.', '').'</span></td>';
-					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
+					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
+					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
+					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
 				'</tr>';
 			}
 		}
@@ -59,9 +59,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					$htmlTemp.='</td>'.
 					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
 					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
-					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.$value->precio_unitario.'</span></td>';
-					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
+					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
+					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'. number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
+					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
 				'</tr>';
 			}
 			$htmlTemp.=((count($meta->childPartida))>0 ? '</tbody></table></div><ul>' : '');
@@ -71,7 +71,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	$htmlTemp.='<li class="listaNivel'.$meta->nivel.'">';
 	$htmlTemp.='<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
 
-		$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'">'.html_escape($meta->desc_meta).'</span>'.
+		$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'">'.html_escape($meta->numeracion).' '.html_escape($meta->desc_meta).' - '.number_format($meta->costoMeta, 4, '.', ',').'</span>'.
 		((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
 
 	if(count($meta->childMeta)==0)
@@ -92,9 +92,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				$htmlTemp.='</td>'.
 				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'">'.html_escape($value->desc_partida).'</span></td>'.
 				'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-				'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'">'.number_format($value->cantidad, 4, '.', '').'</span></td>'.
-				'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'">'.$value->precio_unitario.'</span></td>';
-				$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 2, '.', ',').'</td>'.
+				'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'">'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
+				'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'">'.number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
+				$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
 			'</tr>';
 		}
 	}
@@ -366,10 +366,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 									<li>
 										<?php if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){?>
 											<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
-											<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',1,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
-											<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?></b>
+											<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
+											<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
 										<?php } else {?>
-											<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?></b>
+											<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
 										<?php }?>
 										<ul>
 											<?php foreach($value->childMeta as $index => $item){ ?>
@@ -465,7 +465,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			var htmlTemp='<li>'+
 				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
 
-				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',1,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
+				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
 				htmlTemp+='<ul></ul></li>';
 
 
@@ -558,6 +558,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						"idSubpresupuesto" : id ,
 						"idComponente" : objectJSON.idComponente ,
 						"idET" : $('#hdIdET').val(),
+						"idPresupuestoEjecucion":PresupuestoEjecucion,
 						},
 						base_url+'index.php/ET_Componente/cargarMetaS10',
 						'POST', null, async function(metaJSON)

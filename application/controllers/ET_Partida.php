@@ -96,7 +96,7 @@ class ET_Partida extends CI_Controller
 
 		foreach($listaETPartidaTemporal as $key => $value)
 		{
-			$this->Model_ET_Partida->updateNumeracionPorIdPartida($value->id_partida, $meta->numeracion.'.'.($key+1));
+			$this->Model_ET_Partida->updateNumeracionPorIdPartida($value->id_partida, $meta->numeracion.'.'.sprintf("%02d", ($key+1)));
 		}
 	}
 
