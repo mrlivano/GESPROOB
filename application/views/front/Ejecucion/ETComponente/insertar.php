@@ -38,7 +38,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						// }
 						
 					$htmlTemp.='</td>'.
-					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
+					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
 					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
 					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
 					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
@@ -57,7 +57,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 						
 					$htmlTemp.='</td>'.
-					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
+					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
 					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
 					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
 					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'. number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
@@ -90,7 +90,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					// }
 					
 				$htmlTemp.='</td>'.
-				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'">'.html_escape($value->desc_partida).'</span></td>'.
+				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'">'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
 				'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
 				'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'">'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
 				'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'">'.number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
