@@ -53,13 +53,13 @@
 								<div class="col-md-3 col-sm-6 col-xs-12">
 									<label for="control-label">Fecha de Inicio</label>
 									<div>
-										<input type="date" id="txtFechaInicio" name="txtFechaInicio" autocomplete="off" class="form-control" value="<?=$actividad->fecha_inicio?>">
+										<input type="date" max="2050-12-31" id="txtFechaInicio" name="txtFechaInicio" autocomplete="off" class="form-control" value="<?=$actividad->fecha_inicio?>">
 									</div>
 								</div>
 								<div class="col-md-3 col-sm-6 col-xs-12">
 									<label for="control-label">Fecha de Fin</label>
 									<div>
-										<input type="date" id="txtFechaFin" name="txtFechaFin" autocomplete="off" class="form-control" value="<?=$actividad->fecha_fin?>">
+										<input type="date" max="2050-12-31" id="txtFechaFin" name="txtFechaFin" autocomplete="off" class="form-control" value="<?=$actividad->fecha_fin?>">
 									</div>
 								</div>	
 							</div>						

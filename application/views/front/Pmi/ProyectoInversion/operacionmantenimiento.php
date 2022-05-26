@@ -20,7 +20,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<label for="name">Fecha <span class="required"></span></label>
-				<input type="date" id="dateFechaIniC" name="dateFechaIniC" class="form-control" required="required" type="text" value="<?php echo date("Y-m-d"); ?>" class="notValidate" disabled="true">
+				<input type="date" max="2050-12-31" id="dateFechaIniC" name="dateFechaIniC" class="form-control" required="required" type="text" value="<?php echo date("Y-m-d"); ?>" class="notValidate" disabled="true">
 			</div>
 		</div>
 		<div class="row">

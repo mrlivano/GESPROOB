@@ -500,11 +500,11 @@
                       </div>
                       <div class="col-md-12 col-sm-12 col-xs-12">
                           <label class=" col-md-6 col-sm-6 col-xs-12">Inicio y Final de la Actividad </label>
-                          <input type="hidden" id="txt_fechaActividadIAc" name="txt_fechaActividadIAc"  type="date" class="form-control calendario">
+                          <input type="hidden" id="txt_fechaActividadIAc" name="txt_fechaActividadIAc"  type="date" max="2050-12-31" class="form-control calendario">
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 ">
                           <label class=" col-md-6 col-sm-6 col-xs-12"></label>
-                          <input type="hidden" id="txt_fechaActividadfAc"  name="txt_fechaActividadfAc" type="date" class="form-control calendario">
+                          <input type="hidden" id="txt_fechaActividadfAc"  name="txt_fechaActividadfAc" type="date" max="2050-12-31" class="form-control calendario">
                       </div>
                       <div class="input-prepend input-group col-md-10 col-sm-10 col-xs-10" style="margin-left: 8px;">
                                             <span class="add-on input-group-addon">Fecha de actividad <i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>

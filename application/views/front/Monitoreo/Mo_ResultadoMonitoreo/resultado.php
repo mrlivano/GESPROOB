@@ -39,7 +39,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<label for="control-label">Fecha:</label>
-				<input type="date" class="form-control" id="txtFechaRegistro" name="txtFechaRegistro" value="<?=date('Y-m-d')?>">
+				<input type="date" max="2050-12-31" class="form-control" id="txtFechaRegistro" name="txtFechaRegistro" value="<?=date('Y-m-d')?>">
 			</div>
 			<div class="col-md-2 col-sm-6 col-xs-12">
 				<label for="control-label">.</label>

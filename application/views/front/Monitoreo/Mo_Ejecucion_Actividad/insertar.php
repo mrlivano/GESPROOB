@@ -18,7 +18,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label for="control-label">Fecha: </label>
 							<div>
-								<input type="date" id="txtFecha" name="txtFecha" value="<?=date('Y-m-d')?>" class="form-control">
+								<input type="date" max="2050-12-31" id="txtFecha" name="txtFecha" value="<?=date('Y-m-d')?>" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">

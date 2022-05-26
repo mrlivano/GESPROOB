@@ -83,7 +83,7 @@
 												</select>
 											</td>
 											<td style="width: 20%;padding: 2px;">
-												<input class="form-control" onchange="asignarPersonalAsignacion(<?=$value->id_responsable_et?>, this);" type="date" name="dateFechaAsignacion" id="dateFechaAsignacion" value="<?=(new DateTime($value->fecha_asignacion_resp_et))->format('Y-m-d')?>">
+												<input class="form-control" onchange="asignarPersonalAsignacion(<?=$value->id_responsable_et?>, this);" type="date" max="2050-12-31" name="dateFechaAsignacion" id="dateFechaAsignacion" value="<?=(new DateTime($value->fecha_asignacion_resp_et))->format('Y-m-d')?>">
 											</td>
 											<td style="width: 5%;padding: 2px;"><a href="#" style="color: red;padding: 2px;" onclick="eliminarEspecialidadAsignada(<?=$value->id_responsable_et?>, this);">Eliminar</a>
 											</td>
@@ -238,7 +238,7 @@
 					'<tr>'+
 						'<td style="width: 35%;padding: 2px;"><div style="background-color: #54c4b9;border-radius: 5px;color: #ffffff;margin: 3px;padding: 4px;height: 40px;width: 100%;">'+replaceAll(replaceAll($('#'+data).text(), '<', '&gt;'), '>', '&lt;')+'</div></td>'+
 						'<td style="padding: 2px;">'+'<select class="selectPersonaETPerReq selectpicker form-control" data-live-search="true" data-width="100%" onchange="asignarPersonalETPerReq('+objectJSON.idRespEt+', this);"><option value="">Seleccionar Personal</option>'+listaPersona+'</select>'+'</td>'+
-						'<td style="width: 20%;padding:2px;">'+'<input onchange="asignarPersonalAsignacion('+objectJSON.idRespEt+', this);" class="form-control" type="date" name="dateFechaAsignacion" id="dateFechaAsignacion"'+'</td>'+
+						'<td style="width: 20%;padding:2px;">'+'<input onchange="asignarPersonalAsignacion('+objectJSON.idRespEt+', this);" class="form-control" type="date" max="2050-12-31" name="dateFechaAsignacion" id="dateFechaAsignacion"'+'</td>'+
 						'<td style="width: 5%;padding: 2px;">'+'<a href="#" style="color: red;padding: 2px;" onclick="eliminarEspecialidadAsignada('+objectJSON.idRespEt+', this);">Eliminar</a>'+'</td>'+
 					'</tr>'+
 				'</tbody>'+

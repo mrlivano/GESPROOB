@@ -9,7 +9,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label for="control-label">Fecha:</label>
 							<div>
-								<input type="date" id="txtFechaCompromiso" name="txtFechaCompromiso" autocomplete="off" class="form-control" value="<?=date('Y-m-d')?>">
+								<input type="date" max="2050-12-31" id="txtFechaCompromiso" name="txtFechaCompromiso" autocomplete="off" class="form-control" value="<?=date('Y-m-d')?>">
 							</div>
 						</div>	
 						<div class="col-md-9 col-sm-6 col-xs-12">

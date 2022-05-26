@@ -34,7 +34,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Fecha: </label>
 							<div>
-								<input class="form-control" name="txtFecha" id="txtFecha" type="date" autocomplete="off" value="<?=$fecha?>">	
+								<input class="form-control" name="txtFecha" id="txtFecha" type="date" max="2050-12-31" autocomplete="off" value="<?=$fecha?>">	
 							</div>	
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">

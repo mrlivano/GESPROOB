@@ -146,7 +146,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Fecha Indicador</label>
 
 										<div class="col-sm-6">
-											<input type="date" id="form-field-1-1" placeholder="Valor de indicador" class="form-control" />
+											<input type="date" id="form-field-1-1" placeholder="Valor de indicador" class="form-control" max="2050-12-31"/>
 										</div>
 									</div>
                                     

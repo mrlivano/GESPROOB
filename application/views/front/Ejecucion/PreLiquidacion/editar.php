@@ -132,11 +132,11 @@
 									</div>
 									<div class="col-md-3">
 			                <label class="control-label">Fecha Inicio</label>
-			                <input class="form-control col-md-4 col-xs-12" type="date" name="dateStart[]" value="<?= $responsable->fecha_inicio ?>" id="dateStart" notValidate>
+			                <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" name="dateStart[]" value="<?= $responsable->fecha_inicio ?>" id="dateStart" notValidate>
 			            </div>
 									<div class="col-md-3">
 			                <label class="control-label">Fecha Fin</label>
-			                <input class="form-control col-md-4 col-xs-12" type="date" name="dateEnd[]" value="<?= $responsable->fecha_fin ?>" id="dateEnd" notValidate>
+			                <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" name="dateEnd[]" value="<?= $responsable->fecha_fin ?>" id="dateEnd" notValidate>
 			            </div>
 						      <div class="col-md-1">
 									<label class="control-label">Opción</label>
@@ -167,11 +167,11 @@
 									</div>
 									<div class="col-md-3">
 			                <label class="control-label">Fecha Inicio</label>
-			                <input class="form-control col-md-4 col-xs-12" type="date" id="dateStart" notValidate>
+			                <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" id="dateStart" notValidate>
 			            </div>
 									<div class="col-md-3">
 			                <label class="control-label">Fecha Fin</label>
-			                <input class="form-control col-md-4 col-xs-12" type="date" id="dateEnd" notValidate>
+			                <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" id="dateEnd" notValidate>
 			            </div>
 						        <div class="col-md-1">
 											<label class="control-label"></label>

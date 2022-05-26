@@ -190,7 +190,7 @@
                                           <div class="col-md-4">
                                            <label for="name">Fecha <span class="required"></span>
                                             </label>
-                                                  <input type="date" id="dateFechaIniC" name="dateFechaIniC" class="form-control col-md-6 col-xs-5" data-validate-length-range="6" data-validate-words="2" required="required" type="text" value="<?php echo date("Y-m-d"); ?>" disabled="true">
+                                                  <input type="date" max="2050-12-31" id="dateFechaIniC" name="dateFechaIniC" class="form-control col-md-6 col-xs-5" data-validate-length-range="6" data-validate-words="2" required="required" type="text" value="<?php echo date("Y-m-d"); ?>" disabled="true">
                                           </div>
                                           <div class="col-md-4">
                                              <label for="name">. <span class="required"></span>
