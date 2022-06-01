@@ -772,7 +772,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			const tipo_ejecucion=$(this).find("option:selected").val();
 			$('#selectPresupuestoEjecucionI').find('option:contains("'+tipo_ejecucion+'")').show();
 			$('#selectPresupuestoEjecucionI').find('option:not(:contains("'+tipo_ejecucion+'"))').hide();
-			$("#selectPresupuestoEjecucion").val($("#selectPresupuestoEjecucion option:first").val());
+			$("#selectPresupuestoEjecucionI").val($("#selectPresupuestoEjecucionI option:first").val());
 		});
 
 	function guardarCambiosComponente(idComponente)
