@@ -86,6 +86,7 @@ class ET_Componente extends CI_Controller
 			$c_data['descripcion']=$this->input->post('descripcionComponente');
 			$c_data['id_presupuesto_ej']=$this->input->post('idPresupuestoEjecucion');
 			$c_data['estado']="EXPEDIENTETECNICO";
+			$c_data['tipo_ejecucion']=$this->input->post('tipoEjecucion');
 
 			$ultimoIdComponente=$this->Model_ET_Componente->insertarComponente($c_data);
 

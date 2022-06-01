@@ -28,14 +28,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<td>'.
 						'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('.$value->id_partida.');" style="width: 30px;">'.
 						'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
-						// if($idPresupuestoEjecucion==2)
-						// {
+						if($idPresupuestoEjecucion==2)
+						{
 							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - '.html_escape($value->desc_partida).' \', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-						// }
-						// else
-						// {
-						// 	$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-						// }
+						}
+						else
+						{
+							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+						}
 						
 					$htmlTemp.='</td>'.
 					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
@@ -80,14 +80,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		{
 			$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
 				'<td>';
-					// if($idPresupuestoEjecucion==2)
-					// {
+					if($idPresupuestoEjecucion==2)
+					{
 						$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.', id_etapa_et:'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-					// }
-					// else
-					// {
-					// 	$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-					// }
+					}
+					else
+					{
+						$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+					}
 					
 				$htmlTemp.='</td>'.
 				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'">'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
@@ -239,17 +239,43 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 	<div id="divImportarComponente" class="row" style="margin-top: 3px;">
+	<div class="col-md-2 col-sm-12 col-xs-12">
+			<div>
+					<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
+					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
+						case 'ADMINISTRACION DIRECTA':
+					    ?>
+					    <option value="ADM DIRECTA" >ADM DIRECTA</option>
+					    <?php
+							break;
+						case 'POR CONTRATA':
+							?>
+							<option value="POR CONTRATA" >POR CONTRATA</option>
+							<?php
+							break;
+						default:
+						?>
+						<option value="ADM DIRECTA" >ADM DIRECTA</option>
+						<option value="POR CONTRATA" >POR CONTRATA</option>
+						<?php
+							break;
+					}?>
+					</select>
+			</div>
+		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
 					<option value="">Estructura de Presupuesto</option>
-					<?php foreach ($PresupuestoEjecucion as $key => $value) { ?>
+					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
+						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+						?>
 						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php } ?>
+					<?php }} ?>
 				</select>
 			</div>
 		</div>
-		<div class="col-md-7 col-sm-12 col-xs-12">
+		<div class="col-md-5 col-sm-12 col-xs-12">
 				<select id="selectComponente" name="selectComponente" class="form-control">
 				<option selected="true" value="" disabled>Seleccione Componente</option>
 				</select>
@@ -260,17 +286,43 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		</div>
 	</div>
 	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
+	<div class="col-md-2 col-sm-12 col-xs-12">
+			<div>
+					<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
+					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
+						case 'ADMINISTRACION DIRECTA':
+					    ?>
+					    <option value="ADM DIRECTA" >ADM DIRECTA</option>
+					    <?php
+							break;
+						case 'POR CONTRATA':
+							?>
+							<option value="POR CONTRATA" >POR CONTRATA</option>
+							<?php
+							break;
+						default:
+						?>
+						<option value="ADM DIRECTA" >ADM DIRECTA</option>
+						<option value="POR CONTRATA" >POR CONTRATA</option>
+						<?php
+							break;
+					}?>
+					</select>
+			</div>
+		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
 					<option value="">Estructura de Presupuesto</option>
-					<?php foreach ($PresupuestoEjecucion as $key => $value) { ?>
+					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
+						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+						?>
 						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php } ?>
+					<?php }} ?>
 				</select>
 			</div>
 		</div>
-		<div class="col-md-7 col-sm-12 col-xs-12">
+		<div class="col-md-5 col-sm-12 col-xs-12">
 			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
 		<div class="col-md-2 col-sm-12 col-xs-12">
@@ -353,7 +405,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
             <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                <?php foreach ($expedienteTecnico->childPresupuestoEjecucion as $key => $temp3) { ?>                
+                <?php foreach ($expedienteTecnico->childPresupuestoEjecucion as $key => $temp3) { 
+								 if (strpos($temp3->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+									?>                
                 <div class="panel">
                     <div class="panel-heading" style="padding: 6px;">
                         <a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?>
@@ -362,27 +416,27 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
                     <div id="collapse<?=$temp3->id_presupuesto_ej?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?=$temp3->id_presupuesto_ej?>">
                         <div class="panel-body">
 	                        <ul id="ulComponenteMetaPartida<?=$temp3->id_presupuesto_ej?>" style="list-style-type: upper-roman;">
-								<?php foreach($temp3->childComponente as $key => $value) { ?>
-									<li>
-										<?php if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){?>
-											<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
-											<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
-											<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
-										<?php } else {?>
-											<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
-										<?php }?>
-										<ul>
-											<?php foreach($value->childMeta as $index => $item){ ?>
-												<?=mostrarMetaAnidada($item, $expedienteTecnico->id_et, $temp3->id_presupuesto_ej,$expedienteTecnico);?>
+											<?php foreach($temp3->childComponente as $key => $value) { ?>
+												<li>
+													<?php if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){?>
+														<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
+														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
+														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
+													<?php } else {?>
+														<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
+													<?php }?>
+													<ul>
+														<?php foreach($value->childMeta as $index => $item){ ?>
+															<?=mostrarMetaAnidada($item, $expedienteTecnico->id_et, $temp3->id_presupuesto_ej,$expedienteTecnico);?>
+														<?php } ?>
+													</ul>
+												</li>
 											<?php } ?>
-										</ul>
-									</li>
-								<?php } ?>
-							</ul>              
+										</ul>              
                         </div>
                     </div>
                 </div> 
-                <?php } ?>              
+                <?php }} ?>              
             </div>
         </div>
 	</div>
@@ -445,7 +499,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			return;
 		}
 
-		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
+		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), "tipoEjecucion" : $('#selectTipoEjecucion').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
 		{
 			objectJSON=JSON.parse(objectJSON);
 
@@ -464,8 +518,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 			var htmlTemp='<li>'+
 				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
-
-				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
+					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
 				htmlTemp+='<ul></ul></li>';
 
 
@@ -515,7 +568,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			return;
 		}
 
-		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#selectComponente').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
+		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#selectComponente').val().trim(), "tipoEjecucion" : $('#selectTipoEjecucionI').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
 		{
 			objectJSON=JSON.parse(objectJSON);
 
