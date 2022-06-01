@@ -32,6 +32,7 @@
 		border-collapse: collapse;
 	}
   </style>
+  
 </head>
 <body>
   	<div id="header">
@@ -270,3 +271,4 @@
   	</div>
 </body>
 </html>
+
