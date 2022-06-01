@@ -245,7 +245,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
 						case 'ADMINISTRACION DIRECTA':
 					    ?>
-					    <option value="ADM DIRECTA" >ADM DIRECTA</option>
+					    <option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
 					    <?php
 							break;
 						case 'POR CONTRATA':
@@ -255,7 +255,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							break;
 						default:
 						?>
-						<option value="ADM DIRECTA" >ADM DIRECTA</option>
+						<option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
 						<option value="POR CONTRATA" >POR CONTRATA</option>
 						<?php
 							break;
@@ -266,12 +266,19 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
-					<option value="" disabled selected="true">Estructura de Presupuesto</option>
+				<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
-						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) {
 						?>
 						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php }} ?>
+					<?php }if ($expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+						if (strpos($value->desc_presupuesto_ej,'ADMINISTRACION DIRECTA') !== false) {
+						?>
+						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
+					<?php } else{
+						?>
+						<option value="<?=$value->id_presupuesto_ej?>" hidden><?=$value->desc_presupuesto_ej?></option>
+					<?php }}} ?>
 				</select>
 			</div>
 		</div>
@@ -292,7 +299,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
 						case 'ADMINISTRACION DIRECTA':
 					    ?>
-					    <option value="ADM DIRECTA" >ADM DIRECTA</option>
+					    <option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
 					    <?php
 							break;
 						case 'POR CONTRATA':
@@ -302,7 +309,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							break;
 						default:
 						?>
-						<option value="ADM DIRECTA" >ADM DIRECTA</option>
+						<option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
 						<option value="POR CONTRATA" >POR CONTRATA</option>
 						<?php
 							break;
@@ -313,12 +320,19 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control" >
-					<option value="" selected="true" disabled>Estructura de Presupuesto</option>
+				<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
-						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) {
 						?>
 						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php }} ?>
+					<?php }if ($expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
+						if (strpos($value->desc_presupuesto_ej,'ADMINISTRACION DIRECTA') !== false) {
+						?>
+						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
+					<?php } else{
+						?>
+						<option value="<?=$value->id_presupuesto_ej?>" hidden><?=$value->desc_presupuesto_ej?></option>
+					<?php }}} ?>
 				</select>
 			</div>
 		</div>
@@ -710,12 +724,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							option.text = element.Descripcion;
 							option.id = element.Id;
 							select.add(option);
-						}); 
-							
-						
-					
+						}); 	
 			}, false, true)
 		});
+
 		$("#selectPresupuestoEjecucion").change(function()
 		{
 			let Id_Presupuesto_Ej=$(this).find("option:selected").val();	
@@ -746,7 +758,21 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				console.log('costos directos');
 			}
 		});
-		
+
+		$("#selectTipoEjecucion").change(function()
+		{
+			const tipo_ejecucion=$(this).find("option:selected").val();
+			$('#selectPresupuestoEjecucion').find('option:contains("'+tipo_ejecucion+'")').show();
+			$('#selectPresupuestoEjecucion').find('option:not(:contains("'+tipo_ejecucion+'"))').hide();
+		});
+
+		$("#selectTipoEjecucionI").change(function()
+		{
+			const tipo_ejecucion=$(this).find("option:selected").val();
+			$('#selectPresupuestoEjecucionI').find('option:contains("'+tipo_ejecucion+'")').show();
+			$('#selectPresupuestoEjecucionI').find('option:not(:contains("'+tipo_ejecucion+'"))').hide();
+		});
+
 	function guardarCambiosComponente(idComponente)
 	{
 		if($('#nombreComponente'+idComponente).text().trim()=='')
