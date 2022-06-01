@@ -329,12 +329,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
 					<option value="" selected="true" disabled>Seleccione Componente</option>
 					<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) { 
-						if (strpos($texto, $elementoABuscar) !== false) { // false es cuendo encuentra entonces != de false es si encuentra
 						?>
 						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php }} ?>
+					<?php } ?>
 				</select>
-			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
@@ -686,9 +684,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		});
 		$("#selectPresupuestoEjecucion").change(function()
 		{
-			let Id_Presupuesto_Ej=$(this).find("option:selected").val();			
-			console.log(Id_Presupuesto_Ej);
-			paginaAjaxJSON(
+			let Id_Presupuesto_Ej=$(this).find("option:selected").val();	
+			if($(this).find("option:selected").text().includes('COSTOS INDIRECTOS')){
+				paginaAjaxJSON(
 				{ 
 				"Id_Presupuesto_Ej" : Id_Presupuesto_Ej ,
 				},
@@ -703,11 +701,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							option.text = element.desc_presupuesto_ej;
 							option.id = element.id_presupuesto_ej;
 							select.add(option);
-						}); 
-							
-						
-					
+						}); 	
 			}, false, true)
+			}
+			else{
+				console.log('costos directos');
+			}
 		});
 		
 	function guardarCambiosComponente(idComponente)
