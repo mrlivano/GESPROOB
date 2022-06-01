@@ -322,10 +322,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div class="col-md-5 col-sm-12 col-xs-12">
+		<div id="divTxtDescripcionComponente" class="col-md-5 col-sm-12 col-xs-12">
 			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
-		<div class="col-md-5 col-sm-12 col-xs-12">
+		<div id="divCargarSelectComponentePresupuesto" class="col-md-5 col-sm-12 col-xs-12">
 		<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
 					<option value="" selected="true" disabled>Seleccione Componente</option>
 					<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) { 
@@ -703,8 +703,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							select.add(option);
 						}); 	
 			}, false, true)
+				$("#divCargarSelectComponentePresupuesto").show();
+				$("#divTxtDescripcionComponente").hide();
 			}
 			else{
+				$("#divCargarSelectComponentePresupuesto").hide();
+				$("#divTxtDescripcionComponente").show();
 				console.log('costos directos');
 			}
 		});
@@ -1321,6 +1325,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 	$(function()
 	{
+		$("#divCargarSelectComponentePresupuesto").hide();
+				$("#divTxtDescripcionComponente").show();
 		limpiarArbolCompletoMasOpciones();
 
 		$('#selectBuscarPartida').selectpicker({ liveSearch: true }).ajaxSelectPicker(
