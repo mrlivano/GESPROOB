@@ -39,7 +39,7 @@
 			<table style="width: 100%;">
 				<tr>
 					<td style="width: 75px;">
-						<img style="width: 60px;" src="/assets/images/peru.jpg">
+						<img style="width: 60px;" src="./assets/images/peru.jpg">
 					</td>
 					<td id="header_texto">
 						<div style="text-align: center;"><b>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</b></div>
@@ -47,7 +47,7 @@
 						
 					</td>
 					<td style="width: 75px;">
-						<img style="width: 60px;" src="/assets/images/logoUniq.png">
+						<img style="width: 60px;" src="./assets/images/logoUniq.png">
 					</td>
 				</tr>
 			</table>
