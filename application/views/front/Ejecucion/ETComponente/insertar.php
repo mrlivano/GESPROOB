@@ -266,7 +266,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
-					<option value="">Estructura de Presupuesto</option>
+					<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
 						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
 						?>
@@ -312,8 +312,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
-				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
-					<option value="">Estructura de Presupuesto</option>
+				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control" >
+					<option value="" selected="true" disabled>Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
 						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
 						?>
@@ -323,6 +323,17 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 		<div class="col-md-5 col-sm-12 col-xs-12">
+			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
+		</div>
+		<div class="col-md-5 col-sm-12 col-xs-12">
+		<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
+					<option value="" selected="true" disabled>Seleccione Componente</option>
+					<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) { 
+						if (strpos($texto, $elementoABuscar) !== false) { // false es cuendo encuentra entonces != de false es si encuentra
+						?>
+						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
+					<?php }} ?>
+				</select>
 			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
 		<div class="col-md-2 col-sm-12 col-xs-12">
@@ -666,6 +677,31 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							var option = document.createElement("option");
 							option.text = element.Descripcion;
 							option.id = element.Id;
+							select.add(option);
+						}); 
+							
+						
+					
+			}, false, true)
+		});
+		$("#selectPresupuestoEjecucion").change(function()
+		{
+			let Id_Presupuesto_Ej=$(this).find("option:selected").val();			
+			console.log(Id_Presupuesto_Ej);
+			paginaAjaxJSON(
+				{ 
+				"Id_Presupuesto_Ej" : Id_Presupuesto_Ej ,
+				},
+				base_url+'index.php/ET_Componente/cargarSelectComponentePresupuesto',
+				 'POST', null, function(objectJSON)
+				{
+					resultado=JSON.parse(objectJSON);
+					let select = document.getElementsByName("cargarSelectComponentePresupuesto")[0];
+					$("#cargarSelectComponentePresupuesto").find('option').not(':first').remove();
+						resultado.data.forEach(element => {
+							var option = document.createElement("option");
+							option.text = element.desc_presupuesto_ej;
+							option.id = element.id_presupuesto_ej;
 							select.add(option);
 						}); 
 							
