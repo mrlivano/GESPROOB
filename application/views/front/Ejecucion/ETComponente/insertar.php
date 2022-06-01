@@ -507,8 +507,40 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 			return;
 		}
+		
+		if($('#selectPresupuestoEjecucion').find("option:selected").text().includes('COSTOS INDIRECTOS')){
+			paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), "tipoEjecucion" : $('#selectTipoEjecucion').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
+		{
+			objectJSON=JSON.parse(objectJSON);
 
-		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), "tipoEjecucion" : $('#selectTipoEjecucion').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
+			swal(
+			{
+				title: '',
+				text: objectJSON.mensaje,
+				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+			},
+			function(){});
+
+			if(objectJSON.proceso=='Error')
+			{
+				return false;
+			}
+
+			var htmlTemp='<li>'+
+				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
+					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
+				htmlTemp+='<ul></ul></li>';
+
+
+			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
+
+			$('#txtDescripcionComponente').val('');
+
+			limpiarArbolCompletoMasOpciones();
+		}, false, true);
+			}
+			else{
+				paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), "tipoEjecucion" : $('#selectTipoEjecucion').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
 		{
 			objectJSON=JSON.parse(objectJSON);
 
@@ -537,6 +569,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 			limpiarArbolCompletoMasOpciones();
 		}, false, true);
+			}
+		
 	}
 	function importarComponente()
 	{
