@@ -146,7 +146,7 @@ class ET_Componente extends CI_Controller
 
 	public function cargarSelectComponentePresupuesto(){
 		$Id_Presupuesto_Ej=$this->input->post('Id_Presupuesto_Ej');
-		$selectComponentePresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarComponente($Id_Presupuesto_Ej);
+		$selectComponentePresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarColistarComponentePresupuestoEjmponente($Id_Presupuesto_Ej);
 		echo json_encode(['data' => $selectComponentePresupuesto]);exit;
 	}
 
