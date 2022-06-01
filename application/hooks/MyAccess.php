@@ -850,6 +850,7 @@ function autorizar($url)
       'ET_Meta/insertar',
       'ET_Componente/eliminar',
       'ET_Componente/cargarSelectSubPresupuesto',
+      'ET_Componente/cargarSelectComponentePresupuesto',
       'ET_Componente/cargarMetaS10',
       'ET_Meta/editarDescMeta',
       'ET_Meta/eliminar',
