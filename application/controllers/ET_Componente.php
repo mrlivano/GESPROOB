@@ -167,6 +167,23 @@ class ET_Componente extends CI_Controller
 		echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente.']);exit;
 	}
 
+	public function editarMontoComponente()
+	{
+		$idComponente=$this->input->post('idComponente');
+		$montoComponente=$this->input->post('montoComponente');
+		// aqui se puede evaluar si es numerico o no
+		// if($this->Model_ET_Componente->existsDiffIdComponenteAndSameDescripcion($idComponente, $descripcionComponente))
+		// {
+		// 	$this->db->trans_rollback();
+
+		// 	echo json_encode(['proceso' => 'Error', 'mensaje' => 'Nombre del componente existente.']);exit;
+		// }
+
+		$this->Model_ET_Componente->updateMontoComponente($idComponente, $montoComponente);
+
+		echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente.']);exit;
+	}
+
 	private function obtenerMetaAnidada($meta)
 	{
 		$temp=$this->Model_ET_Meta->ETMetaPorIdMetaPadre($meta->id_meta);

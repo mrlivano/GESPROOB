@@ -103,6 +103,13 @@ class Model_ET_Componente extends CI_Model
 		return true;
 	}
 
+	function updateMontoComponente($idComponente, $montoComponente)
+	{
+		$this->db->query("update ET_COMPONENTE set monto='".$montoComponente."' where id_componente=".$idComponente);
+
+		return true;
+	}
+
 	public function updateNumeracionPorIdComponente($idComponente, $numeracion)
 	{
 		$this->db->query("update ET_COMPONENTE set numeracion='".$numeracion."' where id_componente=".$idComponente);

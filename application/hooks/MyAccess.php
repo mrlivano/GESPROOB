@@ -846,7 +846,7 @@ function autorizar($url)
       'ET_Per_Req/asignarPersonal',
       'ET_Per_Req/eliminar',
       'ET_Per_Req/insertar',
-      'ET_Componente/editarDescComponente',
+      'ET_Componente/editarMontoComponente',
       'ET_Meta/insertar',
       'ET_Componente/eliminar',
       'ET_Componente/cargarSelectSubPresupuesto',
