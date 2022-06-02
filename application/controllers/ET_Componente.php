@@ -173,16 +173,16 @@ class ET_Componente extends CI_Controller
 		$montoComponente=$this->input->post('montoComponente');
 		//aqui se puede evaluar si es numerico o no
 		if (is_numeric($montoComponente)) {
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente']);exit;
+			$this->Model_ET_Componente->updateMontoComponente($idComponente, $montoComponente);
+
+		echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente.']);exit;
 		} else {
 			$this->db->trans_rollback();
 
 			echo json_encode(['proceso' => 'Error', 'mensaje' => 'Ingrese Ingrese un monto valido.']);exit;
 		}
 
-		$this->Model_ET_Componente->updateMontoComponente($idComponente, $montoComponente);
-
-		echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente.']);exit;
+		
 	}
 
 	private function obtenerMetaAnidada($meta)
