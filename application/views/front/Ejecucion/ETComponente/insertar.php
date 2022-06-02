@@ -443,7 +443,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 												<li>
 													<?php if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){?>
 														<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
+														<?php if (strpos($temp3->desc_presupuesto_ej,'COSTOS INDIRECTOS') !== false) {?>
+														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
+														<?php } else{?>
 														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
+														<?php }?>
 														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
 													<?php } else {?>
 														<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
@@ -542,7 +546,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 			var htmlTemp='<li>'+
 				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
-					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
+					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
 				htmlTemp+='<ul></ul></li>';
 
 
@@ -1070,6 +1074,65 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				$($(elementoPadre).find('ul')[0]).append(htmlTemp);
 
 				limpiarArbolCompletoMasOpciones();
+			}, false, true);
+		});
+	}
+	function agregarMonto(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion)
+	{
+		if($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length>0)
+		{
+			swal(
+			{
+				title: '',
+				text: 'No se puede agregar submeta al mismo nivel que una partida.',
+				type: 'error'
+			},
+			function(){});
+
+			return;
+		}
+
+		var descripcionMeta = '';
+		let inputValue = 345.67
+		swal({
+			
+			title: "",
+			text: "Agregar Monto",
+			type: "input",
+			showCancelButton: true,
+			cancelButtonText:"CERRAR",
+			confirmButtonText: "AGREGAR",
+			closeOnConfirm: false,
+		 	inputPlaceholder: "",
+		}, 
+		function (inputValue)
+		{
+			
+		  	if (inputValue === false) return false;
+		  	if (inputValue === "")
+		  	{
+		    	swal.showInputError("Ingrese el Monto Por favor");
+		    	return false
+		  	}
+
+		  	Monto = inputValue;
+
+			paginaAjaxJSON({ "idComponente" : idComponente, "montoComponente" : Monto}, base_url+'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON)
+			{
+				objectJSON=JSON.parse(objectJSON);
+
+				swal(
+				{
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+				},
+				function(){});
+
+				if(objectJSON.proceso=='Error')
+				{
+					return false;
+				}
 			}, false, true);
 		});
 	}
@@ -1615,4 +1678,17 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			}
 		});
 	});
+	function valideKey(evt){
+			
+			// code is the decimal ASCII representation of the pressed key.
+			var code = (evt.which) ? evt.which : evt.keyCode;
+			
+			if(code==46) { // backspace.
+			  return true;
+			} else if(code>=48 && code<=57) { // is a number.
+			  return true;
+			} else{ // other keys.
+			  return false;
+			}
+		}
 </script>
