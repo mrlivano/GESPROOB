@@ -445,11 +445,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 														<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
 														<?php if (strpos($temp3->desc_presupuesto_ej,'COSTOS INDIRECTOS') !== false) {?>
 														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
+														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - </b><b style="text-transform: uppercase; color: black;" id="montoComponente<?=$value->id_componente?>" ><?=number_format($value->monto, 4, '.', ',')?></b>
 														<?php } else{?>
 														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
-														<?php }?>
 														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
-													<?php } else {?>
+														<?php }?>
+														<?php } else {?>
 														<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
 													<?php }?>
 													<ul>
@@ -1079,21 +1080,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	}
 	function agregarMonto(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion)
 	{
-		if($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length>0)
-		{
-			swal(
-			{
-				title: '',
-				text: 'No se puede agregar submeta al mismo nivel que una partida.',
-				type: 'error'
-			},
-			function(){});
-
-			return;
-		}
 
 		var descripcionMeta = '';
-		let inputValue = 345.67
 		swal({
 			
 			title: "",
@@ -1133,9 +1121,17 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				{
 					return false;
 				}
+				const montoF = separator(Monto);
+				$('#montoComponente'+idComponente).text(montoF);
 			}, false, true);
 		});
 	}
+
+	function separator(numb) {
+    var str = numb.toString().split(".");
+    str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return str.join(".");
+}
 
 	function importarMeta(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion,meta)
 	{
