@@ -3,6 +3,11 @@
 	{
 		margin-top: 4px;
 	}
+	.borderBudget
+	{
+		border: 1px solid #E6E9ED;
+		padding-bottom: 12px;
+	}
 </style>
 
 <form class="form-horizontal" id="form-EditarExpedienteTecnico" action="<?php echo base_url();?>index.php/Expediente_Tecnico/editar" method="POST" enctype="multipart/form-data" >
@@ -91,8 +96,11 @@
 					    	</div>
 					  	</div>
 					</div>
-
-					<div class="row">
+					<div>
+					<?php foreach ($listaModalidadEjecucion as $key => $value) { 
+						if(($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $ExpedienteTecnicoM->modalidad_ejecucion_et!='MIXTO') || ($ExpedienteTecnicoM->modalidad_ejecucion_et=='MIXTO' && $ExpedienteTecnicoM->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)){?>
+						  <label class="control-label"><?=	$value->nombre_modalidad_ejec?></label>	
+							<div class="row borderBudget">
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Costo Total (Inversión)*</label>
 							<div>
@@ -105,59 +113,17 @@
 								<input id="txtCostoDirectoInversion" name="txtCostoDirectoInversion" value="<?= a_number_format($ExpedienteTecnicoM->costo_directo_inv_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
 						</div>
+						<?php foreach ($costoIndirectoComponente as $key => $componente) { 
+						if($value->nombre_modalidad_ejec == $componente->tipo_ejecucion){?>
 						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">Gastos generales*</label>
+							<label class="control-label"><?=$componente->descripcion?></label>
 							<div>
-								<input id="txtGastosGenerales" name="txtGastosGenerales" value="<?= a_number_format($ExpedienteTecnicoM->gastos_generales_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
+								<input value ="<?= a_number_format($componente->monto , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto" autocomplete="off" maxlength="40" disabled>
 							</div>
 						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">Gastos de supervisión*</label>
-							<div>
-								<input id="txtGastosSupervision" name="txtGastosSupervision" value ="<?= a_number_format($ExpedienteTecnicoM->gastos_supervision_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3 col-sm-6 col-xs-12" id="divUtilidad">
-							<label class="control-label">Utilidad*</label>
-							<div>
-								<input id="txtCostoUtilidad" name="txtCostoUtilidad" value="<?=a_number_format($ExpedienteTecnicoM->costo_utilidad , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Utilidad" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="divIGV">
-							<label class="control-label">IGV*</label>
-							<div>
-								<input id="txtCostoIGV" name="txtCostoIGV" value="<?= a_number_format($ExpedienteTecnicoM->costo_IGV , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="IGV"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="divAdministracion">
-							<label class="control-label">Administracion de Contratos*</label>
-							<div>
-								<input id="txtCostoAdministracion" name="txtCostoAdministracion" value="<?= a_number_format($ExpedienteTecnicoM->costo_administracion_contratos , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-						
-						<div class="col-md-3 col-sm-6 col-xs-12" id="divLiquidacion">
-							<label class="control-label">Liquidacion*</label>
-							<div>
-								<input id="txtCostoLiquidacion" name="txtCostoLiquidacion" value ="<?= a_number_format($ExpedienteTecnicoM->costo_liquidacion , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Liquidacion" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-					
-						<div class="col-md-3 col-sm-6 col-xs-12" id="divElaboracionET">
-							<label class="control-label">Elaboracion de Expediente Tecnico*</label>
-							<div>
-								<input id="txtCostoElaboracionET" name="txtCostoElaboracionET" value="<?=a_number_format($ExpedienteTecnicoM->costo_elaboracion_ET , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Elaboracion de Exp. Tecnico" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="divSupervisionET">
-							<label class="control-label">Supervision de Expediente Tecnico*</label>
-							<div>
-								<input id="txtCostoSupervisionET" name="txtCostoSupervisionET" value="<?= a_number_format($ExpedienteTecnicoM->costo_supervision_ET , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Supervision de Exp. Tecnico"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-						
+						<?php }} ?>
+					</div>      								      			
+					<?php }} ?>
 					</div>				
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
@@ -181,25 +147,11 @@
 					</div>					
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Componente*</label>
-							<div>
-								<input id="txtComponente" name="txtComponente" value="<?= $ExpedienteTecnicoM->componente_et?>" class="form-control col-md-4 col-xs-12"  placeholder="Componente" autocomplete="off" maxlength="200" >
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Meta*</label>
-							<div>
-								<input id="txtMeta" name="txtMeta" value="<?= $ExpedienteTecnicoM->meta_et?>" class="form-control col-md-4 col-xs-12"  placeholder="Meta"  autocomplete="off" maxlength="200" >
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Tiempo de Ejecución del Proyecto* (Meses)</label>
 							<div>
 								<input maxlength="3" id="txtTiempoEjecucionPip" name="txtTiempoEjecucionPip" value="<?= $ExpedienteTecnicoM->tiempo_ejecucion_pi_et?>" class="form-control col-md-4 col-xs-12"  placeholder="Tiempo de Ejecución" autocomplete="off" maxlength="100" >
 							</div>
-						</div>
-					</div>
-					<div class="row">						
+						</div>					
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Num Beneficiarios Indirectos*</label>
 							<div>
@@ -222,8 +174,9 @@
 					</div>
 
 					<div class="row">						
-					<div class="col-md-4 col-sm-4 col-xs-12" style="display:none;">
-							<label class="control-label">Tipo de Responsable:</label>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+					<label class="control-label">Responsables de Elaboración de Expediente</label>
+					<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Elaboración" class='btn btn-primary btn-xs' onclick="paginaAjaxDialogo(null, 'Agregar Presupuesto de Ejecución', { id_et: '<?=$ExpedienteTecnicoM->id_et?>' }, base_url+'index.php/Expediente_Tecnico/insertarResponsableElaboracion', 'GET', null, null, false, true);"><i class='fa fa-plus'></i> Agregar</button>
 					    	<div class="form-group">
 						      	<select class="selectpicker form-control" id="comboTipoResponsableElaboracion" name="comboTipoResponsableElaboracion" data-live-search="true">
 									<?php foreach ($listaTipoResponsableElaboracion as $key => $item) { ?>

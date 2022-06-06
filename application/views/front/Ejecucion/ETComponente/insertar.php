@@ -433,7 +433,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 									?>                
                 <div class="panel">
                     <div class="panel-heading" style="padding: 6px;">
-                        <a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?>
+                        <a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?> <?=$temp3->costoPresupuestoIndirecto?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?>
                         </a>
                     </div>
                     <div id="collapse<?=$temp3->id_presupuesto_ej?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?=$temp3->id_presupuesto_ej?>">
