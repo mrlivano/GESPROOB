@@ -1518,19 +1518,19 @@
 																<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
 																</a>
-																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/formatoFE12?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia / Alquilada" href="<?= site_url('Expediente_Tecnico/formatoFE12?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-12</span>
 																</a>
-																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Mayores Metrados" href="<?= site_url('Expediente_Tecnico/formatoFE13?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Acta de terminación de Obra" href="<?= site_url('Expediente_Tecnico/formatoFE13?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-13</span>
 																</a>
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/formatoFE14?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Memoria Descriptiva Valorizada" href="<?= site_url('Expediente_Tecnico/formatoFE14?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-14</span>
 																</a>
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/formatoFE15?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Aporte" href="<?= site_url('Expediente_Tecnico/formatoFE15?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-15</span>
 																</a>
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/formatoFE16?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Avance de Obra Valorizado" href="<?= site_url('Expediente_Tecnico/formatoFE16?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-16</span>
 																</a>
 

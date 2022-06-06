@@ -20,6 +20,7 @@ class ET_Componente extends CI_Controller
 		$this->load->model('Model_ET_Detalle_Analisis_Unitario');
 		$this->load->model('Model_ET_Insumo');
 		$this->load->model('Model_ET_Recurso_Insumo');
+		$this->load->model('Model_ModalidadE');
 	}
 
 	private function updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico, $idPresupuestoEjecucion, $estado)
@@ -102,6 +103,7 @@ class ET_Componente extends CI_Controller
 		$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
 		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucion();
+		$listaModalidadEjecucion=$this->Model_ModalidadE->GetModalidadE();
 
 		$expedienteTecnico->childPresupuestoEjecucion=$PresupuestoEjecucion;
 
@@ -130,7 +132,15 @@ class ET_Componente extends CI_Controller
 			$value->costoPresupuestoDirecto = $costoPresupuestoDirecto;
 			$value->costoPresupuestoIndirecto = $costoPresupuestoIndirecto;
 		}		
-
+		foreach($expedienteTecnico->childPresupuestoEjecucion as $key => $value)
+		{
+			if(strpos($value->desc_presupuesto_ej, 'COSTOS INDIRECTOS')){
+				$presupuesto_ej = explode('-', $value->desc_presupuesto_ej)[0].'- COSTOS DIRECTOS';
+				$presup = array_column($expedienteTecnico->childPresupuestoEjecucion, 'desc_presupuesto_ej');
+				$key = array_search($presupuesto_ej, $presup);
+				$value->costoPresupuestoDirecto = $expedienteTecnico->childPresupuestoEjecucion[$key]->costoPresupuestoDirecto;
+			}
+		}
 		$listaPartidaNivel1 = $this->Model_Unidad_Medida->listaPartidaNivel1();
 
 		foreach ($listaPartidaNivel1 as $key => $value) 
@@ -140,7 +150,7 @@ class ET_Componente extends CI_Controller
 
 		$selectPresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarPresupuesto($expedienteTecnico->codigo_unico_pi);
 
-		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico, 'listaUnidadMedida'=>$listaUnidadMedida,'listaPartidaNivel1'=>$listaPartidaNivel1,'PresupuestoEjecucion'=>$PresupuestoEjecucion,"SelectPresupuesto"=>$selectPresupuesto]);
+		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico, 'listaUnidadMedida'=>$listaUnidadMedida,'listaPartidaNivel1'=>$listaPartidaNivel1,'PresupuestoEjecucion'=>$PresupuestoEjecucion,"SelectPresupuesto"=>$selectPresupuesto,'listaModalidadEjecucion'=>$listaModalidadEjecucion]);
 	}
 	public function cargarSelectSubPresupuesto(){
 		$Codigo_Presupuesto=$this->input->post('Codigo_Presupuesto');
@@ -175,10 +185,11 @@ class ET_Componente extends CI_Controller
 	public function editarMontoComponente()
 	{
 		$idComponente=$this->input->post('idComponente');
+		$porcentaje=$this->input->post('porcentaje');
 		$montoComponente=$this->input->post('montoComponente');
 		//aqui se puede evaluar si es numerico o no
 		if (is_numeric($montoComponente)) {
-			$this->Model_ET_Componente->updateMontoComponente($idComponente, $montoComponente);
+			$this->Model_ET_Componente->updateMontoComponente($idComponente,$porcentaje,$montoComponente);
 
 		echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente.']);exit;
 		} else {
