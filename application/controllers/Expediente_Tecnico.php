@@ -2936,14 +2936,22 @@ class Expediente_Tecnico extends CI_Controller
 						$id_tipo_responsableElabo='2';
 						$comboResponsableElaboracion =$this->input->post('comboResponsableElaboracion');
 						$comboCargoElaboracion =$this->input->post('comboCargoElaboracion');
-
 						if($comboResponsableElaboracion!='')
 						{
-							$this->Model_ET_Responsable->insertarET_Epediente($hdIdExpediente,$comboResponsableElaboracion,$id_tipo_responsableElabo,$comboCargoElaboracion);
-							$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
+							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersona($hdIdExpediente,$comboResponsableElaboracion);
+							if(count($responsable)>0){
+								$msg =(['proceso' => 'Error', 'mensaje' => 'Responsable ya se encuentra registrado en la elaboración de expediente']);
+								echo json_encode($msg);exit;
+							}
+						  else{
+								$this->Model_ET_Responsable->insertarET_Epediente($hdIdExpediente,$comboResponsableElaboracion,$id_tipo_responsableElabo,$comboCargoElaboracion);
+								$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
+								echo json_encode($msg);exit;
+							}
 						}
 						else{
 							$msg =(['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']);
+							echo json_encode($msg);exit;
 						}               
             
             echo json_encode($msg);exit;

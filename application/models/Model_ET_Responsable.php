@@ -72,4 +72,9 @@ class Model_ET_Responsable extends CI_Model
         return $data->result(); 
     }
 
+    function ResponsableIdETPersona($id_et, $id_persona){
+        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona'");
+        return $data->result(); 
+    }
+
 }
