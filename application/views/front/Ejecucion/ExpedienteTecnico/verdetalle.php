@@ -165,6 +165,24 @@
 											<div class="x_content">
 												<div style="padding-top:20px;padding-bottom:20px;">
 													<ul class="list-unstyled timeline">
+													<li>
+															<div class="block">
+																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Modalidad de Ejecución',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/modalidad', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Modalidad de Ejecución</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Modalidad de Ejecución',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/modalidad', 'GET', null, null, false, true);return false;">1.- Modalidad de Ejecución</a>
+																	</h2>
+																	<div class="byline">
+																		<span></span> <a></a>
+																	</div>
+																	<p class="excerpt">Se debe definir la modalidad de ejecución del Expediente.</p>
+																</div>
+															</div>
+														</li>
 														<li>
 															<div class="block">
 																<div class="tags">

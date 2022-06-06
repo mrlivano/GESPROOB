@@ -669,6 +669,7 @@ function autorizar($url)
       'Expediente_Tecnico/verdetalle',  // Expediente_Tecnico/verdetalle?id=variable
       'ProyectoInversion/ReporteBuscadorPorPip',
       'Expediente_Tecnico/editar',
+      'Expediente_Tecnico/modalidad',
       'ET_Responsable/insertar',
       'ET_Responsable/eliminar',
       'ET_Responsable/asignarPersonal',
