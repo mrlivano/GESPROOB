@@ -221,24 +221,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
-					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
-						case 'ADMINISTRACION DIRECTA':
-					?>
-							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
-						<?php
-							break;
-						case 'POR CONTRATA':
-						?>
-							<option value="POR CONTRATA">POR CONTRATA</option>
-						<?php
-							break;
-						default:
-						?>
-							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
-							<option value="POR CONTRATA">POR CONTRATA</option>
-					<?php
-							break;
-					} ?>
+				<option value="">Seleccione una opción</option>
+									<?php foreach ($listaModalidadEjecucion as $key => $value) { if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et =='MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec )) {									 ?>
+						      			<option  value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
+						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
+						      		<?php }} ?>
 				</select>
 			</div>
 		</div>
@@ -278,24 +265,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
-					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
-						case 'ADMINISTRACION DIRECTA':
-					?>
-							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
-						<?php
-							break;
-						case 'POR CONTRATA':
-						?>
-							<option value="POR CONTRATA">POR CONTRATA</option>
-						<?php
-							break;
-						default:
-						?>
-							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
-							<option value="POR CONTRATA">POR CONTRATA</option>
-					<?php
-							break;
-					} ?>
+				<option value="">Seleccione una opción</option>
+									<?php foreach ($listaModalidadEjecucion as $key => $value) { if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et =='MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec )) {									 ?>
+						      			<option  value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
+						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
+						      		<?php }} ?>
 				</select>
 			</div>
 		</div>
@@ -416,7 +390,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				?>
 						<div class="panel">
 							<div class="panel-heading" style="padding: 6px;">
-							<a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?> <?=strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS')?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?>							<a class="panel-title" id="heading<?= $temp3->id_presupuesto_ej ?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $temp3->id_presupuesto_ej ?>" aria-expanded="false" aria-controls="collapse<?= $temp3->id_presupuesto_ej ?>" style="text-transform: uppercase;"><?= $temp3->desc_presupuesto_ej ?> <?= $temp3->costoPresupuestoIndirecto ? number_format($temp3->costoPresupuestoIndirecto, 4, '.', ',') : number_format($temp3->costoPresupuestoDirecto, 4, '.', ',') ?>
+							<a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?> <?=strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS')?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?>
 								</a>
 								<input type="hidden" name="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirecto ?>">
 							</div>

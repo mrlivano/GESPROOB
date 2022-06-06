@@ -20,6 +20,7 @@ class ET_Componente extends CI_Controller
 		$this->load->model('Model_ET_Detalle_Analisis_Unitario');
 		$this->load->model('Model_ET_Insumo');
 		$this->load->model('Model_ET_Recurso_Insumo');
+		$this->load->model('Model_ModalidadE');
 	}
 
 	private function updateNumerationComponentPresupuestoEjecucion($idExpedienteTecnico, $idPresupuestoEjecucion, $estado)
@@ -102,6 +103,7 @@ class ET_Componente extends CI_Controller
 		$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
 		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucion();
+		$listaModalidadEjecucion=$this->Model_ModalidadE->GetModalidadE();
 
 		$expedienteTecnico->childPresupuestoEjecucion=$PresupuestoEjecucion;
 
@@ -148,7 +150,7 @@ class ET_Componente extends CI_Controller
 
 		$selectPresupuesto = $this->Model_ET_Presupuesto_Ejecucion->listarPresupuesto($expedienteTecnico->codigo_unico_pi);
 
-		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico, 'listaUnidadMedida'=>$listaUnidadMedida,'listaPartidaNivel1'=>$listaPartidaNivel1,'PresupuestoEjecucion'=>$PresupuestoEjecucion,"SelectPresupuesto"=>$selectPresupuesto]);
+		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico, 'listaUnidadMedida'=>$listaUnidadMedida,'listaPartidaNivel1'=>$listaPartidaNivel1,'PresupuestoEjecucion'=>$PresupuestoEjecucion,"SelectPresupuesto"=>$selectPresupuesto,'listaModalidadEjecucion'=>$listaModalidadEjecucion]);
 	}
 	public function cargarSelectSubPresupuesto(){
 		$Codigo_Presupuesto=$this->input->post('Codigo_Presupuesto');
