@@ -103,9 +103,9 @@ class Model_ET_Componente extends CI_Model
 		return true;
 	}
 
-	function updateMontoComponente($idComponente, $montoComponente)
+	function updateMontoComponente($idComponente,$porcentaje, $montoComponente)
 	{
-		$this->db->query("update ET_COMPONENTE set monto='".$montoComponente."' where id_componente=".$idComponente);
+		$this->db->query("update ET_COMPONENTE set monto='".$montoComponente."' , porcentaje='".$porcentaje."' where id_componente=".$idComponente);
 
 		return true;
 	}

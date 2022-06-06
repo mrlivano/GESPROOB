@@ -1,338 +1,323 @@
 <?php
 function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion, $expedienteTecnico)
 {
-	$htmlTemp='';
-	if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){
-		$htmlTemp.='<li class="listaNivel'.$meta->nivel.'">';
-		$htmlTemp.='<input type="button" title="Guardar Cambios" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosMeta('.$meta->id_meta.');" style="width: 30px;">
-			<input type="button" title="Eliminar Meta" class="btn btn-default btn-xs" value="-" onclick="eliminarMeta('.$meta->id_meta.', this);" style="width: 30px;">
-			<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
+	$htmlTemp = '';
+	if (!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et != 3) {
+		$htmlTemp .= '<li class="listaNivel' . $meta->nivel . '">';
+		$htmlTemp .= '<input type="button" title="Guardar Cambios" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosMeta(' . $meta->id_meta . ');" style="width: 30px;">
+			<input type="button" title="Eliminar Meta" class="btn btn-default btn-xs" value="-" onclick="eliminarMeta(' . $meta->id_meta . ', this);" style="width: 30px;">
+			<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo' . $meta->id_meta . '"><i class="fa fa-expand"></i></button>';
 
-			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '.$meta->id_meta.', '.($meta->nivel+1).', '.$idPresupuestoEjecucion.')" style="width: 30px;">';
+		$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), ' . $meta->id_meta . ', ' . ($meta->nivel + 1) . ', ' . $idPresupuestoEjecucion . ')" style="width: 30px;">';
 
-			$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '.$meta->id_meta.','.$idPresupuestoEjecucion.')" style="width: 30px;">';
+		$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), ' . $meta->id_meta . ',' . $idPresupuestoEjecucion . ')" style="width: 30px;">';
 
-			if($idPresupuestoEjecucion==16 && $meta->nivel==1)
-			{
-				$htmlTemp.='<input type="button" class="btn btn-default btn-xs" title="Agregar Clasificador" value="+C" onclick="paginaAjaxDialogo(\'clasificadorMeta\', \'Asociar a Clasificador\', { idET : '.$idExpedienteTecnico.', idMeta : '.$meta->id_meta.'}, \''.base_url().'index.php/ET_Meta_Analitico/insertar\', \'get\', null, null, false, true);" style="width: 30px;" style="width: 30px;">';
-			}
-
-			$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'" contenteditable>'.html_escape($meta->numeracion).' '.html_escape($meta->desc_meta).' - '.number_format($meta->costoMeta, 4, '.', ',').'</span>'.
-			((count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
-
-		if(count($meta->childMeta)==0)
-		{
-			foreach($meta->childPartida as $key => $value)
-			{
-				$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
-					'<td>'.
-						'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('.$value->id_partida.');" style="width: 30px;">'.
-						'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
-						if($idPresupuestoEjecucion==2)
-						{
-							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - '.html_escape($value->desc_partida).' \', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-						}
-						else
-						{
-							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-						}
-						
-					$htmlTemp.='</td>'.
-					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
-					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
-					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'.number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
-					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
-				'</tr>';
-			}
+		if ($idPresupuestoEjecucion == 16 && $meta->nivel == 1) {
+			$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" title="Agregar Clasificador" value="+C" onclick="paginaAjaxDialogo(\'clasificadorMeta\', \'Asociar a Clasificador\', { idET : ' . $idExpedienteTecnico . ', idMeta : ' . $meta->id_meta . '}, \'' . base_url() . 'index.php/ET_Meta_Analitico/insertar\', \'get\', null, null, false, true);" style="width: 30px;" style="width: 30px;">';
 		}
-		else{
-			foreach($meta->childPartida as $key => $value)
-			{
-				$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
-					'<td>'.
-						'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('.$value->id_partida.');" style="width: 30px;">'.
-						'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('.$value->id_partida.', this);" style="width: 30px;">';
 
-							$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.',  id_etapa_et :'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-						
-					$htmlTemp.='</td>'.
-					'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'" contenteditable>'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
-					'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-					'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'" contenteditable>'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
-					'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'" contenteditable>'. number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
-					$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
-				'</tr>';
+		$htmlTemp .= '<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta' . $meta->id_meta . '" contenteditable>' . html_escape($meta->numeracion) . ' ' . html_escape($meta->desc_meta) . ' - ' . number_format($meta->costoMeta, 4, '.', ',') . '</span>' .
+			((count($meta->childPartida)) > 0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo' . $meta->id_meta . '" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
+
+		if (count($meta->childMeta) == 0) {
+			foreach ($meta->childPartida as $key => $value) {
+				$htmlTemp .= '<tr id="rowPartida' . $value->id_partida . '" style="color: ' . ($value->partidaCompleta ? 'blue' : 'red') . ';" class="liPartida">' .
+					'<td>' .
+					'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida(' . $value->id_partida . ');" style="width: 30px;">' .
+					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida(' . $value->id_partida . ', this);" style="width: 30px;">';
+				if ($idPresupuestoEjecucion == 2) {
+					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - ' . html_escape($value->desc_partida) . ' \', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ',  id_etapa_et :' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				} else {
+					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				}
+
+				$htmlTemp .= '</td>' .
+					'<td style="text-transform: uppercase;"><span id="nombrePartida' . $value->id_partida . '" contenteditable>' . html_escape($value->numeracion) . ' ' . html_escape($value->desc_partida) . '</span></td>' .
+					'<td style="text-align: right; text-transform: uppercase;">' . html_escape($value->descripcion) . '</td>' .
+					'<td style="text-align: right;"><span id="cantidadPartida' . $value->id_partida . '" contenteditable>' . number_format($value->cantidad, 2, '.', '') . '</span></td>' .
+					'<td style="text-align: right;"><span id="precioUnitarioPartida' . $value->id_partida . '" contenteditable>' . number_format($value->precio_unitario, 4, '.', ',') . '</span></td>';
+				$htmlTemp .= '<td style="text-align: right;">' . number_format(@$value->parcial, 4, '.', ',') . '</td>' .
+					'</tr>';
 			}
-			$htmlTemp.=((count($meta->childPartida))>0 ? '</tbody></table></div><ul>' : '');
+		} else {
+			foreach ($meta->childPartida as $key => $value) {
+				$htmlTemp .= '<tr id="rowPartida' . $value->id_partida . '" style="color: ' . ($value->partidaCompleta ? 'blue' : 'red') . ';" class="liPartida">' .
+					'<td>' .
+					'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida(' . $value->id_partida . ');" style="width: 30px;">' .
+					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida(' . $value->id_partida . ', this);" style="width: 30px;">';
+
+				$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ',  id_etapa_et :' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+
+				$htmlTemp .= '</td>' .
+					'<td style="text-transform: uppercase;"><span id="nombrePartida' . $value->id_partida . '" contenteditable>' . html_escape($value->numeracion) . ' ' . html_escape($value->desc_partida) . '</span></td>' .
+					'<td style="text-align: right; text-transform: uppercase;">' . html_escape($value->descripcion) . '</td>' .
+					'<td style="text-align: right;"><span id="cantidadPartida' . $value->id_partida . '" contenteditable>' . number_format($value->cantidad, 2, '.', '') . '</span></td>' .
+					'<td style="text-align: right;"><span id="precioUnitarioPartida' . $value->id_partida . '" contenteditable>' . number_format($value->precio_unitario, 4, '.', ',') . '</span></td>';
+				$htmlTemp .= '<td style="text-align: right;">' . number_format(@$value->parcial, 4, '.', ',') . '</td>' .
+					'</tr>';
+			}
+			$htmlTemp .= ((count($meta->childPartida)) > 0 ? '</tbody></table></div><ul>' : '');
 		}
-   }
-   else {
-	$htmlTemp.='<li class="listaNivel'.$meta->nivel.'">';
-	$htmlTemp.='<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'.$meta->id_meta.'"><i class="fa fa-expand"></i></button>';
+	} else {
+		$htmlTemp .= '<li class="listaNivel' . $meta->nivel . '">';
+		$htmlTemp .= '<button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo' . $meta->id_meta . '"><i class="fa fa-expand"></i></button>';
 
-		$htmlTemp.='<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'.$meta->id_meta.'">'.html_escape($meta->numeracion).' '.html_escape($meta->desc_meta).' - '.number_format($meta->costoMeta, 4, '.', ',').'</span>'.
-		((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo'.$meta->id_meta.'" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
+		$htmlTemp .= '<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta' . $meta->id_meta . '">' . html_escape($meta->numeracion) . ' ' . html_escape($meta->desc_meta) . ' - ' . number_format($meta->costoMeta, 4, '.', ',') . '</span>' .
+			((count($meta->childMeta) == 0 && count($meta->childPartida)) > 0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo' . $meta->id_meta . '" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
 
-	if(count($meta->childMeta)==0)
-	{
-		foreach($meta->childPartida as $key => $value)
-		{
-			$htmlTemp.='<tr id="rowPartida'.$value->id_partida.'" style="color: '.($value->partidaCompleta ? 'blue' : 'red').';" class="liPartida">'.
-				'<td>';
-					if($idPresupuestoEjecucion==2)
-					{
-						$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.', aprobado :'.$expedienteTecnico->aprobado.', id_etapa_et:'.$expedienteTecnico->id_etapa_et.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-					}
-					else
-					{
-						$htmlTemp.='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-					}
-					
-				$htmlTemp.='</td>'.
-				'<td style="text-transform: uppercase;"><span id="nombrePartida'.$value->id_partida.'">'.html_escape($value->numeracion).' '.html_escape($value->desc_partida).'</span></td>'.
-				'<td style="text-align: right; text-transform: uppercase;">'.html_escape($value->descripcion).'</td>'.
-				'<td style="text-align: right;"><span id="cantidadPartida'.$value->id_partida.'">'.number_format($value->cantidad, 2, '.', '').'</span></td>'.
-				'<td style="text-align: right;"><span id="precioUnitarioPartida'.$value->id_partida.'">'.number_format($value->precio_unitario, 4, '.', ',').'</span></td>';
-				$htmlTemp.='<td style="text-align: right;">'. number_format(@$value->parcial, 4, '.', ',').'</td>'.
-			'</tr>';
+		if (count($meta->childMeta) == 0) {
+			foreach ($meta->childPartida as $key => $value) {
+				$htmlTemp .= '<tr id="rowPartida' . $value->id_partida . '" style="color: ' . ($value->partidaCompleta ? 'blue' : 'red') . ';" class="liPartida">' .
+					'<td>';
+				if ($idPresupuestoEjecucion == 2) {
+					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ', id_etapa_et:' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				} else {
+					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				}
+
+				$htmlTemp .= '</td>' .
+					'<td style="text-transform: uppercase;"><span id="nombrePartida' . $value->id_partida . '">' . html_escape($value->numeracion) . ' ' . html_escape($value->desc_partida) . '</span></td>' .
+					'<td style="text-align: right; text-transform: uppercase;">' . html_escape($value->descripcion) . '</td>' .
+					'<td style="text-align: right;"><span id="cantidadPartida' . $value->id_partida . '">' . number_format($value->cantidad, 2, '.', '') . '</span></td>' .
+					'<td style="text-align: right;"><span id="precioUnitarioPartida' . $value->id_partida . '">' . number_format($value->precio_unitario, 4, '.', ',') . '</span></td>';
+				$htmlTemp .= '<td style="text-align: right;">' . number_format(@$value->parcial, 4, '.', ',') . '</td>' .
+					'</tr>';
+			}
 		}
 	}
-   }
 
-	foreach($meta->childMeta as $key => $value)
-	{
-		$htmlTemp.=mostrarMetaAnidada($value, $idExpedienteTecnico,$idPresupuestoEjecucion, $expedienteTecnico);
+	foreach ($meta->childMeta as $key => $value) {
+		$htmlTemp .= mostrarMetaAnidada($value, $idExpedienteTecnico, $idPresupuestoEjecucion, $expedienteTecnico);
 	}
 
-	$htmlTemp.=((count($meta->childMeta)==0 && count($meta->childPartida))>0 ? '</tbody></table></div>' : '</ul>').
-	'</li>';
+	$htmlTemp .= ((count($meta->childMeta) == 0 && count($meta->childPartida)) > 0 ? '</tbody></table></div>' : '</ul>') .
+		'</li>';
 	return $htmlTemp;
 }
 ?>
 <style>
-	.modal-dialog
-	{
+	.modal-dialog {
 		width: 90%;
 		margin: 0;
 		margin-left: 5%;
 		padding: 0;
 	}
 
-	.listaNivel1
-	{
-		color:#1d73c9;
-		padding-left:37px;
+	.listaNivel1 {
+		color: #1d73c9;
+		padding-left: 37px;
 	}
 
-	.listaNivel2
-	{
-		color:#fba905;
-		padding-left:37px;
-	}
-	.listaNivel3
-	{		
-		color:#249991;
-		padding-left:37px;
+	.listaNivel2 {
+		color: #fba905;
+		padding-left: 37px;
 	}
 
-	.listaNivel4
-	{
-		color:#b3372f;
-		padding-left:37px;
-	}
-	
-	.listaNivelCI1
-	{
-		color:#1d73c9;
-		padding-left:37px;
+	.listaNivel3 {
+		color: #249991;
+		padding-left: 37px;
 	}
 
-	.listaNivelCI2
-	{
-		color:#fba905;
-		padding-left:74px;
-	}
-	.listaNivelCI3
-	{		
-		color:#249991;
-		padding-left:37px;
+	.listaNivel4 {
+		color: #b3372f;
+		padding-left: 37px;
 	}
 
-	.listaNivelCI4
-	{
-		color:#b3372f;
-		padding-left:37px;
+	.listaNivelCI1 {
+		color: #1d73c9;
+		padding-left: 37px;
 	}
 
-	.modal-content
-	{
+	.listaNivelCI2 {
+		color: #fba905;
+		padding-left: 74px;
+	}
+
+	.listaNivelCI3 {
+		color: #249991;
+		padding-left: 37px;
+	}
+
+	.listaNivelCI4 {
+		color: #b3372f;
+		padding-left: 37px;
+	}
+
+	.modal-content {
 		height: auto;
 		min-height: 100%;
 		border-radius: 0;
 	}
-	.nivel
-	{
+
+	.nivel {
 		color: #73879C;
-	    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-	    font-size: 13px;
-	    font-weight: 400;
-	    line-height: 1.471;
-	    margin : 2px;
+		font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+		font-size: 13px;
+		font-weight: 400;
+		line-height: 1.471;
+		margin: 2px;
 	}
-	li
-	{
-		list-style:none;
+
+	li {
+		list-style: none;
 	}
-	.liPartida
-	{
-		list-style:none;
+
+	.liPartida {
+		list-style: none;
 	}
-	.tablaPartidas
-	{
-		margin-left: 70px;
-		width:90%;
-	}
+
 	.tablaPartidas {
-	    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	    border-collapse: collapse;
+		margin-left: 70px;
+		width: 90%;
+	}
+
+	.tablaPartidas {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
 	}
 
 	.tablaPartidas td {
-	    border: 1px solid #ddd;
-	    padding: 2px 6px;
+		border: 1px solid #ddd;
+		padding: 2px 6px;
 	}
+
 	.tablaPartidas th {
-	    text-align: left;
-	    background-color: #e5e5e5;
-	    color: #5d87b1;
-	    border: 1px solid #ddd;
-	    padding: 4px;
+		text-align: left;
+		background-color: #e5e5e5;
+		color: #5d87b1;
+		border: 1px solid #ddd;
+		padding: 4px;
 	}
-	.panel-title 
-    {
-        font-size: 13px;
-        font-weight: bold;
-    }
-    .active a span.fa 
-    {
-    text-align: right !important;
-    margin-right: 0px;
-    }
+
+	.panel-title {
+		font-size: 13px;
+		font-weight: bold;
+	}
+
+	.active a span.fa {
+		text-align: right !important;
+		margin-right: 0px;
+	}
 </style>
 <div class="form-horizontal">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div>
-				<textarea name="txtNombreProyectoInversion" id="txtNombreProyectoInversion" rows="2" class="form-control" style="resize: none;resize: vertical;" readonly="readonly"><?=html_escape(trim($expedienteTecnico->nombre_pi))?></textarea>
+				<textarea name="txtNombreProyectoInversion" id="txtNombreProyectoInversion" rows="2" class="form-control" style="resize: none;resize: vertical;" readonly="readonly"><?= html_escape(trim($expedienteTecnico->nombre_pi)) ?></textarea>
 			</div>
 		</div>
 	</div>
 	<div class="row" style="margin-top: 3px;">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-					<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
-						<option selected="true" value="" disabled>Seleccione Presupuesto</option>
-						<?php foreach ($SelectPresupuesto as $key => $value) { ?>
-							<option value="<?=$value->Codigo?>"><?=$value->Descripcion?></option>
-						<?php } ?>
-					</select>
-			</div>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
+				<option selected="true" value="" disabled>Seleccione Presupuesto</option>
+				<?php foreach ($SelectPresupuesto as $key => $value) { ?>
+					<option value="<?= $value->Codigo ?>"><?= $value->Descripcion ?></option>
+				<?php } ?>
+			</select>
 		</div>
+	</div>
 	<div id="divImportarComponente" class="row" style="margin-top: 3px;">
-	<div class="col-md-2 col-sm-12 col-xs-12">
+		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
-					<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
+				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
 					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
 						case 'ADMINISTRACION DIRECTA':
-					    ?>
-					    <option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
-					    <?php
+					?>
+							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
+						<?php
 							break;
 						case 'POR CONTRATA':
-							?>
-							<option value="POR CONTRATA" >POR CONTRATA</option>
-							<?php
+						?>
+							<option value="POR CONTRATA">POR CONTRATA</option>
+						<?php
 							break;
 						default:
 						?>
-						<option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
-						<option value="POR CONTRATA" >POR CONTRATA</option>
-						<?php
+							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
+							<option value="POR CONTRATA">POR CONTRATA</option>
+					<?php
 							break;
-					}?>
-					</select>
+					} ?>
+				</select>
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
-				<option value="" disabled selected="true">Estructura de Presupuesto</option>
-					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
+					<option value="" disabled selected="true">Estructura de Presupuesto</option>
+					<?php foreach ($PresupuestoEjecucion as $key => $value) {
 						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) {
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php }if ($expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
-						if (strpos($value->desc_presupuesto_ej,'ADMINISTRACION DIRECTA') !== false) {
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php } else{
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>" hidden><?=$value->desc_presupuesto_ej?></option>
-					<?php }}} ?>
+					?>
+							<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+							<?php }
+						if ($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
+							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
+							?>
+								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+							<?php } else {
+							?>
+								<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
+					<?php }
+						}
+					} ?>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-5 col-sm-12 col-xs-12">
-				<select id="selectComponente" name="selectComponente" class="form-control">
+			<select id="selectComponente" name="selectComponente" class="form-control">
 				<option selected="true" value="" disabled>Seleccione Componente</option>
-				</select>
+			</select>
 		</div>
-		
+
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<input type="button" class="btn btn-info" value="Importar componente" onclick="importarComponente();" style="width: 100%;">
 		</div>
 	</div>
 	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
-	<div class="col-md-2 col-sm-12 col-xs-12">
+		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
-					<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
+				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
 					<?php switch ($expedienteTecnico->modalidad_ejecucion_et) {
 						case 'ADMINISTRACION DIRECTA':
-					    ?>
-					    <option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
-					    <?php
+					?>
+							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
+						<?php
 							break;
 						case 'POR CONTRATA':
-							?>
-							<option value="POR CONTRATA" >POR CONTRATA</option>
-							<?php
+						?>
+							<option value="POR CONTRATA">POR CONTRATA</option>
+						<?php
 							break;
 						default:
 						?>
-						<option value="ADMINISTRACION DIRECTA" >ADM DIRECTA</option>
-						<option value="POR CONTRATA" >POR CONTRATA</option>
-						<?php
+							<option value="ADMINISTRACION DIRECTA">ADM DIRECTA</option>
+							<option value="POR CONTRATA">POR CONTRATA</option>
+					<?php
 							break;
-					}?>
-					</select>
+					} ?>
+				</select>
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
-				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control" >
-				<option value="" disabled selected="true">Estructura de Presupuesto</option>
-					<?php foreach ($PresupuestoEjecucion as $key => $value) { 
+				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
+					<option value="" disabled selected="true">Estructura de Presupuesto</option>
+					<?php foreach ($PresupuestoEjecucion as $key => $value) {
 						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) {
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php }if ($expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
-						if (strpos($value->desc_presupuesto_ej,'ADMINISTRACION DIRECTA') !== false) {
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php } else{
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>" hidden><?=$value->desc_presupuesto_ej?></option>
-					<?php }}} ?>
+					?>
+							<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+							<?php }
+						if ($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
+							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
+							?>
+								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+							<?php } else {
+							?>
+								<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
+					<?php }
+						}
+					} ?>
 				</select>
 			</div>
 		</div>
@@ -340,13 +325,13 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
 		<div id="divCargarSelectComponentePresupuesto" class="col-md-5 col-sm-12 col-xs-12">
-		<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
-					<option value="" selected="true" disabled>Seleccione Componente</option>
-					<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) { 
-						?>
-						<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
-					<?php } ?>
-				</select>
+			<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
+				<option value="" selected="true" disabled>Seleccione Componente</option>
+				<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) {
+				?>
+					<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+				<?php } ?>
+			</select>
 		</div>
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
@@ -358,25 +343,23 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			<div>
 				<select name="selectBuscarPartida" id="selectBuscarPartida" class="form-control selectpicker"></select>
 			</div>
-			<input  name='hdIdPresupuestoEjecucion' id='hdIdPresupuestoEjecucion'>
+			<input name='hdIdPresupuestoEjecucion' id='hdIdPresupuestoEjecucion'>
 			<label for="control-label">Descripción de la Partida</label>
 			<div style="height: 200px;overflow-y: scroll; background-color: #f2f5f7;">
 				<ul>
-			    	<?php foreach ($listaPartidaNivel1 as $key => $value)
-			    	{
-		    			if($value->hasChild)
-		    			{?>
-		    				<li>
-		    					<input type="button" style="width: 25px;" class="btn btn-default btn-xs" id="btnAccion" name="Accion" value="+" onclick="elegirAccion('<?=$value->CodPartida?>', 3, this);" style="margin: 1px;">
-				    			<span class="nivel"><?=$value->Descripcion?> <?=($value->Simbolo==null ? '' : ($value->Simbolo))?> </span>
-				    		</li>
-		    			<?php } else { ?>
-		    				<li>
-				    			<span class="nivel"><?=$value->Descripcion?></span>
-				    		</li>
-		    			<?php } ?>
-			    	<?php } ?>
-			    </ul>
+					<?php foreach ($listaPartidaNivel1 as $key => $value) {
+						if ($value->hasChild) { ?>
+							<li>
+								<input type="button" style="width: 25px;" class="btn btn-default btn-xs" id="btnAccion" name="Accion" value="+" onclick="elegirAccion('<?= $value->CodPartida ?>', 3, this);" style="margin: 1px;">
+								<span class="nivel"><?= $value->Descripcion ?> <?= ($value->Simbolo == null ? '' : ($value->Simbolo)) ?> </span>
+							</li>
+						<?php } else { ?>
+							<li>
+								<span class="nivel"><?= $value->Descripcion ?></span>
+							</li>
+						<?php } ?>
+					<?php } ?>
+				</ul>
 			</div>
 		</div>
 		<div class="col-md-6">
@@ -393,7 +376,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<label class="control-label">Unidad</label>
 						<div>
-							<select  name="selectUnidadMedidaPartida" id="selectUnidadMedidaPartida" class="form-control selectpicker">
+							<select name="selectUnidadMedidaPartida" id="selectUnidadMedidaPartida" class="form-control selectpicker">
 								<option value="">Buscar Unidad</option>
 							</select>
 						</div>
@@ -427,50 +410,53 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	<hr style="margin-top: 1px;">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                <?php foreach ($expedienteTecnico->childPresupuestoEjecucion as $key => $temp3) { 
-								 if (strpos($temp3->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et==='MIXTO') {
-									?>                
-                <div class="panel">
-                    <div class="panel-heading" style="padding: 6px;">
-                        <a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?> <?=$temp3->costoPresupuestoIndirecto?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?>
-                        </a>
-                    </div>
-                    <div id="collapse<?=$temp3->id_presupuesto_ej?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?=$temp3->id_presupuesto_ej?>">
-                        <div class="panel-body">
-	                        <ul id="ulComponenteMetaPartida<?=$temp3->id_presupuesto_ej?>" style="list-style-type: upper-roman;">
-											<?php foreach($temp3->childComponente as $key => $value) { ?>
-												<li>
-													<?php if(!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et!=3){?>
-														<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?=$value->id_componente?>);" style="width: 30px;">
-														<?php if (strpos($temp3->desc_presupuesto_ej,'COSTOS INDIRECTOS') !== false) {?>
-														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
-														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - </b><b style="text-transform: uppercase; color: black;" id="montoComponente<?=$value->id_componente?>" ><?=number_format($value->monto, 4, '.', ',')?></b>
-														<?php } else{?>
-														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?=$value->id_componente?>, $(this).parent(), '',0,<?=$temp3->id_presupuesto_ej?>);" style="width: 30px;">
-														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?=$value->id_componente?>,<?=$value->id_presupuesto_ej?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>" contenteditable><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
-														<?php }?>
-														<?php } else {?>
-														<b style="text-transform: uppercase; color: black;" id="nombreComponente<?=$value->id_componente?>"><?=html_escape($value->descripcion)?> - <?=number_format($value->costoComponente, 4, '.', ',')?></b>
-													<?php }?>
-													<ul>
-														<?php foreach($value->childMeta as $index => $item){ ?>
-															<?=mostrarMetaAnidada($item, $expedienteTecnico->id_et, $temp3->id_presupuesto_ej,$expedienteTecnico);?>
-														<?php } ?>
-													</ul>
-												</li>
-											<?php } ?>
-										</ul>              
-                        </div>
-                    </div>
-                </div> 
-                <?php }} ?>              
-            </div>
-        </div>
+			<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+				<?php foreach ($expedienteTecnico->childPresupuestoEjecucion as $key => $temp3) {
+					if (strpos($temp3->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
+				?>
+						<div class="panel">
+							<div class="panel-heading" style="padding: 6px;">
+							<a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?> <?=strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS')?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?>							<a class="panel-title" id="heading<?= $temp3->id_presupuesto_ej ?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $temp3->id_presupuesto_ej ?>" aria-expanded="false" aria-controls="collapse<?= $temp3->id_presupuesto_ej ?>" style="text-transform: uppercase;"><?= $temp3->desc_presupuesto_ej ?> <?= $temp3->costoPresupuestoIndirecto ? number_format($temp3->costoPresupuestoIndirecto, 4, '.', ',') : number_format($temp3->costoPresupuestoDirecto, 4, '.', ',') ?>
+								</a>
+								<input type="hidden" name="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirecto ?>">
+							</div>
+							<div id="collapse<?= $temp3->id_presupuesto_ej ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?= $temp3->id_presupuesto_ej ?>">
+								<div class="panel-body">
+									<ul id="ulComponenteMetaPartida<?= $temp3->id_presupuesto_ej ?>" style="list-style-type: upper-roman;">
+										<?php foreach ($temp3->childComponente as $key => $value) { ?>
+											<li>
+												<?php if (!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et != 3) { ?>
+													<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?= $value->id_componente ?>);" style="width: 30px;">
+													<?php if (strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS') !== false) { ?>
+														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Montos" onclick="agregarMonto(<?= $value->id_componente ?>,'<?= $value->descripcion ?>','<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>');" style="width: 30px;">
+														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?= $value->id_componente ?>,<?= $value->id_presupuesto_ej ?>, this);" style="width: 30px;">
+														<b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>" contenteditable><?= html_escape($value->descripcion) ?></b> - <span><b style="text-transform: uppercase; color: black;" id="montoComponente<?= $value->id_componente ?>"><?= number_format($value->monto, 4, '.', ',') ?></b></span>
+													<?php } else { ?>
+														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(<?= $value->id_componente ?>, $(this).parent(), '',0,<?= $temp3->id_presupuesto_ej ?>);" style="width: 30px;">
+														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?= $value->id_componente ?>,<?= $value->id_presupuesto_ej ?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>" contenteditable><?= html_escape($value->descripcion) ?></b> - </span><b style="text-transform: uppercase; color: black;"><?= number_format($value->costoComponente, 4, '.', ',') ?></b></span>
+													<?php } ?>
+												<?php } else { ?>
+													<b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>"><?= html_escape($value->descripcion) ?> - <?= number_format($value->costoComponente, 4, '.', ',') ?></b>
+												<?php } ?>
+												<ul>
+													<?php foreach ($value->childMeta as $index => $item) { ?>
+														<?= mostrarMetaAnidada($item, $expedienteTecnico->id_et, $temp3->id_presupuesto_ej, $expedienteTecnico); ?>
+													<?php } ?>
+												</ul>
+											</li>
+										<?php } ?>
+									</ul>
+								</div>
+							</div>
+						</div>
+				<?php }
+				} ?>
+			</div>
+		</div>
 	</div>
 	<hr>
 	<div class="row" style="text-align: right;">
-		<input type="hidden" id="hdIdET" value="<?=$expedienteTecnico->id_et?>">
+		<input type="hidden" id="hdIdET" value="<?= $expedienteTecnico->id_et ?>">
 		<button class="btn btn-danger" data-dismiss="modal">
 			<span class="glyphicon glyphicon-remove"></span>
 			Cerrar
@@ -478,161 +464,166 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	</div>
 </div>
 <script>
-	function cerrar()
-	{
+	function cerrar() {
 		$('#divAgregarPartida').hide(1000);
 	}
-	function limpiarArbolCompletoMasOpciones()
-	{
+
+	function limpiarArbolCompletoMasOpciones() {
 
 		limpiarText('divAgregarPartida', []);
 	}
 
-	function agregarComponente()
-	{
+	function agregarComponente() {
 		$('#divAgregarComponente').data('formValidation').resetField($('#txtDescripcionComponente'));
 		$('#divAgregarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucion'));
 
 		$('#divAgregarComponente').data('formValidation').validate();
 
-		if(!($('#divAgregarComponente').data('formValidation').isValid()))
-		{
+		if (!($('#divAgregarComponente').data('formValidation').isValid())) {
 			return;
 		}
 
-		var existeComponente=false;
+		var existeComponente = false;
 
-		var PresupuestoEjecucion=$('#selectPresupuestoEjecucion').val();
+		var PresupuestoEjecucion = $('#selectPresupuestoEjecucion').val();
 
-		$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(function(index, element)
-		{
-			if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll($('#txtDescripcionComponente').val(), ' ', '').toLowerCase())
-			{
-				existeComponente=true;
-
+		$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(function(index, element) {
+			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#txtDescripcionComponente').val(), ' ', '').toLowerCase()) {
+				existeComponente = true;
+				
 				return false;
 			}
 		});
+		$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(function(index, element) {
+			//console.log($(element).text());
+			console.log($('#cargarSelectComponentePresupuesto').find("option:selected").text());
+			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text(), ' ', '').toLowerCase()) {
+				existeComponente = true;
+				
+				return false;
+			}
+		});
+		
 
-		if(existeComponente)
-		{
-			swal(
-			{
-				title: '',
-				text: 'No se puede agregar dos veces el mismo componente.',
-				type: 'error'
-			},
-			function(){});
+		if (existeComponente) {
+			swal({
+					title: '',
+					text: 'No se puede agregar dos veces el mismo componente.',
+					type: 'error'
+				},
+				function() {});
 
 			return;
 		}
-		
-		if($('#selectPresupuestoEjecucion').find("option:selected").text().includes('COSTOS INDIRECTOS')){
-			paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), "tipoEjecucion" : $('#selectTipoEjecucion').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
+		if ($('#selectPresupuestoEjecucion').find("option:selected").text().includes('COSTOS INDIRECTOS')) {
+			paginaAjaxJSON({
+				"idET": $('#hdIdET').val(),
+				"descripcionComponente": $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(),
+				"tipoEjecucion": $('#selectTipoEjecucion').val().trim(),
+				idPresupuestoEjecucion: PresupuestoEjecucion
+			}, base_url + 'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON) {
+				objectJSON = JSON.parse(objectJSON);
 
-			if(objectJSON.proceso=='Error')
-			{
-				return false;
-			}
+				swal({
+						title: '',
+						text: objectJSON.mensaje,
+						type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+					},
+					function() {});
 
-			var htmlTemp='<li>'+
-				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
-					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;')+' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente'+objectJSON.idComponente+'"> 0.0000 </b>';
-				htmlTemp+='<ul></ul></li>';
+				if (objectJSON.proceso == 'Error') {
+					return false;
+				}
 
-
-			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
-
-			$('#txtDescripcionComponente').val('');
-
-			limpiarArbolCompletoMasOpciones();
-		}, false, true);
-			}
-			else{
-				paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#txtDescripcionComponente').val().trim(), "tipoEjecucion" : $('#selectTipoEjecucion').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
-
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
-
-			if(objectJSON.proceso=='Error')
-			{
-				return false;
-			}
-
-			var htmlTemp='<li>'+
-				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
-					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',0,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
-				htmlTemp+='<ul></ul></li>';
+				var htmlTemp = '<li>' +
+					'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(' + objectJSON.idComponente + ');" style="width: 30px;"> ';
+				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(' + objectJSON.idComponente + ', $(this).parent(), \'\',0,' + PresupuestoEjecucion + ');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;') + ' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente' + objectJSON.idComponente + '"> 0.0000 </b>';
+				htmlTemp += '<ul></ul></li>';
 
 
-			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
+				$('#ulComponenteMetaPartida' + PresupuestoEjecucion).append(htmlTemp);
 
-			$('#txtDescripcionComponente').val('');
+				$('#txtDescripcionComponente').val('');
 
-			limpiarArbolCompletoMasOpciones();
-		}, false, true);
-			}
-		
+				limpiarArbolCompletoMasOpciones();
+			}, false, true);
+		} else {
+			paginaAjaxJSON({
+				"idET": $('#hdIdET').val(),
+				"descripcionComponente": $('#txtDescripcionComponente').val().trim(),
+				"tipoEjecucion": $('#selectTipoEjecucion').val().trim(),
+				idPresupuestoEjecucion: PresupuestoEjecucion
+			}, base_url + 'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON) {
+				objectJSON = JSON.parse(objectJSON);
+
+				swal({
+						title: '',
+						text: objectJSON.mensaje,
+						type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+					},
+					function() {});
+
+				if (objectJSON.proceso == 'Error') {
+					return false;
+				}
+
+				var htmlTemp = '<li>' +
+					'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(' + objectJSON.idComponente + ');" style="width: 30px;"> ';
+				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(' + objectJSON.idComponente + ', $(this).parent(), \'\',0,' + PresupuestoEjecucion + ');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#txtDescripcionComponente').val().trim(), '<', '&lt;'), '>', '&gt;') + '</b>';
+				htmlTemp += '<ul></ul></li>';
+
+
+				$('#ulComponenteMetaPartida' + PresupuestoEjecucion).append(htmlTemp);
+
+				$('#txtDescripcionComponente').val('');
+
+				limpiarArbolCompletoMasOpciones();
+			}, false, true);
+		}
+
 	}
-	function importarComponente()
-	{
+
+	function importarComponente() {
 		$('#divImportarComponente').data('formValidation').resetField($('#selectComponente'));
 		$('#divImportarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucionI'));
 
 		$('#divImportarComponente').data('formValidation').validate();
 
-		if(!($('#divImportarComponente').data('formValidation').isValid()))
-		{
+		if (!($('#divImportarComponente').data('formValidation').isValid())) {
 			return;
 		}
 
-		var existeComponente=false;
+		var existeComponente = false;
 
-		var PresupuestoEjecucion=$('#selectPresupuestoEjecucionI').val();
+		var PresupuestoEjecucion = $('#selectPresupuestoEjecucionI').val();
 
-		$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(function(index, element)
-		{
-			if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll($('#selectComponente').val(), ' ', '').toLowerCase())
-			{
-				existeComponente=true;
+		$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(function(index, element) {
+			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#selectComponente').val(), ' ', '').toLowerCase()) {
+				existeComponente = true;
 
 				return false;
 			}
 		});
 
-		if(existeComponente)
-		{
-			swal(
-			{
-				title: '',
-				text: 'No se puede agregar dos veces el mismo componente.',
-				type: 'error'
-			},
-			function(){});
+		if (existeComponente) {
+			swal({
+					title: '',
+					text: 'No se puede agregar dos veces el mismo componente.',
+					type: 'error'
+				},
+				function() {});
 
 			return;
 		}
 
-		paginaAjaxJSON({ "idET" : $('#hdIdET').val(), "descripcionComponente" : $('#selectComponente').val().trim(), "tipoEjecucion" : $('#selectTipoEjecucionI').val().trim(), idPresupuestoEjecucion:PresupuestoEjecucion }, base_url+'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
+		paginaAjaxJSON({
+			"idET": $('#hdIdET').val(),
+			"descripcionComponente": $('#selectComponente').val().trim(),
+			"tipoEjecucion": $('#selectTipoEjecucionI').val().trim(),
+			idPresupuestoEjecucion: PresupuestoEjecucion
+		}, base_url + 'index.php/ET_Componente/insertar', 'POST', null, function(objectJSON) {
+			objectJSON = JSON.parse(objectJSON);
 
 			// swal(
 			// {
@@ -642,63 +633,58 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			// },
 			// function(){});
 
-			if(objectJSON.proceso=='Error')
-			{
+			if (objectJSON.proceso == 'Error') {
 				return false;
 			}
 
-			var htmlTemp='<li>'+
-				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente('+objectJSON.idComponente+');" style="width: 30px;"> ';
+			var htmlTemp = '<li>' +
+				'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(' + objectJSON.idComponente + ');" style="width: 30px;"> ';
 
-				htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta('+objectJSON.idComponente+', $(this).parent(), \'\',1,'+PresupuestoEjecucion+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente('+objectJSON.idComponente+','+PresupuestoEjecucion+', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente'+objectJSON.idComponente+'" contenteditable>'+replaceAll(replaceAll($('#selectComponente').val().trim(), '<', '&lt;'), '>', '&gt;')+'</b>';
-				htmlTemp+='<ul></ul></li>';
+			htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Meta" onclick="agregarMeta(' + objectJSON.idComponente + ', $(this).parent(), \'\',1,' + PresupuestoEjecucion + ');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#selectComponente').val().trim(), '<', '&lt;'), '>', '&gt;') + '</b>';
+			htmlTemp += '<ul></ul></li>';
 
 
-			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).append(htmlTemp);
+			$('#ulComponenteMetaPartida' + PresupuestoEjecucion).append(htmlTemp);
 
 			//Importar Meta S10
 
 			id = $('#selectComponente option:selected').attr('id');
 			componente = $('#selectComponente').val();
 
-			$('#ulComponenteMetaPartida'+PresupuestoEjecucion).find('> li > b').each(async function(index, element)
-			{
+			$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(async function(index, element) {
 				var elementP = [];
 				var idelementP = [];
-				elementP[0]=$(element).parent();
-				if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(componente, ' ', '').toLowerCase()){
-					
-					paginaAjaxJSON(
-						{ 
-						"idSubpresupuesto" : id ,
-						"idComponente" : objectJSON.idComponente ,
-						"idET" : $('#hdIdET').val(),
-						"idPresupuestoEjecucion":PresupuestoEjecucion,
+				elementP[0] = $(element).parent();
+				if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll(componente, ' ', '').toLowerCase()) {
+
+					paginaAjaxJSON({
+							"idSubpresupuesto": id,
+							"idComponente": objectJSON.idComponente,
+							"idET": $('#hdIdET').val(),
+							"idPresupuestoEjecucion": PresupuestoEjecucion,
 						},
-						base_url+'index.php/ET_Componente/cargarMetaS10',
-						'POST', null, async function(metaJSON)
-						{
-							resultado=JSON.parse(metaJSON);
-							let idetTemp=$('#hdIdET').val();
+						base_url + 'index.php/ET_Componente/cargarMetaS10',
+						'POST', null, async function(metaJSON) {
+							resultado = JSON.parse(metaJSON);
+							let idetTemp = $('#hdIdET').val();
 							console.log(idetTemp);
 
-							swal(
-							{
+							swal({
 								title: '',
-								text: 'Se importó el costo total del componente: '+parseFloat(resultado.sumaParcial).toFixed(4)+' de un total de: '+parseFloat(resultado.totalSubpresupuesto).toFixed(4),
-								type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-							},function(){
-								
+								text: 'Se importó el costo total del componente: ' + parseFloat(resultado.sumaParcial).toFixed(4) + ' de un total de: ' + parseFloat(resultado.totalSubpresupuesto).toFixed(4),
+								type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+							}, function() {
+
 							});
-							setTimeout(function(){
+							setTimeout(function() {
 								window.location.reload();
-							},5000);
-							
-					    }, false, true)
+							}, 5000);
+
+						}, false, true)
 				}
 			});
-				console.log('id'+id)
-				console.log('componente'+componente)
+			console.log('id' + id)
+			console.log('componente' + componente)
 
 
 
@@ -707,212 +693,198 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			limpiarArbolCompletoMasOpciones();
 		}, false, true);
 	}
-	$("#selectPresupuesto").change(function()
-		{
-			let Codigo_Presupuesto=$(this).find("option:selected").val();
-			let CodigoProyecto="<?php echo $expedienteTecnico->codigo_unico_pi ?>";
-			
-			console.log(CodigoProyecto);
-			paginaAjaxJSON(
-				{ 
-				"Codigo_Presupuesto" : Codigo_Presupuesto ,
-				"Codigo_Proyecto" :  CodigoProyecto,
-				},
-				base_url+'index.php/ET_Componente/cargarSelectSubPresupuesto',
-				 'POST', null, function(objectJSON)
-				{
-					resultado=JSON.parse(objectJSON);
-					let select = document.getElementsByName("selectComponente")[0];
-					$("#selectComponente").find('option').not(':first').remove();
-						resultado.data.forEach(element => {
-							var option = document.createElement("option");
-							option.text = element.Descripcion;
-							option.id = element.Id;
-							select.add(option);
-						}); 	
-			}, false, true)
-		});
+	$("#selectPresupuesto").change(function() {
+		let Codigo_Presupuesto = $(this).find("option:selected").val();
+		let CodigoProyecto = "<?php echo $expedienteTecnico->codigo_unico_pi ?>";
 
-		$("#selectPresupuestoEjecucion").change(function()
-		{
-			let Id_Presupuesto_Ej=$(this).find("option:selected").val();	
-			if($(this).find("option:selected").text().includes('COSTOS INDIRECTOS')){
-				paginaAjaxJSON(
-				{ 
-				"Id_Presupuesto_Ej" : Id_Presupuesto_Ej ,
+		console.log(CodigoProyecto);
+		paginaAjaxJSON({
+				"Codigo_Presupuesto": Codigo_Presupuesto,
+				"Codigo_Proyecto": CodigoProyecto,
+			},
+			base_url + 'index.php/ET_Componente/cargarSelectSubPresupuesto',
+			'POST', null,
+			function(objectJSON) {
+				resultado = JSON.parse(objectJSON);
+				let select = document.getElementsByName("selectComponente")[0];
+				$("#selectComponente").find('option').not(':first').remove();
+				resultado.data.forEach(element => {
+					var option = document.createElement("option");
+					option.text = element.Descripcion;
+					option.id = element.Id;
+					select.add(option);
+				});
+			}, false, true)
+	});
+
+	$("#selectPresupuestoEjecucion").change(function() {
+		let Id_Presupuesto_Ej = $(this).find("option:selected").val();
+		if ($(this).find("option:selected").text().includes('COSTOS INDIRECTOS')) {
+			paginaAjaxJSON({
+					"Id_Presupuesto_Ej": Id_Presupuesto_Ej,
 				},
-				base_url+'index.php/ET_Componente/cargarSelectComponentePresupuesto',
-				 'POST', null, function(objectJSON)
-				{
-					resultado=JSON.parse(objectJSON);
+				base_url + 'index.php/ET_Componente/cargarSelectComponentePresupuesto',
+				'POST', null,
+				function(objectJSON) {
+					resultado = JSON.parse(objectJSON);
 					let select = document.getElementsByName("cargarSelectComponentePresupuesto")[0];
 					$("#cargarSelectComponentePresupuesto").find('option').not(':first').remove();
-						resultado.data.forEach(element => {
-							var option = document.createElement("option");
-							option.text = element.desc_presupuesto_ej;
-							option.id = element.id_presupuesto_ej;
-							select.add(option);
-						}); 	
-			}, false, true)
-				$("#divCargarSelectComponentePresupuesto").show();
-				$("#divTxtDescripcionComponente").hide();
-			}
-			else{
-				$("#divCargarSelectComponentePresupuesto").hide();
-				$("#divTxtDescripcionComponente").show();
-				console.log('costos directos');
-			}
-		});
+					resultado.data.forEach(element => {
+						var option = document.createElement("option");
+						option.text = element.desc_presupuesto_ej;
+						option.id = element.id_presupuesto_ej;
+						select.add(option);
+					});
+				}, false, true)
+			$("#divCargarSelectComponentePresupuesto").show();
+			$("#divTxtDescripcionComponente").hide();
+		} else {
+			$("#divCargarSelectComponentePresupuesto").hide();
+			$("#divTxtDescripcionComponente").show();
+			console.log('costos directos');
+		}
+	});
 
-		$("#selectTipoEjecucion").change(function()
-		{
-			const tipo_ejecucion=$(this).find("option:selected").val();
-			$('#selectPresupuestoEjecucion').find('option:contains("'+tipo_ejecucion+'")').show();
-			$('#selectPresupuestoEjecucion').find('option:not(:contains("'+tipo_ejecucion+'"))').hide();
-			$("#selectPresupuestoEjecucion").val($("#selectPresupuestoEjecucion option:first").val());
-		});
+	$("#selectTipoEjecucion").change(function() {
+		const tipo_ejecucion = $(this).find("option:selected").val();
+		$('#selectPresupuestoEjecucion').find('option:contains("' + tipo_ejecucion + '")').show();
+		$('#selectPresupuestoEjecucion').find('option:not(:contains("' + tipo_ejecucion + '"))').hide();
+		$("#selectPresupuestoEjecucion").val($("#selectPresupuestoEjecucion option:first").val());
+	});
 
-		$("#selectTipoEjecucionI").change(function()
-		{
-			const tipo_ejecucion=$(this).find("option:selected").val();
-			$('#selectPresupuestoEjecucionI').find('option:contains("'+tipo_ejecucion+'")').show();
-			$('#selectPresupuestoEjecucionI').find('option:not(:contains("'+tipo_ejecucion+'"))').hide();
-			$("#selectPresupuestoEjecucionI").val($("#selectPresupuestoEjecucionI option:first").val());
-		});
+	$("#selectTipoEjecucionI").change(function() {
+		const tipo_ejecucion = $(this).find("option:selected").val();
+		$('#selectPresupuestoEjecucionI').find('option:contains("' + tipo_ejecucion + '")').show();
+		$('#selectPresupuestoEjecucionI').find('option:not(:contains("' + tipo_ejecucion + '"))').hide();
+		$("#selectPresupuestoEjecucionI").val($("#selectPresupuestoEjecucionI option:first").val());
+	});
 
-	function guardarCambiosComponente(idComponente)
-	{
-		if($('#nombreComponente'+idComponente).text().trim()=='')
-		{
-			swal(
-			{
-				title: '',
-				text: 'El nombre del componente es obligatorio.',
-				type: 'error'
-			},
-			function(){});
+	function guardarCambiosComponente(idComponente) {
+		if ($('#nombreComponente' + idComponente).text().trim() == '') {
+			swal({
+					title: '',
+					text: 'El nombre del componente es obligatorio.',
+					type: 'error'
+				},
+				function() {});
 
-			$('#nombreComponente'+idComponente).text('___');
+			$('#nombreComponente' + idComponente).text('___');
 
 			return;
 		}
 
-		paginaAjaxJSON({ "idComponente" : idComponente, 'descripcionComponente' : replaceAll(replaceAll($('#nombreComponente'+idComponente).text().trim(), '<', '&lt;'), '>', '&gt;') }, base_url+'index.php/ET_Componente/editarDescComponente', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
+		paginaAjaxJSON({
+			"idComponente": idComponente,
+			'descripcionComponente': replaceAll(replaceAll($('#nombreComponente' + idComponente).text().trim(), '<', '&lt;'), '>', '&gt;')
+		}, base_url + 'index.php/ET_Componente/editarDescComponente', 'POST', null, function(objectJSON) {
+			objectJSON = JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
+			swal({
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+				},
+				function() {});
 
-			$('#nombreComponente'+idComponente).text($('#nombreComponente'+idComponente).text().trim());
+			$('#nombreComponente' + idComponente).text($('#nombreComponente' + idComponente).text().trim());
 		}, false, true);
 	}
 
-	function guardarCambiosMeta(idMeta)
-	{
-		if($('#nombreMeta'+idMeta).text().trim()=='')
-		{
-			swal(
-			{
-				title: '',
-				text: 'El nombre de la meta es obligatorio.',
-				type: 'error'
-			},
-			function(){});
+	function guardarCambiosMeta(idMeta) {
+		if ($('#nombreMeta' + idMeta).text().trim() == '') {
+			swal({
+					title: '',
+					text: 'El nombre de la meta es obligatorio.',
+					type: 'error'
+				},
+				function() {});
 
-			$('#nombreMeta'+idMeta).text('___');
+			$('#nombreMeta' + idMeta).text('___');
 
 			return;
 		}
 
-		paginaAjaxJSON({ "idMeta" : idMeta, 'descripcionMeta' : replaceAll(replaceAll($('#nombreMeta'+idMeta).text().trim(), '<', '&lt;'), '>', '&gt;') }, base_url+'index.php/ET_Meta/editarDescMeta', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
+		paginaAjaxJSON({
+			"idMeta": idMeta,
+			'descripcionMeta': replaceAll(replaceAll($('#nombreMeta' + idMeta).text().trim(), '<', '&lt;'), '>', '&gt;')
+		}, base_url + 'index.php/ET_Meta/editarDescMeta', 'POST', null, function(objectJSON) {
+			objectJSON = JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
+			swal({
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+				},
+				function() {});
 
-			$('#nombreMeta'+idMeta).text($('#nombreMeta'+idMeta).text().trim());
+			$('#nombreMeta' + idMeta).text($('#nombreMeta' + idMeta).text().trim());
 		}, false, true);
 	}
 
-	function guardarCambiosPartida(idPartida)
-	{
-		var nombrePartida = $('#nombrePartida'+idPartida).text().trim();
-		var cantidad = $('#cantidadPartida'+idPartida).text().trim();
-		var precioUnitario = $('#precioUnitarioPartida'+idPartida).text().trim();
-		if(nombrePartida=='')
-		{
-			swal(
-			{
-				title: '',
-				text: 'Partida es un campo obligatorio.',
-				type: 'error'
-			},
-			function(){});
+	function guardarCambiosPartida(idPartida) {
+		var nombrePartida = $('#nombrePartida' + idPartida).text().trim();
+		var cantidad = $('#cantidadPartida' + idPartida).text().trim();
+		var precioUnitario = $('#precioUnitarioPartida' + idPartida).text().trim();
+		if (nombrePartida == '') {
+			swal({
+					title: '',
+					text: 'Partida es un campo obligatorio.',
+					type: 'error'
+				},
+				function() {});
 
-			$('#nombrePartida'+idPartida).text('___');
+			$('#nombrePartida' + idPartida).text('___');
 
 			return;
 		}
-		if(cantidad=='')
-		{
-			swal(
-			{
-				title: '',
-				text: 'Cantidad es un campo obligatorio.',
-				type: 'error'
-			},
-			function(){});
+		if (cantidad == '') {
+			swal({
+					title: '',
+					text: 'Cantidad es un campo obligatorio.',
+					type: 'error'
+				},
+				function() {});
 
-			$('#cantidadPartida'+idPartida).text('___');
+			$('#cantidadPartida' + idPartida).text('___');
 
 			return;
 		}
-		if(precioUnitario=='')
-		{
-			swal(
-			{
-				title: '',
-				text: 'Precio Unitario es un campo obligatorio.',
-				type: 'error'
-			},
-			function(){});
+		if (precioUnitario == '') {
+			swal({
+					title: '',
+					text: 'Precio Unitario es un campo obligatorio.',
+					type: 'error'
+				},
+				function() {});
 
-			$('#precioUnitario'+idPartida).text('___');
+			$('#precioUnitario' + idPartida).text('___');
 
 			return;
 		}
 
-		paginaAjaxJSON({ "idPartida" : idPartida,'nombrePartida' : replaceAll(replaceAll(nombrePartida, '<', '&lt;'), '>', '&gt;') , 'cantidadPartida' : replaceAll(replaceAll(cantidad, '<', '&lt;'), '>', '&gt;'), 'rendimientoPartida' : '', 'precioUnitarioPartida' : replaceAll(replaceAll(precioUnitario, '<', '&lt;'), '>', '&gt;') }, base_url+'index.php/ET_Partida/editarCambiosPartida', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
+		paginaAjaxJSON({
+			"idPartida": idPartida,
+			'nombrePartida': replaceAll(replaceAll(nombrePartida, '<', '&lt;'), '>', '&gt;'),
+			'cantidadPartida': replaceAll(replaceAll(cantidad, '<', '&lt;'), '>', '&gt;'),
+			'rendimientoPartida': '',
+			'precioUnitarioPartida': replaceAll(replaceAll(precioUnitario, '<', '&lt;'), '>', '&gt;')
+		}, base_url + 'index.php/ET_Partida/editarCambiosPartida', 'POST', null, function(objectJSON) {
+			objectJSON = JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
+			swal({
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+				},
+				function() {});
 
-			var currentRow = $("#rowPartida"+objectJSON.idPartida);
+			var currentRow = $("#rowPartida" + objectJSON.idPartida);
 
-			currentRow.find("td:eq(1)").html('<span id="nombrePartida'+objectJSON.idPartida+'" contenteditable>'+nombrePartida+'</span>');
+			currentRow.find("td:eq(1)").html('<span id="nombrePartida' + objectJSON.idPartida + '" contenteditable>' + nombrePartida + '</span>');
 
-			currentRow.find("td:eq(3)").html('<span id="cantidadPartida'+objectJSON.idPartida+'" contenteditable>'+(parseFloat(objectJSON.cantidad).toFixed(2))+'</span>');
+			currentRow.find("td:eq(3)").html('<span id="cantidadPartida' + objectJSON.idPartida + '" contenteditable>' + (parseFloat(objectJSON.cantidad).toFixed(2)) + '</span>');
 
-			currentRow.find("td:eq(4)").html('<span id="precioUnitarioPartida'+objectJSON.idPartida+'" contenteditable>'+(parseFloat(objectJSON.precioUnitario).toFixed(2))+'</span>');
+			currentRow.find("td:eq(4)").html('<span id="precioUnitarioPartida' + objectJSON.idPartida + '" contenteditable>' + (parseFloat(objectJSON.precioUnitario).toFixed(2)) + '</span>');
 
 			currentRow.find("td:eq(5)").text(parseFloat(objectJSON.precioParcial).toFixed(2));
 
@@ -920,81 +892,77 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		}, false, true);
 	}
 
-	function eliminarComponente(idComponente,idPresupuestoEjecucion, element)
-    {
-        swal({
-            title: "Al borrar componente se eliminará todas las metas, sub metas y partidas asociadas. ¿Realmente desea proseguir con la operación?",
-            text: "",
-            type: "warning",
-            showCancelButton: true,
-            cancelButtonText:"CERRAR" ,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "SI,ELIMINAR",
-            closeOnConfirm: false
-        },
-        function(){
-            paginaAjaxJSON({ "idComponente" : idComponente, "idPresupuestoEjecucion" : idPresupuestoEjecucion }, base_url+'index.php/ET_Componente/eliminar', 'POST', null, function(objectJSON)
-			{
-				objectJSON=JSON.parse(objectJSON);
-
-				swal(
-				{
-					title: '',
-					text: objectJSON.mensaje,
-					type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-				},
-				function(){});
-
-				$(element).parent().remove();
-
-				limpiarArbolCompletoMasOpciones();
-			}, false, true);
-        });
-    }
-
-	function eliminarMeta(idMeta, element)
-    {
-        swal({
-            title: "Al borrar meta se eliminará todas las sub metas y partidas asociadas. ¿Realmente desea proseguir con la operación?",
-            text: "",
-            type: "warning",
-            showCancelButton: true,
-            cancelButtonText:"CERRAR" ,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "SI,ELIMINAR",
-            closeOnConfirm: false
-        },
-        function(){
-            paginaAjaxJSON({ "idMeta" : idMeta }, base_url+'index.php/ET_Meta/eliminar', 'POST', null, function(objectJSON)
-			{
-				objectJSON=JSON.parse(objectJSON);
-
-				swal(
-				{
-					title: '',
-					text: objectJSON.mensaje,
-					type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-				},
-				function(){});
-
-				$(element).parent().remove();
-
-				limpiarArbolCompletoMasOpciones();
-			}, false, true);
-        });
-    }
-
-	function agregarMeta(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion)
-	{
-		if($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length>0)
-		{
-			swal(
-			{
-				title: '',
-				text: 'No se puede agregar submeta al mismo nivel que una partida.',
-				type: 'error'
+	function eliminarComponente(idComponente, idPresupuestoEjecucion, element) {
+		swal({
+				title: "Al borrar componente se eliminará todas las metas, sub metas y partidas asociadas. ¿Realmente desea proseguir con la operación?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				cancelButtonText: "CERRAR",
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "SI,ELIMINAR",
+				closeOnConfirm: false
 			},
-			function(){});
+			function() {
+				paginaAjaxJSON({
+					"idComponente": idComponente,
+					"idPresupuestoEjecucion": idPresupuestoEjecucion
+				}, base_url + 'index.php/ET_Componente/eliminar', 'POST', null, function(objectJSON) {
+					objectJSON = JSON.parse(objectJSON);
+
+					swal({
+							title: '',
+							text: objectJSON.mensaje,
+							type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+						},
+						function() {});
+
+					$(element).parent().remove();
+
+					limpiarArbolCompletoMasOpciones();
+				}, false, true);
+			});
+	}
+
+	function eliminarMeta(idMeta, element) {
+		swal({
+				title: "Al borrar meta se eliminará todas las sub metas y partidas asociadas. ¿Realmente desea proseguir con la operación?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				cancelButtonText: "CERRAR",
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "SI,ELIMINAR",
+				closeOnConfirm: false
+			},
+			function() {
+				paginaAjaxJSON({
+					"idMeta": idMeta
+				}, base_url + 'index.php/ET_Meta/eliminar', 'POST', null, function(objectJSON) {
+					objectJSON = JSON.parse(objectJSON);
+
+					swal({
+							title: '',
+							text: objectJSON.mensaje,
+							type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+						},
+						function() {});
+
+					$(element).parent().remove();
+
+					limpiarArbolCompletoMasOpciones();
+				}, false, true);
+			});
+	}
+
+	function agregarMeta(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion) {
+		if ($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length > 0) {
+			swal({
+					title: '',
+					text: 'No se puede agregar submeta al mismo nivel que una partida.',
+					type: 'error'
+				},
+				function() {});
 
 			return;
 		}
@@ -1006,71 +974,65 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			text: "Descripción de la Meta",
 			type: "input",
 			showCancelButton: true,
-			cancelButtonText:"CERRAR",
+			cancelButtonText: "CERRAR",
 			confirmButtonText: "ACEPTAR",
 			closeOnConfirm: false,
-		 	inputPlaceholder: ""
-		}, function (inputValue)
-		{
-		  	if (inputValue === false) return false;
-		  	if (inputValue === "")
-		  	{
-		    	swal.showInputError("Meta es un campo requerido");
-		    	return false
-		  	}
+			inputPlaceholder: ""
+		}, function(inputValue) {
+			if (inputValue === false) return false;
+			if (inputValue === "") {
+				swal.showInputError("Meta es un campo requerido");
+				return false
+			}
 
-		  	descripcionMeta = inputValue;
+			descripcionMeta = inputValue;
 
-			if(descripcionMeta==null || descripcionMeta.trim()=='')
-			{
+			if (descripcionMeta == null || descripcionMeta.trim() == '') {
 				return;
 			}
 
-			var existeMeta=false;
+			var existeMeta = false;
 
-			$($(elementoPadre).find('ul')[0]).find('> li').each(function(index, element)
-			{
-				if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(descripcionMeta, ' ', '').toLowerCase())
-				{
-					existeMeta=true;
+			$($(elementoPadre).find('ul')[0]).find('> li').each(function(index, element) {
+				if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll(descripcionMeta, ' ', '').toLowerCase()) {
+					existeMeta = true;
 
 					return false;
 				}
 			});
 
-			if(existeMeta)
-			{
-				swal(
-				{
-					title: '',
-					text: 'No se puede agregar dos metas iguales en el mismo nivel.',
-					type: 'error'
-				},
-				function(){});
+			if (existeMeta) {
+				swal({
+						title: '',
+						text: 'No se puede agregar dos metas iguales en el mismo nivel.',
+						type: 'error'
+					},
+					function() {});
 
 				return;
 			}
 
-			paginaAjaxJSON({ "idComponente" : idComponente, "descripcionMeta" : descripcionMeta.trim(), "idMetaPadre" : idMetaPadre }, base_url+'index.php/ET_Meta/insertar', 'POST', null, function(objectJSON)
-			{
-				objectJSON=JSON.parse(objectJSON);
+			paginaAjaxJSON({
+				"idComponente": idComponente,
+				"descripcionMeta": descripcionMeta.trim(),
+				"idMetaPadre": idMetaPadre
+			}, base_url + 'index.php/ET_Meta/insertar', 'POST', null, function(objectJSON) {
+				objectJSON = JSON.parse(objectJSON);
 
-				swal(
-				{
-					title: '',
-					text: objectJSON.mensaje,
-					type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-				},
-				function(){});
+				swal({
+						title: '',
+						text: objectJSON.mensaje,
+						type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+					},
+					function() {});
 
-				if(objectJSON.proceso=='Error')
-				{
+				if (objectJSON.proceso == 'Error') {
 					return false;
 				}
 
-				var htmlTemp='<li class="listaNivel'+nivel+'">'+
-					'<input type="button" class="btn btn-default btn-xs" title="Guardar Cambios" value="G" onclick="guardarCambiosMeta('+objectJSON.idMeta+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" title="Eliminar Meta" value="-" onclick="eliminarMeta('+objectJSON.idMeta+', this);" style="width: 30px;"> <button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'+objectJSON.idMeta+'"><i class="fa fa-expand"></i></button><input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '+objectJSON.idMeta+','+(nivel+1)+','+idPresupuestoEjecucion+')" style="width: 30px;"><input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '+objectJSON.idMeta+','+idPresupuestoEjecucion+')" style="width: 30px;"><span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'+objectJSON.idMeta+'" contenteditable>'+descripcionMeta+'</span>';
-					htmlTemp+='<ul></ul></li>';
+				var htmlTemp = '<li class="listaNivel' + nivel + '">' +
+					'<input type="button" class="btn btn-default btn-xs" title="Guardar Cambios" value="G" onclick="guardarCambiosMeta(' + objectJSON.idMeta + ');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" title="Eliminar Meta" value="-" onclick="eliminarMeta(' + objectJSON.idMeta + ', this);" style="width: 30px;"> <button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo' + objectJSON.idMeta + '"><i class="fa fa-expand"></i></button><input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), ' + objectJSON.idMeta + ',' + (nivel + 1) + ',' + idPresupuestoEjecucion + ')" style="width: 30px;"><input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), ' + objectJSON.idMeta + ',' + idPresupuestoEjecucion + ')" style="width: 30px;"><span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta' + objectJSON.idMeta + '" contenteditable>' + descripcionMeta + '</span>';
+				htmlTemp += '<ul></ul></li>';
 
 				$($(elementoPadre).find('ul')[0]).append(htmlTemp);
 
@@ -1078,139 +1040,180 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			}, false, true);
 		});
 	}
-	function agregarMonto(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion)
-	{
 
-		var descripcionMeta = '';
-		swal({
-			
-			title: "",
-			text: "Agregar Monto",
-			type: "input",
-			showCancelButton: true,
-			cancelButtonText:"CERRAR",
-			confirmButtonText: "AGREGAR",
-			closeOnConfirm: false,
-		 	inputPlaceholder: "",
-		}, 
-		function (inputValue)
-		{
-			
-		  	if (inputValue === false) return false;
-		  	if (inputValue === "")
-		  	{
-		    	swal.showInputError("Ingrese el Monto Por favor");
-		    	return false
-		  	}
+	function agregarMonto(idComponente, descripcionComponente, desc_presupuesto_ej) {
 
-		  	Monto = inputValue;
+		let index1 = descripcionComponente.search('IGV')
+		let index2 = descripcionComponente.search('UTILIDAD')
+		if (index1 >= 0 || index2 >= 0) {
+			const presupuesto_ejec = `${desc_presupuesto_ej.split('-')[0]}-COSTOSDIRECTOS`;
+			var monto_presupueto_ejec = $("#sumaTotalCostos" + presupuesto_ejec).val();
+			console.log(monto_presupueto_ejec);
+			swal({
 
-			paginaAjaxJSON({ "idComponente" : idComponente, "montoComponente" : Monto}, base_url+'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON)
-			{
-				objectJSON=JSON.parse(objectJSON);
-
-				swal(
-				{
-					title: '',
-					text: objectJSON.mensaje,
-					type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
+					title: "",
+					text: "Agregar Porcentaje",
+					type: "input",
+					showCancelButton: true,
+					cancelButtonText: "CERRAR",
+					confirmButtonText: "AGREGAR",
+					closeOnConfirm: false,
+					inputPlaceholder: "",
 				},
-				function(){});
+				function(inputValue) {
 
-				if(objectJSON.proceso=='Error')
-				{
-					return false;
-				}
-				const montoF = separator(Monto);
-				$('#montoComponente'+idComponente).text(montoF);
-			}, false, true);
-		});
+					if (inputValue === false) return false;
+					if (inputValue === "" || inputValue>100 || inputValue<0) {
+						swal.showInputError("Ingrese el porcentaje entre 0 y 100 %");
+						return false
+					}
+
+					Monto = (inputValue*monto_presupueto_ejec)/100;
+					porcentaje=inputValue;
+					paginaAjaxJSON({
+						"idComponente": idComponente,
+						"porcentaje" : porcentaje,
+						"montoComponente": Monto
+					}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
+						objectJSON = JSON.parse(objectJSON);
+
+						swal({
+								title: '',
+								text: objectJSON.mensaje,
+								type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+							},
+							function() {});
+
+						if (objectJSON.proceso == 'Error') {
+							return false;
+						}
+						const montoF = separator(Monto);
+						$('#montoComponente' + idComponente).text(montoF);
+					}, false, true);
+				});
+		} else {
+			swal({
+
+					title: "",
+					text: "Agregar Monto",
+					type: "input",
+					showCancelButton: true,
+					cancelButtonText: "CERRAR",
+					confirmButtonText: "AGREGAR",
+					closeOnConfirm: false,
+					inputPlaceholder: "",
+				},
+				function(inputValue) {
+
+					if (inputValue === false) return false;
+					if (inputValue === "" || isNaN(inputValue)) {
+						swal.showInputError("Ingrese un monto correcto");
+						return false
+					}
+
+					Monto = inputValue;
+					porcentaje=0;
+
+					paginaAjaxJSON({
+						"idComponente": idComponente,
+						"porcentaje": porcentaje,
+						"montoComponente": Monto
+					}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
+						objectJSON = JSON.parse(objectJSON);
+
+						swal({
+								title: '',
+								text: objectJSON.mensaje,
+								type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+							},
+							function() {});
+
+						if (objectJSON.proceso == 'Error') {
+							return false;
+						}
+						const montoF = separator(Monto);
+						$('#montoComponente' + idComponente).text(montoF);
+					}, false, true);
+				});
+		}
+
 	}
 
 	function separator(numb) {
-    var str = numb.toString().split(".");
-    str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return str.join(".");
-}
+		var str = numb.toString().split(".");
+		str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return str.join(".");
+	}
 
-	function importarMeta(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion,meta)
-	{
-		if($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length>0)
-		{
+	function importarMeta(idComponente, elementoPadre, idMetaPadre, nivel, idPresupuestoEjecucion, meta) {
+		if ($($(elementoPadre).find('> div')[0]).find('> table > tbody > .liPartida').length > 0) {
 			return;
 		}
 
 		var descripcionMeta = '';
 
-		  	descripcionMeta = meta;
+		descripcionMeta = meta;
 
-			if(descripcionMeta==null || descripcionMeta.trim()=='')
-			{
-				return;
+		if (descripcionMeta == null || descripcionMeta.trim() == '') {
+			return;
+		}
+
+		var existeMeta = false;
+
+		$($(elementoPadre).find('ul')[0]).find('> li').each(function(index, element) {
+			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll(descripcionMeta, ' ', '').toLowerCase()) {
+				existeMeta = true;
+
+				return false;
+			}
+		});
+
+		if (existeMeta) {
+			return;
+		}
+
+		paginaAjaxJSON({
+			"idComponente": idComponente,
+			"descripcionMeta": descripcionMeta.trim(),
+			"idMetaPadre": idMetaPadre
+		}, base_url + 'index.php/ET_Meta/insertar', 'POST', null, function(objectJSON) {
+			objectJSON = JSON.parse(objectJSON);
+			idmeta = objectJSON.idMeta;
+			if (objectJSON.proceso == 'Error') {
+				return false;
 			}
 
-			var existeMeta=false;
+			var htmlTemp = '<li class="listaNivel' + nivel + '">' +
+				'<input type="button" class="btn btn-default btn-xs" title="Guardar Cambios" value="G" onclick="guardarCambiosMeta(' + objectJSON.idMeta + ');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" title="Eliminar Meta" value="-" onclick="eliminarMeta(' + objectJSON.idMeta + ', this);" style="width: 30px;"> <button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo' + objectJSON.idMeta + '"><i class="fa fa-expand"></i></button><input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), ' + objectJSON.idMeta + ',' + (nivel + 1) + ',' + idPresupuestoEjecucion + ')" style="width: 30px;"><input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), ' + objectJSON.idMeta + ',' + idPresupuestoEjecucion + ')" style="width: 30px;"><span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta' + objectJSON.idMeta + '" contenteditable>' + descripcionMeta + '</span>';
+			htmlTemp += '<ul></ul></li>';
 
-			$($(elementoPadre).find('ul')[0]).find('> li').each(function(index, element)
-			{
-				if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(descripcionMeta, ' ', '').toLowerCase())
-				{
-					existeMeta=true;
+			$($(elementoPadre).find('ul')[0]).append(htmlTemp);
 
-					return false;
+			limpiarArbolCompletoMasOpciones();
+
+			$($(elementoPadre).find('ul')[0]).find('> li >span').each(function(index, element) {
+				if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll(descripcionMeta, ' ', '').toLowerCase()) {
+					console.log($(element).parent());
+					return $(element).parent();
 				}
 			});
 
-			if(existeMeta)
-			{
-				return;
-			}
+		}, false, true);
 
-			paginaAjaxJSON({ "idComponente" : idComponente, "descripcionMeta" : descripcionMeta.trim(), "idMetaPadre" : idMetaPadre }, base_url+'index.php/ET_Meta/insertar', 'POST', null, function(objectJSON)
-			{
-				objectJSON=JSON.parse(objectJSON);
-				idmeta = objectJSON.idMeta;
-				if(objectJSON.proceso=='Error')
-				{
-					return false;
-				}
-
-				var htmlTemp='<li class="listaNivel'+nivel+'">'+
-					'<input type="button" class="btn btn-default btn-xs" title="Guardar Cambios" value="G" onclick="guardarCambiosMeta('+objectJSON.idMeta+');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" title="Eliminar Meta" value="-" onclick="eliminarMeta('+objectJSON.idMeta+', this);" style="width: 30px;"> <button type="button" title="Mostrar Partidas" class="btn btn-default btn-xs" style="width: 30px;" data-toggle="collapse" data-target="#demo'+objectJSON.idMeta+'"><i class="fa fa-expand"></i></button><input type="button" class="btn btn-default btn-xs" title="Agregar Meta" value="+M" onclick="agregarMeta(\'\', $(this).parent(), '+objectJSON.idMeta+','+(nivel+1)+','+idPresupuestoEjecucion+')" style="width: 30px;"><input type="button" class="btn btn-default btn-xs" title="Agregar Partida" value="+P" onclick="renderizarAgregarPartida($(this).parent(), '+objectJSON.idMeta+','+idPresupuestoEjecucion+')" style="width: 30px;"><span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta'+objectJSON.idMeta+'" contenteditable>'+descripcionMeta+'</span>';
-					htmlTemp+='<ul></ul></li>';
-
-				$($(elementoPadre).find('ul')[0]).append(htmlTemp);
-
-				limpiarArbolCompletoMasOpciones();
-
-				$($(elementoPadre).find('ul')[0]).find('> li >span').each(function(index, element)
-				{
-					if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll(descripcionMeta, ' ', '').toLowerCase())
-					{
-						console.log($(element).parent());
-						return  $(element).parent();
-					}
-				});
-
-			}, false, true);
-		
 	}
 
 	var elementoPadreParaAgregarPartida, metaPadreParaAgregarPartida;
 
-	function renderizarAgregarPartida(elementoPadre, metaPadre, idPresupuestoEjecucion)
-	{
+	function renderizarAgregarPartida(elementoPadre, metaPadre, idPresupuestoEjecucion) {
 		limpiarArbolCompletoMasOpciones();
 
-		if($($(elementoPadre).find('ul')[0]).find('input[value="+M"]').length)
-		{
-			swal(
-			{
-				title: '',
-				text: 'No se puede agregar partida a una meta antecesora de otra.',
-				type: 'error'
-			},
-			function(){});
+		if ($($(elementoPadre).find('ul')[0]).find('input[value="+M"]').length) {
+			swal({
+					title: '',
+					text: 'No se puede agregar partida a una meta antecesora de otra.',
+					type: 'error'
+				},
+				function() {});
 
 			return;
 		}
@@ -1219,14 +1222,15 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 		$('#hdIdPresupuestoEjecucion').val(idPresupuestoEjecucion);
 
-		$(elementoPadre).css({ "background-color" : "#f5f5f5" });
+		$(elementoPadre).css({
+			"background-color": "#f5f5f5"
+		});
 
-		elementoPadreParaAgregarPartida=elementoPadre;
-		metaPadreParaAgregarPartida=metaPadre;
+		elementoPadreParaAgregarPartida = elementoPadre;
+		metaPadreParaAgregarPartida = metaPadre;
 	}
 
-	function agregarPartida()
-	{
+	function agregarPartida() {
 		$('#divAgregarPartida').data('formValidation').resetField($('#selectDescripcionPartida'));
 		$('#divAgregarPartida').data('formValidation').resetField($('#selectUnidadMedidaPartida'));
 		$('#divAgregarPartida').data('formValidation').resetField($('#txtCantidadPartida'));
@@ -1234,32 +1238,27 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 		$('#divAgregarPartida').data('formValidation').validate();
 
-		if(!($('#divAgregarPartida').data('formValidation').isValid()))
-		{
+		if (!($('#divAgregarPartida').data('formValidation').isValid())) {
 			return;
 		}
 
-		var existePartida=false;
+		var existePartida = false;
 
-		$($(elementoPadreParaAgregarPartida).find('table')[0]).find('> tbody > tr > td > b').each(function(index, element)
-		{
-			if(replaceAll($(element).text(), ' ', '').toLowerCase()==replaceAll($('#selectDescripcionPartida').val(), ' ', '').toLowerCase())
-			{
-				existePartida=true;
+		$($(elementoPadreParaAgregarPartida).find('table')[0]).find('> tbody > tr > td > b').each(function(index, element) {
+			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#selectDescripcionPartida').val(), ' ', '').toLowerCase()) {
+				existePartida = true;
 
 				return false;
 			}
 		});
 
-		if(existePartida)
-		{
-			swal(
-			{
-				title: '',
-				text: 'No se puede agregar dos partidas iguales en el mismo nivel.',
-				type: 'error'
-			},
-			function(){});
+		if (existePartida) {
+			swal({
+					title: '',
+					text: 'No se puede agregar dos partidas iguales en el mismo nivel.',
+					type: 'error'
+				},
+				function() {});
 
 			return;
 		}
@@ -1271,49 +1270,53 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		var idLista = $('#hdIdListaPartida').val();
 		var idPresupuestoEjecucion = $('#hdIdPresupuestoEjecucion').val();
 
-		paginaAjaxJSON({ "idMeta" : metaPadreParaAgregarPartida, "idUnidad" : idUnidad, "descripcionPartida" : descripcion, "rendimientoPartida" : '', "cantidadPartida" : cantidad, "precioUnitarioPartida" : precio, "idListaPartida" : idLista }, base_url+'index.php/ET_Partida/insertar', 'POST', null, function(objectJSON)
-		{
-			objectJSON=JSON.parse(objectJSON);
+		paginaAjaxJSON({
+			"idMeta": metaPadreParaAgregarPartida,
+			"idUnidad": idUnidad,
+			"descripcionPartida": descripcion,
+			"rendimientoPartida": '',
+			"cantidadPartida": cantidad,
+			"precioUnitarioPartida": precio,
+			"idListaPartida": idLista
+		}, base_url + 'index.php/ET_Partida/insertar', 'POST', null, function(objectJSON) {
+			objectJSON = JSON.parse(objectJSON);
 
-			swal(
-			{
-				title: '',
-				text: objectJSON.mensaje,
-				type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-			},
-			function(){});
+			swal({
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+				},
+				function() {});
 
-			if(objectJSON.proceso=='Error')
-			{
+			if (objectJSON.proceso == 'Error') {
 				return false;
 			}
 
-			var htmlTemp='<tr id="rowPartida'+objectJSON.idPartida+'" style="color: red;" class="liPartida">'+
-				'<td>'+
-					'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida('+objectJSON.idPartida+');" style="width: 30px;">'+
-					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida('+objectJSON.idPartida+', this);" style="width: 30px;">';
-				// if(idPresupuestoEjecucion==2)
-				// {
-					htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' , aprobado :<?=$expedienteTecnico->aprobado?>, id_etapa_et :<?=$expedienteTecnico->id_etapa_et?> }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
-				// }
-				// else
-				// {
-				// 	htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
-				// }
-				htmlTemp+='</td>'+
-				'<td style="text-transform: uppercase;"><span id="nombrePartida'+objectJSON.idPartida+'" contenteditable>'+replaceAll(replaceAll($('#selectDescripcionPartida').val().trim(), '<', '&lt;'), '>', '&gt;')+'</span></td>'+
+			var htmlTemp = '<tr id="rowPartida' + objectJSON.idPartida + '" style="color: red;" class="liPartida">' +
+				'<td>' +
+				'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida(' + objectJSON.idPartida + ');" style="width: 30px;">' +
+				'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida(' + objectJSON.idPartida + ', this);" style="width: 30px;">';
+			// if(idPresupuestoEjecucion==2)
+			// {
+			htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : <?= $expedienteTecnico->id_et ?>, idPartida : ' + objectJSON.idPartida + ', idPresupuesto : ' + idPresupuestoEjecucion + ' , aprobado :<?= $expedienteTecnico->aprobado ?>, id_etapa_et :<?= $expedienteTecnico->id_etapa_et ?> }, \'' + base_url + 'index.php/ET_Analisis_Unitario/insertar\'' + ', \'get\', null, null, false, true);" style="width: 30px;">';
+			// }
+			// else
+			// {
+			// 	htmlTemp+='<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : <?= $expedienteTecnico->id_et ?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
+			// }
+			htmlTemp += '</td>' +
+				'<td style="text-transform: uppercase;"><span id="nombrePartida' + objectJSON.idPartida + '" contenteditable>' + replaceAll(replaceAll($('#selectDescripcionPartida').val().trim(), '<', '&lt;'), '>', '&gt;') + '</span></td>' +
 
-				'<td style="text-align: right; text-transform: uppercase;">'+replaceAll(replaceAll(objectJSON.descripcionUnidadMedida, '<', '&lt;'), '>', '&gt;')+'</td>'+
+				'<td style="text-align: right; text-transform: uppercase;">' + replaceAll(replaceAll(objectJSON.descripcionUnidadMedida, '<', '&lt;'), '>', '&gt;') + '</td>' +
 
-				'<td style="text-align: right;"><span id="cantidadPartida'+objectJSON.idPartida+'" contenteditable>'+ parseFloat(objectJSON.cantidadDetallePartida).toFixed(2)+'</span></td>'+
+				'<td style="text-align: right;"><span id="cantidadPartida' + objectJSON.idPartida + '" contenteditable>' + parseFloat(objectJSON.cantidadDetallePartida).toFixed(2) + '</span></td>' +
 
-				'<td style="text-align: right;"><span id="precioUnitarioPartida'+objectJSON.idPartida+'" contenteditable>'+parseFloat(objectJSON.precioUnitarioDetallePartida).toFixed(2)+'</span></td>'+
+				'<td style="text-align: right;"><span id="precioUnitarioPartida' + objectJSON.idPartida + '" contenteditable>' + parseFloat(objectJSON.precioUnitarioDetallePartida).toFixed(2) + '</span></td>' +
 
-				'<td style="text-align: right;">'+parseFloat(objectJSON.precioParcialDetallePartida).toFixed(2)+'</td>'+
-			'</tr>';
-			if(!($(elementoPadreParaAgregarPartida).find('table').length))
-			{
-				$($(elementoPadreParaAgregarPartida).find('ul')[0]).replaceWith('<div id="demo'+metaPadreParaAgregarPartida+'" style="margin-bottom : 8px;margin-top : 2px;" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody></tbody</table></div>');
+				'<td style="text-align: right;">' + parseFloat(objectJSON.precioParcialDetallePartida).toFixed(2) + '</td>' +
+				'</tr>';
+			if (!($(elementoPadreParaAgregarPartida).find('table').length)) {
+				$($(elementoPadreParaAgregarPartida).find('ul')[0]).replaceWith('<div id="demo' + metaPadreParaAgregarPartida + '" style="margin-bottom : 8px;margin-top : 2px;" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody></tbody</table></div>');
 			}
 
 			$($(elementoPadreParaAgregarPartida).find('table > tbody')[0]).append(htmlTemp);
@@ -1325,252 +1328,219 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		}, false, true);
 	}
 
-	function eliminarPartida(idPartida, element)
-    {
-        swal({
-            title: "Al borrar partida se eliminará todos los datos relacionados a dicha partida. ¿Realmente desea proseguir con la operación?",
-            text: "",
-            type: "warning",
-            showCancelButton: true,
-            cancelButtonText:"CERRAR" ,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "SI,ELIMINAR",
-            closeOnConfirm: false
-        },
-        function(){
-            paginaAjaxJSON({ "idPartida" : idPartida }, base_url+'index.php/ET_Partida/eliminar', 'POST', null, function(objectJSON)
-			{
-				objectJSON=JSON.parse(objectJSON);
+	function eliminarPartida(idPartida, element) {
+		swal({
+				title: "Al borrar partida se eliminará todos los datos relacionados a dicha partida. ¿Realmente desea proseguir con la operación?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				cancelButtonText: "CERRAR",
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "SI,ELIMINAR",
+				closeOnConfirm: false
+			},
+			function() {
+				paginaAjaxJSON({
+					"idPartida": idPartida
+				}, base_url + 'index.php/ET_Partida/eliminar', 'POST', null, function(objectJSON) {
+					objectJSON = JSON.parse(objectJSON);
 
-				swal(
-				{
-					title: '',
-					text: objectJSON.mensaje,
-					type: (objectJSON.proceso=='Correcto' ? 'success' : 'error')
-				},
-				function(){});
+					swal({
+							title: '',
+							text: objectJSON.mensaje,
+							type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+						},
+						function() {});
 
-				var tBodyTemporal=$(element).parent().parent().parent();
+					var tBodyTemporal = $(element).parent().parent().parent();
 
-				$(element).parent().parent().remove();
+					$(element).parent().parent().remove();
 
-				if(!($(tBodyTemporal).find('tr').length))
-				{
-					$($(tBodyTemporal).parent()[0]).parent().replaceWith('<ul></ul>');
-				}
+					if (!($(tBodyTemporal).find('tr').length)) {
+						$($(tBodyTemporal).parent()[0]).parent().replaceWith('<ul></ul>');
+					}
 
-				limpiarArbolCompletoMasOpciones();
-			}, false, true);
-        });
-    }
+					limpiarArbolCompletoMasOpciones();
+				}, false, true);
+			});
+	}
 
-	function MostrarSubLista(codigoPartida, nivel, element)
-	{
-		var marginLeftTemp=35;
-		$.ajax(
-		{
+	function MostrarSubLista(codigoPartida, nivel, element) {
+		var marginLeftTemp = 35;
+		$.ajax({
 			type: "POST",
-			url: base_url+"index.php/ET_Componente/cargarNivel",
+			url: base_url + "index.php/ET_Componente/cargarNivel",
 			cache: false,
-			data: { codigoPartida: codigoPartida, nivel: nivel },
-			success: function(resp)
-			{
-				var obj=JSON.parse(resp);
+			data: {
+				codigoPartida: codigoPartida,
+				nivel: nivel
+			},
+			success: function(resp) {
+				var obj = JSON.parse(resp);
 
-				if(obj.length==0)
-				{
+				if (obj.length == 0) {
 					return false;
 				}
-				var htmlTemp='<ul style="margin-left: '+marginLeftTemp+'px;">';
-				for(var i=0; i<obj.length; i++)
-				{
-					if(obj[i].hasChild == false)
-					{
-						htmlTemp+='<li>'+
-						'<input type="button" id="btnAgregar" class="btn btn-warning btn-xs" value="A" style="width: 25px;" onclick="seleccionar(\''+replaceAll(obj[i].Descripcion,'"','*')+'\',\''+obj[i].Unidad+'\', \''+obj[i].RendimientoMO+'\');" style="margin: 1px;">'+
-						'<span class="nivel">'+obj[i].Descripcion+ ((obj[i].Simbolo == null) ? "" : ' ('+obj[i].Simbolo+')')+'</span>'+
-						'</li>';
-					}
-					else
-					{
-						htmlTemp+='<li>'+
-						'<input type="button" style="width: 25px;" class="btn btn-default btn-xs" value="+" onclick="elegirAccion(\''+obj[i].CodPartida+'\', '+(obj[i].Nivel+1)+', this);" style="margin: 1px;">'+
-						'<span class="nivel">'+obj[i].Descripcion+ ((obj[i].Simbolo == null) ? "" : ' ('+obj[i].Simbolo+')')+'</span>'+
-					'</li>';
+				var htmlTemp = '<ul style="margin-left: ' + marginLeftTemp + 'px;">';
+				for (var i = 0; i < obj.length; i++) {
+					if (obj[i].hasChild == false) {
+						htmlTemp += '<li>' +
+							'<input type="button" id="btnAgregar" class="btn btn-warning btn-xs" value="A" style="width: 25px;" onclick="seleccionar(\'' + replaceAll(obj[i].Descripcion, '"', '*') + '\',\'' + obj[i].Unidad + '\', \'' + obj[i].RendimientoMO + '\');" style="margin: 1px;">' +
+							'<span class="nivel">' + obj[i].Descripcion + ((obj[i].Simbolo == null) ? "" : ' (' + obj[i].Simbolo + ')') + '</span>' +
+							'</li>';
+					} else {
+						htmlTemp += '<li>' +
+							'<input type="button" style="width: 25px;" class="btn btn-default btn-xs" value="+" onclick="elegirAccion(\'' + obj[i].CodPartida + '\', ' + (obj[i].Nivel + 1) + ', this);" style="margin: 1px;">' +
+							'<span class="nivel">' + obj[i].Descripcion + ((obj[i].Simbolo == null) ? "" : ' (' + obj[i].Simbolo + ')') + '</span>' +
+							'</li>';
 					}
 				}
 
-				htmlTemp+='</ul>';
+				htmlTemp += '</ul>';
 				$(element).parent().append(htmlTemp);
 			}
 		});
 	}
 
-	function ContraerSubLista(element)
-	{
+	function ContraerSubLista(element) {
 		$(element).parent().find('>ul').remove();
 	}
 
-	function seleccionar(partida,unidad,rendimiento)
-	{
-		var nuevoPartida = replaceAll(partida,'*','"');
+	function seleccionar(partida, unidad, rendimiento) {
+		var nuevoPartida = replaceAll(partida, '*', '"');
 		$('#selectDescripcionPartida').val(nuevoPartida);
-		if(unidad=='null')
-		{
+		if (unidad == 'null') {
 			$('#selectUnidadMedidaPartida').html('<option val="UNIDAD">UNIDAD</option>');
 			$('#selectUnidadMedidaPartida').selectpicker('refresh');
 			$('#selectUnidadMedidaPartida').selectpicker('val', "UNIDAD");
-		}
-		else
-		{
-			$('#selectUnidadMedidaPartida').html('<option val="'+unidad+'">'+unidad+'</option>');
+		} else {
+			$('#selectUnidadMedidaPartida').html('<option val="' + unidad + '">' + unidad + '</option>');
 			$('#selectUnidadMedidaPartida').selectpicker('refresh');
 			$('#selectUnidadMedidaPartida').selectpicker('val', unidad);
 		}
 	}
 
-	function elegirAccion(codigoInsumo, nivel, element)
-	{
-		var valueButton =  $(element).attr('value');
-		if(valueButton == '+')
-		{
+	function elegirAccion(codigoInsumo, nivel, element) {
+		var valueButton = $(element).attr('value');
+		if (valueButton == '+') {
 			MostrarSubLista(codigoInsumo, nivel, element);
-			$(element).attr('value','-');
-		}
-		else
-		{
+			$(element).attr('value', '-');
+		} else {
 			ContraerSubLista(element);
-			$(element).attr('value','+');
+			$(element).attr('value', '+');
 		}
 	}
 
-	$(function()
-	{
+	$(function() {
 		$("#divCargarSelectComponentePresupuesto").hide();
-				$("#divTxtDescripcionComponente").show();
+		$("#divTxtDescripcionComponente").show();
 		limpiarArbolCompletoMasOpciones();
 
-		$('#selectBuscarPartida').selectpicker({ liveSearch: true }).ajaxSelectPicker(
-		{
-	        ajax: {
-	            url: base_url+'index.php/ET_Lista_Partida/verPorDescripcion',
-	            data: { valueSearch : '{{{q}}}' }
-	        },
-	        locale:
-	        {
-	        	statusInitialized : 'Escriba para buscar partida',
-	            statusNoResults : 'No se encontro',
-	            statusSearching : 'Buscando...',
-	            searchPlaceholder : 'Buscar',
-	            emptyTitle : 'Buscar Partida'
-	        },
-	        preprocessData: function(data)
-	        {
-	        	var dataForSelect=[];
+		$('#selectBuscarPartida').selectpicker({
+			liveSearch: true
+		}).ajaxSelectPicker({
+			ajax: {
+				url: base_url + 'index.php/ET_Lista_Partida/verPorDescripcion',
+				data: {
+					valueSearch: '{{{q}}}'
+				}
+			},
+			locale: {
+				statusInitialized: 'Escriba para buscar partida',
+				statusNoResults: 'No se encontro',
+				statusSearching: 'Buscando...',
+				searchPlaceholder: 'Buscar',
+				emptyTitle: 'Buscar Partida'
+			},
+			preprocessData: function(data) {
+				var dataForSelect = [];
 
-	        	for(var i=0; i<data.length; i++)
-	        	{
-	        		dataForSelect.push(
-	                {
-	                    "value" : data[i].Descripcion,
-	                    "text" : data[i].Descripcion,
-	                    "data" :
-	                    {
-	                    	"unidad" : data[i].Unidad,
-	                    	"rendimiento" : data[i].RendimientoMO
-	                    },
-	                    "disabled" : false
-	                });
-	        	}
+				for (var i = 0; i < data.length; i++) {
+					dataForSelect.push({
+						"value": data[i].Descripcion,
+						"text": data[i].Descripcion,
+						"data": {
+							"unidad": data[i].Unidad,
+							"rendimiento": data[i].RendimientoMO
+						},
+						"disabled": false
+					});
+				}
 
-	            return dataForSelect;
-	        },
-	        preserveSelected: false
-	    });
+				return dataForSelect;
+			},
+			preserveSelected: false
+		});
 
-	    $('#selectBuscarPartida').on('change', function()
-	    {
-			var selected=$(this).find("option:selected").val();
-			var unidad ='';
-			if(selected.trim()!='')
-			{
-				unidad=$(this).find("option:selected").data('unidad');
+		$('#selectBuscarPartida').on('change', function() {
+			var selected = $(this).find("option:selected").val();
+			var unidad = '';
+			if (selected.trim() != '') {
+				unidad = $(this).find("option:selected").data('unidad');
 				$('#selectDescripcionPartida').val(selected);
 			}
-			if(unidad===undefined)
-			{
-				$('#selectUnidadMedidaPartida').html('<option val="UNIDAD">UNIDAD</option>');	
+			if (unidad === undefined) {
+				$('#selectUnidadMedidaPartida').html('<option val="UNIDAD">UNIDAD</option>');
 				$('#selectUnidadMedidaPartida').selectpicker('refresh');
 				$('#selectUnidadMedidaPartida').selectpicker('val', "UNIDAD");
+			} else {
+				$('#selectUnidadMedidaPartida').html('<option val="' + unidad + '">' + unidad + '</option>');
+				$('#selectUnidadMedidaPartida').selectpicker('refresh');
+				$('#selectUnidadMedidaPartida').selectpicker('val', unidad);
 			}
-			else
-			{
-				$('#selectUnidadMedidaPartida').html('<option val="'+unidad+'">'+unidad+'</option>');
-				$('#selectUnidadMedidaPartida').selectpicker('refresh');	
-				$('#selectUnidadMedidaPartida').selectpicker('val',unidad);
-			}
-	    });
+		});
 
-	    $('#selectUnidadMedidaPartida').selectpicker({ liveSearch: true }).ajaxSelectPicker(
-		{
-	        ajax: {
-	            url: base_url+'index.php/Unidad_Medida/listaUnidadMedida',
-	            data: { valueSearch : '{{{q}}}' }
-	        },
-	        locale: {
-	            statusInitialized : 'Escriba para buscar unidad',
-	            statusNoResults : 'No se encontro',
-	            statusSearching : 'Buscando...',
-	            searchPlaceholder : 'Buscar',
-	            emptyTitle : 'Buscar Unidad'
-	        },
-	        preprocessData: function(data)
-	        {
-	        	var dataForSelect=[];
-	        	for(var i=0; i<data.length; i++)
-	        	{
-	        		dataForSelect.push(
-	                {
-	                    "value" : data[i].descripcion,
-	                    "text" : data[i].descripcion,
-	                    "data" :
-	                    {
-	                    	"id-unidad" : data[i].id_unidad
-	                    },
-	                    "disabled" : false
-	                });
-	        	}
+		$('#selectUnidadMedidaPartida').selectpicker({
+			liveSearch: true
+		}).ajaxSelectPicker({
+			ajax: {
+				url: base_url + 'index.php/Unidad_Medida/listaUnidadMedida',
+				data: {
+					valueSearch: '{{{q}}}'
+				}
+			},
+			locale: {
+				statusInitialized: 'Escriba para buscar unidad',
+				statusNoResults: 'No se encontro',
+				statusSearching: 'Buscando...',
+				searchPlaceholder: 'Buscar',
+				emptyTitle: 'Buscar Unidad'
+			},
+			preprocessData: function(data) {
+				var dataForSelect = [];
+				for (var i = 0; i < data.length; i++) {
+					dataForSelect.push({
+						"value": data[i].descripcion,
+						"text": data[i].descripcion,
+						"data": {
+							"id-unidad": data[i].id_unidad
+						},
+						"disabled": false
+					});
+				}
 
-	            return dataForSelect;
-	        },
-	        preserveSelected: false
-	    });
+				return dataForSelect;
+			},
+			preserveSelected: false
+		});
 
-		$('#divImportarComponente').formValidation(
-		{
+		$('#divImportarComponente').formValidation({
 			framework: 'bootstrap',
 			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
 			live: 'enabled',
 			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
 			trigger: null,
-			fields:
-			{
-				selectComponente:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+			fields: {
+				selectComponente: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Descripción del componente" es requerido.</b>'
 						}
 					}
 				},
-				selectPresupuestoEjecucionI:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+				selectPresupuestoEjecucionI: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Estructurao de Presupuesto" es requerido.</b>'
 						}
 					}
@@ -1579,31 +1549,23 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			}
 		});
 
-		$('#divAgregarComponente').formValidation(
-		{
+		$('#divAgregarComponente').formValidation({
 			framework: 'bootstrap',
 			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
 			live: 'enabled',
 			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
 			trigger: null,
-			fields:
-			{
-				txtDescripcionComponente:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+			fields: {
+				txtDescripcionComponente: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Descripción del componente" es requerido.</b>'
 						}
 					}
 				},
-				selectPresupuestoEjecucion:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+				selectPresupuestoEjecucion: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Estructurao de Presupuesto" es requerido.</b>'
 						}
 					}
@@ -1612,79 +1574,64 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			}
 		});
 
-		$('#divAgregarPartida').formValidation(
-		{
+		$('#divAgregarPartida').formValidation({
 			framework: 'bootstrap',
 			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
 			live: 'enabled',
 			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
 			trigger: null,
-			fields:
-			{
-				selectDescripcionPartida:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+			fields: {
+				selectDescripcionPartida: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Descripción partida" es requerido.</b>'
 						}
 					}
 				},
-				selectUnidadMedidaPartida:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+				selectUnidadMedidaPartida: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Unidad" es requerido.</b>'
 						}
 					}
 				},
-				txtCantidadPartida:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+				txtCantidadPartida: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Cantidad" es requerido.</b>'
 						},
-						regexp:
-	                    {
-	                        regexp: /^(\d+([\.]{1}(\d{1,2})?)?)*$/,
-	                        message: '<b style="color: red;">El campo "Cantidad" debe ser un número.</b>'
-	                    }
+						regexp: {
+							regexp: /^(\d+([\.]{1}(\d{1,2})?)?)*$/,
+							message: '<b style="color: red;">El campo "Cantidad" debe ser un número.</b>'
+						}
 					}
 				},
-				txtPrecioUnitarioPartida:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+				txtPrecioUnitarioPartida: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Precio unitario" es requerido.</b>'
 						},
-						regexp:
-	                    {
-	                        regexp: /^(\d+([\.]{1}(\d{1,2})?)?)*$/,
-	                        message: '<b style="color: red;">El campo "Precio unitario" debe ser en soles.</b>'
-	                    }
+						regexp: {
+							regexp: /^(\d+([\.]{1}(\d{1,2})?)?)*$/,
+							message: '<b style="color: red;">El campo "Precio unitario" debe ser en soles.</b>'
+						}
 					}
 				}
 			}
 		});
 	});
-	function valideKey(evt){
-			
-			// code is the decimal ASCII representation of the pressed key.
-			var code = (evt.which) ? evt.which : evt.keyCode;
-			
-			if(code==46) { // backspace.
-			  return true;
-			} else if(code>=48 && code<=57) { // is a number.
-			  return true;
-			} else{ // other keys.
-			  return false;
-			}
+
+	function valideKey(evt) {
+
+		// code is the decimal ASCII representation of the pressed key.
+		var code = (evt.which) ? evt.which : evt.keyCode;
+
+		if (code == 46) { // backspace.
+			return true;
+		} else if (code >= 48 && code <= 57) { // is a number.
+			return true;
+		} else { // other keys.
+			return false;
 		}
+	}
 </script>

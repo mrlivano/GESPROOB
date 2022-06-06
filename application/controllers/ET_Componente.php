@@ -130,7 +130,15 @@ class ET_Componente extends CI_Controller
 			$value->costoPresupuestoDirecto = $costoPresupuestoDirecto;
 			$value->costoPresupuestoIndirecto = $costoPresupuestoIndirecto;
 		}		
-
+		foreach($expedienteTecnico->childPresupuestoEjecucion as $key => $value)
+		{
+			if(strpos($value->desc_presupuesto_ej, 'COSTOS INDIRECTOS')){
+				$presupuesto_ej = explode('-', $value->desc_presupuesto_ej)[0].'- COSTOS DIRECTOS';
+				$presup = array_column($expedienteTecnico->childPresupuestoEjecucion, 'desc_presupuesto_ej');
+				$key = array_search($presupuesto_ej, $presup);
+				$value->costoPresupuestoDirecto = $expedienteTecnico->childPresupuestoEjecucion[$key]->costoPresupuestoDirecto;
+			}
+		}
 		$listaPartidaNivel1 = $this->Model_Unidad_Medida->listaPartidaNivel1();
 
 		foreach ($listaPartidaNivel1 as $key => $value) 
@@ -175,10 +183,11 @@ class ET_Componente extends CI_Controller
 	public function editarMontoComponente()
 	{
 		$idComponente=$this->input->post('idComponente');
+		$porcentaje=$this->input->post('porcentaje');
 		$montoComponente=$this->input->post('montoComponente');
 		//aqui se puede evaluar si es numerico o no
 		if (is_numeric($montoComponente)) {
-			$this->Model_ET_Componente->updateMontoComponente($idComponente, $montoComponente);
+			$this->Model_ET_Componente->updateMontoComponente($idComponente,$porcentaje,$montoComponente);
 
 		echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Cambios guardados correctamente.']);exit;
 		} else {
