@@ -11,8 +11,8 @@ class Model_ET_Responsable extends CI_Model
     function insertarET_Epediente($id_et,$ComboResponsableEjecucion,$ComboTipoResponsableEjecucion,$comboCargoEjecucion)
     {
         $estado_responsable_et=1;
-        $mensaje1=$this->db->query("insert into ET_RESPONSABLE(id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et)values('".$id_et."','".$ComboResponsableEjecucion."','".$ComboTipoResponsableEjecucion."','".$comboCargoEjecucion."','".$estado_responsable_et."')");
-        return true;
+        $this->db->query("insert into ET_RESPONSABLE(id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et)values('".$id_et."','".$ComboResponsableEjecucion."','".$ComboTipoResponsableEjecucion."','".$comboCargoEjecucion."','".$estado_responsable_et."')");
+        return $this->db->insert_id();
     }
 
     function ETResponsablePorIdET($idEt)
@@ -65,6 +65,11 @@ class Model_ET_Responsable extends CI_Model
     {
         $data= $this->db->query("select p.nombres+' '+p.apellido_p+' '+p.apellido_m as nombres from et_responsable r inner join persona p on r.id_persona=p.id_persona where id_cargo='$idCargo' and id_et='$idEt'");
         return $data->result();
+    }
+
+    function ResponsableEtapa($id_et, $id_etapa){
+        $data= $this->db->query("select r.*, p.nombres,p.apellido_p,p.apellido_m,c.desc_cargo from ET_RESPONSABLE r inner join PERSONA p on r.id_persona=p.id_persona inner join CARGO c on r.id_cargo = c.id_cargo where id_et='$id_et' and id_tipo_responsable_et='$id_etapa'");
+        return $data->result(); 
     }
 
 }
