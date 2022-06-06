@@ -173,41 +173,24 @@
 						
 					</div>
 
-					<div class="row">						
-					<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">						
 					<label class="control-label">Responsables de Elaboración de Expediente</label>
-					<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Elaboración" class='btn btn-primary btn-xs' onclick="paginaAjaxDialogo(null, 'Agregar Presupuesto de Ejecución', { id_et: '<?=$ExpedienteTecnicoM->id_et?>' }, base_url+'index.php/Expediente_Tecnico/insertarResponsableElaboracion', 'GET', null, null, false, true);"><i class='fa fa-plus'></i> Agregar</button>
-					    	<div class="form-group">
-						      	<select class="selectpicker form-control" id="comboTipoResponsableElaboracion" name="comboTipoResponsableElaboracion" data-live-search="true">
-									<?php foreach ($listaTipoResponsableElaboracion as $key => $item) { ?>
-										<option value="<?=$item->id_tipo_responsable_et?>"><?=$item->desc_tipo_responsable_et?></option>
-									<?php } ?>
-						      	</select>
-					    	</div>
+					<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Elaboración" class='btn btn-primary btn-xs' onclick="insertarResponsableElaboracion('<?=$ExpedienteTecnicoM->id_et?>')"><i class='fa fa-plus'></i> Agregar</button>
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Responsable de Elaboración:</label>
-					    	<div class="form-group">
-						      	<select class="selectpicker form-control" id="comboResponsableElaboracion" name="comboResponsableElaboracion" data-live-search="true">
-						        	<option value="">Seleccione una opción</option>
-									<?php foreach ($listarPersona as $key => $item) { ?>
-										<option value="<?=$item->id_persona?>" <?=($item->id_persona==@$listarUResponsableERespoElabo[0]->id_persona ? 'selected' : '')?> ><?=$item->nombreCompleto?></option>
-									<?php } ?>
-						      	</select>
-					    	</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="table-responsive">
+								<table id="tablaResponsableElaboracion" class="table table-bordered table-striped tablaGenerica" style="width:100%;">
+									<thead>
+										<tr>
+											<th>Nombres y Apellidos</th>
+											<th>Cargo</th>
+											<th>Opción</th>
+										</tr>
+									</thead>
+								</table>
+							</div>	
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-					  		<label class="control-label">Cargo:</label>
-					    	<div class="form-group">
-								<input type="hidden" name="idTipoResponsableElaboracion" value="<?=@$listarUResponsableERespoElabo[0]->id_responsable_et?>" >						      	
-								<select class="selectpicker form-control" id="comboCargoElaboracion" name="comboCargoElaboracion" data-live-search="true">
-								  	<option value="">Seleccione una opción</option>
-									<?php foreach ($listarCargo as $key => $item) { ?>
-						      			<option value='<?=$item->id_cargo?>' <?=($item->id_cargo==@$listarUResponsableERespoElabo[0]->id_cargo ? 'selected' : '')?> ><?=$item->Desc_cargo?></option>		      								      			
-						      		<?php } ?>
-						      	</select>
-					    	</div>
-					  	</div>
 					</div>
 					<div class="row">						
 						<?php if($ExpedienteTecnicoM->id_etapa_et==3 || $ExpedienteTecnicoM->id_etapa_et==10){ ?>
@@ -653,6 +636,8 @@ $(function()
 			}			
 		}
 	});
+
+	listaResponsableElaboracion($('#hdIdExpediente').val());
 });
 
 	function EliminarImagen(id_img,id_et)
@@ -773,6 +758,64 @@ function valideKey(evt){
 			  return false;
 			}
 		}
+
+		function insertarResponsableElaboracion(id_et)
+{
+    paginaAjaxDialogo('otherModalResponsableElaboracion', 'Agregar Responsables de Elaboración', {id_et:id_et}, base_url+'index.php/Expediente_Tecnico/insertarResponsableElaboracion', 'GET', null, null, false, true);
+}
+
+		function listaResponsableElaboracion(id_et) 
+	{
+		console.log(id_et)
+		var table=$("#tablaResponsableElaboracion").DataTable({
+			"processing": true,
+			"serverSide":false,
+			destroy:true,
+			"ajax":{
+				url:base_url+"index.php/Expediente_Tecnico/listarResponsableElaboracion",
+				type:"POST",
+				data :{id_et:id_et}
+			},
+			"columns":
+			[
+				{"data":"nombres"},
+				{"data":"desc_cargo"},
+				{"data":"id_responsable_et",
+					render: function(data, type, row)
+					{
+						return "<button type='button' class='btn btn-danger btn-xs' onclick=eliminarResponsableElaboracion(" + data + ",this)><i class='fa fa-trash-o'></i></button>"; 
+					}
+				}
+			],
+			"language":idioma_espanol
+		});
+	}
+
+	function eliminarResponsableElaboracion(id_responsable_et, element) 
+	{
+		swal({
+			title: "Se eliminará responsable de elaboración. ¿Realmente desea proseguir con la operación?",
+			text: "",
+			type: "warning",
+			showCancelButton: true,
+			cancelButtonText: "Cerrar",
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "SI,Eliminar",
+			closeOnConfirm: false
+		}, function() {
+			paginaAjaxJSON({
+				"id_responsable_et": id_responsable_et
+			}, base_url + 'index.php/Expediente_Tecnico/eliminarResponsableElaboracion', 'POST', null, function(objectJSON) {
+				objectJSON = JSON.parse(objectJSON);
+				swal({
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+				}, function() {});
+				$('#tablaResponsableElaboracion').dataTable()._fnAjaxUpdate();
+			}, false, true);
+		});
+	}
 </script>
 
 

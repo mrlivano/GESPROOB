@@ -2926,10 +2926,64 @@ class Expediente_Tecnico extends CI_Controller
 		echo json_encode($costoUnitario->result());exit;
 	}
 
-	public function insertarResponsableElaboracion()
+		function insertarResponsableElaboracion()
     {
-    	$id_et =  $this->input->get('id_et');
+        if($_POST)
+        {
+            $msg = array();
+            $hdIdExpediente=$this->input->post("hdET");
+						// obtener id_tipo_responsable Elaboracion
+						$id_tipo_responsableElabo='2';
+						$comboResponsableElaboracion =$this->input->post('comboResponsableElaboracion');
+						$comboCargoElaboracion =$this->input->post('comboCargoElaboracion');
 
-        $this->load->view('front/Ejecucion/PresupuestoEjecucion/insertar',['id_et'=>$id_et]);        
+						if($comboResponsableElaboracion!='')
+						{
+							$this->Model_ET_Responsable->insertarET_Epediente($hdIdExpediente,$comboResponsableElaboracion,$id_tipo_responsableElabo,$comboCargoElaboracion);
+							$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
+						}
+						else{
+							$msg =(['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']);
+						}               
+            
+            echo json_encode($msg);exit;
+        }
+        if($_GET)
+        {
+            $id_et=$this->input->get('id_et');
+						$listarCargo=$this->Cargo_Modal->getcargo();
+						$listarPersona=$this->Model_Personal->listarPersona();
+            $this->load->view('front/Ejecucion/ExpedienteTecnico/insertarResponsableElaboracion', ['listarCargo'=>$listarCargo,'listarPersona'=>$listarPersona,'id_et'=>$id_et]);
+        }        
     }
+
+	public function listarResponsableElaboracion()
+    {
+        if ($this->input->is_ajax_request())
+        {
+            $id_et = $this->input->post("id_et");
+            $data  = $this->Model_ET_Responsable->ResponsableEtapa($id_et,'2');
+            if($data == false)
+            {
+                echo json_encode(array('data' => $data));
+            }
+            else
+            {
+                echo json_encode(array('data' => $data));
+            }
+        }
+        else
+        {
+            show_404();
+        }
+    }
+
+		function eliminarResponsableElaboracion()
+    {
+        $msg = array();
+        $data = $this->Model_ET_Responsable->eliminar($this->input->post("id_responsable_et"));
+        $msg = ($data>0 ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron eliminados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+        echo json_encode($msg);exit;
+    }
+		
 }
