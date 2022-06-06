@@ -22,7 +22,7 @@
 			<div class="x_content">
 				<div class="row"> 
 					<div class="table-responsive" >
-						<table id="table-DetallePorCadaOrden"  class="table table-striped table-bordered" cellspacing="0" width="100%;">
+						<table id="table-DetallePorCadaOrden"  class="table table-striped table-bordered" cellspacing="0" style="width: 100%;" width="100%;">
 							<thead>
 								<tr>
 									<td>Fecha de Registro</td>
