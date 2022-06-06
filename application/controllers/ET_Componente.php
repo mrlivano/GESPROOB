@@ -107,6 +107,8 @@ class ET_Componente extends CI_Controller
 
 		foreach ($expedienteTecnico->childPresupuestoEjecucion as $key => $value) 
 		{
+			$costoPresupuestoDirecto = 0;
+			$costoPresupuestoIndirecto =0;
 			$value->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, $value->id_presupuesto_ej, 'EXPEDIENTETECNICO');
 
 			foreach($value->childComponente as $key => $item)
@@ -121,9 +123,12 @@ class ET_Componente extends CI_Controller
 					$temp->costoMeta=$this->obtenerMetaAnidada($temp);
 					$costoComponente+=$temp->costoMeta;
 				}
-
+				$costoPresupuestoDirecto+=$costoComponente;
+				$costoPresupuestoIndirecto+=$item->monto;
 				$item->costoComponente=$costoComponente;
 			}
+			$value->costoPresupuestoDirecto = $costoPresupuestoDirecto;
+			$value->costoPresupuestoIndirecto = $costoPresupuestoIndirecto;
 		}		
 
 		$listaPartidaNivel1 = $this->Model_Unidad_Medida->listaPartidaNivel1();

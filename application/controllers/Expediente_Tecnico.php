@@ -450,11 +450,12 @@ class Expediente_Tecnico extends CI_Controller
 
 		$listarPersona=$this->Model_Personal->listarPersona();
 		$ExpedienteTecnicoM=$this->Model_ET_Expediente_Tecnico->DatosExpediente($id_et);
+		$costoIndirectoComponente=$this->Model_ET_Expediente_Tecnico->CostoIndirectoComponente($id_et);
 
 		$listaModalidadEjecucion=$this->Model_ModalidadE->GetModalidadE();
 		$listaFuenteFinanciamiento=$this->FuenteFinanciamiento_Model->get_FuenteFinanciamiento();
 
-		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editar',['ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento ]);
+		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editar',['ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento,'costoIndirectoComponente' => $costoIndirectoComponente ]);
 	}
 
     function registroBuscarProyecto()
@@ -2900,4 +2901,11 @@ class Expediente_Tecnico extends CI_Controller
 	   group by pd.PropioPartida order by pd.PropioPartida desc)");
 		echo json_encode($costoUnitario->result());exit;
 	}
+
+	public function insertarResponsableElaboracion()
+    {
+    	$id_et =  $this->input->get('id_et');
+
+        $this->load->view('front/Ejecucion/PresupuestoEjecucion/insertar',['id_et'=>$id_et]);        
+    }
 }
