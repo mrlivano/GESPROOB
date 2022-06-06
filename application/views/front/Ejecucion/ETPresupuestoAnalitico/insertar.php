@@ -24,7 +24,7 @@
 			<label class="control-label">Presupuesto Ejecución</label>
 			<div>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
-					<?php foreach ($PresupuestoEjecucionListar as $key => $value) { 						
+					<?php foreach ($PresupuestoEjecucionListar as $key => $value) { if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false)||($expedienteTecnico->modalidad_ejecucion_et=="MIXTO")){						
 						if(count($value->childPresupuesto)>0)
 						{	?>
 							<optgroup label="<?=$value->desc_presupuesto_ej?>">
@@ -37,7 +37,7 @@
 						else { ?>
 							<option value="<?=$value->id_presupuesto_ej?>"><?=$value->desc_presupuesto_ej?></option>
 						<?php }
-					} ?>
+					} }?>
 				</select>
 
 			</div>
