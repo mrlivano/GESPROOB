@@ -411,7 +411,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?= $value->id_componente ?>,<?= $value->id_presupuesto_ej ?>, this);" style="width: 30px;"><b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>" contenteditable><?= html_escape($value->descripcion) ?></b> - </span><b style="text-transform: uppercase; color: black;"><?= number_format($value->costoComponente, 4, '.', ',') ?></b></span>
 													<?php } ?>
 												<?php } else { ?>
-													<b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>"><?= html_escape($value->descripcion) ?> - <?= number_format($value->costoComponente, 4, '.', ',') ?></b>
+													<b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>"><?= html_escape($value->descripcion) ?> - <?= number_format($value->monto, 4, '.', ',') ?></b>
 												<?php } ?>
 												<ul>
 													<?php foreach ($value->childMeta as $index => $item) { ?>
