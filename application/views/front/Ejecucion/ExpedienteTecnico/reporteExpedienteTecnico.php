@@ -27,8 +27,7 @@
 		background-color:#f8f8f8;
 		border: 1px solid black;
 	}
-	table
-	{
+	table{
 		border-collapse: collapse;
 	}
   </style>
@@ -59,152 +58,170 @@
 		<div style="text-align: center; font-size: 15px;"><b>FICHA TÉCNICA DEL PROYECTO</b></div>
 		<br>
   		<table id="tablaPresentacion" style="width: 100%" border="1">
-			<tr>
+			<!--<tr>
 				<th>1. Nombre de la Unidad Ejecución</th>
 				<td>Universidad Nacional Intercultural de Quillabamba</td>
-			</tr>
+			</tr>-->
 			<tr>
-				<th>1.1. Dirección</th>
-				<td><?=@$listarExpedienteFicha001->direccion_ue;?></td>
-			</tr>
-			<tr>
-				<th>1.2. Distrito/Provincia/Departamento</th>
-				<td><?= @$listarExpedienteFicha001->distrito_provincia_departamento_ue ?></td>
-			</tr>
-			<tr>
-				<th>1.3. Teléfono</th>
-				<td><?= @$listarExpedienteFicha001->telefono_ue ?></td>
-			</tr>
-			<tr>
-				<th>1.4. RUC</th>
-				<td><?= @$listarExpedienteFicha001->ruc_ue ?></td>
-			</tr>			
-			<tr>
-				<th>2. Nombre del Proyecto</th>
+				<th>1. Nombre del Proyecto</th>
 				<td><?= @$listarExpedienteFicha001->nombre_pi ?></td>
 			</tr>
 			<tr>
-				<th>2.1. Ubicación distrital donde se plantea su ejecución</th>
-				<td><?= @$listarExpedienteFicha001->provincia ?></td>
+				<th>2. Ubicación</th>
+				<td>Distrito/Provincia/Departamento: <?= @$listarExpedienteFicha001->distrito_provincia_departamento_ue ?> <br>
+					Zona: <?=@$listarExpedienteFicha001->direccion_ue;?> 
+				
+			</td>
+			</tr>
+			<tr >
+				<td colspan="2">3. Autores del estudio</td>
 			</tr>
 			<tr>
-				<th>2.2. Codigo único</th>
+			<td colspan="2">
+			<table id="tresp" style="width: 100%" border="0">
+			<tr >
+			
+				<th style="width: 40%">Cargo</th>
+				<td>Responsable</td>
+			</tr>
+			
+			<?php foreach($listarResponsables as $item){ ?>
+				<tr>
+				<th ><?=$item->desc_cargo;?> </th>
+				<td><?=$item->nombres;?> </td>
+				</tr>
+				
+			<?php } ?>
+		
+			</table>
+			</td>
+			</tr>
+
+			<tr>
+				<th>4. Código único</th>
 				<td><?= @$listarExpedienteFicha001->codigo_unico_pi ?></td>
 			</tr>
 			<tr>
-				<th>3. Costo Total Proyecto(Pre Invesión)</th>
+				<th>5. Costo Total Proyecto(Pre Inversión)</th>
 				<td>S/. <?= @$listarExpedienteFicha001->costo_total_preinv_et ?> </td>
 			</tr>
+
 			<tr>
-				<th> 3.1. Costo Directo</th>
-				<td>S/. <?= @$listarExpedienteFicha001->costo_directo_preinv_et ?></td>
-			</tr>
-			<tr>
-				<th>3.2. Costo Indirecto</th>
-				<td>S/. <?= @$listarExpedienteFicha001->costo_indirecto_preinv_et ?></td>
-			</tr>
-			<tr>
-				<th>4. Costo Total Proyecto(Invesión)</th>
+				<th>6. Costo Total Proyecto(Inversión)</th>
 				<td>S/. <?= @$listarExpedienteFicha001->costo_total_inv_et ?></td>
 			</tr>
+			<tr >
+				<td colspan="2">7. Componentes del Proyecto</td>
+			</tr>
+			<tr >
+			
+				
+							
+			
+				<td colspan="2">
+				<?php $i=1; foreach($listarComponentes as $item){ ?>
+				<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+				<?php  $i=$i+1;} ?>
+				</td>
+			</tr>	
 			<tr>
-				<th>4.1. Costo Directo</th>
-				<td>S/. <?= @$listarExpedienteFicha001->costo_directo_inv_et ?></td>
+				<th>8. Plazo de Ejecución</th>
+				<td><?= @$listarExpedienteFicha001->tiempo_ejecucion_pi_et ?> meses</td>
 			</tr>
 			<tr>
-				<th>4.2. Costo General</th>
-				<td>S/. <?= @$listarExpedienteFicha001->gastos_generales_et ?></td>
+				<th>9. Entidad Ejecutora</th>
+				<td>Universidad Nacional Intercultural de Quillabamba</td>
 			</tr>
-			<tr>
-				<th>4.3. Gasto de Supervisión</th>
-				<td>S/. <?= @$listarExpedienteFicha001->gastos_supervision_et ?></td>
+			<tr >
+				<td colspan="2">10. Función Programática</td>
 			</tr>
+			
 			<tr>
-				<th>5. Función Programática</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>5.1. FUNCIÓN</th>
+				<th>10.1. Función</th>
 				<td><?= @$listarExpedienteFicha001->funcion_et ?></td>
 			</tr>
 			<tr>
-				<th>5.2. PROGRAMA</th>
+				<th>10.2. Programa</th>
 				<td><?= @$listarExpedienteFicha001->programa_et ?></td>
 			</tr>
 			<tr>
-				<th>5.3. SUB PROGRAMA</th>
+				<th>10.3. Sub Programa</th>
 				<td><?= @$listarExpedienteFicha001->sub_programa_et ?></td>
 			</tr>
 			<tr>
-				<th>5.4. PROYECTO</th>
-				<td><?= @$listarExpedienteFicha001->proyecto_et ?></td>
-			</tr>
-			<tr>
-				<th>5.5. COMPONENTE</th>
-				<td><?= @$listarExpedienteFicha001->componente_et ?></td>
-			</tr>
-			<tr>
-				<th>5.6. META</th>
-				<td><?= @$listarExpedienteFicha001->meta_et ?></td>
-			</tr>
-			<tr>
-				<th>5.7. FUENTE DE FINANCIAMIENTO</th>
+				<th>11. Fuente de financiamiento</th>
 				<td><?= @$listarExpedienteFicha001->fuente_financiamiento_et ?></td>
 			</tr>
 			<tr>
-				<th>5.8. MODALIDAD DE EJECUCIÓN</th>
+				<th>12. Modalidad de ejecución</th>
 				<td><?= @$listarExpedienteFicha001->modalidad_ejecucion_et ?></td>
 			</tr>
 			<tr>
-				<th>6. Tiempo de Ejecución del Proyecto</th>
-				<td><?= @$listarExpedienteFicha001->tiempo_ejecucion_pi_et ?></td>
+			<td colspan="2">
+			<table id="tmod" style="width: 100%" border="0">
+			<tr >
+			
+				<th style="width: 70%">Componentes</th>
+				<td>Modalidad de Ejecución</td>
+			</tr>
+			<?php if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION DIRECTA"){ ?>
+			<tr>
+			<td>
+			
+			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
+			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $i=$i+1;} 
+			?>
+			</td>
+			<td>ADMINISTRACION DIRECTA</td>
+			</tr>
+			<?php }
+			
+			 else if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="MIXTO"){ ?>
+			<tr>
+			<td>
+			
+			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
+			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $i=$i+1;} 
+			?>
+			</td>
+			<td>ADMINISTRACION DIRECTA</td>
 			</tr>
 			<tr>
-				<th>7. Número de Beneficiario Indirecto del Proyecto</th>
+			<td>
+			
+			<?php  foreach($listarComponentesAI as $item){ ?>
+			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $i=$i+1;} 
+			?>
+			</td>
+			<td>ADMINISTRACION INDIRECTA</td>
+			</tr>
+			<?php }
+			else { ?>
+			<tr>
+			<td>
+			
+			<?php $i=1; foreach($listarComponentesAI as $item){ ?>
+			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $i=$i+1;} 
+			?>
+			</td>
+			<td>ADMINISTRACION INDIRECTA</td>
+			</tr>
+			<?php } ?>
+			</table>
+			</td>
+			</tr>
+			<tr>
+				<th>13. Número de Beneficiarios Indirectos del Proyecto</th>
 				<td><?= @$listarExpedienteFicha001->num_beneficiarios_indirectos ?> </td>
 			</tr>
+
+
 			<tr>
-				<th>8. Nombre del Responsable de la Elaboración del Proyecto</th>
-				<td><?= @$responsableElaboracion->nombres?> <?= @$responsableElaboracion->apellido_p?>  <?= @$responsableElaboracion->apellido_m?></td>
-			</tr>
-			<tr>
-				<th>8.1. Profesion</th>
-				<td><?= @$responsableElaboracion->nombre_esp?></td>
-			</tr>	        
-			<tr>
-				<th>8.2. DNI</th>
-				<td><?= @$responsableElaboracion->dni?></td>
-			</tr>
-			<tr>
-				<th>8.4. Dirección</th>
-				<td><?= @$responsableElaboracion->direccion?></td>
-			</tr>
-			<tr>
-				<th>8.5. Teléfono</th>
-				<td><?= @$responsableElaboracion->telefonos?></td>
-			</tr>
-			<tr>
-				<th>9. Nombre del Responsable de la Ejecución del proyecto</th>
-				<td><?= @$responsableEjecucion->nombres?> <?= @$responsableEjecucion->apellido_p?>  <?= @$responsableEjecucion->apellido_m?></td>
-			</tr>
-			<tr>
-				<th>9.1. Profesíon</th>
-				<td><?= @$responsableEjecucion->nombre_esp?> </td>
-			</tr>
-			<tr>
-				<th>9.2. DNI</th>
-				<td><?= @$responsableEjecucion->dni?></td>
-			</tr>
-			<tr>
-				<th>9.4. Dirección</th>
-				<td><?= @$responsableEjecucion->direccion?></td>
-			</tr>
-			<tr>
-				<th>9.5. Teléfono</th>
-				<td><?= @$responsableEjecucion->telefonos?></td>
-			</tr>
-			<tr>
-				<th colspan="2">10. Sustento para la presentación del proyecto</th>	             
+				<th colspan="2">14. Sustento para la presentación del proyecto</th>	             
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -214,7 +231,7 @@
 				</td>	             
 			</tr>
 			<tr>
-				<th colspan="2">11. Revelación económica</th>	        		
+				<th colspan="2">15. Revelación económica</th>	        		
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -224,7 +241,7 @@
 				</td>	        		
 			</tr>
 			<tr>
-				<th colspan="2">12. Resumen del proyecto(descripción general)</th>
+				<th colspan="2">16. Resumen del proyecto(descripción general)</th>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -234,11 +251,11 @@
 				</td>
 			</tr>
 			<tr>
-				<th>13. N° de Folios</th>
+				<th>17. N° de Folios</th>
 				<td><?= @$listarExpedienteFicha001->num_folios ?></td>
 			</tr>
 			<tr>
-				<th colspan="2">14. Fotografias</th>
+				<th colspan="2">18. Fotografias</th>
 			</tr>
 			<?php 
 

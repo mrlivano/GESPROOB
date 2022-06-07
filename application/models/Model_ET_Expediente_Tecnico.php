@@ -243,7 +243,30 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 		$ETExpediente=$this->db->query("select * from  ET_EXPEDIENTE_TECNICO inner join PROYECTO_INVERSION ON ET_EXPEDIENTE_TECNICO.id_pi=PROYECTO_INVERSION.id_pi where id_et ='".$id_et."'");
 	    return $ETExpediente->result()[0];
 	}
-	
+	/*ssssssssss */
+	public function listarComponentes($id_et)
+	{
+		$listarComponentes=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where (ET_COMPONENTE.id_presupuesto_ej=2 OR ET_COMPONENTE.id_presupuesto_ej=1033) and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."'");
+	    return $listarComponentes->result();
+	}
+
+	public function listarComponentesAD($id_et)
+	{
+		$listarComponentesAD=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where ET_COMPONENTE.id_presupuesto_ej=2 and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."' ORDER BY ET_COMPONENTE.id_presupuesto_ej");
+	    return $listarComponentesAD->result();
+	}
+	public function listarComponentesAI($id_et)
+	{
+		$listarComponentesAI=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where ET_COMPONENTE.id_presupuesto_ej=1033 and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."' ORDER BY ET_COMPONENTE.id_presupuesto_ej");
+	    return $listarComponentesAI->result();
+	}
+
+	public function listarResponsables($id_et)
+	{
+		$listarResponsables=$this->db->query("select ET_RESPONSABLE.id_responsable_et,PERSONA.apellido_p+' '+PERSONA.apellido_m+' '+PERSONA.nombres AS nombres,CARGO.desc_cargo from ((ET_RESPONSABLE inner join ET_EXPEDIENTE_TECNICO ON ET_RESPONSABLE.id_et=ET_EXPEDIENTE_TECNICO.id_et) INNER JOIN PERSONA ON PERSONA.id_persona=ET_RESPONSABLE.id_persona) INNER JOIN CARGO ON CARGO.id_cargo=ET_RESPONSABLE.id_cargo where ET_RESPONSABLE.id_tipo_responsable_et=2 and ET_RESPONSABLE.id_et='".$id_et."'");
+	    return $listarResponsables->result();
+	}
+	/*ssssssssss*/
 	public function editar($flat,$hdIdExpediente,$txtNombreUe,$txtDireccionUE,$txtUbicacionUE,$txtTelefonoUE,$txtRucUE,$txtCostoTotalPreInversion,$txtCostoDirectoPre,$txtCostoIndirectoPre,$txtCostoTotalInversion,$txtCostoDirectoInversion,$txtGastosGenerales,$txtGastosSupervision,$txtFuncionProgramatica,$txtFuncion,$txtPrograma,$txtSubPrograma,$txtProyecto,$txtComponente,$txtMeta,$txtFuenteFinanciamiento,$txtModalidadEjecucion,$txtTiempoEjecucionPip,$txtNumBeneficiarios,$url,$txtSituacioActual,$txtSituacioDeseada,$txtContribucioInterv,$txtNumFolio,$txtFechaAprobacion)
 	{
 		$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico_c @Opcion='".$flat."',@id_et='".$hdIdExpediente."',@nombre_ue='".$txtNombreUe."',@direccion_ue='".$txtDireccionUE."',@distrito_provincia_departamento_ue='".$txtUbicacionUE."',@telefono_ue='".$txtTelefonoUE."',@ruc_ue='".$txtRucUE."',@costo_total_preinv_et='".$txtCostoTotalPreInversion."',@costo_directo_preinv_et='".$txtCostoDirectoPre."',@costo_indirecto_preinv_et='".$txtCostoIndirectoPre."',@costo_total_inv_et='".$txtCostoTotalInversion."',@costo_directo_inv_et='".$txtCostoDirectoInversion."',@gastos_generales_et='".$txtGastosGenerales."',@gastos_supervision_et='".$txtGastosSupervision."',@funcion_programatica='".$txtFuncionProgramatica."',@funcion_et='".$txtFuncion."',@programa_et='".$txtPrograma."',@sub_programa_et='".$txtSubPrograma."',@proyecto_et='".$txtProyecto."',@componente_et='".$txtComponente."',@meta_et='".$txtMeta."',@fuente_financiamiento_et='".$txtFuenteFinanciamiento."',@modalidad_ejecucion_et='".$txtModalidadEjecucion."',@tiempo_ejecucion_pi_et='".$txtTiempoEjecucionPip."',@num_beneficiarios_indirectos='".$txtNumBeneficiarios."',@url_doc_aprobacion_et='".$url."',@desc_situacion_actual_et='".$txtSituacioActual."',@relevancia_economica_et='".$txtSituacioDeseada."',@resumen_pi_et='".$txtContribucioInterv."',@num_folios='".$txtNumFolio."', @fecha_aprobacion = '".$txtFechaAprobacion."'");
