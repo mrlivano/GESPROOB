@@ -425,5 +425,29 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 	    }
 	    return false;
     }
+		/*ssssssssss */
+		public function listarComponentes($id_et)
+		{
+			$listarComponentes=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where (ET_COMPONENTE.id_presupuesto_ej=2 OR ET_COMPONENTE.id_presupuesto_ej=1033) and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."'");
+			return $listarComponentes->result();
+		}
+	
+		public function listarComponentesAD($id_et)
+		{
+			$listarComponentesAD=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where ET_COMPONENTE.id_presupuesto_ej=2 and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."' ORDER BY ET_COMPONENTE.id_presupuesto_ej");
+			return $listarComponentesAD->result();
+		}
+		public function listarComponentesAI($id_et)
+		{
+			$listarComponentesAI=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where ET_COMPONENTE.id_presupuesto_ej=1033 and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."' ORDER BY ET_COMPONENTE.id_presupuesto_ej");
+			return $listarComponentesAI->result();
+		}
+	
+		public function listarResponsables($id_et)
+		{
+			$listarResponsables=$this->db->query("select ET_RESPONSABLE.id_responsable_et,PERSONA.apellido_p+' '+PERSONA.apellido_m+' '+PERSONA.nombres AS nombres,CARGO.desc_cargo from ((ET_RESPONSABLE inner join ET_EXPEDIENTE_TECNICO ON ET_RESPONSABLE.id_et=ET_EXPEDIENTE_TECNICO.id_et) INNER JOIN PERSONA ON PERSONA.id_persona=ET_RESPONSABLE.id_persona) INNER JOIN CARGO ON CARGO.id_cargo=ET_RESPONSABLE.id_cargo where ET_RESPONSABLE.id_tipo_responsable_et=2 and ET_RESPONSABLE.id_et='".$id_et."'");
+			return $listarResponsables->result();
+		}
+		/*ssssssssss*/
 
 }
