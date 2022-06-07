@@ -344,7 +344,6 @@ class Expediente_Tecnico extends CI_Controller
 			$c_data['componente_et']=$this->input->post('txtComponente');
 			$c_data['meta_et']=$this->input->post('txtMeta');
 			$c_data['fuente_financiamiento_et']=$this->input->post('txtFuenteFinanciamiento');
-			$c_data['modalidad_ejecucion_et']=$this->input->post('txtModalidadEjecucion');
 			$c_data['tiempo_ejecucion_pi_et']=$this->input->post('txtTiempoEjecucionPip');
 			$c_data['num_beneficiarios_indirectos']=$this->input->post('txtNumBeneficiarios');
 			
@@ -454,8 +453,12 @@ class Expediente_Tecnico extends CI_Controller
 
 		$listaModalidadEjecucion=$this->Model_ModalidadE->GetModalidadE();
 		$listaFuenteFinanciamiento=$this->FuenteFinanciamiento_Model->get_FuenteFinanciamiento();
+		$listaPresupuestoEj=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoDirecto($ExpedienteTecnicoM->modalidad_ejecucion_et);
+		foreach ($listaPresupuestoEj as $key => $value) {
+			$value->costo_presupuesto_ej=$this->Model_ET_Expediente_Tecnico->ListarCostos($id_et,$value->id_presupuesto_ej);
+		}
 
-		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editar',['ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento,'costoIndirectoComponente' => $costoIndirectoComponente ]);
+		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editar',['ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento,'costoIndirectoComponente' => $costoIndirectoComponente,'listaPresupuestoEj'=>$listaPresupuestoEj ]);
 	}
 
 	function modalidad()
@@ -2938,7 +2941,7 @@ class Expediente_Tecnico extends CI_Controller
 						$comboCargoElaboracion =$this->input->post('comboCargoElaboracion');
 						if($comboResponsableElaboracion!='')
 						{
-							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersona($hdIdExpediente,$comboResponsableElaboracion);
+							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersonaElaboracion($hdIdExpediente,$comboResponsableElaboracion);
 							if(count($responsable)>0){
 								$msg =(['proceso' => 'Error', 'mensaje' => 'Responsable ya se encuentra registrado en la elaboración de expediente']);
 								echo json_encode($msg);exit;
@@ -2965,12 +2968,74 @@ class Expediente_Tecnico extends CI_Controller
         }        
     }
 
+		function insertarResponsableEjecucion()
+    {
+        if($_POST)
+        {
+            $msg = array();
+            $hdIdExpediente=$this->input->post("hdET");
+						// obtener id_tipo_responsable Ejecucion
+						$id_tipo_responsableElabo='3';
+						$comboResponsableEjecucion =$this->input->post('comboResponsableEjecucion');
+						$comboCargoEjecucion =$this->input->post('comboCargoEjecucion');
+						$fechaInicio =$this->input->post('txtFechaInicio');
+						$fechaFin =$this->input->post('txtFechaFin');
+						if($comboResponsableEjecucion!='')
+						{
+							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersonaEjecucion($hdIdExpediente,$comboResponsableEjecucion);
+							if(count($responsable)>0){
+								$msg =(['proceso' => 'Error', 'mensaje' => 'Responsable ya se encuentra registrado en la ejecución']);
+								echo json_encode($msg);exit;
+							}
+						  else{
+								$this->Model_ET_Responsable->insertarET_EpedienteEjecucion($hdIdExpediente,$comboResponsableEjecucion,$id_tipo_responsableElabo,$comboCargoEjecucion,$fechaInicio,$fechaFin);
+								$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
+								echo json_encode($msg);exit;
+							}
+						}
+						else{
+							$msg =(['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']);
+							echo json_encode($msg);exit;
+						}               
+            
+            echo json_encode($msg);exit;
+        }
+        if($_GET)
+        {
+            $id_et=$this->input->get('id_et');
+						$listarCargo=$this->Cargo_Modal->getcargo();
+						$listarPersona=$this->Model_Personal->listarPersona();
+            $this->load->view('front/Ejecucion/ExpedienteTecnico/insertarResponsableEjecucion', ['listarCargo'=>$listarCargo,'listarPersona'=>$listarPersona,'id_et'=>$id_et]);
+        }        
+    }
+
 	public function listarResponsableElaboracion()
     {
         if ($this->input->is_ajax_request())
         {
             $id_et = $this->input->post("id_et");
             $data  = $this->Model_ET_Responsable->ResponsableEtapa($id_et,'2');
+            if($data == false)
+            {
+                echo json_encode(array('data' => $data));
+            }
+            else
+            {
+                echo json_encode(array('data' => $data));
+            }
+        }
+        else
+        {
+            show_404();
+        }
+    }
+
+		public function listarResponsableEjecucion()
+    {
+        if ($this->input->is_ajax_request())
+        {
+            $id_et = $this->input->post("id_et");
+            $data  = $this->Model_ET_Responsable->ResponsableEtapa($id_et,'3');
             if($data == false)
             {
                 echo json_encode(array('data' => $data));

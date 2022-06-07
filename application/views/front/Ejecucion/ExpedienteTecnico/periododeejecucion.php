@@ -99,7 +99,7 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12" style="height:250px;overflow:scroll;overflow-x: hidden;text-align: left; ">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="table_plazoEjecucion">
+				<table class="table table-bordered" id="table_cronogramaEjecucion" style="width: 100%;">
 					<thead>
 						<tr>
 							<th>FECHA DE RESOLUCIÓN DE APROBACIÓN</th>
@@ -109,27 +109,9 @@
 							<th>FECHA-FIN</th>
 							<th>NUM. MESES</th>
 							<th>RESPONSABLE</th>
-							<th>CARGO</th>
+							<th>EDITAR</th>
 						</tr>
 					</thead>
-					<tbody id="bodyPlazo">
-						<?php foreach ($listaPlazoEjecucion as $key => $value) { ?>
-							<tr>
-								<td><?= date('d/m/Y', strtotime($value->fecha_resolucion)) ?> (<?= $value->tipo ?>)</td>
-								<td><?= $value->numero_resolucion ?> </td>
-								<td>
-									<?php if ($value->resolucion != '') { ?>
-										<a href='<?php echo base_url() . "uploads/ResolucionAmpliacion/" . $value->resolucion ?>' target='_blank'><i class='fa fa-file fa-lg'></i></a>
-									<?php } ?>
-								</td>
-								<td><?= date('d/m/Y', strtotime($value->fecha_inicio)) ?></td>
-								<td><?= date('d/m/Y', strtotime($value->fecha_fin)) ?></td>
-								<td><?= $value->num_meses ?> Meses.</td>
-								<td><?= $value->responsable ?></td>
-								<td><?= $value->cargo ?></td>
-							</tr>
-						<?php } ?>
-					</tbody>
 				</table>
 			</div>
 		</div>
@@ -234,6 +216,7 @@
 				}
 			}
 		});
+		listaCronogramaEjecucion($('#hdIdEt').val());
 	});
 	$('#btnEnviarFormulario').on('click', function(event) {
 		event.preventDefault();
@@ -263,7 +246,8 @@
 				$('#divModalCargaAjax').hide();
 				resp = JSON.parse(resp);
 				swal(resp.proceso, resp.mensaje, (resp.proceso == 'Correcto') ? 'success' : 'error');
-				$('#modalTemp').modal('hide');
+				$('#table_cronogramaEjecucion').dataTable()._fnAjaxUpdate();
+			//	$('#modalTemp').modal('hide');
 			},
 			error: function() {
 				$('#divModalCargaAjax').hide();
@@ -271,4 +255,77 @@
 			}
 		});
 	});
+
+	function listaCronogramaEjecucion(id_et) 
+	{
+		var table=$("#table_cronogramaEjecucion").DataTable({
+			"processing": true,
+			"serverSide":false,
+			destroy:true,
+			"ajax":{
+				url:base_url+"index.php/ET_Periodo_Ejecucion/listarCronogramaEjecucion",
+				type:"POST",
+				data :{id_et:id_et}
+			},
+			"columns":
+			[
+				{"data":"fecha_resolucion",
+					render: function(data, type, row)
+					{
+						var date = moment(data,'YYYY/MM/DD HH:mm:ss').format('DD/MM/YYYY');
+						return date+" ("+row.tipo+")"; 
+					}
+				},
+				{"data":"numero_resolucion"},
+				{"data":"resolucion",
+					render: function(data, type, row)
+					{
+						if (data != '') { 
+								return "<a href='"+base_url+"uploads/ResolucionAmpliacion/"+data+"' target='_blank'><i class='fa fa-file fa-lg'></i></a>"
+									} 
+						return data; 
+					}
+				},
+				{"data":"fecha_inicio",
+					render: function(data, type, row)
+					{
+            var date = moment(data,'YYYY/MM/DD HH:mm:ss').format('DD/MM/YYYY');
+						return date;
+					}
+				},
+				{"data":"fecha_fin",
+					render: function(data, type, row)
+					{
+						var date = moment(data,'YYYY/MM/DD HH:mm:ss').format('DD/MM/YYYY');
+						return date;
+					}
+				},
+				{"data":"num_meses",
+					render: function(data, type, row)
+					{
+						return data+" Meses"; 
+					}
+				},
+				{"data":"id_et",
+					render: function(data, type, row)
+					{
+						return "<button type='button' class='btn btn-success btn-xs' onclick=insertarResponsableEjecucion(" + data + ")>Gestionar</button>"; 
+					}
+				},
+				{"data":"id_tiempo_ejecucion",
+					render: function(data, type, row)
+					{
+						return "<button type='button' class='btn btn-success btn-xs' onclick=editarCronogramaEjecucion(" + data + ",this)>Editar</button>";; 
+					}
+				}
+			],
+			"language":idioma_espanol
+		});
+	}
+
+function insertarResponsableEjecucion(id_et)
+{
+    paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:id_et}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);
+}
+
 </script>

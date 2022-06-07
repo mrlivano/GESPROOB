@@ -15,6 +15,13 @@ class Model_ET_Responsable extends CI_Model
         return $this->db->insert_id();
     }
 
+    function insertarET_EpedienteEjecucion($id_et,$ComboResponsableEjecucion,$ComboTipoResponsableEjecucion,$comboCargoEjecucion,$fechaInicio,$fechaFin)
+    {
+        $estado_responsable_et=1;
+        $this->db->query("insert into ET_RESPONSABLE(id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et,fecha_inicio,fecha_fin)values('".$id_et."','".$ComboResponsableEjecucion."','".$ComboTipoResponsableEjecucion."','".$comboCargoEjecucion."','".$estado_responsable_et."','".$fechaInicio."','".$fechaFin."')");
+        return $this->db->insert_id();
+    }
+
     function ETResponsablePorIdET($idEt)
     {
         $data= $this->db->query("select * from et_responsable where id_et=$idEt");
@@ -72,8 +79,13 @@ class Model_ET_Responsable extends CI_Model
         return $data->result(); 
     }
 
-    function ResponsableIdETPersona($id_et, $id_persona){
-        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona'");
+    function ResponsableIdETPersonaElaboracion($id_et, $id_persona){
+        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona' and id_tipo_responsable_et=2");
+        return $data->result(); 
+    }
+
+    function ResponsableIdETPersonaEjecucion($id_et, $id_persona){
+        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona' and id_tipo_responsable_et=3");
         return $data->result(); 
     }
 
