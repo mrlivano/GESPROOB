@@ -28,6 +28,14 @@ class ET_Cronograma_Componente extends CI_Controller
 				$numeroMes=$this->input->post('numeroMes');
 				$anio=$this->input->post('anio');
 				$monto=$this->input->post('monto');
+				$montoComponente=$this->input->post('montoComponente');
+
+				if($monto>$montoComponente)
+				{
+					$this->db->trans_rollback();
+
+					echo json_encode(['proceso' => 'Error', 'mensaje' => 'La cantidad ingresada no puede ser mayor al destinado en el componente.']);exit;
+				}
 
 				$etCronogramaTemp=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponenteAndNumeroMes($idComponente, $numeroMes, $anio);
 
