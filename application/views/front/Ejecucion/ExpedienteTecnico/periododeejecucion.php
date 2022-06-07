@@ -109,7 +109,6 @@
 							<th>FECHA-FIN</th>
 							<th>NUM. MESES</th>
 							<th>RESPONSABLE</th>
-							<th>EDITAR</th>
 						</tr>
 					</thead>
 				</table>
@@ -310,12 +309,6 @@
 					render: function(data, type, row)
 					{
 						return "<button type='button' class='btn btn-success btn-xs' onclick=insertarResponsableEjecucion(" + data + ")>Gestionar</button>"; 
-					}
-				},
-				{"data":"id_tiempo_ejecucion",
-					render: function(data, type, row)
-					{
-						return "<button type='button' class='btn btn-success btn-xs' onclick=editarCronogramaEjecucion(" + data + ",this)>Editar</button>";; 
 					}
 				}
 			],

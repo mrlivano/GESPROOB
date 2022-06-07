@@ -29,7 +29,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
 				'<td>'.number_format($value->cantidad, 4, '.', '').'</td>'.
-				'<td>S/.'.$value->precio_unitario.'</td>'.
+				'<td>S/.'.number_format($value->precio_unitario,2).'</td>'.
 				'<td>S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>'.
 				'<td><span style="color:#d9534f;font-weight:bold" id="saldo'.$value->id_partida.'">'.number_format($value->saldo, 2).'</span></td>';
 
@@ -180,7 +180,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 			{ ?>
 				<tr class="elementoBuscar">
 					<td><b><i><?=$value->numeracion?></i></b></td>
-					<td style="text-align: left;" colspan="6"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+					<td style="text-align: left;" colspan="4"><b><i><?=html_escape($value->descripcion)?></i></b></td>
 					<?php foreach($listaMesesPeriodo as $i => $mes) 
 					{ 
 						$precioComponente=0;
@@ -192,11 +192,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 								break;
 							}
 						}?>
+						<td colspan="2"><span style="color:#d9534f;font-weight:bold" id="monto<?=$value->id_componente?>"><?=number_format($value->monto, 2)?></span></td>
 						<td <?=($precioComponente==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"')?>>
 							<div>
-								<input type="text" style="display: none;padding: 0px;width: 40px;" value="<?=number_format($precioComponente, 2, '.', ',')?>" onkeyup="onKeyUpGuardarCronograma('<?=$value->id_componente?>', '<?=$mes->num?>','<?=$anio?>', this, event);">
+								<input type="text" style="display: none;padding: 0px;width: 40px;" value="<?=number_format($precioComponente, 2)?>" onkeyup="onKeyUpGuardarCronograma('<?=$value->id_componente?>', '<?=$mes->num?>','<?=$anio?>', this, event,<?=$value->monto?>);">
 							</div>
-							<span class="spanMontoValorizacion">S/.<?=number_format($precioComponente, 2, '.', ',')?></span>
+							<span class="spanMontoValorizacion">S/.<?=number_format($precioComponente, 2)?></span>
 						</td>
 					<?php } ?>
 				</tr>
@@ -279,7 +280,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 		}
 	}
 
-	function onKeyUpGuardarCronograma(idComponente, numeroMes, anio, element, event)
+	function onKeyUpGuardarCronograma(idComponente, numeroMes, anio, element, event, montoComponente)
 	{
 		var evt=event || window.event;
 
@@ -298,8 +299,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 			{
 				return;
 			}
+			if(isNaN(monto) || monto.trim()=='')
+			{
+				return;
+			}
 
-			paginaAjaxJSON({ idComponente : idComponente, numeroMes : numeroMes, anio : anio, monto : monto }, '<?=base_url()?>index.php/ET_Cronograma_Componente/insertar', 'POST', null, function(objectJSON)
+			paginaAjaxJSON({ idComponente : idComponente, numeroMes : numeroMes, anio : anio, monto : monto,montoComponente }, '<?=base_url()?>index.php/ET_Cronograma_Componente/insertar', 'POST', null, function(objectJSON)
 			{
 				objectJSON=JSON.parse(objectJSON);
 
