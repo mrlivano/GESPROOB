@@ -1077,9 +1077,9 @@ class Expediente_Tecnico extends CI_Controller
 			$value->costoComponente=$costoComponente;
 		}
 
-		$expedienteTecnico->childCostoIndirectoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 1031, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 1031, 'EXPEDIENTETECNICO');
 
-		foreach($expedienteTecnico->childCostoIndirectoIndirecto as $key => $value)
+		foreach($expedienteTecnico->childCostoIndirectoIndirecta as $key => $value)
 		{
 			$costoComponente=0;
 			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
