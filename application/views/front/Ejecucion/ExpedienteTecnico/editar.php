@@ -1,6 +1,4 @@
-<?php $cd=0;
-								$ci=0;
-								?>
+
 <style>
 	.row
 	{
@@ -95,21 +93,18 @@
 					</div>
 					<div>
 					<?php foreach ($listaModalidadEjecucion as $key => $value) { 
+						$cd=0;
+						$ci=0;
 						if(($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $ExpedienteTecnicoM->modalidad_ejecucion_et!='MIXTO') || ($ExpedienteTecnicoM->modalidad_ejecucion_et=='MIXTO' && $ExpedienteTecnicoM->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)){?>
 						  <label class="control-label"><?=	$value->nombre_modalidad_ejec?></label>	
 							<div class="row borderBudget">
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">Costo Total (Inversión)*</label>
-							<div>
-
-								<input id="txtCostoTotalInversion" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
-							</div>
-						</div>
+						
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Costo Directo*</label>
 							<div>
 							<?php  foreach ($listaPresupuestoEj as $key => $valuess) { if (strpos($valuess->desc_presupuesto_ej,$value->nombre_modalidad_ejec) !== false) {?>
-								<?php $cd=$cd+$valuess->costo_presupuesto_ej[0]->suma; ?>
+								<?php
+									$cd=$cd+$valuess->costo_presupuesto_ej[0]->suma; ?>
 								<input  id="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" name="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" value="<?= a_number_format($valuess->costo_presupuesto_ej[0]->suma, 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" disabled>
 								<?php } }?>
 								
@@ -122,6 +117,13 @@
 							<div>
 								<?php $ci=$ci+$componente->monto; ?>
 								<input value ="<?= a_number_format($componente->monto , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto" autocomplete="off" maxlength="40" disabled>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<label class="control-label">Costo Total (Inversión)*</label>
+							<div>
+
+								<input id="txtCostoTotalInversion<?=str_replace(' ', '',$value->nombre_modalidad_ejec)?>" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
 							</div>
 						</div>
 						<?php }} ?>
@@ -641,6 +643,8 @@ $(function()
 	});
 
 	listaResponsableElaboracion($('#hdIdExpediente').val());
+	// $('#txtCostoTotalInversionADMINISTRACIONDIRECTA').val("<?=$cd?>");
+	// $('#txtCostoTotalInversionADMINISTRACIONINDIRECTA').val("<?=$ci?>");
 });
 
 	function EliminarImagen(id_img,id_et)
