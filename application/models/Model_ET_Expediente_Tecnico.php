@@ -308,6 +308,11 @@ class Model_ET_Expediente_Tecnico extends CI_Model
     	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='".$flat."',@id_et='".$id_et."'");
         return $data->result();
     }
+	public function ListarCostos($id_et,$id_presupuesto_ej)
+    {
+    	$data=$this->db->query("execute suma_costos @id_et='".$id_et."',@id_presupuesto_ej='".$id_presupuesto_ej."'");
+        return $data->result();
+    }
 
     public function ListarDocumentoExpediente($id_et)
     {

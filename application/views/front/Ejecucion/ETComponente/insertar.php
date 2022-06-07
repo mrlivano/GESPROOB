@@ -390,9 +390,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				?>
 						<div class="panel">
 							<div class="panel-heading" style="padding: 6px;">
-							<a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?> <?=strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS')?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?>
+							<a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?><span id="sumaTotalCostosUltimo<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" > <?=strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS')?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?> </span>
 								</a>
 								<input type="hidden" name="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirecto ?>">
+								<input type="hidden" name="sumaTotalCostos1<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos1<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoIndirecto ?>">
 							</div>
 							<div id="collapse<?= $temp3->id_presupuesto_ej ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?= $temp3->id_presupuesto_ej ?>">
 								<div class="panel-body">
@@ -469,8 +470,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			}
 		});
 		$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(function(index, element) {
-			//console.log($(element).text());
-			console.log($('#cargarSelectComponentePresupuesto').find("option:selected").text());
+			
 			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text(), ' ', '').toLowerCase()) {
 				existeComponente = true;
 				
@@ -509,10 +509,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				if (objectJSON.proceso == 'Error') {
 					return false;
 				}
-
+				presupuesto=$('#selectTipoEjecucion').val().trim().replace(/ /g,"");
 				var htmlTemp = '<li>' +
 					'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(' + objectJSON.idComponente + ');" style="width: 30px;"> ';
-				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(' + objectJSON.idComponente + ', $(this).parent(), \'\',0,' + PresupuestoEjecucion + ');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;') + ' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente' + objectJSON.idComponente + '"> 0.0000 </b>';
+				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(' + objectJSON.idComponente + ',\'' + $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim()+'\',\''+presupuesto+'\');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;') + ' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente' + objectJSON.idComponente + '"> 0.0000 </b>';
 				htmlTemp += '<ul></ul></li>';
 
 
@@ -641,7 +641,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						'POST', null, async function(metaJSON) {
 							resultado = JSON.parse(metaJSON);
 							let idetTemp = $('#hdIdET').val();
-							console.log(idetTemp);
 
 							swal({
 								title: '',
@@ -657,11 +656,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}, false, true)
 				}
 			});
-			console.log('id' + id)
-			console.log('componente' + componente)
-
-
-
+			
 			$('#selectComponente').val('');
 
 			limpiarArbolCompletoMasOpciones();
@@ -671,7 +666,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		let Codigo_Presupuesto = $(this).find("option:selected").val();
 		let CodigoProyecto = "<?php echo $expedienteTecnico->codigo_unico_pi ?>";
 
-		console.log(CodigoProyecto);
 		paginaAjaxJSON({
 				"Codigo_Presupuesto": Codigo_Presupuesto,
 				"Codigo_Proyecto": CodigoProyecto,
@@ -715,7 +709,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		} else {
 			$("#divCargarSelectComponentePresupuesto").hide();
 			$("#divTxtDescripcionComponente").show();
-			console.log('costos directos');
 		}
 	});
 
@@ -1019,10 +1012,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 		let index1 = descripcionComponente.search('IGV')
 		let index2 = descripcionComponente.search('UTILIDAD')
-		if (index1 >= 0 || index2 >= 0) {
-			const presupuesto_ejec = `${desc_presupuesto_ej.split('-')[0]}-COSTOSDIRECTOS`;
+		const presupuesto_ejec = `${desc_presupuesto_ej.split('-')[0]}-COSTOSDIRECTOS`;
+			const presupuesto_ejec_ind = `${desc_presupuesto_ej.split('-')[0]}-COSTOSINDIRECTOS`;
 			var monto_presupueto_ejec = $("#sumaTotalCostos" + presupuesto_ejec).val();
-			console.log(monto_presupueto_ejec);
+			var monto_presupueto_ejec_ind = $("#sumaTotalCostos1" + presupuesto_ejec_ind);
+		if (index1 >= 0 || index2 >= 0) {
+			
 			swal({
 
 					title: "",
@@ -1050,7 +1045,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						"montoComponente": Monto
 					}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
 						objectJSON = JSON.parse(objectJSON);
-
+						const montoA = parseFloat($('#montoComponente' + idComponente).text().replace(/[^\d\.\-]/g, ""));
+						var sumatoria=parseFloat(monto_presupueto_ejec_ind.val())+Monto-montoA;
+						monto_presupueto_ejec_ind.val(sumatoria);
 						swal({
 								title: '',
 								text: objectJSON.mensaje,
@@ -1063,6 +1060,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}
 						const montoF = separator(Monto);
 						$('#montoComponente' + idComponente).text(montoF);
+						$('#sumaTotalCostosUltimo'+presupuesto_ejec_ind).text(" "+separator(sumatoria));
 					}, false, true);
 				});
 		} else {
@@ -1094,7 +1092,9 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						"montoComponente": Monto
 					}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
 						objectJSON = JSON.parse(objectJSON);
-
+						const montoA = parseFloat($('#montoComponente' + idComponente).text().replace(/[^\d\.\-]/g, ""));
+						var sumatoria=parseFloat(monto_presupueto_ejec_ind.val())+parseFloat(Monto)-montoA;
+						monto_presupueto_ejec_ind.val(sumatoria);
 						swal({
 								title: '',
 								text: objectJSON.mensaje,
@@ -1107,6 +1107,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}
 						const montoF = separator(Monto);
 						$('#montoComponente' + idComponente).text(montoF);
+						$('#sumaTotalCostosUltimo'+presupuesto_ejec_ind).text(" "+separator(sumatoria));
 					}, false, true);
 				});
 		}
@@ -1167,7 +1168,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 			$($(elementoPadre).find('ul')[0]).find('> li >span').each(function(index, element) {
 				if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll(descripcionMeta, ' ', '').toLowerCase()) {
-					console.log($(element).parent());
 					return $(element).parent();
 				}
 			});

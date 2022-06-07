@@ -83,16 +83,10 @@
 						</div>
 					</div>
 					<div class="row">
-					<div class=" col-md-4 col-sm-4 col-xs-12">
+					<div class=" col-md-8 col-sm-8 col-xs-12">
 					  		<label class="control-label">Modalidad de Ejecución*</label>
-					    	<div class="form-group">
-						      	<select class="selectpicker form-control" id="txtModalidadEjecucion" name="txtModalidadEjecucion" data-live-search="true" onChange="mostrar(this.value);">
-								  	<option value="">Seleccione una opción</option>
-									<?php foreach ($listaModalidadEjecucion as $key => $value) { ?>
-						      			<option  value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
-						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
-						      		<?php } ?>
-						      	</select>
+					    	<div class="form-group" >
+							<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="<?=$ExpedienteTecnicoM->modalidad_ejecucion_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
 					    	</div>
 					  	</div>
 					</div>
@@ -110,7 +104,10 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Costo Directo*</label>
 							<div>
-								<input id="txtCostoDirectoInversion" name="txtCostoDirectoInversion" value="<?= a_number_format($ExpedienteTecnicoM->costo_directo_inv_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
+							<?php foreach ($listaPresupuestoEj as $key => $valuess) { if (strpos($valuess->desc_presupuesto_ej,$value->nombre_modalidad_ejec) !== false) {?>
+								<input  id="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" name="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" value="<?= a_number_format($valuess->costo_presupuesto_ej[0]->suma, 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" disabled>
+								<?php } }?>
+								
 							</div>
 						</div>
 						<?php foreach ($costoIndirectoComponente as $key => $componente) { 
@@ -764,9 +761,8 @@ function valideKey(evt){
     paginaAjaxDialogo('otherModalResponsableElaboracion', 'Agregar Responsables de Elaboración', {id_et:id_et}, base_url+'index.php/Expediente_Tecnico/insertarResponsableElaboracion', 'GET', null, null, false, true);
 }
 
-		function listaResponsableElaboracion(id_et) 
+function listaResponsableElaboracion(id_et) 
 	{
-		console.log(id_et)
 		var table=$("#tablaResponsableElaboracion").DataTable({
 			"processing": true,
 			"serverSide":false,
@@ -778,7 +774,13 @@ function valideKey(evt){
 			},
 			"columns":
 			[
-				{"data":"nombres"},
+				{"data":"nombres",
+					render: function(data, type, row)
+					{
+						var name = data+' '+row.apellido_p+' '+row.apellido_m;
+						return name;
+					}
+				},
 				{"data":"desc_cargo"},
 				{"data":"id_responsable_et",
 					render: function(data, type, row)
