@@ -265,7 +265,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">6.- Ficha Técnica del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span> <a></a>
@@ -283,7 +283,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de Especificaciones Técnicas', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_EspecificacionTecnica/Insertar', 'GET', null, null, false, true); return false;">6.- Registro de Especificaciones Técnicas </a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de Especificaciones Técnicas', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_EspecificacionTecnica/Insertar', 'GET', null, null, false, true); return false;">7.- Registro de Especificaciones Técnicas </a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -301,7 +301,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="window.open(base_url+'index.php/Expediente_Tecnico/valorizacionEjecucionProyecto?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;">7.- Cronograma Valorizado de Ejecución del Proyecto</a>
+																	<a href="" onclick="window.open(base_url+'index.php/Expediente_Tecnico/valorizacionEjecucionProyecto?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;">8.- Cronograma Valorizado de Ejecución del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -319,7 +319,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Cronograma de Requerimiento', null, base_url+'index.php/Expediente_Tecnico/CronogramacionRecurso?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', 'GET', null, null, false, true); return false;">8.- Cronogramación de Requerimiento de Insumo </a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Cronograma de Requerimiento', null, base_url+'index.php/Expediente_Tecnico/CronogramacionRecurso?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', 'GET', null, null, false, true); return false;">9.- Cronogramación de Requerimiento de Insumo </a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
