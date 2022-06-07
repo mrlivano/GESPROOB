@@ -183,24 +183,7 @@
 																</div>
 															</div>
 														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ficha Tecnica</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span> <a></a>
-																	</div>
-																	<p class="excerpt">Se debe realizar el registro de la Ficha Técnica del proyecto, responsables del Expediente técnico.</p>
-																</div>
-															</div>
-														</li>
+														
 														<li>
 															<div class="block">
 																<div class="tags">
@@ -270,6 +253,24 @@
 																		<span></span><a></a>
 																	</div>
 																	<p class="excerpt">Se detallara el presupuesto general del proyecto a nivel de Componentes, Metas y Partidas en Costos Directos e Indirectos. Tambien se podra definir el Analisis de los costos unitarios de cada partida.</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="block">
+																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Ficha Tecnica</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
+																	</h2>
+																	<div class="byline">
+																		<span></span> <a></a>
+																	</div>
+																	<p class="excerpt">Se debe realizar el registro de la Ficha Técnica del proyecto, responsables del Expediente técnico.</p>
 																</div>
 															</div>
 														</li>

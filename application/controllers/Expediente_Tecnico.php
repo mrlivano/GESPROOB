@@ -1495,6 +1495,8 @@ class Expediente_Tecnico extends CI_Controller
 				$resp_data['num_registro_prof']=$resp->num_registro_prof;
 				$resp_data['fecha_asignacion_resp_et']=$resp->fecha_asignacion_resp_et;
 				$resp_data['estado_responsable_et']=$resp->estado_responsable_et;
+				$resp_data['fecha_inicio']=$resp->fecha_inicio;
+				$resp_data['fecha_fin']=$resp->fecha_fin;
 				$lastResp=$this->Model_ET_Responsable->insertar($resp_data);
 			}
 
@@ -1520,6 +1522,9 @@ class Expediente_Tecnico extends CI_Controller
 				$comp_data['id_presupuesto_ej']=$comp->id_presupuesto_ej;
 				$comp_data['estado']=$comp->estado;
 				$comp_data['url']=$comp->url;
+				$comp_data['tipo_ejecucion']=$comp->tipo_ejecucion;
+				$comp_data['monto']=$comp->monto;
+				$comp_data['porcentaje']=$comp->porcentaje;
 				$lastComponente=$this->Model_ET_Componente->insertarComponente($comp_data);
 				
 				$meta=$this->Model_ET_Meta->ETMetaPorIdComponente($comp->id_componente);
@@ -1672,6 +1677,8 @@ class Expediente_Tecnico extends CI_Controller
 				$resp_data['num_registro_prof']=$resp->num_registro_prof;
 				$resp_data['fecha_asignacion_resp_et']=$resp->fecha_asignacion_resp_et;
 				$resp_data['estado_responsable_et']=$resp->estado_responsable_et;
+				$resp_data['fecha_inicio']=$resp->fecha_inicio;
+				$resp_data['fecha_fin']=$resp->fecha_fin;
 				$lastResp=$this->Model_ET_Responsable->insertar($resp_data);
 			}
 
@@ -1697,6 +1704,9 @@ class Expediente_Tecnico extends CI_Controller
 				$comp_data['id_presupuesto_ej']=$comp->id_presupuesto_ej;
 				$comp_data['estado']=$comp->estado;
 				$comp_data['url']=$comp->url;
+				$comp_data['tipo_ejecucion']=$comp->tipo_ejecucion;
+				$comp_data['monto']=$comp->monto;
+				$comp_data['porcentaje']=$comp->porcentaje;
 				$lastComponente=$this->Model_ET_Componente->insertarComponente($comp_data);
 				
 				$meta=$this->Model_ET_Meta->ETMetaPorIdComponente($comp->id_componente);
