@@ -62,10 +62,13 @@ class Expediente_Tecnico extends CI_Controller
 		$Opcion="ReporteFichaTecnica01";
 
 		$ImagenesExpediente=$this->Model_ET_Expediente_Tecnico->ET_Img($id_ExpedienteTecnico);
-
+		$listarComponentes=$this->Model_ET_Expediente_Tecnico->listarComponentes($id_ExpedienteTecnico);
+		$listarComponentesAD=$this->Model_ET_Expediente_Tecnico->listarComponentesAD($id_ExpedienteTecnico);
+		$listarComponentesAI=$this->Model_ET_Expediente_Tecnico->listarComponentesAI($id_ExpedienteTecnico);
+		$listarResponsables=$this->Model_ET_Expediente_Tecnico->listarResponsables($id_ExpedienteTecnico);
 		$listarExpedienteFicha001=$this->Model_ET_Expediente_Tecnico->reporteExpedienteFicha001($Opcion,$id_ExpedienteTecnico);
 
-		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteExpedienteTecnico',["listarExpedienteFicha001" => $listarExpedienteFicha001, "ImagenesExpediente" =>$ImagenesExpediente,"responsableElaboracion" => $responsableElaboracion,"responsableEjecucion" => $responsableEjecucion],true);
+		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteExpedienteTecnico',["listarExpedienteFicha001" => $listarExpedienteFicha001, "ImagenesExpediente" =>$ImagenesExpediente,"responsableElaboracion" => $responsableElaboracion,"responsableEjecucion" => $responsableEjecucion,"listarComponentes" => $listarComponentes,"listarComponentesAD" => $listarComponentesAD,"listarComponentesAI" => $listarComponentesAI,"listarResponsables" => $listarResponsables],true);
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->set_paper("A4", "portrait");
 		$this->mydompdf->render();
@@ -1047,9 +1050,36 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 
+		$expedienteTecnico->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 1030, 'EXPEDIENTETECNICO');
+
+		foreach($expedienteTecnico->childComponenteIndirecta as $key => $value)
+		{
+			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+
+			foreach($value->childMeta as $index => $item)
+			{
+				$this->obtenerMetaAnidadaParaValorizacion($item);
+			}
+		}
+
 		$expedienteTecnico->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 16, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childCostoIndirecto as $key => $value)
+		{
+			$costoComponente=0;
+			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+
+			foreach($value->childMeta as $index => $item)
+			{
+				$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
+				$costoComponente+=$item->costoMeta;
+			}
+			$value->costoComponente=$costoComponente;
+		}
+
+		$expedienteTecnico->childCostoIndirectoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 1031, 'EXPEDIENTETECNICO');
+
+		foreach($expedienteTecnico->childCostoIndirectoIndirecto as $key => $value)
 		{
 			$costoComponente=0;
 			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
