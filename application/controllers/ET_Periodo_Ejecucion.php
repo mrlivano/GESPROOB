@@ -86,6 +86,27 @@ class ET_Periodo_Ejecucion extends CI_Controller
 		}
 	}
 
+	public function listarCronogramaEjecucion()
+	{
+			if ($this->input->is_ajax_request())
+			{
+					$id_et = $this->input->post("id_et");
+					$data  = $this->Model_ET_Periodo_Ejecucion->listaPlazoEjecucion($id_et);
+					if($data == false)
+					{
+							echo json_encode(array('data' => $data));
+					}
+					else
+					{
+							echo json_encode(array('data' => $data));
+					}
+			}
+			else
+			{
+					show_404();
+			}
+	}
+
 	private function calcularNumeroMeses($fechaInicio,$fechaFin)
 	{
 		$ts1 = strtotime($fechaInicio);
