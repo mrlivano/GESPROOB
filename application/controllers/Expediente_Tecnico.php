@@ -2606,15 +2606,33 @@ class Expediente_Tecnico extends CI_Controller
 		else
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
-			foreach($expedienteTecnico->childComponente as $key => $value)
-			{
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'MIXTO'){
+				
+				$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
-				foreach($value->childMeta as $index => $item)
+				foreach($expedienteTecnico->childComponente as $key => $value)
 				{
-					$this->obtenerMetaAnidadaParaValorizacionFisica($item, date('m'), date('Y'),'valorizacion');
+					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+	
+					foreach($value->childMeta as $index => $item)
+					{
+						$this->obtenerMetaAnidadaParaValorizacionFisica($item, date('m'), date('Y'),'valorizacion');
+					}
+				}
+			}
+			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'MIXTO'){
+				
+				$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+
+				foreach($expedienteTecnico->childComponenteInd as $key => $value)
+				{
+					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+	
+					foreach($value->childMeta as $index => $item)
+					{
+						$this->obtenerMetaAnidadaParaValorizacionFisica($item, date('m'), date('Y'),'valorizacion');
+					}
 				}
 			}
 
