@@ -2377,20 +2377,34 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'EXPEDIENTETECNICO');
+			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'MIXTO'){
+				$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'EXPEDIENTETECNICO');
+
+				foreach($expedienteTecnico->childComponente as $key => $value)
+				{
+					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+					foreach($value->childMeta as $index => $item)
+					{
+						$this->obtenerMetaAnidadaParaValorizacion($item);
+					}
+				}
+			}
+			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'MIXTO'){
+				$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et,'EXPEDIENTETECNICO');
+
+				foreach($expedienteTecnico->childComponenteInd as $key => $value)
+				{
+					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+					foreach($value->childMeta as $index => $item)
+					{
+						$this->obtenerMetaAnidadaParaValorizacion($item);
+					}
+				}	
+			}
 
 			$expedienteTecnico->childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'ADICIONAL');
 
 			$countValorizacionDiaria  = $this->Model_DetSegOrden->sumatoriaValorizacion();
-
-			foreach($expedienteTecnico->childComponente as $key => $value)
-			{
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-				foreach($value->childMeta as $index => $item)
-				{
-					$this->obtenerMetaAnidadaParaValorizacion($item);
-				}
-			}
 
 			foreach($expedienteTecnico->childComponenteAdicional as $key => $value)
 			{
