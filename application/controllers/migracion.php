@@ -44,7 +44,7 @@ class migracion extends CI_Controller
     public function clonacion()
 	{
 		$idExpedienteTecnico=isset($_GET['id_et']) ? $_GET['id_et'] : null;
-        $componente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+        $componente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
         foreach ($componente as $comp) 
         {            
             $meta=$this->Model_ET_Meta->ETMetaPorIdComponente($comp->id_componente);

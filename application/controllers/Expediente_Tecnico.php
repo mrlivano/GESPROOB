@@ -534,7 +534,7 @@ class Expediente_Tecnico extends CI_Controller
 		$MostraExpedienteNombre=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_ExpedienteTecnico);
 		$MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_ExpedienteTecnico);
 
-	    $MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($id_ExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+	    $MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 	    foreach ($MostraExpedienteTecnicoExpe->childComponente as $key => $value)
 	    {
@@ -628,14 +628,14 @@ class Expediente_Tecnico extends CI_Controller
 		if($_POST)
 		{
 			$idExpedienteTecnico=$this->input->post('idExpediente');	
-			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
 			$this->load->view('front/Ejecucion/ETAnalisisUnitario/listaComponente',['childComponente'=>$childComponente, 'idExpedienteTecnico'=>$idExpedienteTecnico]);			
 		}
 		else
 		{
 			$id_et = isset($_GET['query']) ? $_GET['query'] : null;
 			$etExpedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($id_et);
-			$etExpedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($etExpedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+			$etExpedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($etExpedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 			foreach($etExpedienteTecnico->childComponente as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -676,7 +676,7 @@ class Expediente_Tecnico extends CI_Controller
 		$MostraExpedienteNombre=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_ExpedienteTecnico);
 		$MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_ExpedienteTecnico);
 
-	  $MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($id_ExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+	  $MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 		$costoDirectoTotal=0;
 		foreach ($MostraExpedienteTecnicoExpe->childComponente as $key => $value)
@@ -693,7 +693,7 @@ class Expediente_Tecnico extends CI_Controller
 		}
 		$MostraExpedienteTecnicoExpe->costoDirecto=$costoDirectoTotal;
 
-		$MostraExpedienteTecnicoExpe->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($id_ExpedienteTecnico, 1030, 'EXPEDIENTETECNICO');
+		$MostraExpedienteTecnicoExpe->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 		$costoDirectoTotalIndirecta=0;
 		foreach ($MostraExpedienteTecnicoExpe->childComponenteIndirecta as $key => $value)
@@ -710,7 +710,7 @@ class Expediente_Tecnico extends CI_Controller
 		}
 		$MostraExpedienteTecnicoExpe->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
     //COSTOS INDIRECTOS
-	  $MostraExpedienteTecnicoExpe->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($id_ExpedienteTecnico, 16, 'EXPEDIENTETECNICO');
+	  $MostraExpedienteTecnicoExpe->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 		$costoIndirectoTotal=0;
 	    foreach ($MostraExpedienteTecnicoExpe->childCostoIndirecto as $key => $value)
@@ -727,7 +727,7 @@ class Expediente_Tecnico extends CI_Controller
 		}
 		$MostraExpedienteTecnicoExpe->costoIndirecto=$costoIndirectoTotal;
 
-		$MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($id_ExpedienteTecnico, 1031, 'EXPEDIENTETECNICO');
+		$MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 		$costoIndirectoTotalIndirecta=0;
 	    foreach ($MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta as $key => $value)
@@ -1021,7 +1021,7 @@ class Expediente_Tecnico extends CI_Controller
 			redirect('Expediente_Tecnico/index');
         }
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
@@ -1044,7 +1044,7 @@ class Expediente_Tecnico extends CI_Controller
 
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
@@ -1067,7 +1067,7 @@ class Expediente_Tecnico extends CI_Controller
 	{
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : null;
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
@@ -2027,7 +2027,7 @@ class Expediente_Tecnico extends CI_Controller
 					echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar dos veces de un mismo expediente técnico.']);exit;
 				}
 
-				$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+				$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 				foreach($listaETComponente as $key => $value)
 				{
@@ -2136,7 +2136,7 @@ class Expediente_Tecnico extends CI_Controller
 					echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede clonar dos veces de un mismo expediente técnico.']);exit;
 				}
 
-				$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+				$listaETComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 				foreach($listaETComponente as $key => $value)
 				{
@@ -2377,9 +2377,9 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et,2,'EXPEDIENTETECNICO');
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'EXPEDIENTETECNICO');
 
-			$expedienteTecnico->childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et,2,'ADICIONAL');
+			$expedienteTecnico->childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'ADICIONAL');
 
 			$countValorizacionDiaria  = $this->Model_DetSegOrden->sumatoriaValorizacion();
 
@@ -2540,7 +2540,7 @@ class Expediente_Tecnico extends CI_Controller
 		else
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 			$meses = $this->listaMeses();
 
@@ -2573,7 +2573,7 @@ class Expediente_Tecnico extends CI_Controller
 		else
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 			foreach($expedienteTecnico->childComponente as $key => $value)
 			{
@@ -2609,7 +2609,7 @@ class Expediente_Tecnico extends CI_Controller
 		else
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 			foreach($expedienteTecnico->childComponente as $key => $value)
 			{
@@ -2643,7 +2643,7 @@ class Expediente_Tecnico extends CI_Controller
 		else
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 			foreach($expedienteTecnico->childComponente as $key => $value)
 			{
@@ -2677,7 +2677,7 @@ class Expediente_Tecnico extends CI_Controller
 		else
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
-			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'ADICIONAL');
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'ADICIONAL');
 
 			foreach($expedienteTecnico->childComponente as $key => $value)
 			{
@@ -2787,7 +2787,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
         }
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
 			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);

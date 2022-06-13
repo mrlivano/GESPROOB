@@ -44,7 +44,7 @@ class ET_Detalle_Formato extends CI_Controller
 			$plazoPogramado=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Programado');
 			$ampliacionPlazo=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Ampliacion');	
 			$arrayPartidaEjecutada=[];
-			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');			
+			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($childComponente as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -54,7 +54,7 @@ class ET_Detalle_Formato extends CI_Controller
 				}
 			}
 			$arrayAdicional=[];
-			$childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'ADICIONAL');			
+			$childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
 			foreach ($childComponenteAdicional as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -86,7 +86,7 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoActual=0;
 			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
 			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
-			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');			
+			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -97,7 +97,7 @@ class ET_Detalle_Formato extends CI_Controller
 				}
 			}
 
-			$adicionalTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'ADICIONAL');			
+			$adicionalTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
 			foreach ($adicionalTemp as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -107,7 +107,7 @@ class ET_Detalle_Formato extends CI_Controller
 					$this->adicionalEjecutado($item, $anio, (int)$mes, $adicionalAnterior, $adicionalActual);
 				}
 			}			
-			$componenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 16, 'EXPEDIENTETECNICO');			
+			$componenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteIndirecto as $key => $value)
 			{
 				$programacion=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $anio);
@@ -152,7 +152,7 @@ class ET_Detalle_Formato extends CI_Controller
 			$plazoPogramado=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Programado');
 			$ampliacionPlazo=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Ampliacion');	
 			$arrayPartidaEjecutada=[];
-			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');			
+			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($childComponente as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -162,7 +162,7 @@ class ET_Detalle_Formato extends CI_Controller
 				}
 			}
 			$arrayAdicional=[];
-			$childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'ADICIONAL');			
+			$childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
 			foreach ($childComponenteAdicional as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -197,7 +197,7 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoActual=0;
 			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
 			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
-			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');			
+			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -208,7 +208,7 @@ class ET_Detalle_Formato extends CI_Controller
 				}
 			}
 
-			$adicionalTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'ADICIONAL');			
+			$adicionalTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
 			foreach ($adicionalTemp as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -218,7 +218,7 @@ class ET_Detalle_Formato extends CI_Controller
 					$this->adicionalEjecutado($item, $anio, (int)$mes, $adicionalAnterior, $adicionalActual);
 				}
 			}			
-			$componenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 16, 'EXPEDIENTETECNICO');			
+			$componenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteIndirecto as $key => $value)
 			{
 				$programacion=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $anio);

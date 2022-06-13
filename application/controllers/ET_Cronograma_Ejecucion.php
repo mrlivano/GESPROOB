@@ -45,7 +45,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 
 		$listaMes=$this->listaMeses();
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, $this->input->post('tipo'));
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
@@ -57,7 +57,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 			}
 		}
 
-		$expedienteTecnico->childComponenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 16, $this->input->post('tipo'));
+		$expedienteTecnico->childComponenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
 		foreach($expedienteTecnico->childComponenteIndirecto as $key => $value)
 		{

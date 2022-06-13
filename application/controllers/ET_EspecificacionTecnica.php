@@ -24,7 +24,7 @@ class ET_EspecificacionTecnica extends CI_Controller
 		$idExpedienteTecnico=$this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
 			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
@@ -83,7 +83,7 @@ class ET_EspecificacionTecnica extends CI_Controller
 		$idExpedienteTecnico=$this->input->get('id_et');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 		
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
@@ -108,7 +108,7 @@ class ET_EspecificacionTecnica extends CI_Controller
 		if($_POST)
 		{
 			$idExpedienteTecnico=$this->input->post('idExpediente');	
-			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($idExpedienteTecnico, 2, 'EXPEDIENTETECNICO');
+			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
 			$this->load->view('front/Ejecucion/EspecificacionTecnica/listaComponente',['childComponente'=>$childComponente, 'idExpedienteTecnico'=>$idExpedienteTecnico]);			
 		}
 		else
