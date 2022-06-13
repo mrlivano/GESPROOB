@@ -1527,7 +1527,6 @@ class Expediente_Tecnico extends CI_Controller
 				$exp_data['id_et_padre']= $exp->id_et;
 				$exp_data['id_etapa_et']= $idEtapa;
 				$exp_data['fecha_registro']= $exp->fecha_registro;
-				$exp_data['fecha_aprobacion']= $exp->fecha_aprobacion;
 				$exp_data['aprobado']= $exp->aprobado;
 				$exp_data['url_memoria_descriptiva']= $exp->url_memoria_descriptiva;
 				$exp_data['url_impacto_ambiental']= $exp->url_impacto_ambiental;
@@ -1708,7 +1707,6 @@ class Expediente_Tecnico extends CI_Controller
 				$exp_data['id_et_padre']= $exp->id_et;
 				$exp_data['id_etapa_et']= $idEtapa;
 				$exp_data['fecha_registro']= $exp->fecha_registro;
-				$exp_data['fecha_aprobacion']= $exp->fecha_aprobacion;
 				$exp_data['aprobado']= $exp->aprobado;
 				$exp_data['url_memoria_descriptiva']= $exp->url_memoria_descriptiva;
 				$exp_data['url_impacto_ambiental']= $exp->url_impacto_ambiental;
