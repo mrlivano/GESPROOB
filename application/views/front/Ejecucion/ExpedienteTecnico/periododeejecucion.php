@@ -64,29 +64,6 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
-					<label class="control-label">Responsable de Ejecución:</label>
-					<div class="form-group">
-						<select class="selectpicker form-control" id="ComboResponsableEjecucion" name="ComboResponsableEjecucion" data-live-search="true" style="display: block !important;">
-							<option value="">Seleccione una opción</option>
-							<?php foreach ($listarPersona as $key => $item) { ?>
-								<option value="<?= $item->nombreCompleto ?>"><?= $item->nombreCompleto ?></option>
-							<?php } ?>
-						</select>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<label class="control-label">Cargo:</label>
-					<div class="form-group">
-						<input type="hidden" name="idTipoResponsableEjecucion" value="<?= @$listarUResponsableERespoEjecucion[0]->id_responsable_et ?>">
-						<select class="selectpicker form-control" id="comboCargoEjecucion" name="comboCargoEjecucion" data-live-search="true" style="display: block !important;">
-							<option value="">Seleccione una opción</option>
-							<?php foreach ($listarCargo as $key => $item) { ?>
-								<option value='<?= $item->Desc_cargo ?>'><?= $item->Desc_cargo ?></option>
-							<?php } ?>
-						</select>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12">
 					<label class="control-label">.</label>
 					<div>
 						<button style="width:100%;" type="submit" id="btnEnviarFormulario" class="btn btn-success">Guardar</button>
