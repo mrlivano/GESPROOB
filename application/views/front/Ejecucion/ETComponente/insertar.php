@@ -1036,8 +1036,18 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						swal.showInputError("Ingrese el porcentaje entre 0 y 100 %");
 						return false
 					}
-
-					Monto = (inputValue*monto_presupueto_ejec)/100;
+					if (index1 >= 0) {
+						idComponenteGastosGenerales=idComponente-2;
+						idComponenteUtilidad=idComponente-1;
+						console.log(idComponente+" - "+idComponenteGastosGenerales);
+						const gastosGenerales = parseFloat($('#montoComponente' + idComponenteGastosGenerales).text().replace(/[^\d\.\-]/g, ""));
+						const utilidad = parseFloat($('#montoComponente' + idComponenteUtilidad).text().replace(/[^\d\.\-]/g, ""));
+						console.log(monto_presupueto_ejec+"+"+gastosGenerales+"+"+utilidad);
+						Monto = (inputValue*(parseFloat(monto_presupueto_ejec)+gastosGenerales+utilidad))/100;
+					} else {
+						Monto = (inputValue*monto_presupueto_ejec)/100;
+					}
+					
 					porcentaje=inputValue;
 					paginaAjaxJSON({
 						"idComponente": idComponente,
