@@ -25,11 +25,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<td>' .
 					'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida(' . $value->id_partida . ');" style="width: 30px;">' .
 					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida(' . $value->id_partida . ', this);" style="width: 30px;">';
-				if ($idPresupuestoEjecucion == 2) {
+				// if ($idPresupuestoEjecucion == 2) {
 					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - ' . html_escape($value->desc_partida) . ' \', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ',  id_etapa_et :' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-				} else {
-					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-				}
+				// } else {
+				// 	$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				// }
 
 				$htmlTemp .= '</td>' .
 					'<td style="text-transform: uppercase;"><span id="nombrePartida' . $value->id_partida . '" contenteditable>' . html_escape($value->numeracion) . ' ' . html_escape($value->desc_partida) . '</span></td>' .
@@ -69,11 +69,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			foreach ($meta->childPartida as $key => $value) {
 				$htmlTemp .= '<tr id="rowPartida' . $value->id_partida . '" style="color: ' . ($value->partidaCompleta ? 'blue' : 'red') . ';" class="liPartida">' .
 					'<td>';
-				if ($idPresupuestoEjecucion == 2) {
+				// if ($idPresupuestoEjecucion == 2) {
 					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ', id_etapa_et:' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-				} else {
-					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-				}
+				// } else {
+				// 	$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				// }
 
 				$htmlTemp .= '</td>' .
 					'<td style="text-transform: uppercase;"><span id="nombrePartida' . $value->id_partida . '">' . html_escape($value->numeracion) . ' ' . html_escape($value->desc_partida) . '</span></td>' .

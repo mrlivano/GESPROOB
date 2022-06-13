@@ -29,14 +29,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<input type="button" title="Guardar Cambios" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartidaAdicional('.$value->id_partida.');" style="width: 30px;">'.
 					'<input type="button" title="Eliminar Partida" class="btn btn-default btn-xs" value="-" onclick="eliminarPartidaAdicional('.$value->id_partida.', this);" style="width: 30px;">'.
 					'<input type="button" title="Resolución de Aprobación de Adicional de Obra" class="btn btn-default btn-xs" value="R" onclick="subirResolucionAprobacionPartida('.$value->id_partida.', this);" style="width: 30px;">';
-					if($idPresupuestoEjecucion==2)
-					{
+					// if($idPresupuestoEjecucion==2)
+					// {
 						$htmlTemp.='<input type="button" title="Análisis Unitario" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-					}
-					else
-					{
-						$htmlTemp.='<input type="button" title="Asociar Clasificador" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
-					}
+					// }
+					// else
+					// {
+					// 	$htmlTemp.='<input type="button" title="Asociar Clasificador" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : '.$idExpedienteTecnico.', idPartida : '.$value->id_partida.', idPresupuesto :'.$idPresupuestoEjecucion.' }, \''.base_url().'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+					// }
 					
 				$htmlTemp.='</td>'.
 				'<td style="text-transform: uppercase;"><span id="nombrePartidaAdicional'.$value->id_partida.'" contenteditable>'.html_escape($value->desc_partida).'</span></td>'.
@@ -767,14 +767,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<input type="button" title="Guardar Cambios" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartidaAdicional('+objectJSON.idPartida+');" style="width: 30px;">'+
 					'<input type="button" title="Eliminar Partida" class="btn btn-default btn-xs" value="-" onclick="eliminarPartidaAdicional('+objectJSON.idPartida+', this);" style="width: 30px;">'+
 					'<input type="button" title="Resolución de Aprobación de Adicional de Obra" class="btn btn-default btn-xs" value="R" onclick="subirResolucionAprobacionPartida('+objectJSON.idPartida+');" style="width: 30px;">';
-				if(idPresupuestoEjecucion==2)
-				{
+				// if(idPresupuestoEjecucion==2)
+				// {
 					htmlTemp+='<input type="button" title="Análisis Unitario" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
-				}
-				else
-				{
-					htmlTemp+='<input type="button" title="Asociar Clasificador" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
-				}
+				// }
+				// else
+				// {
+				// 	htmlTemp+='<input type="button" title="Asociar Clasificador" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : <?=$expedienteTecnico->id_et?>, idPartida : '+objectJSON.idPartida+', idPresupuesto : '+idPresupuestoEjecucion+' }, \''+base_url+'index.php/ET_Analisis_Unitario/insertar\''+', \'get\', null, null, false, true);" style="width: 30px;">';
+				// }
 				htmlTemp+='</td>'+
 				'<td style="text-transform: uppercase;"><span id="nombrePartidaAdicional'+objectJSON.idPartida+'" contenteditable>'+replaceAll(replaceAll($('#selectDescripcionPartidaAdicional').val().trim(), '<', '&lt;'), '>', '&gt;')+'</span></td>'+
 
