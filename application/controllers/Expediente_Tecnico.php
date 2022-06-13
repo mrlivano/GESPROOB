@@ -1090,7 +1090,7 @@ class Expediente_Tecnico extends CI_Controller
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : null;
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 2, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
@@ -1102,7 +1102,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 
-		$expedienteTecnico->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 1030, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childComponenteIndirecta as $key => $value)
 		{
@@ -1114,7 +1114,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 
-		$expedienteTecnico->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 16, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childCostoIndirecto as $key => $value)
 		{
@@ -1129,7 +1129,7 @@ class Expediente_Tecnico extends CI_Controller
 			$value->costoComponente=$costoComponente;
 		}
 
-		$expedienteTecnico->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, 1031, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childCostoIndirectoIndirecta as $key => $value)
 		{

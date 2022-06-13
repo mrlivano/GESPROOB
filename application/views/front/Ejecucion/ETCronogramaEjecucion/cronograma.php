@@ -136,7 +136,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 			<tr>
 				<th>PROY:</th>
 				<th colspan="6"><?=html_escape($expedienteTecnico->nombre_pi)?></th>
-				<th colspan="12">CRONOGRAMA VALORIZADO DE EJECUCIÓN DEL PROYECTO <?=$anio?></th>
+				<th colspan="<?=count($listaMesesPeriodo)?>">CRONOGRAMA VALORIZADO DE EJECUCIÓN DEL PROYECTO <?=$anio?></th>
 			</tr>
 			<tr>
 				<th>ÍTEM</th>
@@ -153,6 +153,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 			</tr>
 		</thead>
 		<tbody>
+		<td colspan="<?=count($listaMesesPeriodo)+7?>" style="text-align:centes;"><b>ADMINISTRACION DIRECTA</b></td>
 			<?php foreach($expedienteTecnico->childComponente as $key => $value)
 			{ ?>
 				<tr class="elementoBuscar">
@@ -174,16 +175,18 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				<?php } ?>
 			<?php } ?>
 			<tr>
-				<td colspan="19" style="text-align:left;"><b><i>COSTOS INDIRECTOS</i></b></td>
+				<td colspan="<?=count($listaMesesPeriodo)+7?>" style="text-align:left;"><b><i>COSTOS INDIRECTOS</i></b></td>
 			</tr>
 			<?php foreach($expedienteTecnico->childComponenteIndirecto as $key => $value)
 			{ ?>
 				<tr class="elementoBuscar">
 					<td><b><i><?=$value->numeracion?></i></b></td>
 					<td style="text-align: left;" colspan="4"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+					<td colspan="2"><span style="color:#d9534f;font-weight:bold" id="monto<?=$value->id_componente?>"><?=number_format($value->monto, 2)?></span></td>
 					<?php foreach($listaMesesPeriodo as $i => $mes) 
 					{ 
-						$precioComponente=0;
+						$precioComponente=0;?>
+						<?php
 						foreach($value->childCronograma as $temp)
 						{
 							if($value->id_componente==$temp->id_componente && $temp->numero_mes==$mes->num)
@@ -192,7 +195,6 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 								break;
 							}
 						}?>
-						<td colspan="2"><span style="color:#d9534f;font-weight:bold" id="monto<?=$value->id_componente?>"><?=number_format($value->monto, 2)?></span></td>
 						<td <?=($precioComponente==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"')?>>
 							<div>
 								<input type="text" style="display: none;padding: 0px;width: 40px;" value="<?=number_format($precioComponente, 2)?>" onkeyup="onKeyUpGuardarCronograma('<?=$value->id_componente?>', '<?=$mes->num?>','<?=$anio?>', this, event,<?=$value->monto?>);">

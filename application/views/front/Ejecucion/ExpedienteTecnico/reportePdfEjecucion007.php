@@ -210,6 +210,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 		<div>
 			<br>
 		<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
+		<?php $costoDirectoTotal=0; ?>
 			<table id="tableValorizacion" style="width:100%;">
 				<thead>
 					<tr>

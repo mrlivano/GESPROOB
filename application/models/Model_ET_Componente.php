@@ -57,6 +57,34 @@ class Model_ET_Componente extends CI_Model
 		return $data->result();
 	}
 
+	public function ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico,$estado)
+	{
+		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='2' or desc_presupuesto_ej like 'ADMINISTRACION DIRECTA - COSTOS DIRECTOS')");
+		
+		return $data->result();
+	}
+
+	public function ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico,$estado)
+	{
+		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='1030' or desc_presupuesto_ej like 'ADMINISTRACION INDIRECTA - COSTOS DIRECTOS')");
+		
+		return $data->result();
+	}
+
+	public function ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico,$estado)
+	{
+		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='16' or desc_presupuesto_ej like 'ADMINISTRACION DIRECTA - COSTOS INDIRECTOS')");
+		
+		return $data->result();
+	}
+
+	public function ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($idExpedienteTecnico,$estado)
+	{
+		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='1031' or desc_presupuesto_ej like 'ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS')");
+		
+		return $data->result();
+	}
+
 	public function ETCostoIndirectoPorDescripcion($idExpedienteTecnico,$idPresupuestoEjecucion,$texto,$estado)
 	{
 		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and id_presupuesto_ej='$idPresupuestoEjecucion' and estado='$estado' and descripcion like '%".$texto."%'");
