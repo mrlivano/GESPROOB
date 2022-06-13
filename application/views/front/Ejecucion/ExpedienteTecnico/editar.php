@@ -125,7 +125,7 @@
 							<label class="control-label">Costo Total (Inversión)*</label>
 							<div>
 
-								<input id="txtCostoTotalInversion<?=str_replace(' ', '',$value->nombre_modalidad_ejec)?>" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
+								<input disabled id="txtCostoTotalInversion<?=str_replace(' ', '',$value->nombre_modalidad_ejec)?>" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
 							</div>
 						</div>
 					</div>								      			

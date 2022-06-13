@@ -355,13 +355,13 @@
 															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-07
 															</a>
-															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos Generales" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="modal" id="feedback-ff08" data-target="#feedback-ff08-modal" title="Desagregado de Gastos Generales" class="btn btn-app btn-box">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-															<a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Supervisión" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosSupervision?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="modal" id="feedback-ff09" data-target="#feedback-ff09-modal" title="Desagregado de Gastos Generales de Supervision" class="btn btn-app btn-box">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-09
 															</a>
-															<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Desagregado de Gastos de Liquidación" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosLiquidacion?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<a style="background-color: #5cb360;" class="btn btn-app btn-box" data-toggle="modal" id="feedback-ff09B" data-target="#feedback-ff09B-modal" title="Desagregado de Gastos de Liquidación" class="btn btn-app btn-box">
 																<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FF-09B</span>
 															</a>
 															<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -1690,7 +1690,7 @@ function listaComponenteAnalisis(idExpediente)
 				<h3>Formato FE-01</h3>
 			</div>
 			<div class="modal-body">
-				<form id="formAddDocumento" class="feedback" name="feedback">
+				<form id="formAddDocumentoF01" class="feedback" name="feedback">
 					<div class="form-group">
 						<input type="hidden" name="id_et" value="<?=$ExpedienteTecnicoElaboracion[0]->id_et?>">
 						<table class="table">
@@ -1702,17 +1702,143 @@ function listaComponenteAnalisis(idExpediente)
 							</thead>
 							<tbody>
 								<?php $counter = 1; ?>
-								<?php if ( !empty($et_documentos) ): ?>
-									<?php foreach ($et_documentos as $et_documento): ?>
+								<?php if ( !empty($et_documentos_f01) ): ?>
+									<?php foreach ($et_documentos_f01 as $et_documento_f01): ?>
 									<tr>
 										<th scope="row"><?php echo $counter++; ?></th>
-											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/ActaDeEntrega/<?= $et_documento['filename'] ?>" target="_blank"><?= $et_documento['filename'] ?></a></td>
+											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/ActaDeEntrega/<?= $et_documento_f01['filename'] ?>" target="_blank"><?= $et_documento_f01['filename'] ?></a></td>
 									</tr>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</tbody>
 						</table>
-					<input type="file" class="form-control-file" id="inputFileDoc" name="inputFileDoc">
+					<input type="file" class="form-control-file" id="inputFileDocF01" name="inputFileDocF01">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" id="send" type="submit">Guardar</button>
+						<a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="feedback-ff08-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Formato FF-08</h3>
+			</div>
+			<div class="modal-body">
+				<form id="formAddDocumentoF08" class="feedback" name="feedback">
+					<div class="form-group">
+						<input type="hidden" name="id_et" value="<?=$ExpedienteTecnicoElaboracion[0]->id_et?>">
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Documentos</th>
+							</tr>
+							</thead>
+							<tbody>
+								<?php $counter = 1; ?>
+								<?php if ( !empty($et_documentos_f08) ): ?>
+									<?php foreach ($et_documentos_f08 as $et_documento_f08): ?>
+									<tr>
+										<th scope="row"><?php echo $counter++; ?></th>
+											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_f08['filename'] ?>" target="_blank"><?= $et_documento_f08['filename'] ?></a></td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</tbody>
+						</table>
+					<input type="file" class="form-control-file" id="inputFileDocF08" name="inputFileDocF08">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" id="send" type="submit">Guardar</button>
+						<a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="feedback-ff09-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Formato FF-09</h3>
+			</div>
+			<div class="modal-body">
+				<form id="formAddDocumentoF09" class="feedback" name="feedback">
+					<div class="form-group">
+						<input type="hidden" name="id_et" value="<?=$ExpedienteTecnicoElaboracion[0]->id_et?>">
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Documentos</th>
+							</tr>
+							</thead>
+							<tbody>
+								<?php $counter = 1; ?>
+								<?php if ( !empty($et_documentos_f09) ): ?>
+									<?php foreach ($et_documentos_f09 as $et_documento_f09): ?>
+									<tr>
+										<th scope="row"><?php echo $counter++; ?></th>
+											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_f09['filename'] ?>" target="_blank"><?= $et_documento_f09['filename'] ?></a></td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</tbody>
+						</table>
+					<input type="file" class="form-control-file" id="inputFileDocF09" name="inputFileDocF09">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" id="send" type="submit">Guardar</button>
+						<a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="feedback-ff09B-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Formato FF-09B</h3>
+			</div>
+			<div class="modal-body">
+				<form id="formAddDocumentoF09B" class="feedback" name="feedback">
+					<div class="form-group">
+						<input type="hidden" name="id_et" value="<?=$ExpedienteTecnicoElaboracion[0]->id_et?>">
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Documentos</th>
+							</tr>
+							</thead>
+							<tbody>
+								<?php $counter = 1; ?>
+								<?php if ( !empty($et_documentos_f09B) ): ?>
+									<?php foreach ($et_documentos_f09B as $et_documento_f09B): ?>
+									<tr>
+										<th scope="row"><?php echo $counter++; ?></th>
+											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_f09B['filename'] ?>" target="_blank"><?= $et_documento_f09B['filename'] ?></a></td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</tbody>
+						</table>
+					<input type="file" class="form-control-file" id="inputFileDocF09B" name="inputFileDocF09B">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-success" id="send" type="submit">Guardar</button>
@@ -1725,10 +1851,10 @@ function listaComponenteAnalisis(idExpediente)
 </div>
 <script>
 
-	$("#formAddDocumento").submit(function(event)
+	$("#formAddDocumentoF01").submit(function(event)
 	{
 		event.preventDefault();
-		var formData=new FormData($("#formAddDocumento")[0]);
+		var formData=new FormData($("#formAddDocumentoF01")[0]);
 		$.ajax({
 			url: base_url+"index.php/Expediente_Tecnico/insertActaEntregaTerreno",
 			type:'POST',
@@ -1740,6 +1866,75 @@ function listaComponenteAnalisis(idExpediente)
 			success:function(resp)
 			{
 				$('feedback-modal').modal('hide');
+				swal("Bien!", "Se registro correctamente!", "success");
+			},
+			error: function ()
+			{
+					swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error");
+			}
+		});
+	});
+	$("#formAddDocumentoF08").submit(function(event)
+	{
+		event.preventDefault();
+		var formData=new FormData($("#formAddDocumentoF08")[0]);
+		$.ajax({
+			url: base_url+"index.php/Expediente_Tecnico/insertDesagregadoGastos",
+			type:'POST',
+			enctype: 'multipart/form-data',
+			data:formData,
+			cache: false,
+			contentType:false,
+			processData:false,
+			success:function(resp)
+			{
+				$('feedback-ff08-modal').modal('hide');
+				swal("Bien!", "Se registro correctamente!", "success");
+			},
+			error: function ()
+			{
+					swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error");
+			}
+		});
+	});
+	$("#formAddDocumentoF09").submit(function(event)
+	{
+		event.preventDefault();
+		var formData=new FormData($("#formAddDocumentoF09")[0]);
+		$.ajax({
+			url: base_url+"index.php/Expediente_Tecnico/insertDesagregadoGastosSupervision",
+			type:'POST',
+			enctype: 'multipart/form-data',
+			data:formData,
+			cache: false,
+			contentType:false,
+			processData:false,
+			success:function(resp)
+			{
+				$('feedback-ff09-modal').modal('hide');
+				swal("Bien!", "Se registro correctamente!", "success");
+			},
+			error: function ()
+			{
+					swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error");
+			}
+		});
+	});
+	$("#formAddDocumentoF09B").submit(function(event)
+	{
+		event.preventDefault();
+		var formData=new FormData($("#formAddDocumentoF09B")[0]);
+		$.ajax({
+			url: base_url+"index.php/Expediente_Tecnico/insertDesagregadoGastosLiquidacion",
+			type:'POST',
+			enctype: 'multipart/form-data',
+			data:formData,
+			cache: false,
+			contentType:false,
+			processData:false,
+			success:function(datos)
+			{
+				$('feedback-ff09B-modal').modal('hide');
 				swal("Bien!", "Se registro correctamente!", "success");
 			},
 			error: function ()

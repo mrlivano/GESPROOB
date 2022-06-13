@@ -470,9 +470,25 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$this->db->trans_start();
 			$hdIdExpediente=$this->input->post('hdIdExpediente');
-
+			$modalidad=$this->input->post('txtModalidadEjecucion');
 			$c_data['modalidad_ejecucion_et']=$this->input->post('txtModalidadEjecucion');
 			$q1 = $this->Model_ET_Expediente_Tecnico->update($c_data, $hdIdExpediente);
+			
+			if (($modalidad=='ADMINISTRACION INDIRECTA') || ($modalidad=="MIXTO")) {
+				$presupuestoEjec= $this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionAdmInCostoDirecto();
+				foreach($presupuestoEjec as $key =>$presupuesto){
+					$existe = $this->Model_ET_Presupuesto_Ejecucion->siExiste($hdIdExpediente,$presupuesto->desc_presupuesto_ej); 
+					if ($existe[0]->existe == 0) {
+						$Comp_data['id_et']=$hdIdExpediente;
+						$Comp_data['descripcion']=$presupuesto->desc_presupuesto_ej;
+						$Comp_data['id_presupuesto_ej']=$presupuesto->id_presupuesto_ej_padre;
+						$Comp_data['estado']="EXPEDIENTETECNICO";
+						$Comp_data['tipo_ejecucion']='ADMINISTRACION INDIRECTA';
+						$this->Model_ET_Componente->insertarComponente($Comp_data);
+					}
+					
+			}
+			}
 			$this->db->trans_complete();
 
 			$this->session->set_flashdata('correcto', 'Expediente Tecnico modificado correctamente.');
@@ -2260,11 +2276,15 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$ExpedienteTecnicoElaboracion=$this->Model_ET_Expediente_Tecnico->ExpedienteListarElaboracionPorId($id_et);
 		}
-		$et_documentos = $this->Model_ET_Expediente_Tecnico->getETDocumento($id_et);
+		$et_documentos_f01 = $this->Model_ET_Expediente_Tecnico->getETDocumento($id_et,1);
+		$et_documentos_f08 = $this->Model_ET_Expediente_Tecnico->getETDocumento($id_et,8);
+		$et_documentos_f09 = $this->Model_ET_Expediente_Tecnico->getETDocumento($id_et,9);
+		$et_documentos_f09B = $this->Model_ET_Expediente_Tecnico->getETDocumento($id_et,99);
+
 		$listaContraActual = $this->Model_ET_Expediente_Tecnico->ListarExpedientePorEtapaProyecto(3,$ExpedienteAprobado[0]->id_pi);
 		$listaModificatoria = $this->Model_ET_Expediente_Tecnico->ListarExpedientePorEtapaProyecto(10,$ExpedienteAprobado[0]->id_pi);
 		$this->load->view('layout/Ejecucion/header');
-		$this->load->view('front/Ejecucion/ExpedienteTecnico/verdetalle',['aprobado'=>$aprobado, 'ExpedienteTecnicoElaboracion'=>$ExpedienteTecnicoElaboracion, 'et_documentos' => $et_documentos, 'listaContraActual' => $listaContraActual, 'listaModificatoria' => $listaModificatoria]);
+		$this->load->view('front/Ejecucion/ExpedienteTecnico/verdetalle',['aprobado'=>$aprobado, 'ExpedienteTecnicoElaboracion'=>$ExpedienteTecnicoElaboracion, 'et_documentos_f01' => $et_documentos_f01,'et_documentos_f08' => $et_documentos_f08,'et_documentos_f09' => $et_documentos_f09,'et_documentos_f09B' => $et_documentos_f09B, 'listaContraActual' => $listaContraActual, 'listaModificatoria' => $listaModificatoria]);
 		$this->load->view('layout/Ejecucion/footer');
 	}
 
@@ -2821,7 +2841,7 @@ class Expediente_Tecnico extends CI_Controller
 				//
 				// $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
 
-				$nombreArchivo = trim(addslashes($_FILES['inputFileDoc']['name']));
+				$nombreArchivo = trim(addslashes($_FILES['inputFileDocF01']['name']));
 
 				$path_parts = pathinfo($nombreArchivo);
 
@@ -2831,6 +2851,7 @@ class Expediente_Tecnico extends CI_Controller
 
 				$c_data['filename']= $nombreArchivo;
 				$c_data['id_et']=$id_et;
+				$c_data['tipo']=1;
 
 				$ultimoId = $this->Model_ET_Expediente_Tecnico->insertETDocumento($c_data);
 
@@ -2845,7 +2866,164 @@ class Expediente_Tecnico extends CI_Controller
 
 						$this->load->library('upload', $config);
 
-						if (!$this->upload->do_upload('inputFileDoc'))
+						if (!$this->upload->do_upload('inputFileDocF01'))
+						{
+								$error = array('error' => $this->upload->display_errors());
+								$this->load->view('front/json/json_view',['datos' => $error]);
+						}
+				}
+
+				$this->db->trans_complete();
+
+				$msg = array();
+
+				$msg = ($ultimoId != '' ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+				$this->load->view('front/json/json_view', ['datos' => $msg]);
+		}
+		else
+		{
+				show_404();
+		}
+	}
+
+	public function insertDesagregadoGastos() {
+		if ($this->input->is_ajax_request())
+		{
+				$id_et = $_POST['id_et'];
+				// $nombreArchivo = $_FILES['inputFileDoc']['name'];
+				//
+				// $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+
+				$nombreArchivo = trim(addslashes($_FILES['inputFileDocF08']['name']));
+
+				$path_parts = pathinfo($nombreArchivo);
+
+				$nombreArchivo = str_replace(' ', '_', $path_parts['filename']. '_' .date('Y-m-d-H-i-s') . '.' . $path_parts['extension'] );
+
+				$this->db->trans_start();
+
+				$c_data['filename']= $nombreArchivo;
+				$c_data['id_et']=$id_et;
+				$c_data['tipo']=8;
+
+				$ultimoId = $this->Model_ET_Expediente_Tecnico->insertETDocumento($c_data);
+
+				if($nombreArchivo != '' || $nombreArchivo != null)
+				{
+						$config['upload_path'] = './uploads/DesagregadoGastos/';
+						$config['allowed_types'] = '*';
+						// $config['max_size'] = 50000;
+						// $config['max_width'] = 2000;
+						$config['max_height'] = '20048';
+						$config['file_name'] = $nombreArchivo;
+
+						$this->load->library('upload', $config);
+
+						if (!$this->upload->do_upload('inputFileDocF08'))
+						{
+								$error = array('error' => $this->upload->display_errors());
+								$this->load->view('front/json/json_view',['datos' => $error]);
+						}
+				}
+
+				$this->db->trans_complete();
+
+				$msg = array();
+
+				$msg = ($ultimoId != '' ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+				$this->load->view('front/json/json_view', ['datos' => $msg]);
+		}
+		else
+		{
+				show_404();
+		}
+	}
+	public function insertDesagregadoGastosSupervision() {
+		if ($this->input->is_ajax_request())
+		{
+				$id_et = $_POST['id_et'];
+				// $nombreArchivo = $_FILES['inputFileDoc']['name'];
+				//
+				// $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+
+				$nombreArchivo = trim(addslashes($_FILES['inputFileDocF09']['name']));
+
+				$path_parts = pathinfo($nombreArchivo);
+
+				$nombreArchivo = str_replace(' ', '_', $path_parts['filename']. '_' .date('Y-m-d-H-i-s') . '.' . $path_parts['extension'] );
+
+				$this->db->trans_start();
+
+				$c_data['filename']= $nombreArchivo;
+				$c_data['id_et']=$id_et;
+				$c_data['tipo']=9;
+
+				$ultimoId = $this->Model_ET_Expediente_Tecnico->insertETDocumento($c_data);
+
+				if($nombreArchivo != '' || $nombreArchivo != null)
+				{
+						$config['upload_path'] = './uploads/DesagregadoGastos/';
+						$config['allowed_types'] = '*';
+						// $config['max_size'] = 50000;
+						// $config['max_width'] = 2000;
+						$config['max_height'] = '20048';
+						$config['file_name'] = $nombreArchivo;
+
+						$this->load->library('upload', $config);
+
+						if (!$this->upload->do_upload('inputFileDocF09'))
+						{
+								$error = array('error' => $this->upload->display_errors());
+								$this->load->view('front/json/json_view',['datos' => $error]);
+						}
+				}
+
+				$this->db->trans_complete();
+
+				$msg = array();
+
+				$msg = ($ultimoId != '' ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+				$this->load->view('front/json/json_view', ['datos' => $msg]);
+		}
+		else
+		{
+				show_404();
+		}
+	}
+	public function insertDesagregadoGastosLiquidacion() {
+		if ($this->input->is_ajax_request())
+		{
+				$id_et = $_POST['id_et'];
+				// $nombreArchivo = $_FILES['inputFileDoc']['name'];
+				//
+				// $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+
+				$nombreArchivo = trim(addslashes($_FILES['inputFileDocF09B']['name']));
+
+				$path_parts = pathinfo($nombreArchivo);
+
+				$nombreArchivo = str_replace(' ', '_', $path_parts['filename']. '_' .date('Y-m-d-H-i-s') . '.' . $path_parts['extension'] );
+
+				$this->db->trans_start();
+
+				$c_data['filename']= $nombreArchivo;
+				$c_data['id_et']=$id_et;
+				$c_data['tipo']=99;
+
+				$ultimoId = $this->Model_ET_Expediente_Tecnico->insertETDocumento($c_data);
+
+				if($nombreArchivo != '' || $nombreArchivo != null)
+				{
+						$config['upload_path'] = './uploads/DesagregadoGastos/';
+						$config['allowed_types'] = '*';
+						// $config['max_size'] = 50000;
+						// $config['max_width'] = 2000;
+						$config['max_height'] = '20048';
+						$config['file_name'] = $nombreArchivo;
+
+						$this->load->library('upload', $config);
+
+						if (!$this->upload->do_upload('inputFileDocF09B'))
 						{
 								$error = array('error' => $this->upload->display_errors());
 								$this->load->view('front/json/json_view',['datos' => $error]);

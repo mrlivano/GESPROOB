@@ -414,9 +414,9 @@ class Model_ET_Expediente_Tecnico extends CI_Model
         return $this->db->insert_id();
     }
 
-		public function getETDocumento($data)
+		public function getETDocumento($data,$tipo)
     {
-			$this->db->select('*')->from('ET_DOCUMENTO')->where('id_et', $data);
+			$this->db->select('*')->from('ET_DOCUMENTO')->where('id_et', $data)->where('tipo',$tipo);
 
 	    $query = $this->db->get();
 

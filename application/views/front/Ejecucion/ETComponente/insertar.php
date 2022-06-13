@@ -234,12 +234,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
 					<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) {
-						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) {
+						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false )) {
 					?>
 							<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
 							<?php }
-						if ($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
-							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
+						if (($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false )) {
+							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false ) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
 							<?php } else {

@@ -70,7 +70,7 @@
 					</tr>
 				</thead>
 				<tbody id="bodyClasificador">
-					<?php foreach ($PresupuestoEjecucionListar as $key => $value) {?>
+					<?php foreach ($PresupuestoEjecucionListar as $key => $value) {if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false)||($expedienteTecnico->modalidad_ejecucion_et=="MIXTO")){?>
 						<tr id="trPresupuestoEjecucion<?=$value->id_presupuesto_ej?>">
 							<td style="background-color: #f1f1f1;color:#3f5367;" colspan="4">
 								<?=$value->desc_presupuesto_ej?>								
@@ -106,7 +106,7 @@
 								<?php }
 							} ?>
 						</tr>						
-					<?php } ?>
+					<?php }} ?>
 				</tbody>
 			</table>		
 		</div>
