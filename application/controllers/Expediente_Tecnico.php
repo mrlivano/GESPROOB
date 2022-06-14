@@ -727,7 +727,7 @@ class Expediente_Tecnico extends CI_Controller
 		}
 		$MostraExpedienteTecnicoExpe->costoIndirecto=$costoIndirectoTotal;
 
-		$MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
+		$MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 		$costoIndirectoTotalIndirecta=0;
 	    foreach ($MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta as $key => $value)
