@@ -66,8 +66,8 @@ class ET_Analisis_Unitario extends CI_Controller
 		$id_etapa_et = $this->input->get('id_etapa_et');
 		$aprobado = $this->input->get('aprobado');
 
-		if($idPresupuesto==2)
-		{
+		// if($idPresupuesto==2)
+		// {
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
 			$etEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucionPorDescEtaoaET('Elaboración de expediente técnico');
@@ -83,15 +83,15 @@ class ET_Analisis_Unitario extends CI_Controller
 			$listaETPresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoPorIdET($idET);
 
 			$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertar', ['etDetallePartida' => $etDetallePartida, 'listaUnidadMedida' => $listaUnidadMedida, 'listaETAnalisisUnitario' => $listaETAnalisisUnitario, 'listaETRecurso' => $listaETRecurso, 'listaETPresupuestoAnalitico' => $listaETPresupuestoAnalitico, 'idPartida' => $idPartida,'idExpediente' => $idET, 'idPresupuesto'=>$idPresupuesto, 'aprobado'=>$aprobado, 'id_etapa_et'=>$id_etapa_et]);		
-		}
-		else
-		{
-			$etEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucionPorDescEtaoaET('Elaboración de expediente técnico');
-			$listaETPresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoPorIdET($idET);
-			$etDetallePartida=$this->Model_ET_Detalle_Partida->ETDetallePartidaPorIdPartidaAndIdEtapaET($idPartida, $etEtapaEjecucion->id_etapa_et);
-			$listaETAnalisisUnitario=$this->Model_ET_Analisis_Unitario->ETClasificadorPorIdDetallePartida($etDetallePartida->id_detalle_partida);			
-			$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertarClasificadorIndirecto', ['etDetallePartida' => $etDetallePartida,'listaETPresupuestoAnalitico' => $listaETPresupuestoAnalitico,'listaETAnalisisUnitario' => $listaETAnalisisUnitario, 'idPartida' => $idPartida,'idExpediente' => $idET, 'idPresupuesto'=>$idPresupuesto]);		
-		}
+		// }
+		// else
+		// {
+		// 	$etEtapaEjecucion=$this->Model_ET_Etapa_Ejecucion->ETEtapaEjecucionPorDescEtaoaET('Elaboración de expediente técnico');
+		// 	$listaETPresupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoAnaliticoPorIdET($idET);
+		// 	$etDetallePartida=$this->Model_ET_Detalle_Partida->ETDetallePartidaPorIdPartidaAndIdEtapaET($idPartida, $etEtapaEjecucion->id_etapa_et);
+		// 	$listaETAnalisisUnitario=$this->Model_ET_Analisis_Unitario->ETClasificadorPorIdDetallePartida($etDetallePartida->id_detalle_partida);			
+		// 	$this->load->view('Front/Ejecucion/ETAnalisisUnitario/insertarClasificadorIndirecto', ['etDetallePartida' => $etDetallePartida,'listaETPresupuestoAnalitico' => $listaETPresupuestoAnalitico,'listaETAnalisisUnitario' => $listaETAnalisisUnitario, 'idPartida' => $idPartida,'idExpediente' => $idET, 'idPresupuesto'=>$idPresupuesto]);		
+		// }
 	}
 	public function insertarCostoUnitario()
 	{
