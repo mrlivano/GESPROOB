@@ -1021,7 +1021,7 @@ class Expediente_Tecnico extends CI_Controller
 			redirect('Expediente_Tecnico/index');
         }
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 		foreach($expedienteTecnico->childComponente as $key => $value)
 		{
