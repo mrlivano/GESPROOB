@@ -30,7 +30,7 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
         return $selectSubPresupuesto->result();
     }
     function listarComponentePresupuestoEj($Id_Presupuesto_Ej){
-        $selectComponentePresupuesto=$this->db->query("select * from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej_padre = '".$Id_Presupuesto_Ej."'");
+        $selectComponentePresupuesto=$this->db->query("select * from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej_padre = '".$Id_Presupuesto_Ej."' and (desc_presupuesto_ej!='UTILIDAD' and desc_presupuesto_ej!='IGV' and desc_presupuesto_ej!='GASTOS GENERALES')");
         return $selectComponentePresupuesto->result();
     }
     function listarMetaSubpresupuesto($id){
