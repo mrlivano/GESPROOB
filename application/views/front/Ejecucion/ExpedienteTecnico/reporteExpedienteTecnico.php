@@ -63,25 +63,25 @@
 				<td>Universidad Nacional Intercultural de Quillabamba</td>
 			</tr>-->
 			<tr>
-				<th>1. Nombre del Proyecto</th>
-				<td><?= @$listarExpedienteFicha001->nombre_pi ?></td>
+				<td style="width: 20%">1. Nombre del Proyecto</td>
+				<td style="text-align: justify;"  ><?= @$listarExpedienteFicha001->nombre_pi ?></td>
 			</tr>
 			<tr>
 				<th>2. Ubicación</th>
 				<td>Distrito/Provincia/Departamento: <?= @$listarExpedienteFicha001->distrito_provincia_departamento_ue ?> <br>
 					Zona: <?=@$listarExpedienteFicha001->direccion_ue;?> 
-				
-			</td>
-			</tr>
-			<tr >
-				<td colspan="2">3. Autores del estudio</td>
+				</td>
 			</tr>
 			<tr>
+				<td colspan="2">3. Autores del estudio</td>
+			</tr>
+			
+			<tr>
 			<td colspan="2">
-			<table id="tresp" style="width: 100%" border="0">
+			<table id="tresp" style="width: 100%" border="1">
 			<tr >
 			
-				<th style="width: 40%">Cargo</th>
+				<td style="width: 40%">Cargo</td>
 				<td>Responsable</td>
 			</tr>
 			
@@ -257,6 +257,9 @@
 			<tr>
 				<th colspan="2">18. Fotografias</th>
 			</tr>
+			<tr>
+				<th colspan="2">
+			<table id="tbfoto" style="width: 100%" border="0">
 			<?php 
 
 			$numRegistros=count($ImagenesExpediente);
@@ -267,22 +270,24 @@
 
 			for($i=0;$i<$numFilas;$i++)
 			{ ?>
-
+			
 			<tr>
 				<?php $temp+=1;?>
 				<td>
 					<?php if(@$ImagenesExpediente[$temp]->desc_img!='') {  ?>
-						<img style="width: 320px;height: 220px; margin:5px 5px;" src="./uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
+						<img style="width: 325px;height: 220px; margin:5px 5px;" src="./uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
 					<?php } ?>
 				</td>
 				<?php $temp+=1;?>
 				<td>
 					<?php if(@$ImagenesExpediente[$temp]->desc_img!='') {  ?>
-						<img style="width: 320px;height: 220px; margin:5px 5px;" src="./uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
+						<img style="width: 325px;height: 220px; margin:5px 5px;" src="./uploads/ImageExpediente/<?=@$ImagenesExpediente[$temp]->id_img?><?=@$ImagenesExpediente[$temp]->desc_img?>" > 
 					<?php } ?>
 				</td>
 			</tr>
 			<?php } ?>
+				</table></th>
+			</tr>
   		</table>
   	</div>
 </body>
