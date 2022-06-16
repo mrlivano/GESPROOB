@@ -23,16 +23,28 @@ class ET_EspecificacionTecnica extends CI_Controller
 
 		$idExpedienteTecnico=$this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
-
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
-		foreach($expedienteTecnico->childComponente as $key => $value)
-		{
-			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-			foreach($value->childMeta as $index => $item)
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+			foreach($expedienteTecnico->childComponente as $key => $value)
 			{
-				$this->obtenerMetaAnidada($item);
-			}
-		}		
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidada($item);
+				}
+			}	
+		}
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+			foreach($expedienteTecnico->childComponenteInd as $key => $value)
+			{
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidada($item);
+				}
+			}	
+		}	
 		$this->load->view('front/Ejecucion/EspecificacionTecnica/index',['expedienteTecnico'=>$expedienteTecnico]);
 	}
 
@@ -83,16 +95,31 @@ class ET_EspecificacionTecnica extends CI_Controller
 		$idExpedienteTecnico=$this->input->get('id_et');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 		
-		foreach($expedienteTecnico->childComponente as $key => $value)
-		{
-			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-			foreach($value->childMeta as $index => $item)
+			foreach($expedienteTecnico->childComponente as $key => $value)
 			{
-				$this->obtenerMetaAnidadaEspecificacion($item);
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidadaEspecificacion($item);
+				}
 			}
 		}
+
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+		
+			foreach($expedienteTecnico->childComponenteInd as $key => $value)
+			{
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidadaEspecificacion($item);
+				}
+			}
+		}	
 
 		$html= $this->load->view('front/Ejecucion/EspecificacionTecnica/formatoEspecificacionTecnica',['expedienteTecnico'=>$expedienteTecnico], true);				
 		$this->mydompdf->set_option('enable_remote', TRUE);
@@ -108,8 +135,16 @@ class ET_EspecificacionTecnica extends CI_Controller
 		if($_POST)
 		{
 			$idExpedienteTecnico=$this->input->post('idExpediente');	
-			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
-			$this->load->view('front/Ejecucion/EspecificacionTecnica/listaComponente',['childComponente'=>$childComponente, 'idExpedienteTecnico'=>$idExpedienteTecnico]);			
+			$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+				$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
+			}
+
+			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+				$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
+			}
+		
+			$this->load->view('front/Ejecucion/EspecificacionTecnica/listaComponente',['expedienteTecnico'=>$expedienteTecnico, 'idExpedienteTecnico'=>$idExpedienteTecnico]);			
 		}
 		else
 		{

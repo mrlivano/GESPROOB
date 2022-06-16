@@ -72,6 +72,11 @@ function mostrarAnidado($meta, $expedienteTecnico)
 							
 						</div>
 					</div>
+					<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+						<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
+						<?php }?>
 					<div class="table-responsive">
 						<table id="tablaRegistro" style="font-size: 11px;width:100%" class="table table-sm" >
 							<thead>
@@ -103,7 +108,45 @@ function mostrarAnidado($meta, $expedienteTecnico)
 							</tbody>
 						</table>
 					</div>
-                </div>
+						<?php }?>
+						<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+						<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
+						<?php }?>
+					<div class="table-responsive">
+						<table id="tablaRegistro" style="font-size: 11px;width:100%" class="table table-sm" >
+							<thead>
+								<tr>
+									<th>ÍTEM</th>
+									<th>DESCRIPCIÓN</th>
+									<th>UND.</th>
+									<th style="text-align: right;">CANT.</th>
+									<th style="text-align: right;">P.U.</th>
+									<th style="text-align: right;">TOTAL</th>
+									<th style="text-align: center;"> OPCIONES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+									<tr class="elementoBuscar">
+										<td><b><i><?=$value->numeracion?></i></b></td>
+										<td style="text-align: left;text-transform:uppercase;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<?php foreach($value->childMeta as $index => $item) { ?>
+										<?= mostrarAnidado($item, $expedienteTecnico)?>
+									<?php } ?>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+						<?php }?>
+				 </div>
 			</div>
 		</div>
 	</div>

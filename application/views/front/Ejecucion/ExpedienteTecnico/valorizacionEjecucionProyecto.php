@@ -151,6 +151,11 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 						</div>
 						<br>
 					</div>
+					<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+						<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
+						<?php }?>
 					<div id="divContenedorGeneral" style="overflow-x: scroll;">
 						<table id="tableValorizacion">
 							<thead>
@@ -201,6 +206,63 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 							</tbody>
 						</table>
 					</div>
+			   <?php }?>
+				 <?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+						<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
+						<?php }?>
+					<div id="divContenedorGeneral" style="overflow-x: scroll;">
+						<table id="tableValorizacion">
+							<thead>
+								<tr>
+									<th>PROY:</th>
+									<th colspan="6"><?=html_escape($expedienteTecnico->nombre_pi)?></th>
+									<?php if($expedienteTecnico->num_meses!=null){ ?>
+										<th colspan="<?=$expedienteTecnico->num_meses?>">CRONOGRAMA VALORIZADO DE EJECUCIÓN DEL PROYECTO</th>
+									<?php } ?>
+								</tr>
+								<tr>
+									<th>ÍTEM</th>
+									<th>DESCRIPCIÓN</th>
+									<th>UND.</th>
+									<th>CANT.</th>
+									<th>P.U.</th>
+									<th>TOTAL</th>
+									<th>SALDO</th>
+									<?php if($expedienteTecnico->num_meses!=null)
+									{
+										for($i=0; $i<$expedienteTecnico->num_meses; $i++)
+										{ ?>
+											<th>M<?=($i+1)?></th>
+										<?php }
+									} ?>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+									<tr class="elementoBuscar">
+										<td><b><i><?=$value->numeracion?></i></b></td>
+										<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+										<td>---</td>
+										<td>---</td>
+										<td>---</td>
+										<td>---</td>
+										<td>---</td>
+										<?php if($expedienteTecnico->num_meses!=null){
+											for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+												<td>---</td>
+											<?php }
+										} ?>
+									</tr>
+									<?php foreach($value->childMeta as $index => $item){ ?>
+										<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$totalGeneral)?>
+									<?php } ?>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+			   <?php }?>
 				</div>
 			</div>
 		</div>

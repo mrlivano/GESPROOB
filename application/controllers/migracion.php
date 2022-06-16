@@ -44,7 +44,7 @@ class migracion extends CI_Controller
     public function clonacion()
 	{
 		$idExpedienteTecnico=isset($_GET['id_et']) ? $_GET['id_et'] : null;
-        $componente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
+        $componente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
         foreach ($componente as $comp) 
         {            
             $meta=$this->Model_ET_Meta->ETMetaPorIdComponente($comp->id_componente);
@@ -53,6 +53,17 @@ class migracion extends CI_Controller
                 $this->obtenerMetaAnidadaParaClonacion($item, $idExpedienteTecnico);
             }
         }
+
+				$componenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');
+        foreach ($componenteInd as $comp) 
+        {            
+            $meta=$this->Model_ET_Meta->ETMetaPorIdComponente($comp->id_componente);
+            foreach($meta as $item)
+            {
+                $this->obtenerMetaAnidadaParaClonacion($item, $idExpedienteTecnico);
+            }
+        }
+
 
         $this->db->trans_complete();
 

@@ -97,12 +97,29 @@ function mostrarAnidado($meta, $expedienteTecnico)
 			</div>
 		</div>
 		<div>
-			<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+		if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			?>
+		<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
+		<?php } 
+		foreach($expedienteTecnico->childComponente as $key => $value){ ?>
 				<h2><?=$value->numeracion?>. <?=html_escape($value->descripcion)?></h2>
 				<?php foreach($value->childMeta as $index => $item) { ?>
 					<?= mostrarAnidado($item, $expedienteTecnico)?>
 				<?php } ?>
-			<?php } ?>
+			<?php } }?>
+
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+		if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			?>
+		<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
+		<?php } 
+		foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+				<h2><?=$value->numeracion?>. <?=html_escape($value->descripcion)?></h2>
+				<?php foreach($value->childMeta as $index => $item) { ?>
+					<?= mostrarAnidado($item, $expedienteTecnico)?>
+				<?php } ?>
+			<?php } }?>
 		</div>
 	</div>
 </body>

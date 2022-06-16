@@ -206,8 +206,11 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				</tr>
 			</thead>
 			<tbody>
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){?>
-			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACION DIRECTA</b></td>
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+				<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACION DIRECTA</b></td>
+				<?php } ?>
 				<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
 					<tr class="elementoBuscar">
 						<td style="width: 5%"><b><?=$value->numeracion?></b></td>
@@ -218,8 +221,11 @@ function mostrarAnidado($meta, $expedienteTecnico)
 					<?php } ?>
 				<?php } }?>
 
-				<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){?>
+				<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+					if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						?>
 			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACION INDIRECTA</b></td>
+			<?php } ?>
 				<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
 					<tr class="elementoBuscar">
 						<td style="width: 5%"><b><?=$value->numeracion?></b></td>

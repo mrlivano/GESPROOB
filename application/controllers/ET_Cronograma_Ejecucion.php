@@ -45,9 +45,31 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 
 		$listaMes=$this->listaMeses();
 
-		$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
+		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){
+			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
-		foreach($expedienteTecnico->childComponente as $key => $value)
+			foreach($expedienteTecnico->childComponente as $key => $value)
+			{
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+	
+				foreach($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidadaParaValorizacion($item, $this->input->post('anio'));
+				}
+			}
+	
+			$expedienteTecnico->childComponenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
+			
+			foreach($expedienteTecnico->childComponenteIndirecto as $key => $value)
+			{
+				$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
+			}
+		}
+
+		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){
+			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
+		
+		foreach($expedienteTecnico->childComponenteInd as $key => $value)
 		{
 			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
 
@@ -57,11 +79,12 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 			}
 		}
 
-		$expedienteTecnico->childComponenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
+		$expedienteTecnico->childComponenteIndIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
-		foreach($expedienteTecnico->childComponenteIndirecto as $key => $value)
+		foreach($expedienteTecnico->childComponenteIndIndirecto as $key => $value)
 		{
 			$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
+		}
 		}
 
 		$this->load->view('front/Ejecucion/ETCronogramaEjecucion/cronograma', ['expedienteTecnico' => $expedienteTecnico, 'listaMes'=>$listaMes, 'anio'=>$this->input->post('anio')]);

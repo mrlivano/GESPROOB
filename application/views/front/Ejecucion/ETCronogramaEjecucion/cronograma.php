@@ -153,8 +153,11 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 			</tr>
 		</thead>
 		<tbody>
-		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){?>
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+				?>
 		<td colspan="<?=count($listaMesesPeriodo)+7?>" style="text-align:center; background-color: rgb(204 208 255);"><b>ADMINISTRACION DIRECTA</b></td>
+		<?php }?>
 			<?php foreach($expedienteTecnico->childComponente as $key => $value)
 			{ ?>
 				<tr class="elementoBuscar">
@@ -205,8 +208,11 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 					<?php } ?>
 				</tr>
 			<?php }} ?>
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){?>
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			?>
 		<td colspan="<?=count($listaMesesPeriodo)+7?>" style="text-align:center; background-color: rgb(204 208 255);"><b>ADMINISTRACION INDIRECTA</b></td>
+		<?php }?>
 			<?php foreach($expedienteTecnico->childComponenteInd as $key => $value)
 			{ ?>
 				<tr class="elementoBuscar">

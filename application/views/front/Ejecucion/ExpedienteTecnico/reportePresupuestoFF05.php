@@ -94,9 +94,56 @@
 			</tr>
 		</table>    
 	</div>
-	
+
+	<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){?>
+		<br>
+		<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){ ?>
+	<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN DIRECTA</span><br><br>
+	<?php } ?>
+	<table id="tablaContenido" style="width: 100%; font-size:12px;">
+		<tr>
+			<th>ÍTEM</th>
+			<th>EXPEDIENTE GENERAL GLOBAL</th>
+			<th style="text-align: right;">COSTO TOTAL</th>
+		</tr>
+		<tbody>
+			<?php foreach($MostraExpedienteTecnicoExpe->childComponente as $key => $value2){  ?>
+				<tr>
+					<td style="width: 5%"><b><?=$value2->numeracion?>.</b></td>
+					<td style="width: 85%"><b><?=strtoupper(html_escape($value2->descripcion))?></b></td>
+					<td style="width: 10%;text-align: right;">S/. <?=a_number_format($value2->costoComponente, 2, '.',",",3)?></td>
+				</tr>
+			<?php } ?>
+		</tbody>
+	</table>
 	<br>
+	<table id="tablaResumen" style="width: 100%; font-size:12px;">
+		<tr>
+			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></th>
+			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
+		</tr>
+		<?php foreach($MostraExpedienteTecnicoExpe->childCostoIndirecto as $key => $value) { ?>
+			<tr>
+				<th style="width: 90%"><b><?=strtoupper(html_escape($value->descripcion))?></b></th>
+				<td style="width: 10%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 2, '.',",",3)?></td>
+			</tr>				
+		<?php } ?>
+		<tr>
+			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
+			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirecto, 2, '.',",",3)?></b></td>
+		</tr>
+		<tr>
+			<th style="width: 90%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></th>
+			<td style="width: 10%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->presupuestoGeneral, 2, '.',",",3)?></b></td>
+		</tr>
+	</table>
+	<?php } ?>
+
+	<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){?>
+		<br>
+		<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){ ?>
 	<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
+	<?php } ?>
 	<table id="tablaContenido" style="width: 100%; font-size:12px;">
 		<tr>
 			<th>ÍTEM</th>
@@ -134,5 +181,6 @@
 			<td style="width: 10%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->presupuestoGeneralIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 	</table>
+	<?php } ?>
 </body>
 </html>
