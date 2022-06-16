@@ -18,7 +18,31 @@ class ET_EspecificacionTecnica extends CI_Controller
 	{
 		if($_POST)
 		{
+			$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoPorId($this->input->post("hdIdExpedienteTecnico"));
+			var_dump($expedienteTecnico);
+			$this->db->trans_start();
 
+			if (file_exists("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_memoria_descriptiva))
+			{
+				unlink("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_memoria_descriptiva);
+			}
+
+			$config['upload_path'] = './uploads/EspecificacionesTecnicas/';
+			$config['allowed_types'] = 'pdf|doc|docx';
+			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico');
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('fileEspecificacionesTecnicas'))
+			{
+				$c_data['url_especificacion_tecnica']= $this->upload->data('file_ext');
+				$data = $this->Model_ET_Expediente_Tecnico->PeriodoEjecucion($this->input->post('hdIdExpedienteTecnico'),$c_data);
+				$msg=($data>0 ? (['proceso' => 'Correcto', 'mensaje' => 'Especificacion Tecnica guardada correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado']));
+			}
+			else
+			{
+				$msg=(['proceso' => 'Error', 'mensaje' => $this->upload->display_errors('', '')]);
+			}
+			$this->db->trans_complete();
+			echo json_encode($msg);exit;
 		}
 
 		$idExpedienteTecnico=$this->input->get('idExpedienteTecnico');
@@ -44,8 +68,10 @@ class ET_EspecificacionTecnica extends CI_Controller
 					$this->obtenerMetaAnidada($item);
 				}
 			}	
-		}	
-		$this->load->view('front/Ejecucion/EspecificacionTecnica/index',['expedienteTecnico'=>$expedienteTecnico]);
+		}
+		$et_documentos_f04 = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,4);
+	
+		$this->load->view('front/Ejecucion/EspecificacionTecnica/index',['expedienteTecnico'=>$expedienteTecnico,'et_documentos_f04'=>$et_documentos_f04]);
 	}
 
 	public function Guardar()
