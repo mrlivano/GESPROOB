@@ -652,6 +652,7 @@ class ET_Componente extends CI_Controller
 				else
 				{
 					$um_data['descripcion']=$unidad;
+					$um_data['abreviatura']=$unidad;
 					$idUnidad=$this->Model_Unidad_Medida->insertarUnidadMedida($um_data);
 				}				
 			}	
