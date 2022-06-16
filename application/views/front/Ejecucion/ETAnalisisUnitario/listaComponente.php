@@ -11,12 +11,31 @@
 				<div class="x_content">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12" id="listaComponente">
+						<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+						<span style="font-weight:bold;">ADMINISTRACIÓN DIRECTA</span><br><br>
+						<?php }?>
 							<div class="list-group">
-								<?php foreach ($childComponente as $key => $value) { ?>
+								<?php foreach ($expedienteTecnico->childComponente as $key => $value) { ?>
 									<a href="<?=site_url('Expediente_Tecnico/reportePdfAnalisisUnitarioPorComponente?query='.@$value->id_componente);?>" target="_blank" class="list-group-item" ><?=$value->descripcion?></a>
 								<?php } ?>
-                            </div>
-                            <a href="<?=site_url('Expediente_Tecnico/reportePdfAnalisisPrecioUnitarioFF11?query='.@$idExpedienteTecnico);?>"><span class="label label-info">Descargar Formato FE-11 (Análisis de Costos Unitarios)</span></a>														
+            </div>
+						<?php }?>
+
+						<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							?>
+						<span style="font-weight:bold;">ADMINISTRACIÓN INDIRECTA</span><br><br>
+						<?php }?>
+							<div class="list-group">
+								<?php foreach ($expedienteTecnico->childComponenteInd as $key => $value) { ?>
+									<a href="<?=site_url('Expediente_Tecnico/reportePdfAnalisisUnitarioPorComponente?query='.@$value->id_componente);?>" target="_blank" class="list-group-item" ><?=$value->descripcion?></a>
+								<?php } ?>
+            </div>
+						<?php }?>
+
+            <a href="<?=site_url('Expediente_Tecnico/reportePdfAnalisisPrecioUnitarioFF11?query='.@$idExpedienteTecnico);?>"><span class="label label-info">Descargar Formato FE-11 (Análisis de Costos Unitarios)</span></a>														
 						</div>                        
 					</div>		
 				</div>
