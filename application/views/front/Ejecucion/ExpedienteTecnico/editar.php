@@ -65,19 +65,19 @@
 					
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Costo Total (Pre Inversión)*</label>
+							<label class="control-label">COSTO TOAL (Pre Inversión)</label>
 							<div>
 								<input id="txtCostoTotalPreInversion" name="txtCostoTotalPreInversion" value="<?=a_number_format($ExpedienteTecnicoM->costo_total_preinv_et , 2, '.',",",3) ?>"  class="form-control col-md-4 col-xs-12 moneda"  placeholder="Total del Proyecto (Pre Inversión)" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Costo Directo*</label>
+							<label class="control-label">COSTO DIRECTO (Pre Inversión)</label>
 							<div>
 								<input id="txtCostoDirectoPre" name="txtCostoDirectoPre" value="<?= a_number_format($ExpedienteTecnicoM->costo_directo_preinv_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Costo Indirecto*</label>
+							<label class="control-label">COSTO INDIRECTO (Pre Inversión)</label>
 							<div>
 								<input id="txtCostoIndirectoPre" name="txtCostoIndirectoPre" value=" <?= a_number_format($ExpedienteTecnicoM->costo_indirecto_preinv_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto"  autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
@@ -85,7 +85,7 @@
 					</div>
 					<div class="row">
 					<div class=" col-md-8 col-sm-8 col-xs-12">
-					  		<label class="control-label">Modalidad de Ejecución*</label>
+					  		<label class="control-label">MODALIDAD DE LA EJECUCION</label>
 					    	<div class="form-group" >
 							<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="<?=$ExpedienteTecnicoM->modalidad_ejecucion_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
 					    	</div>
@@ -100,7 +100,7 @@
 							<div class="row borderBudget">
 						
 						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">Costo Directo*</label>
+							<label class="control-label">COSTO DIRECTO</label>
 							<div>
 							<?php  foreach ($listaPresupuestoEj as $key => $valuess) { if (strpos($valuess->desc_presupuesto_ej,$value->nombre_modalidad_ejec) !== false && strpos($valuess->desc_presupuesto_ej,"COSTOS DIRECTOS TOTAL") == false) {?>
 								<?php
@@ -122,7 +122,7 @@
 						
 						<?php }} ?>
 						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">Costo Total (Inversión)*</label>
+							<label class="control-label">COSTO TOTAL (Inversión)</label>
 							<div>
 
 								<input disabled id="txtCostoTotalInversion<?=str_replace(' ', '',$value->nombre_modalidad_ejec)?>" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
