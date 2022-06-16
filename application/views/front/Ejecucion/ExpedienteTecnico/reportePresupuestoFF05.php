@@ -174,7 +174,7 @@
 		<?php } ?>
 		<tr>
 			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
-			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirecto, 2, '.',",",3)?></b></td>
+			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirectoIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 		<tr>
 			<th style="width: 90%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></th>
