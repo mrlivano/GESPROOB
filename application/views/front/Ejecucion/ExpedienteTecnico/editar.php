@@ -102,7 +102,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Costo Directo*</label>
 							<div>
-							<?php  foreach ($listaPresupuestoEj as $key => $valuess) { if (strpos($valuess->desc_presupuesto_ej,$value->nombre_modalidad_ejec) !== false) {?>
+							<?php  foreach ($listaPresupuestoEj as $key => $valuess) { if (strpos($valuess->desc_presupuesto_ej,$value->nombre_modalidad_ejec) !== false && strpos($valuess->desc_presupuesto_ej,"COSTOS DIRECTOS TOTAL") == false) {?>
 								<?php
 									$cd=$cd+$valuess->costo_presupuesto_ej[0]->suma; ?>
 								<input  id="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" name="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" value="<?= a_number_format($valuess->costo_presupuesto_ej[0]->suma, 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" disabled>
