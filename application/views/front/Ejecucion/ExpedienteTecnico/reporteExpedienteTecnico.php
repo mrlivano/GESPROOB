@@ -103,12 +103,13 @@
 			</tr>
 			<tr>
 				<th>5. Costo Total Proyecto(Pre Inversión)</th>
-				<td>S/. <?= @$listarExpedienteFicha001->costo_total_preinv_et ?> </td>
+				<td>S/. <?=a_number_format($listarExpedienteFicha001->costo_total_preinv_et, 2, '.',",",3)?></td>
 			</tr>
 
 			<tr>
 				<th>6. Costo Total Proyecto(Inversión)</th>
-				<td>S/. <?= @$listarExpedienteFicha001->costo_total_inv_et ?></td>
+				<td>S/. <?=a_number_format($listarExpedienteFicha001->costo_total_inv_et, 2, '.',",",3)?></td>
+				
 			</tr>
 			<tr >
 				<td colspan="2">7. Componentes del Proyecto</td>
