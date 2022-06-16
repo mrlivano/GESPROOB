@@ -207,6 +207,12 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				</tr>
 			</thead>
 			<tbody>
+
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+					if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						?>
+			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN DIRECTA</b></td>
+			<?php } ?>
 				<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
 					<tr class="elementoBuscar">
 						<td><b><?=$value->numeracion?></b></td>
@@ -215,7 +221,22 @@ function mostrarAnidado($meta, $expedienteTecnico)
 					<?php foreach($value->childMeta as $index => $item){ ?>
 						<?= mostrarAnidado($item, $expedienteTecnico)?>
 					<?php } ?>
-				<?php } ?>
+				<?php } }?>
+
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+					if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						?>
+			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN INDIRECTA</b></td>
+			<?php } ?>
+				<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+					<tr class="elementoBuscar">
+						<td><b><?=$value->numeracion?></b></td>
+						<td style="text-align: left;" colspan="15"><b><?=html_escape($value->descripcion)?></b></td>
+					</tr>
+					<?php foreach($value->childMeta as $index => $item){ ?>
+						<?= mostrarAnidado($item, $expedienteTecnico)?>
+					<?php } ?>
+				<?php } }?>
 			</tbody>
 		</table>
 	</div>
