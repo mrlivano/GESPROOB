@@ -81,7 +81,7 @@
 							text: objectJSON.mensaje,
 							type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
 						},
-						function() {window.history.back()});
+						function() {location.reload();});
 				}, false, true);
 		});
 

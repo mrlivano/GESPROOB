@@ -1229,6 +1229,14 @@ class Expediente_Tecnico extends CI_Controller
 				}
 				$value->costoComponente=$costoComponente;
 			}
+
+			$expedienteTecnico->childCostoDirectoTotalIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirecTotal($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+
+			foreach($expedienteTecnico->childCostoDirectoTotalIndirecta as $key => $value)
+			{
+				$costoComponente=0;
+				$value->costoComponente=$costoComponente;
+			}
 		}
 
 		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfEjecucion007',['expedienteTecnico'=>$expedienteTecnico],true);

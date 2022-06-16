@@ -71,6 +71,13 @@ class Model_ET_Componente extends CI_Model
 		return $data->result();
 	}
 
+	public function ETComponentePorPresupuestoEstadoAdmIndirecCostoDirecTotal($idExpedienteTecnico,$estado)
+	{
+		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='1031' or desc_presupuesto_ej like 'ADMINISTRACION INDIRECTA - COSTOS DIRECTOS TOTAL')");
+		
+		return $data->result();
+	}
+
 	public function ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico,$estado)
 	{
 		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='16' or desc_presupuesto_ej like 'ADMINISTRACION DIRECTA - COSTOS INDIRECTOS')");
@@ -80,7 +87,7 @@ class Model_ET_Componente extends CI_Model
 
 	public function ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($idExpedienteTecnico,$estado)
 	{
-		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='1031' or desc_presupuesto_ej like 'ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS')");
+		$data=$this->db->query("select * from ET_COMPONENTE where id_et='$idExpedienteTecnico' and estado='$estado' and id_presupuesto_ej=(select top 1 id_presupuesto_ej from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej='1036' or desc_presupuesto_ej like 'ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS')");
 		
 		return $data->result();
 	}
