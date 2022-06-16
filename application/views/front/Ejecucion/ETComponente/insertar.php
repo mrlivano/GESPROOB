@@ -220,6 +220,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	<div id="divImportarComponente" class="row" style="margin-top: 3px;">
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
+			<label class="control-label">Modalidad de Ejecución</label>
 				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
 					<option value="">Seleccione una opción</option>
 					<?php foreach ($listaModalidadEjecucion as $key => $value) {
@@ -233,14 +234,15 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
+			<label class="control-label">Estructura de Presupuesto</label>
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
 					<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) {
-						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)) {
+						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 					?>
-							<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+							<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
 							<?php }
-						if (($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)) {
+						if (($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
@@ -254,18 +256,21 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 		<div class="col-md-5 col-sm-12 col-xs-12">
+		<label class="control-label">Componentes</label>
 			<select id="selectComponente" name="selectComponente" class="form-control">
 				<option selected="true" value="" disabled>Seleccione Componente</option>
 			</select>
 		</div>
 
 		<div class="col-md-2 col-sm-12 col-xs-12">
+		<label class="control-label"> </label>
 			<input type="button" class="btn btn-info" value="Importar componente" onclick="importarComponente();" style="width: 100%;">
 		</div>
 	</div>
 	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
+			<label class="control-label">Modalidad de Ejecución</label>
 				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
 					<option value="">Seleccione una opción</option>
 					<?php foreach ($listaModalidadEjecucion as $key => $value) {
@@ -279,18 +284,19 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
+			<label class="control-label">Estructura de Presupuesto</label>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
 					<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) {
-						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) {
+						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false ) {
 					?>
-							<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+							<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
 							<?php }
 						if ($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
-							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
+							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
-							<?php } else {
+							<?php } elseif(strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
 					<?php }
@@ -300,9 +306,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 		<div id="divTxtDescripcionComponente" class="col-md-5 col-sm-12 col-xs-12">
+		<label class="control-label">Componentes</label>
 			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
 		<div id="divCargarSelectComponentePresupuesto" class="col-md-5 col-sm-12 col-xs-12">
+			<label class="control-label">Componentes</label>
 			<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
 				<option value="" selected="true" disabled>Seleccione Componente</option>
 				<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) {
@@ -312,6 +320,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</select>
 		</div>
 		<div class="col-md-2 col-sm-12 col-xs-12">
+		<label class="control-label"></label>
 			<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
 		</div>
 	</div>
