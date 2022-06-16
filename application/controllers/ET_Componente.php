@@ -111,6 +111,7 @@ class ET_Componente extends CI_Controller
 		{
 			$costoPresupuestoDirecto = 0;
 			$costoPresupuestoIndirecto =0;
+			$costoPresupuestoDirectoTotal =0; 	
 			$value->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstado($expedienteTecnico->id_et, $value->id_presupuesto_ej, 'EXPEDIENTETECNICO');
 
 			foreach($value->childComponente as $key => $item)
@@ -126,11 +127,16 @@ class ET_Componente extends CI_Controller
 					$costoComponente+=$temp->costoMeta;
 				}
 				$costoPresupuestoDirecto+=$costoComponente;
-				$costoPresupuestoIndirecto+=$item->monto;
+				if($value->desc_presupuesto_ej=="ADMINISTRACION INDIRECTA - COSTOS DIRECTOS TOTAL"){
+					$costoPresupuestoDirectoTotal+=$item->monto;
+				}elseif ($value->desc_presupuesto_ej=="ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS" || $value->desc_presupuesto_ej=="ADMINISTRACION DIRECTA - COSTOS INDIRECTOS") {
+					$costoPresupuestoIndirecto+=$item->monto;
+				}
 				$item->costoComponente=$costoComponente;
 			}
 			$value->costoPresupuestoDirecto = $costoPresupuestoDirecto;
 			$value->costoPresupuestoIndirecto = $costoPresupuestoIndirecto;
+			$value->costoPresupuestoDirectoTotal = $costoPresupuestoDirectoTotal;
 		}		
 		foreach($expedienteTecnico->childPresupuestoEjecucion as $key => $value)
 		{
