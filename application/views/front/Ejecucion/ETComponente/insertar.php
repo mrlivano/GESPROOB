@@ -524,7 +524,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				if (objectJSON.proceso == 'Error') {
 					return false;
 				}
-				presupuesto = $('#selectTipoEjecucion').val().trim().replace(/ /g, "");
+				presupuesto = $('#selectPresupuestoEjecucion').find("option:selected").text().trim().replace(/ /g, "");
 				var htmlTemp = '<li>' +
 					'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(' + objectJSON.idComponente + ');" style="width: 30px;"> ';
 				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(' + objectJSON.idComponente + ',\'' + $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim() + '\',\'' + presupuesto + '\');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;') + ' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente' + objectJSON.idComponente + '"> 0.0000 </b>';

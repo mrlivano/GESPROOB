@@ -84,7 +84,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										</div>
 									<?php } ?>
 									<div class="col-md-12 col-sm-12 col-xs-12">
-										<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Memoria Descriptiva:</label>
+										<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Especificación Tecnica:</label>
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											<input type="hidden" id="hdIdExpedienteTecnico" name="hdIdExpedienteTecnico" notValidate value="<?= $expedienteTecnico->id_et ?>">
 											<input accept=".pdf,.doc,.docx" type="file" id="fileEspecificacionesTecnicas" name="fileEspecificacionesTecnicas" class="form-control">
