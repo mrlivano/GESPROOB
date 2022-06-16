@@ -213,7 +213,7 @@
 	<table id="tablaResumen" style="width: 100%; font-size:12px;">
 	<tr>
 			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></th>
-			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoTotalIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 		<tr>
 			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
