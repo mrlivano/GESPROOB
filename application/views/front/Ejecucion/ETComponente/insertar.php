@@ -26,7 +26,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					'<input type="button" class="btn btn-default btn-xs" value="G" onclick="guardarCambiosPartida(' . $value->id_partida . ');" style="width: 30px;">' .
 					'<input type="button" class="btn btn-default btn-xs" value="-" onclick="eliminarPartida(' . $value->id_partida . ', this);" style="width: 30px;">';
 				// if ($idPresupuestoEjecucion == 2) {
-					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - ' . html_escape($value->desc_partida) . ' \', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ',  id_etapa_et :' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal - ' . html_escape($value->desc_partida) . ' \', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ',  id_etapa_et :' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 				// } else {
 				// 	$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 				// }
@@ -70,7 +70,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				$htmlTemp .= '<tr id="rowPartida' . $value->id_partida . '" style="color: ' . ($value->partidaCompleta ? 'blue' : 'red') . ';" class="liPartida">' .
 					'<td>';
 				// if ($idPresupuestoEjecucion == 2) {
-					$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ', id_etapa_et:' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
+				$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="A" onclick="paginaAjaxDialogo(\'otherModal\', \'Análisis presupuestal\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ', aprobado :' . $expedienteTecnico->aprobado . ', id_etapa_et:' . $expedienteTecnico->id_etapa_et . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 				// } else {
 				// 	$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" value="C" onclick="paginaAjaxDialogo(\'otherModal\', \'Asociar Clasificador\', { idET : ' . $idExpedienteTecnico . ', idPartida : ' . $value->id_partida . ', idPresupuesto :' . $idPresupuestoEjecucion . ' }, \'' . base_url() . 'index.php/ET_Analisis_Unitario/insertar\', \'get\', null, null, false, true);" style="width: 30px;">';
 				// }
@@ -221,11 +221,13 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
-				<option value="">Seleccione una opción</option>
-									<?php foreach ($listaModalidadEjecucion as $key => $value) { if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et =='MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec )) {									 ?>
-						      			<option  value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
-						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
-						      		<?php }} ?>
+					<option value="">Seleccione una opción</option>
+					<?php foreach ($listaModalidadEjecucion as $key => $value) {
+						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et == 'MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
+							<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
+								<?= $value->nombre_modalidad_ejec ?></option>
+					<?php }
+					} ?>
 				</select>
 			</div>
 		</div>
@@ -234,12 +236,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
 					<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) {
-						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false )) {
+						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)) {
 					?>
 							<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
 							<?php }
-						if (($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false )) {
-							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false ) {
+						if (($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)) {
+							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
 							<?php } else {
@@ -265,11 +267,13 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-2 col-sm-12 col-xs-12">
 			<div>
 				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
-				<option value="">Seleccione una opción</option>
-									<?php foreach ($listaModalidadEjecucion as $key => $value) { if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et =='MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec )) {									 ?>
-						      			<option  value='<?=$value->nombre_modalidad_ejec?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "")?> >
-						      			<?=$value->nombre_modalidad_ejec?></option>		      								      			
-						      		<?php }} ?>
+					<option value="">Seleccione una opción</option>
+					<?php foreach ($listaModalidadEjecucion as $key => $value) {
+						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et == 'MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
+							<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
+								<?= $value->nombre_modalidad_ejec ?></option>
+					<?php }
+					} ?>
 				</select>
 			</div>
 		</div>
@@ -390,10 +394,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				?>
 						<div class="panel">
 							<div class="panel-heading" style="padding: 6px;">
-							<a class="panel-title" id="heading<?=$temp3->id_presupuesto_ej?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$temp3->id_presupuesto_ej?>" aria-expanded="false" aria-controls="collapse<?=$temp3->id_presupuesto_ej?>" style="text-transform: uppercase;"><?=$temp3->desc_presupuesto_ej?><span id="sumaTotalCostosUltimo<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" > <?=strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS')?number_format($temp3->costoPresupuestoIndirecto, 4, '.', ','):number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')?> </span>
+								<a class="panel-title" id="heading<?= $temp3->id_presupuesto_ej ?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $temp3->id_presupuesto_ej ?>" aria-expanded="false" aria-controls="collapse<?= $temp3->id_presupuesto_ej ?>" style="text-transform: uppercase;"><?= $temp3->desc_presupuesto_ej ?><span id="sumaTotalCostosUltimo<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>"> <?= strpos($temp3->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL') ? number_format($temp3->costoPresupuestoDirectoTotal, 4, '.', ',') : (strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS') ? number_format($temp3->costoPresupuestoIndirecto, 4, '.', ',') : number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')) ?> </span>
 								</a>
 								<input type="hidden" name="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirecto ?>">
 								<input type="hidden" name="sumaTotalCostos1<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos1<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoIndirecto ?>">
+								<input type="hidden" name="sumaTotalCostos2<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos2<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirectoTotal ?>">
+
 							</div>
 							<div id="collapse<?= $temp3->id_presupuesto_ej ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?= $temp3->id_presupuesto_ej ?>">
 								<div class="panel-body">
@@ -402,7 +408,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 											<li>
 												<?php if (!$expedienteTecnico->aprobado && $expedienteTecnico->id_etapa_et != 3) { ?>
 													<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(<?= $value->id_componente ?>);" style="width: 30px;">
-													<?php if (strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS') !== false) { ?>
+													<?php if ((strpos($temp3->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL') !== false) || (strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS') !== false)) { ?>
 														<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Montos" onclick="agregarMonto(<?= $value->id_componente ?>,'<?= $value->descripcion ?>','<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>');" style="width: 30px;">
 														<input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(<?= $value->id_componente ?>,<?= $value->id_presupuesto_ej ?>, this);" style="width: 30px;">
 														<b style="text-transform: uppercase; color: black;" id="nombreComponente<?= $value->id_componente ?>" contenteditable><?= html_escape($value->descripcion) ?></b> - <span><b style="text-transform: uppercase; color: black;" id="montoComponente<?= $value->id_componente ?>"><?= number_format($value->monto, 4, '.', ',') ?></b></span>
@@ -465,19 +471,19 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(function(index, element) {
 			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#txtDescripcionComponente').val(), ' ', '').toLowerCase()) {
 				existeComponente = true;
-				
+
 				return false;
 			}
 		});
 		$('#ulComponenteMetaPartida' + PresupuestoEjecucion).find('> li > b').each(function(index, element) {
-			
+
 			if (replaceAll($(element).text(), ' ', '').toLowerCase() == replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text(), ' ', '').toLowerCase()) {
 				existeComponente = true;
-				
+
 				return false;
 			}
 		});
-		
+
 
 		if (existeComponente) {
 			swal({
@@ -509,10 +515,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				if (objectJSON.proceso == 'Error') {
 					return false;
 				}
-				presupuesto=$('#selectTipoEjecucion').val().trim().replace(/ /g,"");
+				presupuesto = $('#selectTipoEjecucion').val().trim().replace(/ /g, "");
 				var htmlTemp = '<li>' +
 					'<input type="button" class="btn btn-default btn-xs" value="G" title="Guardar Cambios" onclick="guardarCambiosComponente(' + objectJSON.idComponente + ');" style="width: 30px;"> ';
-				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(' + objectJSON.idComponente + ',\'' + $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim()+'\',\''+presupuesto+'\');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;') + ' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente' + objectJSON.idComponente + '"> 0.0000 </b>';
+				htmlTemp += '<input type="button" class="btn btn-default btn-xs" value="+M" title="Agregar Monto" onclick="agregarMonto(' + objectJSON.idComponente + ',\'' + $('#cargarSelectComponentePresupuesto').find("option:selected").text().trim() + '\',\'' + presupuesto + '\');" style="width: 30px;"> <input type="button" class="btn btn-default btn-xs" value="-" title="Eliminar Componente" onclick="eliminarComponente(' + objectJSON.idComponente + ',' + PresupuestoEjecucion + ', this);" style="width: 30px;"> <b style="text-transform: uppercase; color: black;" id="nombreComponente' + objectJSON.idComponente + '" contenteditable>' + replaceAll(replaceAll($('#cargarSelectComponentePresupuesto').find("option:selected").text().trim(), '<', '&lt;'), '>', '&gt;') + ' - </b><b style="text-transform: uppercase; color: black;" id="montoComponente' + objectJSON.idComponente + '"> 0.0000 </b>';
 				htmlTemp += '<ul></ul></li>';
 
 
@@ -656,7 +662,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}, false, true)
 				}
 			});
-			
+
 			$('#selectComponente').val('');
 
 			limpiarArbolCompletoMasOpciones();
@@ -1009,15 +1015,78 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 	}
 
 	function agregarMonto(idComponente, descripcionComponente, desc_presupuesto_ej) {
+		if (desc_presupuesto_ej.includes("COSTOSINDIRECTOS") ) {
+			agregarMontoIndirecto(idComponente, descripcionComponente, desc_presupuesto_ej)
+		}
+		if (desc_presupuesto_ej == "ADMINISTRACIONINDIRECTA-COSTOSDIRECTOSTOTAL") {
+			agregarMontoDirecto(idComponente, descripcionComponente, desc_presupuesto_ej)
+
+		}
+	}
+
+	function agregarMontoIndirecto(idComponente, descripcionComponente, desc_presupuesto_ej) {
+		const presupuesto_ejec_ind = `${desc_presupuesto_ej.split('-')[0]}-COSTOSINDIRECTOS`;
+		var monto_presupueto_ejec_ind = $("#sumaTotalCostos1" + presupuesto_ejec_ind);
+		swal({
+
+				title: "",
+				text: "Agregar Monto",
+				type: "input",
+				showCancelButton: true,
+				cancelButtonText: "CERRAR",
+				confirmButtonText: "AGREGAR",
+				closeOnConfirm: false,
+				inputPlaceholder: "",
+			},
+			function(inputValue) {
+
+				if (inputValue === false) return false;
+				if (inputValue === "" || isNaN(inputValue)) {
+					swal.showInputError("Ingrese un monto correcto");
+					return false
+				}
+
+				Monto = inputValue;
+				porcentaje = 0;
+
+				paginaAjaxJSON({
+					"idComponente": idComponente,
+					"porcentaje": porcentaje,
+					"montoComponente": Monto
+				}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
+					objectJSON = JSON.parse(objectJSON);
+					const montoA = parseFloat($('#montoComponente' + idComponente).text().replace(/[^\d\.\-]/g, ""));
+					var sumatoria = parseFloat(monto_presupueto_ejec_ind.val()) + parseFloat(Monto) - montoA;
+					monto_presupueto_ejec_ind.val(sumatoria);
+					swal({
+							title: '',
+							text: objectJSON.mensaje,
+							type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+						},
+						function() {});
+
+					if (objectJSON.proceso == 'Error') {
+						return false;
+					}
+					const montoF = separator(Monto);
+					$('#montoComponente' + idComponente).text(montoF);
+					$('#sumaTotalCostosUltimo' + presupuesto_ejec_ind).text(" " +  separator(sumatoria));
+				}, false, true);
+			});
+	}
+
+	function agregarMontoDirecto(idComponente, descripcionComponente, desc_presupuesto_ej) {
 
 		let index1 = descripcionComponente.search('IGV')
 		let index2 = descripcionComponente.search('UTILIDAD')
 		const presupuesto_ejec = `${desc_presupuesto_ej.split('-')[0]}-COSTOSDIRECTOS`;
-			const presupuesto_ejec_ind = `${desc_presupuesto_ej.split('-')[0]}-COSTOSINDIRECTOS`;
-			var monto_presupueto_ejec = $("#sumaTotalCostos" + presupuesto_ejec).val();
-			var monto_presupueto_ejec_ind = $("#sumaTotalCostos1" + presupuesto_ejec_ind);
+		const presupuesto_ejec_total = `${desc_presupuesto_ej.split('-')[0]}-COSTOSDIRECTOSTOTAL`;
+		const presupuesto_ejec_ind = `${desc_presupuesto_ej.split('-')[0]}-COSTOSINDIRECTOS`;
+		var monto_presupueto_ejec = $("#sumaTotalCostos" + presupuesto_ejec).val();
+		var monto_presupueto_ejec_ind = $("#sumaTotalCostos1" + presupuesto_ejec_ind);
+		var monto_presupueto_ejec_total = $("#sumaTotalCostos2" + presupuesto_ejec_total);
 		if (index1 >= 0 || index2 >= 0) {
-			
+
 			swal({
 
 					title: "",
@@ -1032,32 +1101,30 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				function(inputValue) {
 
 					if (inputValue === false) return false;
-					if (inputValue === "" || inputValue>100 || inputValue<0) {
+					if (inputValue === "" || inputValue > 100 || inputValue < 0) {
 						swal.showInputError("Ingrese el porcentaje entre 0 y 100 %");
 						return false
 					}
 					if (index1 >= 0) {
-						idComponenteGastosGenerales=idComponente-2;
-						idComponenteUtilidad=idComponente-1;
-						console.log(idComponente+" - "+idComponenteGastosGenerales);
+						idComponenteGastosGenerales = idComponente - 2;
+						idComponenteUtilidad = idComponente - 1;
 						const gastosGenerales = parseFloat($('#montoComponente' + idComponenteGastosGenerales).text().replace(/[^\d\.\-]/g, ""));
 						const utilidad = parseFloat($('#montoComponente' + idComponenteUtilidad).text().replace(/[^\d\.\-]/g, ""));
-						console.log(monto_presupueto_ejec+"+"+gastosGenerales+"+"+utilidad);
-						Monto = (inputValue*(parseFloat(monto_presupueto_ejec)+gastosGenerales+utilidad))/100;
+						Monto = (inputValue * (parseFloat(monto_presupueto_ejec) + gastosGenerales + utilidad)) / 100;
 					} else {
-						Monto = (inputValue*monto_presupueto_ejec)/100;
+						Monto = (inputValue * monto_presupueto_ejec) / 100;
 					}
-					
-					porcentaje=inputValue;
+
+					porcentaje = inputValue;
 					paginaAjaxJSON({
 						"idComponente": idComponente,
-						"porcentaje" : porcentaje,
+						"porcentaje": porcentaje,
 						"montoComponente": Monto
 					}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
 						objectJSON = JSON.parse(objectJSON);
 						const montoA = parseFloat($('#montoComponente' + idComponente).text().replace(/[^\d\.\-]/g, ""));
-						var sumatoria=parseFloat(monto_presupueto_ejec_ind.val())+Monto-montoA;
-						monto_presupueto_ejec_ind.val(sumatoria);
+						var sumatoria = parseFloat(monto_presupueto_ejec_total.val()) + Monto - montoA;
+						monto_presupueto_ejec_total.val(sumatoria);
 						swal({
 								title: '',
 								text: objectJSON.mensaje,
@@ -1070,7 +1137,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}
 						const montoF = separator(Monto);
 						$('#montoComponente' + idComponente).text(montoF);
-						$('#sumaTotalCostosUltimo'+presupuesto_ejec_ind).text(" "+separator(sumatoria));
+						$('#sumaTotalCostosUltimo' + presupuesto_ejec_total).text(" " + separator(sumatoria));
 					}, false, true);
 				});
 		} else {
@@ -1094,7 +1161,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					}
 
 					Monto = inputValue;
-					porcentaje=0;
+					porcentaje = 0;
 
 					paginaAjaxJSON({
 						"idComponente": idComponente,
@@ -1103,8 +1170,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					}, base_url + 'index.php/ET_Componente/editarMontoComponente', 'POST', null, function(objectJSON) {
 						objectJSON = JSON.parse(objectJSON);
 						const montoA = parseFloat($('#montoComponente' + idComponente).text().replace(/[^\d\.\-]/g, ""));
-						var sumatoria=parseFloat(monto_presupueto_ejec_ind.val())+parseFloat(Monto)-montoA;
-						monto_presupueto_ejec_ind.val(sumatoria);
+						var sumatoria = parseFloat(monto_presupueto_ejec_total.val()) + parseFloat(Monto) - montoA;
+						monto_presupueto_ejec_total.val(sumatoria);
 						swal({
 								title: '',
 								text: objectJSON.mensaje,
@@ -1117,7 +1184,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}
 						const montoF = separator(Monto);
 						$('#montoComponente' + idComponente).text(montoF);
-						$('#sumaTotalCostosUltimo'+presupuesto_ejec_ind).text(" "+separator(sumatoria));
+						$('#sumaTotalCostosUltimo' + presupuesto_ejec_total).text(" " + separator(sumatoria));
 					}, false, true);
 				});
 		}
