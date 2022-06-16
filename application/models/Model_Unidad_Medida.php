@@ -87,7 +87,7 @@ class Model_Unidad_Medida extends CI_Model
 
 	function validarUnidadMedida($descripcion)
 	{
-		$data=$this->db->query("select * from UNIDAD_MEDIDA where descripcion = '$descripcion'");
+		$data=$this->db->query("select * from UNIDAD_MEDIDA where descripcion = '$descripcion' or abreviatura = '$descripcion'");
 		return $data->result();
 	}
 
