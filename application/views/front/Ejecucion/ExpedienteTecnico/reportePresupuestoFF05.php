@@ -122,11 +122,11 @@
 	</table>
 	<br>
 	<table id="tablaResumen" style="width: 100%; font-size:12px;">
-		<?php foreach($MostraExpedienteTecnicoExpe->childCostoIndirecto as $key => $value) { ?>
-			<tr>
+	<tr>
 			<th style="width: 85%;background-color:#337ab7;color:white;"><b>COSTOS INDIRECTOS</b></th>
 			<tH style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
 		</tr>
+		<?php foreach($MostraExpedienteTecnicoExpe->childCostoIndirecto as $key => $value) { ?>
 			<tr>
 				<th style="width: 85%"><b><?=strtoupper(html_escape($value->descripcion))?></b></th>
 				<td style="width: 15%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 2, '.',",",3)?></td>
@@ -141,16 +141,16 @@
 	<?php } ?>
 	<table id="tablaResumen" style="width: 100%; font-size:12px;">
 	<tr>
-			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></th>
+			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></th>
 			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
 		</tr>
 		<tr>
-			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
-			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirecto, 2, '.',",",3)?></b></td>
+			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirecto, 2, '.',",",3)?></b></td>
 		</tr>
 		<tr>
-			<th style="width: 90%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></th>
-			<td style="width: 10%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->presupuestoGeneral, 2, '.',",",3)?></b></td>
+			<th style="width: 85%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></th>
+			<td style="width: 15%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->presupuestoGeneral, 2, '.',",",3)?></b></td>
 		</tr>
 	</table>
 	<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='MIXTO'){?>
@@ -173,8 +173,20 @@
 				</tr>
 			<?php } ?>
 			<tr>
-			<th style="width: 2%;text-decoration: underline;background-color:#337ab7;color:white;" colspan="2"><b>COSTO DIRECTO TOTAL</b></th>
-			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
+			<th style="width: 10%;text-decoration: underline;background-color:#337ab7;color:white;" colspan="2"><b>COSTO DIRECTO TOTAL</b></th>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
+		</tr>
+
+		<?php foreach($MostraExpedienteTecnicoExpe->childCostoDirectoTotalIndirecta as $key => $value) { ?>
+			<tr>
+			<td style="width: 2%"><b><?=$value2->numeracion?>.</b></td>
+				<td style="width: 83%"><b><?=strtoupper(html_escape($value->descripcion))?></b></td>
+				<td style="width: 15%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 2, '.',",",3)?></td>
+			</tr>				
+		<?php } ?>
+		<tr>
+			<th style="width: 10%;text-decoration: underline;background-color:#337ab7;color:white;" colspan="2"><b>COSTO DIRECTO TOTAL TOTAL</b></th>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoTotalIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 		</tbody>
 	</table>
@@ -182,17 +194,17 @@
 	<table id="tablaResumen" style="width: 100%; font-size:12px;">
 	<tr>
 			<th style="width: 85%;background-color:#337ab7;color:white;"><b>COSTOS INDIRECTOS</b></th>
-			<tH style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
+			<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
 		</tr>
 		<?php foreach($MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta as $key => $value) { ?>
 			<tr>
-				<th style="width: 90%"><b><?=strtoupper(html_escape($value->descripcion))?></b></th>
-				<td style="width: 10%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 2, '.',",",3)?></td>
+				<th style="width: 85%"><b><?=strtoupper(html_escape($value->descripcion))?></b></th>
+				<td style="width: 15%;text-align: right;">S/. <?=a_number_format($value->costoComponente, 2, '.',",",3)?></td>
 			</tr>				
 		<?php } ?>
 		<tr>
-			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
-			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirectoIndirecta, 2, '.',",",3)?></b></td>
+			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirectoIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 		
 	</table>
@@ -200,16 +212,16 @@
 	<br>
 	<table id="tablaResumen" style="width: 100%; font-size:12px;">
 	<tr>
-			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></th>
-			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
+			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></th>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 		<tr>
-			<th style="width: 90%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
-			<td style="width: 10%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirectoIndirecta, 2, '.',",",3)?></b></td>
+			<th style="width: 85%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></th>
+			<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoIndirectoIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 		<tr>
-			<th style="width: 90%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></th>
-			<td style="width: 10%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->presupuestoGeneralIndirecta, 2, '.',",",3)?></b></td>
+			<th style="width: 85%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></th>
+			<td style="width: 15%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->presupuestoGeneralIndirecta, 2, '.',",",3)?></b></td>
 		</tr>
 	</table>
 </body>

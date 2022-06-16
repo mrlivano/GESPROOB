@@ -766,6 +766,21 @@ class Expediente_Tecnico extends CI_Controller
 			}
 			$MostraExpedienteTecnicoExpe->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
 
+			// costos directos total
+
+				$MostraExpedienteTecnicoExpe->childCostoDirectoTotalIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirecTotal($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
+
+		$costoDirectoTotalTotalIndirecta=$costoDirectoTotalIndirecta;
+	    foreach ($MostraExpedienteTecnicoExpe->childCostoDirectoTotalIndirecta as $key => $value)
+	    {
+			$costoComponente=0;
+			$costoDirectoTotalTotalIndirecta+=$value->monto;
+			$value->costoComponente=$value->monto;
+		}
+		$MostraExpedienteTecnicoExpe->costoDirectoTotalIndirecta=$costoDirectoTotalTotalIndirecta;
+
+		// costos indirectos
+
 			$MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
 
 		$costoIndirectoTotalIndirecta=0;
@@ -776,7 +791,7 @@ class Expediente_Tecnico extends CI_Controller
 			$value->costoComponente=$value->monto;
 		}
 		$MostraExpedienteTecnicoExpe->costoIndirectoIndirecta=$costoIndirectoTotalIndirecta;
-		$MostraExpedienteTecnicoExpe->presupuestoGeneralIndirecta=$costoIndirectoTotalIndirecta+$costoDirectoTotalIndirecta;
+		$MostraExpedienteTecnicoExpe->presupuestoGeneralIndirecta=$costoIndirectoTotalIndirecta+$costoDirectoTotalTotalIndirecta;
 		}
 
 		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePresupuestoFF05',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe,'MostraExpedienteNombre' => $MostraExpedienteNombre], true);
