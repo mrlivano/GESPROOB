@@ -677,6 +677,7 @@ function autorizar($url)
       'ET_Responsable/asignarFecha',
       'Expediente_Tecnico/vistoBueno',
       'ET_Componente/insertar',
+      'ET_Pie_Presupuesto/insertar',
       'ET_Tarea/index',
       'Expediente_Tecnico/valorizacionEjecucionProyecto',
       'Expediente_Tecnico/ResponsableExpediente',
