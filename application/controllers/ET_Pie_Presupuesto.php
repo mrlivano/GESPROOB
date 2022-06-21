@@ -8,19 +8,11 @@ class ET_Pie_Presupuesto extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Model_ET_Expediente_Tecnico');
-		$this->load->model('Model_Unidad_Medida');
 		$this->load->model('Model_ET_Componente');
 		$this->load->model('Model_ET_Meta');
 		$this->load->model('Model_ET_Partida');
-		$this->load->model('Model_ET_Detalle_Partida');
-		$this->load->model('Model_ET_Analisis_Unitario');
 		$this->load->model('Model_ET_Presupuesto_Ejecucion');
-		$this->load->model('Model_ET_Etapa_Ejecucion');
-		$this->load->model('Model_ET_Analitico_Partida');
-		$this->load->model('Model_ET_Detalle_Analisis_Unitario');
-		$this->load->model('Model_ET_Insumo');
-		$this->load->model('Model_ET_Recurso_Insumo');
-		$this->load->model('Model_ModalidadE');
+		$this->load->model('Model_ET_Pie_Presupuesto');
 	}
 
 
@@ -92,8 +84,10 @@ class ET_Pie_Presupuesto extends CI_Controller
 			}
 			$expedienteTecnico->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
 		}
-		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoIndirecto();
-		$this->load->view('front/Ejecucion/ETComponente/registroPie.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$PresupuestoEjecucion]);
+		$presupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoIndirecto();
+		$piePresupuesto=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_ExpedienteTecnico);
+
+		$this->load->view('front/Ejecucion/ETComponente/registroPie.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$presupuestoEjecucion,'PiePresupuesto'=>$piePresupuesto]);
 	}
 
 	private function obtenerAnidadaCostoIndirecto($meta)
