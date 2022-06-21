@@ -93,7 +93,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 			$expedienteTecnico->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
 
 		}
-
+		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoIndirecto();
 		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$PresupuestoEjecucion]);
 	}
 
