@@ -51,7 +51,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 
 			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Componente registrado correctamente.', 'idComponente' => $ultimoIdComponente]);exit;
 		}
-
+		$id_ExpedienteTecnico = $this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($this->input->get('idExpedienteTecnico'));
 		
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
