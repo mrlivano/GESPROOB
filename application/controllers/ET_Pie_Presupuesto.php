@@ -94,7 +94,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 
 		}
 		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoIndirecto();
-		$this->load->view('front/Ejecucion/ETComponente/insertar.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$PresupuestoEjecucion]);
+		$this->load->view('front/Ejecucion/ETComponente/registroPie.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$PresupuestoEjecucion]);
 	}
 
 	private function obtenerAnidadaCostoIndirecto($meta)
