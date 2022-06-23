@@ -73,13 +73,13 @@
 function agregarFila(cont){
 
 	contador+=cont+1;
-  document.getElementById("tablePresupuestos").insertRow(-1).innerHTML = '<?php  $cont=$cont+1; ?><td><select name="presupuestoEjecucion'+contador+'" id="presupuestoEjecucion'+contador+'">'+
+  document.getElementById("tablePresupuestos").insertRow(-1).innerHTML = '<?php  $cont=$cont+1; ?><td><select name="presupuestoEjecucion'+contador+'" id="presupuestoEjecucion'+contador+'" onchange="changePresupuesto(this,'+contador+')">'+
 								'<?php foreach ($PresupuestoEjecucion as $key1 => $presupuesto) { ?>'+
-									'<option value="<?php $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>'+
+									'<option value="<?= $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>'+
 							'<?php }?>'+
-							'<option value="9999">SUBTOTAL</option>'+
-							'<option value="9999">COSTO TOTAL EJECUCION DE OBRA</option>'+
-							'<option value="9999">PRESUPUESTO TOTAL</option>'+
+							'<option value="0">SUBTOTAL</option>'+
+							'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>'+
+							'<option value="0">PRESUPUESTO TOTAL</option>'+
 							'</select></td>'+
 							'<td><input class="variable" id="variable'+contador+'" name="variable'+contador+'" type="text"></td>'+
 							'<td><input id="macro'+contador+'" name="macro'+contador+'" type="text" onchange="obtenerMacro(this)"></td>'+
@@ -121,6 +121,17 @@ function splitMulti(str, tokens){
 		} catch (error) {
 			document.querySelector('#monto'+indexResp).value = 0;
 			console.log(0);
+		}
+	}
+
+	function changePresupuesto(select, cont) {
+		if(select.value=='0'){
+			select.parentElement.parentElement.style.background='#eee';
+			select.parentElement.parentElement.querySelector('#gasto'+cont).checked = false;
+		}
+		else{
+			select.parentElement.parentElement.style.background='white';
+			select.parentElement.parentElement.querySelector('#gasto'+cont).checked = true;
 		}
 	}
 </script>
