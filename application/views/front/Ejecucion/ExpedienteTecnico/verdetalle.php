@@ -259,6 +259,24 @@
 														<li>
 															<div class="block">
 																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de pie de presupuesto', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Pie_Presupuesto/insertar', 'GET', null, null, false, true); return false;" class="tag">
+																	<span>Registro</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de pie de presupuesto', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Pie_Presupuesto/insertar', 'GET', null, null, false, true); return false;">5.- Registro de Pie de Presupuesto. </a>
+																	</h2>
+																	<div class="byline">
+																		<span></span><a></a>
+																	</div>
+																	<p class="excerpt">Se registrara parte del presupuesto del proyecto (costos de ejecución, costos indirectos).</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="block">
+																<div class="tags">
 																	<a href="" onclick="paginaAjaxDialogo(null, 'Modificar Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
 																	<span>Ficha Tecnica</span>
 																	</a>

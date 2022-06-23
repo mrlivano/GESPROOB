@@ -1120,8 +1120,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						const gastosGenerales = parseFloat($('#montoComponente' + idComponenteGastosGenerales).text().replace(/[^\d\.\-]/g, ""));
 						const utilidad = parseFloat($('#montoComponente' + idComponenteUtilidad).text().replace(/[^\d\.\-]/g, ""));
 						Monto = (inputValue * (parseFloat(monto_presupueto_ejec) + gastosGenerales + utilidad)) / 100;
+						Monto1 = Monto+" = ("+monto_presupueto_ejec+"+"+gastosGenerales+"+"+utilidad+")" +inputValue+"%"
 					} else {
 						Monto = (inputValue * monto_presupueto_ejec) / 100;
+						Monto1 = Monto+" = "+monto_presupueto_ejec+"("+inputValue+"%)"
 					}
 
 					porcentaje = inputValue;
@@ -1145,7 +1147,8 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 							return false;
 						}
 						const montoF = separator(Monto);
-						$('#montoComponente' + idComponente).text(montoF);
+						
+						$('#montoComponente' + idComponente).text(Monto1);
 						$('#sumaTotalCostosUltimo' + presupuesto_ejec_total).text(" " + separator(sumatoria));
 					}, false, true);
 				});
