@@ -52,7 +52,7 @@
 							<td style="width: 15%"><input id="macro<?=$cont?>" name="macro<?=$cont?>" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"><?=$value->macro?></td>
 							<td style="width: 5%"><input id="gasto<?=$cont?>" name="gasto<?=$cont?>" type="checkbox"></td>
 							<td style="width: 20%"><input id="monto<?=$cont?>" name="monto<?=$cont?>" type="text"><?=$value->monto?></td>
-							<td style="width: 20%"><button onclik="guardarComponente()">guardar</button></td>
+							<td style="width: 20%"><button onclik="guardarComponente(<?=$cont?>)">guardar</button></td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -87,7 +87,7 @@ function agregarFila(cont){
 							'<td style="width: 10%"><input size="7" id="macro'+contador+'" name="macro'+contador+'" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"></td>'+
 							'<td style="width: 10%"><input size="1" id="gasto'+contador+'" name="gasto'+contador+'" type="checkbox"></td>'+
 							'<td style="width: 10%"><input size="7" id="monto'+contador+'" name="monto'+contador+'" type="text"></td>'+
-							'<td style="width: 10%"><button size="10%" onclik="guardarComponente()">guardar</button></td>'
+							'<td style="width: 10%"><button size="10%" onclik="guardarComponente('+contador+')">guardar</button></td>'
 }
 
 function splitMulti(str, tokens){
