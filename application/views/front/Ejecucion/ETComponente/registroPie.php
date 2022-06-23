@@ -14,6 +14,7 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<input type="hidden" name="hd_et" id="hd_et" value="<?=$expedienteTecnico->id_et?>" notValidate>
+			<input type="hidden"  name="modalidad" id="modalidad" value="<?=$expedienteTecnico->modalidad_ejecucion_et?>" notValidate>
 			<label class="control-label">Nombre del proyecto de inversión</label>
 			<div>
 				<textarea name="txtNombreProyectoInversion" id="txtNombreProyectoInversion" rows="3" class="form-control" style="resize: none;resize: vertical;" readonly="readonly"><?=$expedienteTecnico->nombre_pi?></textarea>
@@ -21,36 +22,37 @@
 		</div>
 	</div>
 	<div class="form-horizontal">
-		<label id="costoDirecto">Costos directo <?php echo($expedienteTecnico->costoDirecto) ?> </label>
+		<label  id="costoDirecto">Costos directo = NDIRECTO</label> <input id="monto" type="text" value="<?php echo($expedienteTecnico->costoDirecto) ?>" disabled>
+		<input id="variable" class="variable" type="hidden" value="NDIRECTO" disabled>
 	</div>
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12" style="height:300px;overflow:scroll;overflow-x: hidden;text-align: left; ">
-			<table class="table table-bordered" id="tablePresupuestos">
+			<table class="table table-bordered" id="tablePresupuestos" style="width: 100%;">
 				<thead>
 					<tr>
-						<th>DESCRIPCION</th>
-						<th>VARIABLE</th>
-						<th>MACRO</th>
-						<th>GASTO</th>
-						<th>MONTO</th>
-						<th>OPCION</th>
+						<th style="width: 10%">DESCRIPCION</th>
+						<th style="width: 10%">VARIABLE</th>
+						<th style="width: 10%">MACRO</th>
+						<th style="width: 1%">GASTO</th>
+						<th style="width: 5%">MONTO</th>
+						<th style="width: 20%">OPCION</th>
 					</tr>
 				</thead>
 				<tbody id="bodyPie">
 					
 					<?php foreach ($PiePresupuesto as $key => $value) {?>
 						<tr><?php $cont+=1?>
-						<td>
+						<td style="width: 10%">
 								<select name="presupuestoEjecucion<?=$cont?>" id="presupuestoEjecucion<?=$cont?>">
 								<?php foreach ($PresupuestoEjecucion as $key1 => $presupuesto) { ?>
-									<option value="<?php $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>
+									<option value="<?=$presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>
 							<?php }?></select></td>
-							<td><input class="variable" id="variable<?=$cont?>" name="variable<?=$cont?>" type="text"><?=$value->descripcion?></td>
-							<td><input id="macro<?=$cont?>" name="macro<?=$cont?>" type="text" onchange="obtenerMacro(this)"><?=$value->macro?></td>
-							<td><input id="gasto<?=$cont?>" name="gasto<?=$cont?>" type="checkbox"></td>
-							<td><input id="monto<?=$cont?>" name="monto<?=$cont?>" type="text"><?=$value->monto?></td>
-							<td><button >guardar</button></td>
+							<td style="width: 10%"><input class="variable" id="variable<?=$cont?>" name="variable<?=$cont?>" type="text" onkeyup="this.value = this.value.toUpperCase();"><?=$value->descripcion?></td>
+							<td style="width: 15%"><input id="macro<?=$cont?>" name="macro<?=$cont?>" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"><?=$value->macro?></td>
+							<td style="width: 5%"><input id="gasto<?=$cont?>" name="gasto<?=$cont?>" type="checkbox"></td>
+							<td style="width: 20%"><input id="monto<?=$cont?>" name="monto<?=$cont?>" type="text"><?=$value->monto?></td>
+							<td style="width: 20%"><button onclik="guardarComponente()">guardar</button></td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -73,19 +75,19 @@
 function agregarFila(cont){
 
 	contador+=cont+1;
-  document.getElementById("tablePresupuestos").insertRow(-1).innerHTML = '<?php  $cont=$cont+1; ?><td><select name="presupuestoEjecucion'+contador+'" id="presupuestoEjecucion'+contador+'">'+
+  document.getElementById("tablePresupuestos").insertRow(-1).innerHTML = '<?php  $cont=$cont+1; ?><td style="width: 10%"><select  name="presupuestoEjecucion'+contador+'" id="presupuestoEjecucion'+contador+'">'+
 								'<?php foreach ($PresupuestoEjecucion as $key1 => $presupuesto) { ?>'+
-									'<option value="<?php $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>'+
+									'<option size="10" value="<?php $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>'+
 							'<?php }?>'+
 							'<option value="9999">SUBTOTAL</option>'+
 							'<option value="9999">COSTO TOTAL EJECUCION DE OBRA</option>'+
 							'<option value="9999">PRESUPUESTO TOTAL</option>'+
 							'</select></td>'+
-							'<td><input class="variable" id="variable'+contador+'" name="variable'+contador+'" type="text"></td>'+
-							'<td><input id="macro'+contador+'" name="macro'+contador+'" type="text" onchange="obtenerMacro(this)"></td>'+
-							'<td><input id="gasto'+contador+'" name="gasto'+contador+'" type="checkbox"></td>'+
-							'<td><input id="monto'+contador+'" name="monto'+contador+'" type="text"></td>'+
-							'<td><button >guardar</button></td>'
+							'<td style="width: 10%"><input size="7" class="variable" id="variable'+contador+'" name="variable'+contador+'" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>'+
+							'<td style="width: 10%"><input size="7" id="macro'+contador+'" name="macro'+contador+'" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"></td>'+
+							'<td style="width: 10%"><input size="1" id="gasto'+contador+'" name="gasto'+contador+'" type="checkbox"></td>'+
+							'<td style="width: 10%"><input size="7" id="monto'+contador+'" name="monto'+contador+'" type="text"></td>'+
+							'<td style="width: 10%"><button size="10%" onclik="guardarComponente()">guardar</button></td>'
 }
 
 function splitMulti(str, tokens){
@@ -122,6 +124,28 @@ function splitMulti(str, tokens){
 			document.querySelector('#monto'+indexResp).value = 0;
 			console.log(0);
 		}
+	}
+	function guardarComponente(index){
+		let descripcion = $('#presupuestoEjecucion'+index).find("option:selected").text();
+		let variable = $('#variable'+index).text();
+		let macro = $('#macro'+index).text();
+		let monto = $('#monto'+index).text();
+		let idPresupuesto = $('presupuestoEjecucion'+index).find("option:selected").value();
+		paginaAjaxJSON({
+					"descripcion" : descripcion,
+					"variable" : variable,
+					"macro" : macro,
+					"id_presupuesto_ej" :idPresupuesto,
+					"id_et" : $('#hd_et').value(),
+					"modalidad" : $('#modalida').value(),
+					"orden" : index,
+					"monto" : monto,
+				},
+				base_url + 'index.php/ET_Pie_Presupuesto/insertar',
+				'POST', null,
+				function(objectJSON) {
+					resultado = JSON.parse(objectJSON);
+				}, false, true)
 	}
 </script>
 
