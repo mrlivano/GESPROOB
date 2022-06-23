@@ -52,7 +52,7 @@
 							<td style="width: 15%"><input id="macro<?=$cont?>" name="macro<?=$cont?>" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"><?=$value->macro?></td>
 							<td style="width: 5%"><input id="gasto<?=$cont?>" name="gasto<?=$cont?>" type="checkbox"></td>
 							<td style="width: 20%"><input id="monto<?=$cont?>" name="monto<?=$cont?>" type="text"><?=$value->monto?></td>
-							<td style="width: 20%"><button onclik="guardarComponente(<?=$cont?>)">guardar</button></td>
+							<td style="width: 20%"><button onclick="guardarComponente(<?=$cont?>)">guardar</button></td>
 						</tr>
 					<?php } ?>
 				</tbody>
@@ -78,7 +78,7 @@ function agregarFila(cont){
 
   document.getElementById("tablePresupuestos").insertRow(-1).innerHTML = '<?php  $cont=$cont+1; ?><td style="width: 10%"><select  name="presupuestoEjecucion'+contador+'" id="presupuestoEjecucion'+contador+'" onchange="changePresupuesto(this,'+contador+')">'+
 								'<?php foreach ($PresupuestoEjecucion as $key1 => $presupuesto) { ?>'+
-									'<option size="10" value="<?php $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>'+
+									'<option size="10" value="<?= $presupuesto->id_presupuesto_ej?>"><?=$presupuesto->desc_presupuesto_ej?></option>'+
 							'<?php }?>'+
 							'<option value="0">SUBTOTAL</option>'+
 							'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>'+
@@ -88,7 +88,7 @@ function agregarFila(cont){
 							'<td style="width: 10%"><input size="7" id="macro'+contador+'" name="macro'+contador+'" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"></td>'+
 							'<td style="width: 10%"><input size="1" id="gasto'+contador+'" name="gasto'+contador+'" type="checkbox"></td>'+
 							'<td style="width: 10%"><input size="7" id="monto'+contador+'" name="monto'+contador+'" type="text"></td>'+
-							'<td style="width: 10%"><button size="10%" onclik="guardarComponente('+contador+')">guardar</button></td>'
+							'<td style="width: 10%"><button size="10%" onclick="guardarComponente('+contador+')">guardar</button></td>'
 }
 
 function splitMulti(str, tokens){
@@ -103,7 +103,6 @@ function splitMulti(str, tokens){
 	function obtenerMacro(macro) {
 		const indexResp = macro.id.split('macro')[1];
 		try {
-			console.log(indexResp);
 			const arrayMacro=splitMulti(macro.value,['+', '-', '/', '*']);
 			const arrayVariable=document.querySelectorAll('.variable');
 			
@@ -120,10 +119,8 @@ function splitMulti(str, tokens){
 			});
 			const res=eval(macro.value);
 			const inputMonto = document.querySelector('#monto'+indexResp).value = res;
-			console.log(res);
 		} catch (error) {
 			document.querySelector('#monto'+indexResp).value = 0;
-			console.log(0);
 		}
 	}
 
@@ -137,20 +134,22 @@ function splitMulti(str, tokens){
 			select.parentElement.parentElement.querySelector('#gasto'+cont).checked = true;
 		}
 	}
-	
+
 	function guardarComponente(index){
+		console.log('guarda');
 		let descripcion = $('#presupuestoEjecucion'+index).find("option:selected").text();
-		let variable = $('#variable'+index).text();
-		let macro = $('#macro'+index).text();
-		let monto = $('#monto'+index).text();
-		let idPresupuesto = $('presupuestoEjecucion'+index).find("option:selected").value();
+		let variable = $('#variable'+index).val();
+		let macro = $('#macro'+index).val();
+		let monto = $('#monto'+index).val();
+		let idPresupuesto = $('#presupuestoEjecucion'+index).find("option:selected").val();
+		console.log(idPresupuesto);
 		paginaAjaxJSON({
 					"descripcion" : descripcion,
 					"variable" : variable,
 					"macro" : macro,
 					"id_presupuesto_ej" :idPresupuesto,
-					"id_et" : $('#hd_et').value(),
-					"modalidad" : $('#modalida').value(),
+					"id_et" : $('#hd_et').val(),
+					"modalidad" : $('#modalidad').val(),
 					"orden" : index,
 					"monto" : monto,
 				},

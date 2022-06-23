@@ -22,26 +22,41 @@ class ET_Pie_Presupuesto extends CI_Controller
 		{
 			$this->db->trans_start();
 
-			if(count($this->Model_ET_Componente->ETComponentePorIdETAndDescripcion($this->input->post('idET'), $this->input->post('idPresupuestoEjecucion'), $this->input->post('idPresupuestoEjecucion')))>0)
-			{
-				$this->db->trans_rollback();
+				$descripcion=$this->input->post('descripcion');
+				$variable=$this->input->post('variable');
+				$macro=$this->input->post('macro');
+				$id_presupuesto_ej=$this->input->post('id_presupuesto_ej');
+				$id_et=$this->input->post('id_et');
+				$modalidad=$this->input->post('modalidad');
+				$orden=$this->input->post('orden');
+				$monto=$this->input->post('monto');
 
-				echo json_encode(['proceso' => 'Error', 'mensaje' => 'No se puede agregar dos veces el mismo componente.']);exit;
-			}
+			// $etMesValorizacionTemp=$this->Model_ET_Cronograma_Ejecucion->ETCronogramaPorIdDetallePartidaAndNumeroMes($idDetallePartida, $numeroMes, $anio);
 
-			$c_data['id_et']=$this->input->post('idET');
-			$c_data['descripcion']=$this->input->post('descripcionComponente');
-			$c_data['id_presupuesto_ej']=$this->input->post('idPresupuestoEjecucion');
-			$c_data['estado']="EXPEDIENTETECNICO";
-			$c_data['tipo_ejecucion']=$this->input->post('tipoEjecucion');
+			// if($etMesValorizacionTemp==null)
+			// {
+				$c_data['descripcion']=$descripcion;
+				$c_data['variable']=$variable;
+				$c_data['macro']=$macro;
+				$c_data['id_presupuesto_ej']=$id_presupuesto_ej;
+				$c_data['id_et']=$id_et;
+				// obtener valor de la pestaña modalidad
+				$c_data['modalidad_ejecucion']=1;
+				$c_data['orden']=$orden;
+				$c_data['monto']=$monto;
 
-			$ultimoIdComponente=$this->Model_ET_Componente->insertarComponente($c_data);
-
-			$this->updateNumerationComponentPresupuestoEjecucion($this->input->post('idET'),$this->input->post('idPresupuestoEjecucion'),'EXPEDIENTETECNICO');	
+				$data=$this->Model_ET_Pie_Presupuesto->insertar($c_data);
+			// }
+			// else
+			// {
+			// 	$u_data['cantidad']=$cantidad;
+			// 	$u_data['precio']=$precio;
+			// 	$data=$this->Model_ET_Cronograma_Ejecucion->editar($etMesValorizacionTemp->id_cronograma_valorizacion, $u_data);
+			// }	
 
 			$this->db->trans_complete();
 
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Componente registrado correctamente.', 'idComponente' => $ultimoIdComponente]);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Pie de Presupuesto registrado correctamente.']);exit;
 		}
 		$id_ExpedienteTecnico = $this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($this->input->get('idExpedienteTecnico'));

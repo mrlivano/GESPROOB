@@ -15,31 +15,35 @@ class Model_ET_Pie_Presupuesto extends CI_Model
 		return $data->result();
 	}
 
-
-
-
-	function insertarComponente($data)
+	function buscar($id)
 	{
-		$this->db->insert('ET_COMPONENTE',$data);
-
-		return $this->db->insert_id();
-	}
-
-	function insert($data)
-	{
-		$this->db->insert('ET_COMPONENTE',$data);
+		$this->db->insert('PIE_PRESUPUESTO',$data);
 
 		return $this->db->affected_rows();
 	}
 
-	function editar($idComponente, $data)
+	function insertar($data)
+	{
+		$this->db->insert('PIE_PRESUPUESTO',$data);
+
+		return $this->db->affected_rows();
+	}
+
+	function editar($id, $data)
 	{
 		$this->db->set($data);
 
-		$this->db->where('id_componente', $idComponente);
+		$this->db->where('id_pie_presupuesto', $id);
 
-		$this->db->update('ET_COMPONENTE');
+		$this->db->update('PIE_PRESUPUESTO');
 
+		return $this->db->affected_rows();
+	}
+
+	function eliminar($id)
+	{
+		$this->db->where('id_pie_presupuesto',$id);
+		$this->db->delete('PIE_PRESUPUESTO');
 		return $this->db->affected_rows();
 	}
 
