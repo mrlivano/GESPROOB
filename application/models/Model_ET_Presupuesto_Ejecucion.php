@@ -49,7 +49,13 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
     }
     function ListaPresupuestoEjecucionCostoIndirecto()
     {
-        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion where id_presupuesto_ej_padre = (select top 1 id_presupuesto_ej  from ET_PRESUPUESTO_EJECUCION where desc_presupuesto_ej like '%ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS%' or id_presupuesto_ej='16') ");
+        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion where id_presupuesto_ej_padre = (select top 1 id_presupuesto_ej  from ET_PRESUPUESTO_EJECUCION where desc_presupuesto_ej like '%ADMINISTRACION DIRECTA - COSTOS INDIRECTOS%' or id_presupuesto_ej='16') ");
+
+        return $presupuesto->result();
+    }
+    function ListaPresupuestoEjecucionAdmIndCostoIndirecto()
+    {
+        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion where id_presupuesto_ej_padre = (select top 1 id_presupuesto_ej  from ET_PRESUPUESTO_EJECUCION where desc_presupuesto_ej like '%ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS%' or id_presupuesto_ej='2036') ");
 
         return $presupuesto->result();
     }

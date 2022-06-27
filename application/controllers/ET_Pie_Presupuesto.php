@@ -38,14 +38,14 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$c_data['descripcion']=$descripcion;
 				$c_data['variable']=$variable;
 				$c_data['macro']=$macro;
-				$c_data['id_presupuesto_ej']=$id_presupuesto_ej;
+				$c_data['id_presupuesto_ej']=$id_presupuesto_ej==0?NULL:$id_presupuesto_ej;
 				$c_data['id_et']=$id_et;
 				// obtener valor de la pestaña modalidad
 				$c_data['modalidad_ejecucion']=1;
 				$c_data['orden']=$orden;
 				$c_data['monto']=$monto;
 
-				$data=$this->Model_ET_Pie_Presupuesto->insertar($c_data);
+				$id_pie_presupuesto=$this->Model_ET_Pie_Presupuesto->insertar($c_data);
 			// }
 			// else
 			// {
@@ -56,7 +56,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 
 			$this->db->trans_complete();
 
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Pie de Presupuesto registrado correctamente.']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Pie de Presupuesto registrado correctamente.', 'id_pie_presupuesto' => $id_pie_presupuesto]);exit;
 		}
 		$id_ExpedienteTecnico = $this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($this->input->get('idExpedienteTecnico'));
@@ -78,7 +78,8 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$value->costoComponente=$costoComponente;
 			}
 			$expedienteTecnico->costoDirecto=$costoDirectoTotal;
-
+			$presupuestoEjecucion->directa=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoIndirecto();
+			$piePresupuesto->directa=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_ExpedienteTecnico);
 		}
 
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
@@ -98,12 +99,22 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$value->costoComponente=$costoComponente;
 			}
 			$expedienteTecnico->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
+
+			$presupuestoEjecucion->indirecta=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionAdmIndCostoIndirecto();
+			$piePresupuesto->indirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
 		}
-		$presupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoIndirecto();
-		$piePresupuesto=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_ExpedienteTecnico);
 
 		$this->load->view('front/Ejecucion/ETComponente/registroPie.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$presupuestoEjecucion,'PiePresupuesto'=>$piePresupuesto]);
 	}
+
+	function eliminar()
+	{
+			$msg = array();
+			$data = $this->Model_ET_Pie_Presupuesto->eliminar($this->input->post('id_pie_presupuesto'));
+			$msg = ($data > 0 ? (['proceso' => 'Correcto', 'mensaje' => 'El registro fue eliminado correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+			echo json_encode($msg);exit;
+	}
+
 
 	private function obtenerAnidadaCostoIndirecto($meta)
 	{
