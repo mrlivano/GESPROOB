@@ -34,8 +34,8 @@
 			<div id="myTabPieContent" class="tab-content">
 				<div role="tabpanel" class="tab-pane fade active in" id="tabAdmDirecta" aria-labelledby="home-tab">
 					<div class="form-horizontal">
-						<label id="costoDirecto">Costos directo = NDIRECTO</label> <input id="monto" type="text" value="<?php echo ($expedienteTecnico->costoDirecto) ?>" disabled>
-						<input id="variable" class="variable" type="hidden" value="NDIRECTO" disabled>
+						<label id="costoDirecto">Costos directo = NDIRECTO</label> <input id="montoDirecta" type="text" value="<?php echo ($expedienteTecnico->costoDirecto) ?>" disabled>
+						<input id="variableDirecta" class="variableDirecta" type="hidden" value="NDIRECTO" disabled>
 					</div>
 
 					<div class="row">
@@ -56,15 +56,15 @@
 									<?php foreach ($PiePresupuesto->directa as $key => $value) { ?>
 										<tr><?php $contD += 1 ?>
 											<td style="width: 10%">
-											<input type="hidden" id="idPieDirecta" value="<?php $value->id_pie_presupuesto?>">
+											<input type="hidden" id="idPieDirecta<?= $contD ?>" value="<?php $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucion<?= $contD ?>" id="presupuestoEjecucion<?= $contD ?>">
 													<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>
 													<?php } ?>
 												</select>
 											</td>
-											<td style="width: 10%"><input class="variableDirecta<?= $contD ?>" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();"><?= $value->descripcion ?></td>
-											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"><?= $value->macro ?></td>
+											<td style="width: 10%"><input class="variableDirecta<?= $contD ?>" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->descripcion ?>"></td>
+											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();"><?= $value->macro ?></td>
 											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox"></td>
 											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text"><?= $value->monto ?></td>
 											<td style="width: 20%"><button onclick="guardarComponenteD(<?= $contD ?>)">guardar</button></td>
@@ -111,7 +111,7 @@
 												</select>
 											</td>
 											<td style="width: 10%"><input class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();"><?= $value->descripcion ?></td>
-											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"><?= $value->macro ?></td>
+											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();"><?= $value->macro ?></td>
 											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox"></td>
 											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text"><?= $value->monto ?></td>
 											<td style="width: 20%"><button onclick="guardarComponenteI(<?= $contI ?>)">guardar</button></td>
@@ -145,7 +145,7 @@
 
 		contadorD += contD + 1;
 
-		document.getElementById("tablePresupuestosDirecta").insertRow(-1).innerHTML = '<?php $contD = $contD + 1; ?><td style="width: 10%"><select  name="presupuestoEjecucion' + contadorD + '" id="presupuestoEjecucion' + contadorD + '" onchange="changePresupuesto(this,' + contadorD + ')">' +
+		document.getElementById("tablePresupuestosDirecta").insertRow(-1).innerHTML = '<?php $contD = $contD + 1; ?><td style="width: 10%"><input type="hidden" id="idPieDirecta'+contadorD+'" value=""><select  name="presupuestoEjecucion' + contadorD + '" id="presupuestoEjecucion' + contadorD + '" onchange="changePresupuestoDirecta(this,' + contadorD + ')">' +
 			'<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 			'<?php } ?>' +
@@ -154,7 +154,7 @@
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
 			'</select></td>' +
 			'<td style="width: 10%"><input size="7" class="variableDirecta" id="variableDirecta' + contadorD + '" name="variableDirecta' + contadorD + '" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="7" id="macroDirecta' + contadorD + '" name="macroDirecta' + contadorD + '" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
+			'<td style="width: 10%"><input size="7" id="macroDirecta' + contadorD + '" name="macroDirecta' + contadorD + '" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
 			'<td style="width: 10%"><input size="1" id="gastoDirecta' + contadorD + '" name="gastoDirecta' + contadorD + '" type="checkbox"></td>' +
 			'<td style="width: 10%"><input size="7" id="montoDirecta' + contadorD + '" name="montoDirecta' + contadorD + '" type="text"></td>' +
 			'<td style="width: 10%"><button size="10%" onclick="guardarComponenteD(' + contadorD + ')">guardar</button></td>'
@@ -163,7 +163,7 @@
 
 contadorI += contI + 1;
 
-document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = '<?php $contI = $contI + 1; ?><td style="width: 10%"><select  name="presupuestoEjecucion' + contadorI + '" id="presupuestoEjecucion' + contadorI + '" onchange="changePresupuesto(this,' + contadorI + ')">' +
+document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = '<?php $contI = $contI + 1; ?><td style="width: 10%"><input type="hidden" id="idPieDirecta'+contadorI+'" value=""><select  name="presupuestoEjecucion' + contadorI + '" id="presupuestoEjecucion' + contadorI + '" onchange="changePresupuestoIndirecta(this,' + contadorI + ')">' +
 	'<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>' +
 	'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 	'<?php } ?>' +
@@ -172,7 +172,7 @@ document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = 
 	'<option value="0">PRESUPUESTO TOTAL</option>' +
 	'</select></td>' +
 	'<td style="width: 10%"><input size="7" class="variableIndirecta" id="variableIndirecta' + contadorI + '" name="variableIndirecta' + contadorI + '" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-	'<td style="width: 10%"><input size="7" id="macroIndirecta' + contadorI + '" name="macroIndirecta' + contadorI + '" type="text" onchange="obtenerMacro(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
+	'<td style="width: 10%"><input size="7" id="macroIndirecta' + contadorI + '" name="macroIndirecta' + contadorI + '" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
 	'<td style="width: 10%"><input size="1" id="gastoIndirecta' + contadorI + '" name="gastoIndirecta' + contadorI + '" type="checkbox"></td>' +
 	'<td style="width: 10%"><input size="7" id="montoIndirecta' + contadorI + '" name="montoIndirecta' + contadorI + '" type="text"></td>' +
 	'<td style="width: 10%"><button size="10%" onclick="guardarComponenteI(' + contadorI + ')">guardar</button></td>'
@@ -187,46 +187,78 @@ document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = 
 		return str;
 	}
 
-	function obtenerMacro(macro) {
-		const indexResp = macro.id.split('macro')[1];
+	function obtenerMacroDirecta(macro) {
+		const indexResp = macro.id.split('macroDirecta')[1];
 		try {
 			const arrayMacro = splitMulti(macro.value, ['+', '-', '/', '*']);
-			const arrayVariable = document.querySelectorAll('.variable');
+			const arrayVariable = document.querySelectorAll('.variableDirecta');
 
 			arrayMacro.forEach(variable => {
 				if (variable != '') {
 					arrayVariable.forEach(variableFind => {
 						if (variableFind.value == variable) {
-							const indexVariable = variableFind.id.split('variable')[1];
-							const monto = document.querySelector('#monto' + indexVariable).value;
+							const indexVariable = variableFind.id.split('variableDirecta')[1];
+							const monto = document.querySelector('#montoDirecta' + indexVariable).value;
 							window[variable] = Number(monto);
 						}
 					});
 				}
 			});
 			const res = eval(macro.value);
-			const inputMonto = document.querySelector('#monto' + indexResp).value = res;
+			const inputMonto = document.querySelector('#montoDirecta' + indexResp).value = res;
 		} catch (error) {
-			document.querySelector('#monto' + indexResp).value = 0;
+			document.querySelector('#montoDirecta' + indexResp).value = 0;
+		}
+	}
+	function obtenerMacroIndirecta(macro) {
+		const indexResp = macro.id.split('macroIndirecta')[1];
+		try {
+			const arrayMacro = splitMulti(macro.value, ['+', '-', '/', '*']);
+			const arrayVariable = document.querySelectorAll('.variableIndirecta');
+
+			arrayMacro.forEach(variable => {
+				if (variable != '') {
+					arrayVariable.forEach(variableFind => {
+						if (variableFind.value == variable) {
+							const indexVariable = variableFind.id.split('variableIndirecta')[1];
+							const monto = document.querySelector('#montoIndirecta' + indexVariable).value;
+							window[variable] = Number(monto);
+						}
+					});
+				}
+			});
+			const res = eval(macro.value);
+			const inputMonto = document.querySelector('#montoIndirecta' + indexResp).value = res;
+		} catch (error) {
+			document.querySelector('#montoIndirecta' + indexResp).value = 0;
 		}
 	}
 
-	function changePresupuesto(select, cont) {
+	function changePresupuestoDirecta(select, cont) {
 		if (select.value == '0') {
 			select.parentElement.parentElement.style.background = '#eee';
-			select.parentElement.parentElement.querySelector('#gasto' + cont).checked = false;
+			select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = false;
 		} else {
 			select.parentElement.parentElement.style.background = 'white';
-			select.parentElement.parentElement.querySelector('#gasto' + cont).checked = true;
+			select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = true;
+		}
+	}
+	function changePresupuestoIndirecta(select, cont) {
+		if (select.value == '0') {
+			select.parentElement.parentElement.style.background = '#eee';
+			select.parentElement.parentElement.querySelector('#gastoIndirecta' + cont).checked = false;
+		} else {
+			select.parentElement.parentElement.style.background = 'white';
+			select.parentElement.parentElement.querySelector('#gastoIndirecta' + cont).checked = true;
 		}
 	}
 
 	function guardarComponenteD(index) {
 		console.log('guarda');
 		let descripcion = $('#presupuestoEjecucion' + index).find("option:selected").text();
-		let variable = $('#variable' + index).val();
-		let macro = $('#macro' + index).val();
-		let monto = $('#monto' + index).val();
+		let variable = $('#variableDirecta' + index).val();
+		let macro = $('#macroDirecta' + index).val();
+		let monto = $('#montoDirecta' + index).val();
 		let idPresupuesto = $('#presupuestoEjecucion' + index).find("option:selected").val();
 		console.log(idPresupuesto);
 		paginaAjaxJSON({
