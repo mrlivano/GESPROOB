@@ -281,9 +281,9 @@ document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = 
 	function guardarComponenteI(index) {
 		console.log('guarda');
 		let descripcion = $('#presupuestoEjecucion' + index).find("option:selected").text();
-		let variable = $('#variable' + index).val();
-		let macro = $('#macro' + index).val();
-		let monto = $('#monto' + index).val();
+		let variable = $('#variableIndirecta' + index).val();
+		let macro = $('#macroIndirecta' + index).val();
+		let monto = $('#montoIndirecta' + index).val();
 		let idPresupuesto = $('#presupuestoEjecucion' + index).find("option:selected").val();
 		console.log(idPresupuesto);
 		paginaAjaxJSON({
