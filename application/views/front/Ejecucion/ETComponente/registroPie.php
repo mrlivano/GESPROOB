@@ -63,7 +63,7 @@
 													<?php } ?>
 												</select>
 											</td>
-											<td style="width: 10%"><input class="variableDirecta<?= $contD ?>" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 10%"><input class="variableDirecta" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
 											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
 											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
 											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" value="<?= $value->monto ?>"></td>
@@ -74,7 +74,7 @@
 							</table>
 							<div class="form-group">
 								<button type="button" class="btn btn-primary mr-2" onclick="agregarFilaD(<?= $contD ?>)">Agregar Fila</button>
-								<!-- <button type="button" class="btn btn-danger" onclick="eliminarFila()">Eliminar Fila</button> -->
+								<button type="button" class="btn btn-danger" onclick="eliminarFila()">Eliminar Fila</button>
 							</div>
 						</div>
 					</div>
@@ -121,7 +121,7 @@
 							</table>
 							<div class="form-group">
 								<button type="button" class="btn btn-primary mr-2" onclick="agregarFilaI(<?= $contI ?>)">Agregar Fila</button>
-								<!-- <button type="button" class="btn btn-danger" onclick="eliminarFila()">Eliminar Fila</button> -->
+								<button type="button" class="btn btn-danger" onclick="eliminarFila()">Eliminar Fila</button>
 							</div>
 						</div>
 					</div>
@@ -304,4 +304,14 @@ document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = 
 				resultado = JSON.parse(objectJSON);
 			}, false, true)
 	}
+	function eliminarFila(){
+  var table = document.getElementById("tablaprueba");
+  var rowCount = table.rows.length;
+  //console.log(rowCount);
+  
+  if(rowCount <= 1)
+    alert('No se puede eliminar el encabezado');
+  else
+    table.deleteRow(rowCount -1);
+}
 </script>
