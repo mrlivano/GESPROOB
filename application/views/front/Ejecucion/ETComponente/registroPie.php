@@ -56,17 +56,17 @@
 									<?php foreach ($PiePresupuesto->directa as $key => $value) { ?>
 										<tr><?php $contD += 1 ?>
 											<td style="width: 10%">
-											<input type="hidden" id="idPieDirecta<?= $contD ?>" value="<?php $value->id_pie_presupuesto?>">
-												<select name="presupuestoEjecucion<?= $contD ?>" id="presupuestoEjecucion<?= $contD ?>">
+											<input type="hidden" id="idPieDirecta<?= $contD ?>" value="<?= $value->id_pie_presupuesto?>">
+												<select name="presupuestoEjecucionDirecta<?= $contD ?>" id="presupuestoEjecucionDirecta<?= $contD ?>">
 													<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>
 													<?php } ?>
 												</select>
 											</td>
-											<td style="width: 10%"><input class="variableDirecta<?= $contD ?>" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->descripcion ?>"></td>
-											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();"><?= $value->macro ?></td>
-											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox"></td>
-											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text"><?= $value->monto ?></td>
+											<td style="width: 10%"><input class="variableDirecta<?= $contD ?>" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
+											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
+											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" value="<?= $value->monto ?>"></td>
 											<td style="width: 20%"><button onclick="guardarComponenteD(<?= $contD ?>)">guardar</button></td>
 										</tr>
 									<?php } ?>
@@ -103,17 +103,17 @@
 									<?php foreach ($PiePresupuesto->indirecta as $key => $value) { ?>
 										<tr><?php $contI += 1 ?>
 											<td style="width: 10%">
-											<input type="hidden" id="idPieIndirecta<?= $contI ?>" value="<?php $value->id_pie_presupuesto?>">
-												<select name="presupuestoEjecucion<?= $contI ?>" id="presupuestoEjecucion<?= $contI ?>">
+											<input type="hidden" id="idPieIndirecta<?= $contI ?>" value="<?= $value->id_pie_presupuesto?>">
+												<select name="presupuestoEjecucionIndirecta<?= $contI ?>" id="presupuestoEjecucionIndirecta<?= $contI ?>">
 													<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>
 													<?php } ?>
 												</select>
 											</td>
-											<td style="width: 10%"><input class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();"><?= $value->descripcion ?></td>
-											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();"><?= $value->macro ?></td>
-											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox"></td>
-											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text"><?= $value->monto ?></td>
+											<td style="width: 10%"><input class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
+											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" checked=<?php $presupuesto->id_presupuesto_ej == null ? "true" : "false" ;?>></td>
+											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text" value="<?= $value->monto ?>"></td>
 											<td style="width: 20%"><button onclick="guardarComponenteI(<?= $contI ?>)">guardar</button></td>
 										</tr>
 									<?php } ?>
@@ -145,7 +145,7 @@
 
 		contadorD += contD + 1;
 
-		document.getElementById("tablePresupuestosDirecta").insertRow(-1).innerHTML = '<?php $contD = $contD + 1; ?><td style="width: 10%"><input type="hidden" id="idPieDirecta'+contadorD+'" value=""><select  name="presupuestoEjecucion' + contadorD + '" id="presupuestoEjecucion' + contadorD + '" onchange="changePresupuestoDirecta(this,' + contadorD + ')">' +
+		document.getElementById("tablePresupuestosDirecta").insertRow(-1).innerHTML = '<?php $contD = $contD + 1; ?><td style="width: 10%"><input type="hidden" id="idPieDirecta'+contadorD+'" value=""><select  name="presupuestoEjecucionDirecta' + contadorD + '" id="presupuestoEjecucionDirecta' + contadorD + '" onchange="changePresupuestoDirecta(this,' + contadorD + ')">' +
 			'<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 			'<?php } ?>' +
@@ -163,7 +163,7 @@
 
 contadorI += contI + 1;
 
-document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = '<?php $contI = $contI + 1; ?><td style="width: 10%"><input type="hidden" id="idPieDirecta'+contadorI+'" value=""><select  name="presupuestoEjecucion' + contadorI + '" id="presupuestoEjecucion' + contadorI + '" onchange="changePresupuestoIndirecta(this,' + contadorI + ')">' +
+document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = '<?php $contI = $contI + 1; ?><td style="width: 10%"><input type="hidden" id="idPieDirecta'+contadorI+'" value=""><select  name="presupuestoEjecucionIndirecta' + contadorI + '" id="presupuestoEjecucionIndirecta' + contadorI + '" onchange="changePresupuestoIndirecta(this,' + contadorI + ')">' +
 	'<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>' +
 	'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 	'<?php } ?>' +
@@ -255,11 +255,11 @@ document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = 
 
 	function guardarComponenteD(index) {
 		console.log('guarda');
-		let descripcion = $('#presupuestoEjecucion' + index).find("option:selected").text();
+		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text();
 		let variable = $('#variableDirecta' + index).val();
 		let macro = $('#macroDirecta' + index).val();
 		let monto = $('#montoDirecta' + index).val();
-		let idPresupuesto = $('#presupuestoEjecucion' + index).find("option:selected").val();
+		let idPresupuesto = $('#presupuestoEjecucionDirecta' + index).find("option:selected").val();
 		console.log(idPresupuesto);
 		paginaAjaxJSON({
 				"descripcion": descripcion,
@@ -280,11 +280,11 @@ document.getElementById("tablePresupuestosIndirecta").insertRow(-1).innerHTML = 
 	}
 	function guardarComponenteI(index) {
 		console.log('guarda');
-		let descripcion = $('#presupuestoEjecucion' + index).find("option:selected").text();
+		let descripcion = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").text();
 		let variable = $('#variableIndirecta' + index).val();
 		let macro = $('#macroIndirecta' + index).val();
 		let monto = $('#montoIndirecta' + index).val();
-		let idPresupuesto = $('#presupuestoEjecucion' + index).find("option:selected").val();
+		let idPresupuesto = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").val();
 		console.log(idPresupuesto);
 		paginaAjaxJSON({
 				"descripcion": descripcion,
