@@ -56,7 +56,7 @@
 									<?php foreach ($PiePresupuesto->directa as $key => $value) { ?>
 										<tr><?php $contD += 1 ?>
 											<td style="width: 10%">
-											<input type="hidden" id="idPieDirecta" value="<?php $PiePresupuesto->id_pie_presupuesto?>">
+											<input type="hidden" id="idPieDirecta" value="<?php $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucion<?= $contD ?>" id="presupuestoEjecucion<?= $contD ?>">
 													<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>
@@ -103,7 +103,7 @@
 									<?php foreach ($PiePresupuesto->indirecta as $key => $value) { ?>
 										<tr><?php $contI += 1 ?>
 											<td style="width: 10%">
-											<input type="hidden" id="idPieIndirecta<?= $contI ?>" value="<?php $PiePresupuesto->id_pie_presupuesto?>">
+											<input type="hidden" id="idPieIndirecta<?= $contI ?>" value="<?php $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucion<?= $contI ?>" id="presupuestoEjecucion<?= $contI ?>">
 													<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>
