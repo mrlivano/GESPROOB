@@ -22,6 +22,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 		{
 			$this->db->trans_start();
 
+				$id_pie_presupuesto=$this->input->post('id_pie_presupuesto');	
 				$descripcion=$this->input->post('descripcion');
 				$variable=$this->input->post('variable');
 				$macro=$this->input->post('macro');
@@ -41,18 +42,24 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$c_data['id_presupuesto_ej']=$id_presupuesto_ej==0?NULL:$id_presupuesto_ej;
 				$c_data['id_et']=$id_et;
 				// obtener valor de la pestaña modalidad
-				$c_data['modalidad_ejecucion']=1;
+				$c_data['modalidad_ejecucion']=$modalidad;
 				$c_data['orden']=$orden;
 				$c_data['monto']=$monto;
 
 				$id_pie_presupuesto=$this->Model_ET_Pie_Presupuesto->insertar($c_data);
 			}
-			// else
-			// {
-			// 	$u_data['cantidad']=$cantidad;
-			// 	$u_data['precio']=$precio;
-			// 	$data=$this->Model_ET_Cronograma_Ejecucion->editar($etMesValorizacionTemp->id_cronograma_valorizacion, $u_data);
-			// }	
+			else
+			{
+				$u_data['descripcion']=$descripcion;
+				$u_data['variable']=$variable;
+				$u_data['macro']=$macro;
+				$u_data['id_presupuesto_ej']=$id_presupuesto_ej==0?NULL:$id_presupuesto_ej;
+				$u_data['id_et']=$id_et;
+				$u_data['modalidad_ejecucion']=$modalidad;
+				$u_data['orden']=$orden;
+				$u_data['monto']=$monto;
+				$data=$this->Model_ET_Pie_Presupuesto->editar($etPiePresupuesto->id_pie_presupuesto, $u_data);
+			}	
 
 			$this->db->trans_complete();
 
