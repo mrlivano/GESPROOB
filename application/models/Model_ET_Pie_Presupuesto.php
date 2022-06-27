@@ -24,9 +24,10 @@ class Model_ET_Pie_Presupuesto extends CI_Model
 
 	function buscar($id)
 	{
-		$this->db->insert('PIE_PRESUPUESTO',$data);
-
-		return $this->db->affected_rows();
+		$this->db->select('PIE_PRESUPUESTO.*');
+		$this->db->from('PIE_PRESUPUESTO');
+		$this->db->where('PIE_PRESUPUESTO.id_pie_presupuesto',$id);
+		return $this->db->get()->result();
 	}
 
 	function insertar($data)
