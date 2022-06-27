@@ -31,10 +31,10 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$orden=$this->input->post('orden');
 				$monto=$this->input->post('monto');
 
-			// $etMesValorizacionTemp=$this->Model_ET_Cronograma_Ejecucion->ETCronogramaPorIdDetallePartidaAndNumeroMes($idDetallePartida, $numeroMes, $anio);
+			$etPiePresupuesto=$this->Model_ET_Pie_Presupuesto->buscar($id_pie_presupuesto);
 
-			// if($etMesValorizacionTemp==null)
-			// {
+			if($etPiePresupuesto==null)
+			{
 				$c_data['descripcion']=$descripcion;
 				$c_data['variable']=$variable;
 				$c_data['macro']=$macro;
@@ -46,7 +46,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$c_data['monto']=$monto;
 
 				$id_pie_presupuesto=$this->Model_ET_Pie_Presupuesto->insertar($c_data);
-			// }
+			}
 			// else
 			// {
 			// 	$u_data['cantidad']=$cantidad;
@@ -60,6 +60,8 @@ class ET_Pie_Presupuesto extends CI_Controller
 		}
 		$id_ExpedienteTecnico = $this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($this->input->get('idExpedienteTecnico'));
+		$presupuestoEjecucion='presupuesto esjecucion';
+		$piePresupuesto='pie_presupuesto';
 		
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
 			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
