@@ -24,12 +24,15 @@
 	</div>
 	<div class="" role="tabpanel" data-example-id="togglable-tabs">
 		<ul id="myTabPie" class="nav nav-tabs" role="tablist">
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
 			<li style="width:15%;" role="presentation" class="active">
 				<a href="#tabAdmDirecta" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Administracion Directa</b></a>
 			</li>
+			<?php } if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 			<li style="width:15%;" role="presentation" class="">
 				<a href="#tabAdmIndirecta" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Administracio Indirecta</b></a>
 			</li>
+			<?php }?>
 		</ul>
 		<br>
 			<div id="myTabPieContent" class="tab-content">
