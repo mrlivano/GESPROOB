@@ -125,8 +125,8 @@
 											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" checked=<?php $presupuesto->id_presupuesto_ej == null ? "true" : "false" ;?>></td>
 											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text" value="<?= $value->monto ?>"></td>
 											<td style="width: 20%">
-											<button onclick="guardarComponenteI(<?= $contD ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
-											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+											<button onclick="guardarComponenteI(<?= $contI ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
+											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
 											</td>
 										</tr>
 									<?php } ?>
@@ -275,13 +275,11 @@
 	}
 
 	function guardarComponenteD(index) {
-		console.log('guarda');
 		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text();
 		let variable = $('#variableDirecta' + index).val();
 		let macro = $('#macroDirecta' + index).val();
 		let monto = $('#montoDirecta' + index).val();
 		let idPresupuesto = $('#presupuestoEjecucionDirecta' + index).find("option:selected").val();
-		console.log($('#idPieDirecta'+index).val());
 		paginaAjaxJSON({
 				"descripcion": descripcion,
 				"variable": variable,
@@ -313,7 +311,6 @@
 		let macro = $('#macroIndirecta' + index).val();
 		let monto = $('#montoIndirecta' + index).val();
 		let idPresupuesto = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").val();
-		console.log(idPresupuesto);
 		paginaAjaxJSON({
 				"descripcion": descripcion,
 				"variable": variable,
@@ -358,6 +355,7 @@
 		
 }
 function eliminarFilaI(index){
+	console.log($('#idPieIndirecta'+index).val(),);
 	paginaAjaxJSON({
 				"id_pie_presupuesto" : $('#idPieIndirecta'+index).val(),
 			},
