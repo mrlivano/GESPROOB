@@ -58,7 +58,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$u_data['modalidad_ejecucion']=$modalidad;
 				$u_data['orden']=$orden;
 				$u_data['monto']=$monto;
-				$data=$this->Model_ET_Pie_Presupuesto->editar($etPiePresupuesto->id_pie_presupuesto, $u_data);
+				$data=$this->Model_ET_Pie_Presupuesto->editar($etPiePresupuesto[0]->id_pie_presupuesto, $u_data);
 			}	
 
 			$this->db->trans_complete();

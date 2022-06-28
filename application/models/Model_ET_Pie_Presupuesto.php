@@ -27,7 +27,7 @@ class Model_ET_Pie_Presupuesto extends CI_Model
 		$this->db->select('PIE_PRESUPUESTO.*');
 		$this->db->from('PIE_PRESUPUESTO');
 		$this->db->where('PIE_PRESUPUESTO.id_pie_presupuesto',$id);
-		return $this->db->get()->result()[0];
+		return $this->db->get()->result();
 	}
 
 	function insertar($data)
