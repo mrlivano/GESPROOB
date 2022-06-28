@@ -24,8 +24,8 @@ x<div class="right_col" role="main">
                                       <ul id="myTab" class="nav nav-tabs" role="tablist">
                                       <!--  <li role="presentation" class="active"><a  href="#tab_RubroEjecucion" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> Rubro de ejecucion</a>
                                         </li>-->
-                                        <li role="presentation" class="active"><a href="#tab_ModalidadEjecucion" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Modalidad Ejecucion</b> </a>
-                                        </li>
+                                        <!-- <li role="presentation" class="active"><a href="#tab_ModalidadEjecucion" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Modalidad Ejecucion</b> </a>
+                                        </li> -->
                                         <li role="presentation" class=""><a href="#tab_UnidadEjecutora" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false"><b>Unidad Ejecutora</b> </a>
                                         </li>
                                         <li role="presentation" class=""><a href="#tab_UnidadFormuladora" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false"><b>Unidad Formuladora</b> </a>
@@ -36,40 +36,10 @@ x<div class="right_col" role="main">
                                       <div id="myTabContent" class="tab-content">
 
                             <!-- /  panel de modalidad ejecucion el row -->
-                                        <div role="tabpanel" class="tab-pane fade active in    " id="tab_ModalidadEjecucion" aria-labelledby="profile-tab">
-
-                                              <!-- /tabla de Modalidad de ejecucion row -->
-                                            <div class="row">
-
-                                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="x_panel">
-                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#VentanaRegistraModalidadEjecucion"><span class="fa fa-plus-circle"></span> Nuevo</button>
-                                                          <div class="x_title">
-
-                                                            <div class="clearfix"></div>
-
-                                                          </div>
-                                                          <div class="x_content">
-                                                            <table id="table-ModalidadE" class="table table-condensed table-striped table-bordered table-hover" width="100%">
-                                                              <thead>
-                                                                 <tr>
-                                                                  <th style="width: 1%">ID </th>
-
-                                                                  <th style="width: 91%">MODALIDAD DE EJECUCION </th>
-
-                                                                  <th style="width: 8%">ACCIONES</th>
-                                                                </tr>
-                                                              </thead>
-                                                            </table>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                            </div>
-                                         <!-- / fin  de la tabla de Modalidas de ejecucion row -->
-                                        </div>
+                                        
                                 <!-- /  fin panel de modalidad ejecucion el row -->
                                 <!-- /  Panel Unidad Ejecutora -->
-                                         <div role="tabpanel" class="tab-pane fade" id="tab_UnidadEjecutora" aria-labelledby="profile-tab">
+                                         <div role="tabpanel" class="tab-pane fade active in" id="tab_UnidadEjecutora" aria-labelledby="profile-tab">
                                                 <!-- /tabla de Unidad Ejecutora row -->
                                             <div class="row">
                                                   <div class="col-md-12 col-sm-12 col-xs-12">

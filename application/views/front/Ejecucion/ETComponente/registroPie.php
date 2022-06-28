@@ -24,17 +24,21 @@
 	</div>
 	<div class="" role="tabpanel" data-example-id="togglable-tabs">
 		<ul id="myTabPie" class="nav nav-tabs" role="tablist">
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
 			<li style="width:15%;" role="presentation" class="active">
 				<a href="#tabAdmDirecta" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Administracion Directa</b></a>
 			</li>
+			<?php } if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 			<li style="width:15%;" role="presentation" class="">
 				<a href="#tabAdmIndirecta" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Administracio Indirecta</b></a>
 			</li>
+			<?php }?>
 		</ul>
+		<br>
 			<div id="myTabPieContent" class="tab-content">
 				<div role="tabpanel" class="tab-pane fade active in" id="tabAdmDirecta" aria-labelledby="home-tab">
 					<div class="form-horizontal">
-						<label id="costoDirecto">Costos directo = NDIRECTO</label> <input id="montoDirecta" type="text" value="<?php echo ($expedienteTecnico->costoDirecto) ?>" disabled>
+						<label id="costoDirecto">Costos directo = NDIRECTO</label> <input id="montoDirecta" type="text" value="<?php echo (number_format($expedienteTecnico->costoDirecto,2,".",",")) ?>" disabled>
 						<input id="variableDirecta" class="variableDirecta" type="hidden" value="NDIRECTO" disabled>
 					</div>
 
@@ -67,10 +71,10 @@
 													
 												</select>
 											</td>
-											<td style="width: 10%"><input class="variableDirecta" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 10%"><input style="width: 100%" class="variableDirecta" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
 											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
-											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
-											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" value="<?= $value->monto ?>"></td>
+											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
+											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
 											<td style="width: 40%">
 											<button onclick="guardarComponenteD(<?= $contD ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -88,7 +92,7 @@
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="tabAdmIndirecta" aria-labelledby="profile-tab">
 					<div class="form-horizontal">
-						<label id="costoDirectoIndirecta">Costos directo = NDIRECTO</label> <input id="montoIndirecta" type="text" value="<?php echo ($expedienteTecnico->costoDirectoIndirecta) ?>" disabled>
+						<label id="costoDirectoIndirecta">Costos directo = NDIRECTO</label> <input id="montoIndirecta" type="text" value="<?php echo (number_format($expedienteTecnico->costoDirectoIndirecta,2,".",",")) ?>" disabled>
 						<input id="variableIndirecta" class="variableIndirecta" type="hidden" value="NDIRECTO" disabled>
 					</div>
 
@@ -120,10 +124,10 @@
 														<option value="0" <?php echo ('PRESUPUESTO TOTAL' == $value->descripcion ? "selected" : "") ?>>PRESUPUESTO TOTAL</option> 
 												</select>
 											</td>
-											<td style="width: 10%"><input class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 10%"><input style="width: 100%" class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
 											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
-											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" checked=<?php $presupuesto->id_presupuesto_ej == null ? "true" : "false" ;?>></td>
-											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text" value="<?= $value->monto ?>"></td>
+											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
+											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
 											<td style="width: 20%">
 											<button onclick="guardarComponenteI(<?= $contI ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -159,18 +163,19 @@
 		cont=contadorD+contD;
 		let tr= document.createElement('tr');
 		tr.id='trD'+cont;
-		tr.innerHTML= '<td style="width: 10%"><input type="hidden" id="idPieDirecta'+cont+'" value=""><select  name="presupuestoEjecucionDirecta' + cont + '" id="presupuestoEjecucionDirecta' + cont + '" onchange="changePresupuestoDirecta(this,' + cont + ')">' +
+		tr.innerHTML= '<td style="width: 10%"><input type="hidden" id="idPieDirecta'+cont+'" value=""><select  name="presupuestoEjecucionDirecta' + cont + '" id="presupuestoEjecucionDirecta' + cont + '" onchange="changePresupuestoDirecta(this,' + cont + ')" >' +
+			'<option value disabled selected>Seleccione</option>' +
 			'<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 			'<?php } ?>' +
-			'<option value="0">SUBTOTAL</option>' +
 			'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>' +
+			'<option value="0">SUBTOTAL</option>' +
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
 			'</select></td>' +
 			'<td style="width: 10%"><input size="7" class="variableDirecta" id="variableDirecta' + cont + '" name="variableDirecta' + cont + '" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="7" id="macroDirecta' + cont + '" name="macroDirecta' + cont + '" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="1" id="gastoDirecta' + cont + '" name="gastoDirecta' + cont + '" type="checkbox"></td>' +
-			'<td style="width: 10%"><input size="7" id="montoDirecta' + cont + '" name="montoDirecta' + cont + '" type="text"></td>' +
+			'<td style="width: 10%"><input size="20" id="macroDirecta' + cont + '" name="macroDirecta' + cont + '" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
+			'<td style="width: 10%"><input size="1" id="gastoDirecta' + cont + '" name="gastoDirecta' + cont + '" type="checkbox" disabled></td>' +
+			'<td style="width: 10%"><input size="20" id="montoDirecta' + cont + '" name="montoDirecta' + cont + '" type="text" disabled></td>' +
 			'<td style="width: 10%"><button onclick="guardarComponenteD(' + cont + ')" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>'+
 			'<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(' + cont + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>';
 			document.getElementById("bodyPieD").appendChild(tr);
@@ -182,6 +187,7 @@
 		let tr= document.createElement('tr');
 		tr.id='trI'+cont;
 		tr.innerHTML= '<td style="width: 10%"><input type="hidden" id="idPieIndirecta'+cont+'" value=""><select  name="presupuestoEjecucionIndirecta' + cont + '" id="presupuestoEjecucionIndirecta' + cont + '" onchange="changePresupuestoIndirecta(this,' + cont + ')">' +
+			'<option value disabled selected>Seleccione</option>' +
 			'<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 			'<?php } ?>' +
@@ -190,9 +196,9 @@
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
 			'</select></td>' +
 			'<td style="width: 10%"><input size="7" class="variableIndirecta" id="variableIndirecta' + cont + '" name="variableIndirecta' + cont + '" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="7" id="macroIndirecta' + cont + '" name="macroIndirecta' + cont + '" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="1" id="gastoIndirecta' + cont + '" name="gastoIndirecta' + cont + '" type="checkbox"></td>' +
-			'<td style="width: 10%"><input size="7" id="montoIndirecta' + cont + '" name="montoIndirecta' + cont + '" type="text"></td>' +
+			'<td style="width: 10%"><input size="20" id="macroIndirecta' + cont + '" name="macroIndirecta' + cont + '" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
+			'<td style="width: 10%"><input size="1" id="gastoIndirecta' + cont + '" name="gastoIndirecta' + cont + '" type="checkbox" disabled></td>' +
+			'<td style="width: 10%"><input size="20" id="montoIndirecta' + cont + '" name="montoIndirecta' + cont + '" type="text" disabled></td>' +
 			'<td style="width: 10%"><button onclick="guardarComponenteI(' + cont + ')" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>'+
 			'<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(' + cont + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>';
 			document.getElementById("bodyPie").appendChild(tr);
@@ -275,11 +281,21 @@
 	}
 
 	function guardarComponenteD(index) {
+		
 		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text();
 		let variable = $('#variableDirecta' + index).val();
 		let macro = $('#macroDirecta' + index).val();
 		let monto = $('#montoDirecta' + index).val();
 		let idPresupuesto = $('#presupuestoEjecucionDirecta' + index).find("option:selected").val();
+		if (descripcion=='Seleccione'||variable==""||macro=="") {
+			swal({
+					title: 'Error',
+					text: "Debe Seleccionar la Descripcion y rellenar los campos de Variable y Macro",
+					
+				},
+				function() {});
+		}
+		else{
 		paginaAjaxJSON({
 				"descripcion": descripcion,
 				"variable": variable,
@@ -304,6 +320,7 @@
 				function() {});
 				$('#idPieDirecta'+index).val(resultado.id_pie_presupuesto);
 			}, false, true)
+		}
 	}
 	function guardarComponenteI(index) {
 		let descripcion = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").text();
@@ -311,6 +328,15 @@
 		let macro = $('#macroIndirecta' + index).val();
 		let monto = $('#montoIndirecta' + index).val();
 		let idPresupuesto = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").val();
+		if (descripcion=='Seleccione'||variable==""||macro=="") {
+			swal({
+					title: 'Error',
+					text: "Debe Seleccionar la Descripcion y rellenar los campos de Variable y Macro",
+					
+				},
+				function() {});
+		}
+		else{
 		paginaAjaxJSON({
 				"descripcion": descripcion,
 				"variable": variable,
@@ -335,6 +361,7 @@
 				function() {});
 				$('#idPieIndirecta'+index).val(resultado.id_pie_presupuesto);
 			}, false, true)
+		}
 	}
 	function eliminarFilaD(index){
 		paginaAjaxJSON({

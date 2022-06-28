@@ -15,6 +15,7 @@
 					<label class="control-label col-md-4 col-sm-4 col-xs-12 ">Modalidad de Ejecución*</label>
 
 					<div class="col-md-8 col-sm-8 col-xs-12">
+					<?php if($ExpedienteTecnicoM->modalidad_ejecucion_et==""){ ?>
 						<select class="selectpicker form-control col-md-6 col-sm-6 col-xs-12" id="txtModalidadEjecucion" name="txtModalidadEjecucion" data-live-search="true" style="display: block !important;">
 							<option value="">Seleccione una opción</option>
 							<?php foreach ($listaModalidadEjecucion as $key => $value) { ?>
@@ -23,6 +24,10 @@
 							<?php } ?>
 						</select>
 						<input id="hdIdExpediente" name="hdIdExpediente" value="<?= $ExpedienteTecnicoM->id_et ?>" placeholder="" autocomplete="off" type="hidden">
+						<?php }
+						else{echo('<h5>'.$ExpedienteTecnicoM->modalidad_ejecucion_et.'</h5>');}
+						?>
+						
 					</div>
 				</div>
 
@@ -31,7 +36,9 @@
 	</div>
 	<div class="ln_solid"></div>
 	<div class="row" style="text-align: right;">
+	<?php if($ExpedienteTecnicoM->modalidad_ejecucion_et==""){ ?>
 		<button  id="btnEnviarFormulario" onclick="alerta()" class="btn btn-success">Guardar</button>
+		<?php } ?>
 		<button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 	</div>
 </form>
@@ -81,7 +88,10 @@
 							text: objectJSON.mensaje,
 							type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
 						},
-						function() {location.reload();});
+
+						function() {
+						document.getElementById('txtModalidadEjecucion').disabled = true;
+							location.reload();});
 				}, false, true);
 		});
 
