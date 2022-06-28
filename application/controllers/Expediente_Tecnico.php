@@ -825,19 +825,6 @@ class Expediente_Tecnico extends CI_Controller
 			$MostraExpedienteTecnicoExpe->costoDirecto=$costoDirectoTotal;
 
 			$MostraExpedienteTecnicoExpe->piePresupuestoDirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_ExpedienteTecnico);
-			//COSTOS INDIRECTOS
-			// $MostraExpedienteTecnicoExpe->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
-
-			// $costoIndirectoTotal=0;
-			// 	foreach ($MostraExpedienteTecnicoExpe->childCostoIndirecto as $key => $value)
-			// 	{
-			// 	$costoComponente=0;
-			// 	$costoIndirectoTotal+=$value->monto;
-			// 	$value->costoComponente=$value->monto;
-			// }
-			// $MostraExpedienteTecnicoExpe->costoIndirecto=$costoIndirectoTotal;
-	
-			// $MostraExpedienteTecnicoExpe->presupuestoGeneral=$costoIndirectoTotal+$costoDirectoTotal;
 		}
 
 		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
@@ -858,32 +845,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
 			$MostraExpedienteTecnicoExpe->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
 
-			// costos directos total
-
-				$MostraExpedienteTecnicoExpe->childCostoDirectoTotalIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirecTotal($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
-
-		$costoDirectoTotalTotalIndirecta=$costoDirectoTotalIndirecta;
-	    foreach ($MostraExpedienteTecnicoExpe->childCostoDirectoTotalIndirecta as $key => $value)
-	    {
-			$costoComponente=0;
-			$costoDirectoTotalTotalIndirecta+=$value->monto;
-			$value->costoComponente=$value->monto;
-		}
-		$MostraExpedienteTecnicoExpe->costoDirectoTotalIndirecta=$costoDirectoTotalTotalIndirecta;
-
-		// costos indirectos
-
-			$MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
-
-		$costoIndirectoTotalIndirecta=0;
-	    foreach ($MostraExpedienteTecnicoExpe->childCostoIndirectoIndirecta as $key => $value)
-	    {
-			$costoComponente=0;
-			$costoIndirectoTotalIndirecta+=$value->monto;
-			$value->costoComponente=$value->monto;
-		}
-		$MostraExpedienteTecnicoExpe->costoIndirectoIndirecta=$costoIndirectoTotalIndirecta;
-		$MostraExpedienteTecnicoExpe->presupuestoGeneralIndirecta=$costoIndirectoTotalIndirecta+$costoDirectoTotalTotalIndirecta;
+			$MostraExpedienteTecnicoExpe->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
 		}
 
 		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePresupuestoFF05',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe,'MostraExpedienteNombre' => $MostraExpedienteNombre], true);
@@ -1291,20 +1253,7 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 
-			$expedienteTecnico->childCostoIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
-
-		foreach($expedienteTecnico->childCostoIndirecto as $key => $value)
-		{
-			$costoComponente=0;
-			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-
-			foreach($value->childMeta as $index => $item)
-			{
-				$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
-				$costoComponente+=$item->costoMeta;
-			}
-			$value->costoComponente=$costoComponente;
-		}
+			$expedienteTecnico->piePresupuestoDirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($idExpedienteTecnico);
 	
 		}
 
@@ -1322,28 +1271,7 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 
-			$expedienteTecnico->childCostoIndirectoIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
-
-			foreach($expedienteTecnico->childCostoIndirectoIndirecta as $key => $value)
-			{
-				$costoComponente=0;
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-	
-				foreach($value->childMeta as $index => $item)
-				{
-					$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
-					$costoComponente+=$item->costoMeta;
-				}
-				$value->costoComponente=$costoComponente;
-			}
-
-			$expedienteTecnico->childCostoDirectoTotalIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirecTotal($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
-
-			foreach($expedienteTecnico->childCostoDirectoTotalIndirecta as $key => $value)
-			{
-				$costoComponente=0;
-				$value->costoComponente=$costoComponente;
-			}
+			$expedienteTecnico->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($idExpedienteTecnico);
 		}
 
 		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfEjecucion007',['expedienteTecnico'=>$expedienteTecnico],true);

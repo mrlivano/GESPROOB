@@ -188,45 +188,24 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 					    <?=$resultadoMetaAnidada?>
 					<?php } ?>
 					<tr>
-					<td style="width: 85%;text-decoration: underline; background-color:#337ab7;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO TOTAL</b></td>
-					<td style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
+					<td style="width: 85%;text-decoration: underline; background-color:#959494;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO (NDIRECTO)</b></td>
+					<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
 				</tr>
 				</tbody>
 			</table>
 			<br>
 			<table id="tableResumen" style="width: 100%; font-size:12px;">
 			<tr>
-					<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTOS INDIRECTOS</b></td>
+					<td style="width: 87%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></td>
 					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
 				</tr>
-				<?php $costoIndirectoTotal=0; foreach($expedienteTecnico->childCostoIndirecto as $key => $value) { 
-					$costoIndirectoTotal+=$value->monto?>
+				<?php foreach($expedienteTecnico->piePresupuestoDirecta as $key => $value) { ?>
 					<tr>
-						<td style="width: 87%"><b><?=strtoupper(html_escape($value->descripcion))?></b></td>
-						<td style="width: 13%;text-align: right;">S/. <?=a_number_format($value->monto, 4, '.',",",3)?></td>
+						<td style="width: 87%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></td>
+						<td style="width: 13%;text-align: right;<?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
 					</tr>				
 				<?php } ?>
-				<tr>
-					<td style="width: 87%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoIndirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
 			</table>
-			<br>
-			<table id="tableResumen" style="width: 100%; font-size:12px;">
-			<tr>
-					<td style="width: 87%;text-decoration: underline; background-color:#337ab7;color:white;"><b>COSTO DIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
-				<tr>
-					<td style="width: 87%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoIndirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
-				<tr>
-					<td style="width: 87%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></td>
-					<td style="width: 13%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($costoDirectoTotal+$costoIndirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
-			</table>
-
 			<?php } ?>
 
 		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
@@ -267,54 +246,23 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 					    <?=$resultadoMetaAnidada?>
 					<?php } ?>
 					<tr>
-					<td style="width: 87%;text-decoration: underline; background-color:#337ab7;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
-				<?php $costoDirectoTotalTotal=$costoDirectoTotal; foreach($expedienteTecnico->childCostoDirectoTotalIndirecta as $key => $value) { 
-					$costoDirectoTotalTotal+=$value->monto?>
-					<tr>
-						<td style="width: 87%; text-align: left;" colspan="5"><b><?=strtoupper(html_escape($value->descripcion))?></b></td>
-						<td style="width: 13%;text-align: right;">S/. <?=a_number_format($value->monto, 4, '.',",",3)?></td>
-					</tr>				
-				<?php } ?>
-				<tr>
-					<td style="width: 87%;text-decoration: underline; background-color:#337ab7;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO TOTAL TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotalTotal, 4, '.',",",3)?></b></td>
+					<td style="width: 87%;text-decoration: underline; background-color:#959494;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO (NDIRECTO)</b></td>
+					<td style="width: 13%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
 				</tr>
 				</tbody>
 			</table>
 			<br>
 			<table id="tableResumen" style="width: 100%; font-size:12px;">
 			<tr>
-					<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTOS INDIRECTOS</b></td>
+					<td style="width: 87%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></td>
 					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
 				</tr>
-				<?php $costoIndirectoTotal=0; foreach($expedienteTecnico->childCostoIndirectoIndirecta as $key => $value) { 
-					$costoIndirectoTotal+=$value->monto?>
+				<?php foreach($expedienteTecnico->piePresupuestoIndirecta as $key => $value) { ?>
 					<tr>
-						<td style="width: 87%"><b><?=strtoupper(html_escape($value->descripcion))?></b></td>
-						<td style="width: 13%;text-align: right;">S/. <?=a_number_format($value->monto, 4, '.',",",3)?></td>
+						<td style="width: 87%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></td>
+						<td style="width: 13%;text-align: right;<?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
 					</tr>				
 				<?php } ?>
-				<tr>
-					<td style="width: 87%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoIndirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
-			</table>
-			<br>
-			<table id="tableResumen" style="width: 100%; font-size:12px;">
-			<tr>
-					<td style="width: 87%;text-decoration: underline; background-color:#337ab7;color:white;" ><b>COSTO DIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoDirectoTotalTotal, 4, '.',",",3)?></b></td>
-				</tr>
-				<tr>
-					<td style="width: 87%;text-decoration: underline;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO TOTAL</b></td>
-					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>S/. <?=a_number_format($costoIndirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
-				<tr>
-					<td style="width: 87%;background-color:#f8f8f8;"><b>COSTO TOTAL DE INVERSIÓN</b></td>
-					<td style="width: 13%;text-align: right;background-color:#f8f8f8;"><b>S/. <?=a_number_format($costoDirectoTotalTotal+$costoIndirectoTotal, 4, '.',",",3)?></b></td>
-				</tr>
 			</table>
 			<?php } ?>
 		</div>
