@@ -74,7 +74,7 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
 
     function ListaPresupuestoEjecucionCostoDirecto($presupuesto)
     {
-        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej_padre is NULL and desc_presupuesto_ej like '%COSTOS DIRECTOS%' and ((desc_presupuesto_ej like '%$presupuesto%' and '$presupuesto'!='MIXTO') or '$presupuesto'='MIXTO')");
+        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej_padre is NULL and desc_presupuesto_ej like '%COSTOS DIRECTOS%' and ((desc_presupuesto_ej like '%$presupuesto%' and '$presupuesto'!='ADMINISTRACION MIXTA') or '$presupuesto'='ADMINISTRACION MIXTA')");
 
         return $presupuesto->result();
     }

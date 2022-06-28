@@ -95,7 +95,7 @@
 					<?php foreach ($listaModalidadEjecucion as $key => $value) { 
 						$cd=0;
 						$ci=0;
-						if(($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $ExpedienteTecnicoM->modalidad_ejecucion_et!='MIXTO') || ($ExpedienteTecnicoM->modalidad_ejecucion_et=='MIXTO' && $ExpedienteTecnicoM->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)){?>
+						if(($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $ExpedienteTecnicoM->modalidad_ejecucion_et!='ADMINISTRACION MIXTA') || ($ExpedienteTecnicoM->modalidad_ejecucion_et=='ADMINISTRACION MIXTA' && $ExpedienteTecnicoM->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)){?>
 						  <label class="control-label"><?=	$value->nombre_modalidad_ejec?></label>	
 							<div class="row borderBudget">
 						
@@ -736,7 +736,7 @@ $(function()
 		$("#divElaboracionET").show();
 		$("#divSupervisionET").show();
     }
-	if (id == "MIXTO") {
+	if (id == "ADMINISTRACION MIXTA") {
         $("#divLiquidacion").show();
 		$("#divUtilidad").show();
 		$("#divIGV").show();

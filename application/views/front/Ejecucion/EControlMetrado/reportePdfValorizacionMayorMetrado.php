@@ -208,8 +208,8 @@ function mostrarAnidado($meta, $expedienteTecnico)
 			</thead>
 			<tbody>
 
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-					if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+					if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 						?>
 			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN DIRECTA</b></td>
 			<?php } ?>
@@ -223,8 +223,8 @@ function mostrarAnidado($meta, $expedienteTecnico)
 					<?php } ?>
 				<?php } }?>
 
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-					if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+					if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 						?>
 			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN INDIRECTA</b></td>
 			<?php } ?>

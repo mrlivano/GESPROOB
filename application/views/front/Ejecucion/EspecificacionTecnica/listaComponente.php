@@ -11,8 +11,8 @@
 				<div class="x_content">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12" id="listaComponente">
-						<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-							if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+						<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+							if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
 						<span style="font-weight:bold;">ADMINISTRACIÓN DIRECTA</span><br><br>
 						<?php }?>
@@ -23,8 +23,8 @@
 							</div>
 							<?php }?>
 
-							<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-							if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+							<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+							if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
 						<span style="font-weight:bold;">ADMINISTRACIÓN INDIRECTA</span><br><br>
 						<?php }?>

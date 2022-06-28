@@ -151,8 +151,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 						</div>
 						<br>
 					</div>
-					<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-						if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+					<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+						if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
 						<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
 						<?php }?>
@@ -207,8 +207,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 						</table>
 					</div>
 			   <?php }?>
-				 <?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-						if($expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+				 <?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+						if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
 						<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
 						<?php }?>

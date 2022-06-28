@@ -224,7 +224,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
 					<option value="">Seleccione una opción</option>
 					<?php foreach ($listaModalidadEjecucion as $key => $value) {
-						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et == 'MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
+						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'ADMINISTRACION MIXTA') || ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
 							<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
 								<?= $value->nombre_modalidad_ejec ?></option>
 					<?php }
@@ -242,7 +242,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					?>
 							<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
 							<?php }
-						if (($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
+						if (($expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
@@ -274,7 +274,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
 					<option value="">Seleccione una opción</option>
 					<?php foreach ($listaModalidadEjecucion as $key => $value) {
-						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'MIXTO') || ($expedienteTecnico->modalidad_ejecucion_et == 'MIXTO' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
+						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'ADMINISTRACION MIXTA') || ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
 							<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
 								<?= $value->nombre_modalidad_ejec ?></option>
 					<?php }
@@ -292,7 +292,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 					?>
 							<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
 							<?php }
-						if ($expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
+						if ($expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') {
 							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
@@ -399,7 +399,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
 				<?php foreach ($expedienteTecnico->childPresupuestoEjecucion as $key => $temp3) {
-					if (strpos($temp3->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et === 'MIXTO') {
+					if (strpos($temp3->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false || $expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') {
 				?>
 						<div class="panel">
 							<div class="panel-heading" style="padding: 6px;">

@@ -92,8 +92,8 @@ function obtenerPartidas($meta)
 	<div style="font-size: 8px;padding-top:5px;">
 		<table style="width: 100%;" id="tablaContenido">
 			<tbody>
-			<?php if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $etExpedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-			if($etExpedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+			<?php if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
 			<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN DIRECTA</span><br><br>
 			<?php } ?>
@@ -177,8 +177,8 @@ function obtenerPartidas($meta)
 					<?php }?>
 				<?php } }?>
 
-				<?php if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $etExpedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
-			if($etExpedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+				<?php if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
 			<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
 			<?php } ?>

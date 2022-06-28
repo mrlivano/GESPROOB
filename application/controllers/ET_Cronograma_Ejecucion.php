@@ -45,7 +45,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 
 		$listaMes=$this->listaMeses();
 
-		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
 			foreach($expedienteTecnico->childComponente as $key => $value)
@@ -66,7 +66,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 			}
 		}
 
-		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
 		foreach($expedienteTecnico->childComponenteInd as $key => $value)
@@ -98,7 +98,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 		$listaMesesPeriodo=$this->Model_ET_Periodo_Ejecucion->listaPlazoEjecucionAnio($idExpedienteTecnico,$this->input->post('anio'));
 		$listaMes=$this->listaMeses();
 
-		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
 			foreach($expedienteTecnico->childComponente as $key => $value)
@@ -118,7 +118,7 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 				$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
 			}
 		}
-		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){
+		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
 		
 			foreach($expedienteTecnico->childComponenteInd as $key => $value)

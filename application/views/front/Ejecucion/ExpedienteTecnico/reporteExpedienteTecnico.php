@@ -178,7 +178,7 @@
 			</tr>
 			<?php }
 			
-			 else if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="MIXTO"){ ?>
+			 else if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION MIXTA"){ ?>
 			<tr>
 			<td>
 			

@@ -107,7 +107,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 					</select>
 				</div>
 			</div>
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){?>
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 			<br>
 			<h6><b>ADMINISTRACION DIRECTA</b></h6>
 			<div id="tablaExpedienteTecnico" style="display:block;">
@@ -177,7 +177,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 				</div>
 			</div>
 			<?php }?>			
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='MIXTO'){?>
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 			<br>
 			<h6><b>ADMINISTRACION INDIRECTA</b></h6>
 			<div id="tablaExpedienteTecnico" style="display:block;">
