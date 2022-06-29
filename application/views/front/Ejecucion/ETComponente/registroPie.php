@@ -36,6 +36,7 @@
 		</ul>
 		<br>
 			<div id="myTabPieContent" class="tab-content">
+				<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
 				<div role="tabpanel" class="tab-pane fade active in" id="tabAdmDirecta" aria-labelledby="home-tab">
 					<div class="form-horizontal">
 						<label id="costoDirecto">Costos directo = NDIRECTO</label> <input id="montoDirecta" type="text" value="<?php echo (number_format($expedienteTecnico->costoDirecto,2,".",",")) ?>" disabled>
@@ -90,7 +91,8 @@
 						</div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane fade" id="tabAdmIndirecta" aria-labelledby="profile-tab">
+				<?php } if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
+				<div role="tabpanel" class="tab-pane fade <?=$expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA'?'active in':''?>" id="tabAdmIndirecta" aria-labelledby="profile-tab">
 					<div class="form-horizontal">
 						<label id="costoDirectoIndirecta">Costos directo = NDIRECTO</label> <input id="montoIndirecta" type="text" value="<?php echo (number_format($expedienteTecnico->costoDirectoIndirecta,2,".",",")) ?>" disabled>
 						<input id="variableIndirecta" class="variableIndirecta" type="hidden" value="NDIRECTO" disabled>
@@ -142,6 +144,7 @@
 						</div>
 					</div>
 				</div>
+				<?php }?>
 			</div>
 	</div>
 
@@ -165,9 +168,9 @@
 		tr.id='trD'+cont;
 		tr.innerHTML= '<td style="width: 10%"><input type="hidden" id="idPieDirecta'+cont+'" value=""><select  name="presupuestoEjecucionDirecta' + cont + '" id="presupuestoEjecucionDirecta' + cont + '" onchange="changePresupuestoDirecta(this,' + cont + ')" >' +
 			'<option value disabled selected>Seleccione</option>' +
-			'<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>' +
+			'<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
-			'<?php } ?>' +
+			'<?php }} ?>' +
 			'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>' +
 			'<option value="0">SUBTOTAL</option>' +
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
@@ -188,9 +191,9 @@
 		tr.id='trI'+cont;
 		tr.innerHTML= '<td style="width: 10%"><input type="hidden" id="idPieIndirecta'+cont+'" value=""><select  name="presupuestoEjecucionIndirecta' + cont + '" id="presupuestoEjecucionIndirecta' + cont + '" onchange="changePresupuestoIndirecta(this,' + cont + ')">' +
 			'<option value disabled selected>Seleccione</option>' +
-			'<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>' +
+			'<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
-			'<?php } ?>' +
+			'<?php }} ?>' +
 			'<option value="0">SUBTOTAL</option>' +
 			'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>' +
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
@@ -225,14 +228,15 @@
 					arrayVariable.forEach(variableFind => {
 						if (variableFind.value == variable) {
 							const indexVariable = variableFind.id.split('variableDirecta')[1];
-							const monto = document.querySelector('#montoDirecta' + indexVariable).value;
+							const monto = document.querySelector('#montoDirecta' + indexVariable).value.replaceAll(',','');
+							console.log(monto);
 							window[variable] = Number(monto);
 						}
 					});
 				}
 			});
 			const res = eval(macro.value);
-			const inputMonto = document.querySelector('#montoDirecta' + indexResp).value = res;
+			const inputMonto = document.querySelector('#montoDirecta' + indexResp).value = res.toLocaleString('en-US');
 		} catch (error) {
 			document.querySelector('#montoDirecta' + indexResp).value = 0;
 		}
@@ -248,14 +252,14 @@
 					arrayVariable.forEach(variableFind => {
 						if (variableFind.value == variable) {
 							const indexVariable = variableFind.id.split('variableIndirecta')[1];
-							const monto = document.querySelector('#montoIndirecta' + indexVariable).value;
+							const monto = document.querySelector('#montoIndirecta' + indexVariable).value.replaceAll(',','');
 							window[variable] = Number(monto);
 						}
 					});
 				}
 			});
 			const res = eval(macro.value);
-			const inputMonto = document.querySelector('#montoIndirecta' + indexResp).value = res;
+			const inputMonto = document.querySelector('#montoIndirecta' + indexResp).value = res.toLocaleString('en-US');
 		} catch (error) {
 			document.querySelector('#montoIndirecta' + indexResp).value = 0;
 		}
@@ -285,7 +289,7 @@
 		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text();
 		let variable = $('#variableDirecta' + index).val();
 		let macro = $('#macroDirecta' + index).val();
-		let monto = $('#montoDirecta' + index).val();
+		let monto = $('#montoDirecta' + index).val().replaceAll(',','');
 		let idPresupuesto = $('#presupuestoEjecucionDirecta' + index).find("option:selected").val();
 		if (descripcion=='Seleccione'||variable==""||macro=="") {
 			swal({
@@ -326,7 +330,7 @@
 		let descripcion = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").text();
 		let variable = $('#variableIndirecta' + index).val();
 		let macro = $('#macroIndirecta' + index).val();
-		let monto = $('#montoIndirecta' + index).val();
+		let monto = $('#montoIndirecta' + index).val().replaceAll(',','');
 		let idPresupuesto = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").val();
 		if (descripcion=='Seleccione'||variable==""||macro=="") {
 			swal({
