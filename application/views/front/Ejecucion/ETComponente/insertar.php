@@ -207,122 +207,141 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			</div>
 		</div>
 	</div>
-	<div class="row" style="margin-top: 3px;">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
-				<option selected="true" value="" disabled>Seleccione Presupuesto</option>
-				<?php foreach ($SelectPresupuesto as $key => $value) { ?>
-					<option value="<?= $value->Codigo ?>"><?= $value->Descripcion ?></option>
-				<?php } ?>
-			</select>
-		</div>
-	</div>
-	<div id="divImportarComponente" class="row" style="margin-top: 3px;">
-		<div class="col-md-3 col-sm-12 col-xs-12">
-			<div>
-			<label class="control-label">Modalidad de Ejecución</label>
-				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
-					<option value="">Seleccione una opción</option>
-					<?php foreach ($listaModalidadEjecucion as $key => $value) {
-						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'ADMINISTRACION MIXTA') || ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
-							<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
-								<?= $value->nombre_modalidad_ejec ?></option>
-					<?php }
-					} ?>
-				</select>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12 col-xs-12" style="display: none">
-			<div>
-			<label class="control-label">Estructura de Presupuesto</label>
-				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
-					<?php foreach ($PresupuestoEjecucion as $key => $value) {
-						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
-					?>
-							<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
-							<?php }
-						if (($expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
-							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
-							?>
-								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
-							<?php } else {
-							?>
-								<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
-					<?php }
-						}
-					} ?>
-				</select>
-			</div>
-		</div>
-		<div class="col-md-7 col-sm-12 col-xs-12">
-		<label class="control-label">Componentes</label>
-			<select id="selectComponente" name="selectComponente" class="form-control">
-				<option selected="true" value="" disabled>Seleccione Componente</option>
-			</select>
-		</div>
 
-		<div class="col-md-2 col-sm-12 col-xs-12">
-		<label class="control-label">.</label>
-			<input type="button" class="btn btn-info" value="Importar componente" onclick="importarComponente();" style="width: 100%;">
-		</div>
-	</div>
-	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
-		<div class="col-md-3 col-sm-12 col-xs-12">
-			<div>
-			<label class="control-label">Modalidad de Ejecución</label>
-				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
-					<option value="">Seleccione una opción</option>
-					<?php foreach ($listaModalidadEjecucion as $key => $value) {
-						if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'ADMINISTRACION MIXTA') || ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
-							<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
-								<?= $value->nombre_modalidad_ejec ?></option>
-					<?php }
-					} ?>
-				</select>
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12 col-xs-12" style="display: none">
-			<div>
-			<label class="control-label">Estructura de Presupuesto</label>
-				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
-					<option value="" disabled selected="true">Estructura de Presupuesto</option>
-					<?php foreach ($PresupuestoEjecucion as $key => $value) {
-						if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false ) {
-					?>
-							<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
-							<?php }
-						if ($expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') {
-							if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
+	<div class="" role="tabpanel" data-example-id="togglable-tabs">
+		<ul id="myTabPie" class="nav nav-tabs" role="tablist">
+			<li style="width:15%;" role="presentation" class="active">
+				<a href="#tabImportarComponente" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Importar Componente</b></a>
+			</li>
+			<li style="width:15%;" role="presentation" class="">
+				<a href="#tabAgregarComponente" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Agregar Componente</b></a>
+			</li>
+		</ul>
+		<br>
+			<div id="myTabPieContent" class="tab-content">
+				<div role="tabpanel" class="tab-pane fade active in" id="tabImportarComponente" aria-labelledby="home-tab">
+				<div class="row" style="margin-top: 3px;">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<select id="selectPresupuesto" name="selectPresupuesto" class="form-control">
+							<option selected="true" value="" disabled>Seleccione Presupuesto</option>
+							<?php foreach ($SelectPresupuesto as $key => $value) { ?>
+								<option value="<?= $value->Codigo ?>"><?= $value->Descripcion ?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div id="divImportarComponente" class="row" style="margin-top: 3px;">
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div>
+						<label class="control-label">Modalidad de Ejecución</label>
+							<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
+								<option value="">Seleccione una opción</option>
+								<?php foreach ($listaModalidadEjecucion as $key => $value) {
+									if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'ADMINISTRACION MIXTA') || ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
+										<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
+											<?= $value->nombre_modalidad_ejec ?></option>
+								<?php }
+								} ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12" style="display: none">
+						<div>
+						<label class="control-label">Estructura de Presupuesto</label>
+							<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
+								<?php foreach ($PresupuestoEjecucion as $key => $value) {
+									if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
+								?>
+										<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
+										<?php }
+									if (($expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
+										if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false) {
+										?>
+											<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+										<?php } else {
+										?>
+											<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
+								<?php }
+									}
+								} ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-12 col-xs-12">
+					<label class="control-label">Componentes</label>
+						<select id="selectComponente" name="selectComponente" class="form-control">
+							<option selected="true" value="" disabled>Seleccione Componente</option>
+						</select>
+					</div>
+
+					<div class="col-md-2 col-sm-12 col-xs-12">
+					<label class="control-label">.</label>
+						<input type="button" class="btn btn-info" value="Importar componente" onclick="importarComponente();" style="width: 100%;">
+					</div>
+				</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="tabAgregarComponente" aria-labelledby="profile-tab">
+				<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div>
+						<label class="control-label">Modalidad de Ejecución</label>
+							<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
+								<option value="">Seleccione una opción</option>
+								<?php foreach ($listaModalidadEjecucion as $key => $value) {
+									if (($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $value->nombre_modalidad_ejec != 'ADMINISTRACION MIXTA') || ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA' && $expedienteTecnico->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)) {									 ?>
+										<option value='<?= $value->nombre_modalidad_ejec ?>' <?php echo ($expedienteTecnico->modalidad_ejecucion_et == $value->nombre_modalidad_ejec ? "selected" : "") ?>>
+											<?= $value->nombre_modalidad_ejec ?></option>
+								<?php }
+								} ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12" style="display: none">
+						<div>
+						<label class="control-label">Estructura de Presupuesto</label>
+							<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
+								<option value="" disabled selected="true">Estructura de Presupuesto</option>
+								<?php foreach ($PresupuestoEjecucion as $key => $value) {
+									if (strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false ) {
+								?>
+										<option value="<?= $value->id_presupuesto_ej ?>" <?php echo (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS')!==false ? "selected" : "") ?>><?= $value->desc_presupuesto_ej ?></option>
+										<?php }
+									if ($expedienteTecnico->modalidad_ejecucion_et === 'ADMINISTRACION MIXTA') {
+										if (strpos($value->desc_presupuesto_ej, 'ADMINISTRACION DIRECTA') !== false &&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
+										?>
+											<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
+										<?php } elseif(strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
+										?>
+											<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
+								<?php }
+									}
+								} ?>
+							</select>
+						</div>
+					</div>
+					<div id="divTxtDescripcionComponente" class="col-md-7 col-sm-12 col-xs-12">
+					<label class="control-label">Componentes</label>
+						<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
+					</div>
+					<div id="divCargarSelectComponentePresupuesto" class="col-md-7 col-sm-12 col-xs-12">
+						<label class="control-label">Componentes</label>
+						<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
+							<option value="" selected="true" disabled>Seleccione Componente</option>
+							<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) {
 							?>
 								<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
-							<?php } elseif(strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
-							?>
-								<option value="<?= $value->id_presupuesto_ej ?>" hidden><?= $value->desc_presupuesto_ej ?></option>
-					<?php }
-						}
-					} ?>
-				</select>
+							<?php } ?>
+						</select>
+					</div>
+					<div class="col-md-2 col-sm-12 col-xs-12">
+					<label class="control-label">.</label>
+						<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
+					</div>
+				</div>
+				</div>
 			</div>
-		</div>
-		<div id="divTxtDescripcionComponente" class="col-md-7 col-sm-12 col-xs-12">
-		<label class="control-label">Componentes</label>
-			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
-		</div>
-		<div id="divCargarSelectComponentePresupuesto" class="col-md-7 col-sm-12 col-xs-12">
-			<label class="control-label">Componentes</label>
-			<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
-				<option value="" selected="true" disabled>Seleccione Componente</option>
-				<?php foreach ($cargarSelectComponentePresupuesto as $key => $value) {
-				?>
-					<option value="<?= $value->id_presupuesto_ej ?>"><?= $value->desc_presupuesto_ej ?></option>
-				<?php } ?>
-			</select>
-		</div>
-		<div class="col-md-2 col-sm-12 col-xs-12">
-		<label class="control-label"></label>
-			<input type="button" class="btn btn-info" value="Agregar componente" onclick="agregarComponente();" style="width: 100%;">
-		</div>
 	</div>
+	
 	<div id="divAgregarPartida" class="row" style="display: none;margin-top: 2px;">
 		<div class="col-md-6">
 			<label>.</label>
