@@ -102,7 +102,7 @@ class ET_Componente extends CI_Controller
 		
 		$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
-		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucion();
+		$PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoDirecto($expedienteTecnico->modalidad_ejecucion_et);
 		$listaModalidadEjecucion=$this->Model_ModalidadE->GetModalidadE();
 
 		$expedienteTecnico->childPresupuestoEjecucion=$PresupuestoEjecucion;
@@ -127,26 +127,11 @@ class ET_Componente extends CI_Controller
 					$costoComponente+=$temp->costoMeta;
 				}
 				$costoPresupuestoDirecto+=$costoComponente;
-				if($value->desc_presupuesto_ej=="ADMINISTRACION INDIRECTA - COSTOS DIRECTOS TOTAL"){
-					$costoPresupuestoDirectoTotal+=$item->monto;
-				}elseif ($value->desc_presupuesto_ej=="ADMINISTRACION INDIRECTA - COSTOS INDIRECTOS" || $value->desc_presupuesto_ej=="ADMINISTRACION DIRECTA - COSTOS INDIRECTOS") {
-					$costoPresupuestoIndirecto+=$item->monto;
-				}
 				$item->costoComponente=$costoComponente;
 			}
 			$value->costoPresupuestoDirecto = $costoPresupuestoDirecto;
-			$value->costoPresupuestoIndirecto = $costoPresupuestoIndirecto;
-			$value->costoPresupuestoDirectoTotal = $costoPresupuestoDirectoTotal;
 		}		
-		foreach($expedienteTecnico->childPresupuestoEjecucion as $key => $value)
-		{
-			if(strpos($value->desc_presupuesto_ej, 'COSTOS INDIRECTOS')){
-				$presupuesto_ej = explode('-', $value->desc_presupuesto_ej)[0].'- COSTOS DIRECTOS';
-				$presup = array_column($expedienteTecnico->childPresupuestoEjecucion, 'desc_presupuesto_ej');
-				$key = array_search($presupuesto_ej, $presup);
-				$value->costoPresupuestoDirecto = $expedienteTecnico->childPresupuestoEjecucion[$key]->costoPresupuestoDirecto;
-			}
-		}
+
 		$listaPartidaNivel1 = $this->Model_Unidad_Medida->listaPartidaNivel1();
 
 		foreach ($listaPartidaNivel1 as $key => $value) 
