@@ -47,6 +47,12 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
 
         return $presupuesto->result();
     }
+    function ListaPresupuestoEjecucionCostosDirectos()
+    {
+        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion where id_presupuesto_ej_padre = (select top 1 id_presupuesto_ej  from ET_PRESUPUESTO_EJECUCION where desc_presupuesto_ej like '%ADMINISTRACION DIRECTA - COSTOS INDIRECTOS%' or id_presupuesto_ej='16') ");
+
+        return $presupuesto->result();
+    }
     function ListaPresupuestoEjecucionCostoIndirecto()
     {
         $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion where id_presupuesto_ej_padre = (select top 1 id_presupuesto_ej  from ET_PRESUPUESTO_EJECUCION where desc_presupuesto_ej like '%ADMINISTRACION DIRECTA - COSTOS INDIRECTOS%' or id_presupuesto_ej='16') ");
@@ -74,7 +80,7 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
 
     function ListaPresupuestoEjecucionCostoDirecto($presupuesto)
     {
-        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej_padre is NULL and desc_presupuesto_ej like '%COSTOS DIRECTOS%' and ((desc_presupuesto_ej like '%$presupuesto%' and '$presupuesto'!='ADMINISTRACION MIXTA') or '$presupuesto'='ADMINISTRACION MIXTA')");
+        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej_padre is NULL and (desc_presupuesto_ej like '%COSTOS DIRECTOS%' or desc_presupuesto_ej like '%COSTO DIRECTO%') and ((desc_presupuesto_ej like '%$presupuesto%' and '$presupuesto'!='ADMINISTRACION MIXTA') or '$presupuesto'='ADMINISTRACION MIXTA')");
 
         return $presupuesto->result();
     }

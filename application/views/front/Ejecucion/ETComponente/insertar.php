@@ -218,7 +218,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		</div>
 	</div>
 	<div id="divImportarComponente" class="row" style="margin-top: 3px;">
-		<div class="col-md-2 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 			<label class="control-label">Modalidad de Ejecución</label>
 				<select id="selectTipoEjecucionI" name="selectTipoEjecucionI" class="form-control">
@@ -232,11 +232,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div class="col-md-3 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-12 col-xs-12" style="display: none">
 			<div>
 			<label class="control-label">Estructura de Presupuesto</label>
 				<select id="selectPresupuestoEjecucionI" name="selectPresupuestoEjecucionI" class="form-control">
-					<option value="" disabled selected="true">Estructura de Presupuesto</option>
 					<?php foreach ($PresupuestoEjecucion as $key => $value) {
 						if ((strpos($value->desc_presupuesto_ej, $expedienteTecnico->modalidad_ejecucion_et) !== false) && (strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS') !== false)&&strpos($value->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL')==false) {
 					?>
@@ -255,7 +254,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div class="col-md-5 col-sm-12 col-xs-12">
+		<div class="col-md-7 col-sm-12 col-xs-12">
 		<label class="control-label">Componentes</label>
 			<select id="selectComponente" name="selectComponente" class="form-control">
 				<option selected="true" value="" disabled>Seleccione Componente</option>
@@ -263,12 +262,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		</div>
 
 		<div class="col-md-2 col-sm-12 col-xs-12">
-		<label class="control-label"> </label>
+		<label class="control-label">.</label>
 			<input type="button" class="btn btn-info" value="Importar componente" onclick="importarComponente();" style="width: 100%;">
 		</div>
 	</div>
 	<div id="divAgregarComponente" class="row" style="margin-top: 3px;">
-		<div class="col-md-2 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-12 col-xs-12">
 			<div>
 			<label class="control-label">Modalidad de Ejecución</label>
 				<select id="selectTipoEjecucion" name="selectTipoEjecucion" class="form-control">
@@ -282,7 +281,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div class="col-md-3 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-12 col-xs-12" style="display: none">
 			<div>
 			<label class="control-label">Estructura de Presupuesto</label>
 				<select id="selectPresupuestoEjecucion" name="selectPresupuestoEjecucion" class="form-control">
@@ -305,11 +304,11 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 				</select>
 			</div>
 		</div>
-		<div id="divTxtDescripcionComponente" class="col-md-5 col-sm-12 col-xs-12">
+		<div id="divTxtDescripcionComponente" class="col-md-7 col-sm-12 col-xs-12">
 		<label class="control-label">Componentes</label>
 			<input type="text" class="form-control" id="txtDescripcionComponente" name="txtDescripcionComponente" placeholder="Descripción del componente">
 		</div>
-		<div id="divCargarSelectComponentePresupuesto" class="col-md-5 col-sm-12 col-xs-12">
+		<div id="divCargarSelectComponentePresupuesto" class="col-md-7 col-sm-12 col-xs-12">
 			<label class="control-label">Componentes</label>
 			<select id="cargarSelectComponentePresupuesto" name="cargarSelectComponentePresupuesto" class="form-control">
 				<option value="" selected="true" disabled>Seleccione Componente</option>
@@ -406,8 +405,6 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 								<a class="panel-title" id="heading<?= $temp3->id_presupuesto_ej ?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $temp3->id_presupuesto_ej ?>" aria-expanded="false" aria-controls="collapse<?= $temp3->id_presupuesto_ej ?>" style="text-transform: uppercase;"><?= $temp3->desc_presupuesto_ej ?><span id="sumaTotalCostosUltimo<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>"> <?= strpos($temp3->desc_presupuesto_ej, 'COSTOS DIRECTOS TOTAL') ? number_format($temp3->costoPresupuestoDirectoTotal, 4, '.', ',') : (strpos($temp3->desc_presupuesto_ej, 'COSTOS INDIRECTOS') ? number_format($temp3->costoPresupuestoIndirecto, 4, '.', ',') : number_format($temp3->costoPresupuestoDirecto, 4, '.', ',')) ?> </span>
 								</a>
 								<input type="hidden" name="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirecto ?>">
-								<input type="hidden" name="sumaTotalCostos1<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos1<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoIndirecto ?>">
-								<input type="hidden" name="sumaTotalCostos2<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" id="sumaTotalCostos2<?= str_replace(' ', '', $temp3->desc_presupuesto_ej) ?>" value="<?= $temp3->costoPresupuestoDirectoTotal ?>">
 
 							</div>
 							<div id="collapse<?= $temp3->id_presupuesto_ej ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?= $temp3->id_presupuesto_ej ?>">
@@ -465,7 +462,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 	function agregarComponente() {
 		$('#divAgregarComponente').data('formValidation').resetField($('#txtDescripcionComponente'));
-		$('#divAgregarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucion'));
+		$('#divAgregarComponente').data('formValidation').resetField($('#selectTipoEjecucion'));
 
 		$('#divAgregarComponente').data('formValidation').validate();
 
@@ -575,7 +572,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 
 	function importarComponente() {
 		$('#divImportarComponente').data('formValidation').resetField($('#selectComponente'));
-		$('#divImportarComponente').data('formValidation').resetField($('#selectPresupuestoEjecucionI'));
+		$('#divImportarComponente').data('formValidation').resetField($('#selectTipoEjecucionI'));
 
 		$('#divImportarComponente').data('formValidation').validate();
 
@@ -731,14 +728,14 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 		const tipo_ejecucion = $(this).find("option:selected").val();
 		$('#selectPresupuestoEjecucion').find('option:contains("' + tipo_ejecucion + '")').show();
 		$('#selectPresupuestoEjecucion').find('option:not(:contains("' + tipo_ejecucion + '"))').hide();
-		$("#selectPresupuestoEjecucion").val($("#selectPresupuestoEjecucion option:first").val());
+		$("#selectPresupuestoEjecucion").val($('#selectPresupuestoEjecucion option:contains("' + tipo_ejecucion + '")').val());
 	});
 
 	$("#selectTipoEjecucionI").change(function() {
 		const tipo_ejecucion = $(this).find("option:selected").val();
 		$('#selectPresupuestoEjecucionI').find('option:contains("' + tipo_ejecucion + '")').show();
 		$('#selectPresupuestoEjecucionI').find('option:not(:contains("' + tipo_ejecucion + '"))').hide();
-		$("#selectPresupuestoEjecucionI").val($("#selectPresupuestoEjecucionI option:first").val());
+		$("#selectPresupuestoEjecucionI").val($('#selectPresupuestoEjecucionI option:contains("' + tipo_ejecucion + '")').val());
 	});
 
 	function guardarCambiosComponente(idComponente) {
@@ -1601,10 +1598,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}
 					}
 				},
-				selectPresupuestoEjecucionI: {
+				selectTipoEjecucionI: {
 					validators: {
 						notEmpty: {
-							message: '<b style="color: red;">El campo "Estructurao de Presupuesto" es requerido.</b>'
+							message: '<b style="color: red;">El campo "Modalidad de Ejecucion" es requerido.</b>'
 						}
 					}
 
@@ -1626,10 +1623,10 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 						}
 					}
 				},
-				selectPresupuestoEjecucion: {
+				selectTipoEjecucion: {
 					validators: {
 						notEmpty: {
-							message: '<b style="color: red;">El campo "Estructurao de Presupuesto" es requerido.</b>'
+							message: '<b style="color: red;">El campo "Modalidad de Ejecucion" es requerido.</b>'
 						}
 					}
 
