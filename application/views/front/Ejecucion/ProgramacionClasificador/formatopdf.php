@@ -64,10 +64,6 @@
 				<td style="width: 92%">: <?=@$proyectoInversion->nombre_pi;?></td>
 			</tr>
 			<tr>
-				<td style="width: 8%;font-weight:bold;">COMPONENTE</td>
-				<td style="width: 92%">: <?=@$proyectoInversion->componente_et;?></td>
-			</tr>
-			<tr>
 				<td style="width: 8%;font-weight:bold;">CORRELATIVO</td>				
 				<td style="width: 92%">: <?=@$correlativo?></td>
 			</tr>				

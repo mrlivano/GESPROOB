@@ -151,14 +151,6 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				<tr>
 					<td style="width: 8%;font-weight:bold;">PROYECTO</td>
 					<td style="width: 92%">: <?=$expedienteTecnico->nombre_pi;?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">COMPONENTE</td>
-					<td style="width: 92%">: <?=$expedienteTecnico->componente_et;?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">META</td>				
-					<td style="width: 92%">: <?=$expedienteTecnico->meta_et;?> </td>
 				</tr>				
 				<tr>
 					<td style="width: 8%;font-weight:bold;">FTE. FTO</td>
@@ -167,10 +159,6 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				<tr>
 					<td style="width: 8%;font-weight:bold;">MODALIDAD</td>
 					<td style="width: 92%">: <?=$expedienteTecnico->modalidad_ejecucion_et;?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">AÑO</td>
-					<td style="width: 92%">: <?=date('d/m/Y',strtotime($expedienteTecnico->fecha_registro))?> </td>
 				</tr>
 			</table>    
 		</div>

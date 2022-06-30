@@ -64,14 +64,6 @@
 				<tr>
 					<td style="width: 8%;font-weight:bold;">PROYECTO</td>
 					<td style="width: 92%">: <?=@$proyectoInversion->nombre_pi?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">COMPONENTE</td>
-					<td style="width: 92%">: <?=@$proyectoInversion->componente_et?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">SUM META</td>				
-					<td style="width: 92%">: <?=@$proyectoInversion->meta_et?> </td>
 				</tr>				
 				<tr>
 					<td style="width: 8%;font-weight:bold;">MODALIDAD</td>

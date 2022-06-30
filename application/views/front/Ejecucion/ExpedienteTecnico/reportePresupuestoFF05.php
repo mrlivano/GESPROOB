@@ -71,15 +71,7 @@
 			<tr>
 				<td style="width: 8%;font-weight:bold;">PROYECTO</td>
 				<td style="width: 92%">: <?=$MostraExpedienteNombre->nombre_pi;?> </td>
-			</tr>
-			<tr>
-				<td style="width: 8%;font-weight:bold;">COMPONENTE</td>
-				<td style="width: 92%">: <?=$MostraExpedienteNombre->componente_et;?> </td>
-			</tr>
-			<tr>
-				<td style="width: 8%;font-weight:bold;">META</td>				
-				<td style="width: 92%">: <?=$MostraExpedienteNombre->meta_et;?> </td>
-			</tr>				
+			</tr>			
 			<tr>
 				<td style="width: 8%;font-weight:bold;">FTE. FTO</td>
 				<td style="width: 92%">: <?=$MostraExpedienteNombre->fuente_financiamiento_et;?> </td>

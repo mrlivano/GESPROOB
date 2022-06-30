@@ -157,14 +157,6 @@ function mostrarAnidado($meta, $expedienteTecnico)
 									<td style="padding: 1px;"><?=trim($expedienteTecnico->nombre_pi)?></td>
 								</tr>
 								<tr>
-									<td  style="padding: 1px;"><b>COMPONENTE</b></td>
-									<td  style="padding: 1px;"><?=trim($expedienteTecnico->componente_et)?></td>
-								</tr>
-								<tr>
-									<td  style="padding: 1px;"><b>SUBMETA</b></td>
-									<td  style="padding: 1px;"><?=trim($expedienteTecnico->meta_et)?></td>
-								</tr>
-								<tr>
 									<td  style="padding: 1px;"><b>FTE-FTO</b></td>
 									<td  style="padding: 1px;"><?=trim($expedienteTecnico->fuente_financiamiento_et)?></td>
 								</tr>

@@ -58,14 +58,8 @@
           <td></td>
         </tr>
         <tr>
-          <th scope="row">COMPONENTE</th>
-          <td><?= $expedienteTecnico->componente_et ?></td>
           <th scope="row">POTENCIA</th>
           <td></td>
-        </tr>
-        <tr>
-          <th scope="row">SUB META</th>
-          <td><?= $expedienteTecnico->sub_programa_et ?></td>
           <th scope="row">CAPACIDAD</th>
           <td></td>
         </tr>

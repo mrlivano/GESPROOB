@@ -130,15 +130,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 				<tr>
 					<td style="width: 8%;font-weight:bold;">PROYECTO</td>
 					<td style="width: 92%">: <?=$expedienteTecnico->nombre_pi;?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">COMPONENTE</td>
-					<td style="width: 92%">: <?=$expedienteTecnico->componente_et;?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">META</td>				
-					<td style="width: 92%">: <?=$expedienteTecnico->meta_et;?> </td>
-				</tr>				
+				</tr>			
 				<tr>
 					<td style="width: 8%;font-weight:bold;">FTE. FTO</td>
 					<td style="width: 92%">: <?=$expedienteTecnico->fuente_financiamiento_et;?> </td>

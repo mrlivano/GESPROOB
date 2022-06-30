@@ -52,8 +52,6 @@
       <p>PROGRAMA: </p>
       <p>SUB PROGRAMA: </p>
       <p>PROYECTO: </p>
-      <p>COMPONENTE: </p>
-      <p>META: </p>
       <p>MODALIDAD: </p>
       <p>PRESUPUESTO ASIGNADO: </p>
 

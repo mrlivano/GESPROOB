@@ -59,24 +59,12 @@
             <td><?= $expedienteTecnico->nombre_pi ?></td>
           </tr>
           <tr>
-            <th scope="row">COMPONENTE</th>
-            <td><?= $expedienteTecnico->componente_et ?></td>
-          </tr>
-          <tr>
-            <th scope="row">SUB META</th>
-            <td><?= $expedienteTecnico->sub_programa_et ?></td>
-          </tr>
-          <tr>
             <th scope="row">FTE - FTO</th>
             <td><?= $expedienteTecnico->fuente_financiamiento_et ?></td>
           </tr>
           <tr>
             <th scope="row">MODALIDAD</th>
             <td><?= $expedienteTecnico->modalidad_ejecucion_et ?></td>
-          </tr>
-          <tr>
-            <th scope="row">AÑO</th>
-            <td></td>
           </tr>
         </tbody>
       </table>
