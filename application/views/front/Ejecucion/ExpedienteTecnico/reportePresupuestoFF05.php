@@ -153,7 +153,6 @@
 		</tr>
 		</tbody>
 	</table>
-	<?php } ?>
 	<br>
 	<table id="tablaResumen" style="width: 100%; font-size:12px;">
 	<tr>
@@ -168,5 +167,6 @@
 			</tr>				
 		<?php } ?>
 	</table>
+	<?php } ?>
 </body>
 </html>
