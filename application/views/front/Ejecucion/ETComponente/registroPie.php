@@ -273,6 +273,21 @@
 			select.parentElement.parentElement.style.background = 'white';
 			select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = true;
 		}
+		console.log(select.value);
+		switch (select.value) {
+			case 3:
+				
+				break;
+				case 4:
+				
+				break
+				case 6:
+				
+				break
+		
+			default:
+				break;
+		}
 	}
 	function changePresupuestoIndirecta(select, cont) {
 		if (select.value == '0') {
