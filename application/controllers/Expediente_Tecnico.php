@@ -1750,11 +1750,25 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 
+			$pie_presupuesto=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAll($idExpedienteTecnico);
+			foreach ($pie_presupuesto as $pieP) 
+			{
+				$pie_data['id_et']=$lastExpediente;
+				$pie_data['descripcion']=$pieP->descripcion;
+				$pie_data['variable']=$pieP->variable;
+				$pie_data['macro']=$pieP->macro;
+				$pie_data['id_presupuesto_ej']=$pieP->id_presupuesto_ej;
+				$pie_data['modalidad_ejecucion']=$pieP->modalidad_ejecucion;
+				$pie_data['orden']=$pieP->orden;
+				$pie_data['monto']=$pieP->monto;
+				$lastPiePresupuesto = $this->Model_ET_Pie_Presupuesto->insertar($pie_data);
+			}
+
 			$this->Model_ET_Expediente_Tecnico->updateAprobacion(1,$idExpedienteTecnico);
 
 			$this->db->trans_complete();
 
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'el Expediente paso a etapa de ejecucion satisfactoriamente']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'El Expediente paso a etapa de ejecucion satisfactoriamente']);exit;
 		}
 
 	}
@@ -1929,6 +1943,20 @@ class Expediente_Tecnico extends CI_Controller
 					$lastMeta=$this->Model_ET_Meta->insertarMeta($meta_data);
 					$this->obtenerMetaAnidadaParaClonacionModificatoria($item, $lastMeta, $lastExpediente);
 				}
+			}
+
+			$pie_presupuesto=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAll($idExpedienteTecnico);
+			foreach ($pie_presupuesto as $pieP) 
+			{
+				$pie_data['id_et']=$lastExpediente;
+				$pie_data['descripcion']=$pieP->descripcion;
+				$pie_data['variable']=$pieP->variable;
+				$pie_data['macro']=$pieP->macro;
+				$pie_data['id_presupuesto_ej']=$pieP->id_presupuesto_ej;
+				$pie_data['modalidad_ejecucion']=$pieP->modalidad_ejecucion;
+				$pie_data['orden']=$pieP->orden;
+				$pie_data['monto']=$pieP->monto;
+				$lastPiePresupuesto = $this->Model_ET_Pie_Presupuesto->insertar($pie_data);
 			}
 
 			$this->Model_ET_Expediente_Tecnico->updateAprobacion(1,$idExpedienteTecnico);

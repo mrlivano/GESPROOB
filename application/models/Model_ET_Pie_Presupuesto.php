@@ -8,6 +8,13 @@ class Model_ET_Pie_Presupuesto extends CI_Model
 		parent::__construct();
 	}
 
+	public function PiePresupuestoPorIdETAll($idExpedienteTecnico)
+	{
+		$data=$this->db->query("select * from pie_presupuesto where id_et='".$idExpedienteTecnico."'");
+
+		return $data->result();
+	}
+
 	public function PiePresupuestoPorIdET($idExpedienteTecnico)
 	{
 		$data=$this->db->query("select * from pie_presupuesto where id_et='".$idExpedienteTecnico."' and modalidad_ejecucion=1 order by orden");
