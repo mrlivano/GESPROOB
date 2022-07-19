@@ -92,127 +92,72 @@
 					  	</div>
 					</div>
 					<div>
-					<?php foreach ($listaModalidadEjecucion as $key => $value) { 
+					<?php 
 						$cd=0;
 						$ci=0;
-						if(($ExpedienteTecnicoM->modalidad_ejecucion_et == $value->nombre_modalidad_ejec && $ExpedienteTecnicoM->modalidad_ejecucion_et!='ADMINISTRACION MIXTA') || ($ExpedienteTecnicoM->modalidad_ejecucion_et=='ADMINISTRACION MIXTA' && $ExpedienteTecnicoM->modalidad_ejecucion_et != $value->nombre_modalidad_ejec)){?>
-						  <label class="control-label"><?=	$value->nombre_modalidad_ejec?></label>	
-							<div class="row borderBudget">
-						
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">COSTO DIRECTO</label>
-							<div>
-							<?php  foreach ($listaPresupuestoEj as $key => $valuess) { if (strpos($valuess->desc_presupuesto_ej,$value->nombre_modalidad_ejec) !== false && strpos($valuess->desc_presupuesto_ej,"COSTOS DIRECTOS TOTAL") == false) {?>
-								<?php
-									$cd=$cd+$valuess->costo_presupuesto_ej[0]->suma; ?>
-								<input  id="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" name="txtCostoDirectoInversion<?=str_replace(' ', '', $valuess->desc_presupuesto_ej)?>" value="<?= a_number_format($valuess->costo_presupuesto_ej[0]->suma, 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Directo"  autocomplete="off" disabled>
-								<?php } }?>
-								
-							</div>
-						</div>
-						<?php  foreach ($costoIndirectoComponente as $key => $componente) { 
-						if($value->nombre_modalidad_ejec == $componente->tipo_ejecucion){ ?>
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label"><?=$componente->descripcion?></label>
-							<div>
-								<?php $ci=$ci+$componente->monto; ?>
-								<input value ="<?= a_number_format($componente->monto , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Indirecto" autocomplete="off" maxlength="40" disabled>
-							</div>
-						</div>
-						
-						<?php }} ?>
-						<div class="col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label">COSTO TOTAL (Inversión)</label>
-							<div>
-
-								<input disabled id="txtCostoTotalInversion<?=str_replace(' ', '',$value->nombre_modalidad_ejec)?>" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
-							</div>
-						</div>
-
-						<table id="tablaContenido" style="width: 100%; font-size:12px;">
-						<tbody>
-							<tr>
-							<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;" colspan="2"><b>COSTO DIRECTO (NDIRECTO)</b></th>
-							<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
-						</tr>
-						</tbody>
-					</table>
-					<br>
-					<table id="tablaResumen" style="width: 100%; font-size:12px;">
-					<tr>
-							<th style="width: 85%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></th>
-							<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTOS</b></th>
-						</tr>
-						<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
-							<tr>
-								<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;': ($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
-								<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
-						
-							</tr>				
-						<?php } ?>
-					</table>
-					</div>								      			
-					<?php }} ?>
-
-
+						?>
 					<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
-		<br>
-		<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
-	<label class="control-label">ADMINISTRACIÓN DIRECTA</label><br>
-	<?php } ?>
-	<table id="tablaContenido" style="width: 100%; font-size:12px;">
-		<tbody>
-			
-			<tr>
-			<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;" colspan="2"><b>COSTO DIRECTO (NDIRECTO)</b></th>
-			<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
-			</tr>
-		</tbody>
-	</table>
-	<br>
-	<table id="tablaResumen" style="width: 100%; font-size:12px;">
-	<tr>
-			<th style="width: 85%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></th>
-			<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTOS</b></th>
-		</tr>
-		<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoDirecta as $key => $value) { ?>
-			<tr>
-				<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
-				<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
-		
-			</tr>				
-		<?php } ?>
-	</table>
-	<br>
-	<?php } ?>
-	<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
-		<br>
-		<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
-	<label class="control-label">ADMINISTRACIÓN INDIRECTA</label><br>
-	<?php } ?>
-	<table id="tablaContenido" style="width: 100%; font-size:12px;">
-		<tbody>
-			<tr>
-			<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;" colspan="2"><b>COSTO DIRECTO (NDIRECTO)</b></th>
-			<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
-		</tr>
-		</tbody>
-	</table>
-	<br>
-	<table id="tablaResumen" style="width: 100%; font-size:12px;">
-	<tr>
-			<th style="width: 85%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></th>
-			<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTOS</b></th>
-		</tr>
-		<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
-			<tr>
-				<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;': ($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
-				<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
-		
-			</tr>				
-		<?php } ?>
-	</table>
-	<?php } ?>
+						<br>
+						<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
+						<label class="control-label">ADMINISTRACIÓN DIRECTA</label><br>
+						<?php } ?>
+						<div class="row borderBudget">
+						<table id="tablaContenido" style="width: 100%; font-size:12px;">
+							<tbody>
+								
+								<tr>
+								<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;" colspan="2"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+								<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<table id="tablaResumen" style="width: 100%; font-size:12px;">
+						<tr>
+								<th style="width: 85%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></th>
+								<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTOS</b></th>
+							</tr>
+							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoDirecta as $key => $value) { ?>
+								<tr>
+									<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
+									<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+							
+								</tr>				
+							<?php } ?>
+						</table>			
+						</div>	
+						
+						<?php } ?>
+						<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
+							<br>
+							<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
+						<label class="control-label">ADMINISTRACIÓN INDIRECTA</label><br>
+						<?php } ?>
+						<div class="row borderBudget">
+						<table id="tablaContenido" style="width: 100%; font-size:12px;">
+							<tbody>
+								<tr>
+								<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;" colspan="2"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+								<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
+							</tr>
+							</tbody>
+						</table>
+						<br>
+						<table id="tablaResumen" style="width: 100%; font-size:12px;">
+						<tr>
+								<th style="width: 85%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></th>
+								<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTOS</b></th>
+							</tr>
+							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
+								<tr>
+									<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;': ($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
+									<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+							
+								</tr>				
+							<?php } ?>
+						</table>
+						</div>
+						<?php } ?>
 
 					</div>				
 					<div class="row">
