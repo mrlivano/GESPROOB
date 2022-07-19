@@ -515,8 +515,55 @@ class Expediente_Tecnico extends CI_Controller
 		foreach ($listaPresupuestoEj as $key => $value) {
 			$value->costo_presupuesto_ej=$this->Model_ET_Expediente_Tecnico->ListarCostos($id_et,$value->id_presupuesto_ej);
 		}
+		$opcion="BuscarExpedienteID";
+		$MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_et);
 
-		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editar',['ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento,'costoIndirectoComponente' => $costoIndirectoComponente,'listaPresupuestoEj'=>$listaPresupuestoEj ]);
+		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			$MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($id_et, 'EXPEDIENTETECNICO');
+
+			$costoDirectoTotal=0;
+			foreach ($MostraExpedienteTecnicoExpe->childComponente as $key => $value)
+				{
+				$costoComponente=0;
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach ($value->childMeta as $index => $item)
+				{
+					$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
+					$costoComponente+=$item->costoMeta;
+				}
+				$costoDirectoTotal+=$costoComponente;
+				$value->costoComponente=$costoComponente;
+			}
+			$MostraExpedienteTecnicoExpe->costoDirecto=$costoDirectoTotal;
+
+			//COSTOS INDIRECTOS
+			$MostraExpedienteTecnicoExpe->piePresupuestoDirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_et);
+		}
+
+		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			$MostraExpedienteTecnicoExpe->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($id_et, 'EXPEDIENTETECNICO');
+
+			$costoDirectoTotalIndirecta=0;
+			foreach ($MostraExpedienteTecnicoExpe->childComponenteIndirecta as $key => $value)
+				{
+				$costoComponente=0;
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach ($value->childMeta as $index => $item)
+				{
+					$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
+					$costoComponente+=$item->costoMeta;
+				}
+				$costoDirectoTotalIndirecta+=$costoComponente;
+				$value->costoComponente=$costoComponente;
+			}
+			$MostraExpedienteTecnicoExpe->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
+
+			// costos directos total
+
+			$MostraExpedienteTecnicoExpe->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_et);
+		}
+
+		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editar',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe, 'ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento,'costoIndirectoComponente' => $costoIndirectoComponente,'listaPresupuestoEj'=>$listaPresupuestoEj ]);
 	}
 
 	function modalidad()
