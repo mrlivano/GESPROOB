@@ -104,6 +104,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 				text-align: left;
 				vertical-align: middle;		
 			}
+
 		</style>
 	</head>
 	<body>
@@ -203,7 +204,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 							?>
-			<br><span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
+			<table style='page-break-after:always;'></br></table> 
+			<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
 			<?php } ?>
 		<?php $costoDirectoTotal=0; ?>
 			<table id="tableValorizacion" style="width:100%;">

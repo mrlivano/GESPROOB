@@ -65,7 +65,7 @@
 					
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">COSTO TOAL (Pre Inversión)</label>
+							<label class="control-label">COSTO TOTAL (Pre Inversión)</label>
 							<div>
 								<input id="txtCostoTotalPreInversion" name="txtCostoTotalPreInversion" value="<?=a_number_format($ExpedienteTecnicoM->costo_total_preinv_et , 2, '.',",",3) ?>"  class="form-control col-md-4 col-xs-12 moneda"  placeholder="Total del Proyecto (Pre Inversión)" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
@@ -128,6 +128,29 @@
 								<input disabled id="txtCostoTotalInversion<?=str_replace(' ', '',$value->nombre_modalidad_ejec)?>" name="txtCostoTotalInversion" value="<?=a_number_format($cd+$ci , 2, '.',",",3)  ?>" class="form-control col-md-4 col-xs-12 moneda"  placeholder="Costo Total del Proyecto (Inversión)" maxlength="40" autocomplete="off" onkeypress="return valideKey(event);">
 							</div>
 						</div>
+
+						<table id="tablaContenido" style="width: 100%; font-size:12px;">
+						<tbody>
+							<tr>
+							<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;" colspan="2"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+							<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<table id="tablaResumen" style="width: 100%; font-size:12px;">
+					<tr>
+							<th style="width: 85%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></th>
+							<th style="width: 15%;text-align: right;background-color:#337ab7;color:white;"><b>COSTOS</b></th>
+						</tr>
+						<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
+							<tr>
+								<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;': ($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
+								<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+						
+							</tr>				
+						<?php } ?>
+					</table>
 					</div>								      			
 					<?php }} ?>
 					</div>				

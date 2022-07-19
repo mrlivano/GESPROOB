@@ -162,11 +162,12 @@
 			<table id="tmod" style="width: 100%" border="0">
 			<tr >
 			
-				<th style="width: 70%">Componentes</th>
-				<td>Modalidad de Ejecución</td>
+				<th style="width: 28%">Modalidad de Ejecución</th>
+				<td>Componentes</td>
 			</tr>
 			<?php if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION DIRECTA"){ ?>
 			<tr>
+			<td>ADMINISTRACION DIRECTA</td>
 			<td>
 			
 			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
@@ -174,42 +175,43 @@
 			<?php  $i=$i+1;} 
 			?>
 			</td>
-			<td>ADMINISTRACION DIRECTA</td>
+			
 			</tr>
 			<?php }
-			
 			 else if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION MIXTA"){ ?>
 			<tr>
-			<td>
+			<td rowspan='2'>ADMINISTRACION DIRECTA</td>
+			<td colspan='2'>
 			
 			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
 			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
 			<?php  $i=$i+1;} 
 			?>
 			</td>
-			<td>ADMINISTRACION DIRECTA</td>
 			</tr>
 			<tr>
-			<td>
-			
+				<td>COSTO DIRECTO</td>
+				<td>S/</td>
+			</tr>
+			<tr>
+			<td>ADMINISTRACION INDIRECTA</td>
+			<td colspan='2'>
 			<?php  foreach($listarComponentesAI as $item){ ?>
 			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
 			<?php  $i=$i+1;} 
 			?>
 			</td>
-			<td>ADMINISTRACION INDIRECTA</td>
 			</tr>
 			<?php }
 			else { ?>
 			<tr>
+			<td>ADMINISTRACION INDIRECTA</td>
 			<td>
-			
 			<?php $i=1; foreach($listarComponentesAI as $item){ ?>
 			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
 			<?php  $i=$i+1;} 
 			?>
 			</td>
-			<td>ADMINISTRACION INDIRECTA</td>
 			</tr>
 			<?php } ?>
 			</table>

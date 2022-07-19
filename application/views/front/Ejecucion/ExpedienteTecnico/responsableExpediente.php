@@ -57,7 +57,7 @@
 													<?=$item->nombres?> <?=$item->apellido_p?> <?=$item->apellido_m?>
 										    	</td>
 												<td>
-													<?=date('d/m/Y',strtotime($item->fecha_asignacion_resp_et)) ?>
+												<?=date('d/m/Y',strtotime($item->fecha_inicio)) ?> - <?=date('d/m/Y',strtotime($item->fecha_fin)) ?>
 										    	</td>
 										  </tr>
 										<?php } ?>
@@ -82,7 +82,7 @@
 													<?=$item->nombres?> <?=$item->apellido_p?> <?=$item->apellido_m?>
 										    	</td>
 												<td>
-													<?=date('d/m/Y',strtotime($item->fecha_asignacion_resp_et)) ?>
+													<?=date('d/m/Y',strtotime($item->fecha_inicio)) ?> - <?=date('d/m/Y',strtotime($item->fecha_fin)) ?>
 										    	</td>
 										  </tr>
 										<?php } ?>

@@ -80,10 +80,6 @@
 				<td style="width: 8%;font-weight:bold;">MODALIDAD</td>
 				<td style="width: 92%">: <?=$MostraExpedienteNombre->modalidad_ejecucion_et;?> </td>
 			</tr>
-			<tr>
-				<td style="width: 8%;font-weight:bold;">AÑO</td>
-				<td style="width: 92%">: <?=date('d/m/Y',strtotime($MostraExpedienteNombre->fecha_registro))?> </td>
-			</tr>
 		</table>    
 	</div>
 
