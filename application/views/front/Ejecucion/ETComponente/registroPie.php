@@ -180,7 +180,10 @@
 											<td style="width: 20%">
 											<button onclick="guardarComponenteI(<?= $contI ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-											</td>
+											<?php if(in_array($value->id_presupuesto_ej,array('1037','1040','1041'))){ ?>
+											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor=3 data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+											<?php } ?>
+										</td>
 										</tr>
 									<?php } ?>
 								</tbody>
