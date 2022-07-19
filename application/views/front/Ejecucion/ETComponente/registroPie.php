@@ -9,6 +9,50 @@
 		color: white;
 	}
 </style>
+<div id="modal-pdf" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Formato FF-08</h3>
+			</div>
+			<div class="modal-body">
+				<form id="formAddDocumento" class="feedback" name="feedback">
+					<div class="form-group">
+					<input type="hidden" id="presupuesto_ejecucion" name="presupuesto_ejecucion" value="">
+					<input type="hidden"  name="id_et" value="<?=$expedienteTecnico->id_et?>">
+						
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Documentos</th>
+							</tr>
+							</thead>
+							<tbody>
+								<?php $counter = 1; ?>
+								<?php if ( !empty($et_documentos_f08) ): ?>
+									<?php foreach ($et_documentos_f08 as $et_documento_f08): ?>
+									<tr>
+										<th scope="row"><?php echo $counter++; ?></th>
+											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_f08['filename'] ?>" target="_blank"><?= $et_documento_f08['filename'] ?></a></td>
+									</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</tbody>
+						</table>
+					<input type="file" class="form-control-file" id="inputFileDocF08" name="inputFileDocF08">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-success" id="send" type="submit">Guardar</button>
+						<a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <?php $contD = 0; $contI = 0 ?>
 <div class="form-horizontal">
@@ -77,8 +121,11 @@
 											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
 											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
 											<td style="width: 40%">
-											<button onclick="guardarComponenteD(<?= $contD ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
+											<button onclick="guardarComponenteD(<?= $contD ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+											<?php if(in_array($value->id_presupuesto_ej,array('3','4','6'))){ ?>
+											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor=3 data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+											<?php } ?>
 										</td>
 
 										</tr>
@@ -156,6 +203,7 @@
 	</div>
 
 </div>
+
 <script>
 	var contadorD = 0;
 	var contadorI = 0;
@@ -419,4 +467,36 @@ function eliminarFilaI(index){
 			}, false, true)
 	
 }
+$("#formAddDocumento").submit(function(event)
+	{
+		event.preventDefault();
+		var formData=new FormData($("#formAddDocumento")[0]);
+		console.log(formData);
+		$.ajax({
+			url: base_url+"index.php/Expediente_Tecnico/insertDesagregadoGastos",
+			type:'POST',
+			enctype: 'multipart/form-data',
+			data:formData,
+			cache: false,
+			contentType:false,
+			processData:false,
+			success:function(resp)
+			{
+				$('#modal-pdf').modal('hide');
+				swal("Bien!", "Se registro correctamente!", "success");
+			},
+			error: function ()
+			{
+					swal("Error", "Ocurrió un error en la conexión, vuelva a intentarlo", "error");
+			}
+		});
+	});
+	$('#modal-pdf').on('show.bs.modal', function(event) {
+  var button = $(event.relatedTarget); // Button that triggered the modal
+  var recipient = button.data('elvalor');
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this);
+  modal.find('.modal-body #presupuesto_ejecucion').val(recipient)
+})
 </script>
