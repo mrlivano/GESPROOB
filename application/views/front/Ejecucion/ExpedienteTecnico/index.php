@@ -197,7 +197,6 @@ if ($sessionTempError) { ?>
 						var ProyetoEncontrado = JSON.parse(resp);
 						if (ProyetoEncontrado != 'no existe') {
 							if (ProyetoEncontrado == true) {
-								console.log("ya esta el proy");
 								swal("","Este proyecto de inversión ya esta registrado.","error");
 								return false
 							}

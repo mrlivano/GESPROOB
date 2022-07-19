@@ -65,20 +65,6 @@
 				<tr>
 					<th style="width:12%;">PROYECTO</th>
 					<td style="width:66%;">: <?=$expedienteTecnico->nombre_pi?></td>
-					<th style="width:10%;">COSTO DIRECTO</th>
-					<td style="width:12%;text-align:right;">S/. <?= a_number_format($costoDirecto , 2, '.',",",3);?></td>
-				</tr>
-				<tr>
-					<th style="width:12%;">COMPONENTE</th>
-					<td style="width:66%;">: <?=$expedienteTecnico->componente_et;?></td>
-					<th style="width:10%;">COSTO INDIRECTO</th>
-					<td style="width:12%;text-align:right;">S/. <?= a_number_format($costoIndirecto , 2, '.',",",3);?></td>
-				</tr>
-				<tr>
-					<th style="width:12%;">META</th>
-					<td style="width:66%;">: <?=$expedienteTecnico->meta_et;?></td>
-					<th style="width:10%;">COSTO TOTAL</th>
-					<td style="width:12%;text-align:right;">S/. <?= a_number_format($costoDirecto+$costoIndirecto , 2, '.',",",3);?></td>
 				</tr>
 				<tr>
 					<th style="width:12%;">FTE. FTO.</th>

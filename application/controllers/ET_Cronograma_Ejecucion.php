@@ -57,13 +57,6 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 					$this->obtenerMetaAnidadaParaValorizacion($item, $this->input->post('anio'));
 				}
 			}
-	
-			$expedienteTecnico->childComponenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
-			
-			foreach($expedienteTecnico->childComponenteIndirecto as $key => $value)
-			{
-				$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
-			}
 		}
 
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
@@ -77,13 +70,6 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 			{
 				$this->obtenerMetaAnidadaParaValorizacion($item, $this->input->post('anio'));
 			}
-		}
-
-		$expedienteTecnico->childComponenteIndIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
-		
-		foreach($expedienteTecnico->childComponenteIndIndirecto as $key => $value)
-		{
-			$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
 		}
 		}
 
@@ -110,13 +96,6 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 					$this->obtenerMetaAnidadaParaValorizacion($item, $this->input->post('anio'));
 				}
 			}
-	
-			$expedienteTecnico->childComponenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
-			
-			foreach($expedienteTecnico->childComponenteIndirecto as $key => $value)
-			{
-				$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
-			}
 		}
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($idExpedienteTecnico, $this->input->post('tipo'));
@@ -129,13 +108,6 @@ class ET_Cronograma_Ejecucion extends CI_Controller
 				{
 					$this->obtenerMetaAnidadaParaValorizacion($item, $this->input->post('anio'));
 				}
-			}
-	
-			$expedienteTecnico->childComponenteIndIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoIndirec($idExpedienteTecnico, $this->input->post('tipo'));
-			
-			foreach($expedienteTecnico->childComponenteIndIndirecto as $key => $value)
-			{
-				$value->childCronograma=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $this->input->post('anio'));
 			}
 		}
 
