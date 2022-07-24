@@ -755,13 +755,13 @@ class Expediente_Tecnico extends CI_Controller
 				case '2':
 					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,3);
 					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1037);
-					$this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastosGenerales',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
+					$this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastoSupervision',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
 
 					break;
 				case '3':
 					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,4);
 					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1039);
-					$this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastosGenerales',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
+					$this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastoLiquidacion',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
 
 					break;
 			}
