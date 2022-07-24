@@ -21,27 +21,7 @@
 					<div class="form-group">
 					<input type="hidden" id="presupuesto_ejecucion" name="presupuesto_ejecucion" value="">
 					<input type="hidden"  name="id_et" value="<?=$expedienteTecnico->id_et?>">
-						
-						<table class="table">
-							<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Documentos</th>
-							</tr>
-							</thead>
-							<tbody>
-								<?php $counter = 1; ?>
-								<?php if ( !empty($et_documentos_f08) ): ?>
-									<?php foreach ($et_documentos_f08 as $et_documento_f08): ?>
-									<tr>
-										<th scope="row"><?php echo $counter++; ?></th>
-											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_f08['filename'] ?>" target="_blank"><?= $et_documento_f08['filename'] ?></a></td>
-									</tr>
-									<?php endforeach; ?>
-								<?php endif; ?>
-							</tbody>
-						</table>
-					<input type="file" class="form-control-file" id="inputFileDocF08" name="inputFileDocF08">
+					<input type="file" accept=".pdf,.doc,.docx" class="form-control-file" id="inputFileDocF08" name="inputFileDocF08">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-success" id="send" type="submit">Guardar</button>
@@ -124,7 +104,7 @@
 											<button onclick="guardarComponenteD(<?= $contD ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
 											<?php if(in_array($value->id_presupuesto_ej,array('3','4','6'))){ ?>
-											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor=3 data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
 											<?php } ?>
 										</td>
 
@@ -180,8 +160,8 @@
 											<td style="width: 20%">
 											<button onclick="guardarComponenteI(<?= $contI ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-											<?php if(in_array($value->id_presupuesto_ej,array('1037','1040','1041'))){ ?>
-											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor=3 data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+											<?php if(in_array($value->id_presupuesto_ej,array('1037','1040','1039'))){ ?>
+											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
 											<?php } ?>
 										</td>
 										</tr>
@@ -352,7 +332,7 @@
 
 	function guardarComponenteD(index) {
 		
-		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text();
+		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text().trim();
 		let variable = $('#variableDirecta' + index).val();
 		let macro = $('#macroDirecta' + index).val();
 		let monto = $('#montoDirecta' + index).val().replaceAll(',','');
@@ -393,7 +373,7 @@
 		}
 	}
 	function guardarComponenteI(index) {
-		let descripcion = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").text();
+		let descripcion = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").text().trim();
 		let variable = $('#variableIndirecta' + index).val();
 		let macro = $('#macroIndirecta' + index).val();
 		let monto = $('#montoIndirecta' + index).val().replaceAll(',','');

@@ -738,6 +738,35 @@ class Expediente_Tecnico extends CI_Controller
         $this->mydompdf->render();
         $this->mydompdf->stream("reportePdfPresupuestoAnalitico.pdf", array("Attachment" => false));
     }
+	public function mostrarGastos()
+	{
+		
+			$idExpedienteTecnico=$this->input->post('idExpediente');
+			$tipoGasto=$this->input->post('tipoGasto');
+			$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+
+			switch ($tipoGasto) {
+				case '1':
+					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,6);
+					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1040);
+					return $this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastosGenerales',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
+
+					break;
+				case '2':
+					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,3);
+					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1037);
+					$this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastosGenerales',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
+
+					break;
+				case '3':
+					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,4);
+					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1039);
+					$this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastosGenerales',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
+
+					break;
+			}
+		
+	}
 
     public function reportePdfAnalisisPrecioUnitarioFF11()
 	{
@@ -760,7 +789,7 @@ class Expediente_Tecnico extends CI_Controller
 			$id_et = isset($_GET['query']) ? $_GET['query'] : null;
 			$etExpedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($id_et);
 
-			if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 				$etExpedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($etExpedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 				foreach($etExpedienteTecnico->childComponente as $key => $value)
 				{
@@ -773,7 +802,7 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 			
-			if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			if($etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $etExpedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 				$etExpedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($etExpedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 				foreach($etExpedienteTecnico->childComponenteInd as $key => $value)
 				{
@@ -3159,6 +3188,7 @@ class Expediente_Tecnico extends CI_Controller
 		if ($this->input->is_ajax_request())
 		{
 				$id_et = $_POST['id_et'];
+				$tipo = $_POST['presupuesto_ejecucion'];
 				// $nombreArchivo = $_FILES['inputFileDoc']['name'];
 				//
 				// $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
@@ -3173,7 +3203,7 @@ class Expediente_Tecnico extends CI_Controller
 
 				$c_data['filename']= $nombreArchivo;
 				$c_data['id_et']=$id_et;
-				$c_data['tipo']=8;
+				$c_data['tipo']=$tipo;
 
 				$ultimoId = $this->Model_ET_Expediente_Tecnico->insertETDocumento($c_data);
 

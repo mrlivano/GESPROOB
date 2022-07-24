@@ -373,13 +373,13 @@
 															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-07
 															</a>
-															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="modal" id="feedback-ff08" data-target="#feedback-ff08-modal" title="Desagregado de Gastos Generales" class="btn btn-app btn-box">
+															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="modal" id="feedback-ff08" title="Desagregado de Gastos Generales" class="btn btn-app btn-box" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-															<a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="modal" id="feedback-ff09" data-target="#feedback-ff09-modal" title="Desagregado de Gastos Generales de Supervision" class="btn btn-app btn-box">
+															<a style="background-color: #e73e3a;" class="btn btn-app btn-box"  data-toggle="modal" id="feedback-ff09" title="Desagregado de Gastos Generales de Supervision" class="btn btn-app btn-box" onclick="mostrarGastosSupervision('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>','<?=@$ExpedienteTecnicoElaboracion[0]->url_memoria_descriptiva?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-09
 															</a>
-															<a style="background-color: #5cb360;" class="btn btn-app btn-box" data-toggle="modal" id="feedback-ff09B" data-target="#feedback-ff09B-modal" title="Desagregado de Gastos de Liquidación" class="btn btn-app btn-box">
+															<a style="background-color: #5cb360;" class="btn btn-app btn-box" data-toggle="modal" id="feedback-ff09B" title="Desagregado de Gastos de Liquidación" class="btn btn-app btn-box" onclick="mostrarGastosLiquidacion('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>','<?=@$ExpedienteTecnicoElaboracion[0]->url_memoria_descriptiva?>')">
 																<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FF-09B</span>
 															</a>
 															<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -1723,6 +1723,36 @@ function mostrarImpactoAmbiental(idExpediente,url)
 		return;
 	}
 	window.open('<?=base_url();?>uploads/ImpactoAmbiental/'+idExpediente+url,'_blank');
+}
+
+function mostrarGastosGenerales(idExpediente,url)
+{
+	if(url=='')
+	{
+		swal("Error", "Aún no se ha subido la memoria Descriptiva", "error");
+		return;
+	}
+	paginaAjaxDialogo(null, 'Gastos Generales',{ idExpediente : idExpediente, tipoGasto : 1 }, base_url+'index.php/Expediente_Tecnico/mostrarGastos', 'POST', null, null, false, true);
+}
+
+function mostrarGastosSupervision(idExpediente,url)
+{
+	if(url=='')
+	{
+		swal("Error", "Aún no se ha subido la memoria Descriptiva", "error");
+		return;
+	}
+	paginaAjaxDialogo(null, 'Gastos de Supervision',{ idExpediente: idExpediente, tipoGasto : 2}, base_url+'index.php/Expediente_Tecnico/mostrarGastos', 'POST', null, null, false, true);
+}
+
+function mostrarGastosLiquidacion(idExpediente,url)
+{
+	if(url=='')
+	{
+		swal("Error", "Aún no se ha subido la memoria Descriptiva", "error");
+		return;
+	}
+	paginaAjaxDialogo(null, 'Gastos de Liquidacion',{ idExpediente: idExpediente, tipoGasto : 3 }, base_url+'index.php/Expediente_Tecnico/mostrarGastos', 'POST', null, null, false, true);
 }
 
 function listaComponente(idExpediente)

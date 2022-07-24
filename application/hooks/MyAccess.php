@@ -122,6 +122,7 @@ function autorizar($url)
       'Expediente_Tecnico/CronogramacionRecurso',
       'Expediente_Tecnico/eliminarValorizacionPartida',
       'Expediente_Tecnico/MemoriaDescriptiva',
+      'Expediente_Tecnico/mostrarGastos',
       'Expediente_Tecnico/ImpactoAmbiental',
       'Expediente_Tecnico/reporteDesagGastosGenerales',
       'Expediente_Tecnico/reporteDesagGastosSupervision',
