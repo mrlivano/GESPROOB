@@ -188,6 +188,24 @@ function mostrarMetaAnidada($meta, $expedienteTecnico,&$sumatoriasTotales,&$suma
 				<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 					if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 						?>
+			</tbody>
+		</table>
+		<table style='page-break-after:always;'></br></table> 
+    <table id="tableValorizacion" style="width: 100%;">
+			<thead>
+				<tr>
+					<th style="width:3%;">ÍTEM</th>
+					<th style="width:25%;">DESCRIPCIÓN</th>
+					<th style="width:5%;">UND.</th>
+					<th style="width:6%;">PARCIAL S/.</th>
+					<?php if($expedienteTecnico->num_meses!=null){
+						for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+							<th>M<?=($i+1)?> S/.</th>
+						<?php }
+					} ?>
+				</tr>
+			</thead>
+			<tbody>
 			<td colspan="<?=$expedienteTecnico->num_meses+4?>" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN INDIRECTA</b></td>
 			<?php } ?>
 				<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>

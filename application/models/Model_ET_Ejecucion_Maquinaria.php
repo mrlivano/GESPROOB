@@ -44,13 +44,13 @@ class Model_ET_Ejecucion_Maquinaria extends CI_Model
     {
         $data = $this->db->query("select sum(num_horas_trabajadas) as acumuladoanterior from ET_EJECUCION_MAQUINARIA where DATEPART(yy, fecha)='$anio' and DATEPART(mm, fecha)<'$mes' and id_maquinaria='$maquinaria'");
 
-        return (count($data)==0 ? 0 : $data->row()->acumuladoanterior);
+        return (count($data->result())==0 ? 0 : $data->row()->acumuladoanterior);
     }
 
     function EjecucionPorMaquinariaMensualActual($maquinaria, $anio, $mes)
     {
-        $data = $this->db->query("select sum(num_horas_trabajadas) as acumuladoanterior from ET_EJECUCION_MAQUINARIA where DATEPART(yy, fecha)='$anio' and DATEPART(mm, fecha)='$mes' and id_maquinaria='$maquinaria'");
+        $data = $this->db->query("select sum(num_horas_trabajadas) as acumuladoactual from ET_EJECUCION_MAQUINARIA where DATEPART(yy, fecha)='$anio' and DATEPART(mm, fecha)='$mes' and id_maquinaria='$maquinaria'");
 
-        return (count($data)==0 ? 0 : $data->row()->acumuladoanterior);
+        return (count($data->result())==0 ? 0 : $data->row()->acumuladoactual);
     }
 }

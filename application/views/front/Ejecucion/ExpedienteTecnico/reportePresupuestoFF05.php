@@ -127,6 +127,7 @@
 	<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 		<br>
 		<?php if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ ?>
+	<table style='page-break-after:always;'></br></table> 
 	<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
 	<?php } ?>
 	<table id="tablaContenido" style="width: 100%; font-size:12px;">
