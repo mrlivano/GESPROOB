@@ -1,7 +1,6 @@
 <!--home-->
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -63,7 +62,6 @@
     .skin-blue .main-header .navbar {
       background-color: #0c2528;
     }
-
     .box.box-info {
       border-top-color: #fff;
     }
@@ -85,18 +83,17 @@
       -o-transition: transform 0.3s;
       transition: transform 0.4s;
       user-select: none;
-
+      box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+      border-radius:50%;
     }
 
     .zoom-in {
       padding-top: 30px;
     }
-
     .thebox:hover {
       transform: scale(1.125);
-      
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     }
-
     .box-container {
       padding-top: 10px;
       padding-bottom: 50px;
@@ -113,12 +110,10 @@
       background-color: #35495d;
       color: white;
     }
-
     .subMenu {
       box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
       margin: 0px 0 0;
     }
-
     .content-wrapper {
       background-color: #f7f7f7;
     }
@@ -126,259 +121,22 @@
     .skin-blue .main-header .navbar .nav>li>a {
       color: black;
     }
-
-    .dropdown:hover {
+    .dropdown:hover 
+    {
       background-color: #5c94a0;
 
     }
-
-    .dropdown:hover .dropdown-menu {
+    .dropdown:hover .dropdown-menu 
+    {
       display: block;
     }
-
     .btnDesplegable {
       padding: 3px 4px;
     }
-
     @media (max-width: 770px) {
       .tituloHeader {
         display: none;
       }
-    }
-
-
-
-
-
-    .wrapper1 {
-      width: 100%;
-      margin: 2em auto;
-      background: #3D464E;
-      clear: both;
-      overflow: hidden;
-    }
-
-
-
-    .ul1 li {
-      border-right: 1px solid #3D464E;
-      cursor: pointer;
-      float: left;
-      overflow: hidden;
-      height: 177px;
-      list-style: none;
-      position: relative;
-      width: 72px;
-      transition: all 0.5s ease;
-      -webkit-transition: all 0.5s ease;
-      background: #fff;
-    }
-
-
-    .ul1 li:hover a {
-      background-position: right top;
-    }
-
-    .ul1 li:hover {
-      width: 350px;
-    }
-
-    .p1 {
-      color: #5F5F5F;
-      font-size: 15px;
-      letter-spacing: 0;
-      line-height: 18px;
-      padding-top: 40px;
-      width: 225px;
-      margin: 0px 7em;
-    }
-
-
-    @import url("https://fonts.googleapis.com/css?family=Sunflower:300,500,700");
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      line-height: 1.5;
-    }
-
-    body {
-      background: #1c1c1c;
-    }
-
-    .custom-accordion {
-      background: #376970;
-      color: #ffffff;
-      font-family: "Sunflower", sans-serif;
-      padding-bottom: 2rem;
-    }
-
-    .custom-accordion>.item {
-      padding: 1rem 2rem;
-      margin: 0 auto;
-      max-width: 30rem;
-    }
-
-    .custom-accordion>.item:last-of-type {
-      background: #462521;
-      text-align: center;
-      border-radius: 0.5rem;
-    }
-
-    .custom-accordion>.item:last-of-type>.icon {
-      color: #ffffff;
-    }
-
-    .custom-accordion>.item:nth-of-type(6) {
-      padding-bottom: 2rem;
-    }
-
-    .custom-accordion>.item>.icon {
-      color: #462521;
-      font-size: 2rem;
-    }
-
-    .custom-accordion>.item>.title {
-      font-size: 1.5rem;
-    }
-
-    @media screen and (min-width: 800px) and (min-height: 270px) {
-      .custom-accordion {
-        display: table;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        height: 65vh;
-        max-height: 1000px;
-        overflow: hidden;
-        padding-bottom: 0;
-      }
-
-      .custom-accordion>.item {
-        display: table-cell;
-        position: relative;
-        height: 100%;
-        padding: 5rem 1rem;
-        text-align: center;
-        transform-origin: 0 50%;
-        transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
-      }
-
-      .custom-accordion>.item:hover:not(:last-of-type) {
-        transform: scaleY(1.5)  scaleX(1.5)  translateX(-1px) ;
-        box-shadow: 0 0 3rem #301916;
-        background: #8a6552;
-        border-color: transparent;
-      }
-
-      .custom-accordion>.item:hover+.item {
-        opacity: 0.1;
-      }
-
-      .custom-accordion>.item:hover+.item:last-of-type {
-        opacity: 0.1;
-        background: #8a6552;
-      }
-
-      .custom-accordion>.item:not(:last-of-type) {
-        border-right: 1px solid #462521;
-      }
-
-      .custom-accordion>.item:last-of-type {
-        background: #222d32;
-        width: 25%;
-        border-radius: 0;
-      }
-
-      .custom-accordion>.item:last-of-type .heart-icon {
-        font-size: 6rem;
-      }
-
-      .custom-accordion>.item:hover:last-of-type .heart-icon {
-        transform: scale(2);
-      }
-
-      .custom-accordion>.item:last-of-type>.title {
-        transform: rotate(0) translateX(-50%) translateY(-2.5rem);
-        padding: 0;
-        text-align: center;
-      }
-
-      .custom-accordion>.item:last-of-type>a>.content {
-        opacity: 1;
-        transform: translateX(-50%) translateY(-50%);
-      }
-
-      .custom-accordion>.item:hover:not(:last-of-type)>.icon {
-        transform: scaleX(0.5);
-      }
-
-      .custom-accordion>.item:hover:not(:last-of-type)>.title {
-        transform: scaleX(0.5) translateX(-50%);
-        background: #ca2e55;
-        text-align: center;
-        padding: 0;
-      }
-
-      .custom-accordion>.item:hover:not(:last-of-type)>.title>.text {
-        transform: translateX(-50%);
-        left: 50%;
-      }
-
-      .custom-accordion>.item:hover:not(:last-of-type)>a>.content {
-        opacity: 1;
-      }
-
-      .custom-accordion>.item>.icon {
-        font-weight: 700;
-        font-size: 2rem;
-        transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
-        color: #ffffff;
-      }
-
-      .custom-accordion>.item>.title {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        height: 1.5rem;
-        width: 200%;
-        text-align: left;
-        transform-origin: 0 50%;
-        transform: rotate(-90deg);
-        transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
-        font-size: 1.2rem;
-      }
-
-      .custom-accordion>.item>.title>.text {
-        position: absolute;
-        left: 2rem;
-        bottom: 0;
-        white-space: nowrap;
-        transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
-      }
-
-      .custom-accordion>.item>a>.content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 200%;
-        height: auto;
-        transform: translateX(-10%) translateY(-10%) scaleX(0.01);
-        transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
-        opacity: 0;
-        padding: 1rem;
-        pointer-events: none;
-      }
-    }
-
-    .heart-icon {
-      color: #ca2e55;
-      font-size: 3rem;
-      transition: all 0.3s cubic-bezier(0.8, 0.16, 0.42, 0.89);
     }
   </style>
   <script src="<?php echo base_url(); ?>assets/Template/vendors/jquery/dist/jquery.min.js"></script>
@@ -388,10 +146,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122307432-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    function gtag() { dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'UA-122307432-1');
@@ -405,7 +160,6 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-
 <body class="hold-transition skin-blue layout-top-nav">
   <div class="wrapper">
     <header class="main-header">
@@ -429,6 +183,24 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
               <i class="fa fa-bars"></i>
             </button>
+          </div>
+          <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <ul class="nav navbar-nav Menu">
+              <li class="dropdown">
+                <a href="" target="_blank" class="dropdown-toggle" >Guía de Usuario<span class="caret"></span></a>
+                  <ul class="dropdown-menu subMenu " role="menu">
+                      <li><a href="3" target="_blank">Mantenimiento de Parámetros</a></li>
+                      <li><a href="" target="_blank">PMI</a></li>
+                      <li><a href="" target="_blank">Formulación y Evaluación</a></li>
+                      <li><a href="" target="_blank">Ejecución</a></li>
+                      <li><a href="" target="_blank">Seguimiento</a></li>
+
+                      <li><a href="" target="_blank">Monitoreo</a></li>
+                      <li><a href="" target="_blank">Reportes</a></li>
+                      <li><a href="" target="_blank">Control de Usuarios</a></li>
+                  </ul>
+                  </li>
+            </ul>
           </div>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -466,49 +238,39 @@
 
       </nav>
     </header>
+    <div class="content-wrapper">
+    <div class="container">
+      <section class="content" style="margin-top: 50px;">
+      <div class="row box-container">
 
-    <div class="custom-accordion">
-      <?php foreach ($resp as $value) : ?>
-        <?php if ($value->id_modulo == 'HOME') { ?>
-          <div class="item">
-            <div class="icon"></div>
-            
-            <a class="" href="<?php echo site_url($value->url); ?>">
-            <div class="content">
-            
-                <div class="zoom-in">
+         <?php foreach ($resp as $value): ?>
+          <?php if($value->id_modulo=='HOME') { ?>
+                     <div class="col-md-3 col-sm-6 col-xs-12">
+                         <div class="zoom-in">
+                         
+                             <a href="<?php echo site_url($value->url); ?>">
+                             <div style="background-color: <?php echo $value->color; ?>;" class="col-md-12 thebox">
+                                 <div class="span 6">
+                                  <img style="display: inline; height: 70px; width: 70px; margin-bottom: 5px" src="<?php echo base_url(); ?>assets/images/icondig/<?php echo $value->class_icono; ?>" class="img-responsive">
+                                     <!--<span class="<?php echo $value->class_icono; ?>"></span>-->
+                                 </div>
+                                 <div class="span 6">
+                                     <?php echo $value->nombre; ?>
+                                 </div>
 
-                
-                    <div class="col-md-12 thebox">
-                      <div class="span 6">
-                        <img style="display: inline; height: 70px; width: 70px; margin-bottom: 5px" src="<?php echo base_url(); ?>assets/images/icondig/<?php echo $value->class_icono; ?>" class="img-responsive">
-                        <!--<span class="<?php echo $value->class_icono; ?>"></span>-->
-                      </div>
-                      
-                      <div class="span 6">
-                        <?php echo $value->nombre; ?>
-                      </div>
+                             </div>
+                             </a>
+      
+                         </div>
+                     </div>
+          <?php } ?>
+        <?php endforeach; ?>
 
-                    </div>
-                  
-
-                </div>
-                </a>
-            </div>
-            
-          </div>
-
-        <?php } ?>
-      <?php endforeach; ?>
-      <div class="item">
-        <div class="icon"></div>
-        <div class="title"></div>
-        <div class="content">
-            <div class="heart-icon"></div>
         </div>
-    </div>
-    </div>
+    </section>
 
+    </div>
+    </div>
     <footer class="main-footer">
       <div class="container">
         <div class="row">
@@ -529,5 +291,4 @@
   <script src="<?php echo base_url(); ?>assets/adminlte/demo.js"> </script>
   <script src="<?php echo base_url(); ?>assets/dist/js/sweetalert-dev.js"></script>
 </body>
-
 </html>
