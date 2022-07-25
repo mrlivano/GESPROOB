@@ -151,6 +151,7 @@ function autorizar($url)
       'ET_EspecificacionTecnica/Guardar',
       'ET_EspecificacionTecnica/FormatoEspecificacionTecnica',
       'ET_EspecificacionTecnica/FormatoEspecificacionTecnicaPorComponente',
+      'ET_EspecificacionTecnica/FormatoEspecificacionTecnicaPorComponenteB',
       'ET_EspecificacionTecnica/AgregarGeneralidad',
       'ET_Observacion_Tarea/insertar',
       'ET_Levantamiento_Obs/insertar',

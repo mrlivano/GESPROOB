@@ -66,118 +66,198 @@ function mostrarAnidado($meta, $expedienteTecnico)
 								<br>
 							</div>
 						</div>
-						<div>
-							<form id="frmEspecificacionesTecnicas">
-								<div class="row">
-									<?php if ($expedienteTecnico->url_especificacion_tecnica != '') { ?>
-										<div class="col-md-12 col-sm-12 col-xs-12">
-											<div class="bs-glyphicons">
-												<ul class="bs-glyphicons-list">
-													<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?><?= $expedienteTecnico->url_especificacion_tecnica ?>">
-														<li style="height:77px;">
-															<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-															<span class="glyphicon-class">ver archivo</span>
-														</li>
-													</a>
-												</ul>
+
+					</div>
+					<!--  -->
+
+					<div class="" role="tabpanel" data-example-id="togglable-tabs">
+						<ul id="myTabPie" class="nav nav-tabs" role="tablist">
+							<?php if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') { ?>
+								<li style="width:15%;" role="presentation" class="active">
+									<a href="#tabAdmDirecta" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Administracion Directa</b></a>
+								</li>
+							<?php }
+							if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') { ?>
+								<li style="width:15%;" role="presentation" class="">
+									<a href="#tabAdmIndirecta" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Administracio Indirecta</b></a>
+								</li>
+							<?php } ?>
+						</ul>
+						<br>
+						<div id="myTabPieContent" class="tab-content">
+							<?php if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') { ?>
+								<div role="tabpanel" class="tab-pane fade active in" id="tabAdmDirecta" aria-labelledby="home-tab">
+									<div class="form-horizontal">
+										<?php if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
+											if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
+										?>
+
+												<div>
+													<form id="frmEspecificacionesTecnicasDir">
+														<div class="row">
+															<?php if ($expedienteTecnico->url_especificacion_tecnica != '') { ?>
+																<div class="col-md-12 col-sm-12 col-xs-12">
+																	<div class="bs-glyphicons">
+																		<ul class="bs-glyphicons-list">
+																			<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?>a<?= $expedienteTecnico->url_especificacion_tecnica ?>">
+																				<li style="height:77px;">
+																					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+																					<span class="glyphicon-class">ver archivo</span>
+																				</li>
+																			</a>
+																		</ul>
+																	</div>
+																</div>
+															<?php } ?>
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Especificación Tecnica:</label>
+																<div class="col-md-12 col-sm-12 col-xs-12">
+																	<input type="hidden" id="hdIdExpedienteTecnico" name="hdIdExpedienteTecnico" notValidate value="<?= $expedienteTecnico->id_et ?>">
+																	<input accept=".pdf,.doc,.docx" type="file" id="fileEspecificacionesTecnicas" name="fileEspecificacionesTecnicas" class="form-control">
+																	<label style="color:#f0ad4e;">Solo se aceptan archivos en formato pdf,docx</label>
+															<input type="hidden" id="tipo" name="tipo" value="1">
+
+																</div>
+															</div>
+														</div>
+														<div class="row" style="text-align: right;">
+															<button id="btnGuardarEspecificacionesTecnicasDir" class="btn btn-success">Guardar</button>
+															<button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+														</div>
+													</form>
+												</div>
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<input type="button" onclick="agregarGeneralidad();" value="Agregar Generalidades" class="btn btn-warning btn-xs">
+													<input type="hidden" value="<?= $expedienteTecnico->id_et ?>" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico">
+
+												</div>
+												<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
+											<?php } ?>
+											<div class="table-responsive">
+												<table id="tablaRegistro" style="font-size: 11px;width:100%" class="table table-sm">
+													<thead>
+														<tr>
+															<th>ÍTEM</th>
+															<th>DESCRIPCIÓN</th>
+															<th>UND.</th>
+															<th style="text-align: right;">CANT.</th>
+															<th style="text-align: right;">P.U.</th>
+															<th style="text-align: right;">TOTAL</th>
+															<th style="text-align: center;"> OPCIONES</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php foreach ($expedienteTecnico->childComponente as $key => $value) { ?>
+															<tr class="elementoBuscar">
+																<td><b><i><?= $value->numeracion ?></i></b></td>
+																<td style="text-align: left;text-transform:uppercase;"><b><i><?= html_escape($value->descripcion) ?></i></b></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+															</tr>
+															<?php foreach ($value->childMeta as $index => $item) { ?>
+																<?= mostrarAnidado($item, $expedienteTecnico) ?>
+															<?php } ?>
+														<?php } ?>
+													</tbody>
+												</table>
 											</div>
+										<?php } ?>
+										<?php if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
+											if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
+										?>
+
+									</div>
+
+								</div>
+							<?php }
+											if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') { ?>
+								<div role="tabpanel" class="tab-pane fade <?= $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' ? 'active in' : '' ?>" id="tabAdmIndirecta" aria-labelledby="profile-tab">
+									<div class="form-horizontal">
+
+										<div>
+											<form id="frmEspecificacionesTecnicasInd">
+												<div class="row">
+													<?php if ($expedienteTecnico->url_especificacion_tecnica != '') { ?>
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<div class="bs-glyphicons">
+																<ul class="bs-glyphicons-list">
+																	<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?>b<?= $expedienteTecnico->url_especificacion_tecnica ?>">
+																		<li style="height:77px;">
+																			<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+																			<span class="glyphicon-class">ver archivo</span>
+																		</li>
+																	</a>
+																</ul>
+															</div>
+														</div>
+													<?php } ?>
+													<div class="col-md-12 col-sm-12 col-xs-12">
+														<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Especificación Tecnica:</label>
+														<div class="col-md-12 col-sm-12 col-xs-12">
+															<input type="hidden" id="hdIdExpedienteTecnico" name="hdIdExpedienteTecnico" notValidate value="<?= $expedienteTecnico->id_et ?>">
+															<input accept=".pdf,.doc,.docx" type="file" id="fileEspecificacionesTecnicas" name="fileEspecificacionesTecnicas" class="form-control">
+															<label style="color:#f0ad4e;">Solo se aceptan archivos en formato pdf,docx</label>
+															<input type="hidden" id="tipo" name="tipo" value="2">
+														</div>
+													</div>
+												</div>
+												<div class="row" style="text-align: right;">
+													<button id="btnGuardarEspecificacionesTecnicasInd" class="btn btn-success">Guardar</button>
+													<button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+												</div>
+											</form>
 										</div>
-									<?php } ?>
-									<div class="col-md-12 col-sm-12 col-xs-12">
-										<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Especificación Tecnica:</label>
 										<div class="col-md-12 col-sm-12 col-xs-12">
-											<input type="hidden" id="hdIdExpedienteTecnico" name="hdIdExpedienteTecnico" notValidate value="<?= $expedienteTecnico->id_et ?>">
-											<input accept=".pdf,.doc,.docx" type="file" id="fileEspecificacionesTecnicas" name="fileEspecificacionesTecnicas" class="form-control">
-											<label style="color:#f0ad4e;">Solo se aceptan archivos en formato pdf,docx</label>
+											<input type="button" onclick="agregarGeneralidad();" value="Agregar Generalidades" class="btn btn-warning btn-xs">
+											<input type="hidden" value="<?= $expedienteTecnico->id_et ?>" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico">
+
 										</div>
+										<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
+									<?php } ?>
+									<div class="table-responsive">
+										<table id="tablaRegistro" style="font-size: 11px;width:100%" class="table table-sm">
+											<thead>
+												<tr>
+													<th>ÍTEM</th>
+													<th>DESCRIPCIÓN</th>
+													<th>UND.</th>
+													<th style="text-align: right;">CANT.</th>
+													<th style="text-align: right;">P.U.</th>
+													<th style="text-align: right;">TOTAL</th>
+													<th style="text-align: center;"> OPCIONES</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach ($expedienteTecnico->childComponenteInd as $key => $value) { ?>
+													<tr class="elementoBuscar">
+														<td><b><i><?= $value->numeracion ?></i></b></td>
+														<td style="text-align: left;text-transform:uppercase;"><b><i><?= html_escape($value->descripcion) ?></i></b></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<?php foreach ($value->childMeta as $index => $item) { ?>
+														<?= mostrarAnidado($item, $expedienteTecnico) ?>
+													<?php } ?>
+												<?php } ?>
+											</tbody>
+										</table>
+									</div>
+								<?php } ?>
+
+
 									</div>
 								</div>
-								<div class="row" style="text-align: right;">
-									<button id="btnGuardarEspecificacionesTecnicas" class="btn btn-success">Guardar</button>
-									<button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-								</div>
-							</form>
-						</div>
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<input type="button" onclick="agregarGeneralidad();" value="Agregar Generalidades" class="btn btn-warning btn-xs">
-							<input type="hidden" value="<?= $expedienteTecnico->id_et ?>" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico">
-
+							<?php } ?>
 						</div>
 					</div>
-					<?php if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
-						if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
-					?>
-							<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
-						<?php } ?>
-						<div class="table-responsive">
-							<table id="tablaRegistro" style="font-size: 11px;width:100%" class="table table-sm">
-								<thead>
-									<tr>
-										<th>ÍTEM</th>
-										<th>DESCRIPCIÓN</th>
-										<th>UND.</th>
-										<th style="text-align: right;">CANT.</th>
-										<th style="text-align: right;">P.U.</th>
-										<th style="text-align: right;">TOTAL</th>
-										<th style="text-align: center;"> OPCIONES</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($expedienteTecnico->childComponente as $key => $value) { ?>
-										<tr class="elementoBuscar">
-											<td><b><i><?= $value->numeracion ?></i></b></td>
-											<td style="text-align: left;text-transform:uppercase;"><b><i><?= html_escape($value->descripcion) ?></i></b></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<?php foreach ($value->childMeta as $index => $item) { ?>
-											<?= mostrarAnidado($item, $expedienteTecnico) ?>
-										<?php } ?>
-									<?php } ?>
-								</tbody>
-							</table>
-						</div>
-					<?php } ?>
-					<?php if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
-						if ($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA') {
-					?>
-							<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
-						<?php } ?>
-						<div class="table-responsive">
-							<table id="tablaRegistro" style="font-size: 11px;width:100%" class="table table-sm">
-								<thead>
-									<tr>
-										<th>ÍTEM</th>
-										<th>DESCRIPCIÓN</th>
-										<th>UND.</th>
-										<th style="text-align: right;">CANT.</th>
-										<th style="text-align: right;">P.U.</th>
-										<th style="text-align: right;">TOTAL</th>
-										<th style="text-align: center;"> OPCIONES</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($expedienteTecnico->childComponenteInd as $key => $value) { ?>
-										<tr class="elementoBuscar">
-											<td><b><i><?= $value->numeracion ?></i></b></td>
-											<td style="text-align: left;text-transform:uppercase;"><b><i><?= html_escape($value->descripcion) ?></i></b></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<?php foreach ($value->childMeta as $index => $item) { ?>
-											<?= mostrarAnidado($item, $expedienteTecnico) ?>
-										<?php } ?>
-									<?php } ?>
-								</tbody>
-							</table>
-						</div>
-					<?php } ?>
+					<!--  -->
+
 				</div>
 			</div>
 		</div>
@@ -194,23 +274,33 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		});
 
 	});
-	$(function()
-	{
-		$('#frmEspecificacionesTecnicas').formValidation(
-		{
+	$(function() {
+		$('#frmEspecificacionesTecnicasDir').formValidation({
 			framework: 'bootstrap',
 			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
 			live: 'enabled',
 			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
 			trigger: null,
-			fields:
-			{
-				fileEspecificacionesTecnicas:
-				{
-					validators:
-					{
-						notEmpty:
-						{
+			fields: {
+				fileEspecificacionesTecnicas: {
+					validators: {
+						notEmpty: {
+							message: '<b style="color: red;">El campo "Memoria Descriptiva" es requerido.</b>'
+						}
+					}
+				}
+			}
+		});
+		$('#frmEspecificacionesTecnicasInd').formValidation({
+			framework: 'bootstrap',
+			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
+			live: 'enabled',
+			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
+			trigger: null,
+			fields: {
+				fileEspecificacionesTecnicas: {
+					validators: {
+						notEmpty: {
 							message: '<b style="color: red;">El campo "Memoria Descriptiva" es requerido.</b>'
 						}
 					}
@@ -233,46 +323,78 @@ function mostrarAnidado($meta, $expedienteTecnico)
 			idExpediente: idEt
 		}, base_url + 'index.php/ET_EspecificacionTecnica/AgregarGeneralidad', 'GET', null, null, false, true);
 	}
-	$('#btnGuardarEspecificacionesTecnicas').on('click', function(event)
-   	{
-        event.preventDefault();
-        $('#frmEspecificacionesTecnicas').data('formValidation').validate();
-		if(!($('#frmEspecificacionesTecnicas').data('formValidation').isValid()))
-		{
+	$('#btnGuardarEspecificacionesTecnicasDir').on('click', function(event) {
+		event.preventDefault();
+		$('#frmEspecificacionesTecnicasDir').data('formValidation').validate();
+		if (!($('#frmEspecificacionesTecnicasDir').data('formValidation').isValid())) {
 			return;
 		}
-        var formData=new FormData($("#frmEspecificacionesTecnicas")[0]);
-        $.ajax({
-            type:"POST",
-            url:base_url+"index.php/ET_EspecificacionTecnica/Insertar",
-            data: formData,
-            cache: false,
-            contentType:false,
-            processData:false,
-            beforeSend: function() 
-			{
-            	renderLoading();
-		    },
-            success:function(resp)
-            {
+		var formData = new FormData($("#frmEspecificacionesTecnicasDir")[0]);
+		$.ajax({
+			type: "POST",
+			url: base_url + "index.php/ET_EspecificacionTecnica/Insertar",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				renderLoading();
+			},
+			success: function(resp) {
 				$('#modalTemp').modal('hide');
-				$('#divModalCargaAjax').hide();				
-				window.location.href=base_url+"index.php/Expediente_Tecnico/verdetalle?id_et="+$('#hdIdExpedienteTecnico').val();
-            	objectJSON=JSON.parse(resp);
+				$('#divModalCargaAjax').hide();
+				window.location.href = base_url + "index.php/Expediente_Tecnico/verdetalle?id_et=" + $('#hdIdExpedienteTecnico').val();
+				objectJSON = JSON.parse(resp);
 				console.log(objectJSON);
-				swal('',objectJSON.mensaje,(objectJSON.proceso=='Correcto' ? 'success' : 'error'));
+				swal('', objectJSON.mensaje, (objectJSON.proceso == 'Correcto' ? 'success' : 'error'));
 				console.log("entrandogood");
 				$('#modalTemp').modal('hide');
-				$('#divModalCargaAjax').hide();				
-				window.location.href=base_url+"index.php/Expediente_Tecnico/verdetalle?id_et="+$('#hdIdExpedienteTecnico').val();
-            },
-			error: function ()
-			{
+				$('#divModalCargaAjax').hide();
+				window.location.href = base_url + "index.php/Expediente_Tecnico/verdetalle?id_et=" + $('#hdIdExpedienteTecnico').val();
+			},
+			error: function() {
 				console.log("entrando");
 				swal("Error", "Ha ocurrido un error inesperado", "error")
 				$('#divModalCargaAjax').hide();
 			}
-        });
-      	$('#frmEspecificacionesTecnicas')[0].reset();
-    });	
+		});
+		$('#frmEspecificacionesTecnicasDir')[0].reset();
+	});
+	$('#btnGuardarEspecificacionesTecnicasInd').on('click', function(event) {
+		event.preventDefault();
+		$('#frmEspecificacionesTecnicasInd').data('formValidation').validate();
+		if (!($('#frmEspecificacionesTecnicasInd').data('formValidation').isValid())) {
+			return;
+		}
+		var formData = new FormData($("#frmEspecificacionesTecnicasInd")[0]);
+		$.ajax({
+			type: "POST",
+			url: base_url + "index.php/ET_EspecificacionTecnica/Insertar",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				renderLoading();
+			},
+			success: function(resp) {
+				$('#modalTemp').modal('hide');
+				$('#divModalCargaAjax').hide();
+				window.location.href = base_url + "index.php/Expediente_Tecnico/verdetalle?id_et=" + $('#hdIdExpedienteTecnico').val();
+				objectJSON = JSON.parse(resp);
+				console.log(objectJSON);
+				swal('', objectJSON.mensaje, (objectJSON.proceso == 'Correcto' ? 'success' : 'error'));
+				console.log("entrandogood");
+				$('#modalTemp').modal('hide');
+				$('#divModalCargaAjax').hide();
+				window.location.href = base_url + "index.php/Expediente_Tecnico/verdetalle?id_et=" + $('#hdIdExpedienteTecnico').val();
+			},
+			error: function() {
+				console.log("entrando");
+				swal("Error", "Ha ocurrido un error inesperado", "error")
+				$('#divModalCargaAjax').hide();
+			}
+		});
+		$('#frmEspecificacionesTecnicasInd')[0].reset();
+	});
 </script>

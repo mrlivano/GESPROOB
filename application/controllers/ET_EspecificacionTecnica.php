@@ -19,17 +19,24 @@ class ET_EspecificacionTecnica extends CI_Controller
 		if($_POST)
 		{
 			$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoPorId($this->input->post("hdIdExpedienteTecnico"));
+			$tipo=$this->input->post("tipo");
+
 			var_dump($expedienteTecnico);
 			$this->db->trans_start();
 
-			if (file_exists("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_memoria_descriptiva))
+			if (file_exists("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_especificacion_tecnica))
 			{
-				unlink("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_memoria_descriptiva);
+				unlink("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_especificacion_tecnica);
 			}
+			if ($tipo==1) {
+			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico')."a";
+			}
+			elseif($tipo==2){
+			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico')."b";
 
+			}
 			$config['upload_path'] = './uploads/EspecificacionesTecnicas/';
 			$config['allowed_types'] = 'pdf|doc|docx';
-			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico');
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('fileEspecificacionesTecnicas'))
 			{
@@ -69,7 +76,7 @@ class ET_EspecificacionTecnica extends CI_Controller
 				}
 			}	
 		}
-		$et_documentos_f04 = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,4);
+		$et_documentos_f04 = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,3);
 	
 		$this->load->view('front/Ejecucion/EspecificacionTecnica/index',['expedienteTecnico'=>$expedienteTecnico,'et_documentos_f04'=>$et_documentos_f04]);
 	}
@@ -189,6 +196,14 @@ class ET_EspecificacionTecnica extends CI_Controller
 			$this->mydompdf->render();
 			$this->mydompdf->stream("ReporteMetrado.pdf", array("Attachment" => false));
 		}
+	}
+	public function FormatoEspecificacionTecnicaPorComponenteB()
+	{
+		$idExpedienteTecnico=$this->input->post('idExpediente');
+		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
+		
+		$this->load->view('front/Ejecucion/EspecificacionTecnica/formatoEspecificacionPorComponenteB',['expedienteTecnico'=>$expedienteTecnico]);
+	
 	}
 
 	private function obtenerMetaAnidada($meta)

@@ -364,6 +364,9 @@
 															<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Especificaciones Técnicas" onclick="listaComponente('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-04
 															</a>
+															<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Especificaciones Técnicas" onclick="listaComponenteB('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
+																<i class="fa fa-file-pdf-o"></i> Formato FF-04B
+															</a>
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-05
 															</a>
@@ -1759,6 +1762,11 @@ function listaComponente(idExpediente)
 {
 	paginaAjaxDialogo(null, 'Especificaciones Técnicas',{ idExpediente: idExpediente }, base_url+'index.php/ET_EspecificacionTecnica/FormatoEspecificacionTecnicaPorComponente', 'POST', null, null, false, true);
 }
+function listaComponenteB(idExpediente)
+{
+	paginaAjaxDialogo(null, 'Especificaciones Técnicas',{ idExpediente: idExpediente }, base_url+'index.php/ET_EspecificacionTecnica/FormatoEspecificacionTecnicaPorComponenteB', 'POST', null, null, false, true);
+}
+
 
 function listaComponenteAnalisis(idExpediente)
 {
