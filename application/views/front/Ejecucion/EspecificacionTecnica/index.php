@@ -95,20 +95,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 												<div>
 													<form id="frmEspecificacionesTecnicasDir">
 														<div class="row">
-															<?php if ($expedienteTecnico->url_especificacion_tecnica != '') { ?>
-																<div class="col-md-12 col-sm-12 col-xs-12">
-																	<div class="bs-glyphicons">
-																		<ul class="bs-glyphicons-list">
-																			<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?>a<?= $expedienteTecnico->url_especificacion_tecnica ?>">
-																				<li style="height:77px;">
-																					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-																					<span class="glyphicon-class">ver archivo</span>
-																				</li>
-																			</a>
-																		</ul>
-																	</div>
-																</div>
-															<?php } ?>
+															
 															<div class="col-md-12 col-sm-12 col-xs-12">
 																<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Especificación Tecnica:</label>
 																<div class="col-md-12 col-sm-12 col-xs-12">
@@ -180,20 +167,6 @@ function mostrarAnidado($meta, $expedienteTecnico)
 										<div>
 											<form id="frmEspecificacionesTecnicasInd">
 												<div class="row">
-													<?php if ($expedienteTecnico->url_especificacion_tecnica != '') { ?>
-														<div class="col-md-12 col-sm-12 col-xs-12">
-															<div class="bs-glyphicons">
-																<ul class="bs-glyphicons-list">
-																	<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?>b<?= $expedienteTecnico->url_especificacion_tecnica ?>">
-																		<li style="height:77px;">
-																			<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-																			<span class="glyphicon-class">ver archivo</span>
-																		</li>
-																	</a>
-																</ul>
-															</div>
-														</div>
-													<?php } ?>
 													<div class="col-md-12 col-sm-12 col-xs-12">
 														<label class="control-label"><?= ($expedienteTecnico->url_especificacion_tecnica != '' ? 'Reemplazar' : 'Adjuntar') ?> Especificación Tecnica:</label>
 														<div class="col-md-12 col-sm-12 col-xs-12">
