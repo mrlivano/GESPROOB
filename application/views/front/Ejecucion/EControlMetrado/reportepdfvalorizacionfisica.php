@@ -212,6 +212,41 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 					if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 						?>
+				</tbody>
+			</table>
+			<table style='page-break-after:always;'></br></table>
+			<table id="tablaContenido" style="width: 100%; font-size:10px;">
+			<thead>
+				<tr>
+					<th rowspan="3">ÍTEM</th>
+					<th rowspan="3">DESCRIPCIÓN</th>
+					<th rowspan="3">UNIDAD</th>
+					<th rowspan="2" colspan="3" >PRESUPUESTO</th>
+					<th colspan="7">AVANCES</th>
+					<th colspan="3" rowspan="2">SALDO</th>
+				</tr>
+				<tr>
+					<th colspan="2">ANTERIOR</th>
+					<th colspan="2">ACTUAL</th>
+					<th colspan="3">ACUMULADO</th>
+				</tr>
+				<tr>
+					<th>Metrado</th>
+					<th>P.Unit. S/.</th>
+					<th>Pres.</th>
+					<th>Metrado</th>
+					<th>Valoriz. S/.</th>
+					<th>Metrado</th>
+					<th>Valoriz. S/.</th>
+					<th>Metrado</th>
+					<th>Valoriz. S/.</th>
+					<th>%</th>
+					<th>Metrado</th>
+					<th>Valoriz. S/.</th>
+					<th>%</th>
+				</tr>
+			</thead>
+			<tbody>
 			<td colspan="16" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACION INDIRECTA</b></td>
 			<?php } ?>
 				<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
