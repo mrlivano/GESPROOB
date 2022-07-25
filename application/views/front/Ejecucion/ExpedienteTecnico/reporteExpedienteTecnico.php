@@ -163,24 +163,11 @@
 			<tr >
 			
 				<th style="width: 28%">Modalidad de Ejecución</th>
-				<td>Componentes</td>
+				<td colspan='2'>Componentes</td>
 			</tr>
 			<?php if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION DIRECTA"){ ?>
 			<tr>
-			<td>ADMINISTRACION DIRECTA</td>
-			<td>
-			
-			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
-			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
-			<?php  $i=$i+1;} 
-			?>
-			</td>
-			
-			</tr>
-			<?php }
-			 else if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION MIXTA"){ ?>
-			<tr>
-			<td rowspan='2'>ADMINISTRACION DIRECTA</td>
+			<td rowspan='<?=count($listarPiePresupuestoAD)+2?>'>ADMINISTRACION DIRECTA</td>
 			<td colspan='2'>
 			
 			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
@@ -191,10 +178,40 @@
 			</tr>
 			<tr>
 				<td>COSTO DIRECTO</td>
-				<td>S/</td>
+				<td style="text-align:right">S/ <?=a_number_format($listarExpedienteFicha001->costo_directo_inv_et_ad, 2, '.',",",3)?></td>
+			</tr>
+			<?php foreach($listarPiePresupuestoAD as $item){ ?>
+				<tr>
+				<td><?=$item->descripcion?></td>
+				<td style="text-align:right">S/ <?=a_number_format($item->monto, 2, '.',",",3)?></td>
+			</tr>
+			<?php } 
+			?>
+			<?php }
+			 else if(@$listarExpedienteFicha001->modalidad_ejecucion_et=="ADMINISTRACION MIXTA"){ ?>
+			<tr>
+			<td rowspan='<?=count($listarPiePresupuestoAD)+2?>'>ADMINISTRACION DIRECTA</td>
+			<td colspan='2'>
+			
+			<?php $i=1; foreach($listarComponentesAD as $item){ ?>
+			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $i=$i+1;} 
+			?>
+			</td>
 			</tr>
 			<tr>
-			<td>ADMINISTRACION INDIRECTA</td>
+				<td>COSTO DIRECTO</td>
+				<td style="text-align:right">S/ <?=a_number_format($listarExpedienteFicha001->costo_directo_inv_et_ad, 2, '.',",",3)?></td>
+			</tr>
+			<?php foreach($listarPiePresupuestoAD as $item){ ?>
+				<tr>
+				<td><?=$item->descripcion?></td>
+				<td style="text-align:right">S/ <?=a_number_format($item->monto, 2, '.',",",3)?></td>
+			</tr>
+			<?php } 
+			?>
+			<tr>
+			<td rowspan='<?=count($listarPiePresupuestoAI)+2?>'>ADMINISTRACION INDIRECTA</td>
 			<td colspan='2'>
 			<?php  foreach($listarComponentesAI as $item){ ?>
 			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
@@ -202,17 +219,39 @@
 			?>
 			</td>
 			</tr>
+			<tr>
+				<td>COSTO DIRECTO</td>
+				<td style="text-align:right">S/ <?=a_number_format($listarExpedienteFicha001->costo_directo_inv_et_ai, 2, '.',",",3)?></td>
+			</tr>
+			<?php foreach($listarPiePresupuestoAI as $item){ ?>
+				<tr>
+				<td><?=$item->descripcion?></td>
+				<td style="text-align:right">S/ <?=a_number_format($item->monto, 2, '.',",",3)?></td>
+			</tr>
+			<?php } 
+			?>
 			<?php }
 			else { ?>
 			<tr>
-			<td>ADMINISTRACION INDIRECTA</td>
-			<td>
-			<?php $i=1; foreach($listarComponentesAI as $item){ ?>
+			<td rowspan='<?=count($listarPiePresupuestoAI)+2?>'>ADMINISTRACION INDIRECTA</td>
+			<td colspan='2'>
+			<?php  foreach($listarComponentesAI as $item){ ?>
 			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
 			<?php  $i=$i+1;} 
 			?>
 			</td>
 			</tr>
+			<tr>
+				<td>COSTO DIRECTO</td>
+				<td style="text-align:right">S/ <?=a_number_format($listarExpedienteFicha001->costo_directo_inv_et_ai, 2, '.',",",3)?></td>
+			</tr>
+			<?php foreach($listarPiePresupuestoAI as $item){ ?>
+				<tr>
+				<td><?=$item->descripcion?></td>
+				<td style="text-align:right">S/ <?=a_number_format($item->monto, 2, '.',",",3)?></td>
+			</tr>
+			<?php } 
+			?>
 			<?php } ?>
 			</table>
 			</td>

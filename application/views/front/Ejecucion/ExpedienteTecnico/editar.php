@@ -345,13 +345,19 @@ $(function()
 {
 	mostrar($("#txtModalidadEjecucion").val());
 	CKEDITOR.replace('txtSituacioActual' ,{
-		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>'
+		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>',
+		resize_enabled: 'false',
+  	removePlugins: 'elementspath',
 	});
 	CKEDITOR.replace('txtSituacioDeseada' ,{
-		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>'
+		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>',
+		resize_enabled: 'false',
+  	removePlugins: 'elementspath',
 	});
   	CKEDITOR.replace('txtContribucioInterv' ,{
-		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>'
+		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>',
+		resize_enabled: 'false',
+  	removePlugins: 'elementspath',
 	});
 	var html=$("#hdtxtSituacioActual").val();
 	CKEDITOR.instances.txtSituacioActual.setData(html);

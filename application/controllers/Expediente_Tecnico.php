@@ -322,56 +322,56 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 
-			//obtener monto total
-			$costoTotalET=0;
-			$costoTotalDirectoET=0;
-			$opcion="BuscarExpedienteID";
-			$MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$hdIdExpediente);
+			// //obtener monto total
+			// $costoTotalET=0;
+			// $costoTotalDirectoET=0;
+			// $opcion="BuscarExpedienteID";
+			// $MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$hdIdExpediente);
 
-			if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-				$MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($hdIdExpediente, 'EXPEDIENTETECNICO');
+			// if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			// 	$MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($hdIdExpediente, 'EXPEDIENTETECNICO');
 	
-				$costoDirectoTotal=0;
-				foreach ($MostraExpedienteTecnicoExpe->childComponente as $key => $value)
-					{
-					$costoComponente=0;
-					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-					foreach ($value->childMeta as $index => $item)
-					{
-						$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
-						$costoComponente+=$item->costoMeta;
-					}
-					$costoDirectoTotal+=$costoComponente;
-					$value->costoComponente=$costoComponente;
-				}
-				$MostraExpedienteTecnicoExpe->costoDirecto=$costoDirectoTotal;
+			// 	$costoDirectoTotal=0;
+			// 	foreach ($MostraExpedienteTecnicoExpe->childComponente as $key => $value)
+			// 		{
+			// 		$costoComponente=0;
+			// 		$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			// 		foreach ($value->childMeta as $index => $item)
+			// 		{
+			// 			$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
+			// 			$costoComponente+=$item->costoMeta;
+			// 		}
+			// 		$costoDirectoTotal+=$costoComponente;
+			// 		$value->costoComponente=$costoComponente;
+			// 	}
+			// 	$MostraExpedienteTecnicoExpe->costoDirecto=$costoDirectoTotal;
 	
-				//COSTOS INDIRECTOS
-				$MostraExpedienteTecnicoExpe->piePresupuestoDirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($hdIdExpediente);
-			}
+			// 	//COSTOS INDIRECTOS
+			// 	$MostraExpedienteTecnicoExpe->piePresupuestoDirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($hdIdExpediente);
+			// }
 	
-			if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-				$MostraExpedienteTecnicoExpe->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($hdIdExpediente, 'EXPEDIENTETECNICO');
+			// if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			// 	$MostraExpedienteTecnicoExpe->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($hdIdExpediente, 'EXPEDIENTETECNICO');
 	
-				$costoDirectoTotalIndirecta=0;
-				foreach ($MostraExpedienteTecnicoExpe->childComponenteIndirecta as $key => $value)
-					{
-					$costoComponente=0;
-					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-					foreach ($value->childMeta as $index => $item)
-					{
-						$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
-						$costoComponente+=$item->costoMeta;
-					}
-					$costoDirectoTotalIndirecta+=$costoComponente;
-					$value->costoComponente=$costoComponente;
-				}
-				$MostraExpedienteTecnicoExpe->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
+			// 	$costoDirectoTotalIndirecta=0;
+			// 	foreach ($MostraExpedienteTecnicoExpe->childComponenteIndirecta as $key => $value)
+			// 		{
+			// 		$costoComponente=0;
+			// 		$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			// 		foreach ($value->childMeta as $index => $item)
+			// 		{
+			// 			$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
+			// 			$costoComponente+=$item->costoMeta;
+			// 		}
+			// 		$costoDirectoTotalIndirecta+=$costoComponente;
+			// 		$value->costoComponente=$costoComponente;
+			// 	}
+			// 	$MostraExpedienteTecnicoExpe->costoDirectoIndirecta=$costoDirectoTotalIndirecta;
 	
-				// costos directos total
+			// 	// costos directos total
 	
-				$MostraExpedienteTecnicoExpe->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($hdIdExpediente);
-			}
+			// 	$MostraExpedienteTecnicoExpe->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($hdIdExpediente);
+			// }
 			//fin
 
 			$config['upload_path']   = './uploads/ResolucioExpediente/';
@@ -390,8 +390,8 @@ class Expediente_Tecnico extends CI_Controller
 			$c_data['costo_total_preinv_et']=floatval(str_replace(",","",$this->input->post('txtCostoTotalPreInversion')));
 			$c_data['costo_directo_preinv_et']=floatval(str_replace(",","",$this->input->post('txtCostoDirectoPre')));
 			$c_data['costo_indirecto_preinv_et']=floatval(str_replace(",","",$this->input->post('txtCostoIndirectoPre')));
-			$c_data['costo_total_inv_et']=floatval(str_replace(",","",$costoTotalET));
-			$c_data['costo_directo_inv_et']=floatval(str_replace(",","",$costoTotalDirectoET));
+			// $c_data['costo_total_inv_et']=floatval(str_replace(",","",$costoTotalET));
+			// $c_data['costo_directo_inv_et']=floatval(str_replace(",","",$costoTotalDirectoET));
 			$c_data['gastos_generales_et']=floatval(str_replace(",","",$this->input->post('txtGastosGenerales')));
 			$c_data['gastos_supervision_et']=floatval(str_replace(",","",$this->input->post('txtGastosSupervision')));
 			$c_data['funcion_programatica']=$this->input->post('txtFuncion')."/".$this->input->post('txtPrograma')."/".$this->input->post('txtSubPrograma');
