@@ -61,6 +61,10 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$data=$this->Model_ET_Pie_Presupuesto->editar($etPiePresupuesto[0]->id_pie_presupuesto, $u_data);
 			}	
 
+			if($descripcion=='PRESUPUESTO TOTAL'){
+				$data=$this->Model_ET_Pie_Presupuesto->updatePresupuestoTotal($id_et, $modalidad, $monto);
+			}
+
 			$this->db->trans_complete();
 
 			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Pie de Presupuesto registrado correctamente.', 'id_pie_presupuesto' => $id_pie_presupuesto]);exit;
@@ -111,6 +115,28 @@ class ET_Pie_Presupuesto extends CI_Controller
 
 			$presupuestoEjecucion->indirecta=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionAdmIndCostoIndirecto();
 			$piePresupuesto->indirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
+		}
+
+		switch ($expedienteTecnico->modalidad_ejecucion_et) {
+			case 'ADMINISTRACION DIRECTA':
+				$et_data['costo_directo_inv_et_ad']=$expedienteTecnico->costoDirecto;
+				$et_data['costo_directo_inv_et']=$expedienteTecnico->costoDirecto;
+				$data=$this->Model_ET_Expediente_Tecnico->update($et_data, $id_ExpedienteTecnico);
+				break;
+			case 'ADMINISTRACION INDIRECTA':
+				$et_data['costo_directo_inv_et_ai']=$expedienteTecnico->costoDirectoIndirecta;
+				$et_data['costo_directo_inv_et']=$expedienteTecnico->costoDirectoIndirecta;
+				$data=$this->Model_ET_Expediente_Tecnico->update($et_data, $id_ExpedienteTecnico);
+				break;
+			case 'ADMINISTRACION MIXTA':
+				$et_data['costo_directo_inv_et_ad']=$expedienteTecnico->costoDirecto;
+				$et_data['costo_directo_inv_et_ai']=$expedienteTecnico->costoDirectoIndirecta;
+				$et_data['costo_directo_inv_et']=$expedienteTecnico->costoDirecto+$expedienteTecnico->costoDirectoIndirecta;
+				$data=$this->Model_ET_Expediente_Tecnico->update($et_data, $id_ExpedienteTecnico);
+				break;	
+
+			default:
+				break;
 		}
 
 		$this->load->view('front/Ejecucion/ETComponente/registroPie.php', ['expedienteTecnico'=>$expedienteTecnico,'PresupuestoEjecucion'=>$presupuestoEjecucion,'PiePresupuesto'=>$piePresupuesto]);

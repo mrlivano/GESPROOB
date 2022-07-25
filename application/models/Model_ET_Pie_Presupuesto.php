@@ -29,6 +29,21 @@ class Model_ET_Pie_Presupuesto extends CI_Model
 		return $data->result();
 	}
 
+	public function updatePresupuestoTotal($idExpedienteTecnico,$modalidad,$monto)
+	{
+		if ( $modalidad == 1 ){
+			$this->db->set('costo_total_inv_et_ad', $monto);
+			$this->db->set('costo_total_inv_et', 'case when costo_total_inv_et_ai is NULL then '.$monto.' else (CONVERT(DECIMAL(18,4), costo_total_inv_et_ai)+'.$monto.') end', FALSE);
+		} else {
+			$this->db->set('costo_total_inv_et_ai', $monto);
+			$this->db->set('costo_total_inv_et', 'case when costo_total_inv_et_ad is NULL then '.$monto.' else (CONVERT(DECIMAL(18,4), costo_total_inv_et_ad)+'.$monto.') end', FALSE);
+		}
+		$this->db->where('id_et', $idExpedienteTecnico);
+		$this->db->update('et_expediente_tecnico');
+
+		return $this->db->affected_rows();
+	}
+
 	function buscar($id)
 	{
 		$this->db->select('PIE_PRESUPUESTO.*');
