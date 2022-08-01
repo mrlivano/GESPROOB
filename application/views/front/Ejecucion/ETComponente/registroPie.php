@@ -114,6 +114,7 @@
 							</table>
 							<div class="form-group">
 								<button  class="btn btn-primary mr-2" onclick="agregarFilaD(<?= $contD ?>)">Agregar Fila</button>
+								<span style="color:red;">*PRESUPUESTO TOTAL - CAMPO OBLIGATORIO (Permite obtener la suma total del presupuesto de ejecución del proyecto)</span>
 							</div>
 						</div>
 					</div>
@@ -170,6 +171,7 @@
 							</table>
 							<div class="form-group">
 								<button type="button" class="btn btn-primary mr-2" onclick="agregarFilaI(<?= $contI ?>)">Agregar Fila</button>
+								<span style="color:red;">*PRESUPUESTO TOTAL - CAMPO OBLIGATORIO (Permite obtener la suma total del presupuesto de ejecución del proyecto)</span>
 							</div>
 						</div>
 					</div>

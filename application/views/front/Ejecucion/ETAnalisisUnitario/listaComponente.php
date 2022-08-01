@@ -34,8 +34,7 @@
 								<?php } ?>
             </div>
 						<?php }?>
-
-            <a href="<?=site_url('Expediente_Tecnico/reportePdfAnalisisPrecioUnitarioFF11?query='.@$idExpedienteTecnico);?>"><span class="label label-info">Descargar Formato FE-11 (Análisis de Costos Unitarios)</span></a>														
+													
 						</div>                        
 					</div>		
 				</div>

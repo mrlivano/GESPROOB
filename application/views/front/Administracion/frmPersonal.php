@@ -451,7 +451,7 @@
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre Cargo<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="txt_nombrecargo" name="txt_nombrecargo" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text">
+                                <input id="txt_nombrecargo" name="txt_nombrecargo" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text">
                               </div>
                         </div>
                       </div>
@@ -501,7 +501,7 @@
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombre Cargo<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="txt_nombrecargo_m" name="txt_nombrecargo_m" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text">
+                                <input id="txt_nombrecargo_m" name="txt_nombrecargo_m" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text">
                               </div>
                         </div>
                       </div>
@@ -553,7 +553,7 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Descripción<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input id="txt_descUsuarioTipo" name="txt_descUsuarioTipo" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
+                                  <input id="txt_descUsuarioTipo" name="txt_descUsuarioTipo" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
                                 </div>
                           </div>
                         </div>
@@ -609,7 +609,7 @@
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Descripción<span class="required">*</span>
                                   </label>
                                   <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="txt_descUsuarioTipoM" name="txt_descUsuarioTipoM" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
+                                    <input id="txt_descUsuarioTipoM" name="txt_descUsuarioTipoM" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
                                   </div>
                             </div>
                           </div>
@@ -654,7 +654,7 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Descripción<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input id="txt_nombre_esp" name="txt_nombre_esp" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
+                                      <input id="txt_nombre_esp" name="txt_nombre_esp" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
                                     </div>
                               </div>
                             </div>
@@ -703,7 +703,7 @@
                                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Descripción<span class="required">*</span>
                                       </label>
                                       <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="txt_nombre_esp_M" name="txt_nombre_esp_M" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
+                                        <input id="txt_nombre_esp_M" name="txt_nombre_esp_M" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  required="required" type="text" maxlength="50">
                                       </div>
                                 </div>
                               </div>

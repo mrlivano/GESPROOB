@@ -184,24 +184,6 @@
               <i class="fa fa-bars"></i>
             </button>
           </div>
-          <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-            <ul class="nav navbar-nav Menu">
-              <li class="dropdown">
-                <a href="" target="_blank" class="dropdown-toggle" >Guía de Usuario<span class="caret"></span></a>
-                  <ul class="dropdown-menu subMenu " role="menu">
-                      <li><a href="3" target="_blank">Mantenimiento de Parámetros</a></li>
-                      <li><a href="" target="_blank">PMI</a></li>
-                      <li><a href="" target="_blank">Formulación y Evaluación</a></li>
-                      <li><a href="" target="_blank">Ejecución</a></li>
-                      <li><a href="" target="_blank">Seguimiento</a></li>
-
-                      <li><a href="" target="_blank">Monitoreo</a></li>
-                      <li><a href="" target="_blank">Reportes</a></li>
-                      <li><a href="" target="_blank">Control de Usuarios</a></li>
-                  </ul>
-                  </li>
-            </ul>
-          </div>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li class="dropdown user user-menu">
