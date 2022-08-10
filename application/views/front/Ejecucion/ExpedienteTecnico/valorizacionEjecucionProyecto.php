@@ -34,7 +34,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
 				'<td>'.$value->cantidad.'</td>'.
-				'<td>S/.'.$value->precio_unitario.'</td>'.
+				'<td>S/.'.number_format($value->precio_unitario, 2).'</td>'.
 				'<td>S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>'.
 				'<td><span style="color:#d9534f;font-weight:bold" id="saldo'.$value->id_partida.'">'.number_format($value->saldo, 2).'</span></td>';
 

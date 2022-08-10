@@ -25,6 +25,8 @@
                                       <ul id="myTab" class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#tab_Sector" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"> <b>Personal</b></a>
                                         </li>
+                                        <li role="presentation" class=""><a href="#tab_Persona_Juridica" id="profile-tab0" data-toggle="tab" aria-expanded="false"> <b>Persona Jurídica</b></a>
+                                        </li>
                                         <li role="presentation" class=""><a href="#tab_Entidad" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"> <b>Cargo</b> </a>
                                         </li>
                                         <li role="presentation" class=""><a href="#user_type" role="tab"  id="profile-tab2" data-toggle="tab" aria-expanded="false"> <b>Tipo de Usuario</b> </a>
@@ -41,6 +43,47 @@
                                                   <div class="col-md-12 col-xs-12">
                                                         <div class="x_panel">
                                                             <button  type="button" id="btn_nuevoPersonal" class="btn btn-primary " data-toggle="modal" data-target="#VentanaRegistraPersonal" >
+                                                                      <span class="fa fa-plus-circle"></span>
+
+                                                                Nuevo
+                                                            </button>
+                                                          <div class="x_title">
+
+                                                            <div class="clearfix"></div>
+                                                          </div>
+
+                                                          <div class="x_content">
+                                                            <table id="table-Personal" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                              																<thead>
+                              																	<tr>
+                                                                  <th>ID</th>
+                              																		<th>DNI</th>
+                              																		<th>A. Paterno</th>
+                              																		<th>A. Materno</th>
+                              																		<th>Nombres</th>
+                              																		<th>Direción</th>
+                              																		<th>Grado académico</th>
+                              																		<th>Especialidad</th>
+                              																		<th>ACCIONES</th>
+                              																	</tr>
+                              																</thead>
+                                                            </table>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+                                            </div>
+                                         <!-- / fin tabla de Personal desde el row -->
+                                        </div>
+                                        <!-- /fin del Personal del sector -->
+                                           <!-- /Contenido del Persona Juridica -->
+                                           <div role="tabpanel" class="tab-pane fade" id="tab_Persona_Juridica" aria-labelledby="profile-tab0">
+                                             <!-- /tabla de Personal desde el row -->
+                                            <div class="row">
+
+                                                  <div class="col-md-12 col-xs-12">
+                                                        <div class="x_panel">
+                                                            <button  type="button" id="btn_nuevoPersona_Juridica" class="btn btn-primary " data-toggle="modal" data-target="#VentanaRegistraPersonaJuridica" >
                                                                       <span class="fa fa-plus-circle"></span>
 
                                                                 Nuevo
@@ -321,6 +364,104 @@
     </div>
   </div>
 <!-- /.fin ventana para registra una nuevO personal-->
+
+<!-- /.ventana para registra nuevo persona juridica -->
+<div class="modal fade" id="VentanaRegistraPersonaJuridica" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Registrar Persona Jurídica</h4>
+        </div>
+        <div class="modal-body">
+         <div class="row">
+            <div class="col-xs-12">
+                  <!-- FORULARIO PARA REGISTRAR NUEVO PERSONA JURIDICA  -->
+                <form class="form-horizontal " id="form-addPersonaJuridica" action="<?php echo base_url(); ?>Persona_Juridica/GetPersonal" method="POST">
+                    <div id="validarPersonaJuridica">
+
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">RUC<span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input id="txt_ruc" name="txt_ruc" class="mayuscula form-control col-md-7 col-xs-12" placeholder="RUC" maxlength="11" type="text">
+                          <label id="mensajeError" style="display: none;">  </label>
+                        </div> 
+                        <button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatosRuc()">Buscar</button>
+                      </div>
+
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Razón Social  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_razon_social" name="txt_razon_social" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Razón Social" type="text" maxlength="300">
+                        </div>
+                      </div>
+
+                        <div class="item form-group">
+                        <label class=" mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Representante Legal<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_representante_legal" name="txt_representante_legal" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Representante Legal" type="text" maxlength="500">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Dirección<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_direccionR" name="txt_direccionR" class="mayuscula form-control col-md-7 col-xs-12" placeholder="Dirección" type="text" maxlength="100">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Celular<span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input id="txt_telefonoR" name="txt_telefonoR" class="form-control col-md-7 col-xs-12"  placeholder="Telefono" type="text" maxlength="9">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Correo<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_correoR" name="txt_correoR" class="form-control col-md-7 col-xs-12" placeholder="Correo" type="email" maxlength="100">
+                        </div>
+                      </div>
+                      </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button id="send" type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Guardar
+                          </button>
+                           <button  class="btn btn-danger" data-dismiss="modal">
+                             <span class="glyphicon glyphicon-remove"></span>
+                            Cerrar
+                          </button>
+                        </div>
+                      </div>
+
+                </form> <!-- FORULARIO PARA REGISTRAR NUEVO Personal  -->
+            </div><!-- /.span -->
+          </div><!-- /.row -->
+        </div>
+        <div class="modal-footer">
+               <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <div> *Son campos obligatorios </div>
+                        </div>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- /.fin ventana para registra una nuevO persona juridica-->
+
 
 
 <!-- modificar la nuevo personal-->
@@ -816,6 +957,49 @@
                   });
     }
 
+    function cargarDatosRuc() {
+      let ruc=$('#txt_ruc').val();
+      console.log(ruc);
+      $.ajax(
+            {
+                url:"https://sysapis.uniq.edu.pe/pide/sunat/ruc?ruc="+ruc,
+                type: 'GET',
+                cache: false,
+                processData:false,
+                contentType:false,
+                beforeSend: function(request)
+                {
+                    renderLoading();
+                }               
+                              
+            }).done(
+              function(data)
+                {
+                  $('#divModalCargaAjax').hide();
+			            
+                  console.log(data);
+
+                  if(data)
+                  {
+                    $('#txt_razon_social').val(data.nombreRazonSocial);
+                  $('#txt_direccionR').val(data.direccion);
+                    swal('Operacion Completada','OK','success');
+                  }
+                  else
+                  {
+                    swal('No se pudo completar la Operacion','error');
+                  }
+                }).fail(
+                   function ( )
+                {
+                      $('#divModalCargaAjax').hide();
+                      $('#txt_razon_social').val('');
+                  $('#txt_direccionR').val('');
+                      swal('ERROR!','No se encontró el RUC verifique por favor','error');
+
+                  });
+    }
+
     $(function()
     {
         $('#validarPersonal').formValidation(
@@ -959,6 +1143,113 @@
                         notEmpty:
                         {
                             message: '<b style="color: red;">El campo "Fecha de Nacimiento" es requerido.</b>'
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#validarPersonaJuridica').formValidation(
+        {
+            framework: 'bootstrap',
+            excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
+            live: 'enabled',
+            message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
+            trigger: null,
+            fields:
+            {
+                txt_razon_social:
+                {
+                    validators:
+                    {
+                        notEmpty:
+                        {
+                            message: '<b style="color: red;">El campo "Razon Social" es requerido.</b>'
+                        },
+                        regexp:
+                        {
+                            regexp: /^[a-zñáéíóúüA-ZÑÁÉÍÓÚÜ\s]+$/,
+                            message: '<b style="color: red;">El campo "Razon Social" es solo texto.</b>'
+                        },
+                        stringLength:
+                        {
+                            max: 300,
+                            message: '<b style="color: red;">El campo "Razon Social" no puede exceder los 300 cáracteres.</b>'
+                        }
+                    }
+                },
+                txt_representante_legal:
+                {
+                    validators:
+                    {
+                        notEmpty:
+                        {
+                            message: '<b style="color: red;">El campo "Representante Legal" es requerido.</b>'
+                        },
+                        regexp:
+                        {
+                            regexp: /^[a-zñáéíóúüA-ZÑÁÉÍÓÚÜ\s]+$/,
+                            message: '<b style="color: red;">El campo "Representante Legal" es solo texto.</b>'
+                        },
+                        stringLength:
+                        {
+                            max: 500,
+                            message: '<b style="color: red;">El campo "Representante Legal" no puede exceder los 500 cáracteres.</b>'
+                        }
+                    }
+                },
+                txt_ruc:
+                {
+                    validators:
+                    {
+                        notEmpty:
+                        {
+                            message: '<b style="color: red;">El campo "RUC" es requerido.</b>'
+                        },
+                        regexp:
+                        {
+                            regexp: /^([0-9]){11}$/,
+                            message: '<b style="color: red;">El campo "RUC" es un numero de 11 dígitos.</b>'
+                        },
+                        between:
+                        {
+                            min: 00000000001,
+                            max: 99999999999,
+                            message: '<b style="color: red;">El campo "RUC" ingresado es incorrecto.</b>'
+                        }
+                    }
+                },
+                txt_correoR:
+                {
+                    validators:
+                    {
+                        regexp:
+                        {
+                            regexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: '<b style="color: red;">El campo "Correo electronico" no es un correo electronico.</b>'
+                        },
+                        stringLength:
+                        {
+                            max: 75,
+                            message: '<b style="color: red;">El campo "Correo electronico" no puede exceder los 100 cáracteres.</b>'
+                        }
+                    }
+
+                },
+                txt_telefonoR:
+                {
+                    validators:
+                    {
+                        regexp:
+                        {
+                            regexp: /^[0-9]{9}$/,
+                            message: '<b style="color: red;">El campo "Telefono" requiere carácteres numéricos.</b>'
+                        },
+                    stringLength:
+                        {
+                            min: 5,
+                            max: 9,
+                            message: '<b style="color: red;">El campo "Teléfono" debe contener entre 5 y 9 carácteres numéricos.</b>'
                         }
                     }
                 }

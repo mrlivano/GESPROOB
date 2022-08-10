@@ -866,7 +866,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="window.open(base_url+'index.php/ET_Cronograma_Ejecucion/index?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;">5.- Cronograma valorizado de ejecución del proyecto</a>
+																	<a href="" onclick="window.open(base_url+'index.php/ET_Cronograma_Ejecucion/index?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;">6.- Cronograma valorizado de ejecución del proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -884,7 +884,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?= site_url('Expediente_Tecnico/ControlMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>6.- Ejecución Diaria de Metrados.</a>
+																	<a href="<?= site_url('Expediente_Tecnico/ControlMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>7.- Ejecución Diaria de Metrados.</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -902,7 +902,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?= site_url('Expediente_Tecnico/ValorizacionFisicaMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>7.- Valorización Mensual.</a>
+																	<a href="<?= site_url('Expediente_Tecnico/ValorizacionFisicaMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>8.- Valorización Mensual.</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -920,7 +920,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">8.- Informe Mensual.</a>
+																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">9.- Informe Mensual.</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -938,7 +938,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/insertar?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">9.- Manifiesto de Gastos </a>
+																	<a href="<?= site_url('Manifiesto_Gasto/insertar?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">10.- Manifiesto de Gastos </a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -956,7 +956,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">10.- Ejecución Presupuestal  </a>
+																	<a href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">11.- Ejecución Presupuestal  </a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -974,7 +974,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/programacionClasificador?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">11.- Programación de Presupuesto por Clasificador  </a>
+																	<a href="<?= site_url('Manifiesto_Gasto/programacionClasificador?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">12.- Programación de Presupuesto por Clasificador  </a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
@@ -992,7 +992,7 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="<?=site_url('ET_Maquinaria/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">12.- Registro de Maquinaria</a>
+																	<a href="<?=site_url('ET_Maquinaria/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">13.- Registro de Maquinaria</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>

@@ -75,7 +75,7 @@
 										<th style="width: 10%">DESCRIPCION</th>
 										<th style="width: 10%">VARIABLE</th>
 										<th style="width: 10%">MACRO</th>
-										<th style="width: 1%">GASTO</th>
+										<!-- <th style="width: 1%">GASTO</th> -->
 										<th style="width: 5%">MONTO</th>
 										<th style="width: 20%">OPCION</th>
 									</tr>
@@ -83,25 +83,23 @@
 								<tbody id="bodyPieD">
 
 									<?php foreach ($PiePresupuesto->directa as $key => $value) { ?><?php $contD += 1 ?>
-										<tr id="trD<?=$contD?>">
+										<tr id="trD<?=$contD?>" style=<?php echo($value->id_presupuesto_ej==NULL?"background:#eee":"white")?>>
 											<td style="width: 10%">
 											<input type="hidden" id="idPieDirecta<?= $contD ?>" value="<?= $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucionDirecta<?= $contD ?>" id="presupuestoEjecucionDirecta<?= $contD ?>" onchange="changePresupuestoDirecta(this,<?=$contD?>)">
 													<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"<?php echo ($presupuesto->desc_presupuesto_ej == $value->descripcion ? "selected" : "") ?>>
 														<?= $presupuesto->desc_presupuesto_ej ?></option><?php } ?>
-														<option value="0" <?php echo ('COSTO TOTAL EJECUCION DE OBRA' == $value->descripcion ? "selected" : "") ?>>COSTO TOTAL EJECUCION DE OBRA</option> 
-														<option value="0" <?php echo ('SUBTOTAL' == $value->descripcion ? "selected" : "") ?>>SUBTOTAL</option> 
 														<option value="0" <?php echo ('PRESUPUESTO TOTAL' == $value->descripcion ? "selected" : "") ?>>PRESUPUESTO TOTAL</option> 
 													
 												</select>
 											</td>
-											<td style="width: 10%"><input style="width: 100%" class="variableDirecta" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 10%"><input style="width: 100%" class="variableDirecta" id="variableDirecta<?= $contD ?>" name="variableDirecta<?= $contD ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" onchange="modifiedPie(this)" value="<?= $value->variable ?>"></td>
 											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
-											<td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
+											<!-- <td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td> -->
 											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
-											<td style="width: 40%">
-											<button onclick="guardarComponenteD(<?= $contD ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+											<td style="width: 20%; background:#94cbbf">
+											<button onclick="guardarComponenteD(<?= $contD ?>,this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
 											<?php if(in_array($value->id_presupuesto_ej,array('3','4','6'))){ ?>
 											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
@@ -134,7 +132,7 @@
 										<th style="width: 10%">DESCRIPCION</th>
 										<th style="width: 10%">VARIABLE</th>
 										<th style="width: 10%">MACRO</th>
-										<th style="width: 1%">GASTO</th>
+										<!-- <th style="width: 1%">GASTO</th> -->
 										<th style="width: 5%">MONTO</th>
 										<th style="width: 20%">OPCION</th>
 									</tr>
@@ -142,24 +140,22 @@
 								<tbody id="bodyPie">
 
 									<?php foreach ($PiePresupuesto->indirecta as $key => $value) { ?><?php $contI += 1 ?>
-										<tr id="trI<?=$contI?>">
+										<tr id="trI<?=$contI?>" style=<?php echo($value->id_presupuesto_ej==NULL?"background:#eee":"white")?>>
 											<td style="width: 10%">
 											<input type="hidden" id="idPieIndirecta<?= $contI ?>" value="<?= $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucionIndirecta<?= $contI ?>" id="presupuestoEjecucionIndirecta<?= $contI ?>" onchange="changePresupuestoIndirecta(this,<?=$contI?>)">
 													<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>
-														<option value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>
+														<option value="<?= $presupuesto->id_presupuesto_ej ?>" <?php echo ($presupuesto->desc_presupuesto_ej == $value->descripcion ? "selected" : "") ?>><?= $presupuesto->desc_presupuesto_ej ?></option>
 													<?php } ?>
-													<option value="0" <?php echo ('COSTO TOTAL EJECUCION DE OBRA' == $value->descripcion ? "selected" : "") ?>>COSTO TOTAL EJECUCION DE OBRA</option> 
-														<option value="0" <?php echo ('SUBTOTAL' == $value->descripcion ? "selected" : "") ?>>SUBTOTAL</option> 
 														<option value="0" <?php echo ('PRESUPUESTO TOTAL' == $value->descripcion ? "selected" : "") ?>>PRESUPUESTO TOTAL</option> 
 												</select>
 											</td>
-											<td style="width: 10%"><input style="width: 100%" class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->variable ?>"></td>
+											<td style="width: 10%"><input style="width: 100%" class="variableIndirecta" id="variableIndirecta<?= $contI ?>" name="variableIndirecta<?= $contI ?>" type="text" onkeyup="this.value = this.value.toUpperCase();" onchange="modifiedPie(this)" value="<?= $value->variable ?>"></td>
 											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
-											<td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td>
+											<!-- <td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td> -->
 											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
-											<td style="width: 20%">
-											<button onclick="guardarComponenteI(<?= $contI ?>)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
+											<td style="width: 20%; background:#94cbbf;">
+											<button onclick="guardarComponenteI(<?= $contI ?>,this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
 											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
 											<?php if(in_array($value->id_presupuesto_ej,array('1037','1040','1039'))){ ?>
 											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
@@ -204,15 +200,12 @@
 			'<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 			'<?php }} ?>' +
-			'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>' +
-			'<option value="0">SUBTOTAL</option>' +
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
 			'</select></td>' +
-			'<td style="width: 10%"><input size="7" class="variableDirecta" id="variableDirecta' + cont + '" name="variableDirecta' + cont + '" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>' +
+			'<td style="width: 10%"><input size="7" class="variableDirecta" id="variableDirecta' + cont + '" name="variableDirecta' + cont + '" type="text" onkeyup="this.value = this.value.toUpperCase();" onchange="modifiedPie(this)"></td>' +
 			'<td style="width: 10%"><input size="20" id="macroDirecta' + cont + '" name="macroDirecta' + cont + '" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="1" id="gastoDirecta' + cont + '" name="gastoDirecta' + cont + '" type="checkbox" disabled></td>' +
 			'<td style="width: 10%"><input size="20" id="montoDirecta' + cont + '" name="montoDirecta' + cont + '" type="text" disabled></td>' +
-			'<td style="width: 10%"><button onclick="guardarComponenteD(' + cont + ')" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>'+
+			'<td style="width: 10%"><button onclick="guardarComponenteD(' + cont + ',this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>'+
 			'<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(' + cont + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>';
 			document.getElementById("bodyPieD").appendChild(tr);
 	}
@@ -227,15 +220,12 @@
 			'<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){ foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>' +
 			'<option size="10" value="<?= $presupuesto->id_presupuesto_ej ?>"><?= $presupuesto->desc_presupuesto_ej ?></option>' +
 			'<?php }} ?>' +
-			'<option value="0">SUBTOTAL</option>' +
-			'<option value="0">COSTO TOTAL EJECUCION DE OBRA</option>' +
 			'<option value="0">PRESUPUESTO TOTAL</option>' +
 			'</select></td>' +
-			'<td style="width: 10%"><input size="7" class="variableIndirecta" id="variableIndirecta' + cont + '" name="variableIndirecta' + cont + '" type="text" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="20" id="macroIndirecta' + cont + '" name="macroIndirecta' + cont + '" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();"></td>' +
-			'<td style="width: 10%"><input size="1" id="gastoIndirecta' + cont + '" name="gastoIndirecta' + cont + '" type="checkbox" disabled></td>' +
+			'<td style="width: 10%"><input size="7" class="variableIndirecta" id="variableIndirecta' + cont + '" name="variableIndirecta' + cont + '" type="text" onkeyup="this.value = this.value.toUpperCase();" onchange="modifiedPie(this)"></td>' +
+			'<td style="width: 10%"><input size="20" id="macroIndirecta' + cont + '" name="macroIndirecta' + cont + '" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();" ></td>' +
 			'<td style="width: 10%"><input size="20" id="montoIndirecta' + cont + '" name="montoIndirecta' + cont + '" type="text" disabled></td>' +
-			'<td style="width: 10%"><button onclick="guardarComponenteI(' + cont + ')" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>'+
+			'<td style="width: 10%"><button onclick="guardarComponenteI(' + cont + ',this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>'+
 			'<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(' + cont + ')"><i class="fa fa-trash" aria-hidden="true"></i></button></td>';
 			document.getElementById("bodyPie").appendChild(tr);
 	
@@ -273,6 +263,7 @@
 		} catch (error) {
 			document.querySelector('#montoDirecta' + indexResp).value = 0;
 		}
+		modifiedPie(macro);
 	}
 	function obtenerMacroIndirecta(macro) {
 		const indexResp = macro.id.split('macroIndirecta')[1];
@@ -296,17 +287,18 @@
 		} catch (error) {
 			document.querySelector('#montoIndirecta' + indexResp).value = 0;
 		}
+		modifiedPie(macro);
 	}
 
 	function changePresupuestoDirecta(select, cont) {
 		if (select.value == '0') {
 			select.parentElement.parentElement.style.background = '#eee';
-			select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = false;
+			// select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = false;
 		} else {
 			select.parentElement.parentElement.style.background = 'white';
-			select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = true;
+			// select.parentElement.parentElement.querySelector('#gastoDirecta' + cont).checked = true;
 		}
-		console.log(select.value);
+		modifiedPie(select);
 		switch (select.value) {
 			case 3:
 				
@@ -325,14 +317,15 @@
 	function changePresupuestoIndirecta(select, cont) {
 		if (select.value == '0') {
 			select.parentElement.parentElement.style.background = '#eee';
-			select.parentElement.parentElement.querySelector('#gastoIndirecta' + cont).checked = false;
+			// select.parentElement.parentElement.querySelector('#gastoIndirecta' + cont).checked = false;
 		} else {
 			select.parentElement.parentElement.style.background = 'white';
-			select.parentElement.parentElement.querySelector('#gastoIndirecta' + cont).checked = true;
+			// select.parentElement.parentElement.querySelector('#gastoIndirecta' + cont).checked = true;
 		}
+		modifiedPie(select);
 	}
 
-	function guardarComponenteD(index) {
+	function guardarComponenteD(index,button) {
 		
 		let descripcion = $('#presupuestoEjecucionDirecta' + index).find("option:selected").text().trim();
 		let variable = $('#variableDirecta' + index).val();
@@ -364,6 +357,22 @@
 			function(objectJSON) {
 				resultado = JSON.parse(objectJSON);
 				console.log(resultado);
+				button.parentElement.style.background = '#94cbbf';
+				// agregar boton para agregar documento
+				const addDoc=['3','4','6']
+				let btn= document.createElement('button');
+				if(addDoc.includes(idPresupuesto)){
+					btn.id ="modal-pdf";
+					btn.setAttribute('class','btn btn-primary btn-xs');
+					btn.setAttribute("data-toggle", "modal");
+					btn.setAttribute("data-elvalor", idPresupuesto);
+					btn.setAttribute("data-target", "#modal-pdf");
+					btn.innerHTML= '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>';
+					button.parentElement.appendChild(btn);
+				} else{
+
+				}
+				//end
 				swal({
 					title: '',
 					text: resultado.mensaje,
@@ -374,7 +383,7 @@
 			}, false, true)
 		}
 	}
-	function guardarComponenteI(index) {
+	function guardarComponenteI(index,button) {
 		let descripcion = $('#presupuestoEjecucionIndirecta' + index).find("option:selected").text().trim();
 		let variable = $('#variableIndirecta' + index).val();
 		let macro = $('#macroIndirecta' + index).val();
@@ -405,6 +414,22 @@
 			'POST', null,
 			function(objectJSON) {
 				resultado = JSON.parse(objectJSON);
+				button.parentElement.style.background = '#94cbbf';
+				// agregar boton para agregar documento
+				const addDoc=['1037','1040','1039']
+				let btn= document.createElement('button');
+				if(addDoc.includes(idPresupuesto)){
+					btn.id ="modal-pdf";
+					btn.setAttribute('class','btn btn-primary btn-xs');
+					btn.setAttribute("data-toggle", "modal");
+					btn.setAttribute("data-elvalor", idPresupuesto);
+					btn.setAttribute("data-target", "#modal-pdf");
+					btn.innerHTML= '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>';
+					button.parentElement.appendChild(btn);
+				} else{
+
+				}
+				//end
 				swal({
 					title: '',
 					text: resultado.mensaje,
@@ -416,7 +441,18 @@
 		}
 	}
 	function eliminarFilaD(index){
-		paginaAjaxJSON({
+		swal({
+            title: "¿Realmente desea proseguir con la operación?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText:"CERRAR" ,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "SI,ELIMINAR",
+            closeOnConfirm: false
+        },
+      function(){
+				paginaAjaxJSON({
 				"id_pie_presupuesto" : $('#idPieDirecta'+index).val(),
 			},
 			base_url + 'index.php/ET_Pie_Presupuesto/eliminar',
@@ -431,26 +467,36 @@
 				function() {});
 				$("#trD" + index).remove();
 			}, false, true)
-		
+    });
 }
 function eliminarFilaI(index){
-	console.log($('#idPieIndirecta'+index).val(),);
-	paginaAjaxJSON({
-				"id_pie_presupuesto" : $('#idPieIndirecta'+index).val(),
-			},
-			base_url + 'index.php/ET_Pie_Presupuesto/eliminar',
-			'POST', null,
-			function(objectJSON) {
-				resultado = JSON.parse(objectJSON);
-				swal({
-					title: '',
-					text: resultado.mensaje,
-					type: (resultado.proceso == 'Correcto' ? 'success' : 'error')
-				},
-				function() {});
-				$("#trI" + index).remove();
-			}, false, true)
-	
+	swal({
+            title: "¿Realmente desea proseguir con la operación?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText:"CERRAR" ,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "SI,ELIMINAR",
+            closeOnConfirm: false
+        },
+      function(){
+			paginaAjaxJSON({
+						"id_pie_presupuesto" : $('#idPieIndirecta'+index).val(),
+					},
+					base_url + 'index.php/ET_Pie_Presupuesto/eliminar',
+					'POST', null,
+					function(objectJSON) {
+						resultado = JSON.parse(objectJSON);
+						swal({
+							title: '',
+							text: resultado.mensaje,
+							type: (resultado.proceso == 'Correcto' ? 'success' : 'error')
+						},
+						function() {});
+						$("#trI" + index).remove();
+					}, false, true)
+    });
 }
 $("#formAddDocumento").submit(function(event)
 	{
@@ -484,4 +530,13 @@ $("#formAddDocumento").submit(function(event)
   var modal = $(this);
   modal.find('.modal-body #presupuesto_ejecucion').val(recipient)
 })
+
+function modifiedPie(component) {
+	if(component.parentElement.parentElement.childNodes[11]){
+			component.parentElement.parentElement.childNodes[11].style.background = 'white';
+		}
+		else{
+			component.parentElement.parentElement.childNodes[5].style.background = 'white';
+		}
+}
 </script>

@@ -108,7 +108,7 @@
 								</tr>
 							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoDirecta as $key => $value) { ?>
 								<tr>
-									<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
+									<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?></b></th>
 									<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
 							
 								</tr>				
@@ -128,7 +128,7 @@
 							</tr>
 							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
 								<tr>
-									<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;': ($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?> <span style="font-style: italic;">(<?=strtoupper(html_escape($value->variable))?>)</span> (<?=strtoupper(html_escape($value->macro))?>)</b></th>
+									<th style="width: 85%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;': ($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><b><?=strtoupper(html_escape($value->descripcion))?></b></th>
 									<td style="width: 15%;text-align: right; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
 							
 								</tr>				
@@ -269,20 +269,20 @@
 								<input id="txtNumFolio" name="txtNumFolio" value="<?= $ExpedienteTecnicoM->num_folios?>" class="form-control col-md-4 col-xs-12"  placeholder="Número de folios" autocomplete="off" >
 							</div>
 						</div>
+						<?php if($ExpedienteTecnicoM->id_etapa_et==3 || $ExpedienteTecnicoM->id_etapa_et==10){ ?>
 						<div class="col-md-6 col-sm-12 col-xs-12">
-                            <label class="control-label">Subir Resolución de Aprobacion: </label>                            
-                            <div class="col-md-12 col-sm-9 col-xs-12">
-                            	<input type="hidden" name="Editurl" id="Editurl" value="<?= $ExpedienteTecnicoM->url_doc_aprobacion_et?>" notValidate>
-                                <input type="file" accept=".doc, .docx, .pdf" id="Documento_Resolucion" name="Documento_Resolucion" notValidate >
-                                <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otra resolución remplazara a la anterior</b>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                            <label class="control-label">Fecha de Aprobacion:</label>
-                            <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" name="txtFechaAprobacion" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaAprobacion" Validate>
-                        </div>
-					</div>
-					<div class="row">
+                <label class="control-label">Subir Resolución de Aprobacion: </label>                            
+                <div class="col-md-12 col-sm-9 col-xs-12">
+                	<input type="hidden" name="Editurl" id="Editurl" value="<?= $ExpedienteTecnicoM->url_doc_aprobacion_et?>" notValidate>
+                    <input type="file" accept=".doc, .docx, .pdf" id="Documento_Resolucion" name="Documento_Resolucion" notValidate >
+                    <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otra resolución remplazara a la anterior</b>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <label class="control-label">Fecha de Aprobacion:</label>
+                <input class="form-control col-md-4 col-xs-12" type="date" max="2050-12-31" name="txtFechaAprobacion" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaAprobacion" Validate>
+            </div>
+						<?php }?>
 						<div class="col-md-4 col-sm-3 col-xs-12">
 							<label class="control-label">Fotografías:</label>
 							<div>

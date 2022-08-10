@@ -61,7 +61,7 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$data=$this->Model_ET_Pie_Presupuesto->editar($etPiePresupuesto[0]->id_pie_presupuesto, $u_data);
 			}	
 
-			if($descripcion=='PRESUPUESTO TOTAL'){
+			if($descripcion=='PRESUPUESTO TOTAL' && $id_presupuesto_ej==0){
 				$data=$this->Model_ET_Pie_Presupuesto->updatePresupuestoTotal($id_et, $modalidad, $monto);
 			}
 
