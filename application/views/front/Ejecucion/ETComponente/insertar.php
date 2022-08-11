@@ -16,7 +16,7 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			$htmlTemp .= '<input type="button" class="btn btn-default btn-xs" title="Agregar Clasificador" value="+C" onclick="paginaAjaxDialogo(\'clasificadorMeta\', \'Asociar a Clasificador\', { idET : ' . $idExpedienteTecnico . ', idMeta : ' . $meta->id_meta . '}, \'' . base_url() . 'index.php/ET_Meta_Analitico/insertar\', \'get\', null, null, false, true);" style="width: 30px;" style="width: 30px;">';
 		}
 
-		$htmlTemp .= '<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta' . $meta->id_meta . '" contenteditable>' . html_escape($meta->numeracion) . ' ' . html_escape($meta->desc_meta) . ' - ' . number_format($meta->costoMeta, 4, '.', ',') . '</span>' .
+		$htmlTemp .= '<span style="text-transform: uppercase; font-weight: bold;" id="nombreMeta' . $meta->id_meta . '" contenteditable>' . html_escape($meta->numeracion) . ' ' . html_escape($meta->desc_meta) . ' - ' . number_format($meta->costoMeta, 2, '.', ',') . '</span>' .
 			((count($meta->childPartida)) > 0 ? '<div style="margin-bottom : 8px;margin-top : 2px;" id="demo' . $meta->id_meta . '" class="collapse"><table class ="tablaPartidas"><thead><th class = "col-md-2">OPCIONES</th><th class = "col-md-6">PARTIDA</th><th class = "col-md-1">U. MEDIDA</th><th class = "col-md-1">CANTIDAD</th><th class = "col-md-1">PRECIO U.</th><th class = "col-md-1">TOTAL</th></thead><tbody>' : '<ul>');
 
 		if (count($meta->childMeta) == 0) {

@@ -1016,8 +1016,13 @@ function autorizar($url)
     'Gerencia/UpdateOficinaR',
     'ProyectoInversion/ReportePorOficina',
     'ProyectoInversion/proyectosPorOficina',
-    'ProyectoInversion/detalladoProyectoInversion'
-    
+    'ProyectoInversion/detalladoProyectoInversion',
+    'Persona_Juridica/GetPersonal',
+    'Persona_Juridica/EliminarPersonal',
+    'Persona_Juridica/AddPersonal',
+    'Persona_Juridica/verifyPersonalByRUC',
+    'Persona_Juridica/UpdatePersonal',
+    'Persona_Juridica/EliminarPersonal',
   );
     foreach( $lista_API as $value ) {
       array_push($arrayPermitido, $value);

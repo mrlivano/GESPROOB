@@ -36,7 +36,7 @@ class Persona_Juridica extends CI_Controller
         {
             show_404();
         }
-    }
+    }    
 
     public function ListarPersonal()
     {
@@ -120,20 +120,16 @@ class Persona_Juridica extends CI_Controller
         {
           $msg = array();
 
-          $c_data['id_oficina'] = $this->input->post("Cbx_Oficina");
-          $c_data['nombres']= strtoupper($this->input->post("txt_nombrepersonal"));
-          $c_data['apellido_p'] = strtoupper($this->input->post("txt_apellidopaterno"));
-          $c_data['apellido_m'] = strtoupper($this->input->post("txt_apellidomaterno"));
-          $c_data['dni']= $this->input->post("txt_dni");
-          $c_data['direccion'] = $this->input->post("txt_direccion");
-          $c_data['telefonos'] = $this->input->post("txt_telefono");
-          $c_data['correo']= $this->input->post("txt_correo");
-          $c_data['grado_academico'] = $this->input->post("txt_gradoacademico");
-          $c_data['id_esp'] = $this->input->post("Cbx_especialidad");
+          $c_data['razon_social']= strtoupper($this->input->post("txt_razon_social"));
+          $c_data['representante_legal'] = strtoupper($this->input->post("txt_representante_legal"));
+          $c_data['ruc']= $this->input->post("txt_ruc");
+          $c_data['direccion'] = $this->input->post("txt_direccionR");
+          $c_data['telefono'] = $this->input->post("txt_telefonoR");
+          $c_data['correo']= $this->input->post("txt_correoR");
 
           $q1 = $this->Model_Persona_Juridica->addPersona($c_data);
 
-          $msg = ($q1>0 ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+          $msg = ($q1>0 ? (['proceso' => 'Correcto', 'mensaje' => 'Los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
           $this->load->view('front/json/json_view', ['datos' => $msg]);
         }
         else
@@ -143,10 +139,10 @@ class Persona_Juridica extends CI_Controller
 
     }
 
-    function verifyPersonalByDNI()
+    function verifyPersonalByRUC()
   	{
-      $dni = $this->input->post('dni');
-  		$data = count($this->Model_Persona_Juridica->verifyPersonalByDNI($dni));
+      $ruc = $this->input->post('ruc');
+  		$data = count($this->Model_Persona_Juridica->verifyPersonalByRUC($ruc));
   		echo json_encode(['cantidad'=>$data]);exit;
   	}
 
@@ -154,19 +150,15 @@ class Persona_Juridica extends CI_Controller
     {
         if ($this->input->is_ajax_request())
         {
-            $c_data['id_oficina'] = $this->input->post("Cbx_OficinaModificar");
-            $c_data['nombres']= $this->input->post("txt_nombrepersonalm");
-            $c_data['apellido_p'] = $this->input->post("txt_apellidopaternom");
-            $c_data['apellido_m'] =  $this->input->post("txt_apellidomaternom");
-            $c_data['dni']= $this->input->post("txt_dnim");
-            $c_data['direccion'] = $this->input->post("txt_direccionm");
-            $c_data['telefonos'] = $this->input->post("txt_telefonom");
-            $c_data['correo']= $this->input->post("txt_correom");
-            $c_data['grado_academico'] = $this->input->post("txt_gradoacademicom");
-            $c_data['id_esp'] = $this->input->post("txtEspecialidadm");
+            $c_data['razon_social']= $this->input->post("txt_razon_socialm");
+            $c_data['representante_legal'] = $this->input->post("txt_representante_legalm");
+            $c_data['ruc']= $this->input->post("txt_rucm");
+            $c_data['direccion'] = $this->input->post("txt_direccionRm");
+            $c_data['telefono'] = $this->input->post("txt_telefonoRm");
+            $c_data['correo']= $this->input->post("txt_correoRm");
             $msg = array();
 
-            $q1 = $this->Model_Persona_Juridica->UpdatePersonal($c_data,$this->input->post("txt_idpersonam"));
+            $q1 = $this->Model_Persona_Juridica->UpdatePersonal($c_data,$this->input->post("txt_idpersonamR"));
 
             $msg = ($q1>0 ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
             $this->load->view('front/json/json_view', ['datos' => $msg]);
@@ -183,9 +175,9 @@ class Persona_Juridica extends CI_Controller
         if ($this->input->is_ajax_request()) {
             $flag=0;
             $msg="";
-            $id_persona = $this->input->post("id_persona");
+            $id_persona_juridica = $this->input->post("id_persona_juridica");
 
-        if($this->Model_Persona_Juridica->EliminarPersonal($id_persona)==true){
+        if($this->Model_Persona_Juridica->EliminarPersonal($id_persona_juridica)==true){
                 $flag=0;
                 $msg="registro Eliminado Satisfactoriamente";
             }

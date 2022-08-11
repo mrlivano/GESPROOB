@@ -25,20 +25,20 @@ class Model_Persona_Juridica extends CI_Model
 
     public function addPersona($data)
     {
-        $this->db->insert('PERSONA',$data);
+        $this->db->insert('PERSONA_JURIDICA',$data);
         return $this->db->affected_rows();
     }
-    public function UpdatePersonal($data,$id_persona)
+    public function UpdatePersonal($data,$id_persona_juridica)
     {
         $this->db->set($data);
-        $this->db->where('id_persona', $id_persona);
-        $this->db->update('PERSONA');
+        $this->db->where('id_persona_juridica', $id_persona_juridica);
+        $this->db->update('PERSONA_JURIDICA');
         return $this->db->affected_rows();
     }
-    public function EliminarPersonal($id_persona)
+    public function EliminarPersonal($id_persona_juridica)
     {
-          $this->db->where('id_persona',$id_persona);
-          $this->db->delete('PERSONA');
+          $this->db->where('id_persona_juridica',$id_persona_juridica);
+          $this->db->delete('PERSONA_JURIDICA');
           if($this->db->affected_rows()>0){
           return true;
           }
@@ -99,21 +99,6 @@ class Model_Persona_Juridica extends CI_Model
         return $responsable->result();
     }
 
-    // public function ResponsableExpedieteElaboracion($id_ExpedienteTecnico)
-    // {
-    //    $responsable = $this->db->query("select ET_RESPONSABLE.*, PERSONA.*, E.nombre_esp from ET_RESPONSABLE INNER JOIN PERSONA ON ET_RESPONSABLE.id_persona=PERSONA.id_persona INNER JOIN ET_TIPO_RESPONSABLE on ET_RESPONSABLE.id_tipo_responsable_et=ET_TIPO_RESPONSABLE.id_tipo_responsable_et inner join ESPECIALIDAD E ON E.id_esp=PERSONA.id_esp where id_et='".$id_ExpedienteTecnico."' and codigo_tipo_responsable_et='001' ");
-
-    //   return $responsable->result()[0];
-
-    // }
-    // public function ResponsableExpedieteEjecucion($id_ExpedienteTecnico)
-    // {
-    //    $responsable = $this->db->query(" select ET_RESPONSABLE.*, PERSONA.*, E.nombre_esp  from ET_RESPONSABLE INNER JOIN PERSONA ON ET_RESPONSABLE.id_persona=PERSONA.id_persona INNER JOIN ET_TIPO_RESPONSABLE on ET_RESPONSABLE.id_tipo_responsable_et=ET_TIPO_RESPONSABLE.id_tipo_responsable_et inner join ESPECIALIDAD E ON E.id_esp=PERSONA.id_esp where id_et='".$id_ExpedienteTecnico."' and codigo_tipo_responsable_et='002' ");
-
-    //   return $responsable->result()[0];
-
-    // }
-
     public function ListarPersonalUsuario()
     {
         $personal = $this->db->query("select p.* from PERSONA p LEFT JOIN USUARIO u on u.id_persona=p.id_persona where U.id_persona IS NULL");
@@ -135,11 +120,11 @@ class Model_Persona_Juridica extends CI_Model
         return $this->db->get()->result()[0];
     }
 
-    function verifyPersonalByDNI($dni)
+    function verifyPersonalByRUC($ruc)
     {
-        $this->db->select('persona.*');
-        $this->db->from('persona');
-        $this->db->where('persona.dni',$dni);
+        $this->db->select('persona_juridica.*');
+        $this->db->from('persona_juridica');
+        $this->db->where('persona_juridica.ruc',$ruc);
         return $this->db->get()->result();
     }
 }

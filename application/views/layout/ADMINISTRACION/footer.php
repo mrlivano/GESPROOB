@@ -95,6 +95,7 @@
     <script src="<?php echo base_url(); ?>assets/js/administrador/MetaPresupuestal.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/administrador/ProgramaPresupuestal.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/administrador/persona.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/administrador/personajuridica.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/administrador/cargo.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/administrador/UnidadF.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/administrador/TipoNoPip.js"></script>

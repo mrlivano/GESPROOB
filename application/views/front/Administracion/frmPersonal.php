@@ -94,17 +94,16 @@
                                                           </div>
 
                                                           <div class="x_content">
-                                                            <table id="table-Personal" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                                            <table id="table-PersonaJuridica" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                               																<thead>
                               																	<tr>
                                                                   <th>ID</th>
-                              																		<th>DNI</th>
-                              																		<th>A. Paterno</th>
-                              																		<th>A. Materno</th>
-                              																		<th>Nombres</th>
+                              																		<th>RUC</th>
+                              																		<th>Razón Social</th>
+                              																		<th>Representante Legal</th>
                               																		<th>Direción</th>
-                              																		<th>Grado académico</th>
-                              																		<th>Especialidad</th>
+                              																		<th>Telefono</th>
+                              																		<th>Correo</th>
                               																		<th>ACCIONES</th>
                               																	</tr>
                               																</thead>
@@ -365,105 +364,6 @@
   </div>
 <!-- /.fin ventana para registra una nuevO personal-->
 
-<!-- /.ventana para registra nuevo persona juridica -->
-<div class="modal fade" id="VentanaRegistraPersonaJuridica" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Registrar Persona Jurídica</h4>
-        </div>
-        <div class="modal-body">
-         <div class="row">
-            <div class="col-xs-12">
-                  <!-- FORULARIO PARA REGISTRAR NUEVO PERSONA JURIDICA  -->
-                <form class="form-horizontal " id="form-addPersonaJuridica" action="<?php echo base_url(); ?>Persona_Juridica/GetPersonal" method="POST">
-                    <div id="validarPersonaJuridica">
-
-                    <div class="item form-group">
-                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">RUC<span class="required">*</span>
-                        </label>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                          <input id="txt_ruc" name="txt_ruc" class="mayuscula form-control col-md-7 col-xs-12" placeholder="RUC" maxlength="11" type="text">
-                          <label id="mensajeError" style="display: none;">  </label>
-                        </div> 
-                        <button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatosRuc()">Buscar</button>
-                      </div>
-
-
-                      <div class="item form-group">
-                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Razón Social  <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="txt_razon_social" name="txt_razon_social" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Razón Social" type="text" maxlength="300">
-                        </div>
-                      </div>
-
-                        <div class="item form-group">
-                        <label class=" mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Representante Legal<span class="required"></span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="txt_representante_legal" name="txt_representante_legal" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Representante Legal" type="text" maxlength="500">
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Dirección<span class="required"></span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="txt_direccionR" name="txt_direccionR" class="mayuscula form-control col-md-7 col-xs-12" placeholder="Dirección" type="text" maxlength="100">
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Celular<span class="required">*</span>
-                        </label>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                          <input id="txt_telefonoR" name="txt_telefonoR" class="form-control col-md-7 col-xs-12"  placeholder="Telefono" type="text" maxlength="9">
-                        </div>
-                      </div>
-
-                      <div class="item form-group">
-                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Correo<span class="required"></span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="txt_correoR" name="txt_correoR" class="form-control col-md-7 col-xs-12" placeholder="Correo" type="email" maxlength="100">
-                        </div>
-                      </div>
-                      </div>
-
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button id="send" type="submit" class="btn btn-success">
-                            <span class="glyphicon glyphicon-floppy-disk"></span>
-                            Guardar
-                          </button>
-                           <button  class="btn btn-danger" data-dismiss="modal">
-                             <span class="glyphicon glyphicon-remove"></span>
-                            Cerrar
-                          </button>
-                        </div>
-                      </div>
-
-                </form> <!-- FORULARIO PARA REGISTRAR NUEVO Personal  -->
-            </div><!-- /.span -->
-          </div><!-- /.row -->
-        </div>
-        <div class="modal-footer">
-               <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <div> *Son campos obligatorios </div>
-                        </div>
-                </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- /.fin ventana para registra una nuevO persona juridica-->
-
-
-
 <!-- modificar la nuevo personal-->
 <div class="modal fade" id="VentanaModificarPersonal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -573,6 +473,178 @@
   </div>
 <!-- fin de modificar perosnal-->
 
+<!-- /.ventana para registra nuevo persona juridica -->
+<div class="modal fade" id="VentanaRegistraPersonaJuridica" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Registrar Persona Jurídica</h4>
+        </div>
+        <div class="modal-body">
+         <div class="row">
+            <div class="col-xs-12">
+                  <!-- FORULARIO PARA REGISTRAR NUEVO PERSONA JURIDICA  -->
+                <form class="form-horizontal " id="form-addPersonaJuridica" action="<?php echo base_url(); ?>Persona_Juridica/GetPersonal" method="POST">
+                    <div id="validarPersonaJuridica">
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">RUC<span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input id="txt_ruc" name="txt_ruc" class="mayuscula form-control col-md-7 col-xs-12" placeholder="RUC" maxlength="11" type="text">
+                          <label id="mensajeErrorR" style="display: none;">  </label>
+                        </div> 
+                        <button type="button" name="buscar" class="col-md-2 col-sm-2 col-xs-12 btn btn-secondary" onclick="cargarDatosRuc()">Buscar</button>
+                      </div>
+
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Razón Social  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_razon_social" name="txt_razon_social" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Razón Social" type="text" maxlength="300">
+                        </div>
+                      </div>
+
+                        <div class="item form-group">
+                        <label class=" mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Representante Legal<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_representante_legal" name="txt_representante_legal" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Representante Legal" type="text" maxlength="500">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Dirección<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_direccionR" name="txt_direccionR" class="mayuscula form-control col-md-7 col-xs-12" placeholder="Dirección" type="text" maxlength="100">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Celular<span class="required">*</span>
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                          <input id="txt_telefonoR" name="txt_telefonoR" class="form-control col-md-7 col-xs-12"  placeholder="Telefono" type="text" maxlength="9">
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Correo<span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="txt_correoR" name="txt_correoR" class="form-control col-md-7 col-xs-12" placeholder="Correo" type="email" maxlength="100">
+                        </div>
+                      </div>
+                    </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button id="send" type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Guardar
+                          </button>
+                           <button  class="btn btn-danger" data-dismiss="modal">
+                             <span class="glyphicon glyphicon-remove"></span>
+                            Cerrar
+                          </button>
+                        </div>
+                      </div>
+
+                </form> <!-- FORULARIO PARA REGISTRAR NUEVO Personal  -->
+            </div><!-- /.span -->
+          </div><!-- /.row -->
+        </div>
+        <div class="modal-footer">
+               <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <div> *Son campos obligatorios </div>
+                        </div>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- /.fin ventana para registra una nuevO persona juridica-->
+
+<!-- modificar la nuevo persona juridica-->
+<div class="modal fade" id="VentanaModificarPersonaJuridica" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modificar Persona Juridica</h4>
+        </div>
+        <div class="modal-body">
+         <div class="row">
+            <div class="col-xs-12">
+                <form class="mayuscula form-horizontal " id="form-UpdatePersonaJuridica" action="<?php echo base_url(); ?>Persona_Juridica/UpdatePersonal" method="POST">
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="txt_idpersonamR" name="txt_idpersonamR" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  placeholder="ID" required="required" type="hidden">
+                        </div>
+                    </div>
+                    <div id="validarEdicionPersonaJuridica">
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Razón Social*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txt_razon_socialm" name="txt_razon_socialm" class="mayuscula form-control col-md-7 col-xs-12"   placeholder="Razón Social" type="text">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Representante Legal*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txt_representante_legalm" name="txt_representante_legalm" class="mayuscula form-control" placeholder="Representante Legal"  type="text">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">RUC*</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="txt_rucm" name="txt_rucm" class="form-control col-md-7 col-xs-12" placeholder="RUC" type="text" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Dirección</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txt_direccionRm" name="txt_direccionRm" class="mayuscula form-control col-md-7 col-xs-12" placeholder="Dirección" type="text">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Telefono</label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="txt_telefonoRm" name="txt_telefonoRm" class="form-control col-md-7 col-xs-12" placeholder="Telefono" type="text" maxlength="9">
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Correo</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="txt_correoRm" name="txt_correoRm" class="form-control col-md-7 col-xs-12" placeholder="Correo" type="text">
+                        </div>
+                    </div>
+
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button id="send" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+                            <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+                            Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </form> <!-- FORULARIO para modificar personal -->
+            </div><!-- /.span -->
+                 </div><!-- /.row -->
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- fin de modificar perosnal-->
 
 <!-- Registar cargo -->
 <div class="modal fade" id="VentanaRegistracargo" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
@@ -904,6 +976,40 @@
                 $('#mensajeError').css('display','block');
                 $('#mensajeError').css('color','green');
                 $('#mensajeError').text('Disponible');
+                }
+            }).fail(function()
+            {
+                swal('Error', 'Error no controlado.', 'error');
+            });
+        }        
+    });
+
+    $('#txt_ruc').blur(function()
+    {
+        var ruc = $(this).val();
+        if(ruc.length==11)
+        {
+            $.ajax(
+            {
+                url: base_url+'index.php/Persona_Juridica/verifyPersonalByRUC',
+                type: 'POST',
+                cache: false,
+                data:{ruc:ruc},
+                async: false
+            }).done(function(objectJSON)
+            {
+                objectJSON = JSON.parse(objectJSON);
+                if(objectJSON.cantidad>0)
+                {
+                $('#mensajeErrorR').css('display','block');
+                $('#mensajeErrorR').css('color','red');
+                $('#mensajeErrorR').text('Esta persona juridica ya esta registrado en el sistema, pruebe con otro');
+                }
+                else
+                {
+                $('#mensajeErrorR').css('display','block');
+                $('#mensajeErrorR').css('color','green');
+                $('#mensajeErrorR').text('Disponible');
                 }
             }).fail(function()
             {
@@ -1381,6 +1487,113 @@
                         {
                             regexp: /^[0-9]{9}$/,
                             message: '<b style="color: red;">El campo "Telefono" requiere 9 dígitos.</b>'
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#validarEdicionPersonaJuridica').formValidation(
+        {
+            framework: 'bootstrap',
+            excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
+            live: 'enabled',
+            message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
+            trigger: null,
+            fields:
+            {
+                txt_razon_socialm:
+                {
+                    validators:
+                    {
+                        notEmpty:
+                        {
+                            message: '<b style="color: red;">El campo "Razon Social" es requerido.</b>'
+                        },
+                        regexp:
+                        {
+                            regexp: /^[a-zñáéíóúüA-ZÑÁÉÍÓÚÜ\s]+$/,
+                            message: '<b style="color: red;">El campo "Razon Social" es solo texto.</b>'
+                        },
+                        stringLength:
+                        {
+                            max: 300,
+                            message: '<b style="color: red;">El campo "Razon Social" no puede exceder los 300 cáracteres.</b>'
+                        }
+                    }
+                },
+                txt_representante_legalm:
+                {
+                    validators:
+                    {
+                        notEmpty:
+                        {
+                            message: '<b style="color: red;">El campo "Representante Legal" es requerido.</b>'
+                        },
+                        regexp:
+                        {
+                            regexp: /^[a-zñáéíóúüA-ZÑÁÉÍÓÚÜ\s]+$/,
+                            message: '<b style="color: red;">El campo "Representante Legal" es solo texto.</b>'
+                        },
+                        stringLength:
+                        {
+                            max: 500,
+                            message: '<b style="color: red;">El campo "Representante Legal" no puede exceder los 500 cáracteres.</b>'
+                        }
+                    }
+                },
+                txt_rucm:
+                {
+                    validators:
+                    {
+                        notEmpty:
+                        {
+                            message: '<b style="color: red;">El campo "RUC" es requerido.</b>'
+                        },
+                        regexp:
+                        {
+                            regexp: /^([0-9]){11}$/,
+                            message: '<b style="color: red;">El campo "RUC" es un numero de 11 dígitos.</b>'
+                        },
+                        between:
+                        {
+                            min: 00000000001,
+                            max: 99999999999,
+                            message: '<b style="color: red;">El campo "RUC" ingresado es incorrecto.</b>'
+                        }
+                    }
+                },
+                txt_correoRm:
+                {
+                    validators:
+                    {
+                        regexp:
+                        {
+                            regexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: '<b style="color: red;">El campo "Correo electronico" no es un correo electronico.</b>'
+                        },
+                        stringLength:
+                        {
+                            max: 75,
+                            message: '<b style="color: red;">El campo "Correo electronico" no puede exceder los 100 cáracteres.</b>'
+                        }
+                    }
+
+                },
+                txt_telefonoRm:
+                {
+                    validators:
+                    {
+                        regexp:
+                        {
+                            regexp: /^[0-9]{9}$/,
+                            message: '<b style="color: red;">El campo "Telefono" requiere carácteres numéricos.</b>'
+                        },
+                    stringLength:
+                        {
+                            min: 5,
+                            max: 9,
+                            message: '<b style="color: red;">El campo "Teléfono" debe contener entre 5 y 9 carácteres numéricos.</b>'
                         }
                     }
                 }

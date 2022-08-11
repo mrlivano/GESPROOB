@@ -41,6 +41,30 @@ class Personal extends CI_Controller
         }
     }
 
+    public function GetPersonaJuridica()
+    {
+        if($this->input->is_ajax_request())
+        {
+            $skip=$this->input->post('start');
+            $numberRow=$this->input->post('length');
+            $valueSearch=$this->input->post('search[value]');
+
+            $datos=$this->Model_Persona_Juridica->GetPersonal('R', $skip, $numberRow, $valueSearch);
+            foreach ($datos as $key => $value)
+            {
+                $value->razon_social=strtoupper($value->razon_social);
+            }
+
+            $cantidadDatos=$this->Model_Persona_Juridica->CountPersonalParaPaginacion('X', $valueSearch);
+
+            echo '{ "recordsTotal" : '.$cantidadDatos[0]->cantidad.', "recordsFiltered" : '.$cantidadDatos[0]->cantidad.', "data" : '.json_encode($datos).' }';
+        }
+        else
+        {
+            show_404();
+        }
+    }
+
     public function ListarPersonal()
     {
         if($this->input->is_ajax_request())
