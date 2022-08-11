@@ -32,6 +32,7 @@ class ET_Presupuesto_Ejecucion extends CI_Controller
             $this->db->trans_start(); 
             
             $c_data['desc_presupuesto_ej']=$this->input->post('txtDescripcion');
+            $c_data['repositorio']=($this->input->post('checkRepositorio')=='on'? 1:0);
 
             if($this->input->post('hdIdPresupuestoEjecucion')!='')
             {
@@ -66,12 +67,13 @@ class ET_Presupuesto_Ejecucion extends CI_Controller
             $id=$this->input->post('hdId');
 
             $txtDescripcion=$this->input->post('txtDescripcion');
+            $repositorio=($this->input->post('checkRepositorio')=='on'? 1:0);
 
             if(count($this->Model_ET_Presupuesto_Ejecucion->EtPresupuestoEjecucionPorDescripcionDiffId($id, $txtDescripcion))>0)
             {
                 echo json_encode(['proceso' => 'Error', 'mensaje' => 'Este presupuesto de ejecución ya fue registrado con anterioridad.']);exit; 
             }
-            $this->Model_ET_Presupuesto_Ejecucion->editar($flat,$id,$txtDescripcion);
+            $this->Model_ET_Presupuesto_Ejecucion->editar($flat,$id,$txtDescripcion,$repositorio);
             $this->db->trans_complete();
             echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos actualizados correctamente.']);exit;  
         }

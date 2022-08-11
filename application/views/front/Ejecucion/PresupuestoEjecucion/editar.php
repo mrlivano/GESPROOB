@@ -6,6 +6,13 @@
 			<input id="txtDescripcion" name="txtDescripcion"  onkeyup="javascript:this.value=this.value.toUpperCase();" value="<?=$presupuestoejecucion->desc_presupuesto_ej;?>" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" required="required" autocomplete="off" type="text">
 		</div>
 	</div>
+
+	<div class="item form-group">
+		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Repositorio<span class="required">*</span></label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<input type="checkbox" class="checkRepositorio" name="checkRepositorio" id="checkRepositorio" <?=$presupuestoejecucion->repositorio==1?"checked":""?>>		
+		</div>
+	</div>
 	<div class="ln_solid"></div>
 	<div class="form-group">
 		<div class="col-md-6 col-md-offset-3">

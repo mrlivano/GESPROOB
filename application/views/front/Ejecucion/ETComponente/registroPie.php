@@ -14,7 +14,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Formato FF-08</h3>
+				<h3>Repositorio de Archivo</h3>
 			</div>
 			<div class="modal-body">
 				<form id="formAddDocumento" class="feedback" name="feedback">
@@ -34,7 +34,7 @@
 </div>
 
 
-<?php $contD = 0; $contI = 0 ?>
+<?php $contD = 0; $contI = 0; $repositorio = 0;?>
 <div class="form-horizontal">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
@@ -87,7 +87,7 @@
 											<td style="width: 10%">
 											<input type="hidden" id="idPieDirecta<?= $contD ?>" value="<?= $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucionDirecta<?= $contD ?>" id="presupuestoEjecucionDirecta<?= $contD ?>" onchange="changePresupuestoDirecta(this,<?=$contD?>)">
-													<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) { ?>
+													<?php foreach ($PresupuestoEjecucion->directa as $key1 => $presupuesto) {  if($presupuesto->id_presupuesto_ej==$value->id_presupuesto_ej) {$repositorio=$presupuesto->repositorio;}?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>"<?php echo ($presupuesto->desc_presupuesto_ej == $value->descripcion ? "selected" : "") ?>>
 														<?= $presupuesto->desc_presupuesto_ej ?></option><?php } ?>
 														<option value="0" <?php echo ('PRESUPUESTO TOTAL' == $value->descripcion ? "selected" : "") ?>>PRESUPUESTO TOTAL</option> 
@@ -98,14 +98,7 @@
 											<td style="width: 15%"><input id="macroDirecta<?= $contD ?>" name="macroDirecta<?= $contD ?>" type="text" onchange="obtenerMacroDirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
 											<!-- <td style="width: 5%"><input id="gastoDirecta<?= $contD ?>" name="gastoDirecta<?= $contD ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td> -->
 											<td style="width: 20%"><input id="montoDirecta<?= $contD ?>" name="montoDirecta<?= $contD ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
-											<td style="width: 20%; background:#94cbbf">
-											<button onclick="guardarComponenteD(<?= $contD ?>,this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-											<?php if(in_array($value->id_presupuesto_ej,array('3','4','6'))){ ?>
-											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
-											<?php } ?>
-										</td>
-
+											<td style="width: 20%; background:#94cbbf"><button onclick="guardarComponenteD(<?= $contD ?>,this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></button><button class="btn btn-danger btn-xs"  onclick="eliminarFilaD(<?=$contD?>)"><i class="fa fa-trash" aria-hidden="true"></i></button><?php if($repositorio==1 && $value->id_presupuesto_ej!=0){ ?><button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button><?php } ?></td>
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -144,7 +137,7 @@
 											<td style="width: 10%">
 											<input type="hidden" id="idPieIndirecta<?= $contI ?>" value="<?= $value->id_pie_presupuesto?>">
 												<select name="presupuestoEjecucionIndirecta<?= $contI ?>" id="presupuestoEjecucionIndirecta<?= $contI ?>" onchange="changePresupuestoIndirecta(this,<?=$contI?>)">
-													<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { ?>
+													<?php foreach ($PresupuestoEjecucion->indirecta as $key1 => $presupuesto) { if($presupuesto->id_presupuesto_ej==$value->id_presupuesto_ej) {$repositorio=$presupuesto->repositorio;}?>
 														<option value="<?= $presupuesto->id_presupuesto_ej ?>" <?php echo ($presupuesto->desc_presupuesto_ej == $value->descripcion ? "selected" : "") ?>><?= $presupuesto->desc_presupuesto_ej ?></option>
 													<?php } ?>
 														<option value="0" <?php echo ('PRESUPUESTO TOTAL' == $value->descripcion ? "selected" : "") ?>>PRESUPUESTO TOTAL</option> 
@@ -154,13 +147,7 @@
 											<td style="width: 15%"><input id="macroIndirecta<?= $contI ?>" name="macroIndirecta<?= $contI ?>" type="text" onchange="obtenerMacroIndirecta(this)" onkeyup="this.value = this.value.toUpperCase();" value="<?= $value->macro ?>"></td>
 											<!-- <td style="width: 5%"><input id="gastoIndirecta<?= $contI ?>" name="gastoIndirecta<?= $contI ?>" type="checkbox" disabled <?= $value->id_presupuesto_ej == "" ? "" : "checked" ;?>></td> -->
 											<td style="width: 20%"><input id="montoIndirecta<?= $contI ?>" name="montoIndirecta<?= $contI ?>" type="text" disabled value=<?= number_format($value->monto,2,'.',",") ?>></td>
-											<td style="width: 20%; background:#94cbbf;">
-											<button onclick="guardarComponenteI(<?= $contI ?>,this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button>
-											<button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-											<?php if(in_array($value->id_presupuesto_ej,array('1037','1040','1039'))){ ?>
-											<button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
-											<?php } ?>
-										</td>
+											<td style="width: 20%; background:#94cbbf;"><button onclick="guardarComponenteI(<?= $contI ?>,this)" class="btn btn-success btn-xs"><i class="fa fa-floppy-o" aria-hidden="true"></i></i><i</button><button class="btn btn-danger btn-xs"  onclick="eliminarFilaI(<?=$contI?>)"><i class="fa fa-trash" aria-hidden="true"></i></button><?php if($repositorio==1 && $value->id_presupuesto_ej!=0){ ?><button class="btn btn-primary btn-xs" data-toggle="modal" id="modal-pdf" data-elvalor="<?= $value->id_presupuesto_ej ?>" data-target="#modal-pdf" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button><?php } ?></td>
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -356,12 +343,13 @@
 			'POST', null,
 			function(objectJSON) {
 				resultado = JSON.parse(objectJSON);
-				console.log(resultado);
 				button.parentElement.style.background = '#94cbbf';
 				// agregar boton para agregar documento
-				const addDoc=['3','4','6']
-				let btn= document.createElement('button');
-				if(addDoc.includes(idPresupuesto)){
+				if(button.parentElement.childNodes.length>2){
+					button.parentElement.removeChild(button.parentElement.lastChild);
+				}
+				if(resultado.presupuesto_ej.length>0) if(resultado.presupuesto_ej[0].repositorio==1){
+					let btn= document.createElement('button');
 					btn.id ="modal-pdf";
 					btn.setAttribute('class','btn btn-primary btn-xs');
 					btn.setAttribute("data-toggle", "modal");
@@ -369,9 +357,7 @@
 					btn.setAttribute("data-target", "#modal-pdf");
 					btn.innerHTML= '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>';
 					button.parentElement.appendChild(btn);
-				} else{
-
-				}
+				} 
 				//end
 				swal({
 					title: '',
@@ -416,9 +402,11 @@
 				resultado = JSON.parse(objectJSON);
 				button.parentElement.style.background = '#94cbbf';
 				// agregar boton para agregar documento
-				const addDoc=['1037','1040','1039']
-				let btn= document.createElement('button');
-				if(addDoc.includes(idPresupuesto)){
+				if(button.parentElement.childNodes.length>2){
+					button.parentElement.removeChild(button.parentElement.lastChild);
+				}
+				if(resultado.presupuesto_ej.length>0) if(resultado.presupuesto_ej[0].repositorio==1){
+					let btn= document.createElement('button');
 					btn.id ="modal-pdf";
 					btn.setAttribute('class','btn btn-primary btn-xs');
 					btn.setAttribute("data-toggle", "modal");
@@ -536,7 +524,7 @@ function modifiedPie(component) {
 			component.parentElement.parentElement.childNodes[11].style.background = 'white';
 		}
 		else{
-			component.parentElement.parentElement.childNodes[5].style.background = 'white';
+			component.parentElement.parentElement.childNodes[4].style.background = 'white';
 		}
 }
 </script>

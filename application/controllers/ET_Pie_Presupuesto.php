@@ -65,9 +65,11 @@ class ET_Pie_Presupuesto extends CI_Controller
 				$data=$this->Model_ET_Pie_Presupuesto->updatePresupuestoTotal($id_et, $modalidad, $monto);
 			}
 
+			$presupuesto_ej=$this->Model_ET_Presupuesto_Ejecucion->PresupuestoEjecucion($id_presupuesto_ej);
+
 			$this->db->trans_complete();
 
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Pie de Presupuesto registrado correctamente.', 'id_pie_presupuesto' => $id_pie_presupuesto]);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Pie de Presupuesto registrado correctamente.', 'id_pie_presupuesto' => $id_pie_presupuesto, 'presupuesto_ej' => $presupuesto_ej]);exit;
 		}
 		$id_ExpedienteTecnico = $this->input->get('idExpedienteTecnico');
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($this->input->get('idExpedienteTecnico'));
