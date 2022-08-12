@@ -84,9 +84,8 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		<hr>
   	</div>
   	<div id="footer">
-	  	<hr class="style4">
-	  	<div style="text-align: center; font-size: 9px;"><span><?=$expedienteTecnico->proyecto_et?></span></div>	  
-  	</div>
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
   	<div id="content">
 	  	<div style="text-align: center; font-size: 15px;"><b>FORMATO FF-04</b></div>
 		<div style="text-align: center; font-size: 15px;"><b>ESPECIFICACIONES TECNICAS</b></div>

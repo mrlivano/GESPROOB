@@ -178,9 +178,14 @@ function mostrarTabla($listaExpDev, $clasificadorMeta, $ultimoDia, $gastoTotalMa
 		margin-bottom: 150px;
 		margin-top: 50px;
 	}
+	#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+  #footer .page:after { content: counter(page, upper-roman); }
 </style>
 </head>
 <body>
+<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+</div>
 	<table style="width: 100%;">
 		<tr>
 			<td style="width: 65px;">

@@ -56,6 +56,9 @@ function mostrarMetaAnidada($meta)
 			color:white;	
 			padding:8px 8px;			
 		}
+
+		#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+    #footer .page:after { content: counter(page, upper-roman); }
 	</style>
 </head>
 <body style="font-family: Helvetica;text-align: center;">
@@ -75,6 +78,9 @@ function mostrarMetaAnidada($meta)
 			</tr>
 		</table>
 	</div>
+	<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<div style="text-align: center; font-size: 13px;padding-top:2px;"><b>FORMATO FF-10</b></div>
 	<div style="text-align: center; font-size: 13px;padding-bottom:15px;"><b>SUSTENTACIÓN DE METRADOS</b></div>
 	<div style="font-size: 9px;">

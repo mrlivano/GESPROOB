@@ -66,7 +66,8 @@ function obtenerPartidas($meta)
 			background-color:#e2f0f5;
 			text-align:left;
 		}
-
+		#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+    #footer .page:after { content: counter(page, upper-roman); }
 	</style>
 </head>
 <body>
@@ -86,6 +87,9 @@ function obtenerPartidas($meta)
 			</tr>
 		</table>
 	</div>
+	<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<div style="text-align: center; font-size: 13px;padding-top:2px;"><b>FORMATO FF-11</b></div>
 	<div style="text-align: center; font-size: 13px;padding-bottom:13px;"><b>ANÁLISIS DE COSTOS UNITARIOS</b></div>
 	<div style="text-align: center;font-size: 10px; padding-bottom: 18px;"><b>"<?=@$etExpedienteTecnico->nombre_pi;?>"</b></div>

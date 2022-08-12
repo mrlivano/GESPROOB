@@ -118,6 +118,9 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		border-collapse: collapse;
 	}
 
+	#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+  #footer .page:after { content: counter(page, upper-roman); }
+
 </style>
 <head>
 	<title>FORMATO FE-03</title>
@@ -141,7 +144,8 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		</table>
   	</div>
   	<div id="footer">
-  	</div>
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<div id="content">
 		<div style="text-align: center; font-size: 13px;"><b>FORMATO FE-03B</b></div>
 		<div style="text-align: center; font-size: 13px; padding-bottom:10px;"><b>VALORIZACIÓN MENSUAL DE MAYORES METRADOS</b></div>

@@ -104,7 +104,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 				text-align: left;
 				vertical-align: middle;		
 			}
-
+			#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+   	 #footer .page:after { content: counter(page, upper-roman); }
 		</style>
 	</head>
 	<body>
@@ -123,6 +124,9 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 					</td>
 				</tr>
 			</table>
+		</div>
+		<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
 		</div>
 		<div style="text-align: center; font-size: 13px;padding-top:2px;"><b>FORMATO FF-07</b></div>
 		<div style="text-align: center; font-size: 13px;padding-bottom:15px;"><b>PRESUPUESTO GENERAL</b></div>

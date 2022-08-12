@@ -33,6 +33,8 @@
 			vertical-align: middle;
 			text-transform: uppercase;
 		}
+		#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+  	#footer .page:after { content: counter(page, upper-roman); }
 		@page 
 		{ 
 			margin-bottom: 130px;
@@ -54,6 +56,9 @@
 			</td>
 		</tr>
 	</table>
+	<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<div style="text-align: center; font-size: 13px;padding-bottom:6px;"><b>FORMATO FE-06</b></div>
 	<div style="text-align: center; font-size: 13px;padding-bottom:6px;"><b>CUADRO COMPARATIVO DEL PRESUPUESTO ANALITICO APROBADO Y EJECUTADO</b></div>
 	<div style="font-size: 8px;">

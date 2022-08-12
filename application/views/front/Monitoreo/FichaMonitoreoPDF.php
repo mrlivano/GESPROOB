@@ -26,6 +26,9 @@
 	table{
 		border-collapse: collapse;
 	}
+
+	#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+   	 #footer .page:after { content: counter(page, upper-roman); }
 </style>
 <head>
 	<title>Ficha de Monitoreo</title>
@@ -51,6 +54,9 @@
 						</td>
 					</tr>
 				</table>
+				<div id="footer">
+				<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+				</div>
 				<div style="text-align: center; font-size: 12px;"><b>Formato Nº 02<br>Ficha de Monitoreo de Inversiones<br></b></div>
 				<div class="x_content">
 					<BR>

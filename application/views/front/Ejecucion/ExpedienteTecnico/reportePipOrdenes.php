@@ -62,7 +62,9 @@
   	</div>
 	-->
 	
-	<div id="footer"></div>
+	<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
   	<div id="content">
 	<script>
 	function imprimir()

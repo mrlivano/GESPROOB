@@ -99,6 +99,9 @@ function mostrarMetaAnidada($meta)
 		color:white;
 		background-color:#337ab7;
 	}
+
+	#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+   	 #footer .page:after { content: counter(page, upper-roman); }
 	</style>
 </head>
 <body style="font-family: Helvetica;text-align: center;">
@@ -116,6 +119,9 @@ function mostrarMetaAnidada($meta)
 			</td>
 		</tr>
 	</table><br>
+	<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<div style="text-align: center;font-size: 13px;font-weight:bold; ">FORMATO FF-09</div>
 	<div style="text-align: center;font-size: 15px;font-weight:bold;">DESAGREGADO DE GASTOS DE SUPERVISIÓN</div>
 	<div style="text-align: center;font-size: 11px;margin-top: 15px; border-color: red; margin-left: 10px;"><b>PROY: "<?=@$expedienteTecnico->nombre_pi;?>"</b></div>

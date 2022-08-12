@@ -26,7 +26,7 @@ function mostrarAnidado($meta)
   <style>
     @page { margin: 100px 50px;  }
     #header { position: fixed; left: 0px; top: -100px; right: 0px; height: 100px;text-align: center;}
-    #footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+    #footer { position: fixed; left: 0px; bottom: -150px; right: 0px; height: 100px; }
     #footer .page:after { content: counter(page, upper-roman); }
 
 	body
@@ -84,8 +84,8 @@ function mostrarAnidado($meta)
 		<hr>
   	</div>
   	<div id="footer">
-	  	<hr class="style4">  
-  	</div>
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
   	<div id="content">
 	  	<div style="text-align: center; font-size: 15px;"><b>FORMATO FF-04</b></div>
 		<div style="text-align: center; font-size: 15px;"><b>ESPECIFICACIONES TECNICAS</b></div>

@@ -28,10 +28,15 @@
 		color:white;
 		text-align:center;
 	}	
+	#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+  #footer .page:after { content: counter(page, upper-roman); }
 </style>
 	<p style="font-size:8px;">GESPRO - UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</p>
     <p style="font-size:8px;"><?=date('d/m/y H:i')?></p>
     <div style="text-align: center; font-size: 13px;padding-bottom:20px;"><b>PROYECTOS DE INVERSIÓN PROGRAMADOS</b></div>
+		<div id="footer">
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<table id="tablaProgramacionEjecucion" cellspacing="0" width="100%">
 		<thead>
 			<tr style="border:none;">

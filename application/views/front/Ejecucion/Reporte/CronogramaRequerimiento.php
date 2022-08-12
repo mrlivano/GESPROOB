@@ -29,6 +29,8 @@
 		{
 			border-collapse: collapse;
 		}
+		#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
+  	#footer .page:after { content: counter(page, upper-roman); }
 	</style>
 </head>
 <body>
@@ -49,7 +51,8 @@
 		</table>
   	</div>
   	<div id="footer">
-  	</div>
+		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		</div>
 	<div id="content">
 		<div style="text-align: center; font-size: 13px;"><b>FORMATO FF-<?=@$numeroReporte?></b></div>
 		<div style="text-align: center; font-size: 13px; padding-bottom:10px;text-transform:uppercase;"><b>CRONOGRAMA REQUERIMIENTO DE <?=@$nombreReporte?></b></div>
