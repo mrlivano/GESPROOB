@@ -747,8 +747,10 @@ class Expediente_Tecnico extends CI_Controller
 
 			switch ($tipoGasto) {
 				case '1':
-					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,6);
-					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1040);
+					// $et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,6);
+					// $et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumento($idExpedienteTecnico,1040);
+					$et_documento_GGD = $this->Model_ET_Expediente_Tecnico->getETDocumentoET($idExpedienteTecnico,1);
+					$et_documento_GGI = $this->Model_ET_Expediente_Tecnico->getETDocumentoET($idExpedienteTecnico,2);
 					return $this->load->view('front/Ejecucion/ExpedienteTecnico/mostrarGastosGenerales',['expedienteTecnico'=>$expedienteTecnico, 'et_documento_GGD'=>$et_documento_GGD, 'et_documento_GGI'=> $et_documento_GGI]);			
 
 					break;

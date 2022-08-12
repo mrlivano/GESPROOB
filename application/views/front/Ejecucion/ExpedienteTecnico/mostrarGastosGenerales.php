@@ -10,16 +10,12 @@
 	}
 </style>
 
-<?php $contD = 0; $contI = 0 ?>
+<?php $contD = 0; $contI = 0; $presupuestoD = ""; $presupuestoI= "" ;?>
 <div class="form-horizontal">
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<input type="hidden" name="hd_et" id="hd_et" value="<?= $expedienteTecnico->id_et ?>" notValidate>
 			<input type="hidden" name="modalidad" id="modalidad" value="<?= $expedienteTecnico->modalidad_ejecucion_et ?>" notValidate>
-			<label class="control-label">Nombre del proyecto de inversión</label>
-			<div>
-				<textarea name="txtNombreProyectoInversion" id="txtNombreProyectoInversion" rows="3" class="form-control" style="resize: none;resize: vertical;" readonly="readonly"><?= $expedienteTecnico->nombre_pi ?></textarea>
-			</div>
 		</div>
 	</div>
 	<div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -50,9 +46,14 @@
 								<?php $counter = 1; ?>
 								<?php if ( !empty($et_documento_GGD) ): ?>
 									<?php foreach ($et_documento_GGD as $et_documento_GGDs): ?>
+										<?php if ( $et_documento_GGDs['descripcion']!=$presupuestoD ): $presupuestoD= $et_documento_GGDs['descripcion'];?>
+											<tr>
+												<th scope="row" colspan="2"><?= $et_documento_GGDs['descripcion'] ?></th>
+											<tr>
+										<?php endif; ?>
 									<tr>
 										<th scope="row"><?php echo $counter++; ?></th>
-											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_GGDs['filename'] ?>" target="_blank"><?= $et_documento_GGDs['filename'] ?></a></td>
+											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_GGDs['filename'] ?>" target="_blank"><?= $et_documento_GGDs['filename'] ?></a> <?=$et_documento_GGDs['tipo']?>--<?=$et_documento_GGDs['id_presupuesto_ej']?></td>
 									</tr>
 									<?php endforeach; ?>
 								<?php endif; ?>
@@ -76,6 +77,11 @@
 								<?php $counter = 1; ?>
 								<?php if ( !empty($et_documento_GGI) ): ?>
 									<?php foreach ($et_documento_GGI as $et_documento_GGIs): ?>
+										<?php if ( $et_documento_GGIs['descripcion']!=$presupuestoI ): $presupuestoI= $et_documento_GGIs['descripcion'];?>
+											<tr>
+												<th scope="row" colspan="2"><?= $et_documento_GGIs['descripcion'] ?></th>
+											<tr>
+										<?php endif; ?>
 									<tr>
 										<th scope="row"><?php echo $counter++; ?></th>
 											<td><label for="exampleFormControlFile1">📑 </label> <a href="<?php echo base_url(); ?>uploads/DesagregadoGastos/<?= $et_documento_GGIs['filename'] ?>" target="_blank"><?= $et_documento_GGIs['filename'] ?></a></td>

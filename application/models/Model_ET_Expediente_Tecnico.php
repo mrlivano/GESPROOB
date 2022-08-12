@@ -425,6 +425,18 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 	    }
 	    return false;
     }
+
+		public function getETDocumentoET($data,$tipo)
+    {
+			$this->db->from('ET_DOCUMENTO as d')->select('d.ID,d.filename,d.id_et,d.tipo,p.descripcion,p.id_presupuesto_ej,p.modalidad_ejecucion')->join('PIE_PRESUPUESTO as p','d.tipo=p.id_presupuesto_ej and d.id_et=p.id_et','left')->where('d.id_et', $data)->where('p.modalidad_ejecucion',$tipo)->group_by('d.ID,d.filename,d.id_et,d.tipo,p.descripcion,p.id_presupuesto_ej,p.modalidad_ejecucion')->order_by('d.tipo');
+
+	    $query = $this->db->get();
+
+	    if ($query->num_rows() > 0) {
+	        return $query->result_array();
+	    }
+	    return false;
+    }
 		/*ssssssssss */
 		public function listarComponentes($id_et)
 		{
