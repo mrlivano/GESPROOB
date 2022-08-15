@@ -111,7 +111,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico,&$sumatoriasTotales,&$suma
 			border-collapse: collapse;
 		}
 
-		#tableValorizacionResumen td, #tableValorizacionResumen th
+		#tableValorizacionResumen td, #tableValorizacionResumen th , .tdTotal
 		{
 			border: 1px solid black;
 			color:white;
@@ -225,11 +225,10 @@ function mostrarMetaAnidada($meta, $expedienteTecnico,&$sumatoriasTotales,&$suma
 						<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
 					<?php } ?>
 				<?php } }?>
-			</tbody>
-		</table>
-		<br>
-		<table id="tableValorizacionResumen" style="width: 100%;">
-			<tr>
+				<tr>
+				<td colspan="<?=$expedienteTecnico->num_meses+4?>"></td>
+				</tr>
+			<tr class="tdTotal">
 				<td style="text-align: left;width:33%;" colspan="3"><b>COSTO DIRECTO TOTAL</b></td>
 				<td style="text-align: center;width:6%;"><?=a_number_format($sumatoriaCostoDirecto, 2, '.',",",3);?></td>
 				<?php if($expedienteTecnico->num_meses!=null){
