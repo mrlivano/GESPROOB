@@ -127,9 +127,9 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
       
         return $presupuestoejecucion->result();
     }
-    function EtPresupuestoEjecucionPorDescripcionDiffId($id, $descripcion)
+    function EtPresupuestoEjecucionPorDescripcionDiffId($id, $descripcion, $id_padre)
     {
-        $presupuestoejecucion=$this->db->query("select * from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej!='".$id."' and replace(desc_presupuesto_ej, ' ', '')=replace('".$descripcion."', ' ', '')");
+        $presupuestoejecucion=$this->db->query("select * from ET_PRESUPUESTO_EJECUCION where id_presupuesto_ej!='".$id."' and id_presupuesto_ej_padre='".$id_padre."' and replace(desc_presupuesto_ej, ' ', '')=replace('".$descripcion."', ' ', '')");
 
         return $presupuestoejecucion->result();
     }

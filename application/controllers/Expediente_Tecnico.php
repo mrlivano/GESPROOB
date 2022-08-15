@@ -1230,10 +1230,10 @@ class Expediente_Tecnico extends CI_Controller
 				}
 			}
 		}
-
+		$size = ($expedienteTecnico->num_meses>24)?'A3':'A4';
 		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfCronogramaEjecucion',['expedienteTecnico'=>$expedienteTecnico],true);
 		$this->mydompdf->load_html($html);
-		$this->mydompdf->set_paper("A4", "landscape");
+		$this->mydompdf->set_paper($size, "landscape");
 		$this->mydompdf->render();
 		$this->mydompdf->stream("reporteCronogramaEjecucion.pdf", array("Attachment" => false));
     }
@@ -1269,9 +1269,11 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 
+		$size = ($expedienteTecnico->num_meses>24)?'A3':'A4';
+
 		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfValorizacionEjecucion',['expedienteTecnico'=>$expedienteTecnico],true);
 		$this->mydompdf->load_html($html);
-		$this->mydompdf->set_paper("A4", "landscape");
+		$this->mydompdf->set_paper($size, "landscape");
 		$this->mydompdf->render();
 		$this->mydompdf->stream("reporteValorizacionEjecucion.pdf", array("Attachment" => false));
     }

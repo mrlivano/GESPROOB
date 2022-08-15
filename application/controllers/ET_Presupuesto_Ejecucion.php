@@ -65,11 +65,12 @@ class ET_Presupuesto_Ejecucion extends CI_Controller
             $this->db->trans_start(); 
             $flat  = "U";
             $id=$this->input->post('hdId');
+            $id_padre=$this->input->post('hdIdPadre');
 
             $txtDescripcion=$this->input->post('txtDescripcion');
             $repositorio=($this->input->post('checkRepositorio')=='on'? 1:0);
 
-            if(count($this->Model_ET_Presupuesto_Ejecucion->EtPresupuestoEjecucionPorDescripcionDiffId($id, $txtDescripcion))>0)
+            if(count($this->Model_ET_Presupuesto_Ejecucion->EtPresupuestoEjecucionPorDescripcionDiffId($id, $txtDescripcion, $id_padre))>0)
             {
                 echo json_encode(['proceso' => 'Error', 'mensaje' => 'Este presupuesto de ejecución ya fue registrado con anterioridad.']);exit; 
             }
