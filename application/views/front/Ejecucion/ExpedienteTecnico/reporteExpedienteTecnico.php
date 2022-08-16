@@ -123,7 +123,7 @@
 			
 				<td colspan="2">
 				<?php $i=1; foreach($listarComponentes as $item){ ?>
-				<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
+				<p>Componente: <?=$item->desc_meta;?> </p>
 				<?php  $i=$i+1;} ?>
 				</td>
 			</tr>	
@@ -215,9 +215,9 @@
 			<tr>
 			<td rowspan='<?=count($listarPiePresupuestoAI)+2?>'>ADMINISTRACION INDIRECTA</td>
 			<td colspan='2'>
-			<?php  foreach($listarComponentesAI as $item){ ?>
-			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
-			<?php  $i=$i+1;} 
+			<?php  $j=1; foreach($listarComponentesAI as $item){ ?>
+			<p>Componente <?php echo $j.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $j=$j+1;} 
 			?>
 			</td>
 			</tr>
@@ -237,9 +237,9 @@
 			<tr>
 			<td rowspan='<?=count($listarPiePresupuestoAI)+2?>'>ADMINISTRACION INDIRECTA</td>
 			<td colspan='2'>
-			<?php  foreach($listarComponentesAI as $item){ ?>
-			<p>Componente <?php echo $i.' ';?>: <?=$item->desc_meta;?> </p>
-			<?php  $i=$i+1;} 
+			<?php $j=1; foreach($listarComponentesAI as $item){ ?>
+			<p>Componente <?php echo $j.' ';?>: <?=$item->desc_meta;?> </p>
+			<?php  $j=$j+1;} 
 			?>
 			</td>
 			</tr>
