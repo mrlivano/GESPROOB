@@ -797,13 +797,7 @@ function listaResponsableElaboracion(id_et)
 			},
 			"columns":
 			[
-				{"data":"nombres",
-					render: function(data, type, row)
-					{
-						var name = data+' '+row.apellido_p+' '+row.apellido_m;
-						return name;
-					}
-				},
+				{"data":"nombres"},
 				{"data":"desc_cargo"},
 				{"data":"id_responsable_et",
 					render: function(data, type, row)

@@ -16,6 +16,7 @@ class Expediente_Tecnico extends CI_Controller
 		$this->load->model('Model_ET_Meta');
 		$this->load->model('Model_ET_Partida');
 		$this->load->model('Model_Personal');
+		$this->load->model('Model_Persona_Juridica');
 		$this->load->model("Model_ET_Tipo_Responsable");
 		$this->load->model("Model_ET_Responsable");
 		$this->load->model("Cargo_Modal");
@@ -3504,7 +3505,7 @@ class Expediente_Tecnico extends CI_Controller
 								echo json_encode($msg);exit;
 							}
 						  else{
-								$this->Model_ET_Responsable->insertarET_Epediente($hdIdExpediente,$comboResponsableElaboracion,$id_tipo_responsableElabo,$comboCargoElaboracion);
+								$this->Model_ET_Responsable->insertarET_ExpedienteResponsable($hdIdExpediente,$comboResponsableElaboracion,$id_tipo_responsableElabo,$comboCargoElaboracion,1);
 								$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
 								echo json_encode($msg);exit;
 							}
@@ -3521,9 +3522,43 @@ class Expediente_Tecnico extends CI_Controller
             $id_et=$this->input->get('id_et');
 						$listarCargo=$this->Cargo_Modal->getcargo();
 						$listarPersona=$this->Model_Personal->listarPersona();
-            $this->load->view('front/Ejecucion/ExpedienteTecnico/insertarResponsableElaboracion', ['listarCargo'=>$listarCargo,'listarPersona'=>$listarPersona,'id_et'=>$id_et]);
+						$listarPersonaJuridica=$this->Model_Persona_Juridica->listarPersona();
+            $this->load->view('front/Ejecucion/ExpedienteTecnico/insertarResponsableElaboracion', ['listarCargo'=>$listarCargo,'listarPersona'=>$listarPersona,'listarPersonaJuridica'=>$listarPersonaJuridica,'id_et'=>$id_et]);
         }        
     }
+
+		function insertarResponsableElaboracionJuridica()
+    {
+        if($_POST)
+        {
+            $msg = array();
+            $hdIdExpediente=$this->input->post("hdETJuridica");
+						// obtener id_tipo_responsable Elaboracion
+						$id_tipo_responsableElabo='2';
+						$comboResponsableElaboracion =$this->input->post('comboResponsableElaboracionJuridica');
+						$comboCargoElaboracion =$this->input->post('comboCargoElaboracionJuridica');
+						if($comboResponsableElaboracion!='')
+						{
+							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersonaJuridicaElaboracion($hdIdExpediente,$comboResponsableElaboracion);
+							if(count($responsable)>0){
+								$msg =(['proceso' => 'Error', 'mensaje' => 'Responsable ya se encuentra registrado en la elaboración de expediente']);
+								echo json_encode($msg);exit;
+							}
+						  else{
+								$this->Model_ET_Responsable->insertarET_ExpedienteResponsable($hdIdExpediente,$comboResponsableElaboracion,$id_tipo_responsableElabo,$comboCargoElaboracion,2);
+								$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
+								echo json_encode($msg);exit;
+							}
+						}
+						else{
+							$msg =(['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']);
+							echo json_encode($msg);exit;
+						}               
+            
+            echo json_encode($msg);exit;
+        } 
+    }
+
 
 		function insertarResponsableEjecucion()
     {
@@ -3571,7 +3606,7 @@ class Expediente_Tecnico extends CI_Controller
         if ($this->input->is_ajax_request())
         {
             $id_et = $this->input->post("id_et");
-            $data  = $this->Model_ET_Responsable->ResponsableEtapa($id_et,'2');
+            $data  = $this->Model_ET_Responsable->ResponsableEtapaE($id_et,'2');
             if($data == false)
             {
                 echo json_encode(array('data' => $data));

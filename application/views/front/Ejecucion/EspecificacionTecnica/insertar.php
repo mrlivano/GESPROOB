@@ -58,7 +58,10 @@
 $(function()
 {
 	CKEDITOR.replace('txtEspecificacionTecnica', {
-		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>'
+		filebrowserBrowseUrl: '/browser/browse.php',
+    filebrowserImageBrowseUrl: '/browser/browse.php?type=Images',
+    filebrowserUploadUrl: '/uploader/upload.php',
+    filebrowserImageUploadUrl: '/uploader/upload.php?type=Images'
 	});
 	CKEDITOR.replace('txtEspecificacionSugerencia', {
 		filebrowserImageBrowseUrl : '<?php echo base_url('assets/filemanager/index.html');?>'

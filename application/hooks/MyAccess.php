@@ -710,6 +710,7 @@ function autorizar($url)
       'Expediente_Tecnico/ValorizacionFisicaMetrado/(:num)/(:num)/(:num)',
       'Expediente_Tecnico/ValorizacionFisicaMetrado',
       'Expediente_Tecnico/insertarResponsableElaboracion',
+      'Expediente_Tecnico/insertarResponsableElaboracionJuridica',
       'Expediente_Tecnico/insertarResponsableEjecucion',
       'Expediente_Tecnico/listarResponsableElaboracion',
       'Expediente_Tecnico/listarResponsableEjecucion',

@@ -79,7 +79,7 @@ class Model_Persona_Juridica extends CI_Model
     }
     public function listarPersona()
     {
-       $personal = $this->db->query("select id_persona,CONCAT(nombres,' ', apellido_p,' ',apellido_m)as nombreCompleto from PERSONA");
+       $personal = $this->db->query("select id_persona_juridica,razon_social from PERSONA_JURIDICA");
 
         return $personal->result();
 
