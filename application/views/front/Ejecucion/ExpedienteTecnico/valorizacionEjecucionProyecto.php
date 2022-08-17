@@ -124,6 +124,10 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 		color: #123c67;
 	}
 
+	table.dataTable tr{
+		background-color: white;
+	}
+
 	table.dataTable td, table.dataTable th {
 		border: 1px solid #999999;
 		font-size: 10px;
@@ -131,7 +135,6 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 		text-align: center;
 		vertical-align: middle;
 		color: #123c67;
-		background-color: white;
 	}
 
 	table.dataTable {
@@ -407,12 +410,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 				if(objectJSON.proceso=='Completo')
 				{
 					$($(element).parent().parent().parent().css('background-color', '#baf9c4'));
-					//$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().parent().parent().css('background-color', '#baf9c4'));
+					$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().css('background-color', '#baf9c4'));
 				}
 				else
 				{
 					$($(element).parent().parent().parent().css('background-color', 'white'));
-					//$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().parent().parent().css('background-color', 'white'));
+					$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().css('background-color', 'white'));
 				}
 
 			}, false, true);
