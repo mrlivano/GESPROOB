@@ -17,6 +17,7 @@
 	<link href="<?php echo base_url(); ?>assets/Template/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/bootstrap-select.css">
 	<link href="<?php echo base_url(); ?>assets/Template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/Template/vendors/datatables.net-bs/css/fixedColumns.dataTables.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/Template/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/Template/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/Template/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">

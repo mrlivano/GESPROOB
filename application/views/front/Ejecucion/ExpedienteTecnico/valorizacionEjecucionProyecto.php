@@ -99,6 +99,11 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 		text-align: center;
 	}
 
+	#tableValorizacionI td input[type="text"]
+	{
+		text-align: center;
+	}
+
 	#tableValorizacion td, #tableValorizacion th
 	{
 		border: 1px solid #999999;
@@ -108,6 +113,33 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 		vertical-align: middle;
 		color: #123c67;
 	}
+
+	#tableValorizacionI td, #tableValorizacionI th
+	{
+		border: 1px solid #999999;
+		font-size: 10px;
+		padding: 4px;
+		text-align: center;
+		vertical-align: middle;
+		color: #123c67;
+	}
+
+	table.dataTable td, table.dataTable th {
+		border: 1px solid #999999;
+		font-size: 10px;
+		padding: 4px;
+		text-align: center;
+		vertical-align: middle;
+		color: #123c67;
+		background-color: white;
+	}
+
+	table.dataTable {
+     margin-top: 0px !important; 
+     margin-bottom: 0px !important;
+
+	}
+
 	#tableValorizacionResumen td, #tableValorizacionResumen th
 	{
 		border: 1px solid #999999;
@@ -117,6 +149,14 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 		vertical-align: middle;
 	}
 
+	#tableValorizacionIResumen td, #tableValorizacionIResumen th
+	{
+		border: 1px solid #999999;
+		font-size: 10px;
+		padding: 4px;
+		text-align: left;
+		vertical-align: middle;
+	}
 
 	.spanMontoValorizacion
 	{
@@ -143,9 +183,6 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 				<div class="x_content">
 
 					<div class="row">
-						<div class="col-md-10 col-xs-12">
-							<input type="text" class="form-control" placeholder="Buscar partidas por su descripción" autocomplete="off" style="margin-bottom: 15px;" onkeyup="filtrarHtml('tableValorizacion', this.value, true, 0, event);">
-						</div>
 						<div class="col-md-2 col-xs-12">
 							<a href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionEjecucion?id_et='.$expedienteTecnico->id_et);?>" role=button class="btn btn-primary" target="_blank"><i class="fa fa-file-pdf-o"></i> Exportar a PDF</a>
 						</div>
@@ -156,7 +193,13 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 							?>
 						<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
 						<?php }?>
-					<div id="divContenedorGeneral" style="overflow-x: scroll;">
+						<!-- <div class="row">
+						<div class="col-md-10 col-xs-12">
+							<input type="text" class="form-control" placeholder="Buscar partidas por su descripción" autocomplete="off" style="margin-bottom: 15px;" onkeyup="filtrarHtml('tableValorizacion', this.value, true, 0, event);">
+						</div>
+						<br>
+					</div> -->
+					<div id="divContenedorGeneral" style="">
 						<table id="tableValorizacion">
 							<thead>
 								<tr>
@@ -212,8 +255,15 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 							?>
 						<br><span><b>ADMINISTRACIÓN INDIRECTA</b></span><br><br>
 						<?php }?>
-					<div id="divContenedorGeneral" style="overflow-x: scroll;">
-						<table id="tableValorizacion">
+
+						<!-- <div class="row">
+						<div class="col-md-10 col-xs-12">
+							<input type="text" class="form-control" placeholder="Buscar partidas por su descripción" autocomplete="off" style="margin-bottom: 15px;" onkeyup="filtrarHtml('tableValorizacionI', this.value, true, 0, event);">
+						</div>
+						<br>
+					</div> -->
+					<div id="divContenedorGeneral">
+						<table id="tableValorizacionI">
 							<thead>
 								<tr>
 									<th>PROY:</th>
@@ -284,6 +334,30 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 				$(this).parent().find('input[type="text"]').show();
 			}
 		});
+
+		var table = $('#tableValorizacion').DataTable({
+        scrollX:        true,
+        scrollCollapse: true,
+        searching:      true,
+        ordering:       false,
+				autoWidth: false,
+        fixedColumns:   {
+            leftColumns:  7
+        }
+    });
+
+		
+		var tableI = $('#tableValorizacionI').DataTable({
+        scrollX:        true,
+        scrollCollapse: true,
+        searching:      true,
+        ordering:       false,
+				autoWidth: false,
+        fixedColumns:   {
+            leftColumns:  7
+        }
+    });
+
 	});
 
 	function onKeyUpCalcularPrecio(cantidad, precioUnitario, idDetallePartida, numeroMes, element, event, id_partida)
