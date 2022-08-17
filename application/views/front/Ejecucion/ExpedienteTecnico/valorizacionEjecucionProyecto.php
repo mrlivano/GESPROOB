@@ -401,16 +401,18 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 
 				$($(element).parent().parent().find('span')[0]).text('S/.'+monto.toFixed(2));
 				$($(element).parent().parent().css('background-color', '#fff1b0'));
-
 				$('#saldo'+id_partida).text(objectJSON.saldo);
+				$('.DTFC_Cloned #saldo'+id_partida).text(objectJSON.saldo);
 
 				if(objectJSON.proceso=='Completo')
 				{
 					$($(element).parent().parent().parent().css('background-color', '#baf9c4'));
+					//$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().parent().parent().css('background-color', '#baf9c4'));
 				}
 				else
 				{
 					$($(element).parent().parent().parent().css('background-color', 'white'));
+					//$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().parent().parent().css('background-color', 'white'));
 				}
 
 			}, false, true);
