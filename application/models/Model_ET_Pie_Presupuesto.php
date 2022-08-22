@@ -17,14 +17,14 @@ class Model_ET_Pie_Presupuesto extends CI_Model
 
 	public function PiePresupuestoPorIdET($idExpedienteTecnico)
 	{
-		$data=$this->db->query("select * from pie_presupuesto where id_et='".$idExpedienteTecnico."' and modalidad_ejecucion=1 order by orden");
+		$data=$this->db->query("select p.*, pe.gasto from pie_presupuesto p left join et_presupuesto_ejecucion pe on p.id_presupuesto_ej=pe.id_presupuesto_ej where p.id_et='".$idExpedienteTecnico."' and p.modalidad_ejecucion=1 order by p.orden");
 
 		return $data->result();
 	}
 
 	public function PiePresupuestoPorIdETAdmInd($idExpedienteTecnico)
 	{
-		$data=$this->db->query("select * from pie_presupuesto where id_et='".$idExpedienteTecnico."' and modalidad_ejecucion=2 order by orden");
+		$data=$this->db->query("select p.*, pe.gasto from pie_presupuesto p left join et_presupuesto_ejecucion pe on p.id_presupuesto_ej=pe.id_presupuesto_ej where p.id_et='".$idExpedienteTecnico."' and p.modalidad_ejecucion=2 order by p.orden");
 
 		return $data->result();
 	}

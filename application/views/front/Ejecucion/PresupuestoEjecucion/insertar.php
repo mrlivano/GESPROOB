@@ -7,9 +7,15 @@
 		</div>
 	</div>
 	<div class="item form-group">
-		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Repositorio<span class="required">*</span></label>
+		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Permitir Subir Archivo?<span class="required">*</span></label>
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<input type="checkbox" class="checkRepositorio" name="checkRepositorio" id="checkRepositorio" checked="true">		
+		</div>
+	</div>
+	<div class="item form-group">
+		<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Es Gasto?<span class="required">*</span></label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<input type="checkbox" class="checkGasto" name="checkGasto" id="checkGasto" checked="true">		
 		</div>
 	</div>
 	

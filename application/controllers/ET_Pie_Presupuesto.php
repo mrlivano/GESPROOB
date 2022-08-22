@@ -147,7 +147,13 @@ class ET_Pie_Presupuesto extends CI_Controller
 	function eliminar()
 	{
 			$msg = array();
+			$presupuestoEjecucion=$this->input->post('presupuestoEjecucion');
+			$modalidad=$this->input->post('modalidad');
+			$id_et=$this->input->post('id_et');
 			$data = $this->Model_ET_Pie_Presupuesto->eliminar($this->input->post('id_pie_presupuesto'));
+			if($presupuestoEjecucion==0){
+				$data=$this->Model_ET_Pie_Presupuesto->updatePresupuestoTotal($id_et, $modalidad, 0);
+			}
 			$msg = ($data > 0 ? (['proceso' => 'Correcto', 'mensaje' => 'El registro fue eliminado correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
 			echo json_encode($msg);exit;
 	}

@@ -1219,7 +1219,7 @@ class Expediente_Tecnico extends CI_Controller
 		}
 
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
 			foreach($expedienteTecnico->childComponenteInd as $key => $value)
 			{

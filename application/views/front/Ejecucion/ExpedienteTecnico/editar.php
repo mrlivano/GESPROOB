@@ -84,12 +84,18 @@
 						</div>
 					</div>
 					<div class="row">
-					<div class=" col-md-8 col-sm-8 col-xs-12">
+						<div class=" col-md-8 col-sm-8 col-xs-12">
 					  		<label class="control-label">MODALIDAD DE LA EJECUCION</label>
 					    	<div class="form-group" >
 							<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="<?=$ExpedienteTecnicoM->modalidad_ejecucion_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
 					    	</div>
-					  	</div>
+					  </div>
+						<div class=" col-md-4 col-sm-4 col-xs-12">
+					  		<label class="control-label">PRESUPUESTO TOTAL DEL PROYECTO</label>
+					    	<div class="form-group" >
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+					    	</div>
+					  </div>
 					</div>
 					<div>
 					<?php 

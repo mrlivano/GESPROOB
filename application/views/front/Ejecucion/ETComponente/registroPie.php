@@ -442,6 +442,9 @@
       function(){
 				paginaAjaxJSON({
 				"id_pie_presupuesto" : $('#idPieDirecta'+index).val(),
+				"presupuestoEjecucion":$('#presupuestoEjecucionDirecta' + index).find("option:selected").val(),
+				"modalidad":1,
+				"id_et": $('#hd_et').val(),
 			},
 			base_url + 'index.php/ET_Pie_Presupuesto/eliminar',
 			'POST', null,
@@ -471,6 +474,9 @@ function eliminarFilaI(index){
       function(){
 			paginaAjaxJSON({
 						"id_pie_presupuesto" : $('#idPieIndirecta'+index).val(),
+						"presupuestoEjecucion":$('#presupuestoEjecucionIndirecta' + index).find("option:selected").val(),
+						"modalidad":2,
+						"id_et": $('#hd_et').val(),
 					},
 					base_url + 'index.php/ET_Pie_Presupuesto/eliminar',
 					'POST', null,

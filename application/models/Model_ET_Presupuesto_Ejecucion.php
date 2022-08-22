@@ -107,9 +107,9 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
         return $presupuestoejecucion->result();
     }
 
-    function editar($flat,$id,$txtDescripcion,$repositorio)
+    function editar($flat,$id,$txtDescripcion,$repositorio,$gasto)
     {
-        $presupuestoejecucion=$this->db->query("execute sp_Gestionar_ET_Presupuesto_Ejecucion_c  @Opcion='".$flat."',@id_presupuesto_ej='".$id."',@desc_presupuesto_ej='".$txtDescripcion."',@repositorio='".$repositorio."'");
+        $presupuestoejecucion=$this->db->query("execute sp_Gestionar_ET_Presupuesto_Ejecucion_c  @Opcion='".$flat."',@id_presupuesto_ej='".$id."',@desc_presupuesto_ej='".$txtDescripcion."',@repositorio='".$repositorio."',@gasto='".$gasto."'");
 
         return true;
     }
