@@ -503,7 +503,7 @@
                         <label class="mayuscula control-label col-md-3 col-sm-3 col-xs-12" for="name">Razón Social  <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="txt_razon_social" name="txt_razon_social" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Razón Social" type="text" maxlength="300">
+                          <input id="txt_razon_social" name="txt_razon_social" class="mayuscula form-control col-md-7 col-xs-12"  placeholder="Razón Social" type="text">
                         </div>
                       </div>
 
@@ -543,11 +543,11 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button id="send" type="submit" class="btn btn-success">
+                          <button id="send" type="submit" class="btn btn-success" onclick="limpiarTxt()>
                             <span class="glyphicon glyphicon-floppy-disk"></span>
                             Guardar
                           </button>
-                           <button  class="btn btn-danger" data-dismiss="modal">
+                           <button  class="btn btn-danger" data-dismiss="modal" onclick="limpiarTxt()">
                              <span class="glyphicon glyphicon-remove"></span>
                             Cerrar
                           </button>
@@ -1087,13 +1087,23 @@
 
                   if(data)
                   {
-                    $('#txt_razon_social').val(data.nombreRazonSocial);
-                  $('#txt_direccionR').val(data.direccion);
+                    if (data.nombreRazonSocial) {
+                      
+                    
+                    $('#txt_razon_social').val(data.nombreRazonSocial.trim()).prop('disabled', true);
+                  $('#txt_direccionR').val(data.direccion.trim()).prop('disabled', true);
+                  $('#txt_ruc').prop('disabled',true)
+                  $()
                     swal('Operacion Completada','OK','success');
+                    }
+                    else{
+                      swal('ERROR!','No se encontró el RUC verifique por favor','error');
+                    }
                   }
                   else
                   {
                     swal('No se pudo completar la Operacion','error');
+                    
                   }
                 }).fail(
                    function ( )
@@ -1104,6 +1114,13 @@
                       swal('ERROR!','No se encontró el RUC verifique por favor','error');
 
                   });
+    }
+    function limpiarTxt()
+    {
+      $('#txt_razon_social').prop('disabled', false);
+      $('#txt_direccionR').prop('disabled', false);
+      $('#txt_ruc').prop('disabled',false);
+      $('#mensajeErrorR').text('');
     }
 
     $(function()
@@ -1272,11 +1289,7 @@
                         {
                             message: '<b style="color: red;">El campo "Razon Social" es requerido.</b>'
                         },
-                        regexp:
-                        {
-                            regexp: /^[a-zñáéíóúüA-ZÑÁÉÍÓÚÜ\s]+$/,
-                            message: '<b style="color: red;">El campo "Razon Social" es solo texto.</b>'
-                        },
+                        
                         stringLength:
                         {
                             max: 300,
@@ -1510,11 +1523,7 @@
                         {
                             message: '<b style="color: red;">El campo "Razon Social" es requerido.</b>'
                         },
-                        regexp:
-                        {
-                            regexp: /^[a-zñáéíóúüA-ZÑÁÉÍÓÚÜ\s]+$/,
-                            message: '<b style="color: red;">El campo "Razon Social" es solo texto.</b>'
-                        },
+                        
                         stringLength:
                         {
                             max: 300,
