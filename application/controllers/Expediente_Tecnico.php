@@ -67,7 +67,8 @@ class Expediente_Tecnico extends CI_Controller
 		$listarComponentes=$this->Model_ET_Expediente_Tecnico->listarComponentes($id_ExpedienteTecnico);
 		$listarComponentesAD=$this->Model_ET_Expediente_Tecnico->listarComponentesAD($id_ExpedienteTecnico);
 		$listarComponentesAI=$this->Model_ET_Expediente_Tecnico->listarComponentesAI($id_ExpedienteTecnico);
-		$listarResponsables=$this->Model_ET_Expediente_Tecnico->listarResponsables($id_ExpedienteTecnico);
+		//$listarResponsables=$this->Model_ET_Expediente_Tecnico->listarResponsables($id_ExpedienteTecnico);
+		$listarResponsables=$this->Model_ET_Responsable->ResponsableEtapaE($id_ExpedienteTecnico,'2');
 		$listarPiePresupuestoAD=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_ExpedienteTecnico);
 		$listarPiePresupuestoAI=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
 		$listarExpedienteFicha001=$this->Model_ET_Expediente_Tecnico->reporteExpedienteFicha001($Opcion,$id_ExpedienteTecnico);
