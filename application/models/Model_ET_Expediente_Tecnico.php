@@ -170,7 +170,7 @@ class Model_ET_Expediente_Tecnico extends CI_Model
         }
         else
         {
-        	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados, @id_et=$idEt, @ue=NULL, @id_usuario=NULL,@aprobado=$aprobado");
+        	$data=$this->db->query("execute sp_Gestionar_ET_Expediente_Tecnico @Opcion='lista_expedientes_aprobados', @id_et=$idEt, @ue=NULL, @id_usuario=NULL,@aprobado=$aprobado");
         	return $data->result();
         }
 	}
@@ -438,6 +438,13 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 	    return false;
     }
 		/*ssssssssss */
+
+		public function prioridadEjecucion($id_et)
+		{
+			$prioridadEjecucion=$this->db->query("select top 1 tipo_ejecucion from ET_COMPONENTE where id_et='".$id_et."' order by id_componente");
+			return $prioridadEjecucion->result();
+		}
+
 		public function listarComponentes($id_et)
 		{
 			$listarComponentes=$this->db->query("select * from  (ET_COMPONENTE left JOIN ET_EXPEDIENTE_TECNICO ON ET_EXPEDIENTE_TECNICO.id_et=ET_COMPONENTE.id_et) INNER JOIN ET_META ON ET_COMPONENTE.id_componente=ET_META.id_componente where (ET_COMPONENTE.id_presupuesto_ej=(select top 1 id_presupuesto_ej from et_presupuesto_ejecucion where id_presupuesto_ej=2 or desc_presupuesto_ej='ADMINISTRACION DIRECTA - COSTOS DIRECTOS') OR ET_COMPONENTE.id_presupuesto_ej=(select top 1 id_presupuesto_ej from et_presupuesto_ejecucion where id_presupuesto_ej=1030 or desc_presupuesto_ej='ADMINISTRACION INDIRECTA - COSTOS DIRECTOS')) and ET_EXPEDIENTE_TECNICO.id_et='".$id_et."' order by id_presupuesto_ej");

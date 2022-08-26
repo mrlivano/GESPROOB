@@ -64,6 +64,7 @@ class Expediente_Tecnico extends CI_Controller
 		$Opcion="ReporteFichaTecnica01";
 
 		$ImagenesExpediente=$this->Model_ET_Expediente_Tecnico->ET_Img($id_ExpedienteTecnico);
+		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($id_ExpedienteTecnico);
 		$listarComponentes=$this->Model_ET_Expediente_Tecnico->listarComponentes($id_ExpedienteTecnico);
 		$listarComponentesAD=$this->Model_ET_Expediente_Tecnico->listarComponentesAD($id_ExpedienteTecnico);
 		$listarComponentesAI=$this->Model_ET_Expediente_Tecnico->listarComponentesAI($id_ExpedienteTecnico);
@@ -73,7 +74,7 @@ class Expediente_Tecnico extends CI_Controller
 		$listarPiePresupuestoAI=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
 		$listarExpedienteFicha001=$this->Model_ET_Expediente_Tecnico->reporteExpedienteFicha001($Opcion,$id_ExpedienteTecnico);
 
-		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteExpedienteTecnico',["listarExpedienteFicha001" => $listarExpedienteFicha001, "ImagenesExpediente" =>$ImagenesExpediente,"responsableElaboracion" => $responsableElaboracion,"responsableEjecucion" => $responsableEjecucion,"listarComponentes" => $listarComponentes,"listarComponentesAD" => $listarComponentesAD,"listarComponentesAI" => $listarComponentesAI,"listarResponsables" => $listarResponsables ,"listarPiePresupuestoAD" => $listarPiePresupuestoAD,"listarPiePresupuestoAI" => $listarPiePresupuestoAI],true);
+		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteExpedienteTecnico',["listarExpedienteFicha001" => $listarExpedienteFicha001, "ImagenesExpediente" =>$ImagenesExpediente,"responsableElaboracion" => $responsableElaboracion,"responsableEjecucion" => $responsableEjecucion,"listarComponentes" => $listarComponentes,"listarComponentesAD" => $listarComponentesAD,"listarComponentesAI" => $listarComponentesAI,"listarResponsables" => $listarResponsables ,"listarPiePresupuestoAD" => $listarPiePresupuestoAD,"listarPiePresupuestoAI" => $listarPiePresupuestoAI, "prioridadEjecucion" => $prioridadEjecucion],true);
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->set_paper("A4", "portrait");
 		$this->mydompdf->render();
