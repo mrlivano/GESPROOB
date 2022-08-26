@@ -193,7 +193,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 			<br>
 			<table id="tableResumen" style="width: 100%; font-size:12px;">
 			<tr>
-					<td style="width: 87%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></td>
+					<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO</b></td>
 					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
 				</tr>
 				<?php foreach($expedienteTecnico->piePresupuestoDirecta as $key => $value) { ?>
@@ -252,7 +252,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 			<br>
 			<table id="tableResumen" style="width: 100%; font-size:12px;">
 			<tr>
-					<td style="width: 87%;background-color:#337ab7;color:white;"><b>PIE DE PRESUPUESTO</b></td>
+					<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO</b></td>
 					<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
 				</tr>
 				<?php foreach($expedienteTecnico->piePresupuestoIndirecta as $key => $value) { ?>

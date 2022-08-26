@@ -213,9 +213,12 @@ function mostrarMetaAnidada($meta, $idExpedienteTecnico, $idPresupuestoEjecucion
 			<li style="width:15%;" role="presentation" class="active">
 				<a href="#tabImportarComponente" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b>Importar Componente</b></a>
 			</li>
-			<li style="width:15%;" role="presentation" class="">
+			<?php if ($expedienteTecnico->id_etapa_et == 1) { ?>
+				<li style="width:15%;" role="presentation" class="">
 				<a href="#tabAgregarComponente" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Agregar Componente</b></a>
 			</li>
+			<?php } ?>
+			
 		</ul>
 		<br>
 			<div id="myTabPieContent" class="tab-content">

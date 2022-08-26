@@ -153,37 +153,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 			</tr>
 		</thead>
 		<tbody>
-		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-				?>
-		<td colspan="<?=count($listaMesesPeriodo)+7?>" style="text-align:center; background-color: rgb(204 208 255);"><b>ADMINISTRACION DIRECTA</b></td>
-		<?php }?>
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 			<?php foreach($expedienteTecnico->childComponente as $key => $value)
-			{ ?>
-				<tr class="elementoBuscar">
-					<td><b><i><?=$value->numeracion?></i></b></td>
-					<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-					<?php foreach($listaMesesPeriodo as $i => $mes)
-					{ ?>
-					<td>---</td>
-					<?php } ?>
-				</tr>
-				<?php foreach($value->childMeta as $index => $item)
-				{ ?>
-					<?= mostrarMetaAnidada($item, $expedienteTecnico, $listaMesesPeriodo, $anio)?>
-				<?php } ?>
-			<?php } } ?>
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			?>
-		<td colspan="<?=count($listaMesesPeriodo)+7?>" style="text-align:center; background-color: rgb(204 208 255);"><b>ADMINISTRACION INDIRECTA</b></td>
-		<?php }?>
-			<?php foreach($expedienteTecnico->childComponenteInd as $key => $value)
 			{ ?>
 				<tr class="elementoBuscar">
 					<td><b><i><?=$value->numeracion?></i></b></td>
