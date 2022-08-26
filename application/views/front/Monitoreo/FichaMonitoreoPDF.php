@@ -55,7 +55,7 @@
 					</tr>
 				</table>
 				<div id="footer">
-				<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+				<div style="text-align: left; font-size: 10px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha: <?php echo date("d/m/Y");?></div>
 				</div>
 				<div style="text-align: center; font-size: 12px;"><b>Formato Nº 02<br>Ficha de Monitoreo de Inversiones<br></b></div>
 				<div class="x_content">

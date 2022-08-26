@@ -45,7 +45,7 @@
 </head>
 <body>
 	<div id="footer">
-		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		<div style="text-align: left; font-size: 10px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha: <?php echo date("d/m/Y");?></div>
 	</div>
 	<?php foreach ($listadoMaquinaria as $key => $value) { ?>
 	<div style="page-break-after:always;">

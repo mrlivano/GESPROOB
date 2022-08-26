@@ -120,7 +120,7 @@ function mostrarMetaAnidada($meta)
 		</tr>
 	</table><br>
 	<div id="footer">
-		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		<div style="text-align: left; font-size: 10px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha: <?php echo date("d/m/Y");?></div>
 		</div>
 	<div style="text-align: center;font-size: 13px;font-weight:bold; ">FORMATO FF-08</div>
 	<div style="text-align: center;font-size: 15px;font-weight:bold;">DESAGREGADO DE GASTOS GENERALES</div>

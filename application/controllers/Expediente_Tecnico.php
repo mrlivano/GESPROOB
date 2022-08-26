@@ -2493,11 +2493,11 @@ class Expediente_Tecnico extends CI_Controller
         if($tipoUsuario!=9 && $tipoUsuario!=1)
         {
         	$data=$this->UsuarioProyecto_model->ProyectoAsignado($ExpedienteAprobado[0]->id_pi);
-        	if(count($data)==0)
-			{
-				$this->session->set_flashdata('error', 'Usted no tiene acceso a este Expediente Tecnico');
-				redirect('Expediente_Tecnico/index');
-			}
+							if(count($data)==0)
+					{
+						$this->session->set_flashdata('error', 'Usted no tiene acceso a este Expediente Tecnico');
+						redirect('Expediente_Tecnico/index');
+					}
         }
 
 		$aprobado = 0;

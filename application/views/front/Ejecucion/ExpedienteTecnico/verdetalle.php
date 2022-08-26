@@ -118,11 +118,8 @@
 							<li style="width:15%;" role="presentation" class="">
 								<a href="#tabAprobacion" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Aprobación de E.T</b></a>
 							</li>
-							<li style="width:15%;" role="presentation" class="">
-								<a href="#tabDatosGenerales" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Datos Generales</b></a>
-							</li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
+            </ul>
+            <div id="myTabContent" class="tab-content">
 							<div role="tabpanel" class="tab-pane fade active in" id="tabSeguimiento" aria-labelledby="home-tab">
                                 <div class="row">
 									<div class="col-md-12 col-sm-12 col-xs-12">
@@ -376,7 +373,7 @@
 															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-07
 															</a>
-															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio de Pie de Presupuesto" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
+															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
 															<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -405,6 +402,9 @@
 															</a>
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Requerimiento de Mano de Obra" href="<?= site_url('ET_RelacionInsumo/ReportePdfCronogramaRequerimiento?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et.'&id_recurso=2');?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-18
+															</a>
+															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio General" href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target="_blank">
+																<i class="fa fa-hdd-o"></i> Repositorio
 															</a>
 														</div>
 													</div>
@@ -464,35 +464,6 @@
 									</div>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane fade" id="tabDatosGenerales" aria-labelledby="home-tab">
-                                <div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12">
-										<div class="x_panel">
-											<div class="x_content">
-												<div style="text-align: center;padding-top:28px;">
-													<div>
-														<a class="btn btn-app" data-toggle="tooltip" title="Detalle del Expediente" onclick="paginaAjaxDialogo(null, 'Detalle de expediente técnico',{id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/DetalleExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-list-ul"></i> Detalle
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Responsables" onclick="paginaAjaxDialogo(null, 'Listar Responsables del Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/ResponsableExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-users"></i> Responsable
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Documentos" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);" >
-															<i class="fa fa-file-pdf-o"></i> Documento
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Reporte Estadístico" href="<?= site_url('Expediente_Tecnico/ReporteEstadistico?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>
-															<i class="fa fa-area-chart"></i> Reporte
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Repositorio"  href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target='_blank'>
-															<i class="fa fa-hdd-o"></i> Repositorio
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
                     </div>
 					<?php }
@@ -503,9 +474,6 @@
                         	<li style="width:15%;"  role="presentation" class="active">
 								<a href="#tabFormatos"  id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><b> Expediente Técnico</b></a>
                             </li>
-							<li style="width:15%;" role="presentation" class="">
-								<a href="#tabDetalles" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Datos Generales</b></a>
-							</li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
 							<div role="tabpanel" class="tab-pane fade active in" id="tabFormatos" aria-labelledby="home-tab">
@@ -529,6 +497,9 @@
 															<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Especificaciones Técnicas" onclick="listaComponente('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-04
 															</a>
+															<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Especificaciones Técnicas" onclick="listaComponenteB('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
+																<i class="fa fa-file-pdf-o"></i> Formato FF-04B
+															</a>
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-05
 															</a>
@@ -538,10 +509,10 @@
 															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-07
 															</a>
-															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio de Pie de Presupuesto" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
+															<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-															<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio de Pie de Presupuesto" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
+															<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" href="<?= site_url('Expediente_Tecnico/reporteDesagGastosGenerales?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a> -->
 															<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Sustentación de Metrados" href="<?= site_url('Expediente_Tecnico/reportePdfMetrado?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -571,36 +542,13 @@
 															<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Requerimiento de Mano de Obra" href="<?= site_url('ET_RelacionInsumo/ReportePdfCronogramaRequerimiento?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et.'&id_recurso=2');?>" target="_blank">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-18
 															</a>
+															<a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Resolución de Expediente Técnico" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);">
+																<i class="fa fa-file-pdf-o"></i> Resolución
+															</a>
+															<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio General" href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target="_blank">
+																<i class="fa fa-hdd-o"></i> Repositorio
+															</a>
 														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="tabDetalles" aria-labelledby="profile-tab">
-                                <div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="x_panel">
-											<div class="x_content">
-												<div style="text-align: center;padding-top:28px;padding-bottom:10px;">
-													<div>
-														<a class="btn btn-app" data-toggle="tooltip" title="Detalle del Expediente" onclick="paginaAjaxDialogo(null, 'Detalle de expediente técnico',{id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/DetalleExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-list-ul"></i> Detalle
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Responsables" onclick="paginaAjaxDialogo(null, 'Listar Responsables del Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/ResponsableExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-users"></i> Responsable
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Documentos" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);" >
-															<i class="fa fa-file-pdf-o"></i> Documento
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Reporte Estadístico" href="<?= site_url('Expediente_Tecnico/ReporteEstadistico?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>
-															<i class="fa fa-area-chart"></i> Reporte
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Repositorio"  href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target='_blank'>
-															<i class="fa fa-hdd-o"></i> Repositorio
-														</a>
 													</div>
 												</div>
 											</div>
@@ -623,11 +571,8 @@
 							<li style="width:15%;" role="presentation" class="">
 								<a href="#tabExpedienteTecnico" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Ejecución</b></a>
 							</li>
-							<li style="width:15%;" role="presentation" class="">
-								<a href="#tabDatosGenerales" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Datos Generales</b></a>
-							</li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
+          </ul>
+          <div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="tabModificatoria" aria-labelledby="home-tab">
                                 <div class="row">
 									<div class="col-md-12 col-sm-12 col-xs-12">
@@ -645,24 +590,33 @@
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href='<?=base_url();?>Expediente_Tecnico/verdetalle?id_et=<?=$value->id_et?>'>Expediente Contractual</a>
+																		<a href='<?=base_url();?>Expediente_Tecnico/verdetalle?id_et=<?=$value->id_et?>'>Expediente Contractual</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
 																	</div>
 																	<p class="excerpt"></p>
-																	<?php if($value->aprobado){?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-default btn-sm">
-																	<?php } else {?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
-																	<?php }?>
-																	<span>Crear Modificatoria</span>
-																	</a>
-																	
 																</div>
-																
 															</div>
 														</li>
+														<?php if(!$value->aprobado){?>
+															<li>
+																	<div class="block">
+																		<div class="tags">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="tag">
+																			<span>Crear Modificatoria</span>
+																			</a>
+																		</div>
+																		<div class="block_content">
+																			<div class="byline">
+																				<span></span><a></a>
+																			</div>
+																			<p class="excerpt"></p>
+																				<span></span>
+																		</div>
+																	</div>
+														   </li>
+														<?php }?>
 														<?php }?>
 														<?php foreach ($listaModificatoria as $key => $value) {?>
 														<li>
@@ -679,16 +633,27 @@
 																		<span></span><a></a>
 																	</div>
 																	<p class="excerpt"></p>
-																	<?php if($value->aprobado){?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-default btn-sm">
-																	<?php } else {?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
-																	<?php }?>
-																	<span>Crear Modificatoria</span>
-																	</a>
 																</div>
 															</div>
 														</li>
+														<?php if(!$value->aprobado){?>
+															<li>
+																	<div class="block">
+																		<div class="tags">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="tag">
+																			<span>Crear Modificatoria</span>
+																			</a>
+																		</div>
+																		<div class="block_content">
+																			<div class="byline">
+																				<span></span><a></a>
+																			</div>
+																			<p class="excerpt"></p>
+																				<span></span>
+																		</div>
+																	</div>
+														   </li>
+														<?php }?>
 														<?php }?>
 													</ul>
 												</div>
@@ -1054,7 +1019,7 @@
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-07
 																</a>
 
-																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio de Pie de Presupuesto" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
+																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
 																
@@ -1080,38 +1045,14 @@
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Avance de Obra Valorizado" href="<?= site_url('Expediente_Tecnico/formatoFE16?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-16</span>
 																</a>
-
+																<a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Resolución de Expediente Técnico" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);">
+																<i class="fa fa-file-pdf-o"></i> Resolución
+																</a>
+																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio General" href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target="_blank">
+																	<i class="fa fa-hdd-o"></i> Repositorio
+																</a>
 															</div>
 														<?php } ?>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="tabDatosGenerales" aria-labelledby="home-tab">
-                                <div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12">
-										<div class="x_panel">
-											<div class="x_content">
-												<div style="text-align: center;padding-top:28px;">
-													<div>
-														<a class="btn btn-app" data-toggle="tooltip" title="Detalle del Expediente" onclick="paginaAjaxDialogo(null, 'Detalle de expediente técnico',{id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/DetalleExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-list-ul"></i> Detalle
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Responsables" onclick="paginaAjaxDialogo(null, 'Listar Responsables del Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/ResponsableExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-users"></i> Responsable
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Documentos" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);" >
-															<i class="fa fa-file-pdf-o"></i> Documento
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Reporte Estadístico" href="<?= site_url('Expediente_Tecnico/ReporteEstadistico?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>
-															<i class="fa fa-area-chart"></i> Reporte
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Repositorio"  href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target='_blank'>
-															<i class="fa fa-hdd-o"></i> Repositorio
-														</a>
 													</div>
 												</div>
 											</div>
@@ -1134,11 +1075,8 @@
 							<li style="width:15%;" role="presentation" class="">
 								<a href="#tabExpedienteTecnico" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Ejecución</b></a>
 							</li>
-							<li style="width:15%;" role="presentation" class="">
-								<a href="#tabDatosGenerales" role="tab"  id="profile-tab" data-toggle="tab" aria-expanded="false"><b>Datos Generales</b></a>
-							</li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
+          </ul>
+          <div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="tabModificatoria" aria-labelledby="home-tab">
                                 <div class="row">
 									<div class="col-md-12 col-sm-12 col-xs-12">
@@ -1162,17 +1100,27 @@
 																		<span></span><a></a>
 																	</div>
 																	<p class="excerpt"></p>
-																	<?php if($value->aprobado){?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-default btn-sm">
-																	<?php } else {?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
-																	<?php }?>
-																	<span>Crear Modificatoria</span>
-																	</a>
 																</div>
-																
 															</div>
 														</li>
+														<?php if(!$value->aprobado){?>
+															<li>
+																	<div class="block">
+																		<div class="tags">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="tag">
+																			<span>Crear Modificatoria</span>
+																			</a>
+																		</div>
+																		<div class="block_content">
+																			<div class="byline">
+																				<span></span><a></a>
+																			</div>
+																			<p class="excerpt"></p>
+																				<span></span>
+																		</div>
+																	</div>
+														   </li>
+														<?php }?>
 														<?php }?>
 														<?php foreach ($listaModificatoria as $key => $value) {?>
 														<li>
@@ -1189,16 +1137,27 @@
 																		<span></span><a></a>
 																	</div>
 																	<p class="excerpt"></p>
-																	<?php if($value->aprobado){?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-default btn-sm">
-																	<?php } else {?>
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
-																	<?php }?>
-																	<span>Crear Modificatoria</span>
-																	</a>
 																</div>
 															</div>
 														</li>
+														<?php if(!$value->aprobado){?>
+															<li>
+																	<div class="block">
+																		<div class="tags">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="tag">
+																			<span>Crear Modificatoria</span>
+																			</a>
+																		</div>
+																		<div class="block_content">
+																			<div class="byline">
+																				<span></span><a></a>
+																			</div>
+																			<p class="excerpt"></p>
+																				<span></span>
+																		</div>
+																	</div>
+														   </li>
+														<?php }?>
 														<?php }?>
 													</ul>
 												</div>
@@ -1564,7 +1523,7 @@
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-07
 																</a>
 
-																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio de Pie de Presupuesto" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
+																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
 
@@ -1590,38 +1549,14 @@
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Cronograma de Avance de Obra Valorizado" href="<?= site_url('Expediente_Tecnico/formatoFE16?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-16</span>
 																</a>
-
+																<a style="background-color: #f3632e;" class="btn btn-app btn-box" data-toggle="tooltip" title="Resolución de Expediente Técnico" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);">
+																<i class="fa fa-file-pdf-o"></i> Resolución
+																</a>
+																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio General" href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target="_blank">
+																	<i class="fa fa-hdd-o"></i> Repositorio
+																</a>
 															</div>
 														<?php } ?>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="tabDatosGenerales" aria-labelledby="home-tab">
-                                <div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12">
-										<div class="x_panel">
-											<div class="x_content">
-												<div style="text-align: center;padding-top:28px;">
-													<div>
-														<a class="btn btn-app" data-toggle="tooltip" title="Detalle del Expediente" onclick="paginaAjaxDialogo(null, 'Detalle de expediente técnico',{id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/DetalleExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-list-ul"></i> Detalle
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Responsables" onclick="paginaAjaxDialogo(null, 'Listar Responsables del Expediente Técnico',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/ResponsableExpediente', 'POST', null, null, false, true);" >
-															<i class="fa fa-users"></i> Responsable
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Documentos" onclick="paginaAjaxDialogo(null, 'Listar Documentos',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/DocumentoExpediente', 'GET', null, null, false, true);" >
-															<i class="fa fa-file-pdf-o"></i> Documento
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Reporte Estadístico" href="<?= site_url('Expediente_Tecnico/ReporteEstadistico?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>
-															<i class="fa fa-area-chart"></i> Reporte
-														</a>
-														<a class="btn btn-app" data-toggle="tooltip" title="Repositorio"  href="<?= site_url('elfiles/elfinder_files?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et.'&mod=ET');?>" target='_blank'>
-															<i class="fa fa-hdd-o"></i> Repositorio
-														</a>
 													</div>
 												</div>
 											</div>
@@ -1734,7 +1669,7 @@ function mostrarGastosGenerales(idExpediente,url)
 		swal("Error", "Aún no se ha subido documentos", "error");
 		return;
 	}
-	paginaAjaxDialogo(null, 'Repositorio de Pie de Presupuesto',{ idExpediente : idExpediente, tipoGasto : 1 }, base_url+'index.php/Expediente_Tecnico/mostrarGastos', 'POST', null, null, false, true);
+	paginaAjaxDialogo(null, 'Repositorio Costos Indirectos',{ idExpediente : idExpediente, tipoGasto : 1 }, base_url+'index.php/Expediente_Tecnico/mostrarGastos', 'POST', null, null, false, true);
 }
 
 function mostrarGastosSupervision(idExpediente,url)

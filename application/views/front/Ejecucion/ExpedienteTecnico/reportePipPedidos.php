@@ -72,7 +72,7 @@
 	-->
 	
 	<div id="footer">
-		<div style="text-align: left; font-size: 12px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha:<?php echo date("d/m/Y");?></div>
+		<div style="text-align: left; font-size: 10px;">Usuario: <?php echo $this->session->userdata('nombreUsuario')?> | fecha: <?php echo date("d/m/Y");?></div>
 		</div>
   	<div id="content">
 	  	<div style="text-align: center; font-size: 15px;"><b>REPORTE PEDIDOS</b></div>
