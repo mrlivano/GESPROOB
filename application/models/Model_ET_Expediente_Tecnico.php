@@ -442,7 +442,7 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 		public function prioridadEjecucion($id_et)
 		{
 			$prioridadEjecucion=$this->db->query("select top 1 tipo_ejecucion from ET_COMPONENTE where id_et='".$id_et."' order by id_componente");
-			return $prioridadEjecucion->result();
+			return $prioridadEjecucion->result()[0];
 		}
 
 		public function listarComponentes($id_et)

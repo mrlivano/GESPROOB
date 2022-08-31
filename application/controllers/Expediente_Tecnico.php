@@ -65,7 +65,6 @@ class Expediente_Tecnico extends CI_Controller
 
 		$ImagenesExpediente=$this->Model_ET_Expediente_Tecnico->ET_Img($id_ExpedienteTecnico);
 		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($id_ExpedienteTecnico);
-		$listarComponentes=$this->Model_ET_Expediente_Tecnico->listarComponentes($id_ExpedienteTecnico);
 		$listarComponentesAD=$this->Model_ET_Expediente_Tecnico->listarComponentesAD($id_ExpedienteTecnico);
 		$listarComponentesAI=$this->Model_ET_Expediente_Tecnico->listarComponentesAI($id_ExpedienteTecnico);
 		//$listarResponsables=$this->Model_ET_Expediente_Tecnico->listarResponsables($id_ExpedienteTecnico);
@@ -850,6 +849,7 @@ class Expediente_Tecnico extends CI_Controller
 		$opcion="BuscarExpedienteID";
 		$MostraExpedienteNombre=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_ExpedienteTecnico);
 		$MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_ExpedienteTecnico);
+		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($id_ExpedienteTecnico);
 
 		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($id_ExpedienteTecnico, 'EXPEDIENTETECNICO');
@@ -893,7 +893,7 @@ class Expediente_Tecnico extends CI_Controller
 			$MostraExpedienteTecnicoExpe->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
 		}
 
-		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePresupuestoFF05',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe,'MostraExpedienteNombre' => $MostraExpedienteNombre], true);
+		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePresupuestoFF05',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe,'MostraExpedienteNombre' => $MostraExpedienteNombre,'prioridadEjecucion' => $prioridadEjecucion], true);
 		$this->mydompdf->set_paper('latter','landscape');
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->render();
@@ -1205,6 +1205,7 @@ class Expediente_Tecnico extends CI_Controller
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : null;
 
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($idExpedienteTecnico);
 
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
@@ -1234,7 +1235,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
 		}
 		$size = ($expedienteTecnico->num_meses>18)?'A3':'A4';
-		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfCronogramaEjecucion',['expedienteTecnico'=>$expedienteTecnico],true);
+		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfCronogramaEjecucion',['expedienteTecnico'=>$expedienteTecnico,'prioridadEjecucion'=>$prioridadEjecucion],true);
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->set_paper($size, "landscape");
 		$this->mydompdf->render();
@@ -1285,6 +1286,7 @@ class Expediente_Tecnico extends CI_Controller
 	{
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : null;
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($idExpedienteTecnico);
 
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			
@@ -1321,7 +1323,7 @@ class Expediente_Tecnico extends CI_Controller
 			$expedienteTecnico->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($idExpedienteTecnico);
 		}
 
-		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfEjecucion007',['expedienteTecnico'=>$expedienteTecnico],true);
+		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfEjecucion007',['expedienteTecnico'=>$expedienteTecnico,'prioridadEjecucion' => $prioridadEjecucion],true);
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->set_paper("A4", "portrait");
 		$this->mydompdf->render();

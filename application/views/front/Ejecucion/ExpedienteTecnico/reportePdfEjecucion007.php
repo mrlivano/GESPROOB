@@ -147,11 +147,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 			</table>    
 		</div>
 		<div>
-		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-							?>
-			<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN DIRECTA</span><br><br>
-			<?php } ?>
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA'){?>
 		<?php $costoDirectoTotal=0; ?>
 			<table id="tableValorizacion" style="width:100%;">
 				<thead>
@@ -203,14 +199,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 					</tr>				
 				<?php } ?>
 			</table>
-			<?php } ?>
-
-		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-							?>
-			<table style='page-break-after:always;'></br></table> 
-			<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
-			<?php } ?>
+			<?php } else if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA'){ ?>
 		<?php $costoDirectoTotal=0; ?>
 			<table id="tableValorizacion" style="width:100%;">
 				<thead>
@@ -262,7 +251,227 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$costoDirectoTotal)
 					</tr>				
 				<?php } ?>
 			</table>
-			<?php } ?>
+			<?php } else if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
+			if($prioridadEjecucion->tipo_ejecucion=='ADMINISTRACION DIRECTA'){ ?>
+
+				<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN DIRECTA</span><br><br>
+				<?php $costoDirectoTotal=0; ?>
+					<table id="tableValorizacion" style="width:100%;">
+						<thead>
+							<tr>
+								<th style="width:7%;">ÍTEM</th>
+								<th style="width:50%;">DESCRIPCIÓN</th>
+								<th style="width:10%;">UND.</th>
+								<th style="width:10%;">METRADO</th>
+								<th style="width:10%;">PRECIO (S/.)</th>
+								<th style="width:13%;">PARCIAL (S/.)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($expedienteTecnico->childComponente as $key => $value){ 
+								$resultadoMetaAnidada='';
+								$resultadoSumaAnidada=0;
+									foreach($value->childMeta as $index => $item){ 
+										$resultado=mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal);
+										$resultadoMetaAnidada.= $resultado['htmlT'];
+										$resultadoSumaAnidada+=$resultado['sumaTemp'];
+									} 
+								?>
+								<tr>
+									<td style="width:5%;"><b><i><?=$value->numeracion?></i></b></td>
+									<td style="text-align: left;width:50%;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;text-align: right;">---</td>
+									<td style="width:15%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 4, '.',",",3)?></b></td>
+								</tr>
+									<?=$resultadoMetaAnidada?>
+							<?php } ?>
+							<tr>
+							<td style="width: 85%;text-decoration: underline; background-color:#959494;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO (NDIRECTO)</b></td>
+							<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<table id="tableResumen" style="width: 100%; font-size:12px;">
+					<tr>
+							<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO</b></td>
+							<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
+						</tr>
+						<?php foreach($expedienteTecnico->piePresupuestoDirecta as $key => $value) { ?>
+							<tr>
+								<td style="width: 87%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><?=strtoupper(html_escape($value->descripcion))?></b></td>
+								<td style="width: 13%;text-align: right;<?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+							</tr>				
+						<?php } ?>
+					</table>
+
+					<table style='page-break-after:always;'></br></table> 
+					<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
+				<?php $costoDirectoTotal=0; ?>
+					<table id="tableValorizacion" style="width:100%;">
+						<thead>
+							<tr>
+								<th style="width:7%;">ÍTEM</th>
+								<th style="width:50%;">DESCRIPCIÓN</th>
+								<th style="width:10%;">UND.</th>
+								<th style="width:10%;">METRADO</th>
+								<th style="width:10%;">PRECIO (S/.)</th>
+								<th style="width:13%;">PARCIAL (S/.)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($expedienteTecnico->childComponenteIndirecta as $key => $value){ 
+								$resultadoMetaAnidada='';
+								$resultadoSumaAnidada=0;
+									foreach($value->childMeta as $index => $item){ 
+										$resultado=mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal);
+										$resultadoMetaAnidada.= $resultado['htmlT'];
+										$resultadoSumaAnidada+=$resultado['sumaTemp'];
+									} 
+								?>
+								<tr>
+									<td style="width:7%;"><b><i><?=$value->numeracion?></i></b></td>
+									<td style="text-align: left;width:50%;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;text-align: right;">---</td>
+									<td style="width:13%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 4, '.',",",3)?></b></td>
+								</tr>
+									<?=$resultadoMetaAnidada?>
+							<?php } ?>
+							<tr>
+							<td style="width: 87%;text-decoration: underline; background-color:#959494;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO (NDIRECTO)</b></td>
+							<td style="width: 13%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<table id="tableResumen" style="width: 100%; font-size:12px;">
+					<tr>
+							<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO</b></td>
+							<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
+						</tr>
+						<?php foreach($expedienteTecnico->piePresupuestoIndirecta as $key => $value) { ?>
+							<tr>
+								<td style="width: 87%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><?=strtoupper(html_escape($value->descripcion))?></b></td>
+								<td style="width: 13%;text-align: right;<?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+							</tr>				
+						<?php } ?>
+					</table>
+			<?php } else { ?>
+
+					<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN INDIRECTA</span><br><br>
+				<?php $costoDirectoTotal=0; ?>
+					<table id="tableValorizacion" style="width:100%;">
+						<thead>
+							<tr>
+								<th style="width:7%;">ÍTEM</th>
+								<th style="width:50%;">DESCRIPCIÓN</th>
+								<th style="width:10%;">UND.</th>
+								<th style="width:10%;">METRADO</th>
+								<th style="width:10%;">PRECIO (S/.)</th>
+								<th style="width:13%;">PARCIAL (S/.)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($expedienteTecnico->childComponenteIndirecta as $key => $value){ 
+								$resultadoMetaAnidada='';
+								$resultadoSumaAnidada=0;
+									foreach($value->childMeta as $index => $item){ 
+										$resultado=mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal);
+										$resultadoMetaAnidada.= $resultado['htmlT'];
+										$resultadoSumaAnidada+=$resultado['sumaTemp'];
+									} 
+								?>
+								<tr>
+									<td style="width:7%;"><b><i><?=$value->numeracion?></i></b></td>
+									<td style="text-align: left;width:50%;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;text-align: right;">---</td>
+									<td style="width:13%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 4, '.',",",3)?></b></td>
+								</tr>
+									<?=$resultadoMetaAnidada?>
+							<?php } ?>
+							<tr>
+							<td style="width: 87%;text-decoration: underline; background-color:#959494;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO (NDIRECTO)</b></td>
+							<td style="width: 13%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<table id="tableResumen" style="width: 100%; font-size:12px;">
+					<tr>
+							<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO</b></td>
+							<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
+						</tr>
+						<?php foreach($expedienteTecnico->piePresupuestoIndirecta as $key => $value) { ?>
+							<tr>
+								<td style="width: 87%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><?=strtoupper(html_escape($value->descripcion))?></b></td>
+								<td style="width: 13%;text-align: right;<?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+							</tr>				
+						<?php } ?>
+					</table>
+
+					<table style='page-break-after:always;'></br></table> 
+
+					<span style="font-weight:bold; font-size:0.7rem;">ADMINISTRACIÓN DIRECTA</span><br><br>
+				<?php $costoDirectoTotal=0; ?>
+					<table id="tableValorizacion" style="width:100%;">
+						<thead>
+							<tr>
+								<th style="width:7%;">ÍTEM</th>
+								<th style="width:50%;">DESCRIPCIÓN</th>
+								<th style="width:10%;">UND.</th>
+								<th style="width:10%;">METRADO</th>
+								<th style="width:10%;">PRECIO (S/.)</th>
+								<th style="width:13%;">PARCIAL (S/.)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($expedienteTecnico->childComponente as $key => $value){ 
+								$resultadoMetaAnidada='';
+								$resultadoSumaAnidada=0;
+									foreach($value->childMeta as $index => $item){ 
+										$resultado=mostrarMetaAnidada($item, $expedienteTecnico, $costoDirectoTotal);
+										$resultadoMetaAnidada.= $resultado['htmlT'];
+										$resultadoSumaAnidada+=$resultado['sumaTemp'];
+									} 
+								?>
+								<tr>
+									<td style="width:5%;"><b><i><?=$value->numeracion?></i></b></td>
+									<td style="text-align: left;width:50%;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;">---</td>
+									<td style="width:10%;text-align: right;">---</td>
+									<td style="width:15%;text-align: right;"><b><?=a_number_format($resultadoSumaAnidada, 4, '.',",",3)?></b></td>
+								</tr>
+									<?=$resultadoMetaAnidada?>
+							<?php } ?>
+							<tr>
+							<td style="width: 85%;text-decoration: underline; background-color:#959494;color:white; text-align: left;" colspan="5"><b>COSTO DIRECTO (NDIRECTO)</b></td>
+							<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($costoDirectoTotal, 4, '.',",",3)?></b></td>
+						</tr>
+						</tbody>
+					</table>
+					<br>
+					<table id="tableResumen" style="width: 100%; font-size:12px;">
+					<tr>
+							<td style="width: 87%;background-color:#337ab7;color:white;"><b>COSTO INDIRECTO</b></td>
+							<td style="width: 13%;text-align: right;background-color:#337ab7;color:white;"><b>COSTO</b></td>
+						</tr>
+						<?php foreach($expedienteTecnico->piePresupuestoDirecta as $key => $value) { ?>
+							<tr>
+								<td style="width: 87%; <?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>"><?=strtoupper(html_escape($value->descripcion))?></b></td>
+								<td style="width: 13%;text-align: right;<?= ($value->id_presupuesto_ej=='' && $value->descripcion=='PRESUPUESTO TOTAL')?'background-color:#959494;color:white;':($value->id_presupuesto_ej==''?'background-color:#e6e6e6;':'')?>">S/. <?=a_number_format($value->monto, 2, '.',",",3)?></td>
+							</tr>				
+						<?php } ?>
+					</table>
+
+				<?php } ?>
+		<?php } ?>
 		</div>
 	</body>
 </html>
