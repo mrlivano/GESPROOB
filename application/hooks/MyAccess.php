@@ -715,6 +715,7 @@ function autorizar($url)
       'Expediente_Tecnico/listarResponsableElaboracion',
       'Expediente_Tecnico/listarResponsableEjecucion',
       'Expediente_Tecnico/eliminarResponsableElaboracion',
+      'ET_Periodo_Ejecucion/eliminarPeriodoEjecucion',
       'ET_Partida/insertar',
       'ET_Partida/eliminar',
       'ET_Partida/editarCambiosPartida',

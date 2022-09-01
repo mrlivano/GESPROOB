@@ -282,10 +282,10 @@
 						return data+" Meses"; 
 					}
 				},
-				{"data":"id_et",
+				{"data":"id_tiempo_ejecucion",
 					render: function(data, type, row)
 					{
-						return "<button type='button' class='btn btn-success btn-xs' onclick=insertarResponsableEjecucion(" + data + ")>Gestionar</button>"; 
+						return "<button type='button' class='btn btn-danger btn-xs' onclick=eliminarPeriodoEjecucion(" + data + ")><i class='fa fa-trash-o'></i></button>"; 
 					}
 				}
 			],
@@ -297,5 +297,31 @@ function insertarResponsableEjecucion(id_et)
 {
     paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:id_et}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);
 }
+
+function eliminarPeriodoEjecucion(id_periodo) 
+	{
+		swal({
+			title: "Se eliminará periodo de ejecución. ¿Realmente desea proseguir con la operación?",
+			text: "",
+			type: "warning",
+			showCancelButton: true,
+			cancelButtonText: "Cerrar",
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "SI,Eliminar",
+			closeOnConfirm: false
+		}, function() {
+			paginaAjaxJSON({
+				"id_periodo": id_periodo
+			}, base_url + 'index.php/ET_Periodo_Ejecucion/eliminarPeriodoEjecucion', 'POST', null, function(objectJSON) {
+				objectJSON = JSON.parse(objectJSON);
+				swal({
+					title: '',
+					text: objectJSON.mensaje,
+					type: (objectJSON.proceso == 'Correcto' ? 'success' : 'error')
+				}, function() {});
+				$('#table_cronogramaEjecucion').dataTable()._fnAjaxUpdate();
+			}, false, true);
+		});
+	}
 
 </script>

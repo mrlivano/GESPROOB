@@ -138,4 +138,12 @@ class ET_Periodo_Ejecucion extends CI_Controller
 		}
 	}
 
+	function eliminarPeriodoEjecucion()
+    {
+        $msg = array();
+        $data = $this->Model_ET_Periodo_Ejecucion->eliminar($this->input->post("id_periodo"));
+        $msg = ($data>0 ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron eliminados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+        echo json_encode($msg);exit;
+    }
+
 }

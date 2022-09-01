@@ -702,6 +702,24 @@
 																</div>
 															</div>
 														</li>
+														<li>
+															<div class="block">
+																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Responsables</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);return false;">2.- Responsables de Ejecución</a>
+																	</h2>
+																	<div class="byline">
+																		<span></span><a></a>
+																	</div>
+																	<p class="excerpt">Se debe realizar el registro de Responsables de Ejecución</p>
+																</div>
+															</div>
+														</li>
 													</ul>
 												</div>
 											</div>
@@ -1589,6 +1607,24 @@
 																	<p class="excerpt">Se debe realizar el registro del Plan de Trabajo del Expediente Técnico a ser elaborado,
 																	Asignar responsables a la actividades y registrar el avance de estas según lo programado.
 																	El CRAET es responsable del registro de observaciones</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="block">
+																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Responsables</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);return false;">2.- Responsables de Ejecución</a>
+																	</h2>
+																	<div class="byline">
+																		<span></span><a></a>
+																	</div>
+																	<p class="excerpt">Se debe realizar el registro de Responsables de Ejecución</p>
 																</div>
 															</div>
 														</li>

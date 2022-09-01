@@ -51,4 +51,11 @@ class Model_ET_Periodo_Ejecucion extends CI_Model
 		
 		return  $query->result();
 	}
+
+	function eliminar($idPeriodo)
+    {
+        $this->db->where('id_tiempo_ejecucion',$idPeriodo);
+        $this->db->delete('ET_TIEMPO_EJECUCION');
+        return $this->db->affected_rows();
+    }
 }
