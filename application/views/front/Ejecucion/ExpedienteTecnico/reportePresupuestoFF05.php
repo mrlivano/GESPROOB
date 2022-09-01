@@ -544,15 +544,19 @@
 								<td style="width: 15%;text-align: right; background-color:white;"><?=a_number_format($value->monto, 2, '.',",",3)?></td>
 							<?php } ?>
 					
-						</tr>				
+						</tr>
+										
 					<?php } ?>
+					</table>
+					<br>
+					<table id="tablaResumen" style="width: 100%; font-size:12px;">
 					<tr>
 								<th style="width: 85%; background-color:#959494;color:white;"><b>PRESUPUESTO TOTAL</b></th>
 								<td style="width: 15%;text-align: right; background-color:#959494;color:white;"><?=a_number_format($MostraExpedienteTecnicoExpe->costo_total_inv_et_ai, 2, '.',",",3)?></td>
 								<td style="width: 15%;text-align: right; background-color:#959494;color:white;"><?=a_number_format($MostraExpedienteTecnicoExpe->costo_total_inv_et_ad, 2, '.',",",3)?></td>
 								<td style="width: 15%;text-align: right; background-color:#959494;color:white;"><?=a_number_format($MostraExpedienteTecnicoExpe->costo_total_inv_et, 2, '.',",",3)?></td>
-						</tr>		 
-				</table>
+					</tr>		 
+					</table>
 				<br>
 				<table id="tablaResumen" style="width: 100%; font-size:12px;">
 						<tr>
