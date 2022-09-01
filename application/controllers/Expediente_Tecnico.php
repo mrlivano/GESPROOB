@@ -1246,6 +1246,7 @@ class Expediente_Tecnico extends CI_Controller
 	{
 		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : null;
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($idExpedienteTecnico);
 
 		if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
@@ -1275,7 +1276,7 @@ class Expediente_Tecnico extends CI_Controller
 
 		$size = ($expedienteTecnico->num_meses>18)?'A3':'A4';
 
-		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfValorizacionEjecucion',['expedienteTecnico'=>$expedienteTecnico],true);
+		$html = $this->load->view('front/Ejecucion/ExpedienteTecnico/reportePdfValorizacionEjecucion',['expedienteTecnico'=>$expedienteTecnico,'prioridadEjecucion'=>$prioridadEjecucion],true);
 		$this->mydompdf->load_html($html);
 		$this->mydompdf->set_paper($size, "landscape");
 		$this->mydompdf->render();

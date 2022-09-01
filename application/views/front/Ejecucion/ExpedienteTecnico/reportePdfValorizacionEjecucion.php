@@ -164,12 +164,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico,&$sumatoriasTotales,&$suma
 				</tr>
 			</thead>
 			<tbody>
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-					if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-						?>
-			<td colspan="<?=$expedienteTecnico->num_meses+4?>"style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN DIRECTA</b></td>
-			<?php } ?>
-				<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA'){
+				 foreach($expedienteTecnico->childComponente as $key => $value){ ?>
 					<tr>
 						<td><b><i><?=$value->numeracion?></i></b></td>
 						<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
@@ -184,47 +180,140 @@ function mostrarMetaAnidada($meta, $expedienteTecnico,&$sumatoriasTotales,&$suma
 					<?php foreach($value->childMeta as $index => $item){ ?>
 						<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
 					<?php } ?>
-				<?php } }?>
+			<?php } } else if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA'){
+					 foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+					<tr>
+						<td><b><i><?=$value->numeracion?></i></b></td>
+						<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
+						<td>---</td>
+						<td>---</td>
+						<?php if($expedienteTecnico->num_meses!=null){
+							for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+								<td>---</td>
+							<?php }
+						} ?>
+					</tr>
+					<?php foreach($value->childMeta as $index => $item){ ?>
+						<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
+					<?php } ?>
+			<?php } } else if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 
-				<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-					if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-						?>
-			</tbody>
-		</table>
-		<table style='page-break-after:always;'></br></table> 
-    <table id="tableValorizacion" style="width: 100%;">
-			<thead>
-				<tr>
-					<th style="width:3%;">ÍTEM</th>
-					<th style="width:25%;">DESCRIPCIÓN</th>
-					<th style="width:5%;">UND.</th>
-					<th style="width:6%;">PARCIAL S/.</th>
-					<?php if($expedienteTecnico->num_meses!=null){
-						for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
-							<th>M<?=($i+1)?> S/.</th>
-						<?php }
-					} ?>
-				</tr>
-			</thead>
-			<tbody>
-			<td colspan="<?=$expedienteTecnico->num_meses+4?>" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN INDIRECTA</b></td>
-			<?php } ?>
-				<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
-					<tr>
-						<td><b><i><?=$value->numeracion?></i></b></td>
-						<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
-						<td>---</td>
-						<td>---</td>
-						<?php if($expedienteTecnico->num_meses!=null){
-							for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
-								<td>---</td>
-							<?php }
-						} ?>
-					</tr>
-					<?php foreach($value->childMeta as $index => $item){ ?>
-						<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
-					<?php } ?>
-				<?php } }?>
+					if($prioridadEjecucion->tipo_ejecucion=='ADMINISTRACION DIRECTA'){?>
+						<td colspan="<?=$expedienteTecnico->num_meses+4?>"style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN DIRECTA</b></td>
+						
+							<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
+								<tr>
+									<td><b><i><?=$value->numeracion?></i></b></td>
+									<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
+									<td>---</td>
+									<td>---</td>
+									<?php if($expedienteTecnico->num_meses!=null){
+										for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+											<td>---</td>
+										<?php }
+									} ?>
+								</tr>
+								<?php foreach($value->childMeta as $index => $item){ ?>
+									<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
+								<?php } ?>
+							<?php } ?>
+
+							</tbody>
+						</table>
+
+						<table style='page-break-after:always;'></br></table> 
+						
+						<table id="tableValorizacion" style="width: 100%;">
+							<thead>
+								<tr>
+									<th style="width:3%;">ÍTEM</th>
+									<th style="width:25%;">DESCRIPCIÓN</th>
+									<th style="width:5%;">UND.</th>
+									<th style="width:6%;">PARCIAL S/.</th>
+									<?php if($expedienteTecnico->num_meses!=null){
+										for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+											<th>M<?=($i+1)?> S/.</th>
+										<?php }
+									} ?>
+								</tr>
+							</thead>
+							<tbody>
+							<td colspan="<?=$expedienteTecnico->num_meses+4?>" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN INDIRECTA</b></td>
+								<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+									<tr>
+										<td><b><i><?=$value->numeracion?></i></b></td>
+										<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
+										<td>---</td>
+										<td>---</td>
+										<?php if($expedienteTecnico->num_meses!=null){
+											for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+												<td>---</td>
+											<?php }
+										} ?>
+									</tr>
+									<?php foreach($value->childMeta as $index => $item){ ?>
+										<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
+									<?php } } ?>
+						<?php } else {?>
+							
+								<td colspan="<?=$expedienteTecnico->num_meses+4?>" style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN INDIRECTA</b></td>
+										<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
+											<tr>
+												<td><b><i><?=$value->numeracion?></i></b></td>
+												<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
+												<td>---</td>
+												<td>---</td>
+												<?php if($expedienteTecnico->num_meses!=null){
+													for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+														<td>---</td>
+													<?php }
+												} ?>
+											</tr>
+											<?php foreach($value->childMeta as $index => $item){ ?>
+												<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
+											<?php } ?>
+									<?php } ?>
+								</tbody>
+							</table>
+
+							<table style='page-break-after:always;'></br></table> 
+							
+							<table id="tableValorizacion" style="width: 100%;">
+								<thead>
+									<tr>
+										<th style="width:3%;">ÍTEM</th>
+										<th style="width:25%;">DESCRIPCIÓN</th>
+										<th style="width:5%;">UND.</th>
+										<th style="width:6%;">PARCIAL S/.</th>
+										<?php if($expedienteTecnico->num_meses!=null){
+											for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+												<th>M<?=($i+1)?> S/.</th>
+											<?php }
+										} ?>
+									</tr>
+								</thead>
+								<tbody>
+								<td colspan="<?=$expedienteTecnico->num_meses+4?>"style="text-align:center; background-color:#cbe1f6;"><b>ADMINISTRACIÓN DIRECTA</b></td>
+							
+							<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
+								<tr>
+									<td><b><i><?=$value->numeracion?></i></b></td>
+									<td style="text-align: left;"><b><i><?=$value->descripcion?></i></b></td>
+									<td>---</td>
+									<td>---</td>
+									<?php if($expedienteTecnico->num_meses!=null){
+										for($i=0; $i<$expedienteTecnico->num_meses; $i++){ ?>
+											<td>---</td>
+										<?php }
+									} ?>
+								</tr>
+								<?php foreach($value->childMeta as $index => $item){ ?>
+									<?= mostrarMetaAnidada($item, $expedienteTecnico, $sumatoriasTotales,$sumatoriaCostoDirecto)?>
+								<?php } ?>
+							<?php } }?>
+
+				<?php }?>
+
 				<tr>
 				<td colspan="<?=$expedienteTecnico->num_meses+4?>"></td>
 				</tr>
