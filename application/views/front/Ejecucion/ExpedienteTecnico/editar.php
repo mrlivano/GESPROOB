@@ -250,21 +250,22 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">Sustento para la presentacion del proyecto</label></br>
-							<input type="hidden" id="hdtxtSituacioActual" value="<?= htmlspecialchars($ExpedienteTecnicoM->desc_situacion_actual_et)?>">
+							<input type="hidden" id="hdtxtSituacioActual" value="<?= $ExpedienteTecnicoM->desc_situacion_actual_et?>">
 							<p><textarea name="txtSituacioActual" id="txtSituacioActual" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">Relevancia Economica</label></br>
-							<input type="hidden" id="hdtxtSituacionDeseada" value="<?= htmlspecialchars($ExpedienteTecnicoM->relevancia_economica_et)?>">
+							<!--  htmlspecialchars($ExpedienteTecnicoM->relevancia_economica_et)  -->
+							<input type="hidden" id="hdtxtSituacionDeseada" value="<?= $ExpedienteTecnicoM->relevancia_economica_et?>">
 							<p><textarea name="txtSituacioDeseada" id="txtSituacioDeseada" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">Resumen del proyecto (Descripción)</label></br>
-							<input type="hidden" id="hdtxtContribucioInterv" value="<?=htmlspecialchars($ExpedienteTecnicoM->resumen_pi_et)?>" type="hidden">
+							<input type="hidden" id="hdtxtContribucioInterv" value="<?=$ExpedienteTecnicoM->resumen_pi_et?>" type="hidden">
 							<p><textarea name="txtContribucioInterv" id="txtContribucioInterv" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>									

@@ -615,6 +615,9 @@
 																			</a>
 																		</div>
 																		<div class="block_content">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
+																			<span>Crear Modificatoria</span>
+																			</a>
 																			<div class="byline">
 																				<span></span><a></a>
 																			</div>
@@ -652,6 +655,9 @@
 																			</a>
 																		</div>
 																		<div class="block_content">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
+																			<span>Crear Modificatoria</span>
+																			</a>
 																			<div class="byline">
 																				<span></span><a></a>
 																			</div>
@@ -1499,6 +1505,9 @@
 																			</a>
 																		</div>
 																		<div class="block_content">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
+																			<span>Crear Modificatoria</span>
+																			</a>
 																			<div class="byline">
 																				<span></span><a></a>
 																			</div>
@@ -1536,6 +1545,9 @@
 																			</a>
 																		</div>
 																		<div class="block_content">
+																			<a href="" onclick="paginaAjaxDialogo(null, 'Crear Modificatoria', { idExpedienteTecnico : <?=$value->id_et?> }, base_url+'index.php/Expediente_Tecnico/crearModificatoria', 'GET', null, null, false, true); return false;" class="btn btn-info btn-sm">
+																			<span>Crear Modificatoria</span>
+																			</a>
 																			<div class="byline">
 																				<span></span><a></a>
 																			</div>
