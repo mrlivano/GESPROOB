@@ -208,36 +208,6 @@ $(function()
 					}
 				}
 			},
-			txtTelefonoUE:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Telefono unidad ejecutora" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /^[0-9]+$/,
-						message: '<b style="color: red;">El campo "Teléfono" debe ser un numero.</b>'
-					}
-				}
-			},
-			txtRucUE:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Ruc" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /^([0-9]){11}$/,
-						message: '<b style="color: red;">El campo "Ruc" debe ser un número de 11 dígitos.</b>'
-					}
-				}
-			},
 			txtCodigoUnico:
 			{
 				validators:
@@ -246,141 +216,6 @@ $(function()
 					{
 						message: '<b style="color: red;">El campo "Codigo" es requerido.</b>'
 					}
-				}
-			},
-			txtCostoTotalPreInversion:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Costo Total PreInversion" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Costo total pre Inversion " debe ser un valor en soles.</b>'
-					} 
-				}
-			},
-			txtCostoDirectoPre:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Costo Directo PreInversion" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Costo Directo pre Inversion " debe ser un valor en soles.</b>'
-					}  
-				}
-			},
-			txtCostoIndirectoPre:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Costo Indirecto PreInversion" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Costo Indirecto Pre Inversion " debe ser un valor en soles.</b>'
-					}   
-				}
-			},	
-			txtCostoTotalInversion:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Costo Total Inversion" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Costo Total de Inversion " debe ser un valor en soles.</b>'
-					}  
-				}
-			},
-			txtCostoDirectoInversion:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Costo Directo de inversion" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Costo Directo de inversion" debe ser un valor en soles.</b>'
-					}  
-				}
-			},
-			txtGastosGenerales:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Gastos Generales" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Gastos Generales" debe ser un valor en soles.</b>'
-					}  
-				}
-			},
-			txtGastosSupervision:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Gastos supervisión" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Gastos Supervision" debe ser un valor en soles.</b>'
-					}  
-				}
-			},
-			txtFuncion:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Funcion" es requerido.</b>'
-					} 
-				}
-			},	
-			txtPrograma:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Programa" es requerido.</b>'
-					} 
-				}
-			},
-			txtSubPrograma:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Sub Programa" es requerido.</b>'
-					} 
 				}
 			},
 			txtProyecto:
@@ -393,61 +228,17 @@ $(function()
 					} 
 				}
 			},	
-			txtComponente:
+			txtContratista:
 			{
 				validators:
 				{
 					notEmpty:
 					{
-						message: '<b style="color: red;">El campo "Componente" es requerido.</b>'
+						message: '<b style="color: red;">El campo "Contratista" es requerido.</b>'
 					} 
 				}
 			},	
-			txtMeta:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Meta" es requerido.</b>'
-					} 
-				}
-			},	
-			txtFuenteFinanciamiento:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Fuente Financiamiento" es requerido.</b>'
-					} 
-				}
-			},
-			txtModalidadEjecucion:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Modalidad Ejecucion" es requerido.</b>'
-					} 
-				}
-			},	
-			txtTiempoEjecucionPip:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Tiempo Ejecucion" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /^\d*$/,
-						message: '<b style="color: red;">El campo "Tiempo de ejecución" debe ser un mes en número.</b>'
-					} 
-				}
-			},
+	
 			txtAvanceFinanciero:
 			{
 				validators:
