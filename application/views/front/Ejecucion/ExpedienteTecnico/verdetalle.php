@@ -1020,18 +1020,21 @@
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ficha Técnica del Proyectos" href="<?= site_url('Expediente_Tecnico/reportePdfExpedienteTecnico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-01
 																</a>
-																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																<!-- <a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
-																</a>
+																</a> -->
 																<a style="background-color: #e73e3a;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-01', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE01', 'GET', null, null, false, true); return false;" title="FE-01" class="btn btn-app btn-box">
-																	<i class="fa fa-file-pdf-o"></i> Formato FE-01-B
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
 																 <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
-																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
-																</a> 
+																</a>  -->
+																<a style="background-color: #a200f9;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-03', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE03', 'GET', null, null, false, true); return false;" title="FE-03" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
+																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisicaAdicionales?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04A</span>
 																</a>
@@ -1041,7 +1044,10 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionDeductivo?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04C</span>
 																</a>
-																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
+																</a> -->
+																<a style="background-color: #fd9b15;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-05', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE05', 'GET', null, null, false, true); return false;" title="FE-05" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
 																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -1055,18 +1061,25 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-07
 																</a>
-
+																
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-																
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
+															<a style="background-color: #11b8cc;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-08', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE08', 'GET', null, null, false, true); return false;" title="FE-08" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-08
+																</a>
+																<!-- <a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
-																</a>
-																															
-																<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																</a> -->
+																<a style="background-color: #f3632e;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-10', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE10', 'GET', null, null, false, true); return false;" title="FE-10" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
+																</a>														
+																<!-- <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
-																</a>
+																</a> -->
+																<a style="background-color: #5cb360;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-11', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE11', 'GET', null, null, false, true); return false;" title="FE-11" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
+																</a>	
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia / Alquilada" href="<?= site_url('Expediente_Tecnico/formatoFE12?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-12</span>
 																</a>
@@ -1154,15 +1167,21 @@
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ficha Técnica del Proyectos" href="<?= site_url('Expediente_Tecnico/reportePdfExpedienteTecnico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-01
 																</a>
-																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																<!-- <a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
+																</a> -->
+																<a style="background-color: #e73e3a;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-01', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE01', 'GET', null, null, false, true); return false;" title="FE-01" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
 																 <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
-																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
-																</a> 
+																</a>  -->
+																<a style="background-color: #a200f9;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-03', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE03', 'GET', null, null, false, true); return false;" title="FE-03" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
+																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisicaAdicionales?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04A</span>
 																</a>
@@ -1172,7 +1191,10 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionDeductivo?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04C</span>
 																</a>
-																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
+																</a> -->
+																<a style="background-color: #fd9b15;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-05', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE05', 'GET', null, null, false, true); return false;" title="FE-05" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
 																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -1186,18 +1208,25 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-07
 																</a>
-
+																
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-																
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
+															<a style="background-color: #11b8cc;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-08', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE08', 'GET', null, null, false, true); return false;" title="FE-08" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-08
+																</a>
+																<!-- <a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
-																</a>
-																															
-																<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																</a> -->
+																<a style="background-color: #f3632e;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-10', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE10', 'GET', null, null, false, true); return false;" title="FE-10" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
+																</a>														
+																<!-- <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
-																</a>
+																</a> -->
+																<a style="background-color: #5cb360;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-11', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE11', 'GET', null, null, false, true); return false;" title="FE-11" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
+																</a>	
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia / Alquilada" href="<?= site_url('Expediente_Tecnico/formatoFE12?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-12</span>
 																</a>
@@ -1657,15 +1686,21 @@
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ficha Técnica del Proyectos" href="<?= site_url('Expediente_Tecnico/reportePdfExpedienteTecnico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-01
 																</a>
-																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																<!-- <a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
+																</a> -->
+																<a style="background-color: #e73e3a;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-01', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE01', 'GET', null, null, false, true); return false;" title="FE-01" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
 																 <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
-																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
-																</a> 
+																</a>  -->
+																<a style="background-color: #a200f9;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-03', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE03', 'GET', null, null, false, true); return false;" title="FE-03" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
+																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisicaAdicionales?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04A</span>
 																</a>
@@ -1675,7 +1710,10 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionDeductivo?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04C</span>
 																</a>
-																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
+																</a> -->
+																<a style="background-color: #fd9b15;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-05', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE05', 'GET', null, null, false, true); return false;" title="FE-05" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
 																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -1689,18 +1727,25 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-07
 																</a>
-
+																
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
+															<a style="background-color: #11b8cc;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-08', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE08', 'GET', null, null, false, true); return false;" title="FE-08" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-08
+																</a>
+																<!-- <a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
-																</a>
-																															
-																<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																</a> -->
+																<a style="background-color: #f3632e;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-10', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE10', 'GET', null, null, false, true); return false;" title="FE-10" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
+																</a>														
+																<!-- <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
-																</a>
+																</a> -->
+																<a style="background-color: #5cb360;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-11', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE11', 'GET', null, null, false, true); return false;" title="FE-11" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
+																</a>	
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia / Alquilada" href="<?= site_url('Expediente_Tecnico/formatoFE12?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-12</span>
 																</a>
@@ -1789,15 +1834,21 @@
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ficha Técnica del Proyectos" href="<?= site_url('Expediente_Tecnico/reportePdfExpedienteTecnico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-01
 																</a>
-																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																<!-- <a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
+																</a> -->
+																<a style="background-color: #e73e3a;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-01', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE01', 'GET', null, null, false, true); return false;" title="FE-01" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
 																 <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
-																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion Mensual" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisica?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
-																</a> 
+																</a>  -->
+																<a style="background-color: #a200f9;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-03', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE03', 'GET', null, null, false, true); return false;" title="FE-03" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-03
+																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Adicionales de Obra" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionFisicaAdicionales?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04A</span>
 																</a>
@@ -1807,7 +1858,10 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Valorizacion de Deductivos" href="<?= site_url('Expediente_Tecnico/reportePdfValorizacionDeductivo?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-04C</span>
 																</a>
-																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																<!-- <a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ejecución Presupuestal Mensual" href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
+																</a> -->
+																<a style="background-color: #fd9b15;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-05', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE05', 'GET', null, null, false, true); return false;" title="FE-05" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-05
 																</a>
 																<a style="background-color: #11b8cc;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto Resumen"  href="<?= site_url('Expediente_Tecnico/reportePdfPresupuestoFF05?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
@@ -1821,18 +1875,25 @@
 																<a style="background-color: #0976b4;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Presupuesto General" href="<?= site_url('Expediente_Tecnico/reportePdfEjecucion007?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank">
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-07
 																</a>
-
+																
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Repositorio Costos Indirectos" onclick="mostrarGastosGenerales('<?=@$ExpedienteTecnicoElaboracion[0]->id_et?>')">
 																<i class="fa fa-file-pdf-o"></i> Formato FF-08
 															</a>
-																
-																<a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
+															<a style="background-color: #11b8cc;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-08', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE08', 'GET', null, null, false, true); return false;" title="FE-08" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-08
+																</a>
+																<!-- <a style="background-color: #f3632e;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Resumen de Horas Maquinaria" href="<?= site_url('ET_Maquinaria/reportePdf?query='.$ExpedienteTecnicoElaboracion[0]->id_et.'&form=fe10');?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
-																</a>
-																															
-																<a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
+																</a> -->
+																<a style="background-color: #f3632e;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-10', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE10', 'GET', null, null, false, true); return false;" title="FE-10" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-10
+																</a>														
+																<!-- <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Consumo de Combustible, Lubricante, Repuesto y Otros" href="<?= site_url('Expediente_Tecnico/formatoFE11?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
-																</a>
+																</a> -->
+																<a style="background-color: #5cb360;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-11', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE11', 'GET', null, null, false, true); return false;" title="FE-11" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-11
+																</a>	
 																<a style="background-color: #a200f9;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Maquinaria Propia / Alquilada" href="<?= site_url('Expediente_Tecnico/formatoFE12?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i><span style="font-size:10px;">Formato FE-12</span>
 																</a>

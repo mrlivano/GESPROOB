@@ -4,7 +4,7 @@
 <div class="right_col" role="main">
 	<div class="x_panel">
 		<div class="x_content">   
-			<form class="form-horizontal" id="frmInformeMensual" action="<?php echo base_url();?>index.php/ET_Detalle_Formato/ReporteFE01" method="POST" target="_blank">
+			<form class="form-horizontal" id="frmInformeMensual" action="<?php echo base_url();?>index.php/ET_Detalle_Formato/ReporteFE10" method="POST" target="_blank">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<input type="hidden" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico" value="<?=@$idEt?>">
