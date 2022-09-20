@@ -122,47 +122,6 @@
 	
 	$(function()
 	{
-		$('#frmFichaInforme').formValidation(
-		{
-			framework: 'bootstrap',
-			excluded: [':disabled', ':hidden', ':not(:visible)', '[class*="notValidate"]'],
-			live: 'enabled',
-			message: '<b style="color: #9d9d9d;">Asegúrese que realmente no necesita este valor.</b>',
-			trigger: null,
-			fields:
-			{
-				txtAvanceFinanciero:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Avance Financiero" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
-						message: '<b style="color: red;">El campo "Avance Financiero" debe ser un monto válido.</b>'
-					}
-				}
-			},
-			txtAvanceFisico:
-			{
-				validators:
-				{
-					notEmpty:
-					{
-						message: '<b style="color: red;">El campo "Avance Físico" es requerido.</b>'
-					},
-					regexp:
-					{
-						regexp: /^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
-						message: '<b style="color: red;">El campo "Avance Físico" debe ser un porcentaje válido.</b>'
-					} 
-				}
-			}			
-			}
-		});
 		$('input').attr('autocomplete', 'off');		
 	});
 
@@ -170,6 +129,7 @@
     {
 
 			var patt = new RegExp("/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/");
+			var patt2 = new RegExp("/(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/");
 		if(patt.test($('#txtAvanceFisico').val().trim())){
 			console.log('cumple');
 		} else {
@@ -188,8 +148,6 @@
 			$('#txtAvanceFinanciero').focus();
 			return;
 		}
-
-		
 
 		var formulario = $('#frmFichaInforme');
 		$.ajax({
