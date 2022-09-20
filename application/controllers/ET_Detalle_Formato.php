@@ -136,9 +136,9 @@ class ET_Detalle_Formato extends CI_Controller
 		if($_POST)
 		{
 
-			$idExpedienteTecnico=$this->input->post('idExpedienteTecnico');
-			$metaPresupuestal=explode("-", $this->input->post('metaPresupuestal'));
-			$mes=$this->input->post('mes');
+			$idExpedienteTecnico=$this->input->post('hdIdExpedienteTecnico');
+			$metaPresupuestal=explode("-", $this->input->post('selectMetaPresupuestal'));
+			$mes=$this->input->post('selectMes');
 			$sec_ejec=$metaPresupuestal[0];
       $anio=$metaPresupuestal[1];
 			$meta=$metaPresupuestal[2];

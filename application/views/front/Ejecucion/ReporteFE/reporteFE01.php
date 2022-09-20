@@ -4,7 +4,7 @@
 <div class="right_col" role="main">
 	<div class="x_panel">
 		<div class="x_content">   
-			<form class="form-horizontal" id="frmInformeMensual" method="POST" target="_blank">
+			<form class="form-horizontal" id="frmInformeMensual" action="<?php echo base_url();?>index.php/ET_Detalle_Formato/ReporteFE01" method="POST" target="_blank">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<input type="hidden" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico" value="<?=@$idEt?>">
@@ -35,7 +35,7 @@
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="control-label">.</label>
 								<div>       
-									<input style="width:100%;" type="button" class="btn btn-default" value="Generar" onclick="buscarInformeMensual();">
+									<input style="width:100%;" type="submit" class="btn btn-default" value="Generar">
 								</div>		
 							</div>	
 						</div>
@@ -103,32 +103,35 @@
 		var metaPresupuestal=$('#selectMetaPresupuestal').val();
 		var mes=$('#selectMes').val();
         var hdMes=$('#hdMes').val();
-        $.ajax({
-            type:"POST",
-            url:base_url+"index.php/ET_Detalle_Formato/ReporteFE01",
-            data: 
-			{
-				idExpedienteTecnico:idExpedienteTecnico,
-				metaPresupuestal:metaPresupuestal,
-				mes:mes,
-                hdMes:hdMes
-			},
-            cache: false,
-            beforeSend:function() 
-			{
-            	renderLoading();
-		    },
-            success:function(objectJSON)
-            {
-				$('#divModalCargaAjax').hide();
-				// $('#contenedorManifiestoGasto').html(objectJSON);
-			},
-			error:function ()
-			{
-				swal("Error", "Ha ocurrido un error inesperado", "error")
-				$('#divModalCargaAjax').hide();
-			}
-        });
+
+				paginaAjaxDialogo('otherModalResponsableElaboracion', 'Agregar Responsables de Elaboración', {id_et:id_et}, base_url+'index.php/Expediente_Tecnico/insertarResponsableElaboracion', 'GET', null, null, false, true);
+				
+      //   $.ajax({
+      //       type:"POST",
+      //       url:base_url+"index.php/ET_Detalle_Formato/ReporteFE01",
+      //       data: 
+			// {
+			// 	idExpedienteTecnico:idExpedienteTecnico,
+			// 	metaPresupuestal:metaPresupuestal,
+			// 	mes:mes,
+      //           hdMes:hdMes
+			// },
+      //       cache: false,
+      //       beforeSend:function() 
+			// {
+      //       	renderLoading();
+		  //   },
+      //       success:function(objectJSON)
+      //       {
+			// 	$('#divModalCargaAjax').hide();
+			// 	// $('#contenedorManifiestoGasto').html(objectJSON);
+			// },
+			// error:function ()
+			// {
+			// 	swal("Error", "Ha ocurrido un error inesperado", "error")
+			// 	$('#divModalCargaAjax').hide();
+			// }
+      //   });
     }
 </script>
 
