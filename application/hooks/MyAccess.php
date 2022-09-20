@@ -166,6 +166,7 @@ function autorizar($url)
       'Expediente_Tecnico/clonar',
       'Expediente_Tecnico/crearModificatoria',
       'Expediente_Tecnico/InformeMensual',
+      'Expediente_Tecnico/AvanceMensual',
       'Expediente_Tecnico/CalcularNumeroMeses',
       'Expediente_Tecnico/eliminar',
       'Expediente_Tecnico/clonacion',

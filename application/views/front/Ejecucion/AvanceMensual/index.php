@@ -109,7 +109,7 @@
         var hdMes=$('#hdMes').val();
         $.ajax({
             type:"POST",
-            url:base_url+"index.php/ET_Detalle_Formato/InformeMensual",
+            url:base_url+"index.php/ET_Detalle_Formato/AvanceMensual",
             data: 
 			{
 				idExpedienteTecnico:idExpedienteTecnico,

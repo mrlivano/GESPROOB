@@ -67,7 +67,7 @@
 	<div class="cuerpo">
 		<table class="tablastand tablaMayuscula">
 			<tr>
-				<th>NOMBRE DEL PROYECTO</th>
+				<th>NOMBRE DEL PROYECTOOO</th>
 				<td style="width:80%;"><?=@$proyectoInversion->nombre_pi?></td>
 			</tr>
 			<tr>
