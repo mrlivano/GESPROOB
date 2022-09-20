@@ -65,23 +65,18 @@
 	<input type="hidden" name="hdFechaReporte" id="hdFechaReporte" value="<?=$fechaReporte?>">
 	<input type="hidden" name="hdIdDetalleFormato" id="hdIdDetalleFormato" value="<?=@$detalleFormato[0]->id_detalle?>">			
 	<div class="cuerpo">
-		<table class="tablastand tablaMayuscula">
-			<tr>
-				<th>NOMBRE DEL PROYECTO</th>
-				<td style="width:80%;"><?=@$proyectoInversion->nombre_pi?></td>
-			</tr>
-			<tr>
-				<th>UNIDAD EJECUTORA</th>
-				<td><?=@$proyectoInversion->nombre_ue?></td>
-			</tr>
-		</table>
-		<br>
 		
 		<div class="firstbox">
 			<div class="secondbox">
 				<div class="secondcontent">
 					<br>
 					<table class="tablastand">
+						<tr>
+							<th>NOMBRE DEL PROYECTO</th>
+							<td colspan="5">
+							<?=@$proyectoInversion->nombre_pi?>
+							</td>
+						</tr>
 						<tr>
 							<th>AVANCE FÍSICO</th>
 							<td colspan="5">
