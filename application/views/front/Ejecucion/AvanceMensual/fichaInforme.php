@@ -81,7 +81,7 @@
 							<th>AVANCE FÍSICO</th>
 							<td colspan="5">
 								<div>
-									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->plazo_ejecucion_real?>" name="txtPlazoEjecReal" id="txtPlazoEjecReal" type="text">
+									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->plazo_ejecucion_real?>" name="txtPlazoEjecReal" id="txtPlazoEjecReal" type="text"> %
 								</div>
 							</td>
 						</tr>
@@ -89,7 +89,7 @@
 							<th>AVANCE FINANCIERO</th>
 							<td colspan="5">
 								<div>
-									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->plazo_ejecucion_real?>" name="txtPlazoEjecReal" id="txtPlazoEjecReal" type="text">
+									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->plazo_ejecucion_real?>" name="txtPlazoEjecReal" id="txtPlazoEjecReal" type="text"> S/
 								</div>
 							</td>
 						</tr>
@@ -98,9 +98,14 @@
 					<p>PROBLEMAS PRESENTADOS</p>
 					<textarea style="resize: none;resize: vertical;" name="txtObservaciones" id="txtObservaciones" class="form-control field" rows="3" cols="50" placeholder="Observaciones y/o Comentarios"><?=@$detalleFormato[0]->descripcion_observaciones?></textarea>					
 					<br>
-					<p class="secondtext">SUBIR INFORME</p>					
-					<input type="button" class="btn btn-info" value="Agregar Informe" onclick="agregarFotografia('<?=@$detalleFormato[0]->id_detalle?>');">
-					<input type="button" class="btn btn-warning" value="Exportar a PDF" onclick="exportarFicha();">	
+					<p class="secondtext">SUBIR INFORME</p>		
+						<div class="col-md-12 col-sm-9 col-xs-12">
+            	<input type="hidden" name="Editurl" id="Editurl" value="<?= $detalleFormato->url_doc_aprobacion_et?>" notValidate>
+                <input type="file" accept=".doc, .docx, .pdf" id="Documento_Resolucion" name="Documento_Resolucion" notValidate >
+                <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otro informe remplazará a la anterior</b>
+            </div>			
+					<!-- <input type="button" class="btn btn-info" value="Agregar Informe" onclick="agregarFotografia('<?=@$detalleFormato[0]->id_detalle?>');">
+					<input type="button" class="btn btn-warning" value="Exportar a PDF" onclick="exportarFicha();">	 -->
 				</div>					
 			</div>
 		</div>
