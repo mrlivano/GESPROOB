@@ -749,6 +749,7 @@ function autorizar($url)
       'ET_Detalle_Formato/guardarDetalleFormato',
       'ET_Detalle_Formato/InformeMensual',
       'ET_Detalle_Formato/reportePdf',
+      'ET_Detalle_Formato/reporteFE01',
       'ET_Detalle_Formato/guardarFotografia',
       'ET_Detalle_Formato/eliminarFotografia',
       'ET_Cronograma_Ejecucion/index',
