@@ -216,14 +216,14 @@
 			contentType: false,
 			processData: false,
 			beforeSend: function() {
-				//renderLoading();
+				renderLoading();
 			},
 			success: function(resp) {
 				$('#divModalCargaAjax').hide();
 				resp = JSON.parse(resp);
 				swal(resp.proceso, resp.mensaje, (resp.proceso == 'Correcto') ? 'success' : 'error');
 				$('#table_cronogramaEjecucion').dataTable()._fnAjaxUpdate();
-			//	$('#modalTemp').modal('hide');
+				//$('#modalTemp').modal('hide');
 			},
 			error: function() {
 				$('#divModalCargaAjax').hide();
