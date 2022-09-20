@@ -74,7 +74,7 @@
 						<tr>
 							<th>NOMBRE DEL PROYECTO</th>
 							<td colspan="5">
-							<?=@$proyectoInversion->nombre_pi?>
+							<?=@$proyectoInversion->proyecto?>
 							</td>
 						</tr>
 						<tr>
@@ -100,7 +100,7 @@
 					<br>
 					<p class="secondtext">SUBIR INFORME</p>		
 						<div class="col-md-12 col-sm-9 col-xs-12">
-            	<input type="hidden" name="Editurl" id="Editurl" value="<?= $detalleFormato[0]->url?>" notValidate>
+            	<input type="hidden" name="Editurl" id="Editurl" value="<?=@$detalleFormato[0]->url?>" notValidate>
                 <input type="file" accept=".doc, .docx, .pdf" id="Documento_Resolucion" name="Documento_Resolucion" notValidate >
                 <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otro informe remplazará a la anterior</b>
             </div>			
