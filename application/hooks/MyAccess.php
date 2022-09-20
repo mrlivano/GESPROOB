@@ -753,6 +753,7 @@ function autorizar($url)
       'ET_Detalle_Analisis_Unitario/insertar',
       'ET_Detalle_Analisis_Unitario/eliminar',
       'ET_Detalle_Formato/guardarDetalleFormato',
+      'ET_Detalle_Formato/guardarDetalleAvanceMensual',
       'ET_Detalle_Formato/InformeMensual',
       'ET_Detalle_Formato/AvanceMensual',
       'ET_Detalle_Formato/reportePdf',

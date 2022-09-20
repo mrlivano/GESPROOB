@@ -38,11 +38,26 @@ class Model_ET_Detalle_Formatos extends CI_Model
  		return $this->db->insert_id();
 	}
 
+	public function insertarDetalleAvance($data)
+	{
+		$this->db->insert('ET_INFORMECONTRATA',$data);
+
+ 		return $this->db->insert_id();
+	}
+
 	public function editar($idDetalleFormato, $data)
 	{
 		$this->db->set($data);
 		$this->db->where('id_detalle', $idDetalleFormato);
 		$this->db->update('ET_DETALLE_FORMATO');
+		return $this->db->affected_rows();
+	}
+
+	public function editarDetalleAvance($id, $data)
+	{
+		$this->db->set($data);
+		$this->db->where('id_imcontrata', $id);
+		$this->db->update('ET_INFORMECONTRATA');
 		return $this->db->affected_rows();
 	}
 

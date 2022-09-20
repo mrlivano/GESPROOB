@@ -62,8 +62,9 @@
 	<input type="hidden" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico" value="<?=$idExpedienteTecnico?>">
 	<input type="hidden" name="hdMetaPresupuestal" id="hdMetaPresupuestal" value="<?=$metaPresupuestal?>">
 	<input type="hidden" name="hdMes" id="hdMes" value="<?=$mes?>">
+	<input type="hidden" name="hdMes" id="hdAnio" value="<?=$anio?>">
 	<input type="hidden" name="hdFechaReporte" id="hdFechaReporte" value="<?=$fechaReporte?>">
-	<input type="hidden" name="hdIdDetalleFormato" id="hdIdDetalleFormato" value="<?=@$detalleFormato[0]->id_detalle?>">			
+	<input type="hidden" name="hdIdDetalleFormato" id="hdIdDetalleFormato" value="<?=@$detalleFormato[0]->id_datosg?>">			
 	<div class="cuerpo">
 		
 		<div class="firstbox">
@@ -73,13 +74,13 @@
 					<table class="tablastand">
 						<tr>
 							<th>NOMBRE DEL PROYECTO</th>
-							<td colspan="5">
+							<td style="width:60%;">
 							<?=@$proyectoInversion->proyecto?>
 							</td>
 						</tr>
 						<tr>
 							<th>AVANCE FÍSICO %</th>
-							<td colspan="5">
+							<td style="width:60%;">
 								<div>
 									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_fisico?>" name="txtAvanceFisico" id="txtAvanceFisico" type="text">
 								</div>
@@ -87,7 +88,7 @@
 						</tr>
 						<tr>
 							<th>AVANCE FINANCIERO S/</th>
-							<td colspan="5">
+							<td style="width:60%;">
 								<div>
 									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_financiero?>" name="txtAvanceFinanciero" id="txtAvanceFinanciero" type="text">
 								</div>
@@ -102,7 +103,7 @@
 						<div class="col-md-12 col-sm-9 col-xs-12">
             	<input type="hidden" name="Editurl" id="Editurl" value="<?=@$detalleFormato[0]->url?>" notValidate>
                 <input type="file" accept=".doc, .docx, .pdf" id="Documento_Resolucion" name="Documento_Resolucion" notValidate >
-                <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otro informe remplazará a la anterior</b>
+                <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otro informe remplazará al anterior</b>
             </div>			
 					<!-- <input type="button" class="btn btn-info" value="Agregar Informe" onclick="agregarFotografia('<?=@$detalleFormato[0]->id_detalle?>');">
 					<input type="button" class="btn btn-warning" value="Exportar a PDF" onclick="exportarFicha();">	 -->
@@ -125,22 +126,28 @@
 
     function guardarInformeMensual()
     {
-		if($('#txtOcurrencias').val().trim()=='')
+		if($('#txtAvanceFisico').val().trim()=='')
 		{
-			swal('','El campo "Principales Ocurrrencias en el mes es requerido".','error');
-			$('#txtOcurrencias').focus();
+			swal('','El campo "Avance Físico" es requerido.','error');
+			$('#txtAvanceFisico').focus();
+			return;
+		}
+		if($('#txtAvanceFinanciero').val().trim()=='')
+		{
+			swal('','El campo "Avance Financiero" es requerido".','error');
+			$('#txtAvanceFinanciero').focus();
 			return;
 		}
 		var formulario = $('#frmFichaInforme');
 		$.ajax({
             type:"POST",
-            url:base_url+"index.php/ET_Detalle_Formato/guardarDetalleFormato",
+            url:base_url+"index.php/ET_Detalle_Formato/guardarDetalleAvanceMensual",
             data: formulario.serialize(),
             cache: false,
             beforeSend:function() 
-			{
+					{
             	renderLoading();
-		    },
+		    	},
             success:function(objectJSON)
             {
 				objectJSON=JSON.parse(objectJSON);

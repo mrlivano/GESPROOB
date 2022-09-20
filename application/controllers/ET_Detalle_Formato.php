@@ -147,7 +147,7 @@ class ET_Detalle_Formato extends CI_Controller
 			
 			$detalleFormato=$this->Model_ET_Detalle_Formatos->getDetalleAvanceMensual($proyectoInversion->id_datosg, $anio, $mes);
 
-			$this->load->view('Front/Ejecucion/AvanceMensual/fichaInforme', ['idExpedienteTecnico'=>$idExpedienteTecnico,'metaPresupuestal'=>$this->input->post('metaPresupuestal'),'mes'=>$mes,'proyectoInversion'=>$proyectoInversion,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte]);        
+			$this->load->view('Front/Ejecucion/AvanceMensual/fichaInforme', ['idExpedienteTecnico'=>$idExpedienteTecnico,'metaPresupuestal'=>$this->input->post('metaPresupuestal'),'mes'=>$mes,'anio'=>$anio,'proyectoInversion'=>$proyectoInversion,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte]);        
 		}	
 	}
 
@@ -1051,6 +1051,42 @@ class ET_Detalle_Formato extends CI_Controller
 					$umo_data['monto_operario']=($this->input->post('txtMontoOperario'.$i)=='' ? null : $this->input->post('txtMontoOperario'.$i));		
 					$manoObra=$this->Model_ET_Detalle_Formatos->editarManoObra($detalleFormato[0]->id_detalle,$i,$umo_data);	
 				}
+			}
+			$this->db->trans_complete();
+
+			$msg = ($data>0 ? (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+			echo json_encode($msg);exit;
+
+		}
+	}
+
+	public function guardarDetalleAvanceMensual()
+	{
+		if($_POST)
+		{
+			$this->db->trans_start();
+			$idDatosG=$this->input->post('hdIdDetalleFormato');
+			$mes=$this->input->post('hdMes');
+			$anio=$this->input->post('hdAnio');
+			$detalleFormato=$this->Model_ET_Detalle_Formatos->getDetalleAvanceMensual($idDatosG, $anio, $mes);
+			if(count($detalleFormato)==0)
+			{
+				$c_data['id_datosg']=$idDatosG;
+				$c_data['anio']=$anio;
+				$c_data['mes']=$mes;
+				$c_data['avance_fisico']=$this->input->post('txtAvanceFisico');
+				$c_data['avance_financiero']=$this->input->post('txtAvanceFinanciero');
+				$c_data['problemas']=$this->input->post('txtProblemas');
+				$c_data['url']=$this->input->post('Editurl');
+				$data=$this->Model_ET_Detalle_Formatos->insertarDetalleAvance($c_data);
+			}
+			else
+			{
+				$u_data['avance_fisico']=$this->input->post('txtAvanceFisico');
+				$u_data['avance_financiero']=$this->input->post('txtAvanceFinanciero');
+				$u_data['problemas']=$this->input->post('txtProblemas');
+				$u_data['url']=$this->input->post('Editurl');
+				$data=$this->Model_ET_Detalle_Formatos->editarDetalleAvance($detalleFormato[0]->id_detalle, $u_data);
 			}
 			$this->db->trans_complete();
 
