@@ -4,7 +4,7 @@
 <div class="right_col" role="main">
 	<div class="x_panel">
 		<div class="x_title">
-			<h2><b>Informe Mensual</b></h2>
+			<h2><b>Avance Mensual</b></h2>
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">   
