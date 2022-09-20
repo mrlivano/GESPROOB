@@ -169,7 +169,6 @@
   function guardarInformeMensual()
     {
 
-		event.preventDefault();
     $('#frmFichaInforme').data('formValidation').validate();
 		if(!($('#frmFichaInforme').data('formValidation').isValid()))
 		{
