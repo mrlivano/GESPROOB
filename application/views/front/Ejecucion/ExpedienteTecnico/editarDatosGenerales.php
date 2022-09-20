@@ -21,7 +21,7 @@
 				<div class="x_content">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Nombre de la Unidad Ejecutora*</label>
+							<label class="control-label">ENTIDAD</label>
 							<div>
 								<input id="hdIdExpediente" name="hdIdExpediente" value="<?= $ExpedienteTecnicoM->id_et?>" class="form-control col-md-4 col-xs-12" placeholder="" autocomplete="off"  type="hidden">	
 								<input id="txtNombreUe" readonly name="txtNombreUe" value="<?= $ExpedienteTecnicoM->nombre_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Nombre de la unidad ejecutora" autocomplete="off" maxlength="200">	
@@ -31,7 +31,7 @@
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Proyecto*</label>
+							<label class="control-label">NOMBRE DE LA OBRA</label>
 							<div>
 								<textarea name="txtProyecto" readonly id="txtProyecto" rows="3" class="form-control" style="resize: none;resize: vertical;"><?=html_escape(trim($ExpedienteTecnicoM->proyecto_et))?></textarea>
 							</div>
@@ -39,21 +39,13 @@
 					</div>
 
 					<div class="row">
-						<div class=" col-md-6 col-sm-6 col-xs-12">
+						<div class=" col-md-12 col-sm-12 col-xs-12">
 					  		<label class="control-label">MODALIDAD DE LA EJECUCION</label>
-					    	<div class="form-group" >
-									<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="<?=$ExpedienteTecnicoM->modalidad_ejecucion_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+					    	<div >
+									<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="POR CONTRATA" class="form-control col-md-4 col-xs-12"  disabled>
 					    	</div>
-					  </div>
-						<div class=" col-md-6 col-sm-6 col-xs-12">
-					  		<label class="control-label">COSTO TOTAL</label>
-					    	<div class="form-group" >
-							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ai?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
-					    	</div>
-					  </div>
-						
+						</div>
 					</div>
-					
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">UBICACIÓN</label>
@@ -62,6 +54,10 @@
 							</div>	
 						</div>
 					</div>
+
+
+						
+					
 
 					<div class="row">
 						<div class="col-md-4 col-sm-12 col-xs-12">
@@ -79,8 +75,18 @@
 					    	</div>
 					  </div>
 					</div>
-
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+					  		<label class="control-label">MONTO DE CONTRATO EN S/ </label>
+					    	<div >
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ai?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+							</div>	
+						</div>
+					</div>
+					<BR>
 					<div>
+
+
 					<?php 
 						$cd=0;
 						$ci=0;
@@ -89,7 +95,7 @@
 						<table style="width: 100%;" class="table table-bordered table-striped">
 							<tbody>
 								<tr>
-								<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+								<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;"><b>COSTO DIRECTO</b></th>
 								<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
 							</tr>
 							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
@@ -104,45 +110,59 @@
 
 					</div>				
 					<div class="row">
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Funcion</label>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<label class="control-label">CONTRATISTA</label>
 							<div>
-								<input id="txtFuncion" name="txtFuncion" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->funcion_et?>"  placeholder="Funcion" required="required" autocomplete="off">
-							</div>
+								<input id="txtContratista"  name="txtContratista" value="" class="form-control col-md-4 col-xs-12"  placeholder="Contratista"  autocomplete="off" maxlength="200" >	
+							</div>	
 						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Programa</label>
-							<div>
-								<input id="txtPrograma" name="txtPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->programa_et?>" placeholder="Programa" required="required" autocomplete="off">
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Sub Programa</label>
-							<div>
-								<input id="txtSubPrograma" name="txtSubPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->sub_programa_et?>" placeholder="Sub Programa"  autocomplete="off">
-							</div>
-						</div>
-					</div>					
-
+					</div>
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">						
-									<label class="control-label">Responsables de Ejecución de Expediente</label>
-									<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Ejecución" class='btn btn-primary btn-xs' onclick="insertarResponsableEjecucion('<?=$ExpedienteTecnicoM->id_et?>')"><i class='fa fa-plus'></i> Agregar</button>
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="table-responsive">
-									<table id="tablaResponsableEjecucion" class="table table-bordered table-striped tablaGenerica" style="width:100%;">
-										<thead>
-											<tr>
-												<th>Nombres y Apellidos</th>
-												<th>Cargo</th>
-												<th>Opción</th>
-											</tr>
-										</thead>
-									</table>
-								</div>	
-							</div>
-					</div>	
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<label class="control-label">SUPERVISOR</label>
+							<div>
+								<input id="txtSupervisor"  name="txtSupervisor" value="" class="form-control col-md-4 col-xs-12"  placeholder="Supervisor"  autocomplete="off" maxlength="200" >	
+							</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<label class="control-label">RESIDENTE</label>
+							<div>
+								<input id="txtResidente"  name="txtResidente" value="" class="form-control col-md-4 col-xs-12"  placeholder="Residente"  autocomplete="off" maxlength="200" >	
+							</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-sm-12 col-xs-12">
+               			 <label class="control-label">AVANCE FÍSICO:</label>
+                		<input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaInicio" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaInicio" Validate>
+            		</div>
+						
+					<div class="col-md-4 col-sm-12 col-xs-12">
+                		<label class="control-label">AVANCE FINANCIERO EJECUTADO:</label>
+                		<input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaFin" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaFin" Validate>
+           			 </div>
+					<div class=" col-md-4 col-sm-6 col-xs-12">
+					  	<label class="control-label">ESTADO DE LA OBRA</label>
+					    <div class="form-group" >
+						<select id="estado" name="estado" class="form-control">
+							<option value="EJECUCIÓN">EJECUCIÓN</option>
+							<option value="FINALIZADO">FINALIZADO</option>
+							<option value="PARALIZADO">PARALIZADO</option>
+						</select>
+					    </div>
+					  </div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+					  		<label class="control-label">MONTO DE CONTRATO EN S/ </label>
+					    	<div >
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ai?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+							</div>	
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
