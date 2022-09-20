@@ -1023,6 +1023,9 @@
 																<a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-01
 																</a>
+																<a style="background-color: #e73e3a;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE-01', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFE01', 'GET', null, null, false, true); return false;" title="FE-01" class="btn btn-app btn-box">
+																	<i class="fa fa-file-pdf-o"></i> Formato FE-01-B
+																</a>
 																 <a style="background-color: #5cb360;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Informe Mensual" href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FE-02
 																</a>
