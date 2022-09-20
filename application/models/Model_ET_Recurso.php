@@ -15,9 +15,9 @@ class Model_ET_Recurso extends CI_Model
         return $ListarRecurso->result();
     }
 
-    function insertar($flat,$txtDescripcion)
+    function insertar($flat,$txtDescripcion,$modalidad)
     {
-        $recurso=$this->db->query("execute sp_Gestionar_Recurso_c @Opcion='".$flat."',@desc_recurso='".$txtDescripcion."'");
+        $recurso=$this->db->query("execute sp_Gestionar_Recurso_c @Opcion='".$flat."',@desc_recurso='".$txtDescripcion."',@modalidad='".$modalidad."'");
         return true;
     } 
 
@@ -28,9 +28,9 @@ class Model_ET_Recurso extends CI_Model
         return $recurso->result();
     }
 
-    function editar($flat,$id, $txtDescripcion)
+    function editar($flat,$id, $txtDescripcion,$modalidad)
     {
-        $recurso=$this->db->query("execute sp_Gestionar_Recurso_c  @Opcion='".$flat."',@id_recurso='".$id."',@desc_recurso='".$txtDescripcion."'");
+        $recurso=$this->db->query("execute sp_Gestionar_Recurso_c  @Opcion='".$flat."',@id_recurso='".$id."',@desc_recurso='".$txtDescripcion."',@modalidad='".$modalidad."'");
 
         return true;
     }

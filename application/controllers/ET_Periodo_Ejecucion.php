@@ -30,6 +30,13 @@ class ET_Periodo_Ejecucion extends CI_Controller
 					echo json_encode(['proceso' => 'Error', 'mensaje' => 'La Fecha de Inicio no puede ser mayor a la Fecha de Fin']);exit;
 				}
 
+				$validar = $this->Model_ET_Periodo_Ejecucion->plazoValidar($id_et,$fechaInicio,$fechaFin);
+
+				if(count($validar))
+				{
+					echo json_encode(['proceso' => 'Error', 'mensaje' => 'El periodo de fechas ya se encuentra registrado']);exit;
+				}
+
 				$config['upload_path'] = './uploads/ResolucionAmpliacion/';
                 $config['allowed_types'] = '*';
 			    $config['file_name'] = 'DOC_';

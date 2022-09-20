@@ -107,10 +107,15 @@ class Model_Usuario extends CI_Model
     }
 		function editUsuarioProyecto($id_persona, $cbb_listaMenuDestino){
 			if ($cbb_listaMenuDestino) {
+                $residente = $this->db->query("select * from usuario where id_usuario_tipo=7 and id_persona='$id_persona'");
 				$this->db->query("delete from USUARIO_PROYECTO where id_persona=".$id_persona.";");
 				$id_proyecto = explode("-", $cbb_listaMenuDestino);
 				for ($i=0; $i < count($id_proyecto) ; $i++) {
-					$this->db->query("insert into USUARIO_PROYECTO(id_persona,id_pi) values(".$id_persona.",".$id_proyecto[$i].");");
+                    $this->db->query("insert into USUARIO_PROYECTO(id_persona,id_pi) values(".$id_persona.",".$id_proyecto[$i].");");
+                    if($residente->num_rows()>0){
+                        $this->db->query("delete r from ET_RESPONSABLE r inner join ET_EXPEDIENTE_TECNICO et on r.id_et=et.id_et where id_cargo=7 and r.id_tipo_responsable_et=3 and id_pi='".$id_proyecto[$i]."'");
+                        $this->db->query("insert into et_responsable (id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et) select id_et, up.id_persona,'3' as id_tipo_responsable_et, '7' as id_cargo, '1' as estado_responsable_et  from usuario_proyecto up inner join ET_EXPEDIENTE_TECNICO et on up.id_pi=et.id_pi where up.id_pi='".$id_proyecto[$i]."' and id_persona='$id_persona'");
+                    }
 				}
 			} elseif ($cbb_listaMenuDestino == 0) {
 				$this->db->query("delete from USUARIO_PROYECTO where id_persona=".$id_persona.";");

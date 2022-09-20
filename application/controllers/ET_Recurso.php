@@ -23,13 +23,14 @@ class ET_Recurso extends CI_Controller
             $this->db->trans_start(); 
             $flat  = "C";
             $txtDescripcion=$this->input->post('txtDescripcion');
+            $modalidad = $this->input->post('cbxModalidad');
 
             if(count($this->Model_ET_Recurso->RecursoPorDescripcion($txtDescripcion))>0)
             {
                 echo json_encode(['proceso' => 'Error', 'mensaje' => 'Este Recurso ya fue registrado con anterioridad.']);exit; 
             }
             
-            $this->Model_ET_Recurso->insertar($flat,$txtDescripcion);   
+            $this->Model_ET_Recurso->insertar($flat,$txtDescripcion,$modalidad);   
             $this->db->trans_complete();         
             echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.']);exit;
         }
@@ -44,13 +45,14 @@ class ET_Recurso extends CI_Controller
             $flat  = "U";
             $id=$this->input->post('hdId');
             $txtDescripcion=$this->input->post('txtDescripcion');
+            $modalidad = $this->input->post('cbxModalidad');
 
             if(count($this->Model_ET_Recurso->EtRecursoPorDescripcionDiffId($id, $txtDescripcion))>0)
             {
                  echo json_encode(['proceso' => 'Error', 'mensaje' => 'Este Recurso ya fue registrado con anterioridad.']);exit; 
             }
 
-            $this->Model_ET_Recurso->editar($flat,$id,$txtDescripcion);    
+            $this->Model_ET_Recurso->editar($flat,$id,$txtDescripcion,$modalidad);    
             $this->db->trans_complete();     
             echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Se actualizo el recurso correctamente.']);exit;
         }

@@ -15,6 +15,13 @@ class Model_ET_Insumo_Valorizacion extends CI_Model
 		return $data->result();
 	}
 
+	function ETValorizacionPorRecursoInsumo($idRecursoInsumo)
+	{
+		$data=$this->db->query("select * from ET_INSUMO_VALORIZACION where id_recurso_insumo='$idRecursoInsumo'");
+
+		return $data->result();
+	}
+
 	function ETMesValorizacionPorIdDetallePartidaAndNumeroMes($idRelacionInsumo,$numeroMes)
 	{
 		$data=$this->db->query("select * from ET_INSUMO_VALORIZACION where id_relacion_insumo='$idRelacionInsumo' and numero_mes='$numeroMes'");

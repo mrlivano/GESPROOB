@@ -129,7 +129,7 @@
 			processData:false,
 			beforeSend: function() 
 			{
-            	renderLoading();
+            	//renderLoading();
 		    },
 			success:function(objectJSON)
 			{
@@ -137,8 +137,9 @@
 				swal(objectJSON.proceso, objectJSON.mensaje, (objectJSON.proceso=='Correcto' ? 'success' : 'error'));
 				$('#divModalCargaAjax').hide();	
 				$('#tablaResponsableEjecucion').dataTable()._fnAjaxUpdate();
-				$('#comboResponsableEjecucion').val('');
-        $('#comboCargoEjecucion').val('');
+				//$('#comboCargoEjecucion').val('');
+				//$('#comboResponsableEjecucion').val('');
+        
 			},
 			error:function()
 			{

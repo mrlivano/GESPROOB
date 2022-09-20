@@ -702,7 +702,7 @@
 																</div>
 															</div>
 														</li>
-														<li>
+														<!-- <li>
 															<div class="block">
 																<div class="tags">
 																	<a href="" onclick="paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);return false;" class="tag">
@@ -719,7 +719,7 @@
 																	<p class="excerpt">Se debe realizar el registro de Responsables de Ejecución</p>
 																</div>
 															</div>
-														</li>
+														</li> -->
 													</ul>
 												</div>
 											</div>
@@ -739,13 +739,13 @@
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarEjecucion', 'GET', null, null, false, true);return false;" class="tag">
 																	<span>Ficha Técnica</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarEjecucion', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span> <a></a>
@@ -1104,279 +1104,41 @@
 											<div class="x_content">
 												<div style="padding-top:20px;padding-bottom:20px;">
 													<ul class="list-unstyled timeline">
-														<?php if($aprobado!=1) { ?>
-														<li>
+													<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ficha Técnica</span>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Datos Generales',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarDatosGenerales', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Datos Generales</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Datos Generales',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarDatosGenerales', 'GET', null, null, false, true);return false;">1.- Datos Generales del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span> <a></a>
 																	</div>
-																	<p class="excerpt">Se debe realizar el registro de la Ficha Técnica del proyecto, responsables del Expediente técnico.</p>
-																</div>
-															</div>
-														</li>
-														<?php } ?>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Agregar Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ver cronograma de Ejecución</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Definir Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" >2.- Cronograma de Ejecución del Proyecto</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se debe realizar el registro de la Fecha de inicio y fecha final de Ejecucion del proyecto para el registro de Cronograma valorizado de Ejecución.</p>
+																	<p class="excerpt">Se debe realizar el registro de Datos Generales del proyecto, responsables del Expediente técnico.</p>
 																</div>
 															</div>
 														</li>
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>Presupuesto Analítico</span>
+																	<a href="<?=site_url('Expediente_Tecnico/AvanceMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
+																	<span>Avance Mensual</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;">3.- Asignación de Clasificador a costos del proyecto</a>
+																	<a href="<?=site_url('Expediente_Tecnico/AvanceMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" >2.- Avance Mensual</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
 																	</div>
-																	<p class="excerpt"> Se debe asignar el clasificador presupuestal al costo que se esta realizando.</p>
+																	<p class="excerpt">Se debe realizar el registro del avance mensual de ejecución del proyecto.</p>
 																</div>
 															</div>
-														</li>
-														<?php if($aprobado!=1) { ?>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>ver C,M,P</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true); return false;">4.- Analítico del Presupuesto General </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se detallara el presupuesto general del proyecto a nivel de Componentes, Metas y Partidas en Costos Directos e Indirectos. Tambien se podra definir el Analisis de los costos unitarios de cada partida.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de Costo Indirecto', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Pie_Presupuesto/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>Registro</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de Costo Indirecto', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Pie_Presupuesto/insertar', 'GET', null, null, false, true); return false;">5.- Registro de Costo Indirecto. </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registrara parte del presupuesto del proyecto (costos de ejecución, costos indirectos).</p>
-																</div>
-															</div>
-														</li>
-														<?php } ?>
-														<!-- <li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo('adicionalObra', 'Adicionales de Obra', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_AdicionalObra/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>Adicionales</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo('adicionalObra', 'Adicionales de Obra', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_AdicionalObra/insertar', 'GET', null, null, false, true); return false;">5.- Adicionales de Obra </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra las prestaciones que no se encuentran considerados en el expediente técnico;  cuya realización resulta indispensable para dar cumplimiento a la meta de la obra principal</p>
-																</div>
-															</div>
-														</li> -->
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="window.open(base_url+'index.php/ET_Cronograma_Ejecucion/index?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;"  class="tag">
-																	<span>Cronogramación</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="window.open(base_url+'index.php/ET_Cronograma_Ejecucion/index?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;">6.- Cronograma valorizado de ejecución del proyecto</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se realiza una programación del presupuesto a nivel de costos directos e indirectos.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Expediente_Tecnico/ControlMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'  class="tag">
-																	<span>Ejecución Diaria.</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Expediente_Tecnico/ControlMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>7.- Ejecución Diaria de Metrados.</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra la ejecución diaria de metrados para la valorización mensual</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Expediente_Tecnico/ValorizacionFisicaMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'  class="tag">
-																	<span>Valorización Mensual.</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Expediente_Tecnico/ValorizacionFisicaMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>8.- Valorización Mensual.</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Búsqueda de los informes de valorización mensual.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															 <div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Informe Mensual.</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">9.- Informe Mensual.</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Para el informe mensual se debe registrar como mínimo, información de las actividades técnicas, económicas y administrativas de loss proyectos.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('Manifiesto_Gasto/insertar?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Manifiesto de Gasto</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/insertar?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">10.- Manifiesto de Gastos </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra el manifiesto de gasto mensual por fuente de financiamiento</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Ejecución Presupuestal</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">11.- Ejecución Presupuestal  </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se detalla los expedientes por especifica de gasto y fuente de financiamiento</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Manifiesto_Gasto/programacionClasificador?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Programación de Presupuesto por Clasificador</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/programacionClasificador?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">12.- Programación de Presupuesto por Clasificador  </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se realiza la programación por especifica de gasto y fuente de financiamiento para el cuadro comparativo del presupuesto aprobado y ejecutado</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('ET_Maquinaria/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Maquinaria</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?=site_url('ET_Maquinaria/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">13.- Registro de Maquinaria</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra las horas trabajadas de una maquinaria propia o alquilada</p>
-																</div>
-															</div>
-														</li> 
-														 <!-- <li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('ET_Almacen/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Almacen</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?=site_url('ET_Almacen/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">14.- Gestión de Almacen</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra el movimiento diario de almacen</p>
-																</div>
-															</div> -->
 														</li> 
 													</ul>
 												</div>
@@ -1610,7 +1372,7 @@
 																</div>
 															</div>
 														</li>
-														<li>
+														<!-- <li>
 															<div class="block">
 																<div class="tags">
 																	<a href="" onclick="paginaAjaxDialogo('otherModalResponsableEjecucion', 'Agregar Responsables de Ejecucion', {id_et:'<?=$ExpedienteTecnicoElaboracion[0]->id_et?>'}, base_url+'index.php/Expediente_Tecnico/insertarResponsableEjecucion', 'GET', null, null, false, true);return false;" class="tag">
@@ -1627,7 +1389,7 @@
 																	<p class="excerpt">Se debe realizar el registro de Responsables de Ejecución</p>
 																</div>
 															</div>
-														</li>
+														</li> -->
 													</ul>
 												</div>
 											</div>
@@ -1649,13 +1411,13 @@
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarEjecucion', 'GET', null, null, false, true);return false;" class="tag">
 																	<span>Ficha Técnica</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarEjecucion', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span> <a></a>
@@ -1976,280 +1738,43 @@
 											<div class="x_content">
 												<div style="padding-top:20px;padding-bottom:20px;">
 													<ul class="list-unstyled timeline">
-														<?php if($aprobado!=1) { ?>
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ficha Técnica</span>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Datos Generales',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarDatosGenerales', 'GET', null, null, false, true);return false;" class="tag">
+																	<span>Datos Generales</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Ficha Técnica',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editar', 'GET', null, null, false, true);return false;">1.- Ficha Técnica del Proyecto</a>
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Editar Datos Generales',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/Expediente_Tecnico/editarDatosGenerales', 'GET', null, null, false, true);return false;">1.- Datos Generales del Proyecto</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span> <a></a>
 																	</div>
-																	<p class="excerpt">Se debe realizar el registro de la Ficha Técnica del proyecto, responsables del Expediente técnico.</p>
-																</div>
-															</div>
-														</li>
-														<?php } ?>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Agregar Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" class="tag">
-																	<span>Ver cronograma de Ejecución</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Definir Cronograma de Ejecucion',{ id_et: '<?=$ExpedienteTecnicoElaboracion[0]->id_et?>' }, base_url+'index.php/ET_Periodo_Ejecucion/insertar', 'GET', null, null, false, true);return false;" >2.- Cronograma de Ejecución del Proyecto</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se debe realizar el registro de la Fecha de inicio y fecha final de Ejecucion del proyecto para el registro de Cronograma valorizado de Ejecución.</p>
+																	<p class="excerpt">Se debe realizar el registro de Datos Generales del proyecto, responsables del Expediente técnico.</p>
 																</div>
 															</div>
 														</li>
 														<li>
 															<div class="block">
 																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>Presupuesto Analítico</span>
+																	<a href="<?=site_url('Expediente_Tecnico/AvanceMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
+																	<span>Avance Mensual</span>
 																	</a>
 																</div>
 																<div class="block_content">
 																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;">3.- Asignación de Clasificador a costos del proyecto</a>
+																	<a href="<?=site_url('Expediente_Tecnico/AvanceMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" >2.- Avance Mensual</a>
 																	</h2>
 																	<div class="byline">
 																		<span></span><a></a>
 																	</div>
-																	<p class="excerpt"> Se debe asignar el clasificador presupuestal al costo que se esta realizando.</p>
+																	<p class="excerpt">Se debe realizar el registro del avance mensual de ejecución del proyecto.</p>
 																</div>
 															</div>
 														</li>
-														<?php if($aprobado!=1) { ?>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>ver C,M,P</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de componentes, metas y partidas', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Componente/insertar', 'GET', null, null, false, true); return false;">4.- Analítico del Presupuesto General </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se detallara el presupuesto general del proyecto a nivel de Componentes, Metas y Partidas en Costos Directos e Indirectos. Tambien se podra definir el Analisis de los costos unitarios de cada partida.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de Costo Indirecto', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Pie_Presupuesto/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>Registro</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo(null, 'Registro de Costo Indirecto', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Pie_Presupuesto/insertar', 'GET', null, null, false, true); return false;">5.- Registro de Costo Indirecto. </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registrara parte del presupuesto del proyecto (costos de ejecución, costos indirectos).</p>
-																</div>
-															</div>
-														</li>
-														<?php } ?>
-														<!-- <li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="paginaAjaxDialogo('adicionalObra', 'Adicionales de Obra', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_AdicionalObra/insertar', 'GET', null, null, false, true); return false;" class="tag">
-																	<span>Adicionales</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="paginaAjaxDialogo('adicionalObra', 'Adicionales de Obra', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_AdicionalObra/insertar', 'GET', null, null, false, true); return false;">5.- Adicionales de Obra </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra las prestaciones que no se encuentran considerados en el expediente técnico;  cuya realización resulta indispensable para dar cumplimiento a la meta de la obra principal</p>
-																</div>
-															</div>
-														</li> -->
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="" onclick="window.open(base_url+'index.php/ET_Cronograma_Ejecucion/index?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;"  class="tag">
-																	<span>Cronogramación</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="" onclick="window.open(base_url+'index.php/ET_Cronograma_Ejecucion/index?id_et=<?=$ExpedienteTecnicoElaboracion[0]->id_et?>', '_blank'); return false;">6.- Cronograma valorizado de ejecución del proyecto</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se realiza una programación del presupuesto a nivel de costos directos e indirectos.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Expediente_Tecnico/ControlMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'  class="tag">
-																	<span>Ejecución Diaria.</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Expediente_Tecnico/ControlMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>7.- Ejecución Diaria de Metrados.</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra la ejecución diaria de metrados para la valorización mensual</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Expediente_Tecnico/ValorizacionFisicaMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'  class="tag">
-																	<span>Valorización Mensual.</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Expediente_Tecnico/ValorizacionFisicaMetrado?id_et='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" target='_blank'>8.- Valorización Mensual.</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Búsqueda de los informes de valorización mensual.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															 <div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Informe Mensual.</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?=site_url('Expediente_Tecnico/InformeMensual?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">9.- Informe Mensual.</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Para el informe mensual se debe registrar como mínimo, información de las actividades técnicas, económicas y administrativas de loss proyectos.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('Manifiesto_Gasto/insertar?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Manifiesto de Gasto</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/insertar?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">10.- Manifiesto de Gastos </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra el manifiesto de gasto mensual por fuente de financiamiento</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Ejecución Presupuestal</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/busquedaEjecucionPresupuestal?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">11.- Ejecución Presupuestal  </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se detalla los expedientes por especifica de gasto y fuente de financiamiento</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?= site_url('Manifiesto_Gasto/programacionClasificador?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Programación de Presupuesto por Clasificador</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?= site_url('Manifiesto_Gasto/programacionClasificador?idExpedienteTecnico='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">12.- Programación de Presupuesto por Clasificador  </a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se realiza la programación por especifica de gasto y fuente de financiamiento para el cuadro comparativo del presupuesto aprobado y ejecutado</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('ET_Maquinaria/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Maquinaria</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?=site_url('ET_Maquinaria/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">13.- Registro de Maquinaria</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra las horas trabajadas de una maquinaria propia o alquilada</p>
-																</div>
-															</div>
-														</li> 
-														 <!-- <li>
-															<div class="block">
-																<div class="tags">
-																	<a href="<?=site_url('ET_Almacen/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>" class="tag">
-																	<span>Almacen</span>
-																	</a>
-																</div>
-																<div class="block_content">
-																	<h2 class="title">
-																	<a href="<?=site_url('ET_Almacen/index?query='.$ExpedienteTecnicoElaboracion[0]->id_et);?>">14.- Gestión de Almacen</a>
-																	</h2>
-																	<div class="byline">
-																		<span></span><a></a>
-																	</div>
-																	<p class="excerpt">Se registra el movimiento diario de almacen</p>
-																</div>
-															</div> -->
-														</li> 
+													
 													</ul>
 												</div>
 												<div class="row">

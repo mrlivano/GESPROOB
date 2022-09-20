@@ -52,6 +52,13 @@ class Model_ET_Periodo_Ejecucion extends CI_Model
 		return  $query->result();
 	}
 
+	function plazoValidar($idEt, $periodo_inicial, $periodo_final)
+	{
+		$query=$this->db->query("select * from et_tiempo_ejecucion where ((fecha_inicio <= '$periodo_inicial' and fecha_fin>='$periodo_inicial') or (fecha_inicio <= '$periodo_final' and fecha_fin>='$periodo_final')) and id_et='$idEt'");
+		
+		return  $query->result();
+	}
+
 	function eliminar($idPeriodo)
     {
         $this->db->where('id_tiempo_ejecucion',$idPeriodo);

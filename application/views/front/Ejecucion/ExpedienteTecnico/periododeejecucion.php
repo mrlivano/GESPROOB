@@ -216,7 +216,7 @@
 			contentType: false,
 			processData: false,
 			beforeSend: function() {
-				renderLoading();
+				//renderLoading();
 			},
 			success: function(resp) {
 				$('#divModalCargaAjax').hide();

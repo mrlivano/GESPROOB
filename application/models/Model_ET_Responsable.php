@@ -22,6 +22,13 @@ class Model_ET_Responsable extends CI_Model
         return $this->db->insert_id();
     }
 
+    function insertarET_ExpedienteResponsableEjecucion($id_et,$ComboResponsableEjecucion,$ComboTipoResponsableEjecucion,$comboCargoEjecucion,$tipo,$modalidad)
+    {
+        $estado_responsable_et=1;
+        $this->db->query("insert into ET_RESPONSABLE(id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et,tipo,modalidad)values('".$id_et."','".$ComboResponsableEjecucion."','".$ComboTipoResponsableEjecucion."','".$comboCargoEjecucion."','".$estado_responsable_et."','".$tipo."','".$modalidad."')");
+        return $this->db->insert_id();
+    }
+
 
     function insertarET_EpedienteEjecucion($id_et,$ComboResponsableEjecucion,$ComboTipoResponsableEjecucion,$comboCargoEjecucion,$fechaInicio,$fechaFin)
     {
@@ -92,6 +99,11 @@ class Model_ET_Responsable extends CI_Model
         return $data->result(); 
     }
 
+    function ResponsableEtapaEjecucion($id_et, $id_etapa, $modalidad){
+        $data= $this->db->query("select r.*, case when r.tipo = 1 then  p.nombres+' '+p.apellido_p+' '+p.apellido_m else pj.razon_social end AS nombres,c.desc_cargo from ET_RESPONSABLE r left outer join PERSONA p on (r.id_persona=p.id_persona and r.tipo=1) left outer join PERSONA_JURIDICA pj on (r.id_persona=pj.id_persona_juridica and r.tipo=2) inner join CARGO c on r.id_cargo = c.id_cargo where id_et='$id_et' and id_tipo_responsable_et='$id_etapa' and r.modalidad='$modalidad'");
+        return $data->result(); 
+    }
+
     function ResponsableIdETPersonaElaboracion($id_et, $id_persona){
         $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona' and id_tipo_responsable_et=2 and tipo=1");
         return $data->result(); 
@@ -102,8 +114,13 @@ class Model_ET_Responsable extends CI_Model
         return $data->result(); 
     }
 
-    function ResponsableIdETPersonaEjecucion($id_et, $id_persona){
-        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona' and id_tipo_responsable_et=3");
+    function ResponsableIdETPersonaEjecucion($id_et, $id_persona, $modalidad){
+        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona' and modalidad='$modalidad' and id_tipo_responsable_et=3 and tipo=1");
+        return $data->result(); 
+    }
+
+    function ResponsableIdETPersonaJuridicaEjecucion($id_et, $id_persona_juridica, $modalidad){
+        $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona_juridica' and modalidad='$modalidad' and id_tipo_responsable_et=3 and tipo=2");
         return $data->result(); 
     }
 

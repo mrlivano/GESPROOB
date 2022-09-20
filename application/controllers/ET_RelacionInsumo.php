@@ -59,30 +59,31 @@ class ET_RelacionInsumo extends CI_Controller
 		$idRecurso = isset($_GET['id_recurso']) ? $_GET['id_recurso'] : null;
 		$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
 		$tipoUsuario=$this->session->userdata('tipoUsuario');
-        if($tipoUsuario!=9 && $tipoUsuario!=1)
-        {
-        	$data=$this->UsuarioProyecto_model->ProyectoAsignado($expedienteTecnico->id_pi);
-        	if(count($data)==0)
-			{
-				$this->session->set_flashdata('error', 'Usted no tiene acceso a este Expediente Tecnico');
+      if($tipoUsuario!=9 && $tipoUsuario!=1)
+      {
+      	$data=$this->UsuarioProyecto_model->ProyectoAsignado($expedienteTecnico->id_pi);
+      	if(count($data)==0)
+				{
+					$this->session->set_flashdata('error', 'Usted no tiene acceso a este Expediente Tecnico');
+					redirect('Expediente_Tecnico/index');
+				}
+      }
+      if($expedienteTecnico->aprobado==1)
+      {
+      	$this->session->set_flashdata('error', 'Este expediente Tecnico ya esta en fase de Ejecución');
 				redirect('Expediente_Tecnico/index');
 			}
-        }
-
-        if($expedienteTecnico->aprobado==1)
-        {
-        	$this->session->set_flashdata('error', 'Este expediente Tecnico ya esta en fase de Ejecución');
-			redirect('Expediente_Tecnico/index');
-		}
 		
 		$listarecurso=$this->Model_ET_Recurso->Recurso($idRecurso);			
 		$costoDirectoExpediente=0;
 		foreach($listarecurso as $key => $recurso)
 		{
-			$insumo=$this->Model_ET_Recurso_Insumo->listaInsumoPorRecurso($recurso->id_recurso,$idExpedienteTecnico);			
+			// $insumo=$this->Model_ET_Recurso_Insumo->listaInsumoPorRecurso($recurso->id_recurso,$idExpedienteTecnico);
+			$insumo=$this->Model_ET_Recurso_Insumo->listaInsumoPorRecursoMeta($recurso->id_recurso,$idExpedienteTecnico);		
 			$sumatoria=0;
 			foreach($insumo as $key => $value)
 			{
+				$value->modalidad = $this->Model_ET_Recurso_Insumo->listaInsumoTipoEjecucion($value->id_meta)[0]->tipo_ejecucion;
 				$value->childInsumoValorizacion=$this->Model_ET_Insumo_Valorizacion->ETValorizacionPorRelacionInsumo($value->id_relacion_insumo);
 				$sumatoriaValorizacion=0;
 				foreach($value->childInsumoValorizacion as $key => $child)
