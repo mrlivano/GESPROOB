@@ -1065,7 +1065,7 @@ class ET_Detalle_Formato extends CI_Controller
 		if($_POST)
 		{
 			$this->db->trans_start();
-			$idDatosG=$this->input->post('hdIdDetalleFormato');
+			$idDatosG=$this->input->post('hdIdDatosGenerales');
 			$mes=$this->input->post('hdMes');
 			$anio=$this->input->post('hdAnio');
 			$detalleFormato=$this->Model_ET_Detalle_Formatos->getDetalleAvanceMensual($idDatosG, $anio, $mes);

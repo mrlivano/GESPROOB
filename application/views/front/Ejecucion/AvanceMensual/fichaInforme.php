@@ -64,7 +64,8 @@
 	<input type="hidden" name="hdMes" id="hdMes" value="<?=$mes?>">
 	<input type="hidden" name="hdMes" id="hdAnio" value="<?=$anio?>">
 	<input type="hidden" name="hdFechaReporte" id="hdFechaReporte" value="<?=$fechaReporte?>">
-	<input type="hidden" name="hdIdDetalleFormato" id="hdIdDetalleFormato" value="<?=@$detalleFormato[0]->id_datosg?>">			
+	<input type="hidden" name="hdIdDatosGenerales" id="hdIdDatosGenerales" value="<?=@$proyectoInversion->id_datosg?>">	
+	<input type="hidden" name="hdIdDetalleFormato" id="hdIdDetalleFormato" value="<?=@$detalleFormato[0]->id_imcontrata?>">			
 	<div class="cuerpo">
 		
 		<div class="firstbox">
