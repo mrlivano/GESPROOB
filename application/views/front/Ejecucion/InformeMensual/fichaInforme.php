@@ -57,6 +57,8 @@
     	border: 2px solid #2e6da4;		
 	}	
 </style>
+
+
 <div class="informe">
 	<form id="frmFichaInforme"  action="<?php echo base_url();?>index.php/ET_Detalle_Formato/reportePdf" method="POST" target="_blank">
 	<input type="hidden" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico" value="<?=$idExpedienteTecnico?>">
@@ -170,17 +172,17 @@
 								<th>PROYECTO</th>
 								<td><?=@$proyectoInversion->nombre_pi?></td>
 							</tr>
-							<tr>
+							<!--<tr>
 								<th>COMPONENTE</th>
-								<td><?=@$proyectoInversion->componente_et?></td>
-							</tr>
+								<td><? /*=@$proyectoInversion->componente_et*/?></td>
+							</tr>-->
 							<tr>
 								<th>META</th>
-								<td><?=@$proyectoInversion->meta_et?></td>
+								<td><?=$metaPresupuestal?></td>
 							</tr>
 							<tr>
 								<th>MODALIDAD</th>
-								<td><?=@$proyectoInversion->modalidad_ejecucion_et?></td>
+								<td>ADMINISTRACIÓN DIRECTA</td>
 							</tr>
 						</table>
 						<br>
@@ -532,12 +534,12 @@
 						<th style="width:10%;">PROGRAMADO</th>
 						<td style="width:18%;">
 							<div>
-								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_prog_mo?>" name="txtProgramado" id="txtProgramado" type="text">
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_prog_mo?>" name="txtProgramado" id="txtProgramado" type="text" >
 							</div>
 						</td>
 						<td style="width:10%;">
 							<div>
-								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_prog_anterior?>" name="txtProgramadoAnterior" id="txtProgramadoAnterior" type="text">
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_prog_anterior?>" name="txtProgramadoAnterior" id="txtProgramadoAnterior" type="text" >
 							</div>
 						</td>
 						<td style="width:8%;">
@@ -545,7 +547,7 @@
 						</td>
 						<td style="width:10%;">
 							<div>
-								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_prog_actual?>" name="txtProgramadoActual" id="txtProgramadoActual" type="text">
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_prog_actual?>" name="txtProgramadoActual" id="txtProgramadoActual" type="text" >
 							</div>
 						</td>
 						<td style="width:8%;">
@@ -568,12 +570,12 @@
 						<th>EJECUTADO</th>
 						<td>
 							<div>
-								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_ejec_mo?>" name="txtEjecutado" id="txtEjecutado" type="text">
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_ejec_mo?>" name="txtEjecutado" id="txtEjecutado" type="text" >
 							</div>
 						</td>
 						<td>
 							<div>
-								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_ejec_anterior?>" name="txtEjecutadoAnterior" id="txtEjecutadoAnterior" type="text">
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_ejec_anterior?>" name="txtEjecutadoAnterior" id="txtEjecutadoAnterior" type="text" >
 							</div>
 						</td>
 						<td>
@@ -581,7 +583,7 @@
 						</td>
 						<td>
 							<div>
-								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_ejec_actual?>" name="txtEjecutadoActual" id="txtEjecutadoActual" type="text">
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->presupuesto_ejec_actual?>" name="txtEjecutadoActual" id="txtEjecutadoActual" type="text" >
 							</div>
 						</td>
 						<td>
@@ -670,6 +672,40 @@
 			$('#txtOcurrencias').focus();
 			return;
 		}
+		else if($('#txtProgramado').val().trim()==''){
+			swal('','El campo "Programado es requerido ".','error');
+			$('#txtProgramado').focus();
+			return;
+		}
+		else if($('#txtProgramadoAnterior').val().trim()==''){
+			swal('','El campo "Programado Anterior es requerido ".','error');
+			$('#txtProgramadoAnterior').focus();
+			return;
+		}
+		else if($('#txtProgramadoActual').val().trim()==''){
+			swal('','El campo "Programado Actual es requerido ".','error');
+			$('#txtProgramadoActual').focus();
+			return;
+		}
+		else if($('#txtEjecutado').val().trim()==''){
+			swal('','El campo "Ejecutado es requerido ".','error');
+			$('#txtEjecutado').focus();
+			return;
+		}
+		else if($('#txtEjecutadoAnterior').val().trim()==''){
+			swal('','El campo "Ejecutado Anterior es requerido ".','error');
+			$('#txtEjecutadoAnterior').focus();
+			return;
+		}
+		else if($('#txtEjecutadoActual').val().trim()==''){
+			swal('','El campo "Ejecutado Actual es requerido ".','error');
+			$('#txtEjecutadoActual').focus();
+			return;
+		}
+
+
+
+
 		var formulario = $('#frmFichaInforme');
 		$.ajax({
             type:"POST",
