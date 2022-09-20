@@ -766,191 +766,43 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$this->db->trans_start();
 
-			$url=(string)$this->input->post('Editurl');
-
 			$flag=0;
 
 			$hdIdExpediente=$this->input->post('hdIdExpediente');
+			$hdIdDatosGenerales=$this->input->post('hdIdDatosGenerales');
 
-			if($url!='')
-			{
-				if (file_exists("uploads/ResolucioExpediente/".$hdIdExpediente.'.docx'))
-       			{
-				   	unlink("uploads/ResolucioExpediente/".$hdIdExpediente.'.docx');
-				}
-				if (file_exists("uploads/ResolucioExpediente/".$hdIdExpediente.'.pdf'))
-       			{
-				   	unlink("uploads/ResolucioExpediente/".$hdIdExpediente.'.pdf');
-				}
-			}
-
-			$config['upload_path']   = './uploads/ResolucioExpediente/';
-	        $config['allowed_types'] = 'pdf|docx';
-	        $config['max_size']      = 500000;
-	        $config['encrypt_name']  = false;
-	        $config['file_name']	 = $hdIdExpediente;
-	        $this->load->library('upload', $config);
-            $this->upload->do_upload('Documento_Resolucion');
-
-			$c_data['nombre_ue']=$this->input->post('txtNombreUe');
-			$c_data['direccion_ue']=$this->input->post('txtDireccionUE');
-			$c_data['distrito_provincia_departamento_ue']=$this->input->post('txtUbicacionUE');
-			$c_data['telefono_ue']=$this->input->post('txtTelefonoUE');
-			$c_data['ruc_ue']=$this->input->post('txtRucUE');
-			$c_data['costo_total_preinv_et']=floatval(str_replace(",","",$this->input->post('txtCostoTotalPreInversion')));
-			$c_data['costo_directo_preinv_et']=floatval(str_replace(",","",$this->input->post('txtCostoDirectoPre')));
-			$c_data['costo_indirecto_preinv_et']=floatval(str_replace(",","",$this->input->post('txtCostoIndirectoPre')));
-			// $c_data['costo_total_inv_et']=floatval(str_replace(",","",$costoTotalET));
-			// $c_data['costo_directo_inv_et']=floatval(str_replace(",","",$costoTotalDirectoET));
-			$c_data['gastos_generales_et']=floatval(str_replace(",","",$this->input->post('txtGastosGenerales')));
-			$c_data['gastos_supervision_et']=floatval(str_replace(",","",$this->input->post('txtGastosSupervision')));
-			$c_data['funcion_programatica']=$this->input->post('txtFuncion')."/".$this->input->post('txtPrograma')."/".$this->input->post('txtSubPrograma');
-			$c_data['funcion_et']=$this->input->post('txtFuncion');
-			$c_data['programa_et']=$this->input->post('txtPrograma');
-			$c_data['sub_programa_et']=$this->input->post('txtSubPrograma');
-			$c_data['proyecto_et']=$this->input->post('txtProyecto');
-			$c_data['componente_et']=$this->input->post('txtComponente');
-			$c_data['meta_et']=$this->input->post('txtMeta');
-			$c_data['fuente_financiamiento_et']=$this->input->post('txtFuenteFinanciamiento');
-			$c_data['tiempo_ejecucion_pi_et']=$this->input->post('txtTiempoEjecucionPip');
-			$c_data['num_beneficiarios_indirectos']=$this->input->post('txtNumBeneficiarios');
+			$c_data['entidad']=$this->input->post('txtNombreUe');
+			$c_data['proyecto']=$this->input->post('txtProyecto');
+			$c_data['ubicacion']=$this->input->post('txtUbicacionUE');
+			$c_data['monto_contrato']=$this->input->post('txtPresupuestoTotal');
+			$c_data['fecha_inicio']=$this->input->post('txtFechaInicio');
+			$c_data['fecha_fin']=$this->input->post('txtFechaFin');
+			$c_data['tiempo']=$this->input->post('txtTotalMeses');
+			$c_data['contratista']=$this->input->post('txtContratista');
+			$c_data['supervisor']=$this->input->post('txtSupervisor');
+			$c_data['residente']=$this->input->post('txtResidente');
+			$c_data['avance_fisico']=$this->input->post('txtAvanceFisico');
+			$c_data['avance_financiero']=$this->input->post('txtAvanceFinanciero');
+			$c_data['estado_obra']=$this->input->post('estado');
 			
-			$c_data['costo_liquidacion']=floatval(str_replace(",","",$this->input->post('txtCostoLiquidacion')));
-			$c_data['costo_IGV']=floatval(str_replace(",","",$this->input->post('txtCostoIGV')));
-			$c_data['costo_utilidad']=floatval(str_replace(",","",$this->input->post('txtCostoUtilidad')));
-			$c_data['costo_administracion_contratos']=floatval(str_replace(",","",$this->input->post('txtCostoAdministracion')));
-			$c_data['costo_elaboracion_ET']=floatval(str_replace(",","",$this->input->post('txtCostoElaboracionET')));
-			$c_data['costo_supervision_ET']=floatval(str_replace(",","",$this->input->post('txtCostoSupervisionET')));
 
-
-			if($url!='')
-			{
-				$c_data['url_doc_aprobacion_et']=$url;
-			}
-
-			$c_data['desc_situacion_actual_et']=$this->input->post('txtSituacioActual');
-			$c_data['relevancia_economica_et']=$this->input->post('txtSituacioDeseada');
-			$c_data['resumen_pi_et']=$this->input->post('txtContribucioInterv');
-			$c_data['num_folios']=$this->input->post('txtNumFolio');
-			$c_data['fecha_aprobacion']=$this->input->post('txtFechaAprobacion');
-			$c_data['num_meses']=$this->input->post('txtTiempoEjecucionPip');
-
-			$q1 = $this->Model_ET_Expediente_Tecnico->update($c_data, $hdIdExpediente);
-
-			// Editar Responsables de Ejecución y Elaboración
-
-			$id_tipo_responsableElabo=$this->input->post('idTipoResponsableElaboracion');
-			$comboCargoElaboracion =$this->input->post('comboCargoElaboracion');
-			$comboResponsableElaboracion =$this->input->post('comboResponsableElaboracion');
-
-			if($comboResponsableElaboracion!='')
-			{
-				($id_tipo_responsableElabo=="" ? $this->Model_ET_Responsable->insertarET_Epediente($hdIdExpediente,$comboResponsableElaboracion,$this->input->post('comboTipoResponsableElaboracion'),$comboCargoElaboracion) : $this->Model_ET_Expediente_Tecnico->EditarResponsableET($id_tipo_responsableElabo,$comboCargoElaboracion,$comboResponsableElaboracion));
-			}
-
-			$id_tipo_responsableEjecucion=$this->input->post('idTipoResponsableEjecucion');
-			$comboCargoEjecucion =$this->input->post('comboCargoEjecucion');
-			$ComboResponsableEjecucion =$this->input->post('ComboResponsableEjecucion');
-
-			if($ComboResponsableEjecucion!='')
-			{
-				($id_tipo_responsableEjecucion=="" ? $this->Model_ET_Responsable->insertarET_Epediente($hdIdExpediente,$ComboResponsableEjecucion,$this->input->post('ComboTipoResponsableEjecucion'),$comboCargoEjecucion) : $this->Model_ET_Expediente_Tecnico->EditarResponsableET($id_tipo_responsableEjecucion,$comboCargoEjecucion,$ComboResponsableEjecucion));
-			}
-
-			// Subir Imagenes de Expediente Tecnico
-
-			$configImg = array(
-				"upload_path" => "./uploads/ImageExpediente",
-				'allowed_types' => "*"
-			);
-
-			if($_FILES['imagen']['name'][0]!='')
-			{
-				for ($i=0; $i < count($_FILES['imagen']['name']); $i++)
-				{
-					$path = $_FILES['imagen']['name'][$i];
-					$ext = pathinfo($path, PATHINFO_EXTENSION);
-
-					$c_imagen['id_et'] = $hdIdExpediente;
-					$c_imagen['desc_img'] = ".".$ext;
-
-					$idImagen = $this->Model_ET_Img->insertarImgExpediente($c_imagen);
-
-					$_FILES['archivo']['name'] = $idImagen.".".$ext;
-					$_FILES['archivo']['type'] = $_FILES['imagen']['type'][$i];
-					$_FILES['archivo']['tmp_name'] = $_FILES['imagen']['tmp_name'][$i];
-					$_FILES['archivo']['error'] = $_FILES['imagen']['error'][$i];
-					$_FILES['archivo']['size'] = $_FILES['imagen']['size'][$i];
-
-					$this->load->library('upload', $configImg);
-
-					$this->upload->initialize($configImg);
-
-					if (!$this->upload->do_upload('archivo'))
-					{
-						$this->session->set_flashdata('error', $this->upload->display_errors('', ''));
-						return redirect('/Expediente_Tecnico/verdetalle?id_et='.$hdIdExpediente);
-					}
-					else
-					{
-						$final_files_data[] = $this->upload->data();
-					}
-				}
-			}
+			$q1 = $this->Model_ET_Expediente_Tecnico->updateDatosGenerales($c_data, $hdIdDatosGenerales);
 
 			$this->db->trans_complete();
 
-			$this->session->set_flashdata('correcto', 'Expediente Tecnico modificado correctamente.');
+			$this->session->set_flashdata('correcto', 'Datos Generales modificado correctamente.');
 
 			return redirect('/Expediente_Tecnico/verdetalle?id_et='.$hdIdExpediente);
 		}
 
 		$id_et=$this->input->GET('id_et');
-		$listaimg=$this->Model_ET_Img->ListarImagen($id_et);
-		$listarUResponsableERespoElabo=$this->Model_ET_Expediente_Tecnico->ListaResponsableEt($id_et,'001');
-		$listarUResponsableERespoEjecucion=$this->Model_ET_Expediente_Tecnico->ListaResponsableEt($id_et,'002');
 
-		$listarCargo=$this->Cargo_Modal->getcargo();
+		$ExpedienteTecnicoM=$this->Model_ET_Expediente_Tecnico->DatosExpedienteDatosGenerales($id_et);
 
-		$listaTipoResponsableElaboracion=$this->Model_ET_Tipo_Responsable->NombreTipoResponsable('001');
-		$listaTipoResponsableEjecucion=$this->Model_ET_Tipo_Responsable->NombreTipoResponsable('002');
-
-		$listarPersona=$this->Model_Personal->listarPersona();
-		$ExpedienteTecnicoM=$this->Model_ET_Expediente_Tecnico->DatosExpediente($id_et);
-		$costoIndirectoComponente=$this->Model_ET_Expediente_Tecnico->CostoIndirectoComponente($id_et);
-
-		$listaModalidadEjecucion=$this->Model_ModalidadE->GetModalidadE();
-		$listaFuenteFinanciamiento=$this->FuenteFinanciamiento_Model->get_FuenteFinanciamiento();
-		$listaPresupuestoEj=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionCostoDirecto($ExpedienteTecnicoM->modalidad_ejecucion_et);
-		foreach ($listaPresupuestoEj as $key => $value) {
-			$value->costo_presupuesto_ej=$this->Model_ET_Expediente_Tecnico->ListarCostos($id_et,$value->id_presupuesto_ej);
-		}
 		$opcion="BuscarExpedienteID";
 		$MostraExpedienteTecnicoExpe=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoSelectBuscarId($opcion,$id_et);
 
-		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-			$MostraExpedienteTecnicoExpe->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($id_et, 'EXPEDIENTETECNICO');
 
-			$costoDirectoTotal=0;
-			foreach ($MostraExpedienteTecnicoExpe->childComponente as $key => $value)
-				{
-				$costoComponente=0;
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-				foreach ($value->childMeta as $index => $item)
-				{
-					$item->costoMeta=$this->obtenerAnidadaCostoIndirecto($item);
-					$costoComponente+=$item->costoMeta;
-				}
-				$costoDirectoTotal+=$costoComponente;
-				$value->costoComponente=$costoComponente;
-			}
-			$MostraExpedienteTecnicoExpe->costoDirecto=$costoDirectoTotal;
-
-			//COSTOS INDIRECTOS
-			$MostraExpedienteTecnicoExpe->piePresupuestoDirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_et);
-		}
-
-		if($MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $MostraExpedienteTecnicoExpe->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
 			$MostraExpedienteTecnicoExpe->childComponenteIndirecta=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($id_et, 'EXPEDIENTETECNICO');
 
 			$costoDirectoTotalIndirecta=0;
@@ -971,9 +823,9 @@ class Expediente_Tecnico extends CI_Controller
 			// costos directos total
 
 			$MostraExpedienteTecnicoExpe->piePresupuestoIndirecta=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_et);
-		}
 
-		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editarDatosGenerales',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe, 'ExpedienteTecnicoM'=>$ExpedienteTecnicoM, 'listaimg'=>$listaimg,'listarCargo' => $listarCargo,'listaTipoResponsableElaboracion' => $listaTipoResponsableElaboracion,'listaTipoResponsableEjecucion' => $listaTipoResponsableEjecucion,'listarPersona'=>$listarPersona,'listarUResponsableERespoElabo' =>$listarUResponsableERespoElabo,'listarUResponsableERespoEjecucion' =>$listarUResponsableERespoEjecucion, 'listaModalidadEjecucion' => $listaModalidadEjecucion , 'listaFuenteFinanciamiento' => $listaFuenteFinanciamiento,'costoIndirectoComponente' => $costoIndirectoComponente,'listaPresupuestoEj'=>$listaPresupuestoEj ]);
+
+		return $this->load->view('front/Ejecucion/ExpedienteTecnico/editarDatosGenerales',['MostraExpedienteTecnicoExpe'=>$MostraExpedienteTecnicoExpe, 'ExpedienteTecnicoM'=>$ExpedienteTecnicoM]);
 	}
 
 
@@ -2147,6 +1999,19 @@ class Expediente_Tecnico extends CI_Controller
 				{
 					copy('./uploads/ResolucioExpediente/'.$exp->id_et.'.'.$exp->url_doc_aprobacion_et, './uploads/ResolucioExpediente/'.$lastExpediente.'.'.$exp->url_doc_aprobacion_et);
 				}
+
+				//Crear tabla Datos Generales Administracion Indirecta
+
+				if ($exp->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $exp->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
+						$exp_data_ind['entidad']=$exp->nombre_ue;
+						$exp_data_ind['ubicacion']=$exp->distrito_provincia_departamento_ue;
+						$exp_data_ind['proyecto']=$exp->proyecto_et;
+						$exp_data_ind['monto_contrato']=$exp->costo_total_inv_et_ai;
+						$exp_data_ind['modalidad']= 'POR CONTRATA';
+						$exp_data_ind['id_et']= $lastExpediente;			
+					$lastDatosGenerales=$this->Model_ET_Expediente_Tecnico->insertarDatosGenerales($exp_data_ind);
+				}
+
 			}
 
 			$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdET($idExpedienteTecnico);
@@ -2347,6 +2212,18 @@ class Expediente_Tecnico extends CI_Controller
 				{
 					copy('./uploads/ResolucioExpediente/'.$exp->id_et.'.'.$exp->url_doc_aprobacion_et, './uploads/ResolucioExpediente/'.$lastExpediente.'.'.$exp->url_doc_aprobacion_et);
 				}
+
+				//Crear tabla Datos Generales Administracion Indirecta
+
+				if ($exp->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $exp->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
+					$exp_data_ind['entidad']=$exp->nombre_ue;
+					$exp_data_ind['ubicacion']=$exp->distrito_provincia_departamento_ue;
+					$exp_data_ind['proyecto']=$exp->proyecto_et;
+					$exp_data_ind['monto_contrato']=$exp->costo_total_inv_et_ai;
+					$exp_data_ind['modalidad']= 'POR CONTRATA';
+					$exp_data_ind['id_et']= $lastExpediente;			
+				$lastDatosGenerales=$this->Model_ET_Expediente_Tecnico->insertarDatosGenerales($exp_data_ind);
+			}
 			}
 
 			$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdET($idExpedienteTecnico);

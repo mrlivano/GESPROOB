@@ -23,8 +23,9 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">ENTIDAD</label>
 							<div>
-								<input id="hdIdExpediente" name="hdIdExpediente" value="<?= $ExpedienteTecnicoM->id_et?>" class="form-control col-md-4 col-xs-12" placeholder="" autocomplete="off"  type="hidden">	
-								<input id="txtNombreUe" readonly name="txtNombreUe" value="<?= $ExpedienteTecnicoM->nombre_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Nombre de la unidad ejecutora" autocomplete="off" maxlength="200">	
+								<input id="hdIdExpediente" name="hdIdExpediente" value="<?= $ExpedienteTecnicoM->id_et?>" class="form-control col-md-4 col-xs-12" placeholder="" autocomplete="off"  type="hidden">
+								<input id="hdIdDatosGenerales" name="hdIdDatosGenerales" value="<?= $ExpedienteTecnicoM->id_datosg?>" class="form-control col-md-4 col-xs-12" placeholder="" autocomplete="off"  type="hidden">	
+								<input id="txtNombreUe" readonly name="txtNombreUe" value="<?= $ExpedienteTecnicoM->entidad?>" class="form-control col-md-4 col-xs-12"  placeholder="Nombre de la unidad ejecutora" autocomplete="off" maxlength="200">	
 							</div>	
 						</div>
 					</div>
@@ -33,7 +34,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">NOMBRE DE LA OBRA</label>
 							<div>
-								<textarea name="txtProyecto" readonly id="txtProyecto" rows="3" class="form-control" style="resize: none;resize: vertical;"><?=html_escape(trim($ExpedienteTecnicoM->proyecto_et))?></textarea>
+								<textarea name="txtProyecto" readonly id="txtProyecto" rows="3" class="form-control" style="resize: none;resize: vertical;"><?=html_escape(trim($ExpedienteTecnicoM->proyecto))?></textarea>
 							</div>
 						</div>
 					</div>
@@ -50,42 +51,31 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">UBICACIÓN</label>
 							<div>
-								<input id="txtDireccionUE" readonly name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?> <?=$ExpedienteTecnicoM->distrito_provincia_departamento_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Ubicación"  autocomplete="off" maxlength="200" >	
+								<input id="txtUbicacionUE" readonly name="txtUbicacionUE" value="<?= $ExpedienteTecnicoM->ubicacion?>" class="form-control col-md-4 col-xs-12"  placeholder="Ubicación"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 					</div>
 
-
-						
-					
 
 					<div class="row">
 						<div class="col-md-4 col-sm-12 col-xs-12">
                 <label class="control-label">FECHA DE INICIO DE OBRA:</label>
-                <input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaInicio" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaInicio" Validate>
+                <input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaInicio" value="<?=$ExpedienteTecnicoM->fecha_inicio?>" id="txtFechaInicio" Validate>
             </div>
 						<div class="col-md-4 col-sm-12 col-xs-12">
                 <label class="control-label">FECHA DE FINALIZACIÓN DE OBRA:</label>
-                <input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaFin" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaFin" Validate>
+                <input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaFin" value="<?=$ExpedienteTecnicoM->fecha_fin?>" id="txtFechaFin" Validate>
+								<p style="color: red; display: none;" id="Advertencia">La Fecha de Inicio no puede ser mayor a la Fecha de Fin</p>
             </div>
 						<div class=" col-md-4 col-sm-6 col-xs-12">
 					  		<label class="control-label">TIEMPO DE EJECUCIÓN</label>
 					    	<div class="form-group" >
-									<input id="txtTiempoEjecución" name="txtTiempoEjecución" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ai?>" class="form-control col-md-4 col-xs-12"  disabled>
+									<input type="text" id="txtTotalMeses" name="txtTotalMeses" value="<?=$ExpedienteTecnicoM->tiempo?>" class="form-control col-md-4 col-xs-12" readonly="readonly">
 					    	</div>
 					  </div>
 					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-					  		<label class="control-label">MONTO DE CONTRATO EN S/ </label>
-					    	<div >
-							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ai?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
-							</div>	
-						</div>
-					</div>
 					<BR>
 					<div>
-
 
 					<?php 
 						$cd=0;
@@ -113,7 +103,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">CONTRATISTA</label>
 							<div>
-								<input id="txtContratista"  name="txtContratista" value="" class="form-control col-md-4 col-xs-12"  placeholder="Contratista"  autocomplete="off" maxlength="200" >	
+								<input id="txtContratista"  name="txtContratista" value="<?=$ExpedienteTecnicoM->contratista?>" class="form-control col-md-4 col-xs-12"  placeholder="Contratista"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 					</div>
@@ -121,7 +111,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">SUPERVISOR</label>
 							<div>
-								<input id="txtSupervisor"  name="txtSupervisor" value="" class="form-control col-md-4 col-xs-12"  placeholder="Supervisor"  autocomplete="off" maxlength="200" >	
+								<input id="txtSupervisor"  name="txtSupervisor" value="<?=$ExpedienteTecnicoM->supervisor?>" class="form-control col-md-4 col-xs-12"  placeholder="Supervisor"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 					</div>
@@ -129,27 +119,28 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">RESIDENTE</label>
 							<div>
-								<input id="txtResidente"  name="txtResidente" value="" class="form-control col-md-4 col-xs-12"  placeholder="Residente"  autocomplete="off" maxlength="200" >	
+								<input id="txtResidente"  name="txtResidente" value="<?=$ExpedienteTecnicoM->residente?>" class="form-control col-md-4 col-xs-12"  placeholder="Residente"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4 col-sm-12 col-xs-12">
                			 <label class="control-label">AVANCE FÍSICO:</label>
-                		<input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaInicio" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaInicio" Validate>
+                		<input class="form-control col-md-4 col-xs-12" type="text" name="txtAvanceFisico" value="<?=$ExpedienteTecnicoM->avance_fisico?>" id="txtAvanceFisico" Validate>
             		</div>
 						
 					<div class="col-md-4 col-sm-12 col-xs-12">
                 		<label class="control-label">AVANCE FINANCIERO EJECUTADO:</label>
-                		<input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaFin" value="<?=$ExpedienteTecnicoM->fecha_aprobacion?>" id="txtFechaFin" Validate>
+                		<input class="form-control col-md-4 col-xs-12 moneda" type="text" name="txtAvanceFinanciero" value="<?=$ExpedienteTecnicoM->avance_financiero?>" id="txtAvanceFinanciero" Validate>
            			 </div>
 					<div class=" col-md-4 col-sm-6 col-xs-12">
 					  	<label class="control-label">ESTADO DE LA OBRA</label>
 					    <div class="form-group" >
 						<select id="estado" name="estado" class="form-control">
-							<option value="EJECUCIÓN">EJECUCIÓN</option>
-							<option value="FINALIZADO">FINALIZADO</option>
-							<option value="PARALIZADO">PARALIZADO</option>
+						<option value="">Seleccione estado</option>
+							<option value="EJECUCIÓN" <?=($ExpedienteTecnicoM->estado_obra == 'EJECUCIÓN' ? 'selected' : '')?>>EJECUCIÓN</option>
+							<option value="FINALIZADO" <?=($ExpedienteTecnicoM->estado_obra == 'FINALIZADO' ? 'selected' : '')?>>FINALIZADO</option>
+							<option value="PARALIZADO" <?=($ExpedienteTecnicoM->estado_obra == 'PARALIZADO' ? 'selected' : '')?>>PARALIZADO</option>
 						</select>
 					    </div>
 					  </div>
@@ -158,7 +149,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 					  		<label class="control-label">MONTO DE CONTRATO EN S/ </label>
 					    	<div >
-							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ai?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->monto_contrato?>" class="form-control col-md-4 col-xs-12 moneda"  readonly>
 							</div>	
 						</div>
 					</div>
@@ -178,8 +169,6 @@
 	  
 $(function()
 {
-	mostrar($("#txtModalidadEjecucion").val());
-
 	$('#form-EditarExpedienteTecnico').formValidation(
 	{
 		framework: 'bootstrap',
@@ -459,33 +448,33 @@ $(function()
 					} 
 				}
 			},
-			txtNumBeneficiarios:
+			txtAvanceFinanciero:
 			{
 				validators:
 				{
 					notEmpty:
 					{
-						message: '<b style="color: red;">El campo "Tiempo Ejecucion" es requerido.</b>'
+						message: '<b style="color: red;">El campo "Avance Financiero" es requerido.</b>'
 					},
 					regexp:
 					{
-						regexp: /^\d*$/,
-						message: '<b style="color: red;">El campo "Numero de beneficiarios" debe ser un numero.</b>'
+						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
+						message: '<b style="color: red;">El campo "Avance Financiero" debe ser un monto válido.</b>'
 					}
 				}
 			},
-			txtNumFolio:
+			txtAvanceFisico:
 			{
 				validators:
 				{
 					notEmpty:
 					{
-						message: '<b style="color: red;">El campo "Numero de Folio" es requerido.</b>'
+						message: '<b style="color: red;">El campo "Avance Físico" es requerido.</b>'
 					},
 					regexp:
 					{
-						regexp: /^\d*$/,
-						message: '<b style="color: red;">El campo "Numero de folios" debe ser un número.</b>'
+						regexp: /^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/,
+						message: '<b style="color: red;">El campo "Avance Físico" debe ser un porcentaje válido.</b>'
 					} 
 				}
 			}			
@@ -496,6 +485,35 @@ $(function()
 	// $('#txtCostoTotalInversionADMINISTRACIONDIRECTA').val("<?=$cd?>");
 	// $('#txtCostoTotalInversionADMINISTRACIONINDIRECTA').val("<?=$ci?>");
 });
+
+$(document).ready(function() {
+		$('input[type="date"]').change(function() {
+			var fecha1 = $('#txtFechaInicio').val();
+			var fecha2 = $('#txtFechaFin').val();
+			if ((Date.parse(fecha1)) > (Date.parse(fecha2))) {
+				$('#Advertencia').css('display', 'block');
+				$('#txtTotalMeses').val("");
+			} else {
+				$('#Advertencia').css('display', 'none');
+				$.ajax({
+					url: base_url + "index.php/Expediente_Tecnico/CalcularNumeroMeses",
+					type: 'POST',
+					data: {
+						txtFecha1: fecha1,
+						txtFecha2: fecha2
+					},
+					cache: false,
+					async: true
+				}).done(function(objectJSON) {
+					objectJSON = JSON.parse(objectJSON);
+					$('#txtTotalMeses').val(objectJSON.numerodemeses + " Meses");
+
+				}).fail(function() {
+					swal('Error', 'Error no controlado.', 'error');
+				});
+			}
+		});
+	});
 
 	function EliminarImagen(id_img,id_et)
 	{	
@@ -567,41 +585,7 @@ $(function()
 	$('.selectpicker').selectpicker({
 	});
 
-	function mostrar(id) {
-     
-	if (id == "ADMINISTRACION DIRECTA") {
-        $("#divUtilidad").hide();
-		$("#divIGV").hide();
-        $("#divAdministracion").hide();
-		$("#divElaboracionET").hide();
-		$("#divSupervisionET").hide();
-		$("#divLiquidacion").show();
-    }
-	if (id == "POR CONTRATA") {
-		$("#divLiquidacion").hide();
-		$("#divUtilidad").show();
-		$("#divIGV").show();
-        $("#divAdministracion").show();
-		$("#divElaboracionET").show();
-		$("#divSupervisionET").show();
-    }
-	if (id == "ADMINISTRACION MIXTA") {
-        $("#divLiquidacion").show();
-		$("#divUtilidad").show();
-		$("#divIGV").show();
-        $("#divAdministracion").show();
-		$("#divElaboracionET").show();
-		$("#divSupervisionET").show();
-    }
-	if (id == "") {
-        $("#divLiquidacion").hide();
-		$("#divUtilidad").hide();
-		$("#divIGV").hide();
-        $("#divAdministracion").hide();
-		$("#divElaboracionET").hide();
-		$("#divSupervisionET").hide();
-    }
-}
+
 function valideKey(evt){
 			
 			// code is the decimal ASCII representation of the pressed key.

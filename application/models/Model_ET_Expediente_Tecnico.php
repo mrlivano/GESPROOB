@@ -214,6 +214,13 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function insertarDatosGenerales($data)
+	{
+		$this->db->insert('ET_DATOS_GENERALES', $data);
+		
+		return $this->db->insert_id();
+	}
+
 	public function update($data, $idEt)
 	{
 		$this->db->set($data);
@@ -221,6 +228,17 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 		$this->db->where('id_et', $idEt);
 
 		$this->db->update('ET_EXPEDIENTE_TECNICO');
+		
+		return $this->db->affected_rows();
+	}
+
+	public function updateDatosGenerales($data, $id)
+	{
+		$this->db->set($data);
+
+		$this->db->where('id_datosg', $id);
+
+		$this->db->update('ET_DATOS_GENERALES');
 		
 		return $this->db->affected_rows();
 	}
@@ -241,6 +259,12 @@ class Model_ET_Expediente_Tecnico extends CI_Model
 	public function DatosExpediente($id_et)
 	{
 		$ETExpediente=$this->db->query("select * from  ET_EXPEDIENTE_TECNICO inner join PROYECTO_INVERSION ON ET_EXPEDIENTE_TECNICO.id_pi=PROYECTO_INVERSION.id_pi where id_et ='".$id_et."'");
+	    return $ETExpediente->result()[0];
+	}
+
+	public function DatosExpedienteDatosGenerales($id_et)
+	{
+		$ETExpediente=$this->db->query("select * from  ET_DATOS_GENERALES where id_et ='".$id_et."'");
 	    return $ETExpediente->result()[0];
 	}
 
