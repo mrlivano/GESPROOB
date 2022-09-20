@@ -78,7 +78,7 @@
 		<!-- <p>FORMATO FE-02</p>
 		<p>INFORME MENSUAL</p>
 		<p>MES : <?=@$fechaReporte?></p> -->
-		<p>FORMATO FE-01 <br>INFORME MENSUAL<br><?=@$fechaReporte?></p>DATOS GENERALES DEL PROYECTO <br> 
+		<p>FORMATO FE-05 <br>INFORME MENSUAL<br><?=@$fechaReporte?></p>RESUMEN DE ESTADO FINANCIERO <br> 
 	</div>
 	<br>
 	<form id="frmFichaInforme">
@@ -116,14 +116,15 @@
 			</tr>
 		</table>
 		<br>
-	
+		
 		<div class="firstbox">
 			<div class="firstcontent">
-				<p class="firsttext">II. EJECUCIÓN DE OBRA<p>
+				<p class="firsttext">EJECUCIÓN DE OBRA<p>
 			</div>			
 			<div class="secondbox">
 				<div class="secondcontent">
-					<p class="secondtext"> INFORMACIÓN FÍSICA - FINANCIERA DEL PROYECTO</p>
+
+					<p class="secondtext">INFORMACIÓN FÍSICA - FINANCIERA DEL PROYECTO</p>
 					<table class="tablastand tablacenter" style="text-align:center;">
 						<tr>
 							<th rowspan="2">AVANCE FÍSICO</th>

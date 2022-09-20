@@ -78,7 +78,7 @@
 		<!-- <p>FORMATO FE-02</p>
 		<p>INFORME MENSUAL</p>
 		<p>MES : <?=@$fechaReporte?></p> -->
-		<p>FORMATO FE-01 <br>INFORME MENSUAL<br><?=@$fechaReporte?></p>DATOS GENERALES DEL PROYECTO <br> 
+		<p>FORMATO FE-03 <br>INFORME MENSUAL<br><?=@$fechaReporte?></p>DETALLE DE PARTIDAS EJECUTADAS <br> 
 	</div>
 	<br>
 	<form id="frmFichaInforme">
@@ -116,96 +116,63 @@
 			</tr>
 		</table>
 		<br>
+		
 		<div class="firstbox">
 			<div class="firstcontent">
-				<p class="firsttext">PARTIDAS EJECUTADAS DURANTE EL PERIODO<p>
+				<p class="firsttext">EJECUCIÓN DE OBRA<p>
 			</div>			
 			<div class="secondbox">
 				<div class="secondcontent">
-					<p class="secondtext">1.1.- GENERALIDADES DEL PROYECTO</p>
-				</div>				
-				<div class="thirdbox">
-					<div class="thirdcontent">
-						<p class="thirdtext">1.1.- UBICACIÓN</p>
-						<table class="tablastand tablaMayuscula">
-							<tr>
-								<th>REGIÓN</th>
-								<td style="width:80%;"><?=@$detalleFormato[0]->region?></td>
-							</tr>
-							<tr>
-								<th>PROVINCIA</th>
-								<td><?=@$detalleFormato[0]->provincia?></td>
-							</tr>
-							<tr>
-								<th>DISTRITO</th>
-								<td><?=@$detalleFormato[0]->distrito?></td>
-							</tr>
-							<tr>
-								<th>DIRECCIÓN Y/O UBICACIÓN</th>
-								<td><?=@$detalleFormato[0]->direccion?></td>
-							</tr>
-						</table>
-						<br>
-						<p class="thirdtext">1.2.- FUNCIÓN PROGRAMÁTICA</p>
-						<table class="tablastand tablaMayuscula">
-							<tr>
-								<th>FUNCIÓN</th>
-								<td style="width:80%;"><?=@$proyectoInversion->funcion_et?></td>
-							</tr>
-							<tr>
-								<th>DIVISIÓN FUNCIONAL</th>
-								<td><?=@$proyectoInversion->programa_et?></td>
-							</tr>
-							<tr>
-								<th>GRUPO FUNCIONAL</th>
-								<td><?=@$proyectoInversion->sub_programa_et?></td>
-							</tr>
-							<tr>
-								<th>PROYECTO</th>
-								<td><?=@$proyectoInversion->nombre_pi?></td>
-							</tr>
-							<!--<tr>
-								<th>COMPONENTE</th>
-								<td><?=@$proyectoInversion->componente_et?></td>
-							</tr>-->
-							<tr>
-								<th>META</th>
-								<td><?=@$proyectoInversion->meta_et?></td>
-							</tr>
-							<tr>
-								<th>MODALIDAD</th>
-								<td><?=@$proyectoInversion->modalidad_ejecucion_et?></td>
-							</tr>
-						</table>
-						<br>
-						<p class="thirdtext">1.3.- ASPECTOS FINANCIEROS</p>
-						<table class="tablastand">
-							<tr>
-								<th>MONTO APROBADO</th>
-								<td style="width:20%;text-align:right;"><?=number_format(@$proyectoInversion->costo_total_inv_et, 2, '.', ',')?></td>
-							</tr>
-							<tr>
-								<th>MONTO ASIGNADO</th>
-								<td style="width:20%;text-align:right;"><?=number_format(@$montoasignado, 2, '.', ',')?></td>
-							</tr>
-							<tr>
-								<th colspan="2">FUENTE FINANCIAMIENTO</th>
-							</tr>
-							<?php foreach($fuenteFinanciamieto as $key => $fuente) { ?>
-							<tr>
-								<th><?=$fuente->nombre?></th>
-								<td style="width:20%;text-align:right;"><?=number_format($fuente->pim, 2, '.', ',')?></td>
-							</tr>
-							<?php } ?>
-							<tr>
-								<th>TOTAL</th>
-								<td style="width:20%;text-align:right;"><?=number_format(@$montoasignado, 2, '.', ',')?></td>
-							</tr>
-						</table>
+					
+					<p class="secondtext">PARTIDAS EJECUTADAS DURANTE EL PERIODO</p>
+					<p>OBRAS PRINCIPAL EXPEDIENTE TÉCNICO</p>
+					<table class="tablastand">
+						<tr>
+							<th>ÍTEM</th>
+							<th>PARTIDAS DEL EXPEDIENTE APROBADO</th>
+							<th>UND</th>
+							<th>METRADO</th>
+						</tr>
+						<?php foreach($arrayPartidaEjecutada as $partidaEjecutada) 
+						{?>
+						<tr>
+							<td style="width:10%;"><?=$partidaEjecutada->numeracion?></td>
+							<td style="width:50%;"><?=$partidaEjecutada->desc_partida?></td>
+							<td style="width:20%;"><?=$partidaEjecutada->descripcion?></td>
+							<td style="width:20%;"><?=$partidaEjecutada->metradoEjecutado?></td>
+						</tr>
+						<?php } ?>
+					</table>
+					<br>
+					<div class="cuadroContenedor">
+						<p>Información descriptiva de metas físicas alcanzadas: <?=@$detalleFormato[0]->descripcion_partidas_ejecutadas?></p>
 					</div>
-				</div>
+					<p>OBRAS ADICIONALES</p>
+					<table class="tablastand">
+						<tr>
+							<th>ÍTEM</th>
+							<th>PARTIDAS DEL EXPEDIENTE APROBADO</th>
+							<th>UND</th>
+							<th>METRADO</th>
+						</tr>
+						<?php foreach($arrayAdicional as $adicional) 
+						{?>
+						<tr>
+							<td style="width:10%;"><?=$adicional->numeracion?></td>
+							<td style="width:50%;"><?=$adicional->desc_partida?></td>
+							<td style="width:20%;"><?=$adicional->descripcion?></td>
+							<td style="width:20%;"><?=$adicional->metradoEjecutado?></td>
+						</tr>
+						<?php } ?>
+					</table>
+					<br>
+					<div class="cuadroContenedor">
+						<p>Información descriptiva de adicionales de obra: <?=@$detalleFormato[0]->descripcion_adicionales?></p>
+					</div>
+					
+				</div>					
 			</div>
-		</div>	
+		</div>
 
 	</div>	
 	</form>

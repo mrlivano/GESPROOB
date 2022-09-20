@@ -78,7 +78,7 @@
 		<!-- <p>FORMATO FE-02</p>
 		<p>INFORME MENSUAL</p>
 		<p>MES : <?=@$fechaReporte?></p> -->
-		<p>FORMATO FE-01 <br>INFORME MENSUAL<br><?=@$fechaReporte?></p>DATOS GENERALES DEL PROYECTO <br> 
+		<p>FORMATO FE-11 <br>INFORME MENSUAL<br><?=@$fechaReporte?></p>CONCLUSIONES Y RECOMENDACIONES <br> 
 	</div>
 	<br>
 	<form id="frmFichaInforme">
