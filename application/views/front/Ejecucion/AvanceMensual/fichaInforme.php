@@ -78,29 +78,29 @@
 							</td>
 						</tr>
 						<tr>
-							<th>AVANCE FÍSICO</th>
+							<th>AVANCE FÍSICO %</th>
 							<td colspan="5">
 								<div>
-									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->plazo_ejecucion_real?>" name="txtPlazoEjecReal" id="txtPlazoEjecReal" type="text"> %
+									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_fisico?>" name="txtAvanceFisico" id="txtAvanceFisico" type="text">
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th>AVANCE FINANCIERO</th>
+							<th>AVANCE FINANCIERO S/</th>
 							<td colspan="5">
 								<div>
-									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->plazo_ejecucion_real?>" name="txtPlazoEjecReal" id="txtPlazoEjecReal" type="text"> S/
+									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_financiero?>" name="txtAvanceFinanciero" id="txtAvanceFinanciero" type="text">
 								</div>
 							</td>
 						</tr>
 					</table>
 					<br>
 					<p>PROBLEMAS PRESENTADOS</p>
-					<textarea style="resize: none;resize: vertical;" name="txtObservaciones" id="txtObservaciones" class="form-control field" rows="3" cols="50" placeholder="Observaciones y/o Comentarios"><?=@$detalleFormato[0]->descripcion_observaciones?></textarea>					
+					<textarea style="resize: none;resize: vertical;" name="txtProblemas" id="txtProblemas" class="form-control field" rows="3" cols="50" placeholder="Observaciones y/o Comentarios"><?=@$detalleFormato[0]->problemas?></textarea>					
 					<br>
 					<p class="secondtext">SUBIR INFORME</p>		
 						<div class="col-md-12 col-sm-9 col-xs-12">
-            	<input type="hidden" name="Editurl" id="Editurl" value="<?= $detalleFormato->url_doc_aprobacion_et?>" notValidate>
+            	<input type="hidden" name="Editurl" id="Editurl" value="<?= $detalleFormato[0]->url?>" notValidate>
                 <input type="file" accept=".doc, .docx, .pdf" id="Documento_Resolucion" name="Documento_Resolucion" notValidate >
                 <b style="color: red; font-size: 10px;">Solo se aceptan archivos con extensión PDF y DOCX.En caso de subir otro informe remplazará a la anterior</b>
             </div>			

@@ -16,6 +16,13 @@ class Model_ET_Detalle_Formatos extends CI_Model
 		return $query->result();
 	}
 
+	function getDetalleAvanceMensual($idDatosG, $anio,  $mes)
+	{
+		$query=$this->db->query("select * from ET_INFORMECONTRATA where id_datosg='$idDatosG' and anio='$anio' and mes ='$mes'");
+
+		return $query->result();
+	}
+
 	function getDetalleByAnio($idExpedienteTecnico, $anio, $meta, $sec_ejec)
 	{
 		$query=$this->db->query("select * from ET_DETALLE_FORMATO where id_et='$idExpedienteTecnico' and 

@@ -141,11 +141,11 @@ class ET_Detalle_Formato extends CI_Controller
 			$sec_ejec=$metaPresupuestal[0];
       $anio=$metaPresupuestal[1];
 			$meta=$metaPresupuestal[2];
-			$proyectoInversion=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
+			$proyectoInversion=$this->Model_ET_Expediente_Tecnico->DatosExpedienteDatosGenerales($idExpedienteTecnico);
           
 			$fechaReporte=$this->input->post('hdMes').' - '.$anio;
 			
-			$detalleFormato=$this->Model_ET_Detalle_Formatos->getDetalleBy($idExpedienteTecnico, $anio, $meta, $sec_ejec, $mes);
+			$detalleFormato=$this->Model_ET_Detalle_Formatos->getDetalleAvanceMensual($proyectoInversion->id_datosg, $anio, $mes);
 
 			$this->load->view('Front/Ejecucion/AvanceMensual/fichaInforme', ['idExpedienteTecnico'=>$idExpedienteTecnico,'metaPresupuestal'=>$this->input->post('metaPresupuestal'),'mes'=>$mes,'proyectoInversion'=>$proyectoInversion,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte]);        
 		}	
