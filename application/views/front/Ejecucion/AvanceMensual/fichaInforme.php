@@ -169,11 +169,13 @@
   function guardarInformeMensual()
     {
 
-    $('#frmFichaInforme').data('formValidation').validate();
-		if(!($('#frmFichaInforme').data('formValidation').isValid()))
-		{
-			return;
+			var patt = new RegExp("/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/");
+		if(patt.test($('#txtAvanceFisico').val().trim())){
+			console.log('cumple');
+		} else {
+			console.log('no cumple');
 		}
+
 		if($('#txtAvanceFisico').val().trim()=='')
 		{
 			swal('','El campo "Avance Físico" es requerido.','error');
@@ -186,6 +188,9 @@
 			$('#txtAvanceFinanciero').focus();
 			return;
 		}
+
+		
+
 		var formulario = $('#frmFichaInforme');
 		$.ajax({
             type:"POST",
