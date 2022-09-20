@@ -128,13 +128,13 @@
   function guardarInformeMensual()
     {
 
-			var patt = new RegExp("/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/");
-			var patt2 = new RegExp("/(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/");
-		if(patt.test($('#txtAvanceFisico').val().trim())){
-			console.log('no cumple');
-		} else {
-			console.log('cumple');
-		}
+		// 	var patt = new RegExp("/^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/");
+		// 	var patt2 = new RegExp("/(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/");
+		// if(patt.test($('#txtAvanceFisico').val().trim())){
+		// 	console.log('cumple');
+		// } else {
+		// 	console.log('no cumple');
+		// }
 
 		if($('#txtAvanceFisico').val().trim()=='')
 		{
