@@ -97,6 +97,7 @@
 					<br>
 					<p>PROBLEMAS PRESENTADOS</p>
 					<textarea style="resize: none;resize: vertical;" name="txtObservaciones" id="txtObservaciones" class="form-control field" rows="3" cols="50" placeholder="Observaciones y/o Comentarios"><?=@$detalleFormato[0]->descripcion_observaciones?></textarea>					
+					<br>
 					<p class="secondtext">SUBIR INFORME</p>					
 					<input type="button" class="btn btn-info" value="Agregar Informe" onclick="agregarFotografia('<?=@$detalleFormato[0]->id_detalle?>');">
 					<input type="button" class="btn btn-warning" value="Exportar a PDF" onclick="exportarFicha();">	
