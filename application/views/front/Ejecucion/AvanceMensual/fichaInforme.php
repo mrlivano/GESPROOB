@@ -83,7 +83,7 @@
 							<th>AVANCE FÍSICO %</th>
 							<td style="width:60%;">
 								<div>
-									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_fisico?>" name="txtAvanceFisico" id="txtAvanceFisico" type="text">
+									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_fisico?>" name="txtAvanceFisico" id="txtAvanceFisico" type="text" Validate>
 								</div>
 							</td>
 						</tr>
@@ -91,7 +91,7 @@
 							<th>AVANCE FINANCIERO S/</th>
 							<td style="width:60%;">
 								<div>
-									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_financiero?>" name="txtAvanceFinanciero" id="txtAvanceFinanciero" type="text">
+									<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->avance_financiero?>" name="txtAvanceFinanciero" id="txtAvanceFinanciero" type="text" Validate>
 								</div>
 							</td>
 						</tr>
