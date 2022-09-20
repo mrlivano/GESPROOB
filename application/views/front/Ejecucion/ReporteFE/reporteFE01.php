@@ -121,7 +121,7 @@
             success:function(objectJSON)
             {
 				$('#divModalCargaAjax').hide();
-				$('#contenedorManifiestoGasto').html(objectJSON);
+				// $('#contenedorManifiestoGasto').html(objectJSON);
 			},
 			error:function ()
 			{
