@@ -122,8 +122,6 @@
 	
 	$(function()
 	{
-		$('input').attr('autocomplete', 'off');		
-
 		$('#frmFichaInforme').formValidation(
 		{
 			framework: 'bootstrap',
@@ -165,6 +163,7 @@
 			}			
 			}
 		});
+		$('input').attr('autocomplete', 'off');		
 	});
 
   function guardarInformeMensual()
