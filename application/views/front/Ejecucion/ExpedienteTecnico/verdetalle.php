@@ -791,7 +791,7 @@
 											<div class="x_content">
 												<div style="padding-top:20px;padding-bottom:20px;">
 													<ul class="list-unstyled timeline">
-														<?php if($aprobado!=1) { ?>
+														<?php //if($aprobado!=1) { ?>
 														<li>
 															<div class="block">
 																<div class="tags">
@@ -810,7 +810,7 @@
 																</div>
 															</div>
 														</li>
-														<?php } ?>
+														<?php // } ?>
 														<li>
 															<div class="block">
 																<div class="tags">
@@ -1380,7 +1380,7 @@
 											<div class="x_content">
 												<div style="padding-top:20px;padding-bottom:20px;">
 													<ul class="list-unstyled timeline">
-														<?php if($aprobado!=1) { ?>
+														<?php // if($aprobado!=1) { ?>
 														<li>
 															<div class="block">
 																<div class="tags">
@@ -1399,7 +1399,7 @@
 																</div>
 															</div>
 														</li>
-														<?php } ?>
+														<?php //} ?>
 														<li>
 															<div class="block">
 																<div class="tags">
