@@ -80,7 +80,7 @@
 				<th>RESIDENTE DE PROYECTO</th>
 				<td>
 					<div>
-						<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->residente=='' ? 'residente' : @$detalleFormato[0]->residente)?>" name="txtResidente" id="txtResidente" type="text">
+						<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->residente=='' ? @$detalleGeneral[0]->residente : @$detalleFormato[0]->residente)?>" name="txtResidente" id="txtResidente" type="text">
 					</div>
 				</td>
 			</tr>
