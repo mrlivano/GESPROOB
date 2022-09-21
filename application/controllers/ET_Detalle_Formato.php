@@ -40,7 +40,7 @@ class ET_Detalle_Formato extends CI_Controller
 				$proyectoInversion->region = $ubicacionArray[3];
 				$proyectoInversion->provincia = $ubicacionArray[2];
 				$proyectoInversion->distrito = $ubicacionArray[1];
-				$proyectoInversion->centroPoblado = $ubicacionArray[0];
+				$proyectoInversion->centroPoblado = 'centro poblado';
 			}
 			$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
 			$montoasignado=0;
