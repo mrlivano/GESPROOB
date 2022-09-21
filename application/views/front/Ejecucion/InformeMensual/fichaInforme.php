@@ -217,10 +217,36 @@
 		<div class="firstbox">
 			<div class="firstcontent">
 				<p class="firsttext">II. EJECUCIÓN DE OBRA<p>
-			</div>			
+			</div>
+			<div class="secondbox">	
+				<p class="secondtext">2.1. APROBACIÓN DE EXPEDIENTE TÉCNICO</p>			
+				<table class="tablastand tablaMayuscula">
+							<tr>
+								<th>DOCUMENTO</th>
+								<td style="width:80%;"><?=@$detalleFormato[0]->documento_aprobacion?></td>
+							</tr>
+							<tr>
+								<th>FECHA</th>
+								<td><?=@$detalleFormato[0]->fecha_aprobacion?></td>
+							</tr>
+						</table>
+			</div>	
+				<div class="secondbox">	
+				<p class="secondtext">2.2. DESCRIPCION DEL PROYECTO</p>			
+				<textarea style="resize: none;resize: vertical;" name="txtDescripcionProyecto" id="txtDescripcionProyecto" class="form-control field" rows="4" cols="50" placeholder="Descripcion del Proyecto."><?=@$detalleFormato[0]->descripcion_proyecto?></textarea>		
+				</div>
+				<div class="secondbox">	
+				<p class="secondtext">2.3. OBJETIVO DEL PROYECTO</p>			
+				<textarea style="resize: none;resize: vertical;" name="txtObjetivoProyecto" id="txtObjetivoProyecto" class="form-control field" rows="3" cols="50" placeholder="Objetivo del Proyecto."><?=@$detalleFormato[0]->objetivo_proyecto?></textarea>		
+				</div>
+				<div class="secondbox">	
+				<p class="secondtext">2.4. IMPACTO SOCIAL</p>			
+				<textarea style="resize: none;resize: vertical;" name="txtImpactoProyecto" id="txtImpactoProyecto" class="form-control field" rows="4" cols="50" placeholder="Impacto Social."><?=@$detalleFormato[0]->impacto_proyecto?></textarea>		
+				</div>	
+					
 			<div class="secondbox">
 				<div class="secondcontent">
-					<p class="secondtext">2.1.- PLAZO DE EJECUCIÓN</p>
+					<p class="secondtext">2.5.- PLAZO DE EJECUCIÓN</p>
 					<table class="tablastand tablacenter">
 						<tr>
 							<th>Fecha de Entrega de Terreno</th>
@@ -269,7 +295,7 @@
 						</tr>
 					</table>
 					<br>
-					<p class="secondtext">2.2.- PARTIDAS EJECUTADAS DURANTE EL PERIODO</p>
+					<p class="secondtext">2.6.- PARTIDAS EJECUTADAS DURANTE EL PERIODO</p>
 					<p>OBRAS PRINCIPAL EXPEDIENTE TÉCNICO</p>
 					<table class="tablastand">
 						<tr>
@@ -311,7 +337,7 @@
 					<br>
 					<textarea style="resize: none;resize: vertical;" class="form-control field" name="txtAdicionales" id="txtAdicionales" rows="3" cols="50" placeholder="Información descriptiva de adicionales de obra"><?=@$detalleFormato[0]->descripcion_adicionales?></textarea>
 					<br>
-					<p class="secondtext">2.3.- INFORMACIÓN FÍSICA - FINANCIERA DEL PROYECTO</p>
+					<p class="secondtext">2.7.- INFORMACIÓN FÍSICA - FINANCIERA DEL PROYECTO</p>
 					<table class="tablastand tablacenter" style="text-align:center;">
 						<tr>
 							<th rowspan="2">AVANCE FÍSICO</th>
@@ -607,10 +633,23 @@
 				<textarea style="resize: none;resize: vertical;" name="txtObservaciones" id="txtObservaciones" class="form-control field" rows="3" cols="50" placeholder="Observaciones y/o Comentarios"><?=@$detalleFormato[0]->descripcion_observaciones?></textarea>					
 			</div>				
 		</div>
-		<div class="firstbox">
+		<!--<div class="firstbox">
 			<div class="firstcontent">
 				<p class="firsttext">IV. PRINCIPALES OCURRENCIAS EN EL MES</p>				
 				<textarea style="resize: none;resize: vertical;" name="txtOcurrencias" id="txtOcurrencias" class="form-control field" rows="10" cols="50" placeholder="Comentarios de las principales ocurrencias respecto a los materiales utilizados, personal, equipo, maquinarias, alcance de las metas previstas."><?=@$detalleFormato[0]->descripcion_ocurrencias?></textarea>		
+			</div>				
+		</div>-->
+		<div class="firstbox">
+			<div class="firstcontent">
+				<p class="firsttext">IV. CONCLUSIONES Y RECOMENDACIONES</p>	
+				<div class="secondbox">	
+				<p class="secondtext">4.1. CONCLUSIONES</p>			
+				<textarea style="resize: none;resize: vertical;" name="txtConclusiones" id="txtConclusiones" class="form-control field" rows="10" cols="50" placeholder="Conclusiones."><?=@$detalleFormato[0]->conclusiones?></textarea>		
+				</div>
+				<div class="secondbox">	
+				<p class="secondtext">4.2. RECOMENDACIONES</p>			
+				<textarea style="resize: none;resize: vertical;" name="txtRecomendaciones" id="txtRecomendaciones" class="form-control field" rows="10" cols="50" placeholder="Recomendaciones."><?=@$detalleFormato[0]->recomendaciones?></textarea>		
+				</div>
 			</div>				
 		</div>
 		<div class="firstbox">
@@ -638,6 +677,22 @@
 								<td>
 									<div>
 										<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->al_folio?>" name="txtAlFolio" id="txtAlFolio" type="text">									
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>Asiento</th>
+								<th>Asiento</th>
+							</tr>
+							<tr>	
+								<td>
+									<div>
+										<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->del_asiento?>" name="txtDelAsiento" id="txtDelAsiento" type="text">
+									</div>
+								</td>
+								<td>
+									<div>
+										<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->al_asiento?>" name="txtAlAsiento" id="txtAlAsiento" type="text">									
 									</div>
 								</td>
 							</tr>
