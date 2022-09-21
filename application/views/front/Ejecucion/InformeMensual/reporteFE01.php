@@ -98,15 +98,15 @@
 			</tr>
 			<tr>
 				<th>RESIDENTE DE PROYECTO</th>
-				<td><?=@$detalleFormato[0]->residente?></td>
+				<td><?=(@$detalleFormato[0]->residente=='' ? @$responsableDetalle->residente : @$detalleFormato[0]->residente)?></td>
 			</tr>
 			<tr>
 				<th>SUPERVISOR DE PROYECTO</th>
-				<td><?=@$detalleFormato[0]->supervisor?></td>
+				<td><?=(@$detalleFormato[0]->supervisor=='' ? @$responsableDetalle->supervisor : @$detalleFormato[0]->supervisor)?></td>
 			</tr>
 			<tr>
 				<th>ASISTENTE ADMINISTRATIVO</th>
-				<td><?=@$detalleFormato[0]->asistente_administrativo?></td>
+				<td><?=(@$detalleFormato[0]->asistente_administrativo=='' ? @$responsableDetalle->asistente_administrativo : @$detalleFormato[0]->asistente_administrativo)?></td>
 			</tr>
 		</table>
 		<table class="tablastand" style="margin-top: 6px;">

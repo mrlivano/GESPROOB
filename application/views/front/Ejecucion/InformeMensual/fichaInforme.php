@@ -88,7 +88,7 @@
 				<th>SUPERVISOR DE PROYECTO</th>
 				<td>	
 					<div>
-						<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->supervisor=='' ? @$detalleGeneral[0]->supervisor : @$detalleFormato[0]->supervisor)?>" name="txtSupervisor" id="txtSupervisor" type="text">
+						<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->supervisor=='' ? @$responsableDetalle->supervisor : @$detalleFormato[0]->supervisor)?>" name="txtSupervisor" id="txtSupervisor" type="text">
 					</div>
 				</td>
 			</tr>
@@ -96,7 +96,7 @@
 				<th>ASISTENTE ADMINISTRATIVO</th>
 				<td>
 					<div>
-						<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->asistente_administrativo=='' ? @$detalleGeneral[0]->asistente_administrativo : @$detalleFormato[0]->asistente_administrativo)?>" name="txtAsistenteAdministrativo" id="txtAsistenteAdministrativo" type="text">
+						<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->asistente_administrativo=='' ? @$responsableDetalle->asistente_administrativo : @$detalleFormato[0]->asistente_administrativo)?>" name="txtAsistenteAdministrativo" id="txtAsistenteAdministrativo" type="text">
 					</div>
 				</td>
 			</tr>

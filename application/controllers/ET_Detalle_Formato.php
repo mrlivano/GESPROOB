@@ -73,8 +73,10 @@ class ET_Detalle_Formato extends CI_Controller
 				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
-				$responsableDetalle = new stdClass();
+				
 				// Responsables de Proyecto
+				$responsableDetalle = new stdClass();
+
 				if(@$detalleFormato[0]->residente == ''){
 					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
 					if(count($responsableCargo)>0){	
@@ -82,13 +84,19 @@ class ET_Detalle_Formato extends CI_Controller
 					}
 				}
 
-				// if($detalleFormato[0]->supervisor == '' || $detalleFormato[0]->supervisor == NULL){
-				// 	$detalleFormato[0]->supervisor
-				// }
+				if(@$detalleFormato[0]->supervisor == ''){
+					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+					if(count($responsableCargo)>0){	
+						$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+					}
+				}
 
-				// if($detalleFormato[0]->asistente_administrativo == '' || $detalleFormato[0]->asistente_administrativo == NULL){
-				// 	$detalleFormato[0]->asistente_administrativo
-				// }
+				if(@$detalleFormato[0]->asistente_administrativo == ''){
+					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+					if(count($responsableCargo)>0){	
+						$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+					}
+				}
 
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
@@ -222,6 +230,31 @@ class ET_Detalle_Formato extends CI_Controller
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
 
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+			//
+
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
 			$presupuestoActual=0;
@@ -276,7 +309,7 @@ class ET_Detalle_Formato extends CI_Controller
 
 			$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE01', ['proyectoInversion'=>$proyectoInversion,'fuenteFinanciamieto'=>$fuenteFinanciamieto,'montoasignado'=>$montoasignado,'plazoPogramado'=>$plazoPogramado,'ampliacionPlazo'=>$ampliacionPlazo,'arrayPartidaEjecutada'=>$arrayPartidaEjecutada,'arrayAdicional'=>$arrayAdicional,'detalleFormato'=>$detalleFormato,'childManoObra'=>$childManoObra,'sumatoriaManodeObra'=>$sumatoriaManodeObra,'fechaReporte'=>$fechaReporte,'presupuestoProgramado'=>$presupuestoProgramado,'presupuestoAnterior'=>$presupuestoAnterior,'presupuestoActual'=>$presupuestoActual,
 			'ejecutadoAnterior'=>$ejecutadoAnterior,'ejecutadoActual'=>$ejecutadoActual,'adicionalProgramado'=>$adicionalProgramado,'adicionalAnterior'=>$adicionalAnterior,'adicionalActual'=>$adicionalActual,'costoIndirectoProgramado'=>$costoIndirectoProgramado,'costoIndirectoAnterior'=>$costoIndirectoAnterior, 'costoIndirectoActual'=>$costoIndirectoActual,'financieroAnterior'=>$financieroAnterior,
-			'financieroActual'=>$financieroActual], true);
+			'financieroActual'=>$financieroActual,'responsableDetalle'=>$responsableDetalle], true);
             $this->mydompdf->load_html($html);
             $this->mydompdf->render();
             $this->mydompdf->stream("ReporteFE-01.pdf", array("Attachment" => false));      
@@ -336,6 +369,31 @@ class ET_Detalle_Formato extends CI_Controller
 				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
+
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+			//
 
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
@@ -452,6 +510,31 @@ class ET_Detalle_Formato extends CI_Controller
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
 
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+			//
+
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
 			$presupuestoActual=0;
@@ -566,6 +649,31 @@ class ET_Detalle_Formato extends CI_Controller
 				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
+
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+			//
 
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
@@ -682,6 +790,31 @@ class ET_Detalle_Formato extends CI_Controller
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
 
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+			//
+
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
 			$presupuestoActual=0;
@@ -796,6 +929,31 @@ class ET_Detalle_Formato extends CI_Controller
 				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
+
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+			//
 
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
