@@ -55,24 +55,45 @@
 							</div>	
 						</div>
 					</div>
-
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<label class="control-label">FECHA DE ENTREGA DE TERRENO</label>
+							<div>
+							<input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaEntrega" value="<?=$ExpedienteTecnicoM->fecha_entrega?>" id="txtFechaEntrega" Validate>
+							</div>	
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<label class="control-label">ADJUNTAR ACTA DE ENTREGA DE TERRENO:</label>
+						<div>
+						<input type="file" id="fileActa" name="fileActa" notValidate class="form-control">
+						</div>
+						</div>
+					</div>
 
 					<div class="row">
 						<div class="col-md-4 col-sm-12 col-xs-12">
                 <label class="control-label">FECHA DE INICIO DE OBRA:</label>
                 <input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaInicio" value="<?=$ExpedienteTecnicoM->fecha_inicio?>" id="txtFechaInicio" Validate>
-            </div>
+           		 </div>
 						<div class="col-md-4 col-sm-12 col-xs-12">
                 <label class="control-label">FECHA DE FINALIZACIÓN DE OBRA:</label>
                 <input class="form-control col-md-4 col-xs-12" type="date" max="2200-12-31" name="txtFechaFin" value="<?=$ExpedienteTecnicoM->fecha_fin?>" id="txtFechaFin" Validate>
 								<p style="color: red; display: none;" id="Advertencia">La Fecha de Inicio no puede ser mayor a la Fecha de Fin</p>
-            </div>
+            			</div>
 						<div class=" col-md-4 col-sm-6 col-xs-12">
 					  		<label class="control-label">TIEMPO DE EJECUCIÓN</label>
 					    	<div class="form-group" >
 									<input type="text" id="txtTotalMeses" name="txtTotalMeses" value="<?=$ExpedienteTecnicoM->tiempo?>" class="form-control col-md-4 col-xs-12" readonly="readonly">
 					    	</div>
 					  </div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+					  		<label class="control-label">MONTO DE CONTRATO EN S/ </label>
+					    	<div >
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->monto_contrato?>" class="form-control col-md-4 col-xs-12 moneda"  readonly>
+							</div>	
+						</div>
 					</div>
 					<BR>
 					<div>
@@ -100,13 +121,20 @@
 
 					</div>				
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12">
 							<label class="control-label">CONTRATISTA</label>
 							<div>
 								<input id="txtContratista"  name="txtContratista" value="<?=$ExpedienteTecnicoM->contratista?>" class="form-control col-md-4 col-xs-12"  placeholder="Contratista"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						<label class="control-label">ADJUNTAR CONTRATO:</label>
+						<div>
+						<input type="file" id="fileContrato" name="fileContrato" notValidate class="form-control">
+						</div>
+						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<label class="control-label">SUPERVISOR</label>
@@ -145,14 +173,7 @@
 					    </div>
 					  </div>
 					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-					  		<label class="control-label">MONTO DE CONTRATO EN S/ </label>
-					    	<div >
-							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->monto_contrato?>" class="form-control col-md-4 col-xs-12 moneda"  readonly>
-							</div>	
-						</div>
-					</div>
+
 
 				</div>
 			</div>
