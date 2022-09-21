@@ -31,7 +31,7 @@ class ET_Detalle_Formato extends CI_Controller
 			$metaPresupuestal=explode("-", $this->input->post('metaPresupuestal'));
 			$mes=$this->input->post('mes');
 			$sec_ejec=$metaPresupuestal[0];
-            $anio=$metaPresupuestal[1];
+      $anio=$metaPresupuestal[1];
 			$meta=$metaPresupuestal[2];
 			$proyectoInversion=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
 			$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
@@ -74,10 +74,10 @@ class ET_Detalle_Formato extends CI_Controller
 			}
 
 				// Responsables de Proyecto
-				if(!$detalleFormato[0]->residente || $detalleFormato[0]->residente == '' || $detalleFormato[0]->residente == NULL){
-					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
-					$detalleFormato[0]->residente = 'residente';
-				}
+				// if(!$detalleFormato[0]->residente || $detalleFormato[0]->residente == '' || $detalleFormato[0]->residente == NULL){
+				// 	$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				// 	$detalleFormato[0]->residente = 'residente';
+				// }
 
 				// if($detalleFormato[0]->supervisor == '' || $detalleFormato[0]->supervisor == NULL){
 				// 	$detalleFormato[0]->supervisor
