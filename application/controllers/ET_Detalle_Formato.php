@@ -77,7 +77,7 @@ class ET_Detalle_Formato extends CI_Controller
 				// Responsables de Proyecto
 				if(@$detalleFormato[0]->residente == ''){
 					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
-					$responsableDetalle->residente = 'residente';
+					$responsableDetalle->residente = $responsableCargo->nombres;
 				}
 
 				// if($detalleFormato[0]->supervisor == '' || $detalleFormato[0]->supervisor == NULL){
