@@ -50,7 +50,7 @@ class Model_ET_Presupuesto_Ejecucion extends CI_Model
 
     function ListaPresupuestoEjecucionAdmDirecta()
     {
-        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej = 2");
+        $presupuesto=$this->db->query("select * from et_presupuesto_ejecucion  where id_presupuesto_ej = 16");
 
         return $presupuesto->result();
     }
