@@ -130,19 +130,19 @@
 						<table class="tablastand tablaMayuscula">
 							<tr>
 								<th>DEPARTAMENTO</th>
-								<td style="width:80%;"><?=@$detalleFormato[0]->region?></td>
+								<td style="width:80%;"><?=(@$detalleFormato[0]->region=='' ? @$proyectoInversion->region : @$detalleFormato[0]->region)?></td>
 							</tr>
 							<tr>
 								<th>PROVINCIA</th>
-								<td><?=@$detalleFormato[0]->provincia?></td>
+								<td><?=(@$detalleFormato[0]->provincia=='' ? @$proyectoInversion->provincia : @$detalleFormato[0]->provincia)?></td>
 							</tr>
 							<tr>
 								<th>DISTRITO</th>
-								<td><?=@$detalleFormato[0]->distrito?></td>
+								<td><?=(@$detalleFormato[0]->distrito=='' ? @$proyectoInversion->distrito : @$detalleFormato[0]->distrito)?></td>
 							</tr>
 							<tr>
 								<th>DIRECCIÓN Y/O UBICACIÓN</th>
-								<td><?=@$detalleFormato[0]->direccion?></td>
+								<td><?=(@$detalleFormato[0]->direccion=='' ? @$proyectoInversion->centroPoblado : @$detalleFormato[0]->direccion)?></td>
 							</tr>
 						</table>
 						<br>

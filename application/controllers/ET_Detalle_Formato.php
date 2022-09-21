@@ -40,7 +40,7 @@ class ET_Detalle_Formato extends CI_Controller
 				$proyectoInversion->region = $ubicacionArray[3];
 				$proyectoInversion->provincia = $ubicacionArray[2];
 				$proyectoInversion->distrito = $ubicacionArray[1];
-				$proyectoInversion->centroPoblado = 'centro poblado';
+				$proyectoInversion->centroPoblado = $ubicacionArray[0];
 			}
 			$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
 			$montoasignado=0;
@@ -195,6 +195,15 @@ class ET_Detalle_Formato extends CI_Controller
       $anio=$metaPresupuestal[1];
 			$meta=$metaPresupuestal[2];
 			$proyectoInversion=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idExpedienteTecnico);
+
+			if(@$proyectoInversion->distrito_provincia_departamento_ue != ''){
+				$ubicacionArray = explode("/",$proyectoInversion->distrito_provincia_departamento_ue);
+				$proyectoInversion->region = $ubicacionArray[3];
+				$proyectoInversion->provincia = $ubicacionArray[2];
+				$proyectoInversion->distrito = $ubicacionArray[1];
+				$proyectoInversion->centroPoblado = $ubicacionArray[0];
+			}
+			
 			$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
 			$montoasignado=0;
 			foreach($fuenteFinanciamieto as $key => $fuente)
