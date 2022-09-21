@@ -71,9 +71,10 @@ class ET_Detalle_Formato extends CI_Controller
 			{
 				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
-				
+			}
+
 				// Responsables de Proyecto
-				if($detalleFormato[0]->residente == '' || $detalleFormato[0]->residente == NULL){
+				if(!$detalleFormato[0]->residente || $detalleFormato[0]->residente == '' || $detalleFormato[0]->residente == NULL){
 					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
 					$detalleFormato[0]->residente = 'residente';
 				}
@@ -85,7 +86,6 @@ class ET_Detalle_Formato extends CI_Controller
 				// if($detalleFormato[0]->asistente_administrativo == '' || $detalleFormato[0]->asistente_administrativo == NULL){
 				// 	$detalleFormato[0]->asistente_administrativo
 				// }
-			}
 
 			$presupuestoProgramado=0;
 			$presupuestoAnterior=0;
