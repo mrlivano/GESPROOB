@@ -19,6 +19,7 @@ class ET_Detalle_Formato extends CI_Controller
 		$this->load->model('Model_ET_Cronograma_Componente');		
 		$this->load->model('Model_DetSegOrden');
 		$this->load->model('Model_ET_Fotografia_Formato');
+		$this->load->model('Model_ET_Responsable');
 		$this->load->helper('FormatNumber_helper');	
 		$this->load->library('mydompdf');
 	}
