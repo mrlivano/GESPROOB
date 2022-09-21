@@ -72,11 +72,11 @@ class ET_Detalle_Formato extends CI_Controller
 				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
 				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
 			}
-
+				$responsableDetalle = new stdClass();
 				// Responsables de Proyecto
-				if(!@$detalleFormato[0]->residente == ''){
+				if(@$detalleFormato[0]->residente == ''){
 					$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
-					$detalleFormato[0]->residente = 'residente';
+					$responsableDetalle->residente = 'residente';
 				}
 
 				// if($detalleFormato[0]->supervisor == '' || $detalleFormato[0]->supervisor == NULL){
@@ -141,7 +141,7 @@ class ET_Detalle_Formato extends CI_Controller
 
 			$this->load->view('Front/Ejecucion/InformeMensual/fichaInforme', ['idExpedienteTecnico'=>$idExpedienteTecnico,'metaPresupuestal'=>$this->input->post('metaPresupuestal'),'mes'=>$mes,'proyectoInversion'=>$proyectoInversion,'fuenteFinanciamieto'=>$fuenteFinanciamieto,'montoasignado'=>$montoasignado,'plazoPogramado'=>$plazoPogramado,'ampliacionPlazo'=>$ampliacionPlazo,'arrayPartidaEjecutada'=>$arrayPartidaEjecutada,'arrayAdicional'=>$arrayAdicional,'detalleFormato'=>$detalleFormato,'childManoObra'=>$childManoObra,'sumatoriaManodeObra'=>$sumatoriaManodeObra,'fechaReporte'=>$fechaReporte,'presupuestoProgramado'=>$presupuestoProgramado,'presupuestoAnterior'=>$presupuestoAnterior,'presupuestoActual'=>$presupuestoActual,
 			'ejecutadoAnterior'=>$ejecutadoAnterior,'ejecutadoActual'=>$ejecutadoActual,'adicionalProgramado'=>$adicionalProgramado,'adicionalAnterior'=>$adicionalAnterior,'adicionalActual'=>$adicionalActual,'costoIndirectoProgramado'=>$costoIndirectoProgramado,'costoIndirectoAnterior'=>$costoIndirectoAnterior, 'costoIndirectoActual'=>$costoIndirectoActual,'financieroAnterior'=>$financieroAnterior,
-			'financieroActual'=>$financieroActual,'detalleGeneral'=>$detalleGeneral]);        
+			'financieroActual'=>$financieroActual,'detalleGeneral'=>$detalleGeneral,'responsableDetalle'=>$responsableDetalle]);        
 		}	
 	}
 
