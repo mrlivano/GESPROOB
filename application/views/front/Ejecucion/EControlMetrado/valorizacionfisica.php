@@ -23,7 +23,6 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 		'<td></td>'.
 		'<td></td>'.
 		'<td></td>'.
-		'<td></td>'.
 		'<td></td>';		
 	$htmlTemp1.='</tr>';
 	if(count($meta->childMeta)==0)
@@ -91,7 +90,6 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
 				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
 				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoActual, 2).'</td>';
-				$htmlTemp2.='<td style="text-align: right;">'.$descripcion.'</td>';
 				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoAcumulado, 2).'</td>';
 				$htmlTemp2.='<td style="text-align: right;">S/. '.number_format($valorizadoAcumulado, 2).'</td>';
 				$htmlTemp2.='<td style="text-align: right;">'.number_format($porcentajeAcumulado, 2).'% </td>';
@@ -160,6 +158,26 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 		text-align: center;
 		vertical-align: middle;
 	}
+
+	table.dataTable tr{
+		background-color: white;
+	}
+
+	table.dataTable td, table.dataTable th {
+		border: 1px solid #999999;
+		font-size: 10px;
+		padding: 4px;
+		text-align: center;
+		vertical-align: middle;
+		color: #123c67;
+	}
+
+	table.dataTable {
+     margin-top: 0px !important; 
+     margin-bottom: 0px !important;
+
+	}
+
 	#tableValorizacionResumen td, #tableValorizacionResumen th
 	{
 		border: 1px solid #001f3f;
@@ -270,7 +288,6 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 										<th>Valorizado S/.</th>
 										<th>Metrado</th>
 										<th>Valorizado S/.</th>
-										<th>Descripción.</th>
 										<th>Metrado</th>
 										<th>Valorizado S/.</th>
 										<th>%</th>
@@ -280,16 +297,11 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 									</tr>
 								</thead>
 								<tbody>
-								<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-										if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-											?>
-									<td colspan="17" style="text-align:center; background-color: rgb(204 208 255);"><b>ADMINISTRACION DIRECTA</b></td>
-									<?php } ?>
+								<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){	?>
 									<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
 										<tr class="elementoBuscar">
 											<td><b><i><?=$value->numeracion?></i></b></td>
 											<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
-											<td></td>
 											<td></td>
 											<td></td>
 											<td></td>
@@ -312,38 +324,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 											<?= $mostrarA[0]?>
 										<?php }} ?>
 									<?php } }?>
-								<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-										if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
-											?>
-									<td colspan="17" style="text-align:center; background-color: rgb(204 208 255);"><b>ADMINISTRACION INDIRECTA</b></td>
-									<?php }?>
-									<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
-										<tr class="elementoBuscar">
-											<td><b><i><?=$value->numeracion?></i></b></td>
-											<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<?php foreach($value->childMeta as $index => $item){ 
-											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar,'');
-											if($mostrarA[1]>0){
-											?>
-											<?= $mostrarA[0]?>
-										<?php }} ?>
-									<?php } }?>			
+								
 								</tbody>
 							</table>
 						</div>
@@ -357,6 +338,28 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 </div>
 </div>
 <script>
+	$(document).on('ready', function()
+	{
+
+		var table = $('#tableValorizacion').DataTable({
+        scrollX:        true,
+        scrollCollapse: true,
+        searching:      true,
+        ordering:       false,
+				autoWidth: false,
+				fixedColumns:   {
+            leftColumns:  6
+        }
+    });
+
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust()
+         .fixedColumns().relayout();
+   });  
+
+	});
+
 	function valorizar(codigo)
 	{
 		paginaAjaxDialogo(null, 'Valorizacion de Partida',{ id_DetallePartida: codigo }, base_url+'index.php/Expediente_Tecnico/AsignarValorizacion', 'GET', null, null, false, true);

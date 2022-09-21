@@ -163,7 +163,7 @@ class Manifiesto_Gasto extends CI_Controller
             }
         }
 
-        $PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucion();
+        $PresupuestoEjecucion=$this->Model_ET_Presupuesto_Ejecucion->ListaPresupuestoEjecucionAdmDirecta();
 
 		foreach ($PresupuestoEjecucion as $key => $temporal) 
 		{

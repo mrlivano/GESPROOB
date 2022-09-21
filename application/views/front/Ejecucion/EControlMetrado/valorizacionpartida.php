@@ -17,19 +17,19 @@
 					</div>	
 					<div id="validarValorizacion">
 					<div class="row">
-						<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="col-md-3 col-sm-6 col-xs-12 hidden">
 							<div>
 								<select name="selectEtapaValorizacion" id="selectEtapaValorizacion" class="form-control">
 									<option value="valorizacion">Valorización</option>
 								</select>
 							</div>	
 						</div>
-						<div class="col-md-9 col-sm-6 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div>
-								<input class="form-control" placeholder="Descripción" name="txtDescripcion" id="txtDescripcion" type="text" autocomplete="off">	
+								<textarea rows="2" class="form-control" placeholder="Descripción" name="txtDescripcion" id="txtDescripcion" type="text" autocomplete="off" maxlength="500"></textarea>
 							</div>	
 						</div>
-					</div>				
+					</div>		
 					<div class="row">
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Fecha: </label>
@@ -48,7 +48,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Costo: </label>
 							<div>
-								<input class="form-control moneda" placeholder="Costo" autocomplete="off" name="txtCosto" id="txtCosto">
+								<input class="form-control moneda" placeholder="Costo" autocomplete="off" name="txtCosto" id="txtCosto" readonly>
 								<label style="color: #f39c12; font-size: 11px;"><span class="fa fa-warning"></span> Falta ejecutar <span id="txtCantidadRestante"><?=a_number_format($costoRestante,2,'.',",",3)?></span> en costo
 								</label>	
 							</div>	

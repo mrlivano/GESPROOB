@@ -218,7 +218,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
 										<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 												<br><span><b>ADMINISTRACIÓN DIRECTA</b></span><br><br>
 												<?php }?>
-											<div id="divContenedorGeneral" style="">
+											<div id="divContenedorGeneral" style="overflow-y: scroll;overflow-x: scroll;">
 												<table id="tableValorizacion">
 													<thead>
 														<tr>

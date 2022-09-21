@@ -3151,22 +3151,7 @@ class Expediente_Tecnico extends CI_Controller
 					}
 				}
 			}
-
-			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
-				
-				$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
-
-				foreach($expedienteTecnico->childComponenteInd as $key => $value)
-				{
-					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-	
-					foreach($value->childMeta as $index => $item)
-					{
-						$this->obtenerMetaAnidadaParaValorizacionFisica($item,$mes,$anio,'valorizacion');
-					}
-				}	
-			}
-
+			
 			$meses = $this->listaMeses();
 			$this->load->view('layout/Ejecucion/header');
 			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida, 'listaMeses' =>$meses, 'mes'=>$mes, 'anio'=>$anio, 'mostrar'=>$mostrar]);

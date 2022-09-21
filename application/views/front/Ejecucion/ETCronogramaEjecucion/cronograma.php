@@ -95,13 +95,6 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 		text-transform:uppercase;
 	}	
 
-	#tableValorizacion th
-	{
-		background-color:#2e6da4;
-		color:white;
-		text-align:center;
-	}	
-
 	table.dataTable tr{
 		background-color: white;
 	}
@@ -150,7 +143,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 		<input type="text" class="form-control" placeholder="Buscar partidas por su descripción" autocomplete="off" style="margin-bottom: 15px;" onkeyup="filtrarHtml('tableValorizacion', this.value, true, 0, event);">
 	</div>
 </div> -->
-<div id="divContenedorGeneral" >
+<div id="divContenedorGeneral" style="overflow-y: scroll;overflow-x: scroll;">
 	<table id="tableValorizacion">
 		<thead>
 			<tr>
@@ -296,14 +289,16 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				$($(element).parent().parent().css('background-color', '#fff1b0'));
 
 				$('#saldo'+id_partida).text(objectJSON.saldo);
-
+				$('.DTFC_Cloned #saldo'+id_partida).text(objectJSON.saldo);
 				if(objectJSON.proceso=='Completo')
 				{
 					$($(element).parent().parent().parent().css('background-color', '#baf9c4'));
+					$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().css('background-color', '#baf9c4'));
 				}
 				else
 				{
 					$($(element).parent().parent().parent().css('background-color', 'white'));
+					$($('.DTFC_Cloned #saldo'+id_partida).parent().parent().css('background-color', 'white'));
 				}
 
 			}, false, true);
