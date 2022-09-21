@@ -124,7 +124,7 @@
 								<th>REGIÓN</th>
 								<td style="width:80%;">
 									<div>
-										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->region=='' ? @$detalleGeneral[0]->region : @$detalleFormato[0]->region)?>" name="txtRegion" id="txtRegion" type="text">
+										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->region=='' ? @$proyectoInversion->region : @$detalleFormato[0]->region)?>" name="txtRegion" id="txtRegion" type="text">
 									</div>
 								</td>
 							</tr>
@@ -132,7 +132,7 @@
 								<th>PROVINCIA</th>
 								<td>
 									<div>
-										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->provincia=='' ? @$detalleGeneral[0]->provincia : @$detalleFormato[0]->provincia)?>" name="txtProvincia" id="txtProvincia" type="text">
+										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->provincia=='' ? @$proyectoInversion->provincia : @$detalleFormato[0]->provincia)?>" name="txtProvincia" id="txtProvincia" type="text">
 									</div>
 								</td>
 							</tr>
@@ -140,7 +140,7 @@
 								<th>DISTRITO</th>
 								<td>
 									<div>
-										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->distrito=='' ? @$detalleGeneral[0]->distrito : @$detalleFormato[0]->distrito)?>" name="txtDistrito" id="txtDistrito" type="text">
+										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->distrito=='' ? @$proyectoInversion->distrito : @$detalleFormato[0]->distrito)?>" name="txtDistrito" id="txtDistrito" type="text">
 									</div>
 								</td>
 							</tr>
@@ -148,7 +148,7 @@
 								<th>DIRECCIÓN Y/O UBICACIÓN</th>
 								<td>
 									<div>
-										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->direccion=='' ? @$detalleGeneral[0]->direccion : @$detalleFormato[0]->direccion)?>" name="txtDireccion" id="txtDireccion" type="text">
+										<input class="form-control input-sm field" value="<?=(@$detalleFormato[0]->direccion=='' ? @$proyectoInversion->centroPoblado : @$detalleFormato[0]->direccion)?>" name="txtDireccion" id="txtDireccion" type="text">
 									</div>
 								</td>
 							</tr>
