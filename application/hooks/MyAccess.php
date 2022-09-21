@@ -716,6 +716,7 @@ function autorizar($url)
       'Expediente_Tecnico/ejecucion',
       'Expediente_Tecnico/index',
       'Expediente_Tecnico/ControlMetrado',
+      'Expediente_Tecnico/ControlMetradoI',
       'Expediente_Tecnico/ValorizacionFisicaMetrado/(:num)/(:num)/(:num)',
       'Expediente_Tecnico/ValorizacionFisicaMetrado',
       'Expediente_Tecnico/insertarResponsableElaboracion',

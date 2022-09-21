@@ -107,7 +107,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 					</select>
 				</div>
 			</div>
-			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
+			<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
 			<br>
 			<div id="tablaExpedienteTecnico" style="display:block;">
 				<div class="table-responsive">
@@ -124,40 +124,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($expedienteTecnico->childComponente as $key => $value){ ?>
-								<tr class="elementoBuscar">
-									<td><b><i><?=$value->numeracion?></i></b></td>
-									<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<?php foreach($value->childMeta as $index => $item){ ?>
-									<?= mostrarAnidado($item, $expedienteTecnico, $countValorizacionDiaria)?>
-								<?php } ?>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div id="tablaAdicional" style="display:none;">
-				<div class="table-responsive">
-					<table id="tableValorizacionAdicional" class="table table-striped table-bordered table-sm" >
-						<thead>
-							<tr>
-								<th>ÍTEM</th>
-								<th>DESCRIPCIÓN</th>
-								<th>UND.</th>
-								<th style="text-align: right;">CANT.</th>
-								<th style="text-align: right;">P.U.</th>
-								<th style="text-align: right;">TOTAL</th>
-								<th style="text-align: center;"> OPCIONES</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach($expedienteTecnico->childComponenteAdicional as $key => $value){ ?>
+							<?php foreach($expedienteTecnico->childComponenteInd as $key => $value){ ?>
 								<tr class="elementoBuscar">
 									<td><b><i><?=$value->numeracion?></i></b></td>
 									<td style="text-align: left;"><b><i><?=html_escape($value->descripcion)?></i></b></td>

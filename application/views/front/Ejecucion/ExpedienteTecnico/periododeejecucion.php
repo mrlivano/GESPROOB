@@ -25,7 +25,7 @@
 			<div class="row">
 				<input type="hidden" name="hdIdEt" id="hdIdEt" value="<?= $id_et ?>">
 				<div class="col-md-3 col-sm-6 col-xs-12">
-					<label class="control-label">Numero de Resolución (R.G. Nº):</label>
+					<label class="control-label">Número de Resolución (R.G. Nº):</label>
 					<div>
 						<input autocomplete="off" type="text" name="txtNumeroResolucion" id="txtNumeroResolucion" class="form-control">
 					</div>
@@ -58,9 +58,9 @@
 					<p style="color: red; display: none;" id="Advertencia">La Fecha de Inicio no puede ser mayor a la Fecha de Fin</p>
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
-					<label class="control-label">Numero de Meses:</label>
+					<label class="control-label">Número de Días:</label>
 					<div>
-						<input type="text" readonly="readonly" name="txtTotalMeses" id="txtTotalMeses" class="form-control" value="0 meses">
+						<input type="text" readonly="readonly" name="txtTotalMeses" id="txtTotalMeses" class="form-control" value="0 días">
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
@@ -84,8 +84,8 @@
 							<th>RESOLUCIÓN</th>
 							<th>FECHA-INICIO</th>
 							<th>FECHA-FIN</th>
-							<th>NUM. MESES</th>
-							<th>RESPONSABLE</th>
+							<th>NUM. DÍAS</th>
+							<th>OPCIÓN</th>
 						</tr>
 					</thead>
 				</table>
@@ -106,22 +106,26 @@
 				$('#txtTotalMeses').val("");
 			} else {
 				$('#Advertencia').css('display', 'none');
-				$.ajax({
-					url: base_url + "index.php/Expediente_Tecnico/CalcularNumeroMeses",
-					type: 'POST',
-					data: {
-						txtFecha1: fecha1,
-						txtFecha2: fecha2
-					},
-					cache: false,
-					async: true
-				}).done(function(objectJSON) {
-					objectJSON = JSON.parse(objectJSON);
-					$('#txtTotalMeses').val(objectJSON.numerodemeses + " Meses");
+				// $.ajax({
+				// 	url: base_url + "index.php/Expediente_Tecnico/CalcularNumeroMeses",
+				// 	type: 'POST',
+				// 	data: {
+				// 		txtFecha1: fecha1,
+				// 		txtFecha2: fecha2
+				// 	},
+				// 	cache: false,
+				// 	async: true
+				// }).done(function(objectJSON) {
+				// 	objectJSON = JSON.parse(objectJSON);
+				// 	$('#txtTotalMeses').val(objectJSON.numerodemeses + " días");
 
-				}).fail(function() {
-					swal('Error', 'Error no controlado.', 'error');
-				});
+				// }).fail(function() {
+				// 	swal('Error', 'Error no controlado.', 'error');
+				// });
+				const fechaInicio = new Date(fecha1).getTime();
+				const fechaFin = new Date(fecha2).getTime();
+				const dias = (fechaFin - fechaInicio)/(1000*60*60*24);
+				$('#txtTotalMeses').val(dias + " días");
 			}
 		});
 	});
@@ -276,10 +280,10 @@
 						return date;
 					}
 				},
-				{"data":"num_meses",
+				{"data":"num_dias",
 					render: function(data, type, row)
 					{
-						return data+" Meses"; 
+						return data+" días"; 
 					}
 				},
 				{"data":"id_tiempo_ejecucion",

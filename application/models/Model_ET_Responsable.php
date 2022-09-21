@@ -104,6 +104,11 @@ class Model_ET_Responsable extends CI_Model
         return $data->result(); 
     }
 
+    function ResponsableEtapaEjecucionCargo($id_et, $id_etapa, $modalidad, $cargo){
+        $data= $this->db->query("select r.*, case when r.tipo = 1 then  p.nombres+' '+p.apellido_p+' '+p.apellido_m else pj.razon_social end AS nombres,c.desc_cargo from ET_RESPONSABLE r left outer join PERSONA p on (r.id_persona=p.id_persona and r.tipo=1) left outer join PERSONA_JURIDICA pj on (r.id_persona=pj.id_persona_juridica and r.tipo=2) inner join CARGO c on r.id_cargo = c.id_cargo where id_et='$id_et' and id_tipo_responsable_et='$id_etapa' and r.modalidad='$modalidad' and r.id_cargo='$cargo'");
+        return $data->result(); 
+    }
+
     function ResponsableIdETPersonaElaboracion($id_et, $id_persona){
         $data= $this->db->query("select * from ET_RESPONSABLE where id_et ='$id_et' and id_persona='$id_persona' and id_tipo_responsable_et=2 and tipo=1");
         return $data->result(); 

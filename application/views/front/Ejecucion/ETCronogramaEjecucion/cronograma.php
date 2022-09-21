@@ -86,12 +86,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 
 	#tableValorizacion td, #tableValorizacion th
 	{
-		border: 1px solid #34495e;
+		border: 1px solid #999999;
 		font-size: 10px;
 		padding: 4px;
 		text-align: center;
 		vertical-align: middle;
-		color: #0f161d;
+		color: #123c67;
 		text-transform:uppercase;
 	}	
 
@@ -101,6 +101,26 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 		color:white;
 		text-align:center;
 	}	
+
+	table.dataTable tr{
+		background-color: white;
+	}
+
+	table.dataTable td, table.dataTable th {
+		border: 1px solid #999999;
+		font-size: 10px;
+		padding: 4px;
+		text-align: center;
+		vertical-align: middle;
+		color: #123c67;
+	}
+
+	table.dataTable {
+     margin-top: 0px !important; 
+     margin-bottom: 0px !important;
+
+	}
+
 
 	#tableValorizacionResumen td, #tableValorizacionResumen th
 	{
@@ -125,12 +145,12 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 	}
 </style>
 
-<div class="row">
+<!-- <div class="row">
 	<div class="col-md-12 col-xs-12">
 		<input type="text" class="form-control" placeholder="Buscar partidas por su descripción" autocomplete="off" style="margin-bottom: 15px;" onkeyup="filtrarHtml('tableValorizacion', this.value, true, 0, event);">
 	</div>
-</div>
-<div id="divContenedorGeneral" class="table-responsive">
+</div> -->
+<div id="divContenedorGeneral" >
 	<table id="tableValorizacion">
 		<thead>
 			<tr>
@@ -193,7 +213,45 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				$(this).parent().find('input[type="text"]').show();
 			}
 		});
+
+		var table = $('#tableValorizacion').DataTable({
+        scrollX:        true,
+        scrollCollapse: true,
+        searching:      true,
+        ordering:       false,
+				autoWidth: false,
+        fixedColumns:   {
+            leftColumns:  7
+        }
+    });
+
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust()
+         .fixedColumns().relayout();
+   });  
 	});
+
+	// $(document).on('ready', function()
+	// {
+	// 	var table = $('#tableValorizacion').DataTable({
+  //       scrollX:        true,
+  //       scrollCollapse: true,
+  //       searching:      true,
+  //       ordering:       false,
+	// 			autoWidth: false,
+  //       fixedColumns:   {
+  //           leftColumns:  7
+  //       }
+  //   });
+
+	// 	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+  //     $($.fn.dataTable.tables(true)).DataTable()
+  //        .columns.adjust()
+  //        .fixedColumns().relayout();
+  //  });  
+
+	// });
 
 	function onKeyUpCalcularPrecio(cantidad, precioUnitario, idDetallePartida, numeroMes, anio, element, event, id_partida)
 	{

@@ -2927,18 +2927,6 @@ class Expediente_Tecnico extends CI_Controller
 					}
 				}
 			}
-			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
-				$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et,'EXPEDIENTETECNICO');
-
-				foreach($expedienteTecnico->childComponenteInd as $key => $value)
-				{
-					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-					foreach($value->childMeta as $index => $item)
-					{
-						$this->obtenerMetaAnidadaParaValorizacion($item);
-					}
-				}	
-			}
 
 			$expedienteTecnico->childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'ADICIONAL');
 
@@ -2958,6 +2946,62 @@ class Expediente_Tecnico extends CI_Controller
 			$this->load->view('layout/Ejecucion/footer');
 		}
 	}
+
+	public function ControlMetradoI()
+	{
+		$idExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : '';
+	$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnico($idExpedienteTecnico);
+
+	$tipoUsuario=$this->session->userdata('tipoUsuario');
+			if($tipoUsuario!=9 && $tipoUsuario!=1)
+			{
+				$data=$this->UsuarioProyecto_model->ProyectoAsignado($expedienteTecnico->id_pi);
+				if(count($data)==0)
+		{
+			$this->session->set_flashdata('error', 'Usted no tiene acceso a este Expediente Tecnico');
+			redirect('Expediente_Tecnico/ejecucion');
+		}
+			}
+
+	if($expedienteTecnico->id_etapa_et == 1)
+	{
+		show_404();
+	}
+	else
+	{
+		$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
+
+		if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
+			$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et,'EXPEDIENTETECNICO');
+
+			foreach($expedienteTecnico->childComponenteInd as $key => $value)
+			{
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidadaParaValorizacion($item);
+				}
+			}	
+		}
+
+		$expedienteTecnico->childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et,'ADICIONAL');
+
+		$countValorizacionDiaria  = $this->Model_DetSegOrden->sumatoriaValorizacion();
+
+		foreach($expedienteTecnico->childComponenteAdicional as $key => $value)
+		{
+			$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			foreach($value->childMeta as $index => $item)
+			{
+				$this->obtenerMetaAnidadaParaValorizacion($item);
+			}
+		}
+
+		$this->load->view('layout/Ejecucion/header');
+		$this->load->view('front/Ejecucion/EControlMetrado/controlmetradoI', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida,'countValorizacionDiaria' => $countValorizacionDiaria]);
+		$this->load->view('layout/Ejecucion/footer');
+	}
+}
 
     public function AsignarValorizacion()
 	{
