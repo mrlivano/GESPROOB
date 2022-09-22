@@ -193,6 +193,16 @@ $(function()
 						message: '<b style="color: red;">El campo "Etapa" es requerido.</b>'
 					}
 				}
+			},
+			txtDescripcion:
+			{
+				validators:
+				{
+					notEmpty:
+					{
+						message: '<b style="color: red;">El campo "Descripción" es requerido.</b>'
+					}
+				}
 			}
 		}
 	});

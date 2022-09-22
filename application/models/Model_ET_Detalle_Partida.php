@@ -137,4 +137,10 @@ class Model_ET_Detalle_Partida extends CI_Model
 		$data=$this->db->query("select sum(cantidad) as cantidad from det_seg_valorizacion where DATEPART(year, fecha_dia)='$anio' and DATEPART(month, fecha_dia)='$mes' and id_detalle_partida='$idDetallePartida' and (etapa_valorizacion='valorizacion' or etapa_valorizacion='mayor metrado')");
 		return $data->result();
 	}	
+
+	public function partidasEjecutadaDescripcion($idDetallePartida, $anio, $mes)
+	{
+		$data=$this->db->query("select * from det_seg_valorizacion where DATEPART(year, fecha_dia)='$anio' and DATEPART(month, fecha_dia)='$mes' and id_detalle_partida='$idDetallePartida' and (etapa_valorizacion='valorizacion' or etapa_valorizacion='mayor metrado')");
+		return $data->result();
+	}	
 }

@@ -1373,10 +1373,13 @@ class ET_Detalle_Formato extends CI_Controller
 				{
 					if($partidaEjecutada[0]->cantidad!='')
 					{
+						$partidaEjecutadaDescripcion=$this->Model_ET_Detalle_Partida->partidasEjecutadaDescripcion($partida->id_detalle_partida, $anio, $mes);
+						$partida->descripcionPartida=$partidaEjecutadaDescripcion;
 						$partida->metradoEjecutado=$partidaEjecutada[0]->cantidad;
 						$arrayPartidaEjecutada[]=$partida;
 					}					
 				}
+				
 			}
 		}
 		foreach($meta->childMeta as $key => $value)

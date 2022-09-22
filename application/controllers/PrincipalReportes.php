@@ -389,13 +389,6 @@ class PrincipalReportes extends CI_Controller
         $pagado = 0;
         $listaDetalleMensualizado=$this->Model_Dashboard_Reporte->DetalleMensualizadoMeta($correlativoMeta,$anioMeta,$sec_ejec);
 
-
-
-
-
-
-
-
 /*
         foreach ($listaDetalleMensualizado as $key => $data)
         {

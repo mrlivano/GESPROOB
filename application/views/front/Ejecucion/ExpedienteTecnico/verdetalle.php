@@ -757,7 +757,27 @@
 																</div>
 															</div>
 														</li>
+														<?php } else { ?>
+															<li>
+															<div class="block">
+																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;" class="tag">
+																	<span>Presupuesto Analítico</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;">2.- Asignación de Clasificador a costos del proyecto</a>
+																	</h2>
+																	<div class="byline">
+																		<span></span><a></a>
+																	</div>
+																	<p class="excerpt"> Se debe asignar el clasificador presupuestal al costo que se esta realizando.</p>
+																</div>
+															</div>
+														</li>
 														<?php } ?>
+														
 														<!-- <li>
 															<div class="block">
 																<div class="tags">
@@ -1342,6 +1362,24 @@
 																	<p class="excerpt">Se debe realizar el registro del Plan de Trabajo del Expediente Técnico a ser elaborado,
 																	Asignar responsables a la actividades y registrar el avance de estas según lo programado.
 																	El CRAET es responsable del registro de observaciones</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="block">
+																<div class="tags">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;" class="tag">
+																	<span>Presupuesto Analítico</span>
+																	</a>
+																</div>
+																<div class="block_content">
+																	<h2 class="title">
+																	<a href="" onclick="paginaAjaxDialogo(null, 'Presupuesto analítico', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/ET_Presupuesto_Analitico/insertar', 'GET', null, null, false, true); return false;">2.- Asignación de Clasificador a costos del proyecto</a>
+																	</h2>
+																	<div class="byline">
+																		<span></span><a></a>
+																	</div>
+																	<p class="excerpt"> Se debe asignar el clasificador presupuestal al costo que se esta realizando.</p>
 																</div>
 															</div>
 														</li>

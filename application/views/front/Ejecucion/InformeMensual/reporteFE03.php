@@ -144,10 +144,29 @@
 						<?php } ?>
 					</table>
 					<br>
+					<table class="tablastand">
+						<tr>
+							<th>DESCRIPCIÓN DE PARTIDAS VALORIZADAS</th>
+						</tr>
+						<?php foreach($arrayPartidaEjecutada as $partidaEjecutada) 
+						{?>
+						<tr>
+							<td style="width:100%;">
+							<p class="firsttext"><?=$partidaEjecutada->numeracion?> <?=$partidaEjecutada->desc_partida?><p>
+							<?php foreach($partidaEjecutada->descripcionPartida as $descripcionPartida) 
+							{?>
+								<p><u><?=$descripcionPartida->fecha?></u><p>
+								<p><?=$descripcionPartida->descripcion?></p>
+							<?php } ?>
+							</td>
+						</tr>
+						<?php } ?>
+					</table>
+
 					<div class="cuadroContenedor">
 						<p>Información descriptiva de metas físicas alcanzadas: <?=@$detalleFormato[0]->descripcion_partidas_ejecutadas?></p>
 					</div>
-					<p>OBRAS ADICIONALES</p>
+					<!-- <p>OBRAS ADICIONALES</p>
 					<table class="tablastand">
 						<tr>
 							<th>ÍTEM</th>
@@ -168,7 +187,7 @@
 					<br>
 					<div class="cuadroContenedor">
 						<p>Información descriptiva de adicionales de obra: <?=@$detalleFormato[0]->descripcion_adicionales?></p>
-					</div>
+					</div> -->
 					
 				</div>					
 			</div>
