@@ -118,7 +118,7 @@
 				</div>				
 				<div class="thirdbox">
 					<div class="thirdcontent">
-						<p class="thirdtext">1.1.- UBICACIÓN</p>
+						<p class="thirdtext">1.1.1.- UBICACIÓN</p>
 						<table class="tablastand tablaMayuscula">
 							<tr>
 								<th>REGIÓN</th>
@@ -154,7 +154,7 @@
 							</tr>
 						</table>
 						<br>
-						<p class="thirdtext">1.2.- FUNCIÓN PROGRAMÁTICA</p>
+						<p class="thirdtext">1.1.2.- FUNCIÓN PROGRAMÁTICA</p>
 						<table class="tablastand tablaMayuscula">
 							<tr>
 								<th>FUNCIÓN</th>
@@ -186,7 +186,7 @@
 							</tr>
 						</table>
 						<br>
-						<p class="thirdtext">1.3.- ASPECTOS FINANCIEROS</p>
+						<p class="thirdtext">1.1.3.- ASPECTOS FINANCIEROS</p>
 						<table class="tablastand">
 							<tr>
 								<th>MONTO APROBADO</th>
@@ -223,11 +223,19 @@
 				<table class="tablastand tablaMayuscula">
 							<tr>
 								<th>DOCUMENTO</th>
-								<td style="width:80%;"><?=@$detalleFormato[0]->documento_aprobacion?></td>
+								<td style="width:80%;">
+								<div>
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->documento_aprobacion?>" name="txtDocumentoAprobacion" id="txtDocumentoAprobacion" type="text" >
+								</div>								
+								</td>
 							</tr>
 							<tr>
 								<th>FECHA</th>
-								<td><?=@$detalleFormato[0]->fecha_aprobacion?></td>
+								<td>								
+								<div>
+								<input class="form-control input-sm field" value="<?=@$detalleFormato[0]->fecha_aprobacion?>" name="txtFechaAprobacion" id="txtFechaAprobacion" type="text" >
+								</div>	
+								</td>
 							</tr>
 						</table>
 			</div>	
@@ -721,13 +729,7 @@
 
     function guardarInformeMensual()
     {
-		if($('#txtOcurrencias').val().trim()=='')
-		{
-			swal('','El campo "Principales Ocurrrencias en el mes es requerido".','error');
-			$('#txtOcurrencias').focus();
-			return;
-		}
-		else if($('#txtProgramado').val().trim()==''){
+		if($('#txtProgramado').val().trim()==''){
 			swal('','El campo "Programado es requerido ".','error');
 			$('#txtProgramado').focus();
 			return;

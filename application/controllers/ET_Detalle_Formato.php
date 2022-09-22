@@ -1172,6 +1172,15 @@ class ET_Detalle_Formato extends CI_Controller
 				$c_data['sec_ejec']=$sec_ejec;
 				$c_data['mes']=$mes;
 				$c_data['plazo_ejecucion_real']=$this->input->post('txtPlazoEjecReal');
+				$c_data['documento_aprobacion']=$this->input->post('txtDocumentoAprobacion');
+				$c_data['fecha_aprobacion']=$this->input->post('txtFechaAprobacion');
+				$c_data['descripcion_proyecto']=$this->input->post('txtDescripcionProyecto');
+				$c_data['objetivo_proyecto']=$this->input->post('txtObjetivoProyecto');
+				$c_data['impacto_proyecto']=$this->input->post('txtImpactoProyecto');
+				$c_data['conclusiones']=$this->input->post('txtConclusiones');
+				$c_data['recomendaciones']=$this->input->post('txtRecomendaciones');
+				$c_data['del_asiento']=$this->input->post('txtDelAsiento');
+				$c_data['al_asiento']=$this->input->post('txtAlAsiento');
 				$c_data['descripcion_partidas_ejecutadas']=$this->input->post('txtPartidasEjecutadas');
 				$c_data['descripcion_adicionales']=$this->input->post('txtAdicionales');
 				$c_data['presupuesto_prog_mo']=$this->input->post('txtProgramado');
@@ -1210,6 +1219,15 @@ class ET_Detalle_Formato extends CI_Controller
 			else
 			{
 				$u_data['plazo_ejecucion_real']=$this->input->post('txtPlazoEjecReal');
+				$u_data['documento_aprobacion']=$this->input->post('txtDocumentoAprobacion');
+				$u_data['fecha_aprobacion']=$this->input->post('txtFechaAprobacion');
+				$u_data['descripcion_proyecto']=$this->input->post('txtDescripcionProyecto');
+				$u_data['objetivo_proyecto']=$this->input->post('txtObjetivoProyecto');
+				$u_data['impacto_proyecto']=$this->input->post('txtImpactoProyecto');
+				$u_data['conclusiones']=$this->input->post('txtConclusiones');
+				$u_data['recomendaciones']=$this->input->post('txtRecomendaciones');
+				$u_data['del_asiento']=$this->input->post('txtDelAsiento');
+				$u_data['al_asiento']=$this->input->post('txtAlAsiento');
 				$u_data['descripcion_partidas_ejecutadas']=$this->input->post('txtPartidasEjecutadas');
 				$u_data['descripcion_adicionales']=$this->input->post('txtAdicionales');
 				$u_data['presupuesto_prog_mo']=$this->input->post('txtProgramado');
