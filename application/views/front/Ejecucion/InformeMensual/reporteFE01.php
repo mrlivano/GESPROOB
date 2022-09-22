@@ -167,7 +167,7 @@
 							</tr>-->
 							<tr>
 								<th>META</th>
-								<td></td>
+								<td><?=@$detalleFormato[0]->meta?></td>
 							</tr>
 							<tr>
 								<th>MODALIDAD</th>
@@ -213,14 +213,34 @@
 						<table class="tablastand">
 							<tr>
 								<th>DOCUMENTO</th>
-								<td style="width:20%;text-align:right;"></td>
+								<td style="width:50%"><?=@$detalleFormato[0]->documento_aprobacion?></td>
 							</tr>
 							<tr>
 								<th>FECHA</th>
-								<td style="width:20%;text-align:right;"></td>
+								<td style="width:50%"><?=@$detalleFormato[0]->fecha_aprobacion?></td>
 							</tr>
 						</table>
-					<p class="secondtext">2.5.- PLAZO DE EJECUCIÓN</p>
+
+				<div class="secondcontent">	
+				<p class="thirdtext">2.2. DESCRIPCION DEL PROYECTO</p>			
+				<div class="cuadroContenedor">
+						<p> <?=@$detalleFormato[0]->descripcion_proyecto?></p>
+					</div>	
+				</div>
+				<div class="secondcontent">	
+				<p class="thirdtext">2.3. OBJETIVO DEL PROYECTO</p>			
+				<div class="cuadroContenedor">
+						<p> <?=@$detalleFormato[0]->objetivo_proyecto?></p>
+					</div>	
+				</div>
+				<div class="secondcontent">	
+				<p class="thirdtext">2.4. IMPACTO SOCIAL</p>			
+				<div class="cuadroContenedor">
+						<p> <?=@$detalleFormato[0]->impacto_proyecto?></p>
+					</div>	
+				</div>	
+				<div class="secondcontent">	
+					<p class="thirdtext">2.5.- PLAZO DE EJECUCIÓN</p>
 					<table class="tablastand tablacenter">
 						<tr>
 							<th>Fecha de Entrega de Terreno</th>
