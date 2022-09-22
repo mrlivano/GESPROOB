@@ -155,7 +155,7 @@
 							<p class="firsttext"><?=$partidaEjecutada->numeracion?> <?=$partidaEjecutada->desc_partida?><p>
 							<?php foreach($partidaEjecutada->descripcionPartida as $descripcionPartida) 
 							{?>
-								<p><u><?=date('d/m/Y',strtotime($descripcionPartida->fecha))?></u><p>
+								<p><u><?=date('d/m/Y',strtotime($descripcionPartida->fecha_dia))?></u><p>
 								<p><?=$descripcionPartida->descripcion?></p>
 							<?php } ?>
 							</td>

@@ -134,23 +134,25 @@
 						</div>
 						</div>
 					</div>
-
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">SUPERVISOR</label>
-							<div>
-								<input id="txtSupervisor"  name="txtSupervisor" value="<?=$ExpedienteTecnicoM->supervisor?>" class="form-control col-md-4 col-xs-12"  placeholder="Supervisor"  autocomplete="off" maxlength="200" >	
-							</div>	
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">RESIDENTE</label>
-							<div>
-								<input id="txtResidente"  name="txtResidente" value="<?=$ExpedienteTecnicoM->residente?>" class="form-control col-md-4 col-xs-12"  placeholder="Residente"  autocomplete="off" maxlength="200" >	
-							</div>	
-						</div>
-					</div>
+							<div class="col-md-12 col-sm-12 col-xs-12">						
+									<label class="control-label">Responsables de Ejecución de Expediente</label>
+									<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Ejecución" class='btn btn-primary btn-xs' onclick="insertarResponsableEjecucion('<?=$ExpedienteTecnicoM->id_et?>')"><i class='fa fa-plus'></i> Agregar</button>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="table-responsive">
+									<table id="tablaResponsableEjecucion" class="table table-bordered table-striped tablaGenerica" style="width:100%;">
+										<thead>
+											<tr>
+												<th>Nombres y Apellidos</th>
+												<th>Cargo</th>
+												<th>Opción</th>
+											</tr>
+										</thead>
+									</table>
+								</div>	
+							</div>
+					</div>	
 					<div class="row">
 						<div class="col-md-4 col-sm-12 col-xs-12">
                			 <label class="control-label">AVANCE FÍSICO:</label>
