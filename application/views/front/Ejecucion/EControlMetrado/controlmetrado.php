@@ -51,7 +51,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
 				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
-				'<td style="text-align: right;">S/.'.$value->precio_unitario.'</td>'.
+				'<td style="text-align: right;">S/.'.number_format($value->precio_unitario, 2).'</td>'.
 				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>'.
 				'<td style="text-align: center;"><a id="btnOpcion'.$value->childDetallePartida->id_detalle_partida.'" class="'.$clase.'" onclick="valorizar('.$expedienteTecnico->id_et.','.$value->childDetallePartida->id_detalle_partida.');"><i class="fa fa-plus"></i> Registrar</a></td>'.
 				'</tr>';

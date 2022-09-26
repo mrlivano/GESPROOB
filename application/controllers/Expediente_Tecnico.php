@@ -3051,7 +3051,7 @@ class Expediente_Tecnico extends CI_Controller
 
 					$acumulado = $q1[0]->acumulado;
 
-					$msg=(["proceso" => "Correcto", "mensaje" => "Se registro '$valorizacionNormal' valoriacion normal  y '$mayorMetrado' como mayor metrado", "acumulado" => $acumulado]);
+					$msg=(["proceso" => "Correcto", "mensaje" => "Se registro '$valorizacionNormal' valoriacion normal  y '$mayorMetrado' como mayor metrado", "acumulado" =>  round($acumulado,4)]);
 
 					echo json_encode($msg);exit;
 				}
@@ -3069,7 +3069,7 @@ class Expediente_Tecnico extends CI_Controller
 
 			$acumulado = $q1[0]->acumulado;
 
-			$msg=($data!='' ? (['proceso' => 'Correcto', 'mensaje' => 'Registro guardado correctamente', 'acumulado' => $acumulado]) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado']));
+			$msg=($data!='' ? (['proceso' => 'Correcto', 'mensaje' => 'Registro guardado correctamente', 'acumulado' =>  round($acumulado,4)]) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado']));
 
 			echo json_encode($msg);exit;
 		}
@@ -3188,20 +3188,20 @@ class Expediente_Tecnico extends CI_Controller
 					}
 				}
 			}
-			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
+			// if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
 				
-				$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
+			// 	$expedienteTecnico->childComponenteInd=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmIndirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
 
-				foreach($expedienteTecnico->childComponenteInd as $key => $value)
-				{
-					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+			// 	foreach($expedienteTecnico->childComponenteInd as $key => $value)
+			// 	{
+			// 		$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
 	
-					foreach($value->childMeta as $index => $item)
-					{
-						$this->obtenerMetaAnidadaParaValorizacionFisica($item, date('m'), date('Y'),'valorizacion');
-					}
-				}
-			}
+			// 		foreach($value->childMeta as $index => $item)
+			// 		{
+			// 			$this->obtenerMetaAnidadaParaValorizacionFisica($item, date('m'), date('Y'),'valorizacion');
+			// 		}
+			// 	}
+			// }
 
 			// $this->load->view('front/Ejecucion/EControlMetrado/reportepdfvalorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida , 'mes' => $mes]);
 			

@@ -1,5 +1,14 @@
 <?php
-function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
+$totalPresupuesto = 0;
+$totalAvanceAnterior = 0;
+$totalAvanceActual = 0;
+$totalAvanceAcumulado = 0;
+$totalSaldo = 0;
+?>
+
+<?php
+
+function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP, &$totalPresupuesto, &$totalAvanceAnterior, &$totalAvanceActual, &$totalAvanceAcumulado, &$totalSaldo )
 {
 	$cantidad = 0;
 	$totalMostrar = 0;
@@ -52,12 +61,14 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 				}
 			if (!$mostrar || ($mostrar && number_format($metradoActual, 2)!='0.00')){
 			$totalMostrar++;
+			$totalPresupuesto += $value->cantidad*$value->precio_unitario;
+
 			$htmlTemp2.='<tr class="elementoBuscar">'.
 				'<td>'.$value->numeracion.'</td>'.
 				'<td style="text-align: left;">'.html_escape($value->desc_partida).'</td>'.
 				'<td>'.html_escape($value->descripcion).'</td>'.
 				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
-				'<td style="text-align: right;">S/.'.$value->precio_unitario.'</td>'.
+				'<td style="text-align: right;">S/.'.number_format($value->precio_unitario, 2).'</td>'.
 				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
 
 				foreach($value->childDetallePartida->childDetSegValorizacionAnterior as $index => $item)
@@ -86,6 +97,11 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 				$valorizadoSaldo = ($value->cantidad*$value->precio_unitario) - $valorizadoAcumulado;
 				$porcentajeSaldo = 100 - $porcentajeAcumulado;
 
+				$totalAvanceAnterior += $valorizadoAnterior;
+				$totalAvanceActual += $valorizadoActual;
+				$totalAvanceAcumulado += $valorizadoAcumulado;
+				$totalSaldo += $valorizadoSaldo;
+
 				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoAnterior, 2).'</td>';
 				$htmlTemp2.='<td style="text-align: right;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
 				$htmlTemp2.='<td style="text-align: right;">'.number_format($metradoActual, 2).'</td>';
@@ -113,7 +129,7 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 	foreach($meta->childMeta as $key => $value)
 	{
 		$totalMeta = 0;
-		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar, $htmlP);
+		$anidado = mostrarAnidado($value, $expedienteTecnico, $mostrar, $htmlP, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo);
 		
 		$totalMostrar+=$anidado[1];
 		$totalMeta+=$anidado[1];
@@ -201,9 +217,9 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 		height: 20px;
 	}
 </style>
-<div class="right_col" role="main">
+<div class="right_col" role="main" style="min-height: 20rem; height:20rem">
 	<div>
-		<div class="clearfix"></div>
+		<div class="clearfix 1"></div>
 		<div class="col-md-12 col-xs-12 col-xs-12">
 			<div class="x_panel">
 				<div class="x_title">
@@ -263,21 +279,21 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 						<div class="col-md-12 col-sm-12 col-xs-12" style="font-size: 12px;">
 							<br>
 							<div class="row" style="overflow-y: scroll;overflow-x: scroll;">
-								<table id="tableValorizacion"  >
+								<table id="tableValorizacion" style="width: 100%;">
 								<thead>
 									<tr>
-										<th>PROY:</th>
-										<th><?=trim($expedienteTecnico->nombre_pi)?></th>
+										<th>COD:</th>
+										<th><?=trim($expedienteTecnico->codigo_unico_pi)?></th>
 										<th rowspan="3">UNIDAD</th>
 										<th rowspan="2" colspan="3" >PRESUPUESTO</th>
-										<th colspan="8">AVANCES</th>
+										<th colspan="7">AVANCES</th>
 										<th colspan="3" rowspan="2">SALDO</th>
 									</tr>
 									<tr>
 										<th rowspan="2">ÍTEM</th>
 										<th style="width: 400px;"; rowspan="2">DESCRIPCIÓN</th>
 										<th colspan="2">ANTERIOR</th>
-										<th colspan="3">ACTUAL</th>
+										<th colspan="2">ACTUAL</th>
 										<th colspan="3">ACUMULADO</th>
 									</tr>
 									<tr>
@@ -318,12 +334,31 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 											<td></td>
 										</tr>
 										<?php foreach($value->childMeta as $index => $item){ 
-											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar,'');
+											$mostrarA=mostrarAnidado($item, $expedienteTecnico,$mostrar,'', $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo);
 											if($mostrarA[1]>0){
 											?>
 											<?= $mostrarA[0]?>
 										<?php }} ?>
-									<?php } }?>
+									<?php } ?>
+									<tr>
+											<td></td>
+											<td style="text-align: left;"><b><i>TOTAL</i></b></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td><b>S/. <?=number_format($totalPresupuesto, 2)?></b></td>
+											<td></td>
+											<td><b>S/. <?=number_format($totalAvanceAnterior, 2)?></b></td>
+											<td></td>
+											<td><b>S/. <?=number_format($totalAvanceActual, 2)?></b></td>
+											<td></td>
+											<td><b>S/. <?=number_format($totalAvanceAcumulado, 2)?></b></td>
+											<td></td>
+											<td></td>
+											<td><b>S/. <?=number_format($totalSaldo, 2)?></b></td>
+											<td></td>
+										</tr>
+								  <?php }?>
 								
 								</tbody>
 							</table>
@@ -342,21 +377,10 @@ function mostrarAnidado($meta, $expedienteTecnico, $mostrar, $htmlP)
 	{
 
 		var table = $('#tableValorizacion').DataTable({
-        scrollX:        true,
-        scrollCollapse: true,
         searching:      true,
         ordering:       false,
-				autoWidth: false,
-				fixedColumns:   {
-            leftColumns:  6
-        }
+			
     });
-
-		$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-      $($.fn.dataTable.tables(true)).DataTable()
-         .columns.adjust()
-         .fixedColumns().relayout();
-   });  
 
 	});
 
