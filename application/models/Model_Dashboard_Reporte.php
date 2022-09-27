@@ -619,9 +619,9 @@ class Model_Dashboard_Reporte extends CI_Model
         return $data->result();
     }
 
-    function ConsultaDevengadoMes($opcion, $meta, $sec_ejec, $anio, $mes)
+    function ConsultaDevengadoMes($opcion, $meta, $sec_ejec, $anio, $mes, $act_proy)
     {
-        $data = $this->db->query("execute Consulta_Devengado_Acumulado @opcion='$opcion',@meta='$meta', @anio='$anio', @mes='$mes',@sec_ejec='$sec_ejec'");
+        $data = $this->db->query("execute Consulta_Devengado_Acumulado @opcion='$opcion',@meta='$meta', @anio='$anio', @mes='$mes',@sec_ejec='$sec_ejec',@act_proy='$act_proy'");
 
         return $data->result();        
     }

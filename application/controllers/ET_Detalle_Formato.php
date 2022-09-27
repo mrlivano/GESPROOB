@@ -116,8 +116,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -282,8 +282,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -422,8 +422,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -562,8 +562,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -702,8 +702,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -842,8 +842,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -982,8 +982,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{
@@ -1096,8 +1096,8 @@ class ET_Detalle_Formato extends CI_Controller
 			$costoIndirectoProgramado=0;
 			$costoIndirectoAnterior=0;
 			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes);			
+			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
 			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
 			foreach ($componenteTemp as $key => $value)
 			{

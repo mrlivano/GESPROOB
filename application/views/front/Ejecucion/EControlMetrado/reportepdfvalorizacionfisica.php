@@ -121,7 +121,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 	
 </style>
 <head>
-	<title>FORMATO FE-03</title>
+	<title>FORMATO FE-06</title>
 	<meta charset="utf-8">
 </head>
 <body>
