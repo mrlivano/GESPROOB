@@ -116,6 +116,24 @@ function mostrarAnidado($meta, $expedienteTecnico)
 	{
 		border-collapse: collapse;
 	}
+
+	.tablastand td, .tablastand th
+	{
+		border:1px solid black;
+		padding: 2px 5px;
+		vertical-align: middle;		
+	}
+	.tablastand th
+	{
+		background-color:#f1f1f1;
+		font-weight:bold;
+		text-align:left;
+	}
+
+	.tablaMayuscula td, .tablacenter th
+	{
+		text-transform:uppercase;
+	}
 	#footer { position: fixed; left: 0px; bottom: -100px; right: 0px; height: 100px; }
   #footer .page:after { content: counter(page, upper-roman); }
 	
