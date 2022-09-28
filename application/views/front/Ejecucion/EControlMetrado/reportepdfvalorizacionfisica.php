@@ -167,7 +167,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		<div style="text-align: center; font-size: 13px; padding-bottom:10px;"><b>VALORIZACIÓN MENSUAL</b></div>
 		<div style="text-align: center;font-size: 11px;margin-bottom: 15px;text-transform:uppercase;"><b>MES DE: <?=$mes?></b></div>		
 		<div style="font-size: 8px;">
-			<table class="tablaContenido tablaMayuscula">
+			<table class="tablastand tablaMayuscula">
 			<tr>
 				<th>NOMBRE DEL PROYECTO</th>
 				<td style="width:80%;"><?=@$expedienteTecnico->nombre_pi?></td>
