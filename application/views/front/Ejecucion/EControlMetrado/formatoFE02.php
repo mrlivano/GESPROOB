@@ -247,7 +247,7 @@ function mostrarMetaAnidada($meta)
 							<br>
 							<table id="tabladetalle" class="tabla" style="border: none;">
 								<tr>
-									<td><b>Información descriptiva de metas alcanzadas</b></td>
+									<td><b>Eventos u ocurrencias</b></td>
 								</tr>
 								<tr>
 									<td style="width: 25%;"><?=@$detalleFormato[0]->desc_meta_alcanzadas?></td>

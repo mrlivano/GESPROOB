@@ -323,7 +323,7 @@
 						<?php } ?>
 					</table>
 					<br>
-					<textarea style="resize: none;resize: vertical;" class="form-control field" name="txtPartidasEjecutadas" id="txtPartidasEjecutadas" rows="3" cols="50" placeholder="Información descriptiva de metas físicas alcanzadas"><?=@$detalleFormato[0]->descripcion_partidas_ejecutadas?></textarea>
+					<textarea style="resize: none;resize: vertical;" class="form-control field" name="txtPartidasEjecutadas" id="txtPartidasEjecutadas" rows="3" cols="50" placeholder="Eventos u ocurrencias"><?=@$detalleFormato[0]->descripcion_partidas_ejecutadas?></textarea>
 					<p>OBRAS ADICIONALES</p>
 					<table class="tablastand">
 						<tr>

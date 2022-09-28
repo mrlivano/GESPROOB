@@ -274,7 +274,7 @@
 					</table>
 					<br>
 					<div class="cuadroContenedor">
-						<p>Información descriptiva de metas físicas alcanzadas: <?=@$detalleFormato[0]->descripcion_partidas_ejecutadas?></p>
+						<p>Eventos u ocurrencias: <?=@$detalleFormato[0]->descripcion_partidas_ejecutadas?></p>
 					</div>
 					<p>OBRAS ADICIONALES</p>
 					<table class="tablastand">
