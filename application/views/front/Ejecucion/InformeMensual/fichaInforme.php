@@ -729,36 +729,36 @@
 
     function guardarInformeMensual()
     {
-		if($('#txtProgramado').val().trim()==''){
-			swal('','El campo "Programado es requerido ".','error');
-			$('#txtProgramado').focus();
-			return;
-		}
-		else if($('#txtProgramadoAnterior').val().trim()==''){
-			swal('','El campo "Programado Anterior es requerido ".','error');
-			$('#txtProgramadoAnterior').focus();
-			return;
-		}
-		else if($('#txtProgramadoActual').val().trim()==''){
-			swal('','El campo "Programado Actual es requerido ".','error');
-			$('#txtProgramadoActual').focus();
-			return;
-		}
-		else if($('#txtEjecutado').val().trim()==''){
-			swal('','El campo "Ejecutado es requerido ".','error');
-			$('#txtEjecutado').focus();
-			return;
-		}
-		else if($('#txtEjecutadoAnterior').val().trim()==''){
-			swal('','El campo "Ejecutado Anterior es requerido ".','error');
-			$('#txtEjecutadoAnterior').focus();
-			return;
-		}
-		else if($('#txtEjecutadoActual').val().trim()==''){
-			swal('','El campo "Ejecutado Actual es requerido ".','error');
-			$('#txtEjecutadoActual').focus();
-			return;
-		}
+		// if($('#txtProgramado').val().trim()==''){
+		// 	swal('','El campo "Programado es requerido ".','error');
+		// 	$('#txtProgramado').focus();
+		// 	return;
+		// }
+		// else if($('#txtProgramadoAnterior').val().trim()==''){
+		// 	swal('','El campo "Programado Anterior es requerido ".','error');
+		// 	$('#txtProgramadoAnterior').focus();
+		// 	return;
+		// }
+		// else if($('#txtProgramadoActual').val().trim()==''){
+		// 	swal('','El campo "Programado Actual es requerido ".','error');
+		// 	$('#txtProgramadoActual').focus();
+		// 	return;
+		// }
+		// else if($('#txtEjecutado').val().trim()==''){
+		// 	swal('','El campo "Ejecutado es requerido ".','error');
+		// 	$('#txtEjecutado').focus();
+		// 	return;
+		// }
+		// else if($('#txtEjecutadoAnterior').val().trim()==''){
+		// 	swal('','El campo "Ejecutado Anterior es requerido ".','error');
+		// 	$('#txtEjecutadoAnterior').focus();
+		// 	return;
+		// }
+		// else if($('#txtEjecutadoActual').val().trim()==''){
+		// 	swal('','El campo "Ejecutado Actual es requerido ".','error');
+		// 	$('#txtEjecutadoActual').focus();
+		// 	return;
+		// }
 
 
 
