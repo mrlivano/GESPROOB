@@ -81,7 +81,7 @@
 								<p style="color: red; display: none;" id="Advertencia">La Fecha de Inicio no puede ser mayor a la Fecha de Fin</p>
             			</div>
 						<div class=" col-md-4 col-sm-6 col-xs-12">
-					  		<label class="control-label">TIEMPO DE EJECUCIÓN</label>
+					  		<label class="control-label">PLAZO DE EJECUCIÓN</label>
 					    	<div class="form-group" >
 									<input type="text" id="txtTotalMeses" name="txtTotalMeses" value="<?=$ExpedienteTecnicoM->tiempo?>" class="form-control col-md-4 col-xs-12" readonly="readonly">
 					    	</div>

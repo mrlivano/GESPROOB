@@ -3174,6 +3174,30 @@ class Expediente_Tecnico extends CI_Controller
 		{
 			$listaUnidadMedida=$this->Model_Unidad_Medida->UnidadMedidad_Listar();
 
+			// Responsables de Proyecto
+			$responsableDetalle = new stdClass();
+
+			if(@$detalleFormato[0]->residente == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','7');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->residente = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->supervisor == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','16');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->supervisor = $responsableCargo[0]->nombres;
+				}
+			}
+
+			if(@$detalleFormato[0]->asistente_administrativo == ''){
+				$responsableCargo = $this->Model_ET_Responsable->ResponsableEtapaEjecucionCargo($idExpedienteTecnico,'3','1','13');
+				if(count($responsableCargo)>0){	
+					$responsableDetalle->asistente_administrativo = $responsableCargo[0]->nombres;
+				}
+			}
+
 			if($expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
 				
 				$expedienteTecnico->childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($expedienteTecnico->id_et, 'EXPEDIENTETECNICO');
@@ -3205,7 +3229,7 @@ class Expediente_Tecnico extends CI_Controller
 
 			// $this->load->view('front/Ejecucion/EControlMetrado/reportepdfvalorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida , 'mes' => $mes]);
 			
-			$html = $this->load->view('front/Ejecucion/EControlMetrado/reportepdfvalorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida , 'mes' => $mes],true);
+			$html = $this->load->view('front/Ejecucion/EControlMetrado/reportepdfvalorizacionfisica', ['expedienteTecnico' => $expedienteTecnico, 'listaUnidadMedida' => $listaUnidadMedida , 'mes' => $mes, 'responsableDetalle' => $responsableDetalle],true);
 			$this->mydompdf->load_html($html);
 			$this->mydompdf->set_paper("A4", "landscape");
 			$this->mydompdf->render();

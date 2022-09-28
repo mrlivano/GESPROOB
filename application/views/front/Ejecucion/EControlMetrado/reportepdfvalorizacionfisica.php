@@ -149,20 +149,32 @@ function mostrarAnidado($meta, $expedienteTecnico)
 		<div style="text-align: center; font-size: 13px; padding-bottom:10px;"><b>VALORIZACIÓN MENSUAL</b></div>
 		<div style="text-align: center;font-size: 11px;margin-bottom: 15px;text-transform:uppercase;"><b>MES DE: <?=$mes?></b></div>		
 		<div style="font-size: 8px;">
-			<table id="tablaPresentacion" style="width: 100%">
-				<tr>
-					<td style="width: 8%;font-weight:bold;">PROYECTO</td>
-					<td style="width: 92%">: <?=$expedienteTecnico->nombre_pi;?> </td>
-				</tr>			
-				<tr>
-					<td style="width: 8%;font-weight:bold;">FTE. FTO</td>
-					<td style="width: 92%">: <?=$expedienteTecnico->fuente_financiamiento_et;?> </td>
-				</tr>
-				<tr>
-					<td style="width: 8%;font-weight:bold;">MODALIDAD</td>
-					<td style="width: 92%">: <?=$expedienteTecnico->modalidad_ejecucion_et;?> </td>
-				</tr>
-			</table>    
+			<table class="tablastand tablaMayuscula">
+			<tr>
+				<th>NOMBRE DEL PROYECTO</th>
+				<td style="width:80%;"><?=@$expedienteTecnico->nombre_pi?></td>
+			</tr>
+			<tr>
+				<th>CODIGO ÚNICO</th>
+				<td><?=@$expedienteTecnico->codigo_unico_pi?></td>
+			</tr>
+			<tr>
+				<th>UNIDAD EJECUTORA</th>
+				<td><?=@$expedienteTecnico->nombre_ue?></td>
+			</tr>
+			<tr>
+				<th>RESIDENTE DE PROYECTO</th>
+				<td><?=(@$detalleFormato[0]->residente=='' ? @$responsableDetalle->residente : @$detalleFormato[0]->residente)?></td>
+			</tr>
+			<tr>
+				<th>SUPERVISOR DE PROYECTO</th>
+				<td><?=(@$detalleFormato[0]->supervisor=='' ? @$responsableDetalle->supervisor : @$detalleFormato[0]->supervisor)?></td>
+			</tr>
+			<tr>
+				<th>ASISTENTE ADMINISTRATIVO</th>
+				<td><?=(@$detalleFormato[0]->asistente_administrativo=='' ? @$responsableDetalle->asistente_administrativo : @$detalleFormato[0]->asistente_administrativo)?></td>
+			</tr>
+		</table>   
 		</div>
 		<br>
 		<table id="tablaContenido" style="width: 100%; font-size:10px;">

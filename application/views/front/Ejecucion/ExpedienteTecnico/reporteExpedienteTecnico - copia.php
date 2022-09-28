@@ -156,7 +156,7 @@
 				<td><?= @$listarExpedienteFicha001->modalidad_ejecucion_et ?></td>
 			</tr>
 			<tr>
-				<th>6. Tiempo de Ejecución del Proyecto</th>
+				<th>6. Plazo de Ejecución del Proyecto</th>
 				<td><?= @$listarExpedienteFicha001->tiempo_ejecucion_pi_et ?></td>
 			</tr>
 			<tr>

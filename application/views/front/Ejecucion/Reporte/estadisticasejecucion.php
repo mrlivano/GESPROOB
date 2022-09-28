@@ -152,7 +152,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
                         <i class="fa fa-circle-o-notch"></i>
                     </div>
                     <div class="box-content">
-                        <p class="titulo">Tiempo de Ejecución</p>
+                        <p class="titulo">Plazo de Ejecución</p>
                         <p class="parrafo"><?=$expedienteTecnico->tiempo_ejecucion_pi_et?> Meses</p>
                     </div>
                 </div>
@@ -205,7 +205,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, &$sumatoriasTotales,&$tot
                                         <td style="width: 35%;"><?=$expedienteTecnico->programa_et?></td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 15%; text-align: right;"><b>Tiempo de Ejecución:</b></td>
+                                        <td style="width: 15%; text-align: right;"><b>Plazo de Ejecución:</b></td>
                                         <td style="width: 35%;"><?=$expedienteTecnico->tiempo_ejecucion_pi_et?> Meses</td>
                                         <td style="width: 15%; text-align: right;"><b>SubPrograma:</b></td>
                                         <td style="width: 35%;"><?=$expedienteTecnico->sub_programa_et?></td>

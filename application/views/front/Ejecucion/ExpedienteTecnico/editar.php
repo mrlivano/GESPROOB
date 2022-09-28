@@ -165,9 +165,9 @@
 					</div>					
 					<div class="row">
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Tiempo de Ejecución del Proyecto* (Meses)</label>
+							<label class="control-label">Plazo de Ejecución del Proyecto* (Meses)</label>
 							<div>
-								<input maxlength="3" id="txtTiempoEjecucionPip" name="txtTiempoEjecucionPip" value="<?= $ExpedienteTecnicoM->tiempo_ejecucion_pi_et?>" class="form-control col-md-4 col-xs-12"  placeholder="Tiempo de Ejecución" autocomplete="off" maxlength="100" >
+								<input maxlength="3" id="txtTiempoEjecucionPip" name="txtTiempoEjecucionPip" value="<?= $ExpedienteTecnicoM->tiempo_ejecucion_pi_et?>" class="form-control col-md-4 col-xs-12"  placeholder="Plazo de Ejecución" autocomplete="off" maxlength="100" >
 							</div>
 						</div>					
 						<div class="col-md-4 col-sm-4 col-xs-12">
@@ -620,12 +620,12 @@ $(function()
 				{
 					notEmpty:
 					{
-						message: '<b style="color: red;">El campo "Tiempo Ejecucion" es requerido.</b>'
+						message: '<b style="color: red;">El campo "Plazo Ejecucion" es requerido.</b>'
 					},
 					regexp:
 					{
 						regexp: /^\d*$/,
-						message: '<b style="color: red;">El campo "Tiempo de ejecución" debe ser un mes en número.</b>'
+						message: '<b style="color: red;">El campo "Plazo de ejecución" debe ser un mes en número.</b>'
 					} 
 				}
 			},

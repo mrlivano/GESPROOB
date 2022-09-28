@@ -109,7 +109,7 @@
 														<td><?=$detalleExpediente->modalidad_ejecucion_et;?></td>		
 													</tr>
 													<tr>
-														<td><b>6. Tiempo de ejecución</b></td>
+														<td><b>6. Plazo de ejecución</b></td>
 														<td><?=$detalleExpediente->tiempo_ejecucion_pi_et;?></td>		
 													</tr>
 													<tr>
