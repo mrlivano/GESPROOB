@@ -450,7 +450,7 @@
 				</div>					
 			</div>
 		</div>
-		<div class="firstbox">
+		<!-- <div class="firstbox">
 			<div class="firstcontent">
 				<p class="firsttext">III. CONTROL DE MANO DE OBRA<p>
 				<p>RESUMEN MENSUAL DE TRABAJADORES</p>
@@ -640,7 +640,7 @@
 				<br>
 				<textarea style="resize: none;resize: vertical;" name="txtObservaciones" id="txtObservaciones" class="form-control field" rows="3" cols="50" placeholder="Observaciones y/o Comentarios"><?=@$detalleFormato[0]->descripcion_observaciones?></textarea>					
 			</div>				
-		</div>
+		</div> -->
 		<!--<div class="firstbox">
 			<div class="firstcontent">
 				<p class="firsttext">IV. PRINCIPALES OCURRENCIAS EN EL MES</p>				
