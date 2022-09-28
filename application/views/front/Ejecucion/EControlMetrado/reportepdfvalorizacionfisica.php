@@ -27,7 +27,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				'<td style="text-align: left; width:21%;">'.html_escape($value->desc_partida).'</td>'.
 				'<td style="text-align: center; width:5%;">'.html_escape($value->descripcion).'</td>'.
 				'<td style="text-align: right; width:5%;">'.$value->cantidad.'</td>'.
-				'<td style="text-align: right; width:5%;">S/.'.$value->precio_unitario.'</td>'.
+				'<td style="text-align: right; width:5%;">S/.'.number_format($value->precio_unitario, 2).'</td>'.
 				'<td style="text-align: right; width:7%;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>';
 
 				foreach($value->childDetallePartida->childDetSegValorizacion as $index => $item)
@@ -125,8 +125,9 @@ function mostrarAnidado($meta, $expedienteTecnico)
 	}
 	.tablastand th
 	{
-		background-color:#f1f1f1;
+		background-color:#337ab7;
 		font-weight:bold;
+		color: white;
 		text-align:left;
 	}
 
