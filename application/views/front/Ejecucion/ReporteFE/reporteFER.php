@@ -49,7 +49,7 @@
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="control-label">.</label>
 								<div>       
-									<input style="width:100%;" type="button" class="btn btn-default" value="Generar">
+									<input style="width:100%;" type="submit" class="btn btn-default" value="Generar">
 								</div>		
 							</div>
 						</div>
