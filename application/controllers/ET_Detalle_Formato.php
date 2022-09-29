@@ -204,48 +204,9 @@ class ET_Detalle_Formato extends CI_Controller
 				$proyectoInversion->distrito = $ubicacionArray[1];
 				$proyectoInversion->centroPoblado = $ubicacionArray[0];
 			}
-			
-			$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
-			$montoasignado=0;
-			foreach($fuenteFinanciamieto as $key => $fuente)
-			{
-				$montoasignado+=$fuente->pim;
-			}    
-			$fechaReporte=$this->input->post('hdMes').' - '.$anio;  
-			$plazoPogramado=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Programado');
-			$ampliacionPlazo=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Ampliacion');	
-			$arrayPartidaEjecutada=[];
-			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
-			foreach ($childComponente as $key => $value)
-			{
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-				foreach ($value->childMeta as $index => $item)
-				{
-					$this->obtenerMetaAnidada($item, $anio, $mes, $arrayPartidaEjecutada);
-				}
-			}
-			$arrayAdicional=[];
-			$childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
-			foreach ($childComponenteAdicional as $key => $value)
-			{
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-				foreach ($value->childMeta as $index => $item)
-				{
-					$this->obtenerMetaAnidada($item, $anio, $mes, $arrayAdicional);
-				}
-			}
+
 			$detalleFormato=$this->Model_ET_Detalle_Formatos->getDetalleBy($idExpedienteTecnico, $anio, $meta, $sec_ejec, $mes);
-			foreach($detalleFormato as $detalle)
-			{
-				$detalle->childFotografia=$this->Model_ET_Fotografia_Formato->listaFotografia($detalle->id_detalle);
-			}
-			$childManoObra='';
-			$sumatoriaManodeObra='';
-			if(count($detalleFormato)>0)
-			{
-				$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
-				$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
-			}
+			$fechaReporte=$this->input->post('hdMes').' - '.$anio; 
 
 			// Responsables de Proyecto
 			$responsableDetalle = new stdClass();
@@ -272,65 +233,164 @@ class ET_Detalle_Formato extends CI_Controller
 			}
 			//
 
-			$presupuestoProgramado=0;
-			$presupuestoAnterior=0;
-			$presupuestoActual=0;
-			$ejecutadoAnterior=0;
-			$ejecutadoActual=0;
-			$adicionalProgramado=0;
-			$adicionalAnterior=0;
-			$adicionalActual=0;
-			$costoIndirectoProgramado=0;
-			$costoIndirectoAnterior=0;
-			$costoIndirectoActual=0;
-			$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
-			$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
-			$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
-			foreach ($componenteTemp as $key => $value)
+			if($reporte=='FE01'){
+
+				$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
+				$montoasignado=0;
+				foreach($fuenteFinanciamieto as $key => $fuente)
+				{
+					$montoasignado+=$fuente->pim;
+				}  
+				$plazoPogramado=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Programado');  
+
+				$reportePdf='Front/Ejecucion/InformeMensual/reporteFE01'.$reporte;
+				$doc="Reporte".$reporte.".pdf";
+				$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE01', ['proyectoInversion'=>$proyectoInversion,'fuenteFinanciamieto'=>$fuenteFinanciamieto,'montoasignado'=>$montoasignado,'plazoPogramado'=>$plazoPogramado,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte,'responsableDetalle'=>$responsableDetalle], true);
+							$this->mydompdf->load_html($html);
+							$this->mydompdf->render();
+							$this->mydompdf->stream("ReporteFE01.pdf", array("Attachment" => false)); 
+
+			} elseif ($reporte=='FE03') {
+
+			$arrayPartidaEjecutada=[];
+			$childComponente=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
+			foreach ($childComponente as $key => $value)
 			{
 				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
 				foreach ($value->childMeta as $index => $item)
 				{
-					$this->avanceFisicoProgramado($item, $anio, (int)$mes, $presupuestoProgramado, $presupuestoAnterior, $presupuestoActual);
-					$this->avanceFisicoEjecutado($item, $anio, (int)$mes, $ejecutadoAnterior, $ejecutadoActual);
+					$this->obtenerMetaAnidada($item, $anio, $mes, $arrayPartidaEjecutada);
+				}
+			}
+			$arrayAdicional=[];
+			$childComponenteAdicional=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
+			foreach ($childComponenteAdicional as $key => $value)
+			{
+				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+				foreach ($value->childMeta as $index => $item)
+				{
+					$this->obtenerMetaAnidada($item, $anio, $mes, $arrayAdicional);
 				}
 			}
 
-			$adicionalTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
-			foreach ($adicionalTemp as $key => $value)
-			{
-				$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
-				foreach ($value->childMeta as $index => $item)
+				$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE03', ['proyectoInversion'=>$proyectoInversion,'arrayPartidaEjecutada'=>$arrayPartidaEjecutada,'arrayAdicional'=>$arrayAdicional,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte,'responsableDetalle'=>$responsableDetalle], true);
+							$this->mydompdf->load_html($html);
+							$this->mydompdf->render();
+							$this->mydompdf->stream("ReporteFE03.pdf", array("Attachment" => false)); 
+
+			} elseif ($reporte=='FE05') {
+
+				$fuenteFinanciamieto=$this->Model_Dashboard_Reporte->ConsultaFuenteFinanciamiento($sec_ejec, $anio, $meta); 
+				$montoasignado=0;
+				foreach($fuenteFinanciamieto as $key => $fuente)
 				{
-					$this->adicionalProgramado($item, $anio, $adicionalProgramado);
-					$this->adicionalEjecutado($item, $anio, (int)$mes, $adicionalAnterior, $adicionalActual);
-				}
-			}			
-			$componenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
-			foreach ($componenteIndirecto as $key => $value)
-			{
-				$programacion=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $anio);
-				foreach ($programacion as $index => $item)
+					$montoasignado+=$fuente->pim;
+				} 
+
+				$presupuestoProgramado=0;
+				$presupuestoAnterior=0;
+				$presupuestoActual=0;
+				$ejecutadoAnterior=0;
+				$ejecutadoActual=0;
+				$adicionalProgramado=0;
+				$adicionalAnterior=0;
+				$adicionalActual=0;
+				$costoIndirectoProgramado=0;
+				$costoIndirectoAnterior=0;
+				$costoIndirectoActual=0;
+				$financieroAnterior=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('anterior', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);
+				$financieroActual=$this->Model_Dashboard_Reporte->ConsultaDevengadoMes('actual', $meta, $sec_ejec, $anio, $mes, @$proyectoInversion->codigo_unico_pi);			
+				$componenteTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
+				foreach ($componenteTemp as $key => $value)
 				{
-					$costoIndirectoProgramado+=$item->precio;
-					if($item->numero_mes<$mes)
+					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+					foreach ($value->childMeta as $index => $item)
 					{
-						$costoIndirectoAnterior+=$item->precio;
-					}
-					if($item->numero_mes==$mes)
-					{
-						$costoIndirectoActual+=$item->precio;
+						$this->avanceFisicoProgramado($item, $anio, (int)$mes, $presupuestoProgramado, $presupuestoAnterior, $presupuestoActual);
+						$this->avanceFisicoEjecutado($item, $anio, (int)$mes, $ejecutadoAnterior, $ejecutadoActual);
 					}
 				}
+
+				$adicionalTemp=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoDirec($idExpedienteTecnico, 'ADICIONAL');			
+				foreach ($adicionalTemp as $key => $value)
+				{
+					$value->childMeta=$this->Model_ET_Meta->ETMetaPorIdComponente($value->id_componente);
+					foreach ($value->childMeta as $index => $item)
+					{
+						$this->adicionalProgramado($item, $anio, $adicionalProgramado);
+						$this->adicionalEjecutado($item, $anio, (int)$mes, $adicionalAnterior, $adicionalActual);
+					}
+				}	
+				
+				$componenteIndirecto=$this->Model_ET_Componente->ETComponentePorPresupuestoEstadoAdmDirecCostoIndirec($idExpedienteTecnico, 'EXPEDIENTETECNICO');			
+				foreach ($componenteIndirecto as $key => $value)
+				{
+					$programacion=$this->Model_ET_Cronograma_Componente->ETCronogramaPorIdComponente($value->id_componente, $anio);
+					foreach ($programacion as $index => $item)
+					{
+						$costoIndirectoProgramado+=$item->precio;
+						if($item->numero_mes<$mes)
+						{
+							$costoIndirectoAnterior+=$item->precio;
+						}
+						if($item->numero_mes==$mes)
+						{
+							$costoIndirectoActual+=$item->precio;
+						}
+					}
+				}
+
+				$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE05', ['proyectoInversion'=>$proyectoInversion,'montoasignado'=>$montoasignado,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte,'presupuestoProgramado'=>$presupuestoProgramado,'presupuestoAnterior'=>$presupuestoAnterior,'presupuestoActual'=>$presupuestoActual,
+				'ejecutadoAnterior'=>$ejecutadoAnterior,'ejecutadoActual'=>$ejecutadoActual,'adicionalProgramado'=>$adicionalProgramado,'adicionalAnterior'=>$adicionalAnterior,'adicionalActual'=>$adicionalActual,'costoIndirectoProgramado'=>$costoIndirectoProgramado,'costoIndirectoAnterior'=>$costoIndirectoAnterior, 'costoIndirectoActual'=>$costoIndirectoActual,'financieroAnterior'=>$financieroAnterior,
+				'financieroActual'=>$financieroActual,'responsableDetalle'=>$responsableDetalle], true);
+							$this->mydompdf->load_html($html);
+							$this->mydompdf->render();
+							$this->mydompdf->stream("ReporteFE05.pdf", array("Attachment" => false)); 
+
+			} elseif ($reporte=='FE08') {
+				
+				foreach($detalleFormato as $detalle)
+				{
+					$detalle->childFotografia=$this->Model_ET_Fotografia_Formato->listaFotografia($detalle->id_detalle);
+				}
+
+				$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE08', ['proyectoInversion'=>$proyectoInversion,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte,'responsableDetalle'=>$responsableDetalle], true);
+							$this->mydompdf->load_html($html);
+							$this->mydompdf->render();
+							$this->mydompdf->stream("ReporteFE08.pdf", array("Attachment" => false)); 
+
+			} elseif ($reporte=='FE10') {
+				
+
+				$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE10', ['proyectoInversion'=>$proyectoInversion,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte,'responsableDetalle'=>$responsableDetalle], true);
+							$this->mydompdf->load_html($html);
+							$this->mydompdf->render();
+							$this->mydompdf->stream("ReporteFE10.pdf", array("Attachment" => false)); 
+
+			} elseif ($reporte=='FE11') {
+				
+				$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE11', ['proyectoInversion'=>$proyectoInversion,'detalleFormato'=>$detalleFormato,'fechaReporte'=>$fechaReporte,'responsableDetalle'=>$responsableDetalle], true);
+							$this->mydompdf->load_html($html);
+							$this->mydompdf->render();
+							$this->mydompdf->stream("ReporteFE11.pdf", array("Attachment" => false)); 
+
+			} else {
+				return false;
 			}
-			$reportePdf='Front/Ejecucion/InformeMensual/reporte'.$reporte;
-			$doc="Reporte".$reporte.".pdf";
-			$html=$this->load->view($reportePdf, ['proyectoInversion'=>$proyectoInversion,'fuenteFinanciamieto'=>$fuenteFinanciamieto,'montoasignado'=>$montoasignado,'plazoPogramado'=>$plazoPogramado,'ampliacionPlazo'=>$ampliacionPlazo,'arrayPartidaEjecutada'=>$arrayPartidaEjecutada,'arrayAdicional'=>$arrayAdicional,'detalleFormato'=>$detalleFormato,'childManoObra'=>$childManoObra,'sumatoriaManodeObra'=>$sumatoriaManodeObra,'fechaReporte'=>$fechaReporte,'presupuestoProgramado'=>$presupuestoProgramado,'presupuestoAnterior'=>$presupuestoAnterior,'presupuestoActual'=>$presupuestoActual,
-			'ejecutadoAnterior'=>$ejecutadoAnterior,'ejecutadoActual'=>$ejecutadoActual,'adicionalProgramado'=>$adicionalProgramado,'adicionalAnterior'=>$adicionalAnterior,'adicionalActual'=>$adicionalActual,'costoIndirectoProgramado'=>$costoIndirectoProgramado,'costoIndirectoAnterior'=>$costoIndirectoAnterior, 'costoIndirectoActual'=>$costoIndirectoActual,'financieroAnterior'=>$financieroAnterior,
-			'financieroActual'=>$financieroActual,'responsableDetalle'=>$responsableDetalle], true);
-            $this->mydompdf->load_html($html);
-            $this->mydompdf->render();
-            $this->mydompdf->stream($doc, array("Attachment" => false));      
+			
+			
+			// $ampliacionPlazo=$this->Model_ET_Periodo_Ejecucion->plazoPorDescripcion($idExpedienteTecnico,'Ampliacion');	
+			
+			
+			
+			// $childManoObra='';
+			// $sumatoriaManodeObra='';
+			// if(count($detalleFormato)>0)
+			// {
+			// 	$childManoObra=$this->Model_ET_Detalle_Formatos->getManoObra($detalleFormato[0]->id_detalle);
+			// 	$sumatoriaManodeObra=$this->Model_ET_Detalle_Formatos->sumatoriaManodeObra($detalleFormato[0]->id_detalle);
+			// }
+			     
 		}	
 	}
 
