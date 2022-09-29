@@ -1048,6 +1048,7 @@ function autorizar($url)
     'Persona_Juridica/verifyPersonalByRUC',
     'Persona_Juridica/UpdatePersonal',
     'Persona_Juridica/EliminarPersonal',
+    'Proyectos/fechas',
   );
     foreach( $lista_API as $value ) {
       array_push($arrayPermitido, $value);
