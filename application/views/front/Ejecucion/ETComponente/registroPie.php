@@ -25,7 +25,7 @@
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-success" id="send" type="submit">Guardar</button>
-						<a href="#" class="btn" data-dismiss="modal">Cerrar</a>
+						<a href="#" class="btn" data-dismiss="modal-pdf">Cerrar</a>
 					</div>
 				</form>
 			</div>
