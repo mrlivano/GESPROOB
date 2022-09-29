@@ -31,7 +31,7 @@
 					<label>Administracion Directa</label>
 					<div class="bs-glyphicons">
 						<ul class="bs-glyphicons-list">
-							<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?>a<?= $expedienteTecnico->url_especificacion_tecnica ?>">
+							<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->url_especificacion_tecnica_AD ?>">
 								<li style="height:77px;">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span><br>
 									<span>Ver</span>
@@ -48,7 +48,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12"><label>Administracion Indirecta</label>
 					<div class="bs-glyphicons">
 						<ul class="bs-glyphicons-list">
-							<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->id_et ?>b<?= $expedienteTecnico->url_especificacion_tecnica ?>">
+							<a target="_blank" href="<?= base_url(); ?>uploads/EspecificacionesTecnicas/<?= $expedienteTecnico->url_especificacion_tecnica_AI ?>">
 								<li style="height:77px;">
 									<span class="glyphicon glyphicon-book" aria-hidden="true"></span><br>
 									<span>Ver</span>

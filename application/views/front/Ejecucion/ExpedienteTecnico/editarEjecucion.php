@@ -32,7 +32,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Dirección*</label>
 							<div>
-								<input id="txtDireccionUE" readonly name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Dirección"  autocomplete="off" maxlength="200" >	
+								<input id="txtDireccionUE"  name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Dirección"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
@@ -67,7 +67,7 @@
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">COSTO TOTAL (Pre Inversión)</label>
 							<div>
-								<input id="txtCostoTotalPreInversion" name="txtCostoTotalPreInversion" value="<?=a_number_format($ExpedienteTecnicoM->costo_total_preinv_et , 2, '.',",",3) ?>"  class="form-control col-md-4 col-xs-12 moneda"  placeholder="Total del Proyecto (Pre Inversión)" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
+								<input id="txtCostoTotalPreInversion" readonly name="txtCostoTotalPreInversion" value="<?=a_number_format($ExpedienteTecnicoM->costo_total_preinv_et , 2, '.',",",3) ?>"  class="form-control col-md-4 col-xs-12 moneda"  placeholder="Total del Proyecto (Pre Inversión)" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
@@ -109,7 +109,7 @@
 						<table style="width: 100%;" class="table table-bordered table-striped">
 							<tbody>
 								<tr>
-								<th style="background-color:#959494;color:white;"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+								<th style="background-color:#959494;color:white;"><b>COSTO DIRECTO</b></th>
 								<td style="text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
 								</tr>
 							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoDirecta as $key => $value) { ?>
@@ -129,19 +129,19 @@
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Funcion</label>
 							<div>
-								<input id="txtFuncion" name="txtFuncion" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->funcion_et?>"  placeholder="Funcion" required="required" autocomplete="off">
+								<input id="txtFuncion" readonly name="txtFuncion" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->funcion_et?>"  placeholder="Funcion" required="required" autocomplete="off">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Programa</label>
 							<div>
-								<input id="txtPrograma" name="txtPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->programa_et?>" placeholder="Programa" required="required" autocomplete="off">
+								<input id="txtPrograma" readonly name="txtPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->programa_et?>" placeholder="Programa" required="required" autocomplete="off">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Sub Programa</label>
 							<div>
-								<input id="txtSubPrograma" name="txtSubPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->sub_programa_et?>" placeholder="Sub Programa"  autocomplete="off">
+								<input id="txtSubPrograma" readonly name="txtSubPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->sub_programa_et?>" placeholder="Sub Programa"  autocomplete="off">
 							</div>
 						</div>
 					</div>					
@@ -153,7 +153,7 @@
 							</div>
 						</div>					
 						<div class="col-md-4 col-sm-4 col-xs-12">
-							<label class="control-label">Num Beneficiarios Indirectos*</label>
+							<label class="control-label">Num Beneficiarios*</label>
 							<div>
 								<input id="txtNumBeneficiarios" name="txtNumBeneficiarios" value="<?= $ExpedienteTecnicoM->num_beneficiarios_indirectos?>" class="form-control col-md-4 col-xs-12"  placeholder="Número de beneficiarios indirectos" autocomplete="off" maxlength="40" >
 							</div>
@@ -176,7 +176,7 @@
 					<div class="row">
 					<?php if($ExpedienteTecnicoM->id_etapa_et==1){ ?>
 							<div class="col-md-12 col-sm-12 col-xs-12">						
-									<label class="control-label">Responsables de Elaboración de Expediente</label>
+									<label class="control-label">Responsables de Elaboración de Obra</label>
 									<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Elaboración" class='btn btn-primary btn-xs' onclick="insertarResponsableElaboracion('<?=$ExpedienteTecnicoM->id_et?>')"><i class='fa fa-plus'></i> Agregar</button>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12">

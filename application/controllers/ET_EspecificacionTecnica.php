@@ -24,15 +24,20 @@ class ET_EspecificacionTecnica extends CI_Controller
 			var_dump($expedienteTecnico);
 			$this->db->trans_start();
 
-			if (file_exists("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_especificacion_tecnica))
-			{
-				unlink("uploads/EspecificacionesTecnicas/".$this->input->post("hdIdExpedienteTecnico").$expedienteTecnico[0]->url_especificacion_tecnica);
-			}
 			if ($tipo==1) {
-			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico')."a";
+				if (file_exists("uploads/EspecificacionesTecnicas/".$expedienteTecnico[0]->url_especificacion_tecnica_AD))
+			{
+				unlink("uploads/EspecificacionesTecnicas/".$expedienteTecnico[0]->url_especificacion_tecnica_AD);
+			}
+			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico')."AD";
+
 			}
 			elseif($tipo==2){
-			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico')."b";
+				if (file_exists("uploads/EspecificacionesTecnicas/".$expedienteTecnico[0]->url_especificacion_tecnica_AI))
+				{
+					unlink("uploads/EspecificacionesTecnicas/".$expedienteTecnico[0]->url_especificacion_tecnica_AI);
+				}
+			$config['file_name'] = $this->input->post('hdIdExpedienteTecnico')."AI";
 
 			}
 			$config['upload_path'] = './uploads/EspecificacionesTecnicas/';
@@ -40,7 +45,12 @@ class ET_EspecificacionTecnica extends CI_Controller
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('fileEspecificacionesTecnicas'))
 			{
-				$c_data['url_especificacion_tecnica']= $this->upload->data('file_ext');
+				if ($tipo==1) {
+				$c_data['url_especificacion_tecnica_AD']= $this->upload->data('file_name');
+				}
+				elseif($tipo==2){
+				$c_data['url_especificacion_tecnica_AI']= $this->upload->data('file_name');
+				}
 				$data = $this->Model_ET_Expediente_Tecnico->PeriodoEjecucion($this->input->post('hdIdExpedienteTecnico'),$c_data);
 				$msg=($data>0 ? (['proceso' => 'Correcto', 'mensaje' => 'Especificacion Tecnica guardada correctamente']) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado']));
 			}
