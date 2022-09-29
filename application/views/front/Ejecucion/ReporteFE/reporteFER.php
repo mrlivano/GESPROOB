@@ -4,7 +4,7 @@
 <div class="right_col" role="main">
 	<div class="x_panel">
 		<div class="x_content">   
-			<form class="form-horizontal" id="frmInformeMensual" method="POST" target="_blank">
+			<form class="form-horizontal" id="frmInformeMensual" action="<?php echo base_url();?>index.php/ET_Detalle_Formato/ReporteFER" method="POST" target="_blank">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<input type="hidden" name="hdIdExpedienteTecnico" id="hdIdExpedienteTecnico" value="<?=@$idEt?>">
@@ -33,9 +33,23 @@
 								</div>	
 							</div>	
 							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label class="control-label">Reporte:</label>
+								<div>							
+									<select id="selectReporte" name="selectReporte" class="form-control">
+										<option value="">--Seleccionar--</option>
+										<option value="FE01">Reporte FE-01</option>
+										<option value="FE03">Reporte FE-03</option>
+										<option value="FE05">Reporte FE-05</option>
+										<option value="FE08">Reporte FE-08</option>
+										<option value="FE10">Reporte FE-10</option>
+										<option value="FE11">Reporte FE-11</option>
+									</select>
+								</div>	
+							</div>	
+							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="control-label">.</label>
 								<div>       
-									<input style="width:100%;" type="button" class="btn btn-default" onclick="buscarInformeMensual();" value="Generar">
+									<input style="width:100%;" type="button" class="btn btn-default" value="Generar">
 								</div>		
 							</div>
 						</div>
@@ -104,32 +118,32 @@
 			var mes=$('#selectMes').val();
 			var hdMes=$('#hdMes').val();
 
-        $.ajax({
-            type:"POST",
-            url:base_url+"index.php/ET_Detalle_Formato/ReporteFE01",
-            data: 
-			{
-				idExpedienteTecnico:idExpedienteTecnico,
-				metaPresupuestal:metaPresupuestal,
-				mes:mes,
-                hdMes:hdMes
-			},
-            cache: false,
-            beforeSend:function() 
-			{
-            	renderLoading();
-		    },
-            success:function(objectJSON)
-            {
-				$('#divModalCargaAjax').hide();
-				// $('#contenedorManifiestoGasto').html(objectJSON);
-			},
-			error:function ()
-			{
-				swal("Error", "Ha ocurrido un error inesperado", "error")
-				$('#divModalCargaAjax').hide();
-			}
-        });
+      //   $.ajax({
+      //       type:"POST",
+      //       url:base_url+"index.php/ET_Detalle_Formato/ReporteFE01",
+      //       data: 
+			// {
+			// 	idExpedienteTecnico:idExpedienteTecnico,
+			// 	metaPresupuestal:metaPresupuestal,
+			// 	mes:mes,
+      //           hdMes:hdMes
+			// },
+      //       cache: false,
+      //       beforeSend:function() 
+			// {
+      //       	renderLoading();
+		  //   },
+      //       success:function(objectJSON)
+      //       {
+			// 	$('#divModalCargaAjax').hide();
+			// 	// $('#contenedorManifiestoGasto').html(objectJSON);
+			// },
+			// error:function ()
+			// {
+			// 	swal("Error", "Ha ocurrido un error inesperado", "error")
+			// 	$('#divModalCargaAjax').hide();
+			// }
+      //   });
     }
 </script>
 
