@@ -1668,7 +1668,7 @@
 																<a style="background-color: #fd9b15;" class="btn btn-app btn-box"  data-toggle="tooltip" title="Ficha Técnica del Proyectos" href="<?= site_url('Expediente_Tecnico/reportePdfExpedienteTecnico?id_et='.@$ExpedienteTecnicoElaboracion[0]->id_et);?>" target="_blank" >
 																	<i class="fa fa-file-pdf-o"></i> Formato FF-01
 																</a>
-																<a style="background-color: #e73e3a;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFER', 'GET', null, null, false, true); return false;" title="FE-R" class="btn btn-app btn-box">
+																<a style="background-color: #5cb360;" href="" onclick="paginaAjaxDialogo(null, 'Formato FE', { idExpedienteTecnico : <?=$ExpedienteTecnicoElaboracion[0]->id_et?> }, base_url+'index.php/Expediente_Tecnico/reporteFER', 'GET', null, null, false, true); return false;" title="FE-R" class="btn btn-app btn-box">
 																	<i class="fa fa-file-pdf-o"></i> Formato FE
 																</a>
 																<!-- <a style="background-color: #e73e3a;" href="#" data-toggle="modal" id="feedback" data-target="#feedback-modal" title="Ficha Técnica del Proyecto" class="btn btn-app btn-box">
