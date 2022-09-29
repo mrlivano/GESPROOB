@@ -759,6 +759,7 @@ function autorizar($url)
       'ET_Detalle_Formato/InformeMensual',
       'ET_Detalle_Formato/AvanceMensual',
       'ET_Detalle_Formato/reportePdf',
+      'ET_Detalle_Formato/ReporteFER',
       'ET_Detalle_Formato/ReporteFE01',
       'ET_Detalle_Formato/ReporteFE03',
       'ET_Detalle_Formato/ReporteFE05',
