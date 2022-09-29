@@ -324,13 +324,12 @@ class ET_Detalle_Formato extends CI_Controller
 				}
 			}
 			$reportePdf='Front/Ejecucion/InformeMensual/reporte'.$reporte;
-			$doc="Reporte".$reporte.".pdf";
-			$html=$this->load->view($reportePdf, ['proyectoInversion'=>$proyectoInversion,'fuenteFinanciamieto'=>$fuenteFinanciamieto,'montoasignado'=>$montoasignado,'plazoPogramado'=>$plazoPogramado,'ampliacionPlazo'=>$ampliacionPlazo,'arrayPartidaEjecutada'=>$arrayPartidaEjecutada,'arrayAdicional'=>$arrayAdicional,'detalleFormato'=>$detalleFormato,'childManoObra'=>$childManoObra,'sumatoriaManodeObra'=>$sumatoriaManodeObra,'fechaReporte'=>$fechaReporte,'presupuestoProgramado'=>$presupuestoProgramado,'presupuestoAnterior'=>$presupuestoAnterior,'presupuestoActual'=>$presupuestoActual,
+			$html=$this->load->view('Front/Ejecucion/InformeMensual/reporteFE01', ['proyectoInversion'=>$proyectoInversion,'fuenteFinanciamieto'=>$fuenteFinanciamieto,'montoasignado'=>$montoasignado,'plazoPogramado'=>$plazoPogramado,'ampliacionPlazo'=>$ampliacionPlazo,'arrayPartidaEjecutada'=>$arrayPartidaEjecutada,'arrayAdicional'=>$arrayAdicional,'detalleFormato'=>$detalleFormato,'childManoObra'=>$childManoObra,'sumatoriaManodeObra'=>$sumatoriaManodeObra,'fechaReporte'=>$fechaReporte,'presupuestoProgramado'=>$presupuestoProgramado,'presupuestoAnterior'=>$presupuestoAnterior,'presupuestoActual'=>$presupuestoActual,
 			'ejecutadoAnterior'=>$ejecutadoAnterior,'ejecutadoActual'=>$ejecutadoActual,'adicionalProgramado'=>$adicionalProgramado,'adicionalAnterior'=>$adicionalAnterior,'adicionalActual'=>$adicionalActual,'costoIndirectoProgramado'=>$costoIndirectoProgramado,'costoIndirectoAnterior'=>$costoIndirectoAnterior, 'costoIndirectoActual'=>$costoIndirectoActual,'financieroAnterior'=>$financieroAnterior,
 			'financieroActual'=>$financieroActual,'responsableDetalle'=>$responsableDetalle], true);
             $this->mydompdf->load_html($html);
             $this->mydompdf->render();
-            $this->mydompdf->stream($doc, array("Attachment" => false));      
+            $this->mydompdf->stream("ReporteFE-01.pdf", array("Attachment" => false));      
 		}	
 	}
 
