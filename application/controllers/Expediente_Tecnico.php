@@ -3384,6 +3384,18 @@ class Expediente_Tecnico extends CI_Controller
 		}
 	}
 
+	public function reporteFER()
+	{
+		if($_GET)
+		{
+			$idEt = $this->input->get('idExpedienteTecnico');
+			$proyectoInversion=$this->Model_ET_Expediente_Tecnico->DatosExpediente($idEt);
+			$metaPresupuestal=$this->Model_Dashboard_Reporte->ConsultaMetaProyecto($proyectoInversion->codigo_unico_pi);
+			$meses = $this->listaMeses();
+			$this->load->view('front/Ejecucion/ReporteFE/reporteFER.php',['idEt'=>$idEt, 'metaPresupuestal'=>$metaPresupuestal, 'mes'=>$meses]);
+		}
+	}
+
 	public function reporteFE01()
 	{
 		if($_GET)

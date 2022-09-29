@@ -676,6 +676,7 @@ function autorizar($url)
       'Expediente_Tecnico/editarEjecucion',
       'Expediente_Tecnico/editarDatosGenerales',
       'Expediente_Tecnico/modalidad',
+      'Expediente_Tecnico/reporteFER',
       'Expediente_Tecnico/reporteFE01',
       'Expediente_Tecnico/reporteFE03',
       'Expediente_Tecnico/reporteFE05',
