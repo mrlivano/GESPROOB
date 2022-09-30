@@ -28,7 +28,7 @@ class UF_ModuloEntregable extends CI_Controller
 		    		$this->Model_UFentregables->insertarEntregable($id_est_inv, $id_modulo[$i], $id_entregable[$i],$ValorEntregable[$i]);
 		    	}
 
-				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos Resgistrados del  entregables.', 'idPerReq' => '']);exit;
+				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos Resgistrados del  entregables.', 'idPerReq' => '']);exit;
 			}
 
 			$listarModulo=$this->Model_ModuloFE->ListarModulo();

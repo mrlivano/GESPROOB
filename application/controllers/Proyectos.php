@@ -11,37 +11,7 @@ class Proyectos extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Model_ET_Expediente_Tecnico');
-		$this->load->model('Model_ET_Analisis_Unitario');
-		$this->load->model('Model_ET_Componente');
-		$this->load->model('Model_ET_Meta');
-		$this->load->model('Model_ET_Partida');
-		$this->load->model('Model_Personal');
-		$this->load->model('Model_Persona_Juridica');
-		$this->load->model("Model_ET_Tipo_Responsable");
-		$this->load->model("Model_ET_Responsable");
-		$this->load->model("Cargo_Modal");
-		$this->load->model("Model_ET_Presupuesto_Analitico");
-		$this->load->model("Model_ET_Img");
-		$this->load->model('Model_ET_Etapa_Ejecucion');
-		$this->load->model('Model_ET_Presupuesto_Ejecucion');
-		$this->load->model('Model_Personal');
-		$this->load->model('Model_ET_Detalle_Partida');
-		$this->load->model('Model_ET_Detalle_Analisis_Unitario');
-		$this->load->model('Model_ET_Tarea');
-		$this->load->model('Model_ET_Mes_Valorizacion');
-		$this->load->model('Model_ET_Detalle_Formatos');
-		$this->load->model('Model_Unidad_Medida');
-		$this->load->model('Model_DetSegOrden');
-		$this->load->model('UsuarioProyecto_model');
-		$this->load->model('Model_ET_Recurso');
-		$this->load->model('Model_ModalidadE');
-		$this->load->model('FuenteFinanciamiento_Model');
-		$this->load->model('Model_ET_Meta_Analitico');
-		$this->load->model('Model_ET_Recurso_Insumo');
 		$this->load->model('Model_ET_Periodo_Ejecucion');
-		$this->load->model('Model_Dashboard_Reporte');
-		$this->load->model('Model_ET_Cronograma_Ejecucion');
-		$this->load->model('Model_ET_Pie_Presupuesto');
 		$this->load->library('mydompdf');
 		$this->load->helper('FormatNumber_helper');
 	}
@@ -63,12 +33,28 @@ class Proyectos extends CI_Controller
 	}
 	public function fechas()
 	{
-		if($_GET)
+		if($this->input->is_ajax_request())
 		{
+		if($_POST)
+		{
+			$this->db->trans_start();
+			$id_et = $this->input->post('idExpedienteTecnico');
+			$expedienteTecnico=$this->Model_ET_Expediente_Tecnico->ExpedienteTecnicoPorId($id_et);
+			$c_data['id_pi'] = $expedienteTecnico[0]->id_pi;
+			$c_data['anio'] = $this->input->post('anio');
+			$c_data['mes'] = $this->input->post('mes');
+			$c_data['flag'] = 'True';
+			$hdMes = $this->input->post('hdMes');
+			$this->Model_ET_Periodo_Ejecucion->insertarCierre($c_data);
+			$this->db->trans_complete();
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.']);exit;
+		}
 			$idEt = $this->input->get('idExpedienteTecnico');
 			$años=$this->listaAños();
-			$meses = $this->listaMeses();
-			$this->load->view('front/Administracion/popFechas.php',['idEt'=>$idEt, 'años'=>$años, 'mes'=>$meses]);
+			$meses = $this->listaMesesK();
+			$listaPlazo=$this->Model_ET_Periodo_Ejecucion->cierrePlazo($idEt);
+			$this->load->view('front/Administracion/popFechas.php',['idEt'=>$idEt, 'años'=>$años, 'mes'=>$meses, 'listaPlazo'=>$listaPlazo]);
+
 		}
 	}
 
@@ -87,6 +73,25 @@ class Proyectos extends CI_Controller
             'Octubre'=>'10',
             'Noviembre'=>'11',
             'Diciembre'=>'12'
+        );
+        return $array;
+    }
+
+		private function listaMesesK()
+    {
+        $array = array(
+        '01'=>'Enero',
+        '02'=>'Febrero',
+        '03'=>'Marzo',
+        '04'=>'Abril',
+       	'05'=>'Mayo',
+        '06'=>'Junio',
+        '07'=>'Julio',
+        '08'=>'Agosto',
+        '09'=>'Setiembre',
+        '10'=>'Octubre',
+        '11'=>'Noviembre',
+				'12'=>'Diciembre'
         );
         return $array;
     }

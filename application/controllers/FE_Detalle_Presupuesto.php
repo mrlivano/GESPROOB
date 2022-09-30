@@ -56,7 +56,7 @@ class FE_Detalle_Presupuesto extends CI_Controller
 
 			$this->Model_FE_Presupuesto_Inv->EditarPorcentajeImprevistos($idPresupuestoFE, $txtPorcentajeImprevistos);
 
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos guardados correctamente.', 'idEstudioInversion' => $this->input->post('hdIdEstudioInversion')]);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos guardados correctamente.', 'idEstudioInversion' => $this->input->post('hdIdEstudioInversion')]);exit;
 		}
 
 		$idPresupuestoFE=$this->input->get('idPresupuestoFE');

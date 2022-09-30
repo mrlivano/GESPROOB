@@ -30,7 +30,7 @@ class ET_Per_Req extends CI_Controller
 
 				$this->db->trans_complete();
 
-				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.', 'idPerReq' => $etPerReqTemp->id_per_req]);exit;
+				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.', 'idPerReq' => $etPerReqTemp->id_per_req]);exit;
 			}
 
 			$idET=$this->input->get('idExpedienteTecnico');

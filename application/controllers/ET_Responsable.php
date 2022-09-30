@@ -46,7 +46,7 @@ class ET_Responsable extends CI_Controller
 
 				$this->db->trans_complete();
 
-				$msg = ($data != '' || $data != NULL ? (['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.', 'idRespEt' =>$data]) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
+				$msg = ($data != '' || $data != NULL ? (['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.', 'idRespEt' =>$data]) : (['proceso' => 'Error', 'mensaje' => 'Ha ocurrido un error inesperado.']));
 
             	echo json_encode($msg);exit;
 			}

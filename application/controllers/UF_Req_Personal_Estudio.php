@@ -30,7 +30,7 @@ class UF_Req_Personal_Estudio extends CI_Controller
 
 				$this->db->trans_complete();
 
-				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.e', 'idPerReq' => $etPerReqTemp->id_req_per]);exit;
+				echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.e', 'idPerReq' => $etPerReqTemp->id_req_per]);exit;
 			}
 
 			$id_est_inv=$this->input->get('id_est_inv');

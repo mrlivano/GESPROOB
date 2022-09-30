@@ -12,16 +12,15 @@
 						<table id="table-Ejecucion" style="text-align: center;" class="table table-striped jambo_table bulk_action  table-hover" cellspacing="0" width="100%">
 							<thead>
 								<tr>
-									<td class="col-md-1 col-xs-12">Codigo</td>
-									<td class="col-md-5 col-xs-12">Nombre del proyecto</td>
+									<td class="col-md-1 col-xs-2">Codigo</td>
+									<td class="col-md-5 col-xs-10">Nombre del proyecto</td>
 								</tr>
 							</thead>
 							<tbody>
 							<?php foreach($listaEjecucion as $item){ ?>
 							  	<tr>
 							  		<td>
-									 
-							  			<a style="width: 100%;" href=""  onclick="paginaAjaxDialogo(null, 'Cerra Proyecto', { idExpedienteTecnico : <?=$item->id_et?> }, base_url+'index.php/Proyectos/fechas', 'GET', null, null, false, true); return false;" title="FE-01" class="btn btn-app btn-box" role="button" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->codigo_unico_pi?></a>
+							  			<a style="width: 100%;" onclick="paginaAjaxDialogo(null, 'Cerrar Proyecto', { idExpedienteTecnico : <?=$item->id_et?> }, base_url+'index.php/Proyectos/fechas', 'GET', null, null, false, true); return false;" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->codigo_unico_pi?></a>
 							  		</td>
 									
 									<td>

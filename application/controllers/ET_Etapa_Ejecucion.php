@@ -30,7 +30,7 @@ class ET_Etapa_Ejecucion extends CI_Controller
             }
 			$this->Model_ET_Etapa_Ejecucion->insertar($opcion,$txtDescripcionEtapa);
 			$this->db->trans_complete();
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.']);exit;
 		}
 		$this->load->view('Front/Ejecucion/ETEtapaEjecucion/insertar');
 	}
@@ -48,7 +48,7 @@ class ET_Etapa_Ejecucion extends CI_Controller
             }
 			$this->Model_ET_Etapa_Ejecucion->editar($opcion,$hdIdEtapaFE,$txtDescripcionEtapa);
 			$this->db->trans_complete();
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos Editados Correctamente.']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos Editados Correctamente.']);exit;
 		}
 
 		$id_etapa_et=$this->input->Get('id_etapa_et');

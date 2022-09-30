@@ -34,7 +34,7 @@ class PmiCriterioG extends CI_Controller {/* Mantenimiento de sector entidad Y s
 			$listaCritetioGeneral=$this->Model_CriterioGeneral->ListarCriterioGenerales($txtIdFuncion,$txtAnioCriterioG);
 
 
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.', 'listaCritetioGeneral' => $listaCritetioGeneral]);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.', 'listaCritetioGeneral' => $listaCritetioGeneral]);exit;
 		}
 
 		$anio =$this->input->GET('anio');

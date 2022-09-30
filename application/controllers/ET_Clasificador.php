@@ -45,7 +45,7 @@ class ET_Clasificador extends CI_Controller
             }
 			$this->Model_ET_Clasificador->insertar($opcion,$txtNumeroClasi,$txtDescripcionClasi,$txtDetalleClasi);
 			$this->db->trans_complete();
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.']);exit;
 		}
 
 		$this->load->view('Front/Ejecucion/ETClasificador/insertar');

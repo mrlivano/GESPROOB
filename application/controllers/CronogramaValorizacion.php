@@ -30,7 +30,7 @@ class CronogramaValorizacion extends CI_Controller
             }
 			$this->Model_CronogramaValorizacion->insertar($option,$txtCronogramaValorizacion);
 			$this->db->trans_complete();
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos registrados correctamente.']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.']);exit;
 		}
 		$this->load->view('Front/Ejecucion/CronogramaValorizacion/insertar');
 	}
@@ -48,7 +48,7 @@ class CronogramaValorizacion extends CI_Controller
             }
 			$CronogramaValoracion=$this->Model_CronogramaValorizacion->editar($option,$hdIdCronogramaValorizacion,$txtCronogramaValorizacion);
 			$this->db->trans_complete();
-			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Dastos Editados Correctamente.']);exit;
+			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos Editados Correctamente.']);exit;
 
 		}
 		$id_valorizacion=$this->input->GET('id_valorizacion');
