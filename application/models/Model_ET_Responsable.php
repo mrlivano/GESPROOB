@@ -22,10 +22,10 @@ class Model_ET_Responsable extends CI_Model
         return $this->db->insert_id();
     }
 
-    function insertarET_ExpedienteResponsableEjecucion($id_et,$ComboResponsableEjecucion,$ComboTipoResponsableEjecucion,$comboCargoEjecucion,$tipo,$modalidad)
+    function insertarET_ExpedienteResponsableEjecucion($id_et,$ComboResponsableEjecucion,$ComboTipoResponsableEjecucion,$comboCargoEjecucion,$tipo,$modalidad,$txtFechaInicio,$txtFechaFin)
     {
         $estado_responsable_et=1;
-        $this->db->query("insert into ET_RESPONSABLE(id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et,tipo,modalidad)values('".$id_et."','".$ComboResponsableEjecucion."','".$ComboTipoResponsableEjecucion."','".$comboCargoEjecucion."','".$estado_responsable_et."','".$tipo."','".$modalidad."')");
+        $this->db->query("insert into ET_RESPONSABLE(id_et,id_persona,id_tipo_responsable_et,id_cargo,estado_responsable_et,tipo,modalidad,fecha_inicio,fecha_fin)values('".$id_et."','".$ComboResponsableEjecucion."','".$ComboTipoResponsableEjecucion."','".$comboCargoEjecucion."','".$estado_responsable_et."','".$tipo."','".$modalidad."','".$txtFechaInicio."','".$txtFechaFin."')");
         return $this->db->insert_id();
     }
 

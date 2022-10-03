@@ -146,6 +146,8 @@
 											<tr>
 												<th>Nombres y Apellidos</th>
 												<th>Cargo</th>
+												<th>Inicio</th>
+												<th>Fin</th>
 												<th>Opción</th>
 											</tr>
 										</thead>
@@ -439,6 +441,19 @@ function listaResponsableEjecucion(id_et)
 			[
 				{"data":"nombres"},
 				{"data":"desc_cargo"},
+				{"data":"fecha_inicio",
+					render: function(data, type, row)
+					{
+						var date = moment(data,'YYYY/MM/DD HH:mm:ss').format('DD/MM/YYYY');
+						return date;
+					}
+				},
+				{"data":"fecha_fin",
+					render: function(data, type, row)
+					{
+						var date = moment(data,'YYYY/MM/DD HH:mm:ss').format('DD/MM/YYYY');
+						return date;
+					}},
 				{"data":"id_responsable_et",
 					render: function(data, type, row)
 					{
