@@ -698,6 +698,7 @@ function autorizar($url)
       'Expediente_Tecnico/DetalleExpediente',
       'Expediente_Tecnico/ReporteEstadistico',
       'Expediente_Tecnico/reportePdfExpedienteTecnico',
+      'Expediente_Tecnico/reportePdfExpedienteTecnicoDirecta',
       'Expediente_Tecnico/reportePdfPresupuestoFF05',
       'Expediente_Tecnico/reportePdfPresupuestoAnalitico',
       'Expediente_Tecnico/reportePdfMetrado',

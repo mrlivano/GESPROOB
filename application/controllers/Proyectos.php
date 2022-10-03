@@ -50,9 +50,10 @@ class Proyectos extends CI_Controller
 			echo json_encode(['proceso' => 'Correcto', 'mensaje' => 'Datos registrados correctamente.']);exit;
 		}
 			$idEt = $this->input->get('idExpedienteTecnico');
+			$id_pi = $this->input->get('id_pi');
 			$años=$this->listaAños();
 			$meses = $this->listaMesesK();
-			$listaPlazo=$this->Model_ET_Periodo_Ejecucion->cierrePlazo($idEt);
+			$listaPlazo=$this->Model_ET_Periodo_Ejecucion->cierrePlazo($idEt, $id_pi);
 			$this->load->view('front/Administracion/popFechas.php',['idEt'=>$idEt, 'años'=>$años, 'mes'=>$meses, 'listaPlazo'=>$listaPlazo]);
 
 		}

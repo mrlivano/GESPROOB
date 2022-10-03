@@ -5,6 +5,7 @@
 				<div class="x_content">		
 					<div class="row">
 						<input name="hdIdDetallePartida" id="hdIdDetallePartida" readonly="readonly" type="hidden" value="<?=$DetallePartida->id_detalle_partida?>"> 	
+						<input name="hdIdPi" id="hdIdPi" readonly="readonly" type="hidden" value="<?=$id_pi?>">
 						<input type="hidden" name="hdIdCantidad" id="hdIdCantidad"  autocomplete="off" value="<?=$DetallePartida->cantidad?>" readonly="readonly" >
 						<input type="hidden" autocomplete="off" readonly="readonly" name="txtPrecioUnitarioDetalle" id="txtPrecioUnitarioDetalle" value="<?=$DetallePartida->precio_unitario?>" >
 						<div class="col-md-12 col-sm-3 col-xs-12">
@@ -171,6 +172,22 @@ $(function()
 					{
 						regexp: /^(\d+([\.]{1}(\d{1,2})?)?)*$/,
 	                    message: '<b style="color: red;">El campo "Cantidad" debe ser un número.</b>'
+					}
+				}
+			},
+			txtCosto:
+			{
+				validators:
+				{
+				
+					notEmpty:
+					{
+						message: '<b style="color: red;">El campo "Costo" es requerido.</b>'
+					},
+					regexp:
+					{
+						regexp: /(((\d{1,3},)(\d{3},)*\d{3})|(\d{1,3}))\.?\d{1,2}?$/,
+	                    message: '<b style="color: red;">El campo "Costo" debe ser un monto válido.</b>'
 					}
 				}
 			},

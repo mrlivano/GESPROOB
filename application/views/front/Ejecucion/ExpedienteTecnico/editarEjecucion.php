@@ -197,7 +197,7 @@
 					<div class="row">						
 						<?php if($ExpedienteTecnicoM->id_etapa_et==3 || $ExpedienteTecnicoM->id_etapa_et==10){ ?>
 							<div class="col-md-12 col-sm-12 col-xs-12">						
-									<label class="control-label">Responsables de Ejecución de Expediente</label>
+									<label class="control-label">Responsables de Ejecución de Obra</label>
 									<button type='button'  data-toggle="tooltip" title="Agregar Responsables de Ejecución" class='btn btn-primary btn-xs' onclick="insertarResponsableEjecucion('<?=$ExpedienteTecnicoM->id_et?>')"><i class='fa fa-plus'></i> Agregar</button>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12">

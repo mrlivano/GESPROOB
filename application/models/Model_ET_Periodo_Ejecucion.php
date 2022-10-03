@@ -19,11 +19,21 @@ class Model_ET_Periodo_Ejecucion extends CI_Model
 		return  $query->result();
 	}
 
-	function cierrePlazo($id_Et)
+	function cierrePlazo($id_Et, $id_pi)
 	{
-		$query=$this->db->query("select top 1 MES.id, MES.num, MES.mes, YEAR(fecha_fin) as anio from ET_TIEMPO_EJECUCION t INNER JOIN MES on ((MES.id BETWEEN MONTH(fecha_inicio) and  MONTH(fecha_fin)) or (YEAR(fecha_fin)>YEAR(fecha_inicio) and ( (mes.id between month(fecha_inicio) and 12) or ( mes.id between 1 and month(fecha_fin))))) 
-		inner join ET_EXPEDIENTE_TECNICO et on t.id_et=et.id_et left join cierre_mes c on et.id_pi=c.id_pi and c.mes=mes.num and c.anio=YEAR(fecha_fin) and c.flag='True'
-		where t.id_et='$id_Et' and c.id_pi is null group by MES.id,MES.num,MES.MES, YEAR(fecha_fin) order by MES.id asc");
+		$query=$this->db->query("select top 1 MES.id, MES.num, MES.mes, ej_anio.anio 
+		from (select * from ET_EXPEDIENTE_TECNICO where id_pi='$id_pi') as et
+		INNER JOIN  ET_TIEMPO_EJECUCION te on te.id_et=et.id_et
+		INNER JOIN (select YEAR(fecha_inicio) as anio, id_et  from ET_TIEMPO_EJECUCION UNION select YEAR(fecha_fin) as anio, id_et from ET_TIEMPO_EJECUCION) as ej_anio on ej_anio.anio between YEAR(fecha_inicio) and YEAR(fecha_fin) and ej_anio.id_et = et.id_et
+		INNER JOIN MES on ((MES.id BETWEEN MONTH(fecha_inicio) and  MONTH(fecha_fin)) or (YEAR(fecha_fin)>YEAR(fecha_inicio) and ( (YEAR(fecha_inicio)= ej_anio.anio and mes.id between month(fecha_inicio) and 12) or (YEAR(fecha_fin)=ej_anio.anio and mes.id between 1 and month(fecha_fin))))) 
+		LEFT JOIN cierre_mes c on et.id_pi=c.id_pi and c.mes=mes.num and c.anio=ej_anio.anio and c.flag='True'
+		where (YEAR(fecha_inicio)=ej_anio.anio or YEAR(fecha_fin)=ej_anio.anio) and c.id_pi is null group by MES.id,MES.num,MES.MES, ej_anio.anio order by ej_anio.anio, MES.id asc");
+		return  $query->result();
+	}
+
+	function cierreEjecucion($id_pi, $fecha)
+	{
+		$query=$this->db->query("select * from cierre_mes c where c.id_pi='$id_pi' and c.mes=MONTH('$fecha') and c.anio=YEAR('$fecha') and c.flag='True'");
 		return  $query->result();
 	}
 

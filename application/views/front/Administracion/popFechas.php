@@ -97,6 +97,22 @@
 		{
 			return;
 		}
+
+		swal(
+	{
+		title: "Confirmación",
+		text: "Realmente desea realizar esta operación",
+		type: "info",
+		showCancelButton: true,
+		confirmButtonClass: "btn-danger",
+		confirmButtonText: "Consentir proceso",
+		cancelButtonText: "Cerrar",
+		closeOnConfirm: false
+	},
+	function(isConfirm)
+	{
+		if(isConfirm)
+		{
 			var idExpedienteTecnico=$('#hdIdExpedienteTecnico').val();
 			var anio=$('#selectAnio').val();
 			var mes=$('#selectMes').val();
@@ -130,6 +146,9 @@
 				$('#divModalCargaAjax').hide();
 			}
         });
+		}
+	});
+			
     }
 </script>
 

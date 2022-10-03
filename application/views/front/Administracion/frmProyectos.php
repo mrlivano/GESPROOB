@@ -20,7 +20,7 @@
 							<?php foreach($listaEjecucion as $item){ ?>
 							  	<tr>
 							  		<td>
-							  			<a style="width: 100%;" onclick="paginaAjaxDialogo(null, 'Cerrar Proyecto', { idExpedienteTecnico : <?=$item->id_et?> }, base_url+'index.php/Proyectos/fechas', 'GET', null, null, false, true); return false;" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->codigo_unico_pi?></a>
+							  			<a style="width: 100%;" onclick="paginaAjaxDialogo(null, 'Cerrar Proyecto', { idExpedienteTecnico : <?=$item->id_et?>, id_pi: <?=$item->id_pi?> }, base_url+'index.php/Proyectos/fechas', 'GET', null, null, false, true); return false;" class="btn btn-success btn-sm"><span class="fa fa-eye"></span> <?= $item->codigo_unico_pi?></a>
 							  		</td>
 									
 									<td>

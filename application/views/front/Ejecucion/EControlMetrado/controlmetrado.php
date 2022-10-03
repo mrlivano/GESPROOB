@@ -53,7 +53,7 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 				'<td style="text-align: right;">'.$value->cantidad.'</td>'.
 				'<td style="text-align: right;">S/.'.number_format($value->precio_unitario, 2).'</td>'.
 				'<td style="text-align: right;">S/.'.number_format($value->cantidad*$value->precio_unitario, 2).'</td>'.
-				'<td style="text-align: center;"><a id="btnOpcion'.$value->childDetallePartida->id_detalle_partida.'" class="'.$clase.'" onclick="valorizar('.$expedienteTecnico->id_et.','.$value->childDetallePartida->id_detalle_partida.');"><i class="fa fa-plus"></i> Registrar</a></td>'.
+				'<td style="text-align: center;"><a id="btnOpcion'.$value->childDetallePartida->id_detalle_partida.'" class="'.$clase.'" onclick="valorizar('.$expedienteTecnico->id_et.','.$value->childDetallePartida->id_detalle_partida.','.$expedienteTecnico->id_pi.');"><i class="fa fa-plus"></i> Registrar</a></td>'.
 				'</tr>';
 		}		
 	}
@@ -198,9 +198,9 @@ function mostrarAnidado($meta, $expedienteTecnico,$countValorizacionDiaria)
 		});
 	});
 
-	function valorizar(idEt, codigo)
+	function valorizar(idEt, codigo, id_pi)
 	{
-		paginaAjaxDialogo(null, 'Valorizacion de Partida',{ idExpediente: idEt, id_DetallePartida: codigo }, base_url+'index.php/Expediente_Tecnico/AsignarValorizacion', 'GET', null, null, false, true);
+		paginaAjaxDialogo(null, 'Valorizacion de Partida',{ idExpediente: idEt, id_DetallePartida: codigo, id_pi: id_pi }, base_url+'index.php/Expediente_Tecnico/AsignarValorizacion', 'GET', null, null, false, true);
 	}
 
 	$('#selectTipoEstado').on('change', function()
