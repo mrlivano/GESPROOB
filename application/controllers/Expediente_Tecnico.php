@@ -82,6 +82,35 @@ class Expediente_Tecnico extends CI_Controller
 
 	}
 
+	public function reportePdfExpedienteTecnicoDirecta()
+	{
+		$id_ExpedienteTecnico = isset($_GET['id_et']) ? $_GET['id_et'] : null;
+
+		$responsableElaboracion=$this->Model_Personal->ResponsableExpediente($id_ExpedienteTecnico,'001');
+
+		$responsableEjecucion=$this->Model_Personal->ResponsableExpediente($id_ExpedienteTecnico,'002');
+
+		$Opcion="ReporteFichaTecnica01";
+
+		$ImagenesExpediente=$this->Model_ET_Expediente_Tecnico->ET_Img($id_ExpedienteTecnico);
+		$prioridadEjecucion=$this->Model_ET_Expediente_Tecnico->prioridadEjecucion($id_ExpedienteTecnico);
+		$listarComponentesAD=$this->Model_ET_Expediente_Tecnico->listarComponentesAD($id_ExpedienteTecnico);
+		$listarComponentesAI=$this->Model_ET_Expediente_Tecnico->listarComponentesAI($id_ExpedienteTecnico);
+		//$listarResponsables=$this->Model_ET_Expediente_Tecnico->listarResponsables($id_ExpedienteTecnico);
+		$listarResponsables=$this->Model_ET_Responsable->ResponsableEtapaE($id_ExpedienteTecnico,'2');
+		$listarPiePresupuestoAD=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdET($id_ExpedienteTecnico);
+		$listarPiePresupuestoAI=$this->Model_ET_Pie_Presupuesto->PiePresupuestoPorIdETAdmInd($id_ExpedienteTecnico);
+		$listarExpedienteFicha001=$this->Model_ET_Expediente_Tecnico->reporteExpedienteFicha001($Opcion,$id_ExpedienteTecnico);
+
+		$html= $this->load->view('front/Ejecucion/ExpedienteTecnico/reporteExpedienteTecnicoDirecta',["listarExpedienteFicha001" => $listarExpedienteFicha001, "ImagenesExpediente" =>$ImagenesExpediente,"responsableElaboracion" => $responsableElaboracion,"responsableEjecucion" => $responsableEjecucion,"listarComponentes" => $listarComponentes,"listarComponentesAD" => $listarComponentesAD,"listarComponentesAI" => $listarComponentesAI,"listarResponsables" => $listarResponsables ,"listarPiePresupuestoAD" => $listarPiePresupuestoAD,"listarPiePresupuestoAI" => $listarPiePresupuestoAI, "prioridadEjecucion" => $prioridadEjecucion],true);
+		$this->mydompdf->load_html($html);
+		$this->mydompdf->set_paper("A4", "portrait");
+		$this->mydompdf->render();
+		$this->mydompdf->stream("FormatoFF-01.pdf", array("Attachment" => false));
+
+
+	}
+
 	public function importadorS10()
 	{
 		$lista = $this->db->query("select * from BD_S10");
@@ -2037,6 +2066,7 @@ class Expediente_Tecnico extends CI_Controller
 				$resp_data['fecha_inicio']=$resp->fecha_inicio;
 				$resp_data['fecha_fin']=$resp->fecha_fin;
 				$resp_data['tipo']=$resp->tipo;
+				$resp_data['modalidad']=$resp->modalidad;
 				$lastResp=$this->Model_ET_Responsable->insertar($resp_data);
 			}
 
@@ -2216,14 +2246,28 @@ class Expediente_Tecnico extends CI_Controller
 				//Crear tabla Datos Generales Administracion Indirecta
 
 				if ($exp->modalidad_ejecucion_et == 'ADMINISTRACION INDIRECTA' || $exp->modalidad_ejecucion_et == 'ADMINISTRACION MIXTA'){
-					$exp_data_ind['entidad']=$exp->nombre_ue;
-					$exp_data_ind['ubicacion']=$exp->distrito_provincia_departamento_ue;
-					$exp_data_ind['proyecto']=$exp->proyecto_et;
-					$exp_data_ind['monto_contrato']=$exp->costo_total_inv_et_ai;
-					$exp_data_ind['modalidad']= 'POR CONTRATA';
-					$exp_data_ind['id_et']= $lastExpediente;			
-				$lastDatosGenerales=$this->Model_ET_Expediente_Tecnico->insertarDatosGenerales($exp_data_ind);
-			}
+					$ExpedienteTecnicoM=$this->Model_ET_Expediente_Tecnico->DatosExpedienteDatosGenerales($idExpedienteTecnico);
+					if($ExpedienteTecnicoM!=null)
+					{
+						$exp_data_ind['entidad']=$ExpedienteTecnicoM->entidad;
+						$exp_data_ind['ubicacion']=$ExpedienteTecnicoM->ubicacion;
+						$exp_data_ind['proyecto']=$ExpedienteTecnicoM->proyecto;
+						$exp_data_ind['monto_contrato']=$ExpedienteTecnicoM->monto_contrato;
+						$exp_data_ind['modalidad']= $ExpedienteTecnicoM->modalidad;
+						$exp_data_ind['fecha_inicio']=$ExpedienteTecnicoM->fecha_inicio;
+						$exp_data_ind['fecha_fin']=$ExpedienteTecnicoM->fecha_fin;
+						$exp_data_ind['tiempo']=$ExpedienteTecnicoM->tiempo;
+						$exp_data_ind['contratista']=$ExpedienteTecnicoM->contratista;
+						$exp_data_ind['avance_fisico']=$ExpedienteTecnicoM->avance_fisico;
+						$exp_data_ind['avance_financiero']=$ExpedienteTecnicoM->avance_financiero;
+						$exp_data_ind['estado_obra']=$ExpedienteTecnicoM->estado_obra;
+						$exp_data_ind['url_contrato']=$ExpedienteTecnicoM->url_contrato;
+						$exp_data_ind['fecha_entrega']=$ExpedienteTecnicoM->fecha_entrega;
+						$exp_data_ind['url_acta_entrega']=$ExpedienteTecnicoM->url_acta_entrega;
+						$exp_data_ind['id_et']= $lastExpediente;			
+					$lastDatosGenerales=$this->Model_ET_Expediente_Tecnico->insertarDatosGenerales($exp_data_ind);
+					}
+				}
 			}
 
 			$presupuestoAnalitico=$this->Model_ET_Presupuesto_Analitico->ETPresupuestoPorIdET($idExpedienteTecnico);
@@ -2249,6 +2293,7 @@ class Expediente_Tecnico extends CI_Controller
 				$resp_data['fecha_inicio']=$resp->fecha_inicio;
 				$resp_data['fecha_fin']=$resp->fecha_fin;
 				$resp_data['tipo']=$resp->tipo;
+				$resp_data['modalidad']=$resp->modalidad;
 				$lastResp=$this->Model_ET_Responsable->insertar($resp_data);
 			}
 
@@ -3011,6 +3056,8 @@ class Expediente_Tecnico extends CI_Controller
 
 			$idDetallePartida=$this->input->post('hdIdDetallePartida');
 
+			$idPi=$this->input->post('hdIdPi');
+
 			$cantidad=$this->input->post('txtCantidad');
 
 			$descripcion=$this->input->post('txtDescripcion');
@@ -3020,6 +3067,13 @@ class Expediente_Tecnico extends CI_Controller
 			$fechadia=$this->input->post('txtFecha');
 
 			$fecha = date('Y-m-d H:i:s');
+
+			$cierreEjecucion = $this->Model_ET_Periodo_Ejecucion->cierreEjecucion($idPi, $fechadia);
+
+			if(count($cierreEjecucion) > 0){
+				$msg=(['proceso' => 'Error', 'mensaje' => 'El plazo de ejecución se encuentra cerrado o no se encuentra dentro del cronograma de ejecución']);
+				echo json_encode($msg);exit;
+			}
 
 			if($etapa=='valorizacion')
 			{
@@ -3051,7 +3105,7 @@ class Expediente_Tecnico extends CI_Controller
 
 					$acumulado = $q1[0]->acumulado;
 
-					$msg=(["proceso" => "Correcto", "mensaje" => "Se registro '$valorizacionNormal' valoriacion normal  y '$mayorMetrado' como mayor metrado", "acumulado" =>  round($acumulado,4)]);
+					$msg=(["proceso" => "Correcto", "mensaje" => "Se registró '$valorizacionNormal' valorización normal  y '$mayorMetrado' como mayor metrado", "acumulado" =>  round($acumulado,4)]);
 
 					echo json_encode($msg);exit;
 				}
@@ -3080,6 +3134,7 @@ class Expediente_Tecnico extends CI_Controller
 			$idDetallePartida=$this->input->get('id_DetallePartida');
 
 			$idExpedienteTecnico=$this->input->get('idExpediente');
+			$id_pi=$this->input->get('id_pi');
 
 			$DetallePartida = $this->Model_ET_Detalle_Partida->ETPDetallePartida($idDetallePartida);
 			$listaValorizacion = $this->Model_DetSegOrden->listarValorizacionPorDetallePartida($idDetallePartida);
@@ -3092,7 +3147,7 @@ class Expediente_Tecnico extends CI_Controller
 			}
 			$cantidadRestante=$DetallePartida->cantidad-$cantidadDetalleTotal;
 			$costoRestante=$DetallePartida->parcial-$costoDetalleTotal;
-			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionpartida', ['DetallePartida' => $DetallePartida, 'fecha' => $fechaActual, 'listaValorizacion' => $listaValorizacion,'idExpedienteTecnico' => $idExpedienteTecnico,'cantidadRestante'=>$cantidadRestante,'costoRestante'=>$costoRestante]);
+			$this->load->view('front/Ejecucion/EControlMetrado/valorizacionpartida', ['DetallePartida' => $DetallePartida, 'fecha' => $fechaActual, 'listaValorizacion' => $listaValorizacion,'idExpedienteTecnico' => $idExpedienteTecnico, 'id_pi' => $id_pi,'cantidadRestante'=>$cantidadRestante,'costoRestante'=>$costoRestante]);
 		}
 	}
 
