@@ -804,12 +804,11 @@ class Expediente_Tecnico extends CI_Controller
 			$c_data['proyecto']=$this->input->post('txtProyecto');
 			$c_data['ubicacion']=$this->input->post('txtUbicacionUE');
 			$c_data['monto_contrato']=$this->input->post('txtPresupuestoTotal');
+			$c_data['fecha_entrega']=$this->input->post('txtFechaEntrega');
 			$c_data['fecha_inicio']=$this->input->post('txtFechaInicio');
 			$c_data['fecha_fin']=$this->input->post('txtFechaFin');
 			$c_data['tiempo']=$this->input->post('txtTotalMeses');
 			$c_data['contratista']=$this->input->post('txtContratista');
-			$c_data['supervisor']=$this->input->post('txtSupervisor');
-			$c_data['residente']=$this->input->post('txtResidente');
 			$c_data['avance_fisico']=$this->input->post('txtAvanceFisico');
 			$c_data['avance_financiero']=$this->input->post('txtAvanceFinanciero');
 			$c_data['estado_obra']=$this->input->post('estado');
@@ -4078,6 +4077,8 @@ class Expediente_Tecnico extends CI_Controller
 						$id_tipo_responsableEjec='3';
 						$comboResponsableEjecucion =$this->input->post('comboResponsableEjecucion');
 						$comboCargoEjecucion =$this->input->post('comboCargoEjecucion');
+						$txtFechaInicio =$this->input->post('txtFechaInicio');
+						$txtFechaFin =$this->input->post('txtFechaFin');
 						if($comboResponsableEjecucion!='')
 						{
 							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersonaEjecucion($hdIdExpediente,$comboResponsableEjecucion,$modalidad);
@@ -4086,7 +4087,7 @@ class Expediente_Tecnico extends CI_Controller
 								echo json_encode($msg);exit;
 							}
 						  else{
-								$this->Model_ET_Responsable->insertarET_ExpedienteResponsableEjecucion($hdIdExpediente,$comboResponsableEjecucion,$id_tipo_responsableEjec,$comboCargoEjecucion,1,$modalidad);
+								$this->Model_ET_Responsable->insertarET_ExpedienteResponsableEjecucion($hdIdExpediente,$comboResponsableEjecucion,$id_tipo_responsableEjec,$comboCargoEjecucion,1,$modalidad,$txtFechaInicio,$txtFechaFin);
 								$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
 								echo json_encode($msg);exit;
 							}
@@ -4121,6 +4122,8 @@ class Expediente_Tecnico extends CI_Controller
 						$id_tipo_responsableEjec='3';
 						$comboResponsableEjecucion =$this->input->post('comboResponsableEjecucionJuridica');
 						$comboCargoEjecucion =$this->input->post('comboCargoEjecucionJuridica');
+						$txtFechaInicio =$this->input->post('txtFechaInicio');
+						$txtFechaFin =$this->input->post('txtFechaFin');
 						if($comboResponsableEjecucion!='')
 						{
 							$responsable= $this->Model_ET_Responsable->ResponsableIdETPersonaJuridicaEjecucion($hdIdExpediente,$comboResponsableEjecucion,$modalidad);
@@ -4129,8 +4132,8 @@ class Expediente_Tecnico extends CI_Controller
 								echo json_encode($msg);exit;
 							}
 						  else{
-								$this->Model_ET_Responsable->insertarET_ExpedienteResponsableEjecucion($hdIdExpediente,$comboResponsableEjecucion,$id_tipo_responsableEjec,$comboCargoEjecucion,2,$modalidad);
-								$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
+							$this->Model_ET_Responsable->insertarET_ExpedienteResponsableEjecucion($hdIdExpediente,$comboResponsableEjecucion,$id_tipo_responsableEjec,$comboCargoEjecucion,2,$modalidad,$txtFechaInicio,$txtFechaFin);
+							$msg = (['proceso' => 'Correcto', 'mensaje' => 'los datos fueron registrados correctamente']);
 								echo json_encode($msg);exit;
 							}
 						}
