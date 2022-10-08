@@ -1,5 +1,13 @@
 <?php
-function mostrarAnidado($meta, $expedienteTecnico)
+$totalPresupuesto = 0;
+$totalAvanceAnterior = 0;
+$totalAvanceActual = 0;
+$totalAvanceAcumulado = 0;
+$totalSaldo = 0;
+?>
+
+<?php
+function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAvanceAnterior, &$totalAvanceActual, &$totalAvanceAcumulado, &$totalSaldo)
 {
 	$cantidad = 0;
 	$htmlTemp='';
@@ -56,6 +64,12 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				$metradoSaldo = $value->cantidad - $metradoAcumulado;
 				$valorizadoSaldo = ($value->cantidad*$value->precio_unitario) - $valorizadoAcumulado;
 				$porcentajeSaldo = 100 - $porcentajeAcumulado;
+
+				$totalAvanceAnterior += $valorizadoAnterior;
+				$totalAvanceActual += $valorizadoActual;
+				$totalAvanceAcumulado += $valorizadoAcumulado;
+				$totalSaldo += $valorizadoSaldo;
+				$totalPresupuesto += $value->cantidad*$value->precio_unitario;
 
 				$htmlTemp.='<td style="text-align: right; width:5%;">'.number_format($metradoAnterior, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right; width:7%;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
@@ -240,8 +254,26 @@ function mostrarAnidado($meta, $expedienteTecnico)
 					</tr>
 					<?php foreach($value->childMeta as $index => $item){ ?>
 						<?= mostrarAnidado($item, $expedienteTecnico)?>
-					<?php } ?>
-				<?php } }?>
+					<?php } } ?>
+					<tr>
+						<td></td>
+						<td style="text-align: left;"><b><i>TOTAL</i></b></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><b>S/. <?=number_format($totalPresupuesto, 2)?></b></td>
+						<td></td>
+						<td><b>S/. <?=number_format($totalAvanceAnterior, 2)?></b></td>
+						<td></td>
+						<td><b>S/. <?=number_format($totalAvanceActual, 2)?></b></td>
+						<td></td>
+						<td><b>S/. <?=number_format($totalAvanceAcumulado, 2)?></b></td>
+						<td></td>
+						<td></td>
+						<td><b>S/. <?=number_format($totalSaldo, 2)?></b></td>
+						<td></td>
+					</tr>
+				<?php  }?>
 
 				<?php 
 				// if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
