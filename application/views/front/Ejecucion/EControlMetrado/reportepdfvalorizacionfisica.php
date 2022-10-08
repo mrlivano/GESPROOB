@@ -1,13 +1,5 @@
 <?php
-$totalPresupuesto = 0;
-$totalAvanceAnterior = 0;
-$totalAvanceActual = 0;
-$totalAvanceAcumulado = 0;
-$totalSaldo = 0;
-?>
-
-<?php
-function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAvanceAnterior, &$totalAvanceActual, &$totalAvanceAcumulado, &$totalSaldo)
+function mostrarAnidado($meta, $expedienteTecnico)
 {
 	$cantidad = 0;
 	$htmlTemp='';
@@ -65,12 +57,6 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 				$valorizadoSaldo = ($value->cantidad*$value->precio_unitario) - $valorizadoAcumulado;
 				$porcentajeSaldo = 100 - $porcentajeAcumulado;
 
-				$totalAvanceAnterior += $valorizadoAnterior;
-				$totalAvanceActual += $valorizadoActual;
-				$totalAvanceAcumulado += $valorizadoAcumulado;
-				$totalSaldo += $valorizadoSaldo;
-				$totalPresupuesto += $value->cantidad*$value->precio_unitario;
-
 				$htmlTemp.='<td style="text-align: right; width:5%;">'.number_format($metradoAnterior, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right; width:7%;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right; width:5%;">'.number_format($metradoActual, 2).'</td>';
@@ -88,7 +74,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo);
+		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico);
 	}
 	return $htmlTemp;
 }
@@ -253,10 +239,9 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 						<td style="text-align: left;" colspan="15"><b><?=html_escape($value->descripcion)?></b></td>
 					</tr>
 					<?php foreach($value->childMeta as $index => $item){ ?>
-						<?= mostrarAnidado($item, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo)?>
-					<?php } } ?>
-				
-				<?php  }?>
+						<?= mostrarAnidado($item, $expedienteTecnico)?>
+					<?php } ?>
+				<?php } }?>
 
 				<?php 
 				// if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION INDIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){
