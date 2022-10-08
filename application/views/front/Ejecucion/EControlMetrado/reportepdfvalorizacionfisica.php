@@ -65,6 +65,12 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 				$valorizadoSaldo = ($value->cantidad*$value->precio_unitario) - $valorizadoAcumulado;
 				$porcentajeSaldo = 100 - $porcentajeAcumulado;
 
+				$totalPresupuesto += $value->cantidad*$value->precio_unitario;
+				$totalAvanceAnterior += $valorizadoAnterior;
+				$totalAvanceActual += $valorizadoActual;
+				$totalAvanceAcumulado += $valorizadoAcumulado;
+				$totalSaldo += $valorizadoSaldo;
+
 				$htmlTemp.='<td style="text-align: right; width:5%;">'.number_format($metradoAnterior, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right; width:7%;">S/.'.number_format($valorizadoAnterior, 2).'</td>';
 				$htmlTemp.='<td style="text-align: right; width:5%;">'.number_format($metradoActual, 2).'</td>';
@@ -153,7 +159,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 </head>
 <body>
 	<div id="header">
-    	<table style="width: 100%;margin-top: -20px">
+    	<table style="width: 100%; margin-top: -20px">
 			<tr>
 				<td style="width: 75px;">
 					<img style="width: 60px;" src="./assets/images/peru.jpg">
@@ -176,7 +182,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 		<div style="text-align: center; font-size: 13px; padding-bottom:10px;"><b>VALORIZACIÓN MENSUAL</b></div>
 		<div style="text-align: center;font-size: 11px;margin-bottom: 15px;text-transform:uppercase;"><b>MES DE: <?=$mes?></b></div>		
 		<div style="font-size: 8px;">
-			<table class="tablastand tablaMayuscula">
+			<table class="tablastand tablaMayuscula" style="width:100%;">
 			<tr>
 				<th>NOMBRE DEL PROYECTO</th>
 				<td style="width:80%;"><?=@$expedienteTecnico->nombre_pi?></td>
