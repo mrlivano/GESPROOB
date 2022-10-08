@@ -1,4 +1,12 @@
 <?php
+$totalPresupuesto = 0;
+$totalAvanceAnterior = 0;
+$totalAvanceActual = 0;
+$totalAvanceAcumulado = 0;
+$totalSaldo = 0;
+?>
+
+<?php
 function mostrarAnidado($meta, $expedienteTecnico)
 {
 	$cantidad = 0;
