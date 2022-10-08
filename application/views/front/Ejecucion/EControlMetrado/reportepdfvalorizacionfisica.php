@@ -88,7 +88,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico);
+		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo);
 	}
 	return $htmlTemp;
 }
@@ -253,7 +253,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 						<td style="text-align: left;" colspan="15"><b><?=html_escape($value->descripcion)?></b></td>
 					</tr>
 					<?php foreach($value->childMeta as $index => $item){ ?>
-						<?= mostrarAnidado($item, $expedienteTecnico)?>
+						<?= mostrarAnidado($item, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo)?>
 					<?php } } ?>
 					<tr>
 						<td></td>
