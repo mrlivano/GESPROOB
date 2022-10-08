@@ -255,24 +255,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 					<?php foreach($value->childMeta as $index => $item){ ?>
 						<?= mostrarAnidado($item, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo)?>
 					<?php } } ?>
-					<tr>
-						<td></td>
-						<td style="text-align: left;"><b><i>TOTAL</i></b></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><b>S/. <?=number_format($totalPresupuesto, 2)?></b></td>
-						<td></td>
-						<td><b>S/. <?=number_format($totalAvanceAnterior, 2)?></b></td>
-						<td></td>
-						<td><b>S/. <?=number_format($totalAvanceActual, 2)?></b></td>
-						<td></td>
-						<td><b>S/. <?=number_format($totalAvanceAcumulado, 2)?></b></td>
-						<td></td>
-						<td></td>
-						<td><b>S/. <?=number_format($totalSaldo, 2)?></b></td>
-						<td></td>
-					</tr>
+				
 				<?php  }?>
 
 				<?php 
