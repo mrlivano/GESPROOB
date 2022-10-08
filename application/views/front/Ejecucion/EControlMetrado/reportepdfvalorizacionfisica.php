@@ -7,7 +7,7 @@ $totalSaldo = 0;
 ?>
 
 <?php
-function mostrarAnidado($meta, $expedienteTecnico)
+function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAvanceAnterior, &$totalAvanceActual, &$totalAvanceAcumulado, &$totalSaldo)
 {
 	$cantidad = 0;
 	$htmlTemp='';
@@ -82,7 +82,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 	}
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico);
+		$htmlTemp.=mostrarAnidado($value, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo);
 	}
 	return $htmlTemp;
 }
@@ -247,7 +247,7 @@ function mostrarAnidado($meta, $expedienteTecnico)
 						<td style="text-align: left;" colspan="15"><b><?=html_escape($value->descripcion)?></b></td>
 					</tr>
 					<?php foreach($value->childMeta as $index => $item){ ?>
-						<?= mostrarAnidado($item, $expedienteTecnico)?>
+						<?= mostrarAnidado($item, $expedienteTecnico, $totalPresupuesto, $totalAvanceAnterior, $totalAvanceActual, $totalAvanceAcumulado, $totalSaldo)?>
 					<?php } ?>
 				<?php } }?>
 
@@ -296,11 +296,11 @@ function mostrarAnidado($meta, $expedienteTecnico)
 				// foreach($expedienteTecnico->childComponenteInd as $key => $value){ 
 					?>
 					<!-- <tr class="elementoBuscar">
-						<td style="width: 5%"><b><?=$value->numeracion?></b></td>
-						<td style="text-align: left;" colspan="15"><b><?=html_escape($value->descripcion)?></b></td>
+						<td style="width: 5%"><b><=$value->numeracion?></b></td>
+						<td style="text-align: left;" colspan="15"><b><=html_escape($value->descripcion)?></b></td>
 					</tr> -->
 					<?php // foreach($value->childMeta as $index => $item){ ?>
-						<!-- <?=  mostrarAnidado($item, $expedienteTecnico)?> -->
+						<!-- <=  mostrarAnidado($item, $expedienteTecnico)?> -->
 					<?php // } ?>
 				<?php //} }?>
 			</tbody>
