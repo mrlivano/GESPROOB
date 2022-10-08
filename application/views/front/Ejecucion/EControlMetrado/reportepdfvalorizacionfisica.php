@@ -184,7 +184,7 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 		<div style="font-size: 8px;">
 			<table class="tablastand tablaMayuscula" style="width:100%;">
 			<tr>
-				<th>NOMBRE DEL PROYECTO</th>
+				<th style="width:20%;">NOMBRE DEL PROYECTO</th>
 				<td style="width:80%;"><?=@$expedienteTecnico->nombre_pi?></td>
 			</tr>
 			<tr>
@@ -268,10 +268,10 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 											<td style="text-align: right;"><b>S/. <?=number_format($totalAvanceActual, 2)?></b></td>
 											<td></td>
 											<td style="text-align: right;"><b>S/. <?=number_format($totalAvanceAcumulado, 2)?></b></td>
+											<td style="text-align: right;"><b>S/. <?=number_format(($totalAvanceAcumulado*100)/$totalPresupuesto, 2)?></b></td>
 											<td></td>
-											<td></td>
-											<td style="text-align: right;"><b>S/. <?=number_format($totalSaldo, 2)?></b></td>
-											<td></td>
+											<td style="text-align: right;"><b>S/. <?=number_format(($totalSaldo), 2)?></b></td>
+											<td style="text-align: right;"><b>S/. <?=number_format((100-($totalAvanceAcumulado*100)/$totalPresupuesto), 2)?></b></td>
 										</tr>
 				<?php  }?>
 
