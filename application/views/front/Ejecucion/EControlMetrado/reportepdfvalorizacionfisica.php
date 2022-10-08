@@ -268,10 +268,10 @@ function mostrarAnidado($meta, $expedienteTecnico, &$totalPresupuesto, &$totalAv
 											<td style="text-align: right;"><b>S/. <?=number_format($totalAvanceActual, 2)?></b></td>
 											<td></td>
 											<td style="text-align: right;"><b>S/. <?=number_format($totalAvanceAcumulado, 2)?></b></td>
-											<td style="text-align: right;"><b>S/. <?=number_format(($totalAvanceAcumulado*100)/$totalPresupuesto, 2)?></b></td>
+											<td style="text-align: right;"><b><?=number_format(($totalAvanceAcumulado*100)/$totalPresupuesto, 2)?>%</b></td>
 											<td></td>
 											<td style="text-align: right;"><b>S/. <?=number_format(($totalSaldo), 2)?></b></td>
-											<td style="text-align: right;"><b>S/. <?=number_format((100-($totalAvanceAcumulado*100)/$totalPresupuesto), 2)?></b></td>
+											<td style="text-align: right;"><b><?=number_format((100-($totalAvanceAcumulado*100)/$totalPresupuesto), 2)?>%</b></td>
 										</tr>
 				<?php  }?>
 
