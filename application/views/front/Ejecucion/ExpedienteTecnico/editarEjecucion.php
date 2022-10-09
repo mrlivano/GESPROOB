@@ -87,13 +87,13 @@
 						<div class=" col-md-8 col-sm-8 col-xs-12">
 					  		<label class="control-label">MODALIDAD DE LA EJECUCION</label>
 					    	<div class="form-group" >
-							<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="<?=$ExpedienteTecnicoM->modalidad_ejecucion_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+							<input id="txtModalidadEjecucion" name="txtModalidadEjecucion" value="ADMINISTRACIÓN DIRECTA" class="form-control col-md-4 col-xs-12 moneda"  disabled>
 					    	</div>
 					  </div>
 						<div class=" col-md-4 col-sm-4 col-xs-12">
 					  		<label class="control-label">COSTO TOTAL</label>
 					    	<div class="form-group" >
-							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et_ad?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?= a_number_format($ExpedienteTecnicoM->costo_total_inv_et_ad , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
 					    	</div>
 					  </div>
 					</div>
@@ -217,26 +217,27 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Sustento para la presentacion del proyecto</label></br>
+							<label class="control-label">Resumen del proyecto (Descripción)</label></br>
+							<input type="hidden" id="hdtxtContribucioInterv" value="<?=$ExpedienteTecnicoM->resumen_pi_et?>" type="hidden">
+							<p><textarea name="txtContribucioInterv" id="txtContribucioInterv" rows="10" cols="80"></textarea></p>
+						</div>	
+					</div>		
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<label class="control-label">Objetivo del Proyecto</label></br>
 							<input type="hidden" id="hdtxtSituacioActual" value="<?= $ExpedienteTecnicoM->desc_situacion_actual_et?>">
 							<p><textarea name="txtSituacioActual" id="txtSituacioActual" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Relevancia Economica</label></br>
+							<label class="control-label">Impacto Social</label></br>
 							<!--  htmlspecialchars($ExpedienteTecnicoM->relevancia_economica_et)  -->
 							<input type="hidden" id="hdtxtSituacionDeseada" value="<?= $ExpedienteTecnicoM->relevancia_economica_et?>">
 							<p><textarea name="txtSituacioDeseada" id="txtSituacioDeseada" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Resumen del proyecto (Descripción)</label></br>
-							<input type="hidden" id="hdtxtContribucioInterv" value="<?=$ExpedienteTecnicoM->resumen_pi_et?>" type="hidden">
-							<p><textarea name="txtContribucioInterv" id="txtContribucioInterv" rows="10" cols="80"></textarea></p>
-						</div>	
-					</div>									
+							
 					<div class="row">
 						<div class="col-md-3 col-sm-12 col-xs-12">
 							<label class="control-label">Número de folios*</label>
