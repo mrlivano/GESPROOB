@@ -322,9 +322,18 @@
 				<td><?= @$listarExpedienteFicha001->num_beneficiarios_indirectos ?> </td>
 			</tr>
 
-
 			<tr>
-				<th colspan="2">14. Sustento para la presentación del proyecto</th>	             
+				<th colspan="2">14. Resumen del proyecto (Descripción)</th>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div style="text-align: justify;text-justify: inter-word;" >
+						<?= @$listarExpedienteFicha001->resumen_pi_et ?>  
+					</div>	        		
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">15. Objetivo del proyecto</th>	             
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -334,7 +343,7 @@
 				</td>	             
 			</tr>
 			<tr>
-				<th colspan="2">15. Revelación económica</th>	        		
+				<th colspan="2">16. Impacto Social</th>	        		
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -343,16 +352,7 @@
 					</div>
 				</td>	        		
 			</tr>
-			<tr>
-				<th colspan="2">16. Resumen del proyecto(descripción general)</th>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<div style="text-align: justify;text-justify: inter-word;" >
-						<?= @$listarExpedienteFicha001->resumen_pi_et ?>  
-					</div>	        		
-				</td>
-			</tr>
+
 			<tr>
 				<th>17. N° de Folios</th>
 				<td><?= @$listarExpedienteFicha001->num_folios ?></td>

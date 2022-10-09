@@ -224,19 +224,19 @@
 				<div class="secondcontent">	
 				<p class="thirdtext">2.2. DESCRIPCION DEL PROYECTO</p>			
 				<div class="cuadroContenedor">
-						<p> <?=@$detalleFormato[0]->descripcion_proyecto?></p>
+						<p> <?=@$detalleFormato[0]->desc_situacion_actual_et?></p>
 					</div>	
 				</div>
 				<div class="secondcontent">	
 				<p class="thirdtext">2.3. OBJETIVO DEL PROYECTO</p>			
 				<div class="cuadroContenedor">
-						<p> <?=@$detalleFormato[0]->objetivo_proyecto?></p>
+						<p> <?=@$detalleFormato[0]->resumen_pi_et?></p>
 					</div>	
 				</div>
 				<div class="secondcontent">	
 				<p class="thirdtext">2.4. IMPACTO SOCIAL</p>			
 				<div class="cuadroContenedor">
-						<p> <?=@$detalleFormato[0]->impacto_proyecto?></p>
+						<p> <?=@$detalleFormato[0]->relevancia_economica_et?></p>
 					</div>	
 				</div>	
 				<div class="secondcontent">	

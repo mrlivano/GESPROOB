@@ -32,7 +32,7 @@
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label">Dirección*</label>
 							<div>
-								<input id="txtDireccionUE" readonly name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Dirección"  autocomplete="off" maxlength="200" >	
+								<input id="txtDireccionUE"  name="txtDireccionUE" value="<?= $ExpedienteTecnicoM->direccion_ue?>" class="form-control col-md-4 col-xs-12"  placeholder="Dirección"  autocomplete="off" maxlength="200" >	
 							</div>	
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
@@ -67,7 +67,7 @@
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">COSTO TOTAL (Pre Inversión)</label>
 							<div>
-								<input id="txtCostoTotalPreInversion" name="txtCostoTotalPreInversion" value="<?=a_number_format($ExpedienteTecnicoM->costo_total_preinv_et , 2, '.',",",3) ?>"  class="form-control col-md-4 col-xs-12 moneda"  placeholder="Total del Proyecto (Pre Inversión)" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
+								<input id="txtCostoTotalPreInversion" readonly name="txtCostoTotalPreInversion" value="<?=a_number_format($ExpedienteTecnicoM->costo_total_preinv_et , 2, '.',",",3) ?>"  class="form-control col-md-4 col-xs-12 moneda"  placeholder="Total del Proyecto (Pre Inversión)" autocomplete="off" maxlength="40" onkeypress="return valideKey(event);">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
@@ -93,7 +93,7 @@
 						<div class=" col-md-4 col-sm-4 col-xs-12">
 					  		<label class="control-label">PRESUPUESTO TOTAL DEL PROYECTO</label>
 					    	<div class="form-group" >
-							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?=$ExpedienteTecnicoM->costo_total_inv_et?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
+							<input id="txtPresupuestoTotal" name="txtPresupuestoTotal" value="<?= a_number_format($ExpedienteTecnicoM->costo_total_inv_et , 2, '.',",",3) ?>" class="form-control col-md-4 col-xs-12 moneda"  disabled>
 					    	</div>
 					  </div>
 					</div>
@@ -109,7 +109,7 @@
 						<table style="width: 100%;" class="table table-bordered table-striped">
 							<tbody>
 								<tr>
-								<th style="background-color:#959494;color:white;"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+								<th style="background-color:#959494;color:white;"><b>COSTO DIRECTO </b></th>
 								<td style="text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirecto, 2, '.',",",3)?></b></td>
 								</tr>
 							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoDirecta as $key => $value) { ?>
@@ -129,7 +129,7 @@
 						<table style="width: 100%;" class="table table-bordered table-striped">
 							<tbody>
 								<tr>
-								<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;"><b>COSTO DIRECTO (NDIRECTO)</b></th>
+								<th style="width: 10%;text-decoration: underline;background-color:#959494;color:white;"><b>COSTO DIRECTO </b></th>
 								<td style="width: 15%;text-align: right;background-color:#959494;color:white;"><b>S/. <?=a_number_format($MostraExpedienteTecnicoExpe->costoDirectoIndirecta, 2, '.',",",3)?></b></td>
 							</tr>
 							<?php foreach($MostraExpedienteTecnicoExpe->piePresupuestoIndirecta as $key => $value) { ?>
@@ -147,19 +147,19 @@
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Funcion</label>
 							<div>
-								<input id="txtFuncion" name="txtFuncion" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->funcion_et?>"  placeholder="Funcion" required="required" autocomplete="off">
+								<input id="txtFuncion" readonly name="txtFuncion" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->funcion_et?>"  placeholder="Funcion" required="required" autocomplete="off">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Programa</label>
 							<div>
-								<input id="txtPrograma" name="txtPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->programa_et?>" placeholder="Programa" required="required" autocomplete="off">
+								<input id="txtPrograma" readonly name="txtPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->programa_et?>" placeholder="Programa" required="required" autocomplete="off">
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-4 col-xs-12">
 							<label class="control-label">Sub Programa</label>
 							<div>
-								<input id="txtSubPrograma" name="txtSubPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->sub_programa_et?>" placeholder="Sub Programa"  autocomplete="off">
+								<input id="txtSubPrograma" readonly name="txtSubPrograma" class="form-control col-md-4 col-xs-12" value="<?= $ExpedienteTecnicoM->sub_programa_et?>" placeholder="Sub Programa"  autocomplete="off">
 							</div>
 						</div>
 					</div>					
@@ -249,26 +249,27 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Sustento para la presentacion del proyecto</label></br>
+							<label class="control-label">Resumen del proyecto (Descripción)</label></br>
+							<input type="hidden" id="hdtxtContribucioInterv" value="<?=$ExpedienteTecnicoM->resumen_pi_et?>" type="hidden">
+							<p><textarea name="txtContribucioInterv" id="txtContribucioInterv" rows="10" cols="80"></textarea></p>
+						</div>	
+					</div>	
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<label class="control-label">Objetivo del proyecto</label></br>
 							<input type="hidden" id="hdtxtSituacioActual" value="<?= $ExpedienteTecnicoM->desc_situacion_actual_et?>">
 							<p><textarea name="txtSituacioActual" id="txtSituacioActual" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Relevancia Economica</label></br>
+							<label class="control-label">Impacto Social</label></br>
 							<!--  htmlspecialchars($ExpedienteTecnicoM->relevancia_economica_et)  -->
 							<input type="hidden" id="hdtxtSituacionDeseada" value="<?= $ExpedienteTecnicoM->relevancia_economica_et?>">
 							<p><textarea name="txtSituacioDeseada" id="txtSituacioDeseada" rows="10" cols="80"></textarea></p>
 						</div>	
 					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<label class="control-label">Resumen del proyecto (Descripción)</label></br>
-							<input type="hidden" id="hdtxtContribucioInterv" value="<?=$ExpedienteTecnicoM->resumen_pi_et?>" type="hidden">
-							<p><textarea name="txtContribucioInterv" id="txtContribucioInterv" rows="10" cols="80"></textarea></p>
-						</div>	
-					</div>									
+								
 					<div class="row">
 						<div class="col-md-3 col-sm-12 col-xs-12">
 							<label class="control-label">Número de folios*</label>
