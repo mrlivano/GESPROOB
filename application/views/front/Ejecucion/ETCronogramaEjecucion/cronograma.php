@@ -1,5 +1,8 @@
 <?php
-function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio)
+$totalPresupuesto=0;
+?>
+<?php
+function mostrarMetaAnidada($meta, $expedienteTecnico, &$listaMesesPeriodo, $anio ,&$totalPresupuesto)
 {
 	$htmlTemp='';
 
@@ -34,6 +37,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				'<td><span style="color:#d9534f;font-weight:bold" id="saldo'.$value->id_partida.'">'.number_format($value->saldo, 2).'</span></td>';
 
 			$ValorizacionporPartida = 0;
+			$totalPresupuesto += $value->cantidad*$value->precio_unitario;
 
 			foreach($listaMesesPeriodo as $i => $mes)
 			{
@@ -54,7 +58,8 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 						break;
 					}
 				}
-				$htmlTemp.='<td '.($precioTotalMesValorizacionTemp==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"').'><div><input type="text" style="display: none;padding: 0px;width: 40px;" value="'.$cantidadMesValorizacionTemp.'" onkeyup="onKeyUpCalcularPrecio('.$value->cantidad.', '.$value->precio_unitario.', '.$value->childDetallePartida->id_detalle_partida.', '.$mes->num.','.$anio.', this, event,'.$value->id_partida.');"></div><span class="spanMontoValorizacion">S/.'.number_format($precioTotalMesValorizacionTemp, 2).'</span></td>';
+				$htmlTemp.='<td '.($precioTotalMesValorizacionTemp==0 ? 'style="background-color: #f5f5f5;"' : 'style="background-color: #fff1b0;"').'><div><input type="text" style="display: none;padding: 0px;width: 40px;" value="'.$cantidadMesValorizacionTemp.'" onkeyup="onKeyUpCalcularPrecio('.$value->cantidad.', '.$value->precio_unitario.', '.$value->childDetallePartida->id_detalle_partida.', '.$mes->num.','.$anio.', this, event,'.$value->id_partida.');"></div><span class="spanMontoValorizacion">S/.'.number_format($precioTotalMesValorizacionTemp, 2).'</span><input value="'.$precioTotalMesValorizacionTemp.'" hidden></input></td>';
+				$mes->total = $mes->total + $precioTotalMesValorizacionTemp;
 			}
 
 			if($ValorizacionporPartida==$value->cantidad)
@@ -72,7 +77,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 
 	foreach($meta->childMeta as $key => $value)
 	{
-		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $listaMesesPeriodo, $anio);
+		$htmlTemp.=mostrarMetaAnidada($value, $expedienteTecnico, $listaMesesPeriodo, $anio, $totalPresupuesto);
 	}
 
 	return $htmlTemp;
@@ -162,7 +167,9 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				<?php foreach($listaMesesPeriodo as $key => $value)
 				{ ?>
 				<th><?=substr($value->mes, 0, 3)?></th>
-				<?php } ?>
+				<?php 
+					$value->total = 0;
+				} ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -184,9 +191,35 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				</tr>
 				<?php foreach($value->childMeta as $index => $item)
 				{ ?>
-					<?= mostrarMetaAnidada($item, $expedienteTecnico, $listaMesesPeriodo, $anio)?>
-				<?php } ?>
-			<?php } } ?>
+					<?= mostrarMetaAnidada($item, $expedienteTecnico, $listaMesesPeriodo, $anio, $totalPresupuesto)?>
+				<?php } }?>
+			<?php } ?>
+		</tbody>
+	</table>
+	<br>
+	<table id="tableValorizacionTotal" width="100%">
+		<thead>
+			<tr>
+				<th>DESCRIPCIÓN</th>
+				<th>TOTAL</th>
+				<?php foreach($listaMesesPeriodo as $key => $value)
+				{ ?>
+				<th><?=substr($value->mes, 0, 3)?></th>
+				<?php 
+				} ?>
+			</tr>
+		</thead>
+		<tbody>
+		<?php if($expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION DIRECTA' || $expedienteTecnico->modalidad_ejecucion_et=='ADMINISTRACION MIXTA'){?>
+				<tr  class="elementoBuscar">
+					<td style="text-align: left;"><b><i>TOTAL</i></b></td>
+					<td><?=number_format($totalPresupuesto,2)?></td>
+					<?php foreach($listaMesesPeriodo as $i => $mes)
+					{ ?>
+					<td><span id="mesS<?=$mes->id?>">S/.<?=number_format($mes->total,2)?></span><input id="mes<?=$mes->id?>" value="<?=$mes->total?>" hidden></td>
+					<?php } ?>
+				</tr>
+			<?php } ?>
 		</tbody>
 	</table>
 </div>
@@ -215,6 +248,17 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 				autoWidth: false,
         fixedColumns:   {
             leftColumns:  7
+        }
+    });
+		var table = $('#tableValorizacionTotal').DataTable({
+        scrollX:        true,
+        scrollCollapse: true,
+				paging:   false,
+        searching:      false,
+        ordering:       false,
+				autoWidth: false,
+        fixedColumns:   {
+            leftColumns:  2
         }
     });
 
@@ -248,6 +292,7 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 
 	function onKeyUpCalcularPrecio(cantidad, precioUnitario, idDetallePartida, numeroMes, anio, element, event, id_partida)
 	{
+		
 		var evt=event || window.event;
 
 		var code=0;
@@ -284,7 +329,14 @@ function mostrarMetaAnidada($meta, $expedienteTecnico, $listaMesesPeriodo, $anio
 
 					return false;
 				}
+				const montoAnterior = $($(element).parent().parent().find('input')[1]).val();
+				const montoMes = $('#mes'+numeroMes).val();
+				const montoActual = montoMes - montoAnterior + monto;
 
+				$('#mes'+numeroMes).val(montoActual);
+				$('#mesS'+numeroMes).text('S/.'+montoActual.toFixed(2));
+
+				$($(element).parent().parent().find('input')[1]).val(monto);
 				$($(element).parent().parent().find('span')[0]).text('S/.'+monto.toFixed(2));
 				$($(element).parent().parent().css('background-color', '#fff1b0'));
 
